@@ -61,8 +61,9 @@ ROLE RECOMMENDATIONS — suggest 3 roles:
 - Name 3-6 specific companies hiring for each role
 
 SALARY RANGES must consider work preference:
-- If work preference is "remote" or "flexible": Use EU/EMEA remote market rates (typically EUR). Remote workers from Eastern Europe can earn Western European salaries. Show the full remote market range.
-- If work preference is "hybrid" or "onsite": Use the candidate's country local rates.
+- If work preference is "remote" or "flexible": Use EUR for all salary ranges. Convert local salaries to EUR if needed. Use EU/EMEA remote market rates — remote workers from Eastern Europe can earn Western European salaries.
+- If work preference is "hybrid" or "onsite": Use the candidate's local currency for all salary ranges.
+- CRITICAL: All role recommendations must use the SAME currency. Never mix currencies.
 - All figures are GROSS ANNUAL.
 
 JSON SCHEMA:

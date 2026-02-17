@@ -46,9 +46,12 @@ PRIORITY LEVELS:
 
 SALARY ANALYSIS RULES:
 1. ALL salary figures must be GROSS ANNUAL (before tax). Never use net or monthly figures.
-2. Currency should match the candidate's country for current role market (e.g., RON for Romania, EUR for Germany)
+2. CRITICAL: Both currentRoleMarket and targetRoleMarket MUST use the SAME currency. Pick one currency for both:
+   - If work preference is "remote" or "flexible": Use EUR for BOTH current and target role markets. Convert local salaries to EUR.
+   - If work preference is "hybrid" or "onsite": Use the candidate's local currency for BOTH.
+   - Never mix currencies between current and target — the user needs to compare them directly.
 3. For target role market:
-   - If work preference is "remote" or "flexible": Use EU/EMEA remote market rates (typically EUR). Remote workers from Eastern Europe can earn Western European salaries. Show the full remote market range, NOT local country rates.
+   - If work preference is "remote" or "flexible": Use EU/EMEA remote market rates. Remote workers from Eastern Europe can earn Western European salaries. Show the full remote market range, NOT local country rates.
    - If work preference is "hybrid" or "onsite": Use the candidate's country/city rates
 4. Always specify "(gross annual)" after the region description so there's no ambiguity
 5. Growth potential should be a realistic percentage range, not aspirational

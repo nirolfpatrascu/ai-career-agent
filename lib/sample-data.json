@@ -285,11 +285,11 @@
   },
   "salaryAnalysis": {
     "currentRoleMarket": {
-      "low": 35000,
+      "low": 36000,
       "mid": 48000,
       "high": 65000,
       "currency": "EUR",
-      "region": "Romania - local market (gross annual)"
+      "region": "Romania - local market equivalent (gross annual)"
     },
     "targetRoleMarket": {
       "low": 55000,
