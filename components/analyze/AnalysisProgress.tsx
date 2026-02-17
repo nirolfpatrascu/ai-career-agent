@@ -103,11 +103,9 @@ export default function AnalysisProgress() {
             />
           </div>
 
-          <div className="flex items-center justify-between text-xs text-text-secondary">
+          <div className="text-center text-xs text-text-secondary">
             <span>{Math.round(progress)}% complete</span>
-            <span>{Math.round(elapsed)}s elapsed</span>
           </div>
-        </div>
 
         {/* Steps completed indicator */}
         <div className="flex items-center justify-center gap-3">
