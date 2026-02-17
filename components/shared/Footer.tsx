@@ -11,7 +11,7 @@ export default function Footer() {
               </svg>
             </div>
             <span className="text-sm text-text-secondary">
-              Career<span className="text-primary">Lens</span> AI
+              Gap<span className="text-primary">Zero</span> AI
             </span>
           </div>
 

@@ -14,7 +14,7 @@ export default function Header() {
             </svg>
           </div>
           <span className="text-lg font-semibold text-text-primary">
-            Career<span className="text-primary">Lens</span>
+            Gap<span className="text-primary">Zero</span>
           </span>
         </Link>
 

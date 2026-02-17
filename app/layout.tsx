@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'CareerLens AI — AI-Powered Career Growth Advisor',
+  title: 'GapZero — AI-Powered Career Growth Advisor',
   description:
     'Upload your CV, get a personalized career strategy in 60 seconds. AI-powered gap analysis, learning plans, salary benchmarks, and CV optimization.',
   keywords: [
@@ -22,16 +22,16 @@ export const metadata: Metadata = {
   ],
   metadataBase: new URL('https://ai-career-agent-gamma.vercel.app'),
   openGraph: {
-    title: 'CareerLens AI — AI-Powered Career Growth Advisor',
+    title: 'GapZero — AI-Powered Career Growth Advisor',
     description:
       'Upload your CV, get a personalized career strategy in 60 seconds. Gap analysis, salary benchmarks, role recommendations, and a 30/90/365-day action plan — powered by AI.',
     type: 'website',
     url: 'https://ai-career-agent-gamma.vercel.app',
-    siteName: 'CareerLens AI',
+    siteName: 'GapZero',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CareerLens AI — AI-Powered Career Growth Advisor',
+    title: 'GapZero — AI-Powered Career Growth Advisor',
     description:
       'Upload your CV, get a personalized career strategy in 60 seconds.',
   },

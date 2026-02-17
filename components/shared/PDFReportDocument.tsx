@@ -344,7 +344,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
         </View>
 
         <View style={styles.footer}>
-          <Text>CareerLens AI - AI-Powered Career Advisor</Text>
+          <Text>GapZero - AI-Powered Career Advisor</Text>
           <Text>Page 1</Text>
         </View>
       </Page>
@@ -384,7 +384,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
         </View>
 
         <View style={styles.footer}>
-          <Text>CareerLens AI - AI-Powered Career Advisor</Text>
+          <Text>GapZero - AI-Powered Career Advisor</Text>
           <Text>Page 2</Text>
         </View>
       </Page>
@@ -447,7 +447,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
         </View>
 
         <View style={styles.footer}>
-          <Text>CareerLens AI - AI-Powered Career Advisor</Text>
+          <Text>GapZero - AI-Powered Career Advisor</Text>
           <Text>Page 3</Text>
         </View>
       </Page>
@@ -489,7 +489,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
         </View>
 
         <View style={styles.footer}>
-          <Text>CareerLens AI - AI-Powered Career Advisor</Text>
+          <Text>GapZero - AI-Powered Career Advisor</Text>
           <Text>Page 4</Text>
         </View>
       </Page>
@@ -529,7 +529,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
         )}
 
         <View style={styles.footer}>
-          <Text>CareerLens AI - AI-Powered Career Advisor</Text>
+          <Text>GapZero - AI-Powered Career Advisor</Text>
           <Text>Page 5</Text>
         </View>
       </Page>
@@ -539,7 +539,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
 
 // --- Download Button ---
 export function PDFDownloadButton({ result }: { result: AnalysisResult }) {
-  const filename = `CareerLens_Analysis_${result.metadata.targetRole.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+  const filename = `GapZero_Analysis_${result.metadata.targetRole.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
 
   return (
     <PDFDownloadLink

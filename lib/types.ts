@@ -1,5 +1,5 @@
 // ============================================================================
-// CareerLens AI — Type Definitions
+// GapZero AI — Type Definitions
 // All interfaces match the PRD data schemas and SAMPLE_ANALYSIS.json structure
 // ============================================================================
 
