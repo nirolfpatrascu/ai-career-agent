@@ -13,7 +13,6 @@ const PROGRESS_MESSAGES = [
   { text: 'Generating your personalized report...', icon: '✨' },
 ];
 
-// Target: reach ~92% at 90s, hold at 95% until done
 const CHECKPOINTS = [
   { seconds: 0, progress: 0 },
   { seconds: 10, progress: 12 },
@@ -45,7 +44,6 @@ export default function AnalysisProgress() {
   const [progress, setProgress] = useState(0);
   const [elapsed, setElapsed] = useState(0);
 
-  // Rotate messages every 12 seconds (8 messages over ~96 seconds)
   useEffect(() => {
     const interval = setInterval(() => {
       setMessageIndex((prev) =>
@@ -55,7 +53,6 @@ export default function AnalysisProgress() {
     return () => clearInterval(interval);
   }, []);
 
-  // Update progress based on elapsed time
   useEffect(() => {
     const interval = setInterval(() => {
       setElapsed((prev) => {
@@ -70,13 +67,9 @@ export default function AnalysisProgress() {
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="max-w-lg w-full text-center space-y-8">
-        {/* Animated spinner */}
         <div className="relative w-24 h-24 mx-auto">
-          {/* Outer ring */}
           <div className="absolute inset-0 rounded-full border-2 border-card-border" />
-          {/* Spinning arc */}
           <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-primary animate-spin" />
-          {/* Inner pulse */}
           <div className="absolute inset-3 rounded-full bg-primary/5 animate-pulse flex items-center justify-center">
             <span className="text-2xl">
               {PROGRESS_MESSAGES[messageIndex].icon}
@@ -84,7 +77,6 @@ export default function AnalysisProgress() {
           </div>
         </div>
 
-        {/* Current message */}
         <div className="space-y-2">
           <p className="text-xl font-semibold text-text-primary transition-all duration-300">
             {PROGRESS_MESSAGES[messageIndex].text}
@@ -94,7 +86,6 @@ export default function AnalysisProgress() {
           </p>
         </div>
 
-        {/* Progress bar */}
         <div className="space-y-3">
           <div className="h-2 rounded-full bg-card-border overflow-hidden">
             <div
@@ -102,12 +93,11 @@ export default function AnalysisProgress() {
               style={{ width: `${progress}%` }}
             />
           </div>
-
           <div className="text-center text-xs text-text-secondary">
             <span>{Math.round(progress)}% complete</span>
           </div>
+        </div>
 
-        {/* Steps completed indicator */}
         <div className="flex items-center justify-center gap-3">
           {PROGRESS_MESSAGES.map((_, i) => (
             <div
