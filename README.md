@@ -1,25 +1,40 @@
-# CareerLens AI
+# GapZero
 
-**AI-Powered Career Growth Advisor** — Upload your CV, get a personalized career strategy in 60 seconds.
+**AI-Powered Career Growth Advisor** — Upload your CV, get a personalized career strategy in under 2 minutes.
 
 > Gap analysis, learning plans, salary benchmarks, role recommendations, and CV optimization — career coaching that used to cost $500/hour, now powered by AI.
 
-🔗 **Live Demo:** [ai-career-agent-gamma.vercel.app](https://ai-career-agent-gamma.vercel.app) · [Try with sample data](https://ai-career-agent-gamma.vercel.app/analyze?demo=true)
+🔗 **Live:** [gapzero.app](https://gapzero.app) · [Try Demo](https://gapzero.app/analyze?demo=true)
+
+![GapZero](docs/gapzero-thumbnail.png)
+
+---
+
+## Screenshots
+
+<details>
+<summary>📊 Full Results Dashboard (click to expand)</summary>
+
+![Results Dashboard](docs/screenshot-results.png)
+
+</details>
+
+The results page includes: fit score gauge, strengths panel, skill gaps with severity ratings, role recommendations with salary ranges, 30/90/365-day action plan, salary benchmarks with visual comparison bars, and optional job match analysis.
 
 ---
 
 ## What It Does
 
-CareerLens AI analyzes your CV against your target role and generates:
+GapZero analyzes your CV against your target role and generates:
 
 - **Fit Score** (1-10) with detailed assessment
 - **Strengths** identified and ranked by relevance (differentiator / strong / supporting)
 - **Skill Gaps** color-coded by severity (critical / moderate / minor) with closing plans, time estimates, and specific resources
 - **Role Recommendations** — Top 3 best-fit roles with salary ranges and target companies
 - **Action Plan** — 30-day quick wins, 90-day skill building, 12-month career trajectory
-- **Salary Analysis** — Location-aware market ranges for current and target roles, growth potential, negotiation tips
+- **Salary Analysis** — Location-aware market ranges for current and target roles, EMEA remote rates, growth potential, negotiation tips
 - **Job Match** (optional) — Paste a job posting to get ATS match score, missing keywords, and CV rewrite suggestions
-- **PDF Report** — Download a 5-page formatted report
+- **PDF Report** — Download a formatted report with all sections
 
 ## Tech Stack
 
@@ -31,7 +46,7 @@ CareerLens AI analyzes your CV against your target role and generates:
 | AI Engine | **Claude Sonnet 4** (Anthropic) | Best reasoning for analysis, structured JSON output |
 | PDF Parsing | **pdf-parse** | Server-side CV text extraction |
 | PDF Generation | **@react-pdf/renderer** | Client-side downloadable reports |
-| Deployment | **Vercel** | Zero-config, serverless, free tier |
+| Deployment | **Vercel** | Zero-config, serverless, edge network |
 
 ## Architecture
 
@@ -110,24 +125,13 @@ Open [http://localhost:3000](http://localhost:3000)
 ### Manual Deploy
 
 ```bash
-# Install Vercel CLI
 npm i -g vercel
-
-# Deploy
 vercel
-
-# Set environment variable
 vercel env add ANTHROPIC_API_KEY
-
-# Deploy to production
 vercel --prod
 ```
 
-### Vercel Configuration Notes
-
-- **Function timeout:** 60s on free tier (tight for 3 Claude calls). Analysis runs ~90s locally; Vercel's faster infra typically handles it under 60s. If timeouts occur, upgrade to Pro ($20/mo) for 300s timeout.
-- **No database needed** — stateless, analysis happens in-memory per request.
-- **No build secrets** — only `ANTHROPIC_API_KEY` needed at runtime.
+> **Note:** Analysis runs ~90s (3-4 Claude calls). Free tier has 60s timeout — upgrade to Pro ($20/mo) for 300s if needed.
 
 ## Project Structure
 
@@ -136,8 +140,6 @@ ai-career-agent/
 ├── app/
 │   ├── page.tsx                 # Landing page
 │   ├── analyze/page.tsx         # Upload + questionnaire + results
-│   ├── error.tsx                # Global error page
-│   ├── not-found.tsx            # 404 page
 │   ├── api/
 │   │   ├── analyze/route.ts     # Main analysis pipeline
 │   │   ├── match-job/route.ts   # Job matching endpoint
@@ -155,76 +157,26 @@ ai-career-agent/
 │   ├── rate-limit.ts            # In-memory rate limiter
 │   ├── utils.ts                 # Helpers (formatting, colors, validation)
 │   ├── demo.ts                  # Sample data for demo mode
-│   └── prompts/                 # Claude prompt templates (core IP)
+│   └── prompts/                 # Claude prompt templates
 │       ├── skill-extraction.ts  # CV → structured profile
 │       ├── gap-analysis.ts      # Profile → gaps + strengths + roles
 │       ├── career-plan.ts       # Gaps → action plan + salary benchmarks
 │       ├── job-matcher.ts       # CV + job posting → match analysis
 │       └── cv-rewriter.ts       # CV → optimization suggestions
-└── public/                      # Static assets
+└── docs/                        # Screenshots and assets
 ```
 
-## Features
+## Key Features
 
-### Core Analysis Pipeline
-- 3-4 sequential Claude API calls per analysis
-- Calls 3 & 4 parallelized for performance
-- Structured JSON output with TypeScript validation
-- Fallback defaults if any call fails
+**Analysis Pipeline** — 3-4 sequential Claude API calls with calls 3 & 4 parallelized. Structured JSON output with TypeScript validation and fallback defaults.
 
-### UI
-- Dark theme (Linear/Vercel aesthetic)
-- Drag-and-drop PDF upload with validation
-- Animated progress screen with rotating status messages
-- Expandable gap cards with severity color coding
-- Tabbed action plan (30/90/365 day)
-- Visual salary comparison bars
-- Fully responsive (mobile-first)
-- Demo mode with sample data (no API call needed)
+**Smart Salary Logic** — Auto-detects remote work preference and shows EMEA/EU remote market rates. Cross-currency normalization (e.g., RON → EUR) ensures accurate visual comparisons.
 
-### Error Handling
-- React ErrorBoundary wrapping all pages
-- Next.js error.tsx + not-found.tsx
-- API-level error messages (not stack traces)
-- Rate limiting (10 req/hour/IP)
-- File validation (PDF only, 5MB max)
+**UI** — Dark theme (Linear/Vercel aesthetic), drag-and-drop PDF upload, animated progress screen, expandable gap cards with severity color coding, tabbed action plan, visual salary comparison bars. Fully responsive.
 
-### PDF Report
-- 5-page dark-themed downloadable PDF
-- Generated client-side with @react-pdf/renderer
-- Unicode character sanitization for font compatibility
-- Includes all analysis sections
+**Error Handling** — React ErrorBoundary, API-level error messages, rate limiting (10 req/hour/IP), file validation (PDF only, 5MB max).
 
-## API Reference
-
-### POST /api/analyze
-
-Main analysis endpoint. Accepts multipart form data.
-
-**Request:**
-- `cv` (File) — PDF, max 5MB
-- `questionnaire` (JSON string) — `{ currentRole, targetRole, yearsExperience, country, workPreference, currentSalary?, targetSalary?, jobPosting? }`
-
-**Response:** Full `AnalysisResult` JSON (see `lib/types.ts`)
-
-**Latency:** 30-90 seconds (3-4 Claude calls)
-
-### POST /api/match-job
-
-Match CV against a specific job posting.
-
-### POST /api/rewrite-cv
-
-Generate CV optimization suggestions for a target role.
-
-## Development
-
-```bash
-npm run dev      # Start dev server (http://localhost:3000)
-npm run build    # Production build
-npm run start    # Start production server
-npm run lint     # ESLint
-```
+**PDF Report** — Dark-themed downloadable report generated client-side with @react-pdf/renderer. Unicode sanitization for font compatibility.
 
 ## Cost Estimates
 
@@ -233,24 +185,21 @@ npm run lint     # ESLint
 | 10 analyses | ~$2 |
 | 100 analyses | ~$20 |
 | 1,000 analyses | ~$200 |
-| 5,000 analyses | ~$1,000 |
 
 Each analysis uses ~11-17K input tokens + ~10-12K output tokens across 3-4 Claude calls.
 
-## Roadmap (Post-MVP)
+## Roadmap
 
+- [ ] Multi-language support (EN / RO / DE)
 - [ ] User accounts + saved analysis history
 - [ ] Stripe payment integration
 - [ ] LinkedIn profile import
-- [ ] Real-time job market data integration
-- [ ] Multi-language support
-- [ ] A/B testing on prompts
+- [ ] Real-time job market data
 - [ ] Upstash Redis for production rate limiting
-- [ ] UI revamp with enhanced animations
 
 ## Built By
 
-**Florin Pătrașcu** — Enterprise automation architect transitioning to AI solutions.
+**Florin Patrascu** — Enterprise automation architect transitioning to AI solutions.
 
 - [LinkedIn](https://linkedin.com/in/florinpatrascu)
 - [GitHub](https://github.com/nirolfpatrascu)
