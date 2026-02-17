@@ -1,0 +1,309 @@
+{
+  "metadata": {
+    "analyzedAt": "2026-02-18T14:30:00Z",
+    "cvFileName": "Florin_Patrascu_CV.pdf",
+    "targetRole": "AI Solutions Architect",
+    "country": "Romania"
+  },
+  "fitScore": {
+    "score": 6,
+    "label": "Moderate Fit",
+    "summary": "Strong enterprise automation architecture background with genuine AI/LLM hands-on experience. The UiPath Solutions Architect foundation transfers well to AI-native roles. Key gaps in cloud platform certification and JavaScript/TypeScript proficiency prevent a higher score, but these are closable within 2-3 months. Positioned well for the AI automation architect niche specifically."
+  },
+  "strengths": [
+    {
+      "title": "Enterprise Automation Architecture",
+      "description": "5 years at UiPath designing and implementing scalable RPA solutions, including REFramework architectures, Orchestrator deployments, and AI Center ML model pipelines. This is rare  -  most AI applicants have academic or startup backgrounds, not enterprise SA experience.",
+      "relevance": "AI Solutions Architect roles require someone who can design systems that work in complex enterprise environments. This background is a direct match and a genuine differentiator.",
+      "tier": "differentiator"
+    },
+    {
+      "title": "AI/LLM Application Development",
+      "description": "Active hands-on experience building with Claude API, OpenAI API, n8n, and Make. Building agentic automation prototypes, RAG pipelines, and AI-powered workflow orchestration.",
+      "relevance": "Demonstrates current, practical AI skills  -  not just theoretical knowledge. The combination of enterprise architecture + modern AI tools is exactly what companies hiring AI Solutions Architects need.",
+      "tier": "differentiator"
+    },
+    {
+      "title": "Technical Enablement & Training",
+      "description": "Delivered instructor-led training globally at UiPath. Built training curricula, demo workflows, and technical documentation for complex AI products (Document Understanding, AI Center, Copilot).",
+      "relevance": "AI SA roles require explaining complex technical solutions to non-technical stakeholders. Proven training delivery experience is strong evidence of this capability.",
+      "tier": "strong"
+    },
+    {
+      "title": "Systems Engineering Foundation",
+      "description": "7 years developing embedded software for automotive safety-critical systems (ABS/ESP) at Continental. ANSI C, ARM multicore architectures, Automotive SPICE compliance.",
+      "relevance": "Signals deep engineering fundamentals and ability to work on complex, reliability-critical systems. Adds credibility beyond surface-level automation skills.",
+      "tier": "supporting"
+    },
+    {
+      "title": "Document Intelligence / IDP Specialization",
+      "description": "Deep expertise in UiPath Document Understanding, ML model training for document classification and extraction, and intelligent document processing pipelines.",
+      "relevance": "Document AI / IDP is one of the highest-demand AI use cases in enterprise. This specialization maps directly to Claude-powered document processing solutions.",
+      "tier": "strong"
+    }
+  ],
+  "gaps": [
+    {
+      "skill": "Cloud Platform (AWS/Azure/GCP)",
+      "severity": "critical",
+      "currentLevel": "No formal certification or demonstrated cloud architecture experience",
+      "requiredLevel": "Working knowledge of at least one major cloud platform; certification strongly preferred",
+      "impact": "Auto-reject filter on approximately 60% of AI Solutions Architect job postings. Most enterprise AI deployments are cloud-native.",
+      "closingPlan": "Complete AZ-900 (Azure Fundamentals) in 2-3 weeks, then AI-102 (Azure AI Engineer) in 4-6 weeks. Azure recommended over AWS because of stronger AI services integration and Microsoft's partnership ecosystem with enterprise automation.",
+      "timeToClose": "6-8 weeks for both certifications",
+      "resources": [
+        "Microsoft Learn: AZ-900 Learning Path (free)",
+        "Microsoft Learn: AI-102 Learning Path (free)",
+        "John Savill's AZ-900 YouTube Study Cram",
+        "Azure free trial account for hands-on labs"
+      ]
+    },
+    {
+      "skill": "JavaScript / TypeScript",
+      "severity": "critical",
+      "currentLevel": "Not listed on CV. Limited web development exposure.",
+      "requiredLevel": "Professional working proficiency. Required for n8n custom nodes, modern web development, and most AI integration roles.",
+      "impact": "Blocks applications to companies like n8n (Node.js-based), web-focused AI companies, and full-stack AI roles. Limits ability to build portfolio projects.",
+      "closingPlan": "Complete a focused JavaScript/TypeScript crash course (2 weeks). Then build 2-3 real projects using Next.js to demonstrate proficiency. The portfolio projects planned in the 3-month sprint will serve as proof.",
+      "timeToClose": "2-3 weeks for fundamentals, 2-3 months for professional proficiency",
+      "resources": [
+        "JavaScript.info  -  Modern JavaScript Tutorial (free)",
+        "TypeScript official handbook (free)",
+        "Next.js Learn course (free, by Vercel)",
+        "Build portfolio projects as practice"
+      ]
+    },
+    {
+      "skill": "Production ML/AI Engineering",
+      "severity": "moderate",
+      "currentLevel": "UiPath AI Center operations (model training, deployment within UiPath ecosystem). Claude/OpenAI API integration. No custom model training outside UiPath.",
+      "requiredLevel": "Understanding of ML pipelines, model evaluation, fine-tuning, and deployment. Not necessarily a data scientist, but should speak the language fluently.",
+      "impact": "May struggle in deep technical interviews at AI-first companies. Less critical for SA roles at automation vendors (where solution design matters more than model building).",
+      "closingPlan": "Complete Andrew Ng's Machine Learning Specialization (or fast.ai Practical Deep Learning). Focus on understanding, not becoming an ML engineer. Build one RAG pipeline with evaluation metrics as a portfolio piece.",
+      "timeToClose": "2-3 months (part-time)",
+      "resources": [
+        "Andrew Ng's Machine Learning Specialization (Coursera)",
+        "fast.ai Practical Deep Learning course (free)",
+        "LangChain documentation + tutorials",
+        "Build a RAG pipeline project with evaluation"
+      ]
+    },
+    {
+      "skill": "Docker / Containerization",
+      "severity": "moderate",
+      "currentLevel": "Not mentioned on CV",
+      "requiredLevel": "Ability to containerize applications and work with container orchestration basics",
+      "impact": "Expected skill for any modern deployment workflow. Not always a hard requirement but absence raises questions.",
+      "closingPlan": "Containerize one of your portfolio projects with Docker. Learn basics in a weekend  -  Dockerfile, docker-compose, basic commands. This is a quick win.",
+      "timeToClose": "1 weekend",
+      "resources": [
+        "Docker Getting Started tutorial (official docs)",
+        "Fireship Docker in 100 seconds + follow-up video",
+        "Containerize your Career Agent app as practice"
+      ]
+    },
+    {
+      "skill": "Public Portfolio / GitHub Presence",
+      "severity": "moderate",
+      "currentLevel": "GitHub account exists but likely thin. No public projects demonstrating current AI capabilities.",
+      "requiredLevel": "Active GitHub with 3-5 polished repos showing AI/automation work. Clean READMEs with screenshots.",
+      "impact": "Recruiters and hiring managers check GitHub. Empty or inactive profile signals 'talks about AI but doesn't build.' Active portfolio with AI projects is the single best proof of capability.",
+      "closingPlan": "The 3-month portfolio sprint addresses this directly. Pin 6 best repos, write comprehensive READMEs, maintain commit activity.",
+      "timeToClose": "2 weeks for initial setup, ongoing maintenance",
+      "resources": [
+        "Follow the Portfolio Sprint 2-Week Plan",
+        "GitHub profile README generator",
+        "Study top developer profiles for README inspiration"
+      ]
+    },
+    {
+      "skill": "German Language",
+      "severity": "minor",
+      "currentLevel": "A2 (elementary)",
+      "requiredLevel": "B1-B2 for DACH market roles, not required for English-first companies",
+      "impact": "Limits access to DACH-specific roles (Germany, Austria, Switzerland) which have the highest salaries in Europe. Not a blocker for international remote roles.",
+      "closingPlan": "Continue learning but don't prioritize over technical skills. Focus on English-first remote roles in the short term.",
+      "timeToClose": "6-12 months to reach B1",
+      "resources": [
+        "DW Learn German (free)",
+        "Tandem language exchange app",
+        "German Podcasts for learners"
+      ]
+    }
+  ],
+  "roleRecommendations": [
+    {
+      "title": "Solutions Architect  -  AI/Automation Vendor",
+      "fitScore": 8,
+      "salaryRange": {
+        "low": 55000,
+        "mid": 75000,
+        "high": 100000,
+        "currency": "EUR"
+      },
+      "reasoning": "Direct match for your enterprise SA experience + growing AI skills. Companies like n8n, Make, Celonis, Automation Anywhere, and ServiceNow hire this exact profile. Your UiPath insider experience is a differentiator vs. other candidates. Remote-friendly, European timezone compatible.",
+      "exampleCompanies": [
+        "n8n",
+        "Make",
+        "Celonis",
+        "Automation Anywhere",
+        "ServiceNow",
+        "Workato"
+      ],
+      "timeToReady": "Ready now (apply immediately)"
+    },
+    {
+      "title": "Technical Enablement Engineer  -  AI Company",
+      "fitScore": 7,
+      "salaryRange": {
+        "low": 50000,
+        "mid": 70000,
+        "high": 90000,
+        "currency": "EUR"
+      },
+      "reasoning": "Your Technical Enablement role at UiPath is directly transferable. AI companies (Anthropic, OpenAI, Cohere, Google Cloud, AWS, Dataiku, Databricks) need people who can train partners and customers on AI products. Your experience building training curricula and delivering globally is exactly what they need.",
+      "exampleCompanies": [
+        "Anthropic",
+        "Dataiku",
+        "Databricks",
+        "Google Cloud",
+        "AWS"
+      ],
+      "timeToReady": "Ready now (cloud cert would strengthen application)"
+    },
+    {
+      "title": "AI Automation Consultant  -  Independent / Consultancy",
+      "fitScore": 7,
+      "salaryRange": {
+        "low": 60000,
+        "mid": 90000,
+        "high": 150000,
+        "currency": "EUR"
+      },
+      "reasoning": "Combining your enterprise automation expertise with modern AI tools positions you perfectly for consulting. Businesses need someone who understands both their legacy processes AND modern AI capabilities. You can charge EUR 100-200/hour for this combination. The demo kits you're building become your sales tools.",
+      "exampleCompanies": [
+        "Independent (SRL-D)",
+        "Deloitte",
+        "Accenture",
+        "Capgemini",
+        "Cognizant"
+      ],
+      "timeToReady": "1-3 months (portfolio + company setup)"
+    }
+  ],
+  "actionPlan": {
+    "thirtyDays": [
+      {
+        "action": "Complete LinkedIn and Upwork profile overhaul  -  new headline, about section, featured projects",
+        "priority": "critical",
+        "timeEstimate": "2-3 hours total",
+        "resource": "LinkedIn Audit document (already created)",
+        "expectedImpact": "Immediately visible to recruiters. LinkedIn algorithm starts matching you with AI/automation roles instead of RPA roles."
+      },
+      {
+        "action": "Ship Career Growth AI Agent and 2 other portfolio projects to GitHub with polished READMEs",
+        "priority": "critical",
+        "timeEstimate": "2 weeks at 3 hours/day",
+        "resource": "Portfolio Sprint 2-Week Plan",
+        "expectedImpact": "Proves you can build full-stack AI applications. Transforms empty GitHub into compelling portfolio."
+      },
+      {
+        "action": "Complete AZ-900 Azure Fundamentals certification",
+        "priority": "critical",
+        "timeEstimate": "2-3 weeks at 1 hour/day",
+        "resource": "Microsoft Learn AZ-900 path (free)",
+        "expectedImpact": "Removes the 'no cloud experience' blocker from 60% of job postings."
+      },
+      {
+        "action": "Apply to 10-15 Tier 1 sweet-spot roles (Solutions Architect, Technical Enablement at AI/automation vendors)",
+        "priority": "high",
+        "timeEstimate": "3-5 hours total",
+        "resource": "Updated CV + tailored cover letters",
+        "expectedImpact": "Starts interview pipeline. Even rejections provide market feedback."
+      }
+    ],
+    "ninetyDays": [
+      {
+        "action": "Complete AI-102 Azure AI Engineer Associate certification",
+        "priority": "high",
+        "timeEstimate": "4-6 weeks at 1 hour/day",
+        "resource": "Microsoft Learn AI-102 path (free)",
+        "expectedImpact": "Positions you as cloud AI engineer, not just RPA developer. Combines powerfully with AZ-900."
+      },
+      {
+        "action": "Ship all 5 AI automation demo kits (Invoice, Email, Onboarding, Lead Qual, Meeting Notes)",
+        "priority": "high",
+        "timeEstimate": "5 weeks at ~4 hours/kit",
+        "resource": "3-Month Master Plan",
+        "expectedImpact": "Creates a sellable service catalog. Each kit is a potential EUR 1,500-5,000 client engagement."
+      },
+      {
+        "action": "Register SRL-D (micro-enterprise) in Romania",
+        "priority": "medium",
+        "timeEstimate": "1-2 weeks of paperwork + accountant consultation",
+        "resource": "Romanian accountant, ONRC registration",
+        "expectedImpact": "Enables legal invoicing, 1% revenue tax, professional credibility."
+      },
+      {
+        "action": "Publish 4-6 LinkedIn posts about projects you've built",
+        "priority": "medium",
+        "timeEstimate": "1-2 hours per post",
+        "resource": "Own project portfolio as content source",
+        "expectedImpact": "Builds visibility, establishes thought leadership, attracts inbound opportunities."
+      }
+    ],
+    "twelveMonths": [
+      {
+        "action": "Transition to AI Solutions Architect role at an automation/AI vendor OR build consulting practice to EUR 8K+/month revenue",
+        "priority": "critical",
+        "timeEstimate": "Ongoing",
+        "resource": "Network, portfolio, certifications built in months 1-3",
+        "expectedImpact": "Career transition complete. Earning EUR 70-100K+ in new domain."
+      },
+      {
+        "action": "Launch Ballistics and Pigeon Fancier apps as subscription products",
+        "priority": "medium",
+        "timeEstimate": "2-3 months build + ongoing",
+        "resource": "3-Month Master Plan (Phase 3)",
+        "expectedImpact": "Passive/recurring revenue stream. Demonstrates product management + full-stack capability."
+      },
+      {
+        "action": "Complete one ML course (Andrew Ng's or fast.ai) and build a RAG project with evaluation metrics",
+        "priority": "medium",
+        "timeEstimate": "2-3 months part-time",
+        "resource": "Coursera / fast.ai (free)",
+        "expectedImpact": "Closes the ML knowledge gap. Enables conversation with data science teams as a peer, not just a consumer of APIs."
+      },
+      {
+        "action": "Speak at 1-2 online meetups or conferences about AI automation",
+        "priority": "medium",
+        "timeEstimate": "2-4 hours prep per talk",
+        "resource": "n8n community meetups, local tech meetups, online conferences",
+        "expectedImpact": "Public speaking builds credibility exponentially. One good talk can generate more leads than 50 cold emails."
+      }
+    ]
+  },
+  "salaryAnalysis": {
+    "currentRoleMarket": {
+      "low": 35000,
+      "mid": 48000,
+      "high": 65000,
+      "currency": "EUR",
+      "region": "Romania - local market (gross annual)"
+    },
+    "targetRoleMarket": {
+      "low": 55000,
+      "mid": 80000,
+      "high": 120000,
+      "currency": "EUR",
+      "region": "EU/EMEA remote market (gross annual)"
+    },
+    "growthPotential": "+35-65% increase achievable within 6-12 months by transitioning from RPA-focused roles to AI Solutions Architect positions. The highest leverage move is targeting Western European companies hiring remotely  -  they pay Western European salaries to Eastern European talent.",
+    "bestMonetaryMove": "Apply immediately to Solutions Architect roles at n8n, Make, or Celonis. These companies specifically value enterprise automation experience, pay EUR 65-100K for remote European talent, and your UiPath background is a direct competitive advantage. While interviewing, build consulting income through Upwork at $50-75/hour. The combination of employment applications + freelance income creates multiple paths to higher earnings.",
+    "negotiationTips": [
+      "Lead with your UiPath enterprise experience  -  'I've designed automation architectures deployed across Fortune 500 companies' commands higher rates than 'I know n8n.'",
+      "When asked about salary expectations, anchor to Western European ranges (EUR 70-90K) not Romanian local market. You're competing on value delivered, not local cost of living.",
+      "If offered below target, negotiate for sign-on bonus, equity, or accelerated review timeline rather than accepting a lower base. Base salary compounds  -  every EUR 5K higher compounds over your career."
+    ]
+  }
+}

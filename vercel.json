@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "app/api/analyze/route.ts": {
+      "maxDuration": 300
+    },
+    "app/api/match-job/route.ts": {
+      "maxDuration": 300
+    },
+    "app/api/rewrite-cv/route.ts": {
+      "maxDuration": 300
+    }
+  }
+}
