@@ -7,45 +7,63 @@ const PROGRESS_MESSAGES = [
   { text: 'Extracting skills and experience...', icon: '🔍' },
   { text: 'Analyzing market positioning...', icon: '📊' },
   { text: 'Identifying skill gaps...', icon: '🎯' },
+  { text: 'Matching against target roles...', icon: '🏢' },
   { text: 'Building your career roadmap...', icon: '🗺️' },
   { text: 'Calculating salary benchmarks...', icon: '💰' },
   { text: 'Generating your personalized report...', icon: '✨' },
 ];
+
+// Target: reach ~92% at 90s, hold at 95% until done
+const CHECKPOINTS = [
+  { seconds: 0, progress: 0 },
+  { seconds: 10, progress: 12 },
+  { seconds: 20, progress: 25 },
+  { seconds: 30, progress: 38 },
+  { seconds: 45, progress: 52 },
+  { seconds: 60, progress: 68 },
+  { seconds: 75, progress: 80 },
+  { seconds: 90, progress: 90 },
+  { seconds: 105, progress: 94 },
+  { seconds: 120, progress: 95 },
+];
+
+function getTargetProgress(elapsedSeconds: number): number {
+  for (let i = CHECKPOINTS.length - 1; i >= 0; i--) {
+    if (elapsedSeconds >= CHECKPOINTS[i].seconds) {
+      if (i === CHECKPOINTS.length - 1) return CHECKPOINTS[i].progress;
+      const curr = CHECKPOINTS[i];
+      const next = CHECKPOINTS[i + 1];
+      const segmentProgress = (elapsedSeconds - curr.seconds) / (next.seconds - curr.seconds);
+      return curr.progress + (next.progress - curr.progress) * segmentProgress;
+    }
+  }
+  return 0;
+}
 
 export default function AnalysisProgress() {
   const [messageIndex, setMessageIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [elapsed, setElapsed] = useState(0);
 
-  // Rotate messages every 4 seconds
+  // Rotate messages every 12 seconds (8 messages over ~96 seconds)
   useEffect(() => {
     const interval = setInterval(() => {
       setMessageIndex((prev) =>
         prev < PROGRESS_MESSAGES.length - 1 ? prev + 1 : prev
       );
-    }, 4000);
+    }, 12000);
     return () => clearInterval(interval);
   }, []);
 
-  // Animate progress bar (ease out over ~60 seconds)
+  // Update progress based on elapsed time
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 95) return 95; // Never reach 100 until actually done
-        // Fast at start, slow at end
-        const remaining = 95 - prev;
-        const increment = remaining * 0.02;
-        return prev + Math.max(increment, 0.1);
+      setElapsed((prev) => {
+        const newElapsed = prev + 0.5;
+        setProgress(getTargetProgress(newElapsed));
+        return newElapsed;
       });
-    }, 200);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Timer
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setElapsed((prev) => prev + 1);
-    }, 1000);
+    }, 500);
     return () => clearInterval(interval);
   }, []);
 
@@ -72,7 +90,7 @@ export default function AnalysisProgress() {
             {PROGRESS_MESSAGES[messageIndex].text}
           </p>
           <p className="text-sm text-text-secondary">
-            This typically takes 30-60 seconds
+            This typically takes 60-90 seconds
           </p>
         </div>
 
@@ -87,7 +105,7 @@ export default function AnalysisProgress() {
 
           <div className="flex items-center justify-between text-xs text-text-secondary">
             <span>{Math.round(progress)}% complete</span>
-            <span>{elapsed}s elapsed</span>
+            <span>{Math.round(elapsed)}s elapsed</span>
           </div>
         </div>
 
