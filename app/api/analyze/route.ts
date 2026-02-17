@@ -194,6 +194,36 @@ export async function POST(request: NextRequest) {
       console.log(`[analyze] Job match score: ${jobMatchResult.matchScore}%`);
     }
 
+// --- Normalize salary currencies (ensure both markets use same currency) ---
+    const salaryAnalysis = careerPlan.salaryAnalysis;
+    const currentCur = salaryAnalysis.currentRoleMarket.currency;
+    const targetCur = salaryAnalysis.targetRoleMarket.currency;
+
+    if (currentCur !== targetCur) {
+      // Approximate conversion rates to EUR
+      const toEur: Record<string, number> = {
+        'EUR': 1, 'USD': 0.92, 'GBP': 1.17, 'CHF': 1.05,
+        'RON': 0.20, 'PLN': 0.23, 'CZK': 0.04, 'HUF': 0.0025,
+        'SEK': 0.088, 'DKK': 0.134, 'NOK': 0.087,
+        'CAD': 0.68, 'AUD': 0.60, 'INR': 0.011, 'SGD': 0.69,
+        'JPY': 0.0062, 'BRL': 0.17,
+      };
+      // Convert current role market to target currency
+      const fromRate = toEur[currentCur] || 1;
+      const toRate = toEur[targetCur] || 1;
+      const conversionRate = fromRate / toRate;
+
+      salaryAnalysis.currentRoleMarket.low = Math.round(salaryAnalysis.currentRoleMarket.low * conversionRate);
+      salaryAnalysis.currentRoleMarket.mid = Math.round(salaryAnalysis.currentRoleMarket.mid * conversionRate);
+      salaryAnalysis.currentRoleMarket.high = Math.round(salaryAnalysis.currentRoleMarket.high * conversionRate);
+      salaryAnalysis.currentRoleMarket.currency = targetCur;
+      salaryAnalysis.currentRoleMarket.region = salaryAnalysis.currentRoleMarket.region.replace(
+        /\(gross annual\)/,
+        `(converted to ${targetCur}, gross annual)`
+      );
+      console.log(`[analyze] Converted salary from ${currentCur} to ${targetCur}`);
+    }
+
     // --- Assemble Final Result ---
     const result: AnalysisResult = {
       metadata: {
@@ -207,7 +237,7 @@ export async function POST(request: NextRequest) {
       gaps: gapAnalysis.gaps,
       roleRecommendations: gapAnalysis.roleRecommendations,
       actionPlan: careerPlan.actionPlan,
-      salaryAnalysis: careerPlan.salaryAnalysis,
+      salaryAnalysis: salaryAnalysis,
       ...(jobMatchResult && { jobMatch: jobMatchResult }),
     };
 
