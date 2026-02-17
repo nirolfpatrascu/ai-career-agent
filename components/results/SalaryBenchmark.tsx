@@ -11,10 +11,24 @@ export default function SalaryBenchmark({ salary }: SalaryBenchmarkProps) {
   const currentCurrency = salary.currentRoleMarket.currency;
   const targetCurrency = salary.targetRoleMarket.currency;
 
-  // Normalize to same currency for bar comparison (use raw numbers for visual)
-  const maxSalary = Math.max(salary.targetRoleMarket.high, salary.currentRoleMarket.high);
-  const currentWidth = maxSalary > 0 ? (currentMid / maxSalary) * 100 : 0;
-  const targetWidth = maxSalary > 0 ? (targetMid / maxSalary) * 100 : 0;
+  // Approximate EUR conversion for visual bar comparison only
+  // Displayed values remain in original currency
+  const toEurRate: Record<string, number> = {
+    'EUR': 1, 'USD': 0.92, 'GBP': 1.17, 'CHF': 1.05,
+    'RON': 0.20, 'PLN': 0.23, 'CZK': 0.04, 'HUF': 0.0025,
+    'SEK': 0.088, 'DKK': 0.134, 'NOK': 0.087,
+    'CAD': 0.68, 'AUD': 0.60, 'INR': 0.011, 'SGD': 0.69,
+    'JPY': 0.0062, 'BRL': 0.17,
+  };
+  const currentRate = toEurRate[currentCurrency] || 1;
+  const targetRate = toEurRate[targetCurrency] || 1;
+
+  const currentMidEur = salary.currentRoleMarket.high * currentRate;
+  const targetMidEur = salary.targetRoleMarket.high * targetRate;
+  const maxEur = Math.max(currentMidEur, targetMidEur);
+
+  const currentWidth = maxEur > 0 ? ((currentMid * currentRate) / maxEur) * 100 : 0;
+  const targetWidth = maxEur > 0 ? ((targetMid * targetRate) / maxEur) * 100 : 0;
 
   return (
     <section>
