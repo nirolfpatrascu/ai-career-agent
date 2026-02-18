@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation, LOCALE_NAMES } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
@@ -33,6 +34,7 @@ function GlobeIcon({ className }: { className?: string }) {
 
 export default function Header() {
   const { t, locale, setLocale } = useTranslation();
+  const pathname = usePathname();
   const [langOpen, setLangOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -128,12 +130,21 @@ export default function Header() {
             )}
           </div>
 
-          <Link
-            href="/analyze"
-            className="text-sm font-medium bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-lg transition-all duration-200"
-          >
-            {t('common.analyzeMyCareer')}
-          </Link>
+          {pathname === '/analyze' ? (
+            <a
+              href="/analyze"
+              className="text-sm font-medium bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-lg transition-all duration-200"
+            >
+              {t('common.analyzeMyCareer')}
+            </a>
+          ) : (
+            <Link
+              href="/analyze"
+              className="text-sm font-medium bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-lg transition-all duration-200"
+            >
+              {t('common.analyzeMyCareer')}
+            </Link>
+          )}
         </nav>
       </div>
     </header>

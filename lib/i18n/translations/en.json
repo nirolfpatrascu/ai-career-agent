@@ -17,7 +17,13 @@
     "badge": "AI-Powered Career Advisor",
     "headline1": "Upload your CV.",
     "headline2": "Get a personalized",
-    "rotatingWords": ["career strategy", "skill gap analysis", "salary benchmarks", "action plan", "role recommendations"],
+    "rotatingWords": [
+      "career strategy",
+      "skill gap analysis",
+      "salary benchmarks",
+      "action plan",
+      "role recommendations"
+    ],
     "subtitle": "Gap analysis, learning plans, salary benchmarks, role recommendations, and CV optimization — all in under 2 minutes. Career coaching that used to cost $500/hour, now powered by AI.",
     "analyzeFree": "Analyze My Career",
     "stats": {
@@ -32,12 +38,30 @@
     "title": "Everything you need to navigate your career transition",
     "subtitle": "Powered by advanced AI analysis of your CV, target role requirements, and market data.",
     "cards": [
-      { "title": "CV Deep Analysis", "description": "Upload your PDF resume and our AI extracts every skill, certification, and experience — including ones you forgot to list." },
-      { "title": "Gap Analysis", "description": "See exactly what skills you're missing for your target role — color-coded by severity with specific plans to close each gap." },
-      { "title": "Salary Benchmarks", "description": "Location-aware salary ranges for your current and target roles, plus negotiation tips specific to your experience." },
-      { "title": "Role Recommendations", "description": "Get 3 best-fit roles based on your profile — with fit scores, salary ranges, and specific companies to target." },
-      { "title": "Action Plan", "description": "30-day quick wins, 90-day skill building, and 12-month career trajectory — each with specific resources and time estimates." },
-      { "title": "Job Matching", "description": "Paste any job posting and get an ATS match score, missing keywords, and specific CV rewrite suggestions." }
+      {
+        "title": "CV Deep Analysis",
+        "description": "Upload your PDF resume and our AI extracts every skill, certification, and experience — including ones you forgot to list."
+      },
+      {
+        "title": "Gap Analysis",
+        "description": "See exactly what skills you're missing for your target role — color-coded by severity with specific plans to close each gap."
+      },
+      {
+        "title": "Salary Benchmarks",
+        "description": "Location-aware salary ranges for your current and target roles, plus negotiation tips specific to your experience."
+      },
+      {
+        "title": "Role Recommendations",
+        "description": "Get 3 best-fit roles based on your profile — with fit scores, salary ranges, and specific companies to target."
+      },
+      {
+        "title": "Action Plan",
+        "description": "30-day quick wins, 90-day skill building, and 12-month career trajectory — each with specific resources and time estimates."
+      },
+      {
+        "title": "Job Matching",
+        "description": "Paste any job posting and get an ATS match score, missing keywords, and specific CV rewrite suggestions."
+      }
     ]
   },
   "howItWorks": {
@@ -45,9 +69,18 @@
     "title": "From CV to career roadmap in 3 steps",
     "subtitle": "No sign-up required. Upload, answer a few questions, and get your personalized analysis.",
     "steps": [
-      { "title": "Upload Your CV", "description": "Drag and drop your PDF resume. Our AI reads every detail — skills, certifications, experience, and even implicit competencies you didn't explicitly list." },
-      { "title": "Tell Us Your Goals", "description": "Answer a quick questionnaire about your current role, target position, location, and salary expectations. Takes under 2 minutes." },
-      { "title": "Get Your Career Roadmap", "description": "In under 2 minutes, receive a comprehensive analysis: fit score, strengths, skill gaps, salary benchmarks, and a personalized action plan." }
+      {
+        "title": "Upload Your CV",
+        "description": "Drag and drop your PDF resume. Our AI reads every detail — skills, certifications, experience, and even implicit competencies you didn't explicitly list."
+      },
+      {
+        "title": "Tell Us Your Goals",
+        "description": "Answer a quick questionnaire about your current role, target position, location, and salary expectations. Takes under 2 minutes."
+      },
+      {
+        "title": "Get Your Career Roadmap",
+        "description": "In under 2 minutes, receive a comprehensive analysis: fit score, strengths, skill gaps, salary benchmarks, and a personalized action plan."
+      }
     ],
     "visual": {
       "uploadComplete": "Upload complete",
@@ -67,7 +100,7 @@
   },
   "analyze": {
     "title": "Analyze Your Career",
-    "subtitle": "Upload your CV and tell us about your career goals. We'll generate a comprehensive analysis in about 90 seconds.",
+    "subtitle": "Upload your LinkedIn profile and CV, fill in your career goals, and get your personalized analysis.",
     "uploadCV": "Upload CV",
     "careerDetails": "Career Details",
     "uploadToContinue": "Upload your CV to continue",
@@ -81,7 +114,9 @@
     "wantDifferent": "Want to analyze a different career path?",
     "preFilled": "We pre-filled what we could from your upload. Complete the remaining fields — especially your target role.",
     "tellUsGoals": "Tell us about your current position and where you want to go.",
-    "uploadAtLeastOne": "Upload a LinkedIn PDF or CV to get started"
+    "uploadAtLeastOne": "Upload a LinkedIn PDF or CV to get started",
+    "uploadDocs": "Upload your documents",
+    "uploadDocsHint": "LinkedIn PDF auto-fills your details. Add your CV for a deeper analysis."
   },
   "upload": {
     "label": "Upload Your CV",
@@ -174,14 +209,25 @@
     ]
   },
   "results": {
-    "fitScore": { "title": "Career Fit Score", "outOf": "out of 10" },
+    "fitScore": {
+      "title": "Career Fit Score",
+      "outOf": "out of 10"
+    },
     "strengths": {
       "title": "Your Strengths",
-      "tiers": { "differentiator": "Differentiator", "strong": "Strong", "supporting": "Supporting" }
+      "tiers": {
+        "differentiator": "Differentiator",
+        "strong": "Strong",
+        "supporting": "Supporting"
+      }
     },
     "gaps": {
       "title": "Skill Gaps",
-      "severity": { "critical": "Critical", "moderate": "Moderate", "minor": "Minor" },
+      "severity": {
+        "critical": "Critical",
+        "moderate": "Moderate",
+        "minor": "Minor"
+      },
       "currentLevel": "Current Level",
       "requiredLevel": "Required Level",
       "impact": "Impact",
@@ -194,11 +240,17 @@
       "fitScore": "Fit Score",
       "salaryRange": "Salary Range",
       "timeToReady": "Time to Ready",
-      "exampleCompanies": "Target Companies"
+      "exampleCompanies": "Target Companies",
+      "bestFit": "Best Fit",
+      "mid": "Mid"
     },
     "actionPlan": {
       "title": "Action Plan",
-      "tabs": { "thirtyDays": "30 Days", "ninetyDays": "90 Days", "twelveMonths": "12 Months" },
+      "tabs": {
+        "thirtyDays": "30 Days",
+        "ninetyDays": "90 Days",
+        "twelveMonths": "12 Months"
+      },
       "priority": "Priority",
       "timeEstimate": "Time",
       "resource": "Resource",

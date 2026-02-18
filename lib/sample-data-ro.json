@@ -1,0 +1,290 @@
+{
+  "metadata": {
+    "analyzedAt": "2026-02-18T14:30:00Z",
+    "cvFileName": "Florin_Patrascu_CV.pdf",
+    "targetRole": "AI Solutions Architect",
+    "country": "România"
+  },
+  "fitScore": {
+    "score": 6,
+    "label": "Potrivire Moderată",
+    "summary": "Experiență solidă în arhitectura automatizărilor enterprise cu experiență practică reală în AI/LLM. Fundația de Solutions Architect UiPath se transferă bine către roluri AI-native. Lacunele cheie în certificarea platformelor cloud și competențele JavaScript/TypeScript împiedică un scor mai mare, dar sunt recuperabile în 2-3 luni. Poziționare bună în special pentru nișa de arhitect automatizări AI."
+  },
+  "strengths": [
+    {
+      "title": "Arhitectură de Automatizare Enterprise",
+      "description": "5 ani la UiPath proiectând și implementând soluții RPA scalabile, inclusiv arhitecturi REFramework, deployment-uri Orchestrator și pipeline-uri ML în AI Center. Acest lucru este rar — majoritatea candidaților AI au experiență academică sau de startup, nu experiență enterprise SA.",
+      "relevance": "Rolurile de AI Solutions Architect necesită pe cineva care poate proiecta sisteme funcționale în medii enterprise complexe. Această experiență este o potrivire directă și un diferențiator real.",
+      "tier": "differentiator"
+    },
+    {
+      "title": "Dezvoltare Aplicații AI/LLM",
+      "description": "Experiență practică activă cu Claude API, OpenAI API, n8n și Make. Construiește prototipuri de automatizare agentică, pipeline-uri RAG și orchestrare de workflow-uri alimentate de AI.",
+      "relevance": "Demonstrează competențe AI practice și actuale — nu doar cunoștințe teoretice. Combinația arhitectură enterprise + unelte AI moderne este exact ce caută companiile care angajează AI Solutions Architects.",
+      "tier": "differentiator"
+    },
+    {
+      "title": "Abilitare Tehnică & Training",
+      "description": "A susținut training-uri instructor-led la nivel global la UiPath. A creat curricule de training, workflow-uri demo și documentație tehnică pentru produse AI complexe (Document Understanding, AI Center, Copilot).",
+      "relevance": "Rolurile de AI SA necesită explicarea soluțiilor tehnice complexe către stakeholderi non-tehnici. Experiența dovedită în livrarea de training-uri este o dovadă solidă a acestei capacități.",
+      "tier": "strong"
+    },
+    {
+      "title": "Fundație în Ingineria Sistemelor",
+      "description": "7 ani dezvoltând software embedded pentru sisteme automotive safety-critical (ABS/ESP) la Continental. ANSI C, arhitecturi ARM multicore, conformitate Automotive SPICE.",
+      "relevance": "Semnalează fundamente inginerești solide și capacitatea de a lucra pe sisteme complexe, critice pentru fiabilitate. Adaugă credibilitate dincolo de competențele superficiale de automatizare.",
+      "tier": "supporting"
+    },
+    {
+      "title": "Specializare Document Intelligence / IDP",
+      "description": "Expertiză profundă în UiPath Document Understanding, antrenare modele ML pentru clasificarea și extracția documentelor și pipeline-uri de procesare inteligentă a documentelor.",
+      "relevance": "Document AI / IDP este unul dintre cele mai căutate cazuri de utilizare AI în enterprise. Această specializare se mapează direct pe soluții de procesare documente bazate pe Claude.",
+      "tier": "strong"
+    }
+  ],
+  "gaps": [
+    {
+      "skill": "Platformă Cloud (AWS/Azure/GCP)",
+      "severity": "critical",
+      "currentLevel": "Fără certificare formală sau experiență demonstrată în arhitectura cloud",
+      "requiredLevel": "Cunoștințe de lucru pe cel puțin o platformă cloud majoră; certificarea este puternic preferată",
+      "impact": "Filtru de auto-respingere pe aproximativ 60% din anunțurile de AI Solutions Architect. Majoritatea deployment-urilor AI enterprise sunt cloud-native.",
+      "closingPlan": "Completează AZ-900 (Azure Fundamentals) în 2-3 săptămâni, apoi AI-102 (Azure AI Engineer) în 4-6 săptămâni. Azure recomandat în locul AWS datorită integrării mai puternice a serviciilor AI și ecosistemului de parteneriat Microsoft cu automatizarea enterprise.",
+      "timeToClose": "6-8 săptămâni pentru ambele certificări",
+      "resources": [
+        "Microsoft Learn: AZ-900 Learning Path (gratuit)",
+        "Microsoft Learn: AI-102 Learning Path (gratuit)",
+        "John Savill's AZ-900 YouTube Study Cram",
+        "Cont trial Azure gratuit pentru laboratoare practice"
+      ]
+    },
+    {
+      "skill": "JavaScript / TypeScript",
+      "severity": "critical",
+      "currentLevel": "Nu este listat pe CV. Expunere limitată la dezvoltare web.",
+      "requiredLevel": "Competență profesională de lucru. Necesar pentru noduri custom n8n, dezvoltare web modernă și majoritatea rolurilor de integrare AI.",
+      "impact": "Blochează aplicațiile la companii precum n8n (bazat pe Node.js), companii AI focalizate pe web și roluri full-stack AI. Limitează capacitatea de a construi proiecte de portofoliu.",
+      "closingPlan": "Completează un curs intensiv focalizat JavaScript/TypeScript (2 săptămâni). Apoi construiește 2-3 proiecte reale folosind Next.js pentru a demonstra competența. Proiectele de portofoliu planificate în sprintul de 3 luni vor servi drept dovadă.",
+      "timeToClose": "2-3 săptămâni pentru fundamente, 2-3 luni pentru competență profesională",
+      "resources": [
+        "JavaScript.info — Tutorial JavaScript Modern (gratuit)",
+        "TypeScript official handbook (gratuit)",
+        "Next.js Learn course (gratuit, de la Vercel)",
+        "Construiește proiecte de portofoliu ca practică"
+      ]
+    },
+    {
+      "skill": "Inginerie ML/AI de Producție",
+      "severity": "moderate",
+      "currentLevel": "Operațiuni UiPath AI Center (antrenare modele, deployment în ecosistemul UiPath). Integrare Claude/OpenAI API. Fără antrenare de modele custom în afara UiPath.",
+      "requiredLevel": "Înțelegerea pipeline-urilor ML, evaluarea modelelor, fine-tuning și deployment. Nu neapărat un data scientist, dar ar trebui să vorbească limbajul fluent.",
+      "impact": "Poate avea dificultăți în interviurile tehnice aprofundate la companii AI-first. Mai puțin critic pentru roluri SA la vendori de automatizare (unde designul soluției contează mai mult decât construirea modelelor).",
+      "closingPlan": "Completează Machine Learning Specialization a lui Andrew Ng (sau fast.ai Practical Deep Learning). Concentrează-te pe înțelegere, nu pe a deveni inginer ML. Construiește un pipeline RAG cu metrici de evaluare ca piesă de portofoliu.",
+      "timeToClose": "2-3 luni (part-time)",
+      "resources": [
+        "Andrew Ng's Machine Learning Specialization (Coursera)",
+        "fast.ai Practical Deep Learning course (gratuit)",
+        "Documentație + tutoriale LangChain",
+        "Construiește un proiect pipeline RAG cu evaluare"
+      ]
+    },
+    {
+      "skill": "Docker / Containerizare",
+      "severity": "moderate",
+      "currentLevel": "Nemenționat pe CV",
+      "requiredLevel": "Capacitatea de a containeriza aplicații și cunoștințe de bază în orchestrarea containerelor",
+      "impact": "Competență așteptată pentru orice workflow modern de deployment. Nu întotdeauna o cerință strictă, dar absența ridică întrebări.",
+      "closingPlan": "Containerizează unul din proiectele tale de portofoliu cu Docker. Învață bazele într-un weekend — Dockerfile, docker-compose, comenzi de bază. Aceasta este o victorie rapidă.",
+      "timeToClose": "1 weekend",
+      "resources": [
+        "Docker Getting Started tutorial (documentație oficială)",
+        "Fireship Docker in 100 seconds + video de continuare",
+        "Containerizează aplicația ta Career Agent ca practică"
+      ]
+    },
+    {
+      "skill": "Portofoliu Public / Prezență GitHub",
+      "severity": "moderate",
+      "currentLevel": "Contul GitHub există dar probabil slab. Fără proiecte publice care demonstrează capacități AI actuale.",
+      "requiredLevel": "GitHub activ cu 3-5 repo-uri finisate care arată lucru AI/automatizare. README-uri curate cu capturi de ecran.",
+      "impact": "Recrutorii și managerii de angajare verifică GitHub. Un profil gol sau inactiv semnalează 'vorbește despre AI dar nu construiește.' Un portofoliu activ cu proiecte AI este cea mai bună dovadă de capacitate.",
+      "closingPlan": "Sprintul de portofoliu de 3 luni adresează direct acest lucru. Fixează 6 cele mai bune repo-uri, scrie README-uri comprehensive, menține activitatea de commit.",
+      "timeToClose": "2 săptămâni pentru configurare inițială, mentenanță continuă",
+      "resources": [
+        "Urmează Planul Sprint Portofoliu de 2 Săptămâni",
+        "Generator README profil GitHub",
+        "Studiază profiluri de developeri de top pentru inspirație README"
+      ]
+    },
+    {
+      "skill": "Limba Germană",
+      "severity": "minor",
+      "currentLevel": "A2 (elementar)",
+      "requiredLevel": "B1-B2 pentru roluri pe piața DACH, nu este necesar pentru companii English-first",
+      "impact": "Limitează accesul la roluri specifice DACH (Germania, Austria, Elveția) care au cele mai mari salarii din Europa. Nu este un blocant pentru roluri remote internaționale.",
+      "closingPlan": "Continuă să înveți dar nu prioritiza peste competențele tehnice. Concentrează-te pe roluri remote English-first pe termen scurt.",
+      "timeToClose": "6-12 luni pentru a atinge B1",
+      "resources": [
+        "DW Learn German (gratuit)",
+        "Tandem language exchange app",
+        "Podcast-uri germane pentru cursanți"
+      ]
+    }
+  ],
+  "roleRecommendations": [
+    {
+      "title": "Solutions Architect — Vendor AI/Automatizare",
+      "fitScore": 8,
+      "salaryRange": {
+        "low": 55000,
+        "mid": 75000,
+        "high": 100000,
+        "currency": "EUR"
+      },
+      "reasoning": "Potrivire directă pentru experiența ta de SA enterprise + competențe AI în creștere. Companii precum n8n, Make, Celonis, Automation Anywhere și ServiceNow angajează exact acest profil. Experiența ta din interior la UiPath este un diferențiator față de alți candidați. Remote-friendly, compatibil cu fusul orar european.",
+      "exampleCompanies": ["n8n", "Make", "Celonis", "Automation Anywhere", "ServiceNow", "Workato"],
+      "timeToReady": "Pregătit acum (aplică imediat)"
+    },
+    {
+      "title": "Technical Enablement Engineer — Companie AI",
+      "fitScore": 7,
+      "salaryRange": {
+        "low": 50000,
+        "mid": 70000,
+        "high": 90000,
+        "currency": "EUR"
+      },
+      "reasoning": "Rolul tău de Technical Enablement la UiPath este direct transferabil. Companiile AI (Anthropic, OpenAI, Cohere, Google Cloud, AWS, Dataiku, Databricks) au nevoie de oameni care pot antrena parteneri și clienți pe produse AI. Experiența ta în construirea de curricule de training și livrarea globală este exact ce au nevoie.",
+      "exampleCompanies": ["Anthropic", "Dataiku", "Databricks", "Google Cloud", "AWS"],
+      "timeToReady": "Pregătit acum (certificarea cloud ar întări aplicația)"
+    },
+    {
+      "title": "Consultant Automatizare AI — Independent / Consultanță",
+      "fitScore": 7,
+      "salaryRange": {
+        "low": 60000,
+        "mid": 90000,
+        "high": 150000,
+        "currency": "EUR"
+      },
+      "reasoning": "Combinarea expertizei tale în automatizare enterprise cu unelte AI moderne te poziționează perfect pentru consultanță. Businessurile au nevoie de cineva care înțelege atât procesele lor legacy CÂT ȘI capacitățile AI moderne. Poți percepe 100-200 EUR/oră pentru această combinație. Kit-urile demo pe care le construiești devin uneltele tale de vânzare.",
+      "exampleCompanies": ["Independent (SRL-D)", "Deloitte", "Accenture", "Capgemini", "Cognizant"],
+      "timeToReady": "1-3 luni (portofoliu + înființare companie)"
+    }
+  ],
+  "actionPlan": {
+    "thirtyDays": [
+      {
+        "action": "Completează revizia profilurilor LinkedIn și Upwork — titlu nou, secțiune despre mine, proiecte evidențiate",
+        "priority": "critical",
+        "timeEstimate": "2-3 ore total",
+        "resource": "Document Audit LinkedIn (deja creat)",
+        "expectedImpact": "Imediat vizibil pentru recrutori. Algoritmul LinkedIn începe să te potrivească cu roluri AI/automatizare în loc de roluri RPA."
+      },
+      {
+        "action": "Lansează Career Growth AI Agent și alte 2 proiecte de portofoliu pe GitHub cu README-uri finisate",
+        "priority": "critical",
+        "timeEstimate": "2 săptămâni la 3 ore/zi",
+        "resource": "Planul Sprint Portofoliu de 2 Săptămâni",
+        "expectedImpact": "Demonstrează că poți construi aplicații AI full-stack. Transformă un GitHub gol într-un portofoliu convingător."
+      },
+      {
+        "action": "Completează certificarea AZ-900 Azure Fundamentals",
+        "priority": "critical",
+        "timeEstimate": "2-3 săptămâni la 1 oră/zi",
+        "resource": "Microsoft Learn AZ-900 path (gratuit)",
+        "expectedImpact": "Elimină blocantul 'fără experiență cloud' din 60% din anunțurile de job."
+      },
+      {
+        "action": "Aplică la 10-15 roluri Tier 1 (Solutions Architect, Technical Enablement la vendori AI/automatizare)",
+        "priority": "high",
+        "timeEstimate": "3-5 ore total",
+        "resource": "CV actualizat + scrisori de intenție personalizate",
+        "expectedImpact": "Pornește pipeline-ul de interviuri. Chiar și respingerile oferă feedback de piață."
+      }
+    ],
+    "ninetyDays": [
+      {
+        "action": "Completează certificarea AI-102 Azure AI Engineer Associate",
+        "priority": "high",
+        "timeEstimate": "4-6 săptămâni la 1 oră/zi",
+        "resource": "Microsoft Learn AI-102 path (gratuit)",
+        "expectedImpact": "Te poziționează ca inginer AI cloud, nu doar developer RPA. Se combină puternic cu AZ-900."
+      },
+      {
+        "action": "Lansează toate cele 5 kit-uri demo de automatizare AI (Factură, Email, Onboarding, Calificare Lead, Note Ședință)",
+        "priority": "high",
+        "timeEstimate": "5 săptămâni la ~4 ore/kit",
+        "resource": "Planul Master de 3 Luni",
+        "expectedImpact": "Creează un catalog de servicii vendabil. Fiecare kit este un potențial angajament de client de 1.500-5.000 EUR."
+      },
+      {
+        "action": "Înregistrează SRL-D (micro-întreprindere) în România",
+        "priority": "medium",
+        "timeEstimate": "1-2 săptămâni de documente + consultare contabil",
+        "resource": "Contabil român, înregistrare ONRC",
+        "expectedImpact": "Permite facturare legală, impozit 1% pe venit, credibilitate profesională."
+      },
+      {
+        "action": "Publică 4-6 postări LinkedIn despre proiectele pe care le-ai construit",
+        "priority": "medium",
+        "timeEstimate": "1-2 ore per postare",
+        "resource": "Portofoliu propriu de proiecte ca sursă de conținut",
+        "expectedImpact": "Construiește vizibilitate, stabilește leadership de gândire, atrage oportunități inbound."
+      }
+    ],
+    "twelveMonths": [
+      {
+        "action": "Tranziție către rol de AI Solutions Architect la un vendor de automatizare/AI SAU construiește practica de consultanță la 8K+ EUR/lună venituri",
+        "priority": "critical",
+        "timeEstimate": "Continuu",
+        "resource": "Rețea, portofoliu, certificări construite în lunile 1-3",
+        "expectedImpact": "Tranziția de carieră completă. Câștiguri de 70-100K+ EUR în noul domeniu."
+      },
+      {
+        "action": "Lansează aplicațiile Ballistics și Pigeon Fancier ca produse cu abonament",
+        "priority": "medium",
+        "timeEstimate": "2-3 luni construcție + continuu",
+        "resource": "Planul Master de 3 Luni (Faza 3)",
+        "expectedImpact": "Flux de venituri pasiv/recurent. Demonstrează capacitate de product management + full-stack."
+      },
+      {
+        "action": "Completează un curs ML (Andrew Ng sau fast.ai) și construiește un proiect RAG cu metrici de evaluare",
+        "priority": "medium",
+        "timeEstimate": "2-3 luni part-time",
+        "resource": "Coursera / fast.ai (gratuit)",
+        "expectedImpact": "Închide lacuna de cunoștințe ML. Permite conversația cu echipe de data science ca peer, nu doar consumator de API-uri."
+      },
+      {
+        "action": "Susține 1-2 prezentări la meetup-uri online sau conferințe despre automatizare AI",
+        "priority": "medium",
+        "timeEstimate": "2-4 ore pregătire per prezentare",
+        "resource": "Meetup-uri comunitate n8n, meetup-uri tech locale, conferințe online",
+        "expectedImpact": "Vorbitul în public construiește credibilitate exponențial. O prezentare bună poate genera mai multe leaduri decât 50 de emailuri la rece."
+      }
+    ]
+  },
+  "salaryAnalysis": {
+    "currentRoleMarket": {
+      "low": 36000,
+      "mid": 48000,
+      "high": 65000,
+      "currency": "EUR",
+      "region": "România — echivalent piață locală (brut anual)"
+    },
+    "targetRoleMarket": {
+      "low": 55000,
+      "mid": 80000,
+      "high": 120000,
+      "currency": "EUR",
+      "region": "Piața remote UE/EMEA (brut anual)"
+    },
+    "growthPotential": "+35-65% creștere realizabilă în 6-12 luni prin tranziția de la roluri focalizate pe RPA la poziții de AI Solutions Architect. Cea mai mare pârghie este țintirea companiilor din Europa de Vest care angajează remote — plătesc salarii vest-europene talentelor est-europene.",
+    "bestMonetaryMove": "Aplică imediat la roluri de Solutions Architect la n8n, Make sau Celonis. Aceste companii valorifică specific experiența în automatizare enterprise, plătesc 65-100K EUR pentru talent european remote, iar experiența ta UiPath este un avantaj competitiv direct. În timp ce dai interviuri, construiește venituri din consultanță prin Upwork la 50-75$/oră. Combinația aplicații pentru angajare + venituri freelance creează multiple căi către câștiguri mai mari.",
+    "negotiationTips": [
+      "Conduce cu experiența ta enterprise UiPath — 'Am proiectat arhitecturi de automatizare implementate în companii Fortune 500' comandă rate mai mari decât 'Cunosc n8n.'",
+      "Când ești întrebat despre așteptările salariale, ancorează-te pe intervale vest-europene (70-90K EUR) nu pe piața locală românească. Concurezi pe valoarea livrată, nu pe costul de trai local.",
+      "Dacă primești o ofertă sub țintă, negociază bonus de semnare, equity sau timeline accelerat de evaluare în loc să accepți un salariu de bază mai mic. Salariul de bază se compune — fiecare 5K EUR în plus se compune de-a lungul carierei tale."
+    ]
+  }
+}

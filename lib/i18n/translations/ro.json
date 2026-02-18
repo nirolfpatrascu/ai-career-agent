@@ -17,7 +17,13 @@
     "badge": "Consilier de Carieră cu AI",
     "headline1": "Încarcă CV-ul tău.",
     "headline2": "Primește o",
-    "rotatingWords": ["strategie de carieră", "analiză de competențe", "benchmark salarial", "plan de acțiune", "recomandări de roluri"],
+    "rotatingWords": [
+      "strategie de carieră",
+      "analiză de competențe",
+      "benchmark salarial",
+      "plan de acțiune",
+      "recomandări de roluri"
+    ],
     "subtitle": "Analiză de competențe, planuri de învățare, benchmark-uri salariale, recomandări de roluri și optimizare CV — totul în sub 2 minute. Coaching de carieră care costa 500$/oră, acum alimentat de AI.",
     "analyzeFree": "Analizează Cariera",
     "stats": {
@@ -32,12 +38,30 @@
     "title": "Tot ce ai nevoie pentru a naviga tranziția ta de carieră",
     "subtitle": "Alimentat de analiza AI avansată a CV-ului tău, cerințele rolului țintă și datele de piață.",
     "cards": [
-      { "title": "Analiza CV-ului", "description": "Încarcă CV-ul în format PDF și AI-ul nostru extrage fiecare competență, certificare și experiență — inclusiv pe cele pe care ai uitat să le listezi." },
-      { "title": "Analiză de Gap-uri", "description": "Vezi exact ce competențe îți lipsesc pentru rolul țintă — codificate pe culori după severitate, cu planuri specifice pentru a le acoperi." },
-      { "title": "Benchmark Salarial", "description": "Intervale salariale ajustate la locație pentru rolurile tale curente și țintă, plus sfaturi de negociere specifice experienței tale." },
-      { "title": "Recomandări de Roluri", "description": "Primește cele mai potrivite 3 roluri bazate pe profilul tău — cu scoruri de potrivire, intervale salariale și companii specifice." },
-      { "title": "Plan de Acțiune", "description": "Câștiguri rapide în 30 de zile, dezvoltarea competențelor în 90 de zile și traiectoria carierei pe 12 luni — fiecare cu resurse și estimări de timp." },
-      { "title": "Potrivire Job", "description": "Lipește orice anunț de job și primește scor de potrivire ATS, cuvinte cheie lipsă și sugestii de rescriere CV." }
+      {
+        "title": "Analiza CV-ului",
+        "description": "Încarcă CV-ul în format PDF și AI-ul nostru extrage fiecare competență, certificare și experiență — inclusiv pe cele pe care ai uitat să le listezi."
+      },
+      {
+        "title": "Analiză de Gap-uri",
+        "description": "Vezi exact ce competențe îți lipsesc pentru rolul țintă — codificate pe culori după severitate, cu planuri specifice pentru a le acoperi."
+      },
+      {
+        "title": "Benchmark Salarial",
+        "description": "Intervale salariale ajustate la locație pentru rolurile tale curente și țintă, plus sfaturi de negociere specifice experienței tale."
+      },
+      {
+        "title": "Recomandări de Roluri",
+        "description": "Primește cele mai potrivite 3 roluri bazate pe profilul tău — cu scoruri de potrivire, intervale salariale și companii specifice."
+      },
+      {
+        "title": "Plan de Acțiune",
+        "description": "Câștiguri rapide în 30 de zile, dezvoltarea competențelor în 90 de zile și traiectoria carierei pe 12 luni — fiecare cu resurse și estimări de timp."
+      },
+      {
+        "title": "Potrivire Job",
+        "description": "Lipește orice anunț de job și primește scor de potrivire ATS, cuvinte cheie lipsă și sugestii de rescriere CV."
+      }
     ]
   },
   "howItWorks": {
@@ -45,9 +69,18 @@
     "title": "De la CV la foaie de parcurs în 3 pași",
     "subtitle": "Fără înregistrare. Încarcă, răspunde la câteva întrebări și primește analiza personalizată.",
     "steps": [
-      { "title": "Încarcă CV-ul", "description": "Trage și plasează CV-ul în format PDF. AI-ul nostru citește fiecare detaliu — competențe, certificări, experiență și competențe implicite pe care nu le-ai listat explicit." },
-      { "title": "Spune-ne Obiectivele", "description": "Răspunde la un chestionar scurt despre rolul tău actual, poziția țintă, locația și așteptările salariale. Durează sub 2 minute." },
-      { "title": "Primește Foaia de Parcurs", "description": "În sub 2 minute, primești o analiză completă: scor de potrivire, puncte forte, lacune de competențe, benchmark salarial și plan de acțiune personalizat." }
+      {
+        "title": "Încarcă CV-ul",
+        "description": "Trage și plasează CV-ul în format PDF. AI-ul nostru citește fiecare detaliu — competențe, certificări, experiență și competențe implicite pe care nu le-ai listat explicit."
+      },
+      {
+        "title": "Spune-ne Obiectivele",
+        "description": "Răspunde la un chestionar scurt despre rolul tău actual, poziția țintă, locația și așteptările salariale. Durează sub 2 minute."
+      },
+      {
+        "title": "Primește Foaia de Parcurs",
+        "description": "În sub 2 minute, primești o analiză completă: scor de potrivire, puncte forte, lacune de competențe, benchmark salarial și plan de acțiune personalizat."
+      }
     ],
     "visual": {
       "uploadComplete": "Încărcare completă",
@@ -67,7 +100,7 @@
   },
   "analyze": {
     "title": "Analizează-ți Cariera",
-    "subtitle": "Încarcă CV-ul și spune-ne despre obiectivele tale de carieră. Vom genera o analiză completă în aproximativ 90 de secunde.",
+    "subtitle": "Încarcă profilul LinkedIn și CV-ul, completează obiectivele de carieră și primește analiza personalizată.",
     "uploadCV": "Încarcă CV-ul",
     "careerDetails": "Detalii Carieră",
     "uploadToContinue": "Încarcă CV-ul pentru a continua",
@@ -81,7 +114,9 @@
     "wantDifferent": "Vrei să analizezi un alt parcurs de carieră?",
     "preFilled": "Am pre-completat ce am putut din documentul încărcat. Completează câmpurile rămase — în special rolul țintă.",
     "tellUsGoals": "Spune-ne despre poziția ta actuală și unde vrei să ajungi.",
-    "uploadAtLeastOne": "Încarcă un PDF LinkedIn sau un CV pentru a începe"
+    "uploadAtLeastOne": "Încarcă un PDF LinkedIn sau un CV pentru a începe",
+    "uploadDocs": "Încarcă documentele",
+    "uploadDocsHint": "PDF-ul LinkedIn completează automat detaliile. Adaugă CV-ul pentru o analiză mai detaliată."
   },
   "upload": {
     "label": "Încarcă CV-ul",
@@ -174,14 +209,25 @@
     ]
   },
   "results": {
-    "fitScore": { "title": "Scor de Potrivire", "outOf": "din 10" },
+    "fitScore": {
+      "title": "Scor de Potrivire",
+      "outOf": "din 10"
+    },
     "strengths": {
       "title": "Punctele Tale Forte",
-      "tiers": { "differentiator": "Diferențiator", "strong": "Puternic", "supporting": "Suport" }
+      "tiers": {
+        "differentiator": "Diferențiator",
+        "strong": "Puternic",
+        "supporting": "Suport"
+      }
     },
     "gaps": {
       "title": "Lacune de Competențe",
-      "severity": { "critical": "Critic", "moderate": "Moderat", "minor": "Minor" },
+      "severity": {
+        "critical": "Critic",
+        "moderate": "Moderat",
+        "minor": "Minor"
+      },
       "currentLevel": "Nivel Actual",
       "requiredLevel": "Nivel Necesar",
       "impact": "Impact",
@@ -194,11 +240,17 @@
       "fitScore": "Scor Potrivire",
       "salaryRange": "Interval Salarial",
       "timeToReady": "Timp până la Pregătire",
-      "exampleCompanies": "Companii Țintă"
+      "exampleCompanies": "Companii Țintă",
+      "bestFit": "Cel mai potrivit",
+      "mid": "Mediu"
     },
     "actionPlan": {
       "title": "Plan de Acțiune",
-      "tabs": { "thirtyDays": "30 Zile", "ninetyDays": "90 Zile", "twelveMonths": "12 Luni" },
+      "tabs": {
+        "thirtyDays": "30 Zile",
+        "ninetyDays": "90 Zile",
+        "twelveMonths": "12 Luni"
+      },
       "priority": "Prioritate",
       "timeEstimate": "Timp",
       "resource": "Resursă",

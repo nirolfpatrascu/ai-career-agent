@@ -17,7 +17,13 @@
     "badge": "KI-gesteuerter Karriereberater",
     "headline1": "Laden Sie Ihren Lebenslauf hoch.",
     "headline2": "Erhalten Sie eine personalisierte",
-    "rotatingWords": ["Karrierestrategie", "Kompetenzanalyse", "Gehaltsbenchmarks", "Aktionsplan", "Rollenempfehlungen"],
+    "rotatingWords": [
+      "Karrierestrategie",
+      "Kompetenzanalyse",
+      "Gehaltsbenchmarks",
+      "Aktionsplan",
+      "Rollenempfehlungen"
+    ],
     "subtitle": "Kompetenzanalyse, Lernpläne, Gehaltsbenchmarks, Rollenempfehlungen und Lebenslauf-Optimierung — alles in unter 2 Minuten. Karrierecoaching, das früher 500$/Stunde kostete, jetzt mit KI.",
     "analyzeFree": "Karriere Analysieren",
     "stats": {
@@ -32,12 +38,30 @@
     "title": "Alles, was Sie für Ihren Karrierewechsel brauchen",
     "subtitle": "Basierend auf fortschrittlicher KI-Analyse Ihres Lebenslaufs, der Zielrolle und aktueller Marktdaten.",
     "cards": [
-      { "title": "Lebenslauf-Tiefenanalyse", "description": "Laden Sie Ihren Lebenslauf als PDF hoch und unsere KI extrahiert jede Fähigkeit, Zertifizierung und Erfahrung — auch die, die Sie vergessen haben zu erwähnen." },
-      { "title": "Gap-Analyse", "description": "Sehen Sie genau, welche Fähigkeiten Ihnen für Ihre Zielrolle fehlen — farbcodiert nach Schweregrad mit konkreten Plänen zur Schließung jeder Lücke." },
-      { "title": "Gehaltsbenchmarks", "description": "Standortbezogene Gehaltsspannen für Ihre aktuelle und Zielrolle, plus Verhandlungstipps speziell für Ihre Erfahrung." },
-      { "title": "Rollenempfehlungen", "description": "Erhalten Sie die 3 am besten passenden Rollen basierend auf Ihrem Profil — mit Passungswerten, Gehaltsspannen und konkreten Unternehmen." },
-      { "title": "Aktionsplan", "description": "Schnelle Erfolge in 30 Tagen, Kompetenzaufbau in 90 Tagen und Karriereverlauf über 12 Monate — jeweils mit Ressourcen und Zeitschätzungen." },
-      { "title": "Job-Matching", "description": "Fügen Sie eine Stellenanzeige ein und erhalten Sie einen ATS-Matchscore, fehlende Schlüsselwörter und CV-Optimierungsvorschläge." }
+      {
+        "title": "Lebenslauf-Tiefenanalyse",
+        "description": "Laden Sie Ihren Lebenslauf als PDF hoch und unsere KI extrahiert jede Fähigkeit, Zertifizierung und Erfahrung — auch die, die Sie vergessen haben zu erwähnen."
+      },
+      {
+        "title": "Gap-Analyse",
+        "description": "Sehen Sie genau, welche Fähigkeiten Ihnen für Ihre Zielrolle fehlen — farbcodiert nach Schweregrad mit konkreten Plänen zur Schließung jeder Lücke."
+      },
+      {
+        "title": "Gehaltsbenchmarks",
+        "description": "Standortbezogene Gehaltsspannen für Ihre aktuelle und Zielrolle, plus Verhandlungstipps speziell für Ihre Erfahrung."
+      },
+      {
+        "title": "Rollenempfehlungen",
+        "description": "Erhalten Sie die 3 am besten passenden Rollen basierend auf Ihrem Profil — mit Passungswerten, Gehaltsspannen und konkreten Unternehmen."
+      },
+      {
+        "title": "Aktionsplan",
+        "description": "Schnelle Erfolge in 30 Tagen, Kompetenzaufbau in 90 Tagen und Karriereverlauf über 12 Monate — jeweils mit Ressourcen und Zeitschätzungen."
+      },
+      {
+        "title": "Job-Matching",
+        "description": "Fügen Sie eine Stellenanzeige ein und erhalten Sie einen ATS-Matchscore, fehlende Schlüsselwörter und CV-Optimierungsvorschläge."
+      }
     ]
   },
   "howItWorks": {
@@ -45,9 +69,18 @@
     "title": "Vom Lebenslauf zur Karriere-Roadmap in 3 Schritten",
     "subtitle": "Keine Registrierung nötig. Hochladen, ein paar Fragen beantworten und Ihre personalisierte Analyse erhalten.",
     "steps": [
-      { "title": "Lebenslauf Hochladen", "description": "Ziehen Sie Ihren Lebenslauf per Drag & Drop als PDF. Unsere KI liest jedes Detail — Fähigkeiten, Zertifizierungen, Erfahrung und implizite Kompetenzen." },
-      { "title": "Ziele Angeben", "description": "Beantworten Sie einen kurzen Fragebogen zu Ihrer aktuellen Rolle, Zielposition, Standort und Gehaltsvorstellungen. Dauert unter 2 Minuten." },
-      { "title": "Roadmap Erhalten", "description": "In unter 2 Minuten erhalten Sie eine umfassende Analyse: Passungswert, Stärken, Kompetenzlücken, Gehaltsbenchmarks und einen personalisierten Aktionsplan." }
+      {
+        "title": "Lebenslauf Hochladen",
+        "description": "Ziehen Sie Ihren Lebenslauf per Drag & Drop als PDF. Unsere KI liest jedes Detail — Fähigkeiten, Zertifizierungen, Erfahrung und implizite Kompetenzen."
+      },
+      {
+        "title": "Ziele Angeben",
+        "description": "Beantworten Sie einen kurzen Fragebogen zu Ihrer aktuellen Rolle, Zielposition, Standort und Gehaltsvorstellungen. Dauert unter 2 Minuten."
+      },
+      {
+        "title": "Roadmap Erhalten",
+        "description": "In unter 2 Minuten erhalten Sie eine umfassende Analyse: Passungswert, Stärken, Kompetenzlücken, Gehaltsbenchmarks und einen personalisierten Aktionsplan."
+      }
     ],
     "visual": {
       "uploadComplete": "Upload abgeschlossen",
@@ -67,7 +100,7 @@
   },
   "analyze": {
     "title": "Analysieren Sie Ihre Karriere",
-    "subtitle": "Laden Sie Ihren Lebenslauf hoch und erzählen Sie uns von Ihren Karrierezielen. Wir erstellen eine umfassende Analyse in etwa 90 Sekunden.",
+    "subtitle": "Laden Sie Ihr LinkedIn-Profil und Ihren Lebenslauf hoch, geben Sie Ihre Karriereziele ein und erhalten Sie Ihre personalisierte Analyse.",
     "uploadCV": "Lebenslauf Hochladen",
     "careerDetails": "Karrieredetails",
     "uploadToContinue": "Laden Sie Ihren Lebenslauf hoch, um fortzufahren",
@@ -81,7 +114,9 @@
     "wantDifferent": "Möchten Sie einen anderen Karriereweg analysieren?",
     "preFilled": "Wir haben aus Ihrem Upload vorausgefüllt, was möglich war. Vervollständigen Sie die restlichen Felder — insbesondere die Zielrolle.",
     "tellUsGoals": "Erzählen Sie uns von Ihrer aktuellen Position und wohin Sie möchten.",
-    "uploadAtLeastOne": "Laden Sie ein LinkedIn-PDF oder einen Lebenslauf hoch, um zu beginnen"
+    "uploadAtLeastOne": "Laden Sie ein LinkedIn-PDF oder einen Lebenslauf hoch, um zu beginnen",
+    "uploadDocs": "Dokumente hochladen",
+    "uploadDocsHint": "LinkedIn-PDF füllt Ihre Daten automatisch aus. Fügen Sie Ihren Lebenslauf für eine tiefere Analyse hinzu."
   },
   "upload": {
     "label": "Lebenslauf Hochladen",
@@ -174,14 +209,25 @@
     ]
   },
   "results": {
-    "fitScore": { "title": "Karriere-Passungswert", "outOf": "von 10" },
+    "fitScore": {
+      "title": "Karriere-Passungswert",
+      "outOf": "von 10"
+    },
     "strengths": {
       "title": "Ihre Stärken",
-      "tiers": { "differentiator": "Alleinstellungsmerkmal", "strong": "Stark", "supporting": "Unterstützend" }
+      "tiers": {
+        "differentiator": "Alleinstellungsmerkmal",
+        "strong": "Stark",
+        "supporting": "Unterstützend"
+      }
     },
     "gaps": {
       "title": "Kompetenzlücken",
-      "severity": { "critical": "Kritisch", "moderate": "Moderat", "minor": "Gering" },
+      "severity": {
+        "critical": "Kritisch",
+        "moderate": "Moderat",
+        "minor": "Gering"
+      },
       "currentLevel": "Aktuelles Niveau",
       "requiredLevel": "Erforderliches Niveau",
       "impact": "Auswirkung",
@@ -194,11 +240,17 @@
       "fitScore": "Passungswert",
       "salaryRange": "Gehaltsspanne",
       "timeToReady": "Zeit bis Bereit",
-      "exampleCompanies": "Zielunternehmen"
+      "exampleCompanies": "Zielunternehmen",
+      "bestFit": "Beste Passung",
+      "mid": "Mittel"
     },
     "actionPlan": {
       "title": "Aktionsplan",
-      "tabs": { "thirtyDays": "30 Tage", "ninetyDays": "90 Tage", "twelveMonths": "12 Monate" },
+      "tabs": {
+        "thirtyDays": "30 Tage",
+        "ninetyDays": "90 Tage",
+        "twelveMonths": "12 Monate"
+      },
       "priority": "Priorität",
       "timeEstimate": "Zeit",
       "resource": "Ressource",

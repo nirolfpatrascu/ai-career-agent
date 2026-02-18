@@ -17,7 +17,7 @@ import SalaryBenchmark from '@/components/results/SalaryBenchmark';
 import JobMatchPanel from '@/components/results/JobMatchPanel';
 import PDFReport from '@/components/shared/PDFReport';
 import ChatPanel from '@/components/results/ChatPanel';
-import { SAMPLE_ANALYSIS } from '@/lib/demo';
+import { getSampleAnalysis } from '@/lib/demo';
 import { useTranslation } from '@/lib/i18n';
 import type { AnalysisResult, CareerQuestionnaire } from '@/lib/types';
 
@@ -192,11 +192,11 @@ export default function AnalyzePage() {
   }, [hasFile, cvFile, linkedInFile, isFormValid, questionnaire, locale, t]);
 
   const handleDemo = useCallback(() => {
-    setResult(SAMPLE_ANALYSIS);
+    setResult(getSampleAnalysis(locale));
     setIsDemo(true);
     setState('results');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+  }, [locale]);
 
   const handleReset = useCallback(() => {
     setState('upload');
@@ -321,7 +321,7 @@ export default function AnalyzePage() {
                   {t('analyze.title')}
                 </h1>
                 <p className="text-text-secondary mt-2 text-sm sm:text-base">
-                  Upload your LinkedIn profile and CV, fill in your career goals, and get your personalized analysis.
+                  {t('analyze.subtitle')}
                 </p>
               </div>
               <button
@@ -359,10 +359,10 @@ export default function AnalyzePage() {
               <div className="card lg:sticky lg:top-24">
                 <h2 className="text-lg font-semibold text-text-primary mb-1 flex items-center gap-2">
                   <span className="w-6 h-6 rounded-md bg-primary/10 text-primary text-xs font-bold flex items-center justify-center">1</span>
-                  Upload your documents
+                  {t('analyze.uploadDocs')}
                 </h2>
                 <p className="text-xs text-text-secondary mb-5">
-                  LinkedIn PDF auto-fills your details. Add your CV for a deeper analysis.
+                  {t('analyze.uploadDocsHint')}
                 </p>
                 <DocumentUpload
                   linkedInFile={linkedInFile}

@@ -30,7 +30,7 @@ export default function RoleRecommendations({ roles }: RoleRecommendationsProps)
             <div key={i} className={`card relative overflow-hidden ${i === 0 ? 'ring-1 ring-primary/30' : ''}`}>
               {i === 0 && (
                 <div className="absolute top-0 right-0 bg-primary text-white text-xs font-medium px-3 py-1 rounded-bl-lg">
-                  Best Fit
+                  {t('results.roles.bestFit')}
                 </div>
               )}
               <div className="flex items-center gap-3 mb-4">
@@ -49,7 +49,7 @@ export default function RoleRecommendations({ roles }: RoleRecommendationsProps)
                 <p className="text-lg font-semibold text-success">
                   {formatCurrency(role.salaryRange.low, role.salaryRange.currency)} – {formatCurrency(role.salaryRange.high, role.salaryRange.currency)}
                 </p>
-                <p className="text-xs text-text-secondary mt-0.5">Mid: {formatCurrency(role.salaryRange.mid, role.salaryRange.currency)}</p>
+                <p className="text-xs text-text-secondary mt-0.5">{t('results.roles.mid')}: {formatCurrency(role.salaryRange.mid, role.salaryRange.currency)}</p>
               </div>
               <div className="flex items-center gap-2 mb-4">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-text-secondary"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
