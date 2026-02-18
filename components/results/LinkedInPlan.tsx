@@ -233,7 +233,7 @@ I'm passionate about the intersection of enterprise process automation and moder
               {t('linkedin.skillsAdd')}
             </p>
             <div className="space-y-1.5">
-              {[...new Set(plan.skillsToAdd)].slice(0, 8).map((skill, i) => (
+              {Array.from(new Set(plan.skillsToAdd)).slice(0, 8).map((skill, i) => (
                 <div key={i} className="flex items-center gap-2 text-sm text-text-secondary bg-success/[0.04] border border-success/10 rounded-lg px-3 py-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-success flex-shrink-0" />
                   {skill}

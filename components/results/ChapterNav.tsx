@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback, useMemo } from 'react';
 import { useTranslation } from '@/lib/i18n';
 
 export interface Tab {
@@ -43,11 +43,11 @@ export default function ChapterNav({ hasJobMatch, activeTab, onTabChange }: Chap
   const activeRefDesktop = useRef<HTMLButtonElement>(null);
   const activeRefMobile = useRef<HTMLButtonElement>(null);
 
-  const tabs: Tab[] = [
+  const tabs: Tab[] = useMemo(() => [
     ...TABS,
     ...(hasJobMatch ? [JOB_MATCH_TAB] : []),
     COACH_TAB,
-  ];
+  ], [hasJobMatch]);
 
   const activeIndex = tabs.findIndex((tab) => tab.id === activeTab);
 
