@@ -12,6 +12,13 @@ interface QuestionnaireProps {
 
 const WORK_PREF_KEYS = ['remote', 'hybrid', 'onsite', 'flexible'] as const;
 
+const WORK_PREF_ICONS: Record<string, React.ReactNode> = {
+  remote: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+  hybrid: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>,
+  onsite: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>,
+  flexible: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>,
+};
+
 export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
   const { t } = useTranslation();
   const [showExtraRoles, setShowExtraRoles] = useState(
@@ -54,7 +61,6 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
         return;
       }
 
-      // Fill the job posting textarea with extracted text
       const text = result.fullText || [result.title, result.company, result.description, result.requirements].filter(Boolean).join('\n\n');
       if (text) {
         onChange({ ...data, jobPosting: text, jobPostingUrl: jobUrlInput.trim() });
@@ -74,7 +80,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
       {/* Current Role */}
       <div>
         <label htmlFor="currentRole" className="label">
-          {t('questionnaire.currentRole')} <span className="text-danger">{t('common.required')}</span>
+          {t('questionnaire.currentRole')} <span className="text-danger text-xs">*</span>
         </label>
         <input
           id="currentRole"
@@ -89,7 +95,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
       {/* Target Roles */}
       <div>
         <label htmlFor="targetRole" className="label">
-          {t('questionnaire.targetRole')} <span className="text-danger">{t('common.required')}</span>
+          {t('questionnaire.targetRole')} <span className="text-danger text-xs">*</span>
         </label>
         <input
           id="targetRole"
@@ -106,22 +112,22 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
         <button
           type="button"
           onClick={() => setShowExtraRoles(true)}
-          className="flex items-center gap-1.5 text-xs text-text-secondary hover:text-primary transition-colors -mt-2"
+          className="flex items-center gap-1.5 text-xs text-text-tertiary hover:text-primary transition-colors -mt-2 group"
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:text-primary transition-colors">
             <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
           </svg>
           {t('questionnaire.addAlternativeRoles')}
         </button>
       ) : (
-        <div className="space-y-3 pl-3 border-l-2 border-primary/20">
-          <p className="text-xs text-text-secondary">
+        <div className="space-y-3 pl-4 border-l-2 border-primary/20">
+          <p className="text-xs text-text-tertiary">
             {t('questionnaire.alternativeRolesHint')}
           </p>
           <div>
             <label htmlFor="targetRole2" className="label">
               {t('questionnaire.targetRole2Label')}
-              <span className="text-text-secondary font-normal ml-1">({t('common.optional')})</span>
+              <span className="text-text-tertiary font-normal ml-1">({t('common.optional')})</span>
             </label>
             <input
               id="targetRole2"
@@ -135,7 +141,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
           <div>
             <label htmlFor="targetRole3" className="label">
               {t('questionnaire.targetRole3Label')}
-              <span className="text-text-secondary font-normal ml-1">({t('common.optional')})</span>
+              <span className="text-text-tertiary font-normal ml-1">({t('common.optional')})</span>
             </label>
             <input
               id="targetRole3"
@@ -153,7 +159,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="yearsExperience" className="label">
-            {t('questionnaire.yearsExperience')} <span className="text-danger">{t('common.required')}</span>
+            {t('questionnaire.yearsExperience')} <span className="text-danger text-xs">*</span>
           </label>
           <input
             id="yearsExperience"
@@ -168,7 +174,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
         </div>
         <div>
           <label htmlFor="country" className="label">
-            {t('questionnaire.country')} <span className="text-danger">{t('common.required')}</span>
+            {t('questionnaire.country')} <span className="text-danger text-xs">*</span>
           </label>
           <select
             id="country"
@@ -187,7 +193,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
       {/* Work Preference */}
       <div>
         <label htmlFor="workPreference" className="label">
-          {t('questionnaire.workPreference')} <span className="text-danger">{t('common.required')}</span>
+          {t('questionnaire.workPreference')} <span className="text-danger text-xs">*</span>
         </label>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {WORK_PREF_KEYS.map((key) => (
@@ -195,12 +201,15 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
               key={key}
               type="button"
               onClick={() => update('workPreference', key)}
-              className={`px-4 py-2.5 rounded-lg border text-sm font-medium transition-all duration-200 ${
+              className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-sm font-medium border transition-all duration-200 ${
                 data.workPreference === key
-                  ? 'border-primary bg-primary/10 text-primary'
-                  : 'border-card-border bg-background text-text-secondary hover:border-primary/50 hover:text-text-primary'
+                  ? 'border-primary/40 bg-primary/[0.08] text-primary'
+                  : 'border-white/[0.06] bg-white/[0.02] text-text-tertiary hover:border-white/[0.12] hover:text-text-secondary'
               }`}
             >
+              <span className={`transition-colors ${data.workPreference === key ? 'text-primary' : 'text-text-tertiary'}`}>
+                {WORK_PREF_ICONS[key]}
+              </span>
               {t(`questionnaire.workOptions.${key}`)}
             </button>
           ))}
@@ -212,7 +221,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
         <div>
           <label htmlFor="currentSalary" className="label">
             {t('questionnaire.currentSalary')}
-            <span className="text-text-secondary font-normal ml-1">({t('common.optional')})</span>
+            <span className="text-text-tertiary font-normal ml-1">({t('common.optional')})</span>
           </label>
           <div className="relative">
             <input
@@ -223,14 +232,14 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
               onChange={(e) => update('currentSalary', e.target.value ? parseInt(e.target.value) : undefined)}
               placeholder="e.g. 55000"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary text-sm font-medium">{currency.code}</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-text-tertiary text-xs font-semibold bg-white/[0.04] px-2 py-0.5 rounded-md">{currency.code}</span>
           </div>
-          <p className="text-xs text-text-secondary mt-1">{t('questionnaire.grossAnnual')}</p>
+          <p className="text-[11px] text-text-tertiary mt-1.5">{t('questionnaire.grossAnnual')}</p>
         </div>
         <div>
           <label htmlFor="targetSalary" className="label">
             {t('questionnaire.targetSalary')}
-            <span className="text-text-secondary font-normal ml-1">({t('common.optional')})</span>
+            <span className="text-text-tertiary font-normal ml-1">({t('common.optional')})</span>
           </label>
           <div className="relative">
             <input
@@ -241,15 +250,15 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
               onChange={(e) => update('targetSalary', e.target.value ? parseInt(e.target.value) : undefined)}
               placeholder="e.g. 85000"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary text-sm font-medium">{currency.code}</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-text-tertiary text-xs font-semibold bg-white/[0.04] px-2 py-0.5 rounded-md">{currency.code}</span>
           </div>
-          <p className="text-xs text-text-secondary mt-1">{t('questionnaire.grossAnnual')}</p>
+          <p className="text-[11px] text-text-tertiary mt-1.5">{t('questionnaire.grossAnnual')}</p>
         </div>
       </div>
 
       {data.workPreference === 'remote' && (
-        <div className="bg-primary/5 border border-primary/10 rounded-lg px-4 py-3">
-          <p className="text-xs text-primary">
+        <div className="bg-primary/[0.04] border border-primary/10 rounded-xl px-4 py-3">
+          <p className="text-xs text-primary/80">
             {t('questionnaire.remoteSalaryNote', { country: data.country || 'market' })}
           </p>
         </div>
@@ -260,19 +269,19 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
         <div className="flex items-center justify-between mb-2">
           <label className="label mb-0">
             {t('questionnaire.jobPostingLabel')}
-            <span className="text-text-secondary font-normal ml-1">({t('questionnaire.jobPostingOptional')})</span>
+            <span className="text-text-tertiary font-normal ml-1">({t('questionnaire.jobPostingOptional')})</span>
           </label>
         </div>
 
         {/* Toggle between URL and Paste */}
-        <div className="flex items-center gap-1 mb-3 bg-card border border-card-border rounded-lg p-1 w-fit">
+        <div className="flex items-center gap-1 mb-3 bg-white/[0.02] border border-white/[0.06] rounded-xl p-1 w-fit">
           <button
             type="button"
             onClick={() => setJobMode('url')}
-            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 ${
               jobMode === 'url'
-                ? 'bg-primary/10 text-primary'
-                : 'text-text-secondary hover:text-text-primary'
+                ? 'bg-white/[0.08] text-primary shadow-sm'
+                : 'text-text-tertiary hover:text-text-secondary'
             }`}
           >
             <span className="flex items-center gap-1.5">
@@ -286,10 +295,10 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
           <button
             type="button"
             onClick={() => setJobMode('paste')}
-            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 ${
               jobMode === 'paste'
-                ? 'bg-primary/10 text-primary'
-                : 'text-text-secondary hover:text-text-primary'
+                ? 'bg-white/[0.08] text-primary shadow-sm'
+                : 'text-text-tertiary hover:text-text-secondary'
             }`}
           >
             <span className="flex items-center gap-1.5">
@@ -344,20 +353,20 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
             </div>
 
             {jobFetchError && (
-              <p className="text-xs text-danger mt-1.5 flex items-center gap-1">
+              <p className="text-xs text-danger mt-2 flex items-center gap-1.5">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></svg>
                 {jobFetchError}
               </p>
             )}
 
             {jobFetched && data.jobPosting && (
-              <div className="mt-2 bg-success/5 border border-success/20 rounded-lg px-3 py-2 flex items-start gap-2">
+              <div className="mt-2.5 bg-success/[0.04] border border-success/15 rounded-xl px-3.5 py-2.5 flex items-start gap-2">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 mt-0.5">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
                 <div className="min-w-0">
                   <p className="text-xs text-success font-medium">{t('questionnaire.jobUrl.fetchSuccess')}</p>
-                  <p className="text-xs text-text-secondary mt-0.5 line-clamp-2">{data.jobPosting.slice(0, 150)}...</p>
+                  <p className="text-xs text-text-tertiary mt-0.5 line-clamp-2">{data.jobPosting.slice(0, 150)}...</p>
                 </div>
                 <button
                   type="button"
@@ -366,14 +375,14 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
                     setJobFetched(false);
                     setJobUrlInput('');
                   }}
-                  className="text-text-secondary hover:text-danger text-xs flex-shrink-0"
+                  className="text-text-tertiary hover:text-danger text-xs flex-shrink-0"
                 >
                   {t('questionnaire.jobUrl.clear')}
                 </button>
               </div>
             )}
 
-            <p className="text-xs text-text-secondary mt-1.5">{t('questionnaire.jobUrl.urlHint')}</p>
+            <p className="text-[11px] text-text-tertiary mt-1.5">{t('questionnaire.jobUrl.urlHint')}</p>
           </div>
         ) : (
           <div>
@@ -384,7 +393,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
               onChange={(e) => update('jobPosting', e.target.value)}
               placeholder={t('questionnaire.jobUrl.pastePlaceholder')}
             />
-            <p className="text-xs text-text-secondary mt-1">{t('questionnaire.jobUrl.pasteHint')}</p>
+            <p className="text-[11px] text-text-tertiary mt-1.5">{t('questionnaire.jobUrl.pasteHint')}</p>
           </div>
         )}
       </div>

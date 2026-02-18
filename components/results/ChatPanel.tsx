@@ -166,7 +166,7 @@ export default function ChatPanel({ analysis }: ChatPanelProps) {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary text-white shadow-lg shadow-primary/30 flex items-center justify-center hover:bg-primary-light hover:scale-105 transition-all duration-200 group"
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-accent-cyan text-white shadow-lg shadow-primary/20 flex items-center justify-center hover:scale-105 transition-all duration-200 group no-print"
         aria-label="Open AI Career Coach chat"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -180,25 +180,25 @@ export default function ChatPanel({ analysis }: ChatPanelProps) {
   }
 
   return (
-    <div className="fixed bottom-0 right-0 sm:bottom-6 sm:right-6 z-50 w-full sm:w-[440px] h-[100dvh] sm:h-[600px] sm:max-h-[80vh] flex flex-col bg-card border border-card-border sm:rounded-2xl shadow-2xl shadow-black/40 overflow-hidden">
+    <div className="fixed bottom-0 right-0 sm:bottom-6 sm:right-6 z-50 w-full sm:w-[440px] h-[100dvh] sm:h-[600px] sm:max-h-[80vh] flex flex-col bg-background/95 backdrop-blur-xl border border-white/[0.08] sm:rounded-2xl shadow-2xl shadow-black/50 overflow-hidden no-print">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-card-border bg-card flex-shrink-0">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06] bg-white/[0.02] flex-shrink-0">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-xl bg-primary/[0.08] border border-primary/15 flex items-center justify-center">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
             </svg>
           </div>
           <div>
             <h3 className="text-sm font-semibold text-text-primary">{t('chat.title')}</h3>
-            <p className="text-xs text-text-secondary">{t('chat.subtitle')}</p>
+            <p className="text-xs text-text-tertiary">{t('chat.subtitle')}</p>
           </div>
         </div>
         <div className="flex items-center gap-1">
           {messages.length > 0 && (
             <button
               onClick={() => { setMessages([]); setShowQuickActions(true); }}
-              className="p-2 text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-background"
+              className="p-2 text-text-tertiary hover:text-text-primary transition-colors rounded-lg hover:bg-white/[0.04]"
               aria-label={t('chat.clearChat')}
               title={t('chat.clearChat')}
             >
@@ -210,7 +210,7 @@ export default function ChatPanel({ analysis }: ChatPanelProps) {
           )}
           <button
             onClick={() => setIsOpen(false)}
-            className="p-2 text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-background"
+            className="p-2 text-text-tertiary hover:text-text-primary transition-colors rounded-lg hover:bg-white/[0.04]"
             aria-label="Close chat"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -225,7 +225,7 @@ export default function ChatPanel({ analysis }: ChatPanelProps) {
         {/* Welcome state */}
         {messages.length === 0 && (
           <div className="space-y-4">
-            <div className="bg-primary/5 border border-primary/10 rounded-xl p-4">
+            <div className="bg-primary/[0.04] border border-primary/10 rounded-xl p-4">
               <p className="text-sm text-text-primary font-medium mb-1">
                 👋 {t('chat.welcome')}
               </p>
@@ -236,13 +236,13 @@ export default function ChatPanel({ analysis }: ChatPanelProps) {
 
             {showQuickActions && (
               <div>
-                <p className="text-xs text-text-secondary font-medium mb-2 uppercase tracking-wider">{t('chat.quickActions')}</p>
+                <p className="text-xs text-text-tertiary font-medium mb-2 uppercase tracking-wider">{t('chat.quickActions')}</p>
                 <div className="grid grid-cols-1 gap-1.5">
                   {QUICK_ACTION_PROMPTS.map((prompt, i) => (
                     <button
                       key={i}
                       onClick={() => sendMessage(prompt)}
-                      className="text-left px-3 py-2.5 rounded-lg border border-card-border bg-background hover:border-primary/40 hover:bg-primary/5 transition-all text-xs text-text-secondary hover:text-text-primary"
+                      className="text-left px-3 py-2.5 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:border-primary/30 hover:bg-primary/[0.04] transition-all text-xs text-text-tertiary hover:text-text-primary"
                     >
                       {t(`chat.actions.${i}`)}
                     </button>
@@ -260,7 +260,7 @@ export default function ChatPanel({ analysis }: ChatPanelProps) {
               className={`max-w-[85%] rounded-2xl px-4 py-2.5 ${
                 msg.role === 'user'
                   ? 'bg-primary text-white rounded-br-md'
-                  : 'bg-background border border-card-border rounded-bl-md'
+                  : 'bg-white/[0.03] border border-white/[0.06] rounded-bl-md'
               }`}
             >
               {msg.role === 'user' ? (
@@ -285,7 +285,7 @@ export default function ChatPanel({ analysis }: ChatPanelProps) {
       </div>
 
       {/* Input */}
-      <div className="px-4 py-3 border-t border-card-border bg-card flex-shrink-0">
+      <div className="px-4 py-3 border-t border-white/[0.06] bg-white/[0.02] flex-shrink-0">
         <form onSubmit={handleSubmit} className="flex items-end gap-2">
           <textarea
             ref={inputRef}
@@ -295,12 +295,12 @@ export default function ChatPanel({ analysis }: ChatPanelProps) {
             placeholder={t('chat.inputPlaceholder')}
             rows={1}
             disabled={isStreaming}
-            className="flex-1 bg-background border border-card-border rounded-xl px-3 py-2.5 text-sm text-text-primary placeholder:text-text-secondary resize-none focus:outline-none focus:border-primary/50 transition-colors disabled:opacity-50"
+            className="flex-1 bg-white/[0.03] border border-white/[0.08] rounded-xl px-3 py-2.5 text-sm text-text-primary placeholder:text-text-tertiary resize-none focus:outline-none focus:border-primary/40 focus:ring-2 focus:ring-primary/20 transition-all disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={!input.trim() || isStreaming}
-            className="w-9 h-9 rounded-xl bg-primary text-white flex items-center justify-center hover:bg-primary-light transition-colors disabled:opacity-30 disabled:hover:bg-primary flex-shrink-0"
+            className="w-9 h-9 rounded-xl bg-gradient-to-r from-primary to-accent-cyan text-white flex items-center justify-center transition-all disabled:opacity-30 flex-shrink-0 hover:shadow-lg hover:shadow-primary/20"
             aria-label="Send message"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
