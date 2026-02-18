@@ -1,5 +1,5 @@
 // ============================================================================
-// GapZero AI — Type Definitions
+// GapZero — Type Definitions
 // All interfaces match the PRD data schemas and SAMPLE_ANALYSIS.json structure
 // ============================================================================
 
@@ -8,12 +8,17 @@
 export interface CareerQuestionnaire {
   currentRole: string;
   targetRole: string;
+  targetRole2?: string;       // Optional alternative target role
+  targetRole3?: string;       // Optional alternative target role
   yearsExperience: number;
   country: string;
   workPreference: 'remote' | 'hybrid' | 'onsite' | 'flexible';
   currentSalary?: number;
   targetSalary?: number;
   jobPosting?: string;
+  jobPostingUrl?: string;     // URL of a job posting (fetched server-side)
+  language?: string;          // 'en' | 'ro' | 'de' — for localized AI responses
+  linkedInProfile?: string;   // Raw LinkedIn profile text for supplementary data
 }
 
 // --- Output Types ---

@@ -6,6 +6,7 @@ import type {
   Gap,
   RoleRecommendation,
 } from '../types';
+import { getLanguageInstruction } from './language';
 
 // ============================================================================
 // Prompt #2: Gap Analysis + Role Recommendations
@@ -21,13 +22,17 @@ export interface GapAnalysisResult {
 
 export function buildGapAnalysisPrompt(
   profile: ExtractedProfile,
-  questionnaire: CareerQuestionnaire
+  questionnaire: CareerQuestionnaire,
+  language?: string
 ): { system: string; userMessage: string } {
+  const langInstruction = getLanguageInstruction(language);
+
   const system = `You are a senior career strategist with 20 years in tech recruitment and career coaching. You specialize in helping technology professionals navigate career transitions.
 
 Your task is to perform a comprehensive gap analysis between a candidate's current profile and their target role, then recommend the best-fit roles.
 
 You must respond ONLY with a valid JSON object matching the exact schema below. No preamble, no explanation, no markdown fences — just pure JSON.
+${langInstruction}
 
 ANALYSIS RULES:
 
@@ -53,10 +58,10 @@ For EACH gap, you MUST provide:
 - Realistic time estimate for someone working 1-2 hours/day on it
 - 2-4 specific, named resources (courses, certifications, tutorials) — prefer free resources
 
-ROLE RECOMMENDATIONS — suggest 3 roles:
-- Role 1: Best immediate fit (can apply now or within weeks)
-- Role 2: Strong fit with minor preparation needed
-- Role 3: Aspirational but achievable within 6-12 months
+ROLE RECOMMENDATIONS — suggest 3-5 roles:
+- If the candidate specified multiple target roles, include ALL of them with individual analysis
+- Additional roles: suggest 1-2 more based on the candidate's profile that they may not have considered
+- Role 1 should be the best immediate fit (can apply now or within weeks)
 - Include GROSS ANNUAL salary ranges (before tax)
 - Name 3-6 specific companies hiring for each role
 
@@ -110,12 +115,17 @@ JSON SCHEMA:
   ]
 }`;
 
+  const alternativeRoles = [questionnaire.targetRole2, questionnaire.targetRole3].filter(Boolean);
+  const targetRolesText = alternativeRoles.length > 0
+    ? `- Primary Target Role: ${questionnaire.targetRole}\n- Alternative Target Roles: ${alternativeRoles.join(', ')}`
+    : `- Target Role: ${questionnaire.targetRole}`;
+
   const userMessage = `CANDIDATE PROFILE:
 ${JSON.stringify(profile, null, 2)}
 
 CAREER GOALS:
 - Current Role: ${questionnaire.currentRole}
-- Target Role: ${questionnaire.targetRole}
+${targetRolesText}
 - Years of Experience: ${questionnaire.yearsExperience}
 - Country of Residence: ${questionnaire.country}
 - Work Preference: ${questionnaire.workPreference}
@@ -125,6 +135,8 @@ ${questionnaire.targetSalary ? `- Target Gross Annual Salary: ${questionnaire.ta
 ${questionnaire.workPreference === 'remote' || questionnaire.workPreference === 'flexible'
   ? `NOTE: Candidate seeks REMOTE/FLEXIBLE work. Role salary ranges should reflect EU/EMEA remote market rates, not local ${questionnaire.country} rates. All salaries must be GROSS ANNUAL.`
   : 'All salaries must be GROSS ANNUAL.'}
+
+${alternativeRoles.length > 0 ? `MULTI-ROLE ANALYSIS: The candidate is considering multiple roles. The fitScore and gaps should be evaluated against the PRIMARY target role ("${questionnaire.targetRole}"). However, the roleRecommendations MUST include ALL specified target roles (${[questionnaire.targetRole, ...alternativeRoles].join(', ')}) with individual fit scores and salary ranges for each. Add 1-2 additional AI-suggested roles if relevant.` : ''}
 
 Perform the gap analysis and provide role recommendations as JSON.`;
 

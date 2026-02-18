@@ -6,6 +6,7 @@ import type {
   ActionPlan,
   SalaryAnalysis,
 } from '../types';
+import { getLanguageInstruction } from './language';
 
 // ============================================================================
 // Prompt #3: Career Plan + Salary Benchmarks
@@ -21,13 +22,17 @@ export function buildCareerPlanPrompt(
   profile: ExtractedProfile,
   questionnaire: CareerQuestionnaire,
   gaps: Gap[],
-  roleRecommendations: RoleRecommendation[]
+  roleRecommendations: RoleRecommendation[],
+  language?: string
 ): { system: string; userMessage: string } {
+  const langInstruction = getLanguageInstruction(language);
+
   const system = `You are a senior career strategist who creates highly specific, actionable career development plans. You have deep knowledge of tech industry salary benchmarks across global markets.
 
 Your task is to create a prioritized action plan that closes the identified skill gaps and positions the candidate for their target roles, plus a detailed salary analysis.
 
 You must respond ONLY with a valid JSON object matching the exact schema below. No preamble, no explanation, no markdown fences — just pure JSON.
+${langInstruction}
 
 ACTION PLAN RULES:
 1. 30-Day items are QUICK WINS — things that show immediate results or remove blockers
@@ -50,9 +55,7 @@ SALARY ANALYSIS RULES:
    - If work preference is "remote" or "flexible": Use EUR for BOTH current and target role markets. Convert local salaries to EUR.
    - If work preference is "hybrid" or "onsite": Use the candidate's local currency for BOTH.
    - Never mix currencies between current and target — the user needs to compare them directly.
-3. For target role market:
-   - If work preference is "remote" or "flexible": Use EU/EMEA remote market rates. Remote workers from Eastern Europe can earn Western European salaries. Show the full remote market range, NOT local country rates.
-   - If work preference is "hybrid" or "onsite": Use the candidate's country/city rates
+3. For target role market with remote/flexible preference: Use EU/EMEA remote market rates. Remote workers from Eastern Europe can earn Western European salaries. Show the full remote market range, NOT local country rates.
 4. Always specify "(gross annual)" after the region description so there's no ambiguity
 5. Growth potential should be a realistic percentage range, not aspirational
 6. "Best monetary move" should be a specific, actionable recommendation — not generic career advice. For remote candidates, emphasize that remote roles for Western EU/US companies pay significantly above local market.
@@ -94,10 +97,15 @@ JSON SCHEMA:
   }
 }`;
 
+  const alternativeRoles = [questionnaire.targetRole2, questionnaire.targetRole3].filter(Boolean);
+  const targetRolesText = alternativeRoles.length > 0
+    ? `- Primary Target Role: ${questionnaire.targetRole}\n- Alternative Target Roles: ${alternativeRoles.join(', ')}`
+    : `- Target Role: ${questionnaire.targetRole}`;
+
   const userMessage = `CANDIDATE PROFILE SUMMARY:
 - Name: ${profile.name}
 - Current Role: ${questionnaire.currentRole}
-- Target Role: ${questionnaire.targetRole}
+${targetRolesText}
 - Years of Experience: ${questionnaire.yearsExperience}
 - Country of Residence: ${questionnaire.country}
 - Work Preference: ${questionnaire.workPreference}

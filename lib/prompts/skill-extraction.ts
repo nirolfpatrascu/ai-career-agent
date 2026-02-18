@@ -75,10 +75,25 @@ ${cvText}
 Additional context from the user's questionnaire:
 - Current Role: ${questionnaire.currentRole}
 - Target Role: ${questionnaire.targetRole}
+${questionnaire.targetRole2 ? `- Alternative Target Role: ${questionnaire.targetRole2}` : ''}
+${questionnaire.targetRole3 ? `- Alternative Target Role: ${questionnaire.targetRole3}` : ''}
 - Years of Experience: ${questionnaire.yearsExperience}
 - Country: ${questionnaire.country}
 - Work Preference: ${questionnaire.workPreference}
+${questionnaire.linkedInProfile ? `
+SUPPLEMENTARY DATA — LinkedIn Profile:
+The user provided their LinkedIn profile PDF export. This is a RICH data source — analyze it thoroughly:
+- Extract ALL skills listed in the Skills section (LinkedIn often has more skills than a CV)
+- Note endorsement counts as a signal of proficiency
+- Extract volunteer work, courses, projects, publications, and honors if present
+- Use the LinkedIn headline and about section for career positioning insights
+- Cross-reference experience dates/titles between CV and LinkedIn for accuracy
+- LinkedIn recommendations and endorsements indicate peer-validated skills
 
+---LINKEDIN START---
+${questionnaire.linkedInProfile.slice(0, 12000)}
+---LINKEDIN END---
+` : ''}
 Extract the complete professional profile as JSON.`;
 
   return { system, userMessage };
