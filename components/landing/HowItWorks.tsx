@@ -104,11 +104,14 @@ export default function HowItWorks() {
           if (entry.isIntersecting) entry.target.classList.add('visible');
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.05, rootMargin: '0px 0px -20px 0px' }
     );
     const els = sectionRef.current?.querySelectorAll('.fade-in-up');
     els?.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    const timeout = setTimeout(() => {
+      els?.forEach((el) => el.classList.add('visible'));
+    }, 1000);
+    return () => { observer.disconnect(); clearTimeout(timeout); };
   }, []);
 
   const steps = t('howItWorks.steps') as unknown as { title: string; description: string; detail: string }[];

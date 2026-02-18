@@ -127,11 +127,15 @@ export default function Features() {
           if (entry.isIntersecting) entry.target.classList.add('visible');
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.05, rootMargin: '0px 0px -20px 0px' }
     );
     const els = sectionRef.current?.querySelectorAll('.fade-in-up');
     els?.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    // Fallback: reveal all after 1s in case observer doesn't fire
+    const timeout = setTimeout(() => {
+      els?.forEach((el) => el.classList.add('visible'));
+    }, 1000);
+    return () => { observer.disconnect(); clearTimeout(timeout); };
   }, []);
 
   const cards = t('features.cards') as unknown as { title: string; description: string; highlight: string }[];
