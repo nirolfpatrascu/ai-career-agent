@@ -391,5 +391,27 @@
       "needFile": "Laden Sie mindestens einen Lebenslauf oder LinkedIn-PDF hoch",
       "needDetails": "Füllen Sie alle Pflichtfelder aus"
     }
+  },
+  "linkedin": {
+    "title": "LinkedIn Plan",
+    "subtitle": "Personalisierte Optimierungsstrategie für Ihr LinkedIn-Profil",
+    "headline": "Überschrift-Vorschläge",
+    "headlineAdvice": "Ihre Überschrift erscheint in Suchergebnissen, Kommentaren und Kontaktanfragen. Laden Sie Keywords, nach denen Recruiter suchen, am Anfang. Max. 220 Zeichen.",
+    "aboutSection": "Info-Bereich Entwurf",
+    "aboutAdvice": "Die ersten 3 Zeilen werden ohne Klick auf \"mehr anzeigen\" angezeigt — nutzen Sie sie. Schreiben Sie in der ersten Person, seien Sie konkret, enden Sie mit einem Handlungsaufruf.",
+    "featured": "Im Fokus",
+    "featuredAdvice": "Pinnen Sie 3-6 visuelle Elemente, die Ihre Überschrift belegen. Verwenden Sie benutzerdefinierte Thumbnails für maximale Wirkung.",
+    "skills": "Kompetenz-Optimierung",
+    "skillsAdd": "Hinzufügen / Nach oben verschieben",
+    "skillsDeprioritize": "Nach unten / Entfernung erwägen",
+    "moveDown": "niedrigere Priorität",
+    "skillsNote": "Entfernen Sie Kompetenzen nicht ganz — verschieben Sie sie nach unten. LinkedIn erlaubt 50 Kompetenzen, nutzen Sie alle.",
+    "content": "Content-Strategie",
+    "contentAdvice": "Regelmäßiges Posten ist der #1-Beschleuniger für Karrierewechsel auf LinkedIn. Sie müssen nicht viral gehen — seien Sie einfach für die richtigen 500 Personen sichtbar.",
+    "contentFrequency": "Empfohlen: 1-3 Posts pro Woche. Beste Zeiten: Di-Do, 8-10 Uhr in der Zeitzone Ihres Zielmarkts.",
+    "connections": "Kontaktstrategie",
+    "connectionsAdvice": "Verbinden Sie sich mit Personen in Ihrem Zielbereich. Personalisieren Sie jede Anfrage (max. 3-4 Sätze). Kommentieren Sie täglich 5-10 Posts — das ist effektiver als selbst zu posten.",
+    "copy": "Kopieren",
+    "copied": "Kopiert!"
   }
 }

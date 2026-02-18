@@ -391,5 +391,27 @@
       "needFile": "Téléchargez au moins un CV ou PDF LinkedIn",
       "needDetails": "Complétez tous les détails obligatoires"
     }
+  },
+  "linkedin": {
+    "title": "Plan LinkedIn",
+    "subtitle": "Stratégie d'optimisation personnalisée pour votre profil LinkedIn",
+    "headline": "Suggestions de Titre",
+    "headlineAdvice": "Votre titre apparaît dans les résultats de recherche, commentaires et demandes de connexion. Placez les mots-clés en premier. Maximum 220 caractères.",
+    "aboutSection": "Section À Propos",
+    "aboutAdvice": "Les 3 premières lignes s'affichent sans cliquer \"voir plus\" — rendez-les percutantes. Écrivez à la première personne, soyez précis, terminez par un appel à l'action.",
+    "featured": "Section En Vedette",
+    "featuredAdvice": "Épinglez 3-6 éléments visuels qui prouvent vos affirmations. Utilisez des miniatures personnalisées pour un impact maximal.",
+    "skills": "Optimisation des Compétences",
+    "skillsAdd": "Ajouter / Mettre en Haut",
+    "skillsDeprioritize": "Descendre / Envisager de Retirer",
+    "moveDown": "priorité basse",
+    "skillsNote": "Ne supprimez pas les compétences — descendez-les. LinkedIn autorise 50 compétences, utilisez-les toutes.",
+    "content": "Stratégie de Contenu",
+    "contentAdvice": "Publier régulièrement est l'accélérateur #1 des transitions de carrière sur LinkedIn. Pas besoin de devenir viral — soyez juste visible pour les 500 bonnes personnes.",
+    "contentFrequency": "Recommandé : 1-3 posts par semaine. Meilleurs moments : Mar-Jeu, 8-10h dans le fuseau horaire de votre marché cible.",
+    "connections": "Stratégie de Connexion",
+    "connectionsAdvice": "Connectez-vous avec des personnes dans votre domaine cible. Personnalisez chaque demande (3-4 phrases max). Commentez 5-10 posts par jour — c'est plus efficace que publier.",
+    "copy": "Copier",
+    "copied": "Copié !"
   }
 }

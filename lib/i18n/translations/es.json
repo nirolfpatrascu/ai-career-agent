@@ -391,5 +391,27 @@
       "needFile": "Sube al menos un CV o PDF de LinkedIn",
       "needDetails": "Completa todos los detalles obligatorios"
     }
+  },
+  "linkedin": {
+    "title": "Plan LinkedIn",
+    "subtitle": "Estrategia personalizada de optimización para tu perfil de LinkedIn",
+    "headline": "Sugerencias de Titular",
+    "headlineAdvice": "Tu titular aparece en resultados de búsqueda, comentarios y solicitudes de conexión. Pon las palabras clave al principio. Máximo 220 caracteres.",
+    "aboutSection": "Sección Acerca de",
+    "aboutAdvice": "Las primeras 3 líneas se muestran sin hacer clic en \"ver más\" — hazlas contar. Escribe en primera persona, sé específico, termina con una llamada a la acción.",
+    "featured": "Sección Destacados",
+    "featuredAdvice": "Fija 3-6 elementos visuales que demuestren lo que afirmas en tu titular. Usa miniaturas personalizadas para máximo impacto.",
+    "skills": "Optimización de Competencias",
+    "skillsAdd": "Añadir / Mover Arriba",
+    "skillsDeprioritize": "Mover Abajo / Considerar Eliminar",
+    "moveDown": "prioridad baja",
+    "skillsNote": "No elimines competencias por completo — muévelas abajo. LinkedIn permite 50 competencias, úsalas todas.",
+    "content": "Estrategia de Contenido",
+    "contentAdvice": "Publicar consistentemente es el acelerador #1 para transiciones de carrera en LinkedIn. No necesitas hacerte viral — solo ser visible para las 500 personas correctas.",
+    "contentFrequency": "Recomendado: 1-3 publicaciones por semana. Mejores horarios: Mar-Jue, 8-10 AM en la zona horaria de tu mercado objetivo.",
+    "connections": "Estrategia de Conexiones",
+    "connectionsAdvice": "Conéctate con personas en tu dominio objetivo. Personaliza cada solicitud (3-4 frases máx). Comenta en 5-10 publicaciones diarias — es más efectivo que publicar.",
+    "copy": "Copiar",
+    "copied": "¡Copiado!"
   }
 }

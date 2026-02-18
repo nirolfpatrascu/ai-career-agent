@@ -391,5 +391,27 @@
       "needFile": "Încarcă cel puțin un CV sau PDF LinkedIn",
       "needDetails": "Completează toate detaliile obligatorii"
     }
+  },
+  "linkedin": {
+    "title": "Plan LinkedIn",
+    "subtitle": "Strategie personalizată de optimizare a profilului tău LinkedIn",
+    "headline": "Sugestii pentru Titlu",
+    "headlineAdvice": "Titlul tău apare în rezultatele căutării, comentarii și cereri de conectare. Pune cuvintele cheie la început. Maximum 220 de caractere.",
+    "aboutSection": "Secțiunea Despre",
+    "aboutAdvice": "Primele 3 rânduri se afișează fără a da click pe \"vezi mai mult\" — fă-le să conteze. Scrie la persoana I, fii specific, termină cu un îndemn la acțiune.",
+    "featured": "Secțiunea Recomandate",
+    "featuredAdvice": "Fixează 3-6 elemente vizuale care dovedesc ceea ce afirmi în titlu. Folosește thumbnails personalizate.",
+    "skills": "Optimizare Competențe",
+    "skillsAdd": "Adaugă / Mută în Top",
+    "skillsDeprioritize": "Mută Mai Jos / Consideră Eliminarea",
+    "moveDown": "prioritate scăzută",
+    "skillsNote": "Nu elimina competențele complet — mută-le mai jos. LinkedIn permite 50 de competențe, folosește-le pe toate.",
+    "content": "Strategie de Conținut",
+    "contentAdvice": "Postarea constantă este acceleratorul #1 pentru tranzițiile de carieră pe LinkedIn. Nu trebuie să devii viral — trebuie doar să fii vizibil pentru cei 500 de oameni potriviți.",
+    "contentFrequency": "Recomandat: 1-3 postări pe săptămână. Cele mai bune ore: Ma-Jo, 8-10 dimineața în fusul orar al pieței țintă.",
+    "connections": "Strategie de Conectare",
+    "connectionsAdvice": "Conectează-te cu persoane din domeniul țintă. Personalizează fiecare cerere (max 3-4 propoziții). Comentează la 5-10 postări zilnic — e mai eficient decât să postezi.",
+    "copy": "Copiază",
+    "copied": "Copiat!"
   }
 }

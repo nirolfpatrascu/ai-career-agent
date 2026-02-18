@@ -17,6 +17,7 @@ import SalaryBenchmark from '@/components/results/SalaryBenchmark';
 import JobMatchPanel from '@/components/results/JobMatchPanel';
 import PDFReport from '@/components/shared/PDFReport';
 import ChatPanel from '@/components/results/ChatPanel';
+import LinkedInPlan from '@/components/results/LinkedInPlan';
 import ChapterNav, { DEFAULT_TAB } from '@/components/results/ChapterNav';
 import { getSampleAnalysis } from '@/lib/demo';
 import { useTranslation } from '@/lib/i18n';
@@ -172,6 +173,12 @@ export default function AnalyzePage() {
               <JobMatchPanel match={result.jobMatch} />
             </div>
           ) : null;
+        case 'linkedin':
+          return (
+            <div role="tabpanel" id="tabpanel-linkedin" aria-labelledby="tab-linkedin">
+              <LinkedInPlan analysis={result} />
+            </div>
+          );
         case 'ai-coach':
           return (
             <div role="tabpanel" id="tabpanel-ai-coach" aria-labelledby="tab-ai-coach">
