@@ -34,6 +34,9 @@ export default function PDFReport({ result }: PDFReportProps) {
     en: 'en-US',
     ro: 'ro-RO',
     de: 'de-DE',
+    fr: 'fr-FR',
+    es: 'es-ES',
+    it: 'it-IT',
   };
 
   const labels: PDFLabels = {

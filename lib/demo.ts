@@ -4,14 +4,15 @@ import sampleDataEn from './sample-data.json';
 import sampleDataRo from './sample-data-ro.json';
 import sampleDataDe from './sample-data-de.json';
 
-const SAMPLE_DATA: Record<Locale, AnalysisResult> = {
+const SAMPLE_DATA: Partial<Record<Locale, AnalysisResult>> = {
   en: sampleDataEn as AnalysisResult,
   ro: sampleDataRo as AnalysisResult,
   de: sampleDataDe as AnalysisResult,
+  // fr, es, it use English demo data — real analysis gets translated via API
 };
 
 export function getSampleAnalysis(locale: Locale = 'en'): AnalysisResult {
-  return SAMPLE_DATA[locale] || SAMPLE_DATA.en;
+  return SAMPLE_DATA[locale] || SAMPLE_DATA.en!;
 }
 
 // Keep backward compat for any existing imports

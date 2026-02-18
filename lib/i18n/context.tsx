@@ -4,23 +4,32 @@ import { createContext, useContext, useState, useCallback, useEffect, ReactNode 
 import en from './translations/en.json';
 import ro from './translations/ro.json';
 import de from './translations/de.json';
+import fr from './translations/fr.json';
+import es from './translations/es.json';
+import it from './translations/it.json';
 
-export type Locale = 'en' | 'ro' | 'de';
+export type Locale = 'en' | 'ro' | 'de' | 'fr' | 'es' | 'it';
 
 export const LOCALE_NAMES: Record<Locale, string> = {
   en: 'English',
   ro: 'Română',
   de: 'Deutsch',
+  fr: 'Français',
+  es: 'Español',
+  it: 'Italiano',
 };
 
 export const LOCALE_FLAGS: Record<Locale, string> = {
   en: '🇬🇧',
   ro: '🇷🇴',
   de: '🇩🇪',
+  fr: '🇫🇷',
+  es: '🇪🇸',
+  it: '🇮🇹',
 };
 
 type TranslationDict = Record<string, unknown>;
-const translations: Record<Locale, TranslationDict> = { en, ro, de };
+const translations: Record<Locale, TranslationDict> = { en, ro, de, fr, es, it };
 
 interface I18nContextType {
   locale: Locale;

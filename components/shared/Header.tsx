@@ -10,6 +10,9 @@ const LOCALE_SHORT: Record<Locale, string> = {
   en: 'EN',
   ro: 'RO',
   de: 'DE',
+  fr: 'FR',
+  es: 'ES',
+  it: 'IT',
 };
 
 function GlobeIcon({ className }: { className?: string }) {

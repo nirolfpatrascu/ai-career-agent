@@ -8,6 +8,17 @@
 const LANGUAGE_NAMES: Record<string, string> = {
   ro: 'Romanian (Română)',
   de: 'German (Deutsch)',
+  fr: 'French (Français)',
+  es: 'Spanish (Español)',
+  it: 'Italian (Italiano)',
+};
+
+const EXAMPLES: Record<string, { strongFit: string; free: string; readyNow: string }> = {
+  ro: { strongFit: 'Potrivire Puternică', free: 'gratuit', readyNow: 'Pregătit acum' },
+  de: { strongFit: 'Starke Passung', free: 'kostenlos', readyNow: 'Sofort bereit' },
+  fr: { strongFit: 'Forte Correspondance', free: 'gratuit', readyNow: 'Prêt maintenant' },
+  es: { strongFit: 'Alta Compatibilidad', free: 'gratuito', readyNow: 'Listo ahora' },
+  it: { strongFit: 'Alta Compatibilità', free: 'gratuito', readyNow: 'Pronto ora' },
 };
 
 export function buildTranslationPrompt(
@@ -15,6 +26,7 @@ export function buildTranslationPrompt(
   language: string
 ): { system: string; userMessage: string } {
   const langName = LANGUAGE_NAMES[language] || language;
+  const ex = EXAMPLES[language] || EXAMPLES.fr;
 
   const system = `You are a professional translator specializing in career advisory and technology content. Your ONLY task is to translate a JSON career analysis from English into ${langName}.
 
@@ -26,12 +38,12 @@ CRITICAL RULES:
 5. DO NOT add or remove any keys or array items.
 
 TRANSLATE these string values into ${langName}:
-- fitScore.label (e.g. "Strong Fit" → "${language === 'ro' ? 'Potrivire Puternică' : 'Starke Passung'}")
+- fitScore.label (e.g. "Strong Fit" → "${ex.strongFit}")
 - fitScore.summary
 - All strengths[]: title, description, relevance
 - All gaps[]: skill (display name), currentLevel, requiredLevel, impact, closingPlan, timeToClose
-- All gaps[].resources[] — translate descriptions but keep course/certification names in original (e.g. "Microsoft Learn: AZ-900 Learning Path (${language === 'ro' ? 'gratuit' : 'kostenlos'})")
-- All roleRecommendations[]: title, reasoning, timeToReady (e.g. "Ready now" → "${language === 'ro' ? 'Pregătit acum' : 'Sofort bereit'}")
+- All gaps[].resources[] — translate descriptions but keep course/certification names in original (e.g. "Microsoft Learn: AZ-900 Learning Path (${ex.free})")
+- All roleRecommendations[]: title, reasoning, timeToReady (e.g. "Ready now" → "${ex.readyNow}")
 - All actionPlan items (thirtyDays, ninetyDays, twelveMonths): action, timeEstimate, resource, expectedImpact
 - salaryAnalysis: currentRoleMarket.region, targetRoleMarket.region, growthPotential, bestMonetaryMove
 - All salaryAnalysis.negotiationTips[]

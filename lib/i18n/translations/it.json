@@ -1,0 +1,338 @@
+{
+  "common": {
+    "analyzeMyCareer": "Analizza La Mia Carriera",
+    "tryDemo": "Prova la Demo",
+    "features": "Funzionalità",
+    "howItWorks": "Come Funziona",
+    "newAnalysis": "Nuova Analisi",
+    "startNewAnalysis": "Avvia Nuova Analisi",
+    "backToHome": "Torna alla home",
+    "downloadReport": "Scarica il Report",
+    "required": "*",
+    "optional": "opzionale",
+    "free": "Gratuito",
+    "builtBy": "Sviluppato da"
+  },
+  "hero": {
+    "badge": "Consulente di Carriera con IA",
+    "headline1": "Carica il tuo CV.",
+    "headline2": "Ottieni una strategia",
+    "rotatingWords": [
+      "di carriera personalizzata",
+      "di analisi delle competenze",
+      "di benchmark salariali",
+      "piano d'azione",
+      "di ruoli consigliati"
+    ],
+    "subtitle": "Analisi dei gap, piani di apprendimento, benchmark salariali, raccomandazioni di ruolo e ottimizzazione del CV — il tutto in meno di 2 minuti. Coaching di carriera che costava $500/ora, ora alimentato dall'IA.",
+    "analyzeFree": "Analizza La Mia Carriera",
+    "stats": {
+      "analysisTime": "Tempo di Analisi",
+      "dataPoints": "Punti Dati",
+      "aiSteps": "Passaggi IA",
+      "toUse": "Utilizzo"
+    }
+  },
+  "features": {
+    "sectionLabel": "Funzionalità",
+    "title": "Tutto il necessario per gestire la tua transizione di carriera",
+    "subtitle": "Alimentato da un'analisi IA avanzata del tuo CV, dei requisiti del ruolo target e dei dati di mercato.",
+    "cards": [
+      {
+        "title": "Analisi Approfondita del CV",
+        "description": "Carica il tuo CV in formato PDF e la nostra IA estrae ogni competenza, certificazione ed esperienza — anche quelle che hai dimenticato di elencare."
+      },
+      {
+        "title": "Analisi dei Gap",
+        "description": "Scopri esattamente quali competenze ti mancano per il tuo ruolo target — classificate per gravità con piani specifici per colmare ogni gap."
+      },
+      {
+        "title": "Benchmark Salariali",
+        "description": "Fasce salariali adattate alla tua posizione geografica per i tuoi ruoli attuale e target, più consigli di negoziazione specifici per la tua esperienza."
+      },
+      {
+        "title": "Raccomandazioni di Ruolo",
+        "description": "Ottieni 3 ruoli ottimali basati sul tuo profilo — con punteggi di compatibilità, fasce salariali e aziende specifiche da puntare."
+      },
+      {
+        "title": "Piano d'Azione",
+        "description": "Risultati rapidi a 30 giorni, sviluppo competenze a 90 giorni e traiettoria di carriera a 12 mesi — con risorse specifiche e stime temporali."
+      },
+      {
+        "title": "Matching Lavorativo",
+        "description": "Incolla qualsiasi offerta di lavoro e ottieni un punteggio ATS, parole chiave mancanti e suggerimenti di riscrittura del CV."
+      }
+    ]
+  },
+  "howItWorks": {
+    "sectionLabel": "Come Funziona",
+    "title": "Dal CV alla roadmap in 3 passaggi",
+    "subtitle": "Nessuna registrazione necessaria. Carica, rispondi ad alcune domande e ottieni la tua analisi personalizzata.",
+    "steps": [
+      {
+        "title": "Carica il Tuo CV",
+        "description": "Trascina e rilascia il tuo CV in formato PDF. La nostra IA legge ogni dettaglio — competenze, certificazioni, esperienza e anche le attitudini implicite."
+      },
+      {
+        "title": "Raccontaci i Tuoi Obiettivi",
+        "description": "Rispondi a un breve questionario sul tuo ruolo attuale, posizione target, località e aspettative salariali. Meno di 2 minuti."
+      },
+      {
+        "title": "Ricevi la Tua Roadmap",
+        "description": "In meno di 2 minuti, ricevi un'analisi completa: punteggio di compatibilità, punti di forza, gap di competenze, benchmark salariali e piano d'azione personalizzato."
+      }
+    ],
+    "visual": {
+      "uploadComplete": "Caricamento completato",
+      "currentRole": "Ruolo Attuale",
+      "targetRole": "Ruolo Target",
+      "country": "Paese",
+      "strengthsIdentified": "5 punti di forza identificati",
+      "gapsToClose": "3 gap da colmare",
+      "actionItems": "12 azioni da intraprendere"
+    }
+  },
+  "cta": {
+    "title": "Pronto ad accelerare la tua carriera?",
+    "subtitle": "Carica il tuo CV e ottieni un'analisi completa della carriera in meno di 2 minuti. Gratuito, senza registrazione.",
+    "button": "Analizza La Mia Carriera — Gratis",
+    "footer": "Senza registrazione • Senza carta di credito • Risultati in meno di 2 minuti"
+  },
+  "analyze": {
+    "title": "Analizza la Tua Carriera",
+    "subtitle": "Carica il tuo profilo LinkedIn e il tuo CV, definisci i tuoi obiettivi di carriera e ottieni la tua analisi personalizzata.",
+    "uploadCV": "Carica CV",
+    "careerDetails": "Dettagli di Carriera",
+    "uploadToContinue": "Carica il tuo CV per continuare",
+    "fillFields": "Compila tutti i campi obbligatori per continuare",
+    "analysisFailed": "Analisi Fallita",
+    "somethingWrong": "Qualcosa è andato storto. Per favore, riprova.",
+    "demoBanner": "Questa è un'analisi dimostrativa con dati di esempio.",
+    "uploadOwn": "Carica il tuo CV",
+    "yourAnalysis": "La Tua Analisi di Carriera",
+    "target": "Target",
+    "wantDifferent": "Vuoi analizzare un percorso diverso?",
+    "preFilled": "Abbiamo pre-compilato ciò che abbiamo potuto dal tuo caricamento. Completa i campi rimanenti — soprattutto il tuo ruolo target.",
+    "tellUsGoals": "Raccontaci del tuo ruolo attuale e dove vuoi arrivare.",
+    "uploadAtLeastOne": "Carica un PDF LinkedIn o un CV per iniziare",
+    "uploadDocs": "Carica i tuoi documenti",
+    "uploadDocsHint": "Il PDF LinkedIn compila automaticamente i tuoi dati. Aggiungi il tuo CV per un'analisi più approfondita."
+  },
+  "upload": {
+    "label": "Carica il Tuo CV",
+    "format": "(PDF, max 5 MB)",
+    "dropHere": "Rilascia il tuo CV qui",
+    "dropOrBrowse": "Rilascia il tuo CV qui o clicca per sfogliare",
+    "pdfFormat": "Formato PDF, fino a 5 MB",
+    "onlyPdf": "Sono accettati solo file PDF.",
+    "maxSize": "La dimensione del file deve essere inferiore a 5 MB.",
+    "removeFile": "Rimuovi file"
+  },
+  "docUpload": {
+    "linkedInTitle": "Profilo LinkedIn PDF",
+    "linkedInRecommended": "consigliato",
+    "linkedInLabel": "LinkedIn PDF",
+    "uploadLinkedIn": "Carica PDF LinkedIn",
+    "linkedInSublabel": "Esporta automaticamente il tuo ruolo, esperienza e competenze",
+    "detecting": "Lettura dei dettagli del profilo...",
+    "detected": "Profilo rilevato — modulo pre-compilato sotto",
+    "guideQuestion": "Come esporto il mio profilo LinkedIn come PDF?",
+    "guideStep1a": "Vai al tuo",
+    "guideStep1Link": "profilo LinkedIn",
+    "guideStep1b": "e clicca su",
+    "guideStep1bold": "Risorse",
+    "guideStep2a": "Clicca su",
+    "guideStep2bold": "Salva come PDF",
+    "guideStep2b": ", poi carica il file scaricato qui",
+    "guideTip": "Il PDF LinkedIn include il tuo ruolo, esperienza, formazione e competenze — lo useremo per pre-compilare il modulo e migliorare la tua analisi.",
+    "divider": "e / o",
+    "cvTitle": "CV / Curriculum Vitae",
+    "cvOptional": "opzionale — arricchisce l'analisi",
+    "cvRequired": "richiesto se non c'è PDF LinkedIn",
+    "cvLabel": "CV / Curriculum Vitae",
+    "uploadCV": "Carica il tuo CV",
+    "cvSublabel": "Formato PDF, max 5 MB",
+    "dropHere": "Rilascia qui",
+    "uploadHint": "Carica almeno un documento per continuare. Entrambi insieme danno i migliori risultati."
+  },
+  "questionnaire": {
+    "currentRole": "Ruolo Attuale",
+    "targetRole": "Ruolo Target / Obiettivo di Carriera",
+    "targetRole2Label": "Ruolo Alternativo 1",
+    "targetRole3Label": "Ruolo Alternativo 2",
+    "addAlternativeRoles": "Aggiungi ruoli alternativi (opzionale)",
+    "alternativeRolesHint": "Aggiungi 1-2 ruoli alternativi che stai considerando. Analizzeremo la tua compatibilità per ciascuno.",
+    "yearsExperience": "Anni di Esperienza",
+    "country": "Paese / Regione",
+    "selectCountry": "Seleziona paese...",
+    "workPreference": "Preferenza Lavorativa",
+    "currentSalary": "Stipendio Annuo Lordo Attuale",
+    "targetSalary": "Stipendio Annuo Lordo Target",
+    "grossAnnual": "Lordo annuale (prima delle tasse)",
+    "jobPosting": "Offerta di Lavoro",
+    "jobPostingLabel": "Offerta di Lavoro",
+    "jobPostingOptional": "opzionale — per consigli mirati",
+    "jobPostingHint": "opzionale — incolla un'offerta specifica per consigli mirati",
+    "jobPostingPlaceholder": "Incolla il testo completo dell'offerta di lavoro qui per ottenere un punteggio ATS, parole chiave mancanti e suggerimenti di riscrittura del CV...",
+    "remoteSalaryNote": "Poiché hai selezionato Remoto, i benchmark salariali rifletteranno le tariffe del mercato remoto EMEA/UE per il tuo ruolo target — non solo le tariffe locali di {country}.",
+    "workOptions": {
+      "remote": "Remoto",
+      "hybrid": "Ibrido",
+      "onsite": "In sede",
+      "flexible": "Flessibile"
+    },
+    "jobUrl": {
+      "tabUrl": "Incolla URL",
+      "tabPaste": "Incolla Testo",
+      "placeholder": "https://linkedin.com/jobs/view/... o qualsiasi pagina di lavoro",
+      "fetch": "Ottieni",
+      "fetching": "Ottenendo...",
+      "fetchSuccess": "Offerta di lavoro ottenuta con successo",
+      "clear": "Cancella",
+      "urlHint": "Incolla un link LinkedIn, Indeed, Glassdoor o qualsiasi pagina di lavoro. Alcuni siti potrebbero bloccare il recupero — usa \"Incolla Testo\" come alternativa.",
+      "pasteHint": "Copia la descrizione completa dalla pagina dell'offerta e incollala sopra.",
+      "pastePlaceholder": "Incolla il testo completo della descrizione del ruolo qui..."
+    }
+  },
+  "progress": {
+    "typicallyTakes": "Questo richiede generalmente 60-90 secondi",
+    "percentComplete": "{percent}% completato",
+    "messages": [
+      "Lettura del tuo CV...",
+      "Estrazione competenze ed esperienza...",
+      "Analisi del posizionamento di mercato...",
+      "Identificazione dei gap di competenze...",
+      "Matching con i ruoli target...",
+      "Costruzione della tua roadmap...",
+      "Calcolo dei benchmark salariali...",
+      "Generazione del tuo report personalizzato...",
+      "Finalizzazione del tuo report..."
+    ],
+    "stepLabel": "Passo",
+    "steps": {
+      "parsing": "Lettura dei tuoi documenti",
+      "extraction": "Estrazione competenze ed esperienza",
+      "gap_analysis": "Analisi dei gap e matching dei ruoli",
+      "career_plan": "Costruzione piano di carriera e benchmark salariali",
+      "translating": "Traduzione del tuo report"
+    }
+  },
+  "results": {
+    "fitScore": {
+      "title": "Punteggio di Compatibilità",
+      "outOf": "su 10"
+    },
+    "strengths": {
+      "title": "I Tuoi Punti di Forza",
+      "tiers": {
+        "differentiator": "Differenziatore",
+        "strong": "Forte",
+        "supporting": "Complementare"
+      }
+    },
+    "gaps": {
+      "title": "Gap di Competenze",
+      "severity": {
+        "critical": "Critico",
+        "moderate": "Moderato",
+        "minor": "Minore"
+      },
+      "currentLevel": "Livello Attuale",
+      "requiredLevel": "Livello Richiesto",
+      "impact": "Impatto",
+      "closingPlan": "Come Colmare",
+      "timeToClose": "Tempo per Colmare",
+      "resources": "Risorse"
+    },
+    "roles": {
+      "title": "Ruoli Consigliati",
+      "fitScore": "Punteggio di Compatibilità",
+      "salaryRange": "Fascia Salariale",
+      "timeToReady": "Tempo di Preparazione",
+      "exampleCompanies": "Aziende Target",
+      "bestFit": "Miglior Match",
+      "mid": "Med"
+    },
+    "actionPlan": {
+      "title": "Piano d'Azione",
+      "tabs": {
+        "thirtyDays": "30 Giorni",
+        "ninetyDays": "90 Giorni",
+        "twelveMonths": "12 Mesi"
+      },
+      "priority": "Priorità",
+      "timeEstimate": "Tempo",
+      "resource": "Risorsa",
+      "expectedImpact": "Impatto Previsto"
+    },
+    "salary": {
+      "title": "Analisi Salariale",
+      "subtitle": "Tutte le cifre sono lorde annuali (prima delle tasse)",
+      "currentRoleMarket": "Mercato del Ruolo Attuale",
+      "targetRoleMarket": "Mercato del Ruolo Target",
+      "bestMove": "Miglior Mossa Finanziaria",
+      "negotiationTips": "Consigli di Negoziazione",
+      "growthPotential": "Potenziale di Crescita"
+    },
+    "jobMatch": {
+      "title": "Analisi di Matching",
+      "matchScore": "Punteggio di Matching",
+      "matchingSkills": "Competenze Corrispondenti",
+      "missingSkills": "Competenze Mancanti",
+      "cvSuggestions": "Suggerimenti per il CV",
+      "section": "Sezione",
+      "current": "Attuale",
+      "suggested": "Suggerito",
+      "reasoning": "Motivazione"
+    }
+  },
+  "chat": {
+    "title": "Coach di Carriera IA",
+    "subtitle": "Chiedi qualsiasi cosa sulla tua analisi",
+    "welcome": "Ho letto la tua analisi di carriera completa.",
+    "welcomeHint": "Chiedimi qualsiasi cosa — approfondisci i gap, preparati per i colloqui, riscrivi il tuo CV, confronta i ruoli o pianifica la tua settimana. Ho tutti i tuoi dati.",
+    "quickActions": "Azioni Rapide",
+    "inputPlaceholder": "Chiedi della tua analisi...",
+    "clearChat": "Pulisci chat",
+    "errorPrefix": "Mi dispiace, non sono riuscito a elaborare quella richiesta.",
+    "actions": [
+      "✍️ Riscrivi il riepilogo del mio CV per il ruolo target",
+      "🎯 Top 10 domande di colloquio + risposte",
+      "⚡ Il mio piano d'azione per 5 giorni",
+      "🤔 Quale ruolo dovrei cercare per primo?",
+      "📝 Scrivi un messaggio di contatto a freddo",
+      "🔍 Come colmare il mio gap n°1?",
+      "💰 Guida alla negoziazione salariale",
+      "🏗️ Idee per progetti portfolio"
+    ]
+  },
+  "errors": {
+    "pageTitle": "Qualcosa è andato storto",
+    "pageDescription": "Abbiamo riscontrato un errore imprevisto. Per favore, riprova.",
+    "tryAgain": "Riprova",
+    "goHome": "Vai alla Home",
+    "notFoundTitle": "Pagina non trovata",
+    "notFoundDescription": "La pagina che cerchi non esiste.",
+    "backHome": "Torna alla Home"
+  },
+  "pdf": {
+    "brandLine": "GapZero - Consulente di Carriera con IA",
+    "generatedOn": "Generato il",
+    "fitScoreLabel": "Punteggio di Compatibilità",
+    "strengths": "I Tuoi Punti di Forza",
+    "gaps": "Gap di Competenze",
+    "roles": "Ruoli Consigliati",
+    "salaryAnalysis": "Analisi Salariale",
+    "salarySubtitle": "Tutte le cifre sono lorde annuali (prima delle tasse)",
+    "actionPlan30": "Risultati Rapidi a 30 Giorni",
+    "actionPlan90": "Sviluppo a 90 Giorni",
+    "actionPlan12m": "Traiettoria di Carriera a 12 Mesi",
+    "negotiationTips": "Consigli di Negoziazione",
+    "current": "Attuale",
+    "required": "Richiesto",
+    "growthPotential": "Potenziale di Crescita",
+    "currentRoleMarket": "Mercato del Ruolo Attuale",
+    "targetRoleMarket": "Mercato del Ruolo Target",
+    "companies": "Aziende"
+  }
+}
