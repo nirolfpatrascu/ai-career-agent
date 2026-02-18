@@ -1,0 +1,236 @@
+{
+  "common": {
+    "analyzeMyCareer": "Analyze My Career",
+    "tryDemo": "Try Demo",
+    "features": "Features",
+    "howItWorks": "How It Works",
+    "newAnalysis": "New Analysis",
+    "startNewAnalysis": "Start New Analysis",
+    "backToHome": "Back to home",
+    "downloadReport": "Download Report",
+    "required": "*",
+    "optional": "optional",
+    "free": "Free",
+    "builtBy": "Built by"
+  },
+  "hero": {
+    "badge": "AI-Powered Career Advisor",
+    "headline1": "Upload your CV.",
+    "headline2": "Get a personalized",
+    "rotatingWords": ["career strategy", "skill gap analysis", "salary benchmarks", "action plan", "role recommendations"],
+    "subtitle": "Gap analysis, learning plans, salary benchmarks, role recommendations, and CV optimization — all in under 2 minutes. Career coaching that used to cost $500/hour, now powered by AI.",
+    "analyzeFree": "Analyze My Career",
+    "stats": {
+      "analysisTime": "Analysis Time",
+      "dataPoints": "Data Points",
+      "aiSteps": "AI-Powered Steps",
+      "toUse": "To Use"
+    }
+  },
+  "features": {
+    "sectionLabel": "Features",
+    "title": "Everything you need to navigate your career transition",
+    "subtitle": "Powered by advanced AI analysis of your CV, target role requirements, and market data.",
+    "cards": [
+      {
+        "title": "CV Deep Analysis",
+        "description": "Upload your PDF resume and our AI extracts every skill, certification, and experience — including ones you forgot to list."
+      },
+      {
+        "title": "Gap Analysis",
+        "description": "See exactly what skills you're missing for your target role — color-coded by severity with specific plans to close each gap."
+      },
+      {
+        "title": "Salary Benchmarks",
+        "description": "Location-aware salary ranges for your current and target roles, plus negotiation tips specific to your experience."
+      },
+      {
+        "title": "Role Recommendations",
+        "description": "Get 3 best-fit roles based on your profile — with fit scores, salary ranges, and specific companies to target."
+      },
+      {
+        "title": "Action Plan",
+        "description": "30-day quick wins, 90-day skill building, and 12-month career trajectory — each with specific resources and time estimates."
+      },
+      {
+        "title": "Job Matching",
+        "description": "Paste any job posting and get an ATS match score, missing keywords, and specific CV rewrite suggestions."
+      }
+    ]
+  },
+  "howItWorks": {
+    "sectionLabel": "How It Works",
+    "title": "From CV to career roadmap in 3 steps",
+    "subtitle": "No sign-up required. Upload, answer a few questions, and get your personalized analysis.",
+    "steps": [
+      {
+        "title": "Upload Your CV",
+        "description": "Drag and drop your PDF resume. Our AI reads every detail — skills, certifications, experience, and even implicit competencies you didn't explicitly list."
+      },
+      {
+        "title": "Tell Us Your Goals",
+        "description": "Answer a quick questionnaire about your current role, target position, location, and salary expectations. Takes under 2 minutes."
+      },
+      {
+        "title": "Get Your Career Roadmap",
+        "description": "In under 2 minutes, receive a comprehensive analysis: fit score, strengths, skill gaps, salary benchmarks, and a personalized action plan."
+      }
+    ],
+    "visual": {
+      "uploadComplete": "Upload complete",
+      "currentRole": "Current Role",
+      "targetRole": "Target Role",
+      "country": "Country",
+      "strengthsIdentified": "5 strengths identified",
+      "gapsToClose": "3 gaps to close",
+      "actionItems": "12 action items"
+    }
+  },
+  "cta": {
+    "title": "Ready to accelerate your career?",
+    "subtitle": "Upload your CV and get a comprehensive career analysis in under 2 minutes. Free to use, no sign-up required.",
+    "button": "Analyze My Career — Free",
+    "footer": "No sign-up • No credit card • Results in under 2 minutes"
+  },
+  "analyze": {
+    "title": "Analyze Your Career",
+    "subtitle": "Upload your CV and tell us about your career goals. We'll generate a comprehensive analysis in about 90 seconds.",
+    "uploadCV": "Upload CV",
+    "careerDetails": "Career Details",
+    "uploadToContinue": "Upload your CV to continue",
+    "fillFields": "Fill in all required fields to continue",
+    "analysisFailed": "Analysis Failed",
+    "somethingWrong": "Something went wrong. Please try again.",
+    "demoBanner": "This is a demo analysis using sample data.",
+    "uploadOwn": "Upload your own CV",
+    "yourAnalysis": "Your Career Analysis",
+    "target": "Target",
+    "wantDifferent": "Want to analyze a different career path?"
+  },
+  "upload": {
+    "label": "Upload Your CV",
+    "format": "(PDF, max 5MB)",
+    "dropHere": "Drop your CV here",
+    "dropOrBrowse": "Drop your CV here or click to browse",
+    "pdfFormat": "PDF format, up to 5MB",
+    "onlyPdf": "Only PDF files are accepted.",
+    "maxSize": "File size must be less than 5MB.",
+    "removeFile": "Remove file"
+  },
+  "questionnaire": {
+    "currentRole": "Current Role Title",
+    "targetRole": "Target Role / Career Goal",
+    "yearsExperience": "Years of Experience",
+    "country": "Country / Region",
+    "selectCountry": "Select country...",
+    "workPreference": "Work Preference",
+    "currentSalary": "Current Gross Annual Salary",
+    "targetSalary": "Target Gross Annual Salary",
+    "grossAnnual": "Gross annual (before tax)",
+    "jobPosting": "Job Posting",
+    "jobPostingHint": "optional — paste a specific posting for targeted advice",
+    "jobPostingPlaceholder": "Paste the full job posting text here to get ATS match score, missing keywords, and CV rewrite suggestions...",
+    "remoteSalaryNote": "Since you selected Remote, salary benchmarks will reflect EMEA/EU remote market rates for your target role — not just local {country} rates.",
+    "workOptions": {
+      "remote": "Remote",
+      "hybrid": "Hybrid",
+      "onsite": "On-site",
+      "flexible": "Flexible"
+    }
+  },
+  "progress": {
+    "typicallyTakes": "This typically takes 60-90 seconds",
+    "percentComplete": "{percent}% complete",
+    "messages": [
+      "Reading your CV...",
+      "Extracting skills and experience...",
+      "Analyzing market positioning...",
+      "Identifying skill gaps...",
+      "Matching against target roles...",
+      "Building your career roadmap...",
+      "Calculating salary benchmarks...",
+      "Generating your personalized report..."
+    ]
+  },
+  "results": {
+    "fitScore": {
+      "title": "Career Fit Score",
+      "outOf": "out of 10"
+    },
+    "strengths": {
+      "title": "Your Strengths",
+      "tiers": {
+        "differentiator": "Differentiator",
+        "strong": "Strong",
+        "supporting": "Supporting"
+      }
+    },
+    "gaps": {
+      "title": "Skill Gaps",
+      "severity": {
+        "critical": "Critical",
+        "moderate": "Moderate",
+        "minor": "Minor"
+      },
+      "currentLevel": "Current Level",
+      "requiredLevel": "Required Level",
+      "impact": "Impact",
+      "closingPlan": "How to Close",
+      "timeToClose": "Time to Close",
+      "resources": "Resources"
+    },
+    "roles": {
+      "title": "Recommended Roles",
+      "fitScore": "Fit Score",
+      "salaryRange": "Salary Range",
+      "timeToReady": "Time to Ready",
+      "exampleCompanies": "Target Companies"
+    },
+    "actionPlan": {
+      "title": "Action Plan",
+      "tabs": {
+        "thirtyDays": "30 Days",
+        "ninetyDays": "90 Days",
+        "twelveMonths": "12 Months"
+      },
+      "priority": "Priority",
+      "timeEstimate": "Time",
+      "resource": "Resource",
+      "expectedImpact": "Expected Impact"
+    },
+    "salary": {
+      "title": "Salary Analysis",
+      "subtitle": "All figures are gross annual (before tax)",
+      "currentRoleMarket": "Current Role Market",
+      "targetRoleMarket": "Target Role Market",
+      "bestMove": "Best Monetary Move",
+      "negotiationTips": "Negotiation Tips",
+      "growthPotential": "Growth Potential"
+    },
+    "jobMatch": {
+      "title": "Job Match Analysis",
+      "matchScore": "Match Score",
+      "matchingSkills": "Matching Skills",
+      "missingSkills": "Missing Skills",
+      "cvSuggestions": "CV Suggestions",
+      "section": "Section",
+      "current": "Current",
+      "suggested": "Suggested",
+      "reasoning": "Why"
+    }
+  },
+  "errors": {
+    "pageTitle": "Something went wrong",
+    "pageDescription": "We encountered an unexpected error. Please try again.",
+    "tryAgain": "Try Again",
+    "goHome": "Go Home",
+    "notFoundTitle": "Page not found",
+    "notFoundDescription": "The page you are looking for does not exist.",
+    "backHome": "Back to Home"
+  },
+  "pdf": {
+    "brandLine": "GapZero - AI-Powered Career Advisor",
+    "generatedOn": "Generated on",
+    "fitScoreLabel": "Career Fit Score"
+  }
+}

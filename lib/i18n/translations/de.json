@@ -1,0 +1,236 @@
+{
+  "common": {
+    "analyzeMyCareer": "Karriere Analysieren",
+    "tryDemo": "Demo Testen",
+    "features": "Funktionen",
+    "howItWorks": "So Funktioniert's",
+    "newAnalysis": "Neue Analyse",
+    "startNewAnalysis": "Neue Analyse Starten",
+    "backToHome": "Zurück zur Startseite",
+    "downloadReport": "Bericht Herunterladen",
+    "required": "*",
+    "optional": "optional",
+    "free": "Kostenlos",
+    "builtBy": "Erstellt von"
+  },
+  "hero": {
+    "badge": "KI-gesteuerter Karriereberater",
+    "headline1": "Laden Sie Ihren Lebenslauf hoch.",
+    "headline2": "Erhalten Sie eine personalisierte",
+    "rotatingWords": ["Karrierestrategie", "Kompetenzanalyse", "Gehaltsbenchmarks", "Aktionsplan", "Rollenempfehlungen"],
+    "subtitle": "Kompetenzanalyse, Lernpläne, Gehaltsbenchmarks, Rollenempfehlungen und Lebenslauf-Optimierung — alles in unter 2 Minuten. Karrierecoaching, das früher $500/Stunde kostete, jetzt mit KI.",
+    "analyzeFree": "Karriere Analysieren",
+    "stats": {
+      "analysisTime": "Analysezeit",
+      "dataPoints": "Datenpunkte",
+      "aiSteps": "KI-Schritte",
+      "toUse": "Zu Nutzen"
+    }
+  },
+  "features": {
+    "sectionLabel": "Funktionen",
+    "title": "Alles was Sie für Ihren Karrierewechsel brauchen",
+    "subtitle": "Betrieben durch fortgeschrittene KI-Analyse Ihres Lebenslaufs, Zielrollen-Anforderungen und Marktdaten.",
+    "cards": [
+      {
+        "title": "Tiefgehende CV-Analyse",
+        "description": "Laden Sie Ihren PDF-Lebenslauf hoch und unsere KI extrahiert jede Kompetenz, Zertifizierung und Erfahrung — einschließlich derer, die Sie vergessen haben aufzulisten."
+      },
+      {
+        "title": "Kompetenzlücken-Analyse",
+        "description": "Sehen Sie genau, welche Kompetenzen Ihnen für Ihre Zielrolle fehlen — farbcodiert nach Schweregrad mit spezifischen Plänen zur Schließung jeder Lücke."
+      },
+      {
+        "title": "Gehaltsbenchmarks",
+        "description": "Standortbezogene Gehaltsspannen für Ihre aktuelle und Zielrolle, plus Verhandlungstipps speziell für Ihre Erfahrung."
+      },
+      {
+        "title": "Rollenempfehlungen",
+        "description": "Erhalten Sie 3 bestpassende Rollen basierend auf Ihrem Profil — mit Passungswerten, Gehaltsspannen und spezifischen Zielunternehmen."
+      },
+      {
+        "title": "Aktionsplan",
+        "description": "30-Tage Quick Wins, 90-Tage Kompetenzaufbau und 12-Monate Karriereverlauf — jeweils mit spezifischen Ressourcen und Zeitschätzungen."
+      },
+      {
+        "title": "Job-Matching",
+        "description": "Fügen Sie eine Stellenanzeige ein und erhalten Sie einen ATS-Passungswert, fehlende Schlüsselwörter und spezifische Vorschläge zur CV-Überarbeitung."
+      }
+    ]
+  },
+  "howItWorks": {
+    "sectionLabel": "So Funktioniert's",
+    "title": "Vom Lebenslauf zum Karriereplan in 3 Schritten",
+    "subtitle": "Keine Anmeldung erforderlich. Hochladen, ein paar Fragen beantworten und Ihre personalisierte Analyse erhalten.",
+    "steps": [
+      {
+        "title": "Lebenslauf Hochladen",
+        "description": "Ziehen Sie Ihren PDF-Lebenslauf hierher. Unsere KI liest jedes Detail — Kompetenzen, Zertifizierungen, Erfahrung und sogar implizite Fähigkeiten, die Sie nicht explizit aufgelistet haben."
+      },
+      {
+        "title": "Ziele Mitteilen",
+        "description": "Beantworten Sie einen kurzen Fragebogen über Ihre aktuelle Rolle, Zielposition, Standort und Gehaltsvorstellungen. Dauert unter 2 Minuten."
+      },
+      {
+        "title": "Karriereplan Erhalten",
+        "description": "In unter 2 Minuten erhalten Sie eine umfassende Analyse: Passungswert, Stärken, Kompetenzlücken, Gehaltsbenchmarks und einen personalisierten Aktionsplan."
+      }
+    ],
+    "visual": {
+      "uploadComplete": "Upload abgeschlossen",
+      "currentRole": "Aktuelle Rolle",
+      "targetRole": "Zielrolle",
+      "country": "Land",
+      "strengthsIdentified": "5 Stärken identifiziert",
+      "gapsToClose": "3 Lücken zu schließen",
+      "actionItems": "12 Aktionspunkte"
+    }
+  },
+  "cta": {
+    "title": "Bereit, Ihre Karriere zu beschleunigen?",
+    "subtitle": "Laden Sie Ihren Lebenslauf hoch und erhalten Sie eine umfassende Karriereanalyse in unter 2 Minuten. Kostenlos, keine Anmeldung erforderlich.",
+    "button": "Karriere Analysieren — Kostenlos",
+    "footer": "Keine Anmeldung • Keine Kreditkarte • Ergebnisse in unter 2 Minuten"
+  },
+  "analyze": {
+    "title": "Analysieren Sie Ihre Karriere",
+    "subtitle": "Laden Sie Ihren Lebenslauf hoch und erzählen Sie uns von Ihren Karrierezielen. Wir erstellen eine umfassende Analyse in etwa 90 Sekunden.",
+    "uploadCV": "CV Hochladen",
+    "careerDetails": "Karrieredetails",
+    "uploadToContinue": "Laden Sie Ihren Lebenslauf hoch um fortzufahren",
+    "fillFields": "Füllen Sie alle Pflichtfelder aus um fortzufahren",
+    "analysisFailed": "Analyse fehlgeschlagen",
+    "somethingWrong": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+    "demoBanner": "Dies ist eine Demo-Analyse mit Beispieldaten.",
+    "uploadOwn": "Eigenen Lebenslauf hochladen",
+    "yourAnalysis": "Ihre Karriereanalyse",
+    "target": "Ziel",
+    "wantDifferent": "Möchten Sie einen anderen Karriereweg analysieren?"
+  },
+  "upload": {
+    "label": "Lebenslauf Hochladen",
+    "format": "(PDF, max 5MB)",
+    "dropHere": "Lebenslauf hier ablegen",
+    "dropOrBrowse": "Lebenslauf hier ablegen oder klicken zum Durchsuchen",
+    "pdfFormat": "PDF-Format, bis zu 5MB",
+    "onlyPdf": "Nur PDF-Dateien werden akzeptiert.",
+    "maxSize": "Dateigröße muss unter 5MB liegen.",
+    "removeFile": "Datei entfernen"
+  },
+  "questionnaire": {
+    "currentRole": "Aktuelle Berufsbezeichnung",
+    "targetRole": "Zielrolle / Karriereziel",
+    "yearsExperience": "Jahre Berufserfahrung",
+    "country": "Land / Region",
+    "selectCountry": "Land auswählen...",
+    "workPreference": "Arbeitspräferenz",
+    "currentSalary": "Aktuelles Brutto-Jahresgehalt",
+    "targetSalary": "Ziel-Brutto-Jahresgehalt",
+    "grossAnnual": "Brutto jährlich (vor Steuern)",
+    "jobPosting": "Stellenanzeige",
+    "jobPostingHint": "optional — fügen Sie eine spezifische Anzeige für gezielte Beratung ein",
+    "jobPostingPlaceholder": "Fügen Sie den vollständigen Stellenanzeigentext hier ein, um ATS-Passungswert, fehlende Schlüsselwörter und CV-Überarbeitungsvorschläge zu erhalten...",
+    "remoteSalaryNote": "Da Sie Remote ausgewählt haben, werden die Gehaltsbenchmarks die EMEA/EU Remote-Marktraten für Ihre Zielrolle widerspiegeln — nicht nur lokale {country}-Raten.",
+    "workOptions": {
+      "remote": "Remote",
+      "hybrid": "Hybrid",
+      "onsite": "Vor Ort",
+      "flexible": "Flexibel"
+    }
+  },
+  "progress": {
+    "typicallyTakes": "Dies dauert normalerweise 60-90 Sekunden",
+    "percentComplete": "{percent}% abgeschlossen",
+    "messages": [
+      "Lese Ihren Lebenslauf...",
+      "Extrahiere Kompetenzen und Erfahrung...",
+      "Analysiere Marktpositionierung...",
+      "Identifiziere Kompetenzlücken...",
+      "Vergleiche mit Zielrollen...",
+      "Erstelle Ihren Karriereplan...",
+      "Berechne Gehaltsbenchmarks...",
+      "Generiere Ihren personalisierten Bericht..."
+    ]
+  },
+  "results": {
+    "fitScore": {
+      "title": "Karriere-Passungswert",
+      "outOf": "von 10"
+    },
+    "strengths": {
+      "title": "Ihre Stärken",
+      "tiers": {
+        "differentiator": "Alleinstellungsmerkmal",
+        "strong": "Stark",
+        "supporting": "Unterstützend"
+      }
+    },
+    "gaps": {
+      "title": "Kompetenzlücken",
+      "severity": {
+        "critical": "Kritisch",
+        "moderate": "Moderat",
+        "minor": "Gering"
+      },
+      "currentLevel": "Aktuelles Niveau",
+      "requiredLevel": "Erforderliches Niveau",
+      "impact": "Auswirkung",
+      "closingPlan": "Wie schließen",
+      "timeToClose": "Zeitaufwand",
+      "resources": "Ressourcen"
+    },
+    "roles": {
+      "title": "Empfohlene Rollen",
+      "fitScore": "Passungswert",
+      "salaryRange": "Gehaltsspanne",
+      "timeToReady": "Vorbereitungszeit",
+      "exampleCompanies": "Zielunternehmen"
+    },
+    "actionPlan": {
+      "title": "Aktionsplan",
+      "tabs": {
+        "thirtyDays": "30 Tage",
+        "ninetyDays": "90 Tage",
+        "twelveMonths": "12 Monate"
+      },
+      "priority": "Priorität",
+      "timeEstimate": "Zeit",
+      "resource": "Ressource",
+      "expectedImpact": "Erwartete Auswirkung"
+    },
+    "salary": {
+      "title": "Gehaltsanalyse",
+      "subtitle": "Alle Zahlen sind Brutto-Jahresgehalt (vor Steuern)",
+      "currentRoleMarket": "Markt Aktuelle Rolle",
+      "targetRoleMarket": "Markt Zielrolle",
+      "bestMove": "Bester Finanzieller Schritt",
+      "negotiationTips": "Verhandlungstipps",
+      "growthPotential": "Wachstumspotenzial"
+    },
+    "jobMatch": {
+      "title": "Job-Match-Analyse",
+      "matchScore": "Passungswert",
+      "matchingSkills": "Übereinstimmende Kompetenzen",
+      "missingSkills": "Fehlende Kompetenzen",
+      "cvSuggestions": "CV-Vorschläge",
+      "section": "Abschnitt",
+      "current": "Aktuell",
+      "suggested": "Vorgeschlagen",
+      "reasoning": "Warum"
+    }
+  },
+  "errors": {
+    "pageTitle": "Etwas ist schiefgelaufen",
+    "pageDescription": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    "tryAgain": "Erneut Versuchen",
+    "goHome": "Startseite",
+    "notFoundTitle": "Seite nicht gefunden",
+    "notFoundDescription": "Die gesuchte Seite existiert nicht.",
+    "backHome": "Zurück zur Startseite"
+  },
+  "pdf": {
+    "brandLine": "GapZero - KI-gesteuerter Karriereberater",
+    "generatedOn": "Erstellt am",
+    "fitScoreLabel": "Karriere-Passungswert"
+  }
+}
