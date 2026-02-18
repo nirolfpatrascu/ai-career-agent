@@ -62,10 +62,10 @@ export function getSeverityBg(severity: 'critical' | 'moderate' | 'minor'): stri
  * Get color for fit score gauge
  */
 export function getFitScoreColor(score: number): string {
-  if (score >= 8) return '#22C55E'; // green
-  if (score >= 6) return '#3B82F6'; // blue
-  if (score >= 4) return '#EAB308'; // yellow
-  return '#EF4444'; // red
+  if (score >= 8) return '#10B981'; // emerald — strong fit
+  if (score >= 6) return '#FBBF24'; // amber — moderate fit
+  if (score >= 4) return '#FB923C'; // orange — stretch
+  return '#EF4444'; // red — significant gap
 }
 
 /**

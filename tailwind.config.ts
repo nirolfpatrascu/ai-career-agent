@@ -8,39 +8,43 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: '#09090B',
+        /* Warm dark backgrounds — stone tones, not cold zinc */
+        background: '#0C0A09',
         surface: {
-          DEFAULT: '#111113',
-          raised: '#18181B',
-          overlay: '#1C1C1F',
+          DEFAULT: '#1A1714',
+          raised: '#231F1C',
+          overlay: '#2A2521',
         },
         border: {
-          DEFAULT: '#27272A',
-          subtle: '#1E1E21',
-          hover: '#3F3F46',
+          DEFAULT: '#2E2924',
+          subtle: '#211D19',
+          hover: '#44403C',
         },
+        /* Amber/Gold primary — achievement, optimism, warmth */
         primary: {
-          DEFAULT: '#3B82F6',
-          hover: '#2563EB',
-          light: '#60A5FA',
-          muted: '#3B82F6',
+          DEFAULT: '#F59E0B',
+          hover: '#D97706',
+          light: '#FBBF24',
+          muted: '#D4A017',
         },
+        /* Warm accents */
         accent: {
-          cyan: '#22D3EE',
-          violet: '#8B5CF6',
-          emerald: '#34D399',
+          orange: '#FB923C',      /* gradient end — energy, momentum */
+          rose: '#FB7185',        /* special highlights */
+          emerald: '#34D399',     /* growth, opportunity */
         },
-        success: '#22C55E',
-        warning: '#EAB308',
+        success: '#10B981',       /* emerald — growth */
+        warning: '#FBBF24',       /* amber-400 — shifted lighter than primary */
         danger: '#EF4444',
+        /* Warm-toned text */
         text: {
-          primary: '#FAFAFA',
-          secondary: '#A1A1AA',
-          tertiary: '#71717A',
+          primary: '#FAFAF9',     /* stone-50 — warm white */
+          secondary: '#A8A29E',   /* stone-400 */
+          tertiary: '#78716C',    /* stone-500 */
         },
         card: {
-          DEFAULT: '#111113',
-          border: '#27272A',
+          DEFAULT: '#1A1714',
+          border: '#2E2924',
         },
       },
       fontFamily: {

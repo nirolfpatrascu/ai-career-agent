@@ -26,7 +26,7 @@ export default function Hero() {
       <div className="hero-gradient" />
 
       {/* Subtle grid */}
-      <div className="absolute inset-0 grid-bg opacity-40" />
+      <div className="absolute inset-0 grid-bg opacity-60" />
 
       {/* Radial fade from center */}
       <div className="absolute inset-0" style={{
@@ -35,7 +35,7 @@ export default function Hero() {
 
       <div className={`relative z-10 max-w-container mx-auto px-4 sm:px-6 text-center transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         {/* Badge */}
-        <div className="inline-flex items-center gap-2.5 bg-white/[0.04] border border-white/[0.08] rounded-full px-5 py-2 mb-10 backdrop-blur-sm">
+        <div className="inline-flex items-center gap-2.5 bg-white/[0.07] border border-white/[0.12] rounded-full px-5 py-2 mb-10 backdrop-blur-sm">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-50" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-gradient-to-r from-primary to-accent-cyan" />
@@ -47,8 +47,8 @@ export default function Hero() {
 
         {/* Headline */}
         <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.2rem] font-extrabold tracking-tight leading-[1.05] mb-7">
-          <span className="block text-text-primary">{t('hero.headline1')}</span>
-          <span className="block text-text-tertiary mt-1">{t('hero.headline2')}</span>
+          <span className="block text-white">{t('hero.headline1')}</span>
+          <span className="block text-text-secondary mt-1">{t('hero.headline2')}</span>
           <span className="block mt-2 min-h-[1.15em]">
             <span key={wordIndex} className="text-gradient inline-block animate-word-in">
               {rotatingWord}
@@ -84,16 +84,16 @@ export default function Hero() {
         </div>
 
         {/* Stats bar */}
-        <div className="inline-flex items-center gap-0 bg-white/[0.03] border border-white/[0.06] rounded-2xl overflow-hidden backdrop-blur-sm">
+        <div className="inline-flex items-center gap-0 bg-white/[0.06] border border-white/[0.10] rounded-2xl overflow-hidden backdrop-blur-sm">
           {[
             { value: '~90s', label: t('hero.stats.analysisTime') },
             { value: '10+', label: t('hero.stats.dataPoints') },
             { value: '3', label: t('hero.stats.aiSteps') },
             { value: t('common.free'), label: t('hero.stats.toUse') },
           ].map((stat, i, arr) => (
-            <div key={i} className={`text-center px-6 sm:px-8 py-4 ${i < arr.length - 1 ? 'border-r border-white/[0.06]' : ''}`}>
-              <div className="text-lg sm:text-xl font-bold text-text-primary font-display">{stat.value}</div>
-              <div className="text-[11px] text-text-tertiary mt-0.5">{stat.label}</div>
+            <div key={i} className={`text-center px-6 sm:px-8 py-4 ${i < arr.length - 1 ? 'border-r border-white/[0.10]' : ''}`}>
+              <div className="text-lg sm:text-xl font-bold text-white font-display">{stat.value}</div>
+              <div className="text-[11px] text-text-secondary mt-0.5">{stat.label}</div>
             </div>
           ))}
         </div>
