@@ -209,6 +209,55 @@ export function estimateTokens(text: string): number {
 }
 
 /**
+ * Stream a Claude response as a ReadableStream (for chat).
+ * Returns a stream of text chunks that can be piped to the client.
+ */
+export function streamClaude(options: {
+  system: string;
+  messages: Array<{ role: 'user' | 'assistant'; content: string }>;
+  maxTokens?: number;
+  temperature?: number;
+}): ReadableStream<Uint8Array> {
+  const { system, messages, maxTokens = 2048, temperature = 0.4 } = options;
+  const encoder = new TextEncoder();
+
+  return new ReadableStream({
+    async start(controller) {
+      try {
+        const anthropic = getClient();
+
+        const stream = anthropic.messages.stream({
+          model: MODEL,
+          max_tokens: maxTokens,
+          temperature,
+          system,
+          messages,
+        });
+
+        for await (const event of stream) {
+          if (
+            event.type === 'content_block_delta' &&
+            event.delta.type === 'text_delta'
+          ) {
+            controller.enqueue(encoder.encode(event.delta.text));
+          }
+        }
+
+        controller.close();
+      } catch (error) {
+        console.error('[streamClaude] Error:', error);
+        const msg =
+          error instanceof Error ? error.message : 'Unknown error';
+        controller.enqueue(
+          encoder.encode(`\n\n[Error: ${msg}]`)
+        );
+        controller.close();
+      }
+    },
+  });
+}
+
+/**
  * Truncate CV text if it's too long to avoid hitting token limits.
  * Claude Sonnet has a 200K context window, but we want to stay well under.
  */

@@ -16,6 +16,7 @@ import ActionPlan from '@/components/results/ActionPlan';
 import SalaryBenchmark from '@/components/results/SalaryBenchmark';
 import JobMatchPanel from '@/components/results/JobMatchPanel';
 import PDFReport from '@/components/shared/PDFReport';
+import ChatPanel from '@/components/results/ChatPanel';
 import { SAMPLE_ANALYSIS } from '@/lib/demo';
 import { useTranslation } from '@/lib/i18n';
 import type { AnalysisResult, CareerQuestionnaire } from '@/lib/types';
@@ -275,6 +276,9 @@ export default function AnalyzePage() {
             <ActionPlan plan={result.actionPlan} />
             <SalaryBenchmark salary={result.salaryAnalysis} />
             {result.jobMatch && <JobMatchPanel match={result.jobMatch} />}
+
+            {/* AI Career Coach Chat */}
+            <ChatPanel analysis={result} />
 
             {/* Bottom CTA */}
             <div className="text-center pt-8 pb-4">
