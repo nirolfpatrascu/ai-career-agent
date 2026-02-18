@@ -25,97 +25,101 @@ export default function SalaryBenchmark({ salary }: SalaryBenchmarkProps) {
   const currentRate = toEurRate[currentCurrency] || 1;
   const targetRate = toEurRate[targetCurrency] || 1;
 
-  const currentMidEur = salary.currentRoleMarket.high * currentRate;
-  const targetMidEur = salary.targetRoleMarket.high * targetRate;
-  const maxEur = Math.max(currentMidEur, targetMidEur);
+  const currentHighEur = salary.currentRoleMarket.high * currentRate;
+  const targetHighEur = salary.targetRoleMarket.high * targetRate;
+  const maxEur = Math.max(currentHighEur, targetHighEur);
 
   const currentWidth = maxEur > 0 ? ((currentMid * currentRate) / maxEur) * 100 : 0;
   const targetWidth = maxEur > 0 ? ((targetMid * targetRate) / maxEur) * 100 : 0;
 
   return (
     <section>
-      <div className="flex items-center gap-3 mb-5">
-        <div className="w-8 h-8 rounded-lg bg-success/10 flex items-center justify-center">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-9 h-9 rounded-xl bg-success/10 border border-success/20 flex items-center justify-center text-success">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
           </svg>
         </div>
         <div>
-          <h2 className="text-xl font-bold text-text-primary">{t('results.salary.title')}</h2>
-          <p className="text-xs text-text-secondary mt-0.5">{t('results.salary.subtitle')}</p>
+          <h2 className="text-xl font-bold text-text-primary font-display">{t('results.salary.title')}</h2>
+          <p className="text-xs text-text-tertiary">{t('results.salary.subtitle')}</p>
         </div>
       </div>
 
       <div className="space-y-4">
-        <div className="card space-y-6">
+        {/* Salary comparison */}
+        <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 space-y-6">
+          {/* Current role bar */}
           <div>
-            <div className="flex items-center justify-between mb-2">
-              <p className="text-sm text-text-secondary">{t('results.salary.currentRoleMarket')}</p>
-              <p className="text-sm text-text-secondary">{salary.currentRoleMarket.region}</p>
+            <div className="flex items-center justify-between mb-2.5">
+              <p className="text-sm font-medium text-text-secondary">{t('results.salary.currentRoleMarket')}</p>
+              <p className="text-xs text-text-tertiary">{salary.currentRoleMarket.region}</p>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="flex-1">
-                <div className="h-10 rounded-lg bg-background overflow-hidden relative">
-                  <div className="h-full rounded-lg bg-gradient-to-r from-zinc-700 to-zinc-600 flex items-center justify-end px-3 transition-all duration-1000" style={{ width: `${Math.max(currentWidth, 30)}%` }}>
-                    <span className="text-sm font-semibold text-text-primary">{formatCurrency(currentMid, currentCurrency)}</span>
-                  </div>
-                </div>
-                <div className="flex justify-between mt-1.5 text-xs text-text-secondary">
-                  <span>{formatCurrency(salary.currentRoleMarket.low, currentCurrency)}</span>
-                  <span>{formatCurrency(salary.currentRoleMarket.high, currentCurrency)}</span>
-                </div>
+            <div className="h-11 rounded-xl bg-white/[0.03] border border-white/[0.04] overflow-hidden relative">
+              <div
+                className="h-full rounded-xl bg-gradient-to-r from-zinc-700/80 to-zinc-600/80 flex items-center justify-end px-4 transition-all duration-1000 ease-out"
+                style={{ width: `${Math.max(currentWidth, 25)}%` }}
+              >
+                <span className="text-sm font-bold text-text-primary font-display">{formatCurrency(currentMid, currentCurrency)}</span>
               </div>
+            </div>
+            <div className="flex justify-between mt-1.5 text-[11px] text-text-tertiary px-1">
+              <span>{formatCurrency(salary.currentRoleMarket.low, currentCurrency)}</span>
+              <span>{formatCurrency(salary.currentRoleMarket.high, currentCurrency)}</span>
             </div>
           </div>
 
+          {/* Growth indicator */}
           <div className="flex items-center gap-3">
-            <div className="flex-1 h-px bg-card-border" />
-            <div className="flex items-center gap-2 text-success">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="19" x2="12" y2="5" /><polyline points="5 12 12 5 19 12" /></svg>
-              <span className="text-sm font-semibold">{salary.growthPotential}</span>
+            <div className="flex-1 h-px bg-white/[0.06]" />
+            <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-success/[0.08] border border-success/15">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="19" x2="12" y2="5" /><polyline points="5 12 12 5 19 12" /></svg>
+              <span className="text-sm font-bold text-success">{salary.growthPotential}</span>
             </div>
-            <div className="flex-1 h-px bg-card-border" />
+            <div className="flex-1 h-px bg-white/[0.06]" />
           </div>
 
+          {/* Target role bar */}
           <div>
-            <div className="flex items-center justify-between mb-2">
-              <p className="text-sm text-text-secondary">{t('results.salary.targetRoleMarket')}</p>
-              <p className="text-sm text-text-secondary">{salary.targetRoleMarket.region}</p>
+            <div className="flex items-center justify-between mb-2.5">
+              <p className="text-sm font-medium text-text-secondary">{t('results.salary.targetRoleMarket')}</p>
+              <p className="text-xs text-text-tertiary">{salary.targetRoleMarket.region}</p>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="flex-1">
-                <div className="h-10 rounded-lg bg-background overflow-hidden relative">
-                  <div className="h-full rounded-lg bg-gradient-to-r from-success/80 to-success flex items-center justify-end px-3 transition-all duration-1000" style={{ width: `${Math.max(targetWidth, 30)}%` }}>
-                    <span className="text-sm font-semibold text-white">{formatCurrency(targetMid, targetCurrency)}</span>
-                  </div>
-                </div>
-                <div className="flex justify-between mt-1.5 text-xs text-text-secondary">
-                  <span>{formatCurrency(salary.targetRoleMarket.low, targetCurrency)}</span>
-                  <span>{formatCurrency(salary.targetRoleMarket.high, targetCurrency)}</span>
-                </div>
+            <div className="h-11 rounded-xl bg-white/[0.03] border border-white/[0.04] overflow-hidden relative">
+              <div
+                className="h-full rounded-xl bg-gradient-to-r from-success/70 to-success/90 flex items-center justify-end px-4 transition-all duration-1000 ease-out"
+                style={{ width: `${Math.max(targetWidth, 25)}%` }}
+              >
+                <span className="text-sm font-bold text-white font-display">{formatCurrency(targetMid, targetCurrency)}</span>
               </div>
+            </div>
+            <div className="flex justify-between mt-1.5 text-[11px] text-text-tertiary px-1">
+              <span>{formatCurrency(salary.targetRoleMarket.low, targetCurrency)}</span>
+              <span>{formatCurrency(salary.targetRoleMarket.high, targetCurrency)}</span>
             </div>
           </div>
         </div>
 
-        <div className="card">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-lg">💡</span>
+        {/* Best move */}
+        <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6">
+          <div className="flex items-center gap-2.5 mb-3">
+            <div className="w-7 h-7 rounded-lg bg-warning/10 border border-warning/15 flex items-center justify-center text-warning text-sm">💡</div>
             <h3 className="font-semibold text-text-primary">{t('results.salary.bestMove')}</h3>
           </div>
-          <p className="text-text-secondary leading-relaxed">{salary.bestMonetaryMove}</p>
+          <p className="text-sm text-text-secondary leading-relaxed">{salary.bestMonetaryMove}</p>
         </div>
 
+        {/* Negotiation tips */}
         {salary.negotiationTips.length > 0 && (
-          <div className="card">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="text-lg">🎯</span>
+          <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6">
+            <div className="flex items-center gap-2.5 mb-4">
+              <div className="w-7 h-7 rounded-lg bg-primary/10 border border-primary/15 flex items-center justify-center text-primary text-sm">🎯</div>
               <h3 className="font-semibold text-text-primary">{t('results.salary.negotiationTips')}</h3>
             </div>
             <div className="space-y-3">
               {salary.negotiationTips.map((tip, i) => (
                 <div key={i} className="flex gap-3">
-                  <span className="text-primary font-bold text-sm flex-shrink-0 mt-0.5">{i + 1}.</span>
+                  <span className="text-primary/60 font-bold text-sm flex-shrink-0 mt-0.5 font-display">{i + 1}.</span>
                   <p className="text-sm text-text-secondary leading-relaxed">{tip}</p>
                 </div>
               ))}

@@ -18,6 +18,7 @@ import SalaryBenchmark from '@/components/results/SalaryBenchmark';
 import JobMatchPanel from '@/components/results/JobMatchPanel';
 import PDFReport from '@/components/shared/PDFReport';
 import ChatPanel from '@/components/results/ChatPanel';
+import ChapterNav from '@/components/results/ChapterNav';
 import { getSampleAnalysis } from '@/lib/demo';
 import { useTranslation } from '@/lib/i18n';
 import type { AnalysisResult, CareerQuestionnaire } from '@/lib/types';
@@ -232,11 +233,12 @@ export default function AnalyzePage() {
     return (
       <ErrorBoundary>
         <Header />
-        <main className="pt-24 pb-12 px-4 sm:px-6">
-          <div className="max-w-container mx-auto space-y-10">
+        <ChapterNav hasJobMatch={!!result.jobMatch} />
+        <main className="pt-24 pb-20 px-4 sm:px-6">
+          <div className="max-w-container mx-auto space-y-12">
             {/* Demo banner */}
             {isDemo && (
-              <div className="bg-primary/10 border border-primary/20 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+              <div className="bg-primary/[0.06] border border-primary/15 rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center gap-3">
                 <div className="flex items-center gap-2">
                   <span className="text-lg">👋</span>
                   <p className="text-primary text-sm font-medium">
@@ -255,10 +257,10 @@ export default function AnalyzePage() {
             {/* Results header */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-text-primary">
+                <h1 className="text-2xl sm:text-3xl font-bold text-text-primary font-display">
                   {t('analyze.yourAnalysis')}
                 </h1>
-                <p className="text-text-secondary mt-1 text-sm sm:text-base">
+                <p className="text-text-tertiary mt-1.5 text-sm">
                   {t('analyze.target')}: {result.metadata.targetRole} • {result.metadata.country} •{' '}
                   {new Date(result.metadata.analyzedAt).toLocaleDateString()}
                 </p>
@@ -275,21 +277,40 @@ export default function AnalyzePage() {
               </div>
             </div>
 
-            <FitScoreGauge fitScore={result.fitScore} />
-            <StrengthsPanel strengths={result.strengths} />
-            <GapsPanel gaps={result.gaps} />
-            <RoleRecommendations roles={result.roleRecommendations} />
-            <ActionPlan plan={result.actionPlan} />
-            <SalaryBenchmark salary={result.salaryAnalysis} />
-            {result.jobMatch && <JobMatchPanel match={result.jobMatch} />}
+            {/* Sections with IDs for ChapterNav */}
+            <div id="fit-score" className="scroll-mt-24">
+              <FitScoreGauge fitScore={result.fitScore} />
+            </div>
+            <div id="strengths" className="scroll-mt-24">
+              <StrengthsPanel strengths={result.strengths} />
+            </div>
+            <div id="gaps" className="scroll-mt-24">
+              <GapsPanel gaps={result.gaps} />
+            </div>
+            <div id="roles" className="scroll-mt-24">
+              <RoleRecommendations roles={result.roleRecommendations} />
+            </div>
+            <div id="action-plan" className="scroll-mt-24">
+              <ActionPlan plan={result.actionPlan} />
+            </div>
+            <div id="salary" className="scroll-mt-24">
+              <SalaryBenchmark salary={result.salaryAnalysis} />
+            </div>
+            {result.jobMatch && (
+              <div id="job-match" className="scroll-mt-24">
+                <JobMatchPanel match={result.jobMatch} />
+              </div>
+            )}
 
             {/* AI Career Coach Chat */}
-            <ChatPanel analysis={result} />
+            <div id="ai-coach" className="scroll-mt-24">
+              <ChatPanel analysis={result} />
+            </div>
 
             {/* Bottom CTA */}
             <div className="text-center pt-8 pb-4">
-              <div className="card inline-flex flex-col items-center gap-4 px-8 py-6">
-                <p className="text-text-secondary text-sm">
+              <div className="inline-flex flex-col items-center gap-4 px-8 py-6 rounded-2xl border border-white/[0.06] bg-white/[0.02]">
+                <p className="text-text-tertiary text-sm">
                   {t('analyze.wantDifferent')}
                 </p>
                 <button onClick={handleReset} className="btn-primary text-sm">
@@ -323,10 +344,10 @@ export default function AnalyzePage() {
             </Link>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-text-primary">
+                <h1 className="text-2xl sm:text-3xl font-bold text-text-primary font-display">
                   {t('analyze.title')}
                 </h1>
-                <p className="text-text-secondary mt-2 text-sm sm:text-base">
+                <p className="text-text-tertiary mt-2 text-sm sm:text-base">
                   {t('analyze.subtitle')}
                 </p>
               </div>
@@ -344,7 +365,7 @@ export default function AnalyzePage() {
 
           {/* Error banner */}
           {error && (
-            <div className="mb-6 bg-danger/10 border border-danger/20 rounded-xl p-4 flex items-start gap-3">
+            <div className="mb-6 bg-danger/[0.06] border border-danger/15 rounded-2xl p-4 flex items-start gap-3">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2" className="flex-shrink-0 mt-0.5">
                 <circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" />
               </svg>
@@ -362,9 +383,9 @@ export default function AnalyzePage() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
             {/* Left: Document Upload */}
             <div className="lg:col-span-2">
-              <div className="card lg:sticky lg:top-24">
-                <h2 className="text-lg font-semibold text-text-primary mb-1 flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-md bg-primary/10 text-primary text-xs font-bold flex items-center justify-center">1</span>
+              <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 lg:sticky lg:top-24">
+                <h2 className="text-lg font-semibold text-text-primary mb-1 flex items-center gap-2 font-display">
+                  <span className="w-6 h-6 rounded-md bg-primary/[0.08] border border-primary/15 text-primary text-xs font-bold flex items-center justify-center">1</span>
                   {t('analyze.uploadDocs')}
                 </h2>
                 <p className="text-xs text-text-secondary mb-5">
@@ -384,9 +405,9 @@ export default function AnalyzePage() {
 
             {/* Right: Questionnaire */}
             <div className="lg:col-span-3">
-              <div className="card">
-                <h2 className="text-lg font-semibold text-text-primary mb-1 flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-md bg-primary/10 text-primary text-xs font-bold flex items-center justify-center">2</span>
+              <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6">
+                <h2 className="text-lg font-semibold text-text-primary mb-1 flex items-center gap-2 font-display">
+                  <span className="w-6 h-6 rounded-md bg-primary/[0.08] border border-primary/15 text-primary text-xs font-bold flex items-center justify-center">2</span>
                   {t('analyze.careerDetails')}
                 </h2>
                 <p className="text-xs text-text-secondary mb-5">
@@ -404,7 +425,7 @@ export default function AnalyzePage() {
             <button
               onClick={handleAnalyze}
               disabled={!isFormValid}
-              className="group btn-primary text-base sm:text-lg px-8 sm:px-12 py-4 flex items-center gap-3 shadow-lg shadow-primary/20 disabled:shadow-none w-full sm:w-auto justify-center"
+              className="group btn-primary text-base sm:text-lg px-8 sm:px-12 py-4 flex items-center gap-3 disabled:shadow-none w-full sm:w-auto justify-center rounded-2xl"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
