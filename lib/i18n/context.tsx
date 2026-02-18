@@ -9,7 +9,7 @@ export type Locale = 'en' | 'ro' | 'de';
 
 export const LOCALE_NAMES: Record<Locale, string> = {
   en: 'English',
-  ro: 'Romana',
+  ro: 'Română',
   de: 'Deutsch',
 };
 

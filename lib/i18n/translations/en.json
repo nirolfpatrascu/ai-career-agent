@@ -32,30 +32,12 @@
     "title": "Everything you need to navigate your career transition",
     "subtitle": "Powered by advanced AI analysis of your CV, target role requirements, and market data.",
     "cards": [
-      {
-        "title": "CV Deep Analysis",
-        "description": "Upload your PDF resume and our AI extracts every skill, certification, and experience — including ones you forgot to list."
-      },
-      {
-        "title": "Gap Analysis",
-        "description": "See exactly what skills you're missing for your target role — color-coded by severity with specific plans to close each gap."
-      },
-      {
-        "title": "Salary Benchmarks",
-        "description": "Location-aware salary ranges for your current and target roles, plus negotiation tips specific to your experience."
-      },
-      {
-        "title": "Role Recommendations",
-        "description": "Get 3 best-fit roles based on your profile — with fit scores, salary ranges, and specific companies to target."
-      },
-      {
-        "title": "Action Plan",
-        "description": "30-day quick wins, 90-day skill building, and 12-month career trajectory — each with specific resources and time estimates."
-      },
-      {
-        "title": "Job Matching",
-        "description": "Paste any job posting and get an ATS match score, missing keywords, and specific CV rewrite suggestions."
-      }
+      { "title": "CV Deep Analysis", "description": "Upload your PDF resume and our AI extracts every skill, certification, and experience — including ones you forgot to list." },
+      { "title": "Gap Analysis", "description": "See exactly what skills you're missing for your target role — color-coded by severity with specific plans to close each gap." },
+      { "title": "Salary Benchmarks", "description": "Location-aware salary ranges for your current and target roles, plus negotiation tips specific to your experience." },
+      { "title": "Role Recommendations", "description": "Get 3 best-fit roles based on your profile — with fit scores, salary ranges, and specific companies to target." },
+      { "title": "Action Plan", "description": "30-day quick wins, 90-day skill building, and 12-month career trajectory — each with specific resources and time estimates." },
+      { "title": "Job Matching", "description": "Paste any job posting and get an ATS match score, missing keywords, and specific CV rewrite suggestions." }
     ]
   },
   "howItWorks": {
@@ -63,18 +45,9 @@
     "title": "From CV to career roadmap in 3 steps",
     "subtitle": "No sign-up required. Upload, answer a few questions, and get your personalized analysis.",
     "steps": [
-      {
-        "title": "Upload Your CV",
-        "description": "Drag and drop your PDF resume. Our AI reads every detail — skills, certifications, experience, and even implicit competencies you didn't explicitly list."
-      },
-      {
-        "title": "Tell Us Your Goals",
-        "description": "Answer a quick questionnaire about your current role, target position, location, and salary expectations. Takes under 2 minutes."
-      },
-      {
-        "title": "Get Your Career Roadmap",
-        "description": "In under 2 minutes, receive a comprehensive analysis: fit score, strengths, skill gaps, salary benchmarks, and a personalized action plan."
-      }
+      { "title": "Upload Your CV", "description": "Drag and drop your PDF resume. Our AI reads every detail — skills, certifications, experience, and even implicit competencies you didn't explicitly list." },
+      { "title": "Tell Us Your Goals", "description": "Answer a quick questionnaire about your current role, target position, location, and salary expectations. Takes under 2 minutes." },
+      { "title": "Get Your Career Roadmap", "description": "In under 2 minutes, receive a comprehensive analysis: fit score, strengths, skill gaps, salary benchmarks, and a personalized action plan." }
     ],
     "visual": {
       "uploadComplete": "Upload complete",
@@ -105,7 +78,10 @@
     "uploadOwn": "Upload your own CV",
     "yourAnalysis": "Your Career Analysis",
     "target": "Target",
-    "wantDifferent": "Want to analyze a different career path?"
+    "wantDifferent": "Want to analyze a different career path?",
+    "preFilled": "We pre-filled what we could from your upload. Complete the remaining fields — especially your target role.",
+    "tellUsGoals": "Tell us about your current position and where you want to go.",
+    "uploadAtLeastOne": "Upload a LinkedIn PDF or CV to get started"
   },
   "upload": {
     "label": "Upload Your CV",
@@ -114,12 +90,43 @@
     "dropOrBrowse": "Drop your CV here or click to browse",
     "pdfFormat": "PDF format, up to 5MB",
     "onlyPdf": "Only PDF files are accepted.",
-    "maxSize": "File size must be less than 5MB.",
+    "maxSize": "File size must be under 5MB.",
     "removeFile": "Remove file"
+  },
+  "docUpload": {
+    "linkedInTitle": "LinkedIn Profile PDF",
+    "linkedInRecommended": "recommended",
+    "linkedInLabel": "LinkedIn PDF",
+    "uploadLinkedIn": "Upload LinkedIn PDF",
+    "linkedInSublabel": "Exports your role, experience & skills automatically",
+    "detecting": "Reading your profile details...",
+    "detected": "Profile detected — form pre-filled below",
+    "guideQuestion": "How do I export my LinkedIn profile as PDF?",
+    "guideStep1a": "Go to your",
+    "guideStep1Link": "LinkedIn profile",
+    "guideStep1b": "and click",
+    "guideStep1bold": "Resources",
+    "guideStep2a": "Click",
+    "guideStep2bold": "Save to PDF",
+    "guideStep2b": ", then upload the downloaded file here",
+    "guideTip": "The LinkedIn PDF includes your role, experience, education and skills — we'll use it to pre-fill the form and improve your analysis.",
+    "divider": "and / or",
+    "cvTitle": "CV / Resume",
+    "cvOptional": "optional — enriches analysis",
+    "cvRequired": "required if no LinkedIn PDF",
+    "cvLabel": "CV / Resume",
+    "uploadCV": "Upload your CV",
+    "cvSublabel": "PDF format, max 5MB",
+    "dropHere": "Drop here",
+    "uploadHint": "Upload at least one document to continue. Both together give the best results."
   },
   "questionnaire": {
     "currentRole": "Current Role Title",
     "targetRole": "Target Role / Career Goal",
+    "targetRole2Label": "Alternative Role 1",
+    "targetRole3Label": "Alternative Role 2",
+    "addAlternativeRoles": "Add alternative target roles (optional)",
+    "alternativeRolesHint": "Add 1-2 alternative roles you're considering. We'll analyze your fit for each.",
     "yearsExperience": "Years of Experience",
     "country": "Country / Region",
     "selectCountry": "Select country...",
@@ -128,6 +135,8 @@
     "targetSalary": "Target Gross Annual Salary",
     "grossAnnual": "Gross annual (before tax)",
     "jobPosting": "Job Posting",
+    "jobPostingLabel": "Job Posting",
+    "jobPostingOptional": "optional — for targeted advice",
     "jobPostingHint": "optional — paste a specific posting for targeted advice",
     "jobPostingPlaceholder": "Paste the full job posting text here to get ATS match score, missing keywords, and CV rewrite suggestions...",
     "remoteSalaryNote": "Since you selected Remote, salary benchmarks will reflect EMEA/EU remote market rates for your target role — not just local {country} rates.",
@@ -136,6 +145,18 @@
       "hybrid": "Hybrid",
       "onsite": "On-site",
       "flexible": "Flexible"
+    },
+    "jobUrl": {
+      "tabUrl": "Paste URL",
+      "tabPaste": "Paste Text",
+      "placeholder": "https://linkedin.com/jobs/view/... or any job page",
+      "fetch": "Fetch",
+      "fetching": "Fetching...",
+      "fetchSuccess": "Job posting fetched successfully",
+      "clear": "Clear",
+      "urlHint": "Paste a LinkedIn, Indeed, Glassdoor, or any job page link. Some sites may block fetching — use \"Paste Text\" as a fallback.",
+      "pasteHint": "Copy the full job description from the job posting page and paste it above.",
+      "pastePlaceholder": "Paste the full job description text here..."
     }
   },
   "progress": {
@@ -153,25 +174,14 @@
     ]
   },
   "results": {
-    "fitScore": {
-      "title": "Career Fit Score",
-      "outOf": "out of 10"
-    },
+    "fitScore": { "title": "Career Fit Score", "outOf": "out of 10" },
     "strengths": {
       "title": "Your Strengths",
-      "tiers": {
-        "differentiator": "Differentiator",
-        "strong": "Strong",
-        "supporting": "Supporting"
-      }
+      "tiers": { "differentiator": "Differentiator", "strong": "Strong", "supporting": "Supporting" }
     },
     "gaps": {
       "title": "Skill Gaps",
-      "severity": {
-        "critical": "Critical",
-        "moderate": "Moderate",
-        "minor": "Minor"
-      },
+      "severity": { "critical": "Critical", "moderate": "Moderate", "minor": "Minor" },
       "currentLevel": "Current Level",
       "requiredLevel": "Required Level",
       "impact": "Impact",
@@ -188,11 +198,7 @@
     },
     "actionPlan": {
       "title": "Action Plan",
-      "tabs": {
-        "thirtyDays": "30 Days",
-        "ninetyDays": "90 Days",
-        "twelveMonths": "12 Months"
-      },
+      "tabs": { "thirtyDays": "30 Days", "ninetyDays": "90 Days", "twelveMonths": "12 Months" },
       "priority": "Priority",
       "timeEstimate": "Time",
       "resource": "Resource",
@@ -219,6 +225,16 @@
       "reasoning": "Why"
     }
   },
+  "chat": {
+    "title": "AI Career Coach",
+    "subtitle": "Ask anything about your analysis",
+    "welcome": "I've read your full career analysis.",
+    "welcomeHint": "Ask me anything — deep-dive into gaps, get interview prep, rewrite your CV, compare roles, or plan your week. I have all your data.",
+    "quickActions": "Quick actions",
+    "inputPlaceholder": "Ask about your analysis...",
+    "clearChat": "Clear chat",
+    "errorPrefix": "Sorry, I couldn't process that request."
+  },
   "errors": {
     "pageTitle": "Something went wrong",
     "pageDescription": "We encountered an unexpected error. Please try again.",
@@ -231,6 +247,21 @@
   "pdf": {
     "brandLine": "GapZero - AI-Powered Career Advisor",
     "generatedOn": "Generated on",
-    "fitScoreLabel": "Career Fit Score"
+    "fitScoreLabel": "Career Fit Score",
+    "strengths": "Your Strengths",
+    "gaps": "Skill Gaps",
+    "roles": "Recommended Roles",
+    "salaryAnalysis": "Salary Analysis",
+    "salarySubtitle": "All figures are gross annual (before tax)",
+    "actionPlan30": "30-Day Quick Wins",
+    "actionPlan90": "90-Day Skill Building",
+    "actionPlan12m": "12-Month Career Trajectory",
+    "negotiationTips": "Negotiation Tips",
+    "current": "Current",
+    "required": "Required",
+    "growthPotential": "Growth Potential",
+    "currentRoleMarket": "Current Role Market",
+    "targetRoleMarket": "Target Role Market",
+    "companies": "Companies"
   }
 }
