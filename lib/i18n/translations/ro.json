@@ -282,10 +282,20 @@
     "subtitle": "Întreabă orice despre analiza ta",
     "welcome": "Am citit întreaga ta analiză de carieră.",
     "welcomeHint": "Întreabă-mă orice — aprofundează lacunele, pregătește-te pentru interviu, rescrie-ți CV-ul, compară roluri sau planifică-ți săptămâna. Am toate datele tale.",
-    "quickActions": "Acțiuni rapide",
+    "quickActions": "Acțiuni Rapide",
     "inputPlaceholder": "Întreabă despre analiza ta...",
     "clearChat": "Șterge conversația",
-    "errorPrefix": "Nu am putut procesa cererea."
+    "errorPrefix": "Nu am putut procesa cererea.",
+    "actions": [
+      "✍️ Rescrie sumarul CV-ului pentru rolul țintă",
+      "🎯 Top 10 întrebări de interviu + răspunsuri",
+      "⚡ Planul meu de acțiune pe 5 zile",
+      "🤔 Ce rol ar trebui să urmăresc primul?",
+      "📝 Scrie un mesaj de contact la rece",
+      "🔍 Cum închid lacuna #1 de competențe?",
+      "💰 Ghid de negociere salarială",
+      "🏗️ Idei de proiecte pentru portofoliu"
+    ]
   },
   "errors": {
     "pageTitle": "Ceva nu a mers bine",

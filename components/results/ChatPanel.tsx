@@ -13,15 +13,15 @@ interface ChatPanelProps {
   analysis: AnalysisResult;
 }
 
-const QUICK_ACTIONS = [
-  { label: '✍️ Rewrite my CV summary for target role', prompt: 'Rewrite my professional summary / CV headline optimized for my primary target role. Make it compelling, keyword-rich, and ready to copy-paste. Then list the top 5 keywords I must have in my CV for ATS screening.' },
-  { label: '🎯 Top 10 interview questions + answers', prompt: 'Generate the 10 most likely interview questions for my target role. For each, write a strong suggested answer using my actual experience and skills. Also include how to address my biggest gaps if the interviewer brings them up.' },
-  { label: '⚡ My 5-day action plan for this week', prompt: 'Based on my analysis, create a concrete day-by-day plan for this week (Mon-Fri). Each day: 1-2 specific tasks I can finish in 1-2 hours. Prioritize the highest-impact items from my 30-day plan.' },
-  { label: '🤔 Which role should I pursue first?', prompt: 'Compare all my recommended roles in a decision matrix. For each: fit score, salary range, time to ready, biggest advantage, biggest risk, and whether it leads to my long-term goal. Give me a clear recommendation with reasoning.' },
-  { label: '📝 Write a cold outreach message', prompt: 'Write 3 different LinkedIn cold outreach messages I can send to hiring managers at my target companies. One formal, one casual, one that leads with a specific project. Reference my actual strengths and make each under 300 characters.' },
-  { label: '🔍 How do I close my #1 skill gap?', prompt: 'Take my most critical skill gap and give me the complete roadmap to close it: week-by-week study plan, specific free resources with URLs, a mini-project to prove the skill, and exactly how to present it on my CV once done.' },
-  { label: '💰 Salary negotiation playbook', prompt: 'Write me a complete salary negotiation playbook for my target role. Include: the exact range to ask for, 3 anchoring phrases using my strengths, how to respond to lowball offers, what to negotiate beyond base salary, and a word-for-word script for the money conversation.' },
-  { label: '🏗️ Portfolio project ideas', prompt: 'Suggest 3 portfolio projects I can build in 1-2 weeks each that would directly demonstrate the skills my target role requires. For each: project name, what it proves, tech stack, and a 1-paragraph README description I can use on GitHub.' },
+const QUICK_ACTION_PROMPTS = [
+  'Rewrite my professional summary / CV headline optimized for my primary target role. Make it compelling, keyword-rich, and ready to copy-paste. Then list the top 5 keywords I must have in my CV for ATS screening.',
+  'Generate the 10 most likely interview questions for my target role. For each, write a strong suggested answer using my actual experience and skills. Also include how to address my biggest gaps if the interviewer brings them up.',
+  'Based on my analysis, create a concrete day-by-day plan for this week (Mon-Fri). Each day: 1-2 specific tasks I can finish in 1-2 hours. Prioritize the highest-impact items from my 30-day plan.',
+  'Compare all my recommended roles in a decision matrix. For each: fit score, salary range, time to ready, biggest advantage, biggest risk, and whether it leads to my long-term goal. Give me a clear recommendation with reasoning.',
+  'Write 3 different LinkedIn cold outreach messages I can send to hiring managers at my target companies. One formal, one casual, one that leads with a specific project. Reference my actual strengths and make each under 300 characters.',
+  'Take my most critical skill gap and give me the complete roadmap to close it: week-by-week study plan, specific free resources with URLs, a mini-project to prove the skill, and exactly how to present it on my CV once done.',
+  'Write me a complete salary negotiation playbook for my target role. Include: the exact range to ask for, 3 anchoring phrases using my strengths, how to respond to lowball offers, what to negotiate beyond base salary, and a word-for-word script for the money conversation.',
+  'Suggest 3 portfolio projects I can build in 1-2 weeks each that would directly demonstrate the skills my target role requires. For each: project name, what it proves, tech stack, and a 1-paragraph README description I can use on GitHub.',
 ];
 
 /**
@@ -238,13 +238,13 @@ export default function ChatPanel({ analysis }: ChatPanelProps) {
               <div>
                 <p className="text-xs text-text-secondary font-medium mb-2 uppercase tracking-wider">{t('chat.quickActions')}</p>
                 <div className="grid grid-cols-1 gap-1.5">
-                  {QUICK_ACTIONS.map((action, i) => (
+                  {QUICK_ACTION_PROMPTS.map((prompt, i) => (
                     <button
                       key={i}
-                      onClick={() => sendMessage(action.prompt)}
+                      onClick={() => sendMessage(prompt)}
                       className="text-left px-3 py-2.5 rounded-lg border border-card-border bg-background hover:border-primary/40 hover:bg-primary/5 transition-all text-xs text-text-secondary hover:text-text-primary"
                     >
-                      {action.label}
+                      {t(`chat.actions.${i}`)}
                     </button>
                   ))}
                 </div>

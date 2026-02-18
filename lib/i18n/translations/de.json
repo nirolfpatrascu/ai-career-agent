@@ -285,7 +285,17 @@
     "quickActions": "Schnellaktionen",
     "inputPlaceholder": "Fragen Sie zu Ihrer Analyse...",
     "clearChat": "Chat Löschen",
-    "errorPrefix": "Konnte die Anfrage nicht verarbeiten."
+    "errorPrefix": "Konnte die Anfrage nicht verarbeiten.",
+    "actions": [
+      "✍️ Lebenslauf-Zusammenfassung umschreiben",
+      "🎯 Top 10 Interviewfragen + Antworten",
+      "⚡ Mein 5-Tage-Aktionsplan für diese Woche",
+      "🤔 Welche Rolle sollte ich zuerst verfolgen?",
+      "📝 Kaltakquise-Nachricht schreiben",
+      "🔍 Wie schließe ich meine #1 Kompetenzlücke?",
+      "💰 Gehaltsverhandlungs-Spielplan",
+      "🏗️ Portfolio-Projektideen"
+    ]
   },
   "errors": {
     "pageTitle": "Etwas ist schiefgelaufen",

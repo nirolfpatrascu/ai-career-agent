@@ -22,11 +22,28 @@ export function getLanguageInstruction(language?: string): string {
   const langName = LANGUAGE_NAMES[language] || language;
 
   return `
-LANGUAGE INSTRUCTION:
-- All human-readable string VALUES in your JSON response must be written in ${langName}.
-- This includes: descriptions, summaries, explanations, advice, titles of strengths/gaps, reasoning, tips, plans, and any other text the user will read.
-- JSON KEYS (field names like "title", "description", "severity") must stay in English exactly as specified in the schema.
-- Enum values like severity levels ("critical", "moderate", "minor"), tier values ("differentiator", "strong", "supporting"), and fit labels ("Strong Fit", "Moderate Fit", etc.) must stay in English — these are used for UI logic.
-- Skill names, company names, certification names, course names, and resource names should stay in their original/English form (e.g., "AWS", "Docker", "AZ-900", "Coursera").
-- Write naturally in ${langName} — not machine-translated. Use proper grammar, idioms, and professional tone appropriate for career advice.`;
+CRITICAL — LANGUAGE INSTRUCTION:
+You MUST write ALL human-readable text in ${langName}. This is mandatory, not optional.
+
+TRANSLATE into ${langName}:
+- ALL descriptions, summaries, explanations, advice, reasoning, tips
+- ALL titles of strengths, gaps, role recommendations
+- fitScore.label (e.g. "Potrivire Moderată" not "Moderate Fit")
+- fitScore.summary
+- ALL action items, closing plans, expected impacts
+- ALL salary advice, negotiation tips, best monetary move
+- ALL resource descriptions (but keep resource/course NAMES in original language)
+- timeToClose, timeToReady, timeEstimate values
+- growthPotential text
+
+KEEP in English (these are used for code logic):
+- JSON keys/field names (title, description, severity, etc.)
+- severity enum values: "critical", "moderate", "minor"
+- tier enum values: "differentiator", "strong", "supporting"  
+- priority enum values: "critical", "high", "medium"
+- workPreference values: "remote", "hybrid", "onsite", "flexible"
+- Company names, certification names (AWS, AZ-900, Docker, etc.)
+- Currency codes (EUR, USD, etc.)
+
+Write naturally and professionally in ${langName} — not machine-translated.`;
 }

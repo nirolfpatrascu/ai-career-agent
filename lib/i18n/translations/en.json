@@ -282,10 +282,20 @@
     "subtitle": "Ask anything about your analysis",
     "welcome": "I've read your full career analysis.",
     "welcomeHint": "Ask me anything — deep-dive into gaps, get interview prep, rewrite your CV, compare roles, or plan your week. I have all your data.",
-    "quickActions": "Quick actions",
+    "quickActions": "Quick Actions",
     "inputPlaceholder": "Ask about your analysis...",
     "clearChat": "Clear chat",
-    "errorPrefix": "Sorry, I couldn't process that request."
+    "errorPrefix": "Sorry, I couldn't process that request.",
+    "actions": [
+      "✍️ Rewrite my CV summary for target role",
+      "🎯 Top 10 interview questions + answers",
+      "⚡ My 5-day action plan for this week",
+      "🤔 Which role should I pursue first?",
+      "📝 Write a cold outreach message",
+      "🔍 How do I close my #1 skill gap?",
+      "💰 Salary negotiation playbook",
+      "🏗️ Portfolio project ideas"
+    ]
   },
   "errors": {
     "pageTitle": "Something went wrong",
