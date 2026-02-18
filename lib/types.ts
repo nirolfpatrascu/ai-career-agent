@@ -15,10 +15,17 @@ export interface CareerQuestionnaire {
   workPreference: 'remote' | 'hybrid' | 'onsite' | 'flexible';
   currentSalary?: number;
   targetSalary?: number;
-  jobPosting?: string;
+  jobPosting?: string;        // Legacy single posting (backward compat)
   jobPostingUrl?: string;     // URL of a job posting (fetched server-side)
+  jobPostings?: JobPostingInput[];  // Multiple postings for richer context
   language?: string;          // 'en' | 'ro' | 'de' — for localized AI responses
   linkedInProfile?: string;   // Raw LinkedIn profile text for supplementary data
+}
+
+export interface JobPostingInput {
+  text: string;               // Full job posting text
+  url?: string;               // Source URL if fetched
+  title?: string;             // Extracted job title
 }
 
 // --- Output Types ---
