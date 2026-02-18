@@ -7,7 +7,6 @@ import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
 import { useAuth } from '@/lib/auth/context';
 import { useTranslation } from '@/lib/i18n';
-import AuthModal from '@/components/auth/AuthModal';
 
 interface SavedAnalysis {
   id: string;
@@ -40,7 +39,6 @@ export default function DashboardPage() {
   const [analyses, setAnalyses] = useState<SavedAnalysis[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null);
-  const [authModal, setAuthModal] = useState(false);
 
   // Fetch analyses
   const fetchAnalyses = useCallback(async () => {
@@ -115,14 +113,13 @@ export default function DashboardPage() {
               <p className="text-text-secondary text-sm mb-6 max-w-md mx-auto">
                 {t('dashboard.signInDescription')}
               </p>
-              <button onClick={() => setAuthModal(true)} className="btn-primary text-sm">
-                {t('auth.signIn')}
-              </button>
+              <p className="text-sm text-text-tertiary">
+                ↗ {t('dashboard.useSignIn')}
+              </p>
             </div>
           </div>
         </main>
         <Footer />
-        <AuthModal isOpen={authModal} onClose={() => setAuthModal(false)} />
       </>
     );
   }
