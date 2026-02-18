@@ -21,29 +21,49 @@ import LinkedInPlan from '@/components/results/LinkedInPlan';
 import ChapterNav, { DEFAULT_TAB } from '@/components/results/ChapterNav';
 import { getSampleAnalysis } from '@/lib/demo';
 import { useTranslation } from '@/lib/i18n';
+import { useAuth } from '@/lib/auth/context';
 import type { AnalysisResult, CareerQuestionnaire } from '@/lib/types';
 
 type AppState = 'upload' | 'processing' | 'results' | 'error';
 
 export default function AnalyzePage() {
   const { t, locale } = useTranslation();
+  const { user, session } = useAuth();
   const [state, setState] = useState<AppState>('upload');
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState<string>('');
   const [isDemo, setIsDemo] = useState(false);
   const [activeTab, setActiveTab] = useState(DEFAULT_TAB);
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
 
   // Streaming analysis hook
   const streaming = useStreamingAnalysis();
 
-  // React to streaming completion
+  // React to streaming completion — save if logged in
   useEffect(() => {
     if (streaming.result) {
       setResult(streaming.result);
       setState('results');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Auto-save if user is logged in
+      if (session?.access_token) {
+        setSaveStatus('saving');
+        fetch('/api/analyses', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({ result: streaming.result }),
+        })
+          .then(res => {
+            setSaveStatus(res.ok ? 'saved' : 'error');
+          })
+          .catch(() => setSaveStatus('error'));
+      }
     }
-  }, [streaming.result]);
+  }, [streaming.result, session?.access_token]);
 
   // React to streaming error
   useEffect(() => {
@@ -60,8 +80,29 @@ export default function AnalyzePage() {
       handleDemo();
       window.history.replaceState({}, '', '/analyze');
     }
+    // Load saved analysis if ?saved=<id>
+    const savedId = params.get('saved');
+    if (savedId && session?.access_token) {
+      setState('processing');
+      fetch(`/api/analyses/${savedId}`, {
+        headers: { Authorization: `Bearer ${session.access_token}` },
+      })
+        .then(res => res.ok ? res.json() : Promise.reject('Not found'))
+        .then(data => {
+          if (data.analysis?.result) {
+            setResult(data.analysis.result);
+            setState('results');
+            setSaveStatus('saved');
+          }
+        })
+        .catch(() => {
+          setState('upload');
+          setError('Could not load saved analysis');
+        });
+      window.history.replaceState({}, '', '/analyze');
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [session?.access_token]);
 
   // --- Wizard submit ---
   const handleWizardSubmit = useCallback(({ linkedInFile, cvFile, questionnaire }: {
@@ -105,6 +146,7 @@ export default function AnalyzePage() {
     setError('');
     setIsDemo(false);
     setActiveTab(DEFAULT_TAB);
+    setSaveStatus('idle');
     streaming.reset();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [streaming]);
@@ -224,7 +266,24 @@ export default function AnalyzePage() {
                   {new Date(result.metadata.analyzedAt).toLocaleDateString()}
                 </p>
               </div>
-              <div className="flex gap-3 flex-wrap">
+              <div className="flex gap-3 flex-wrap items-center">
+                {/* Save status */}
+                {user && saveStatus !== 'idle' && (
+                  <span className={`text-xs font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-lg border ${
+                    saveStatus === 'saving' ? 'text-text-tertiary border-white/[0.08] bg-white/[0.04]' :
+                    saveStatus === 'saved' ? 'text-success border-success/15 bg-success/[0.04]' :
+                    'text-danger border-danger/15 bg-danger/[0.04]'
+                  }`}>
+                    {saveStatus === 'saving' && (
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="animate-spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+                    )}
+                    {saveStatus === 'saved' && (
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    )}
+                    {saveStatus === 'error' && '⚠'}
+                    {t(`auth.save${saveStatus.charAt(0).toUpperCase() + saveStatus.slice(1)}`)}
+                  </span>
+                )}
                 <PDFReport result={result} />
                 <button onClick={handleReset} className="btn-secondary text-sm flex items-center gap-2">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

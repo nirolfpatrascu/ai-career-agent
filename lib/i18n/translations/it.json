@@ -18,7 +18,8 @@
     "edit": "Modifica",
     "fetch": "Recupera",
     "added": "Aggiunto",
-    "remove": "Rimuovi"
+    "remove": "Rimuovi",
+    "close": "Chiudi"
   },
   "hero": {
     "badge": "Consulente di Carriera con IA",
@@ -413,5 +414,41 @@
     "connectionsAdvice": "Collegati con persone nel tuo dominio target. Personalizza ogni richiesta (3-4 frasi max). Commenta 5-10 post al giorno — è più efficace che pubblicare.",
     "copy": "Copia",
     "copied": "Copiato!"
+  },
+  "auth": {
+    "signIn": "Accedi",
+    "signUp": "Registrati",
+    "signOut": "Esci",
+    "signInSubtitle": "Salva le tue analisi e accedi in qualsiasi momento",
+    "signUpSubtitle": "Crea un account gratuito per salvare le analisi",
+    "continueGoogle": "Continua con Google",
+    "continueGitHub": "Continua con GitHub",
+    "orEmail": "o continua con email",
+    "fullName": "Nome completo",
+    "email": "Indirizzo email",
+    "password": "Password",
+    "createAccount": "Crea Account",
+    "loading": "Attendere prego...",
+    "fillAllFields": "Compila tutti i campi obbligatori",
+    "checkEmail": "Controlla la tua email",
+    "confirmationSent": "Ti abbiamo inviato un link di conferma. Cliccalo per attivare il tuo account.",
+    "noAccount": "Non hai un account?",
+    "haveAccount": "Hai già un account?",
+    "myAnalyses": "Le Mie Analisi",
+    "saveSaving": "Salvataggio...",
+    "saveSaved": "Salvato",
+    "saveError": "Non salvato"
+  },
+  "dashboard": {
+    "title": "Le Mie Analisi",
+    "subtitle": "{count} analisi salvate",
+    "signInRequired": "Accedi per vedere le tue analisi",
+    "signInDescription": "Crea un account gratuito per salvare le tue analisi di carriera.",
+    "empty": "Nessuna analisi ancora",
+    "emptySubtitle": "Esegui la tua prima analisi di carriera per vederla qui",
+    "startFirst": "Inizia la prima analisi",
+    "viewAnalysis": "Vedi analisi",
+    "delete": "Elimina",
+    "confirmDelete": "Sei sicuro di voler eliminare questa analisi?"
   }
 }

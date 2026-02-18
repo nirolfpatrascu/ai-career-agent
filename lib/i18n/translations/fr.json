@@ -18,7 +18,8 @@
     "edit": "Modifier",
     "fetch": "Récupérer",
     "added": "Ajouté",
-    "remove": "Supprimer"
+    "remove": "Supprimer",
+    "close": "Fermer"
   },
   "hero": {
     "badge": "Conseiller de Carrière IA",
@@ -413,5 +414,41 @@
     "connectionsAdvice": "Connectez-vous avec des personnes dans votre domaine cible. Personnalisez chaque demande (3-4 phrases max). Commentez 5-10 posts par jour — c'est plus efficace que publier.",
     "copy": "Copier",
     "copied": "Copié !"
+  },
+  "auth": {
+    "signIn": "Connexion",
+    "signUp": "Inscription",
+    "signOut": "Déconnexion",
+    "signInSubtitle": "Sauvegardez vos analyses et accédez-y à tout moment",
+    "signUpSubtitle": "Créez un compte gratuit pour sauvegarder vos analyses",
+    "continueGoogle": "Continuer avec Google",
+    "continueGitHub": "Continuer avec GitHub",
+    "orEmail": "ou continuer par email",
+    "fullName": "Nom complet",
+    "email": "Adresse email",
+    "password": "Mot de passe",
+    "createAccount": "Créer un compte",
+    "loading": "Veuillez patienter...",
+    "fillAllFields": "Veuillez remplir tous les champs obligatoires",
+    "checkEmail": "Vérifiez votre email",
+    "confirmationSent": "Nous vous avons envoyé un lien de confirmation. Cliquez dessus pour activer votre compte.",
+    "noAccount": "Pas de compte ?",
+    "haveAccount": "Déjà un compte ?",
+    "myAnalyses": "Mes Analyses",
+    "saveSaving": "Sauvegarde...",
+    "saveSaved": "Sauvegardé",
+    "saveError": "Non sauvegardé"
+  },
+  "dashboard": {
+    "title": "Mes Analyses",
+    "subtitle": "{count} analyses sauvegardées",
+    "signInRequired": "Connectez-vous pour voir vos analyses",
+    "signInDescription": "Créez un compte gratuit pour sauvegarder vos analyses de carrière.",
+    "empty": "Aucune analyse",
+    "emptySubtitle": "Lancez votre première analyse de carrière pour la voir ici",
+    "startFirst": "Lancer ma première analyse",
+    "viewAnalysis": "Voir l'analyse",
+    "delete": "Supprimer",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette analyse ?"
   }
 }

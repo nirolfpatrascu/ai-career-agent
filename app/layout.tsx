@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, Bricolage_Grotesque } from 'next/font/google';
 import { I18nProvider } from '@/lib/i18n';
+import { AuthProvider } from '@/lib/auth/context';
 import './globals.css';
 
 const jakarta = Plus_Jakarta_Sans({
@@ -101,7 +102,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
-        <I18nProvider>{children}</I18nProvider>
+        <I18nProvider><AuthProvider>{children}</AuthProvider></I18nProvider>
       </body>
     </html>
   );

@@ -18,7 +18,8 @@
     "edit": "Editar",
     "fetch": "Obtener",
     "added": "Añadido",
-    "remove": "Eliminar"
+    "remove": "Eliminar",
+    "close": "Cerrar"
   },
   "hero": {
     "badge": "Asesor de Carrera con IA",
@@ -413,5 +414,41 @@
     "connectionsAdvice": "Conéctate con personas en tu dominio objetivo. Personaliza cada solicitud (3-4 frases máx). Comenta en 5-10 publicaciones diarias — es más efectivo que publicar.",
     "copy": "Copiar",
     "copied": "¡Copiado!"
+  },
+  "auth": {
+    "signIn": "Iniciar Sesión",
+    "signUp": "Registrarse",
+    "signOut": "Cerrar Sesión",
+    "signInSubtitle": "Guarda tus análisis y accede a ellos en cualquier momento",
+    "signUpSubtitle": "Crea una cuenta gratuita para guardar análisis",
+    "continueGoogle": "Continuar con Google",
+    "continueGitHub": "Continuar con GitHub",
+    "orEmail": "o continuar con email",
+    "fullName": "Nombre completo",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "createAccount": "Crear Cuenta",
+    "loading": "Por favor espere...",
+    "fillAllFields": "Por favor complete todos los campos obligatorios",
+    "checkEmail": "Revisa tu correo",
+    "confirmationSent": "Te enviamos un enlace de confirmación. Haz clic para activar tu cuenta.",
+    "noAccount": "¿No tienes cuenta?",
+    "haveAccount": "¿Ya tienes cuenta?",
+    "myAnalyses": "Mis Análisis",
+    "saveSaving": "Guardando...",
+    "saveSaved": "Guardado",
+    "saveError": "No guardado"
+  },
+  "dashboard": {
+    "title": "Mis Análisis",
+    "subtitle": "{count} análisis guardados",
+    "signInRequired": "Inicia sesión para ver tus análisis",
+    "signInDescription": "Crea una cuenta gratuita para guardar tus análisis de carrera.",
+    "empty": "Sin análisis aún",
+    "emptySubtitle": "Ejecuta tu primer análisis de carrera para verlo aquí",
+    "startFirst": "Comenzar primer análisis",
+    "viewAnalysis": "Ver análisis",
+    "delete": "Eliminar",
+    "confirmDelete": "¿Estás seguro de que quieres eliminar este análisis?"
   }
 }

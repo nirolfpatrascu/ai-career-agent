@@ -18,7 +18,8 @@
     "edit": "Bearbeiten",
     "fetch": "Abrufen",
     "added": "Hinzugefügt",
-    "remove": "Entfernen"
+    "remove": "Entfernen",
+    "close": "Schließen"
   },
   "hero": {
     "badge": "KI-gesteuerter Karriereberater",
@@ -413,5 +414,41 @@
     "connectionsAdvice": "Verbinden Sie sich mit Personen in Ihrem Zielbereich. Personalisieren Sie jede Anfrage (max. 3-4 Sätze). Kommentieren Sie täglich 5-10 Posts — das ist effektiver als selbst zu posten.",
     "copy": "Kopieren",
     "copied": "Kopiert!"
+  },
+  "auth": {
+    "signIn": "Anmelden",
+    "signUp": "Registrieren",
+    "signOut": "Abmelden",
+    "signInSubtitle": "Speichern Sie Ihre Analysen und greifen Sie jederzeit darauf zu",
+    "signUpSubtitle": "Erstellen Sie ein kostenloses Konto zum Speichern von Analysen",
+    "continueGoogle": "Weiter mit Google",
+    "continueGitHub": "Weiter mit GitHub",
+    "orEmail": "oder weiter mit E-Mail",
+    "fullName": "Vollständiger Name",
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "createAccount": "Konto erstellen",
+    "loading": "Bitte warten...",
+    "fillAllFields": "Bitte füllen Sie alle Pflichtfelder aus",
+    "checkEmail": "E-Mail prüfen",
+    "confirmationSent": "Wir haben Ihnen einen Bestätigungslink gesendet. Klicken Sie darauf, um Ihr Konto zu aktivieren.",
+    "noAccount": "Kein Konto?",
+    "haveAccount": "Bereits ein Konto?",
+    "myAnalyses": "Meine Analysen",
+    "saveSaving": "Wird gespeichert...",
+    "saveSaved": "Gespeichert",
+    "saveError": "Nicht gespeichert"
+  },
+  "dashboard": {
+    "title": "Meine Analysen",
+    "subtitle": "{count} gespeicherte Analysen",
+    "signInRequired": "Melden Sie sich an, um Ihre Analysen zu sehen",
+    "signInDescription": "Erstellen Sie ein kostenloses Konto, um Ihre Karriereanalysen zu speichern.",
+    "empty": "Noch keine Analysen",
+    "emptySubtitle": "Führen Sie Ihre erste Karriereanalyse durch",
+    "startFirst": "Erste Analyse starten",
+    "viewAnalysis": "Analyse ansehen",
+    "delete": "Löschen",
+    "confirmDelete": "Möchten Sie diese Analyse wirklich löschen?"
   }
 }

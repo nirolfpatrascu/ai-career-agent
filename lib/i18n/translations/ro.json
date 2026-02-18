@@ -18,7 +18,8 @@
     "edit": "Editează",
     "fetch": "Preia",
     "added": "Adăugat",
-    "remove": "Șterge"
+    "remove": "Șterge",
+    "close": "Închide"
   },
   "hero": {
     "badge": "Consilier de Carieră cu AI",
@@ -413,5 +414,41 @@
     "connectionsAdvice": "Conectează-te cu persoane din domeniul țintă. Personalizează fiecare cerere (max 3-4 propoziții). Comentează la 5-10 postări zilnic — e mai eficient decât să postezi.",
     "copy": "Copiază",
     "copied": "Copiat!"
+  },
+  "auth": {
+    "signIn": "Autentificare",
+    "signUp": "Înregistrare",
+    "signOut": "Deconectare",
+    "signInSubtitle": "Salvează analizele și accesează-le oricând",
+    "signUpSubtitle": "Creează un cont gratuit pentru a salva analizele",
+    "continueGoogle": "Continuă cu Google",
+    "continueGitHub": "Continuă cu GitHub",
+    "orEmail": "sau continuă cu email",
+    "fullName": "Nume complet",
+    "email": "Adresă de email",
+    "password": "Parolă",
+    "createAccount": "Creează Cont",
+    "loading": "Vă rugăm așteptați...",
+    "fillAllFields": "Completați toate câmpurile obligatorii",
+    "checkEmail": "Verifică emailul",
+    "confirmationSent": "Ți-am trimis un link de confirmare. Click pentru a activa contul.",
+    "noAccount": "Nu ai cont?",
+    "haveAccount": "Ai deja cont?",
+    "myAnalyses": "Analizele Mele",
+    "saveSaving": "Se salvează...",
+    "saveSaved": "Salvat",
+    "saveError": "Nesalvat"
+  },
+  "dashboard": {
+    "title": "Analizele Mele",
+    "subtitle": "{count} analize salvate",
+    "signInRequired": "Autentifică-te pentru a vedea analizele",
+    "signInDescription": "Creează un cont gratuit pentru a salva analizele de carieră și a le accesa oricând.",
+    "empty": "Nicio analiză încă",
+    "emptySubtitle": "Rulează prima analiză de carieră pentru a o vedea aici",
+    "startFirst": "Începe Prima Analiză",
+    "viewAnalysis": "Vezi analiza",
+    "delete": "Șterge",
+    "confirmDelete": "Sigur vrei să ștergi această analiză?"
   }
 }

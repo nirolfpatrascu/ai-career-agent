@@ -18,7 +18,8 @@
     "edit": "Edit",
     "fetch": "Fetch",
     "added": "Added",
-    "remove": "Remove"
+    "remove": "Remove",
+    "close": "Close"
   },
   "hero": {
     "badge": "AI-Powered Career Advisor",
@@ -413,5 +414,41 @@
     "connectionsAdvice": "Connect with people in your target domain. Personalize every request (3-4 sentences max). Comment on 5-10 posts daily — this is more effective than posting.",
     "copy": "Copy",
     "copied": "Copied!"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "signInSubtitle": "Save your analyses and access them anytime",
+    "signUpSubtitle": "Create your free account to save analyses",
+    "continueGoogle": "Continue with Google",
+    "continueGitHub": "Continue with GitHub",
+    "orEmail": "or continue with email",
+    "fullName": "Full name",
+    "email": "Email address",
+    "password": "Password",
+    "createAccount": "Create Account",
+    "loading": "Please wait...",
+    "fillAllFields": "Please fill in all required fields",
+    "checkEmail": "Check your email",
+    "confirmationSent": "We sent you a confirmation link. Click it to activate your account.",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "myAnalyses": "My Analyses",
+    "saveSaving": "Saving...",
+    "saveSaved": "Saved",
+    "saveError": "Not saved"
+  },
+  "dashboard": {
+    "title": "My Analyses",
+    "subtitle": "{count} saved analyses",
+    "signInRequired": "Sign in to view your analyses",
+    "signInDescription": "Create a free account to save your career analyses and access them anytime.",
+    "empty": "No analyses yet",
+    "emptySubtitle": "Run your first career analysis to see it here",
+    "startFirst": "Start Your First Analysis",
+    "viewAnalysis": "View analysis",
+    "delete": "Delete",
+    "confirmDelete": "Are you sure you want to delete this analysis?"
   }
 }

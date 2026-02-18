@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation, LOCALE_NAMES } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
+import UserMenu from '@/components/auth/UserMenu';
 
 const LOCALE_SHORT: Record<Locale, string> = {
   en: 'EN', ro: 'RO', de: 'DE', fr: 'FR', es: 'ES', it: 'IT',
@@ -16,8 +17,8 @@ function Logo() {
       <svg width="28" height="28" viewBox="0 0 32 32" fill="none" className="flex-shrink-0">
         <defs>
           <linearGradient id="hlogo" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#3B82F6"/>
-            <stop offset="100%" stopColor="#06B6D4"/>
+            <stop offset="0%" stopColor="#F59E0B"/>
+            <stop offset="100%" stopColor="#FB923C"/>
           </linearGradient>
         </defs>
         <rect width="32" height="32" rx="8" fill="#111113" className="transition-all duration-300 group-hover:fill-[#161618]"/>
@@ -62,17 +63,17 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 no-print">
       <div className="mx-auto max-w-container px-4 sm:px-6 py-3">
-        <nav className="flex items-center justify-between bg-background/60 backdrop-blur-2xl border border-white/[0.06] rounded-2xl px-4 sm:px-5 py-2.5 shadow-lg shadow-black/10">
+        <nav className="flex items-center justify-between bg-background/60 backdrop-blur-2xl border border-white/[0.10] rounded-2xl px-4 sm:px-5 py-2.5 shadow-lg shadow-black/10">
           <Logo />
 
           <div className="flex items-center gap-1 sm:gap-2">
             {/* Landing page nav links */}
             {isLanding && (
               <div className="hidden sm:flex items-center gap-1">
-                <a href="#features" className="text-sm text-text-secondary hover:text-text-primary transition-colors px-3 py-1.5 rounded-lg hover:bg-white/[0.03]">
+                <a href="#features" className="text-sm text-text-secondary hover:text-text-primary transition-colors px-3 py-1.5 rounded-lg hover:bg-white/[0.06]">
                   {t('common.features')}
                 </a>
-                <a href="#how-it-works" className="text-sm text-text-secondary hover:text-text-primary transition-colors px-3 py-1.5 rounded-lg hover:bg-white/[0.03]">
+                <a href="#how-it-works" className="text-sm text-text-secondary hover:text-text-primary transition-colors px-3 py-1.5 rounded-lg hover:bg-white/[0.06]">
                   {t('common.howItWorks')}
                 </a>
               </div>
@@ -82,7 +83,7 @@ export default function Header() {
             <div ref={langRef} className="relative">
               <button
                 onClick={() => setLangOpen(!langOpen)}
-                className="flex items-center gap-1.5 text-sm text-text-secondary hover:text-text-primary transition-colors px-2.5 py-1.5 rounded-lg hover:bg-white/[0.03]"
+                className="flex items-center gap-1.5 text-sm text-text-secondary hover:text-text-primary transition-colors px-2.5 py-1.5 rounded-lg hover:bg-white/[0.06]"
               >
                 <GlobeIcon />
                 <span className="text-xs font-medium">{LOCALE_SHORT[locale]}</span>
@@ -92,7 +93,7 @@ export default function Header() {
               </button>
 
               {langOpen && (
-                <div className="absolute right-0 top-full mt-2 w-40 bg-surface/95 backdrop-blur-xl border border-white/[0.08] rounded-xl shadow-xl shadow-black/50 py-1.5 z-50">
+                <div className="absolute right-0 top-full mt-2 w-40 bg-surface/95 backdrop-blur-xl border border-white/[0.12] rounded-xl shadow-xl shadow-black/50 py-1.5 z-50">
                   {(Object.keys(LOCALE_NAMES) as Locale[]).map((loc) => (
                     <button
                       key={loc}
@@ -100,7 +101,7 @@ export default function Header() {
                       className={`w-full text-left px-3 py-2 text-sm flex items-center justify-between transition-colors rounded-lg mx-0.5 ${
                         locale === loc
                           ? 'text-primary bg-primary/5 font-medium'
-                          : 'text-text-secondary hover:text-text-primary hover:bg-white/[0.03]'
+                          : 'text-text-secondary hover:text-text-primary hover:bg-white/[0.06]'
                       }`}
                       style={{ width: 'calc(100% - 4px)' }}
                     >
@@ -111,6 +112,9 @@ export default function Header() {
                 </div>
               )}
             </div>
+
+            {/* User menu */}
+            <UserMenu />
 
             {/* CTA */}
             <Link
