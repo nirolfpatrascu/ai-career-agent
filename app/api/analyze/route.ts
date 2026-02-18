@@ -14,6 +14,7 @@ import {
   JOB_MATCH_FALLBACK,
 } from '@/lib/prompts';
 import { buildTranslationPrompt } from '@/lib/prompts/translate';
+import { buildKnowledgeContext } from '@/lib/knowledge';
 import type {
   CareerQuestionnaire,
   ExtractedProfile,
@@ -165,7 +166,8 @@ export async function POST(request: NextRequest) {
     // --- Steps 2 & 3: Run gap analysis first, then career plan ---
     // Gap analysis must complete first since career plan needs gaps + roles as input
     console.log('[analyze] Step 2: Gap analysis and role recommendations...');
-    const gapPrompt = buildGapAnalysisPrompt(profile, questionnaire);
+    const knowledge = buildKnowledgeContext(questionnaire);
+    const gapPrompt = buildGapAnalysisPrompt(profile, questionnaire, knowledge.forGapAnalysis);
     const gapAnalysis = await callClaude<GapAnalysisResult>({
       ...gapPrompt,
       maxTokens: 6144,
@@ -183,7 +185,8 @@ export async function POST(request: NextRequest) {
       profile,
       questionnaire,
       gapAnalysis.gaps,
-      gapAnalysis.roleRecommendations
+      gapAnalysis.roleRecommendations,
+      knowledge.forCareerPlan
     );
 
     const parallelCalls: [Promise<CareerPlanResult>, Promise<JobMatch | undefined>] = [

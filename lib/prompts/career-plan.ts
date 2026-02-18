@@ -6,11 +6,11 @@ import type {
   ActionPlan,
   SalaryAnalysis,
 } from '../types';
-import { getLanguageInstruction } from './language';
 
 // ============================================================================
 // Prompt #3: Career Plan + Salary Benchmarks
 // Takes profile + gaps + role recs → action plan + salary analysis
+// NOTE: Always generates English output. Translation is handled post-processing.
 // ============================================================================
 
 export interface CareerPlanResult {
@@ -23,11 +23,10 @@ export function buildCareerPlanPrompt(
   questionnaire: CareerQuestionnaire,
   gaps: Gap[],
   roleRecommendations: RoleRecommendation[],
-  language?: string
+  knowledgeContext?: string
 ): { system: string; userMessage: string } {
-  const langInstruction = getLanguageInstruction(language);
 
-  const system = `${langInstruction}You are a senior career strategist who creates highly specific, actionable career development plans. You have deep knowledge of tech industry salary benchmarks across global markets.
+  const system = `You are a senior career strategist who creates highly specific, actionable career development plans. You have deep knowledge of tech industry salary benchmarks across global markets.
 
 Your task is to create a prioritized action plan that closes the identified skill gaps and positions the candidate for their target roles, plus a detailed salary analysis.
 
@@ -123,6 +122,8 @@ ${JSON.stringify(gaps, null, 2)}
 
 RECOMMENDED ROLES:
 ${JSON.stringify(roleRecommendations, null, 2)}
+
+${knowledgeContext ? `REFERENCE DATA (use to calibrate salary ranges, action items, and negotiation tips — do NOT copy verbatim, synthesize into personalized recommendations):\n${knowledgeContext}` : ''}
 
 Create the action plan and salary analysis as JSON. Remember: ALL salary figures must be GROSS ANNUAL.`;
 

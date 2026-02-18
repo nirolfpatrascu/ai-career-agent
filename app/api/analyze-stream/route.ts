@@ -14,6 +14,7 @@ import {
   JOB_MATCH_FALLBACK,
 } from '@/lib/prompts';
 import { buildTranslationPrompt } from '@/lib/prompts/translate';
+import { buildKnowledgeContext } from '@/lib/knowledge';
 import type {
   CareerQuestionnaire,
   ExtractedProfile,
@@ -170,7 +171,10 @@ export async function POST(request: NextRequest) {
         // --- Step 2: Gap Analysis ---
         send({ step: 'gap_analysis', progress: 25, message: 'Analyzing skill gaps and matching roles...' });
 
-        const gapPrompt = buildGapAnalysisPrompt(profile, questionnaire);
+        // Build knowledge context from curated data
+        const knowledge = buildKnowledgeContext(questionnaire);
+
+        const gapPrompt = buildGapAnalysisPrompt(profile, questionnaire, knowledge.forGapAnalysis);
         const gapAnalysis = await callClaude<GapAnalysisResult>({
           ...gapPrompt,
           maxTokens: 6144,
@@ -196,7 +200,7 @@ export async function POST(request: NextRequest) {
         send({ step: 'career_plan', progress: 55, message: 'Building your career roadmap...' });
 
         const planPrompt = buildCareerPlanPrompt(
-          profile, questionnaire, gapAnalysis.gaps, gapAnalysis.roleRecommendations
+          profile, questionnaire, gapAnalysis.gaps, gapAnalysis.roleRecommendations, knowledge.forCareerPlan
         );
 
         const hasJobPosting = questionnaire.jobPosting && questionnaire.jobPosting.trim().length > 50;

@@ -6,11 +6,11 @@ import type {
   Gap,
   RoleRecommendation,
 } from '../types';
-import { getLanguageInstruction } from './language';
 
 // ============================================================================
 // Prompt #2: Gap Analysis + Role Recommendations
 // Takes extracted profile + questionnaire → strengths, gaps, fit score, roles
+// NOTE: Always generates English output. Translation is handled post-processing.
 // ============================================================================
 
 export interface GapAnalysisResult {
@@ -23,11 +23,10 @@ export interface GapAnalysisResult {
 export function buildGapAnalysisPrompt(
   profile: ExtractedProfile,
   questionnaire: CareerQuestionnaire,
-  language?: string
+  knowledgeContext?: string
 ): { system: string; userMessage: string } {
-  const langInstruction = getLanguageInstruction(language);
 
-  const system = `${langInstruction}You are a senior career strategist with 20 years in tech recruitment and career coaching. You specialize in helping technology professionals navigate career transitions.
+  const system = `You are a senior career strategist with 20 years in tech recruitment and career coaching. You specialize in helping technology professionals navigate career transitions.
 
 Your task is to perform a comprehensive gap analysis between a candidate's current profile and their target role, then recommend the best-fit roles.
 
@@ -74,8 +73,8 @@ JSON SCHEMA:
 {
   "fitScore": {
     "score": number (1-10),
-    "label": "string — translate the fit label into user's language (English examples: Strong Fit, Moderate Fit, Stretch, Significant Gap)",
-    "summary": "string — 2-3 sentence overall assessment IN USER'S LANGUAGE. Be specific about what transfers and what doesn't."
+    "label": "Strong Fit" | "Moderate Fit" | "Stretch" | "Significant Gap",
+    "summary": "string — 2-3 sentence overall assessment. Be specific about what transfers and what doesn't."
   },
   "strengths": [
     {
@@ -136,6 +135,8 @@ ${questionnaire.workPreference === 'remote' || questionnaire.workPreference === 
   : 'All salaries must be GROSS ANNUAL.'}
 
 ${alternativeRoles.length > 0 ? `MULTI-ROLE ANALYSIS: The candidate is considering multiple roles. The fitScore and gaps should be evaluated against the PRIMARY target role ("${questionnaire.targetRole}"). However, the roleRecommendations MUST include ALL specified target roles (${[questionnaire.targetRole, ...alternativeRoles].join(', ')}) with individual fit scores and salary ranges for each. Add 1-2 additional AI-suggested roles if relevant.` : ''}
+
+${knowledgeContext ? `REFERENCE DATA (use to calibrate your analysis — do NOT copy verbatim, synthesize into your own recommendations):\n${knowledgeContext}` : ''}
 
 Perform the gap analysis and provide role recommendations as JSON.`;
 
