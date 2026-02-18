@@ -1,4 +1,5 @@
 import type { ExtractedProfile, JobMatch } from '../types';
+import { getLanguageInstruction } from './language';
 
 // ============================================================================
 // Prompt #4: Job Posting Matcher
@@ -8,9 +9,12 @@ import type { ExtractedProfile, JobMatch } from '../types';
 export function buildJobMatchPrompt(
   profile: ExtractedProfile,
   cvText: string,
-  jobPosting: string
+  jobPosting: string,
+  language?: string
 ): { system: string; userMessage: string } {
-  const system = `You are an expert ATS (Applicant Tracking System) analyst and resume optimization specialist. Your task is to compare a candidate's profile against a specific job posting and provide a detailed match analysis.
+  const langInstruction = getLanguageInstruction(language);
+
+  const system = `${langInstruction}You are an expert ATS (Applicant Tracking System) analyst and resume optimization specialist. Your task is to compare a candidate's profile against a specific job posting and provide a detailed match analysis.
 
 You must respond ONLY with a valid JSON object matching the exact schema below. No preamble, no explanation, no markdown fences — just pure JSON.
 

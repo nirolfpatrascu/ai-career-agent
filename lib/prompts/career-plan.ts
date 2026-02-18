@@ -27,12 +27,11 @@ export function buildCareerPlanPrompt(
 ): { system: string; userMessage: string } {
   const langInstruction = getLanguageInstruction(language);
 
-  const system = `You are a senior career strategist who creates highly specific, actionable career development plans. You have deep knowledge of tech industry salary benchmarks across global markets.
+  const system = `${langInstruction}You are a senior career strategist who creates highly specific, actionable career development plans. You have deep knowledge of tech industry salary benchmarks across global markets.
 
 Your task is to create a prioritized action plan that closes the identified skill gaps and positions the candidate for their target roles, plus a detailed salary analysis.
 
 You must respond ONLY with a valid JSON object matching the exact schema below. No preamble, no explanation, no markdown fences — just pure JSON.
-${langInstruction}
 
 ACTION PLAN RULES:
 1. 30-Day items are QUICK WINS — things that show immediate results or remove blockers

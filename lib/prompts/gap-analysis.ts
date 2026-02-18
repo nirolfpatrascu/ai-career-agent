@@ -27,12 +27,11 @@ export function buildGapAnalysisPrompt(
 ): { system: string; userMessage: string } {
   const langInstruction = getLanguageInstruction(language);
 
-  const system = `You are a senior career strategist with 20 years in tech recruitment and career coaching. You specialize in helping technology professionals navigate career transitions.
+  const system = `${langInstruction}You are a senior career strategist with 20 years in tech recruitment and career coaching. You specialize in helping technology professionals navigate career transitions.
 
 Your task is to perform a comprehensive gap analysis between a candidate's current profile and their target role, then recommend the best-fit roles.
 
 You must respond ONLY with a valid JSON object matching the exact schema below. No preamble, no explanation, no markdown fences — just pure JSON.
-${langInstruction}
 
 ANALYSIS RULES:
 
@@ -75,8 +74,8 @@ JSON SCHEMA:
 {
   "fitScore": {
     "score": number (1-10),
-    "label": "Strong Fit" | "Moderate Fit" | "Stretch" | "Significant Gap",
-    "summary": "string — 2-3 sentence overall assessment. Be specific about what transfers and what doesn't."
+    "label": "string — translate the fit label into user's language (English examples: Strong Fit, Moderate Fit, Stretch, Significant Gap)",
+    "summary": "string — 2-3 sentence overall assessment IN USER'S LANGUAGE. Be specific about what transfers and what doesn't."
   },
   "strengths": [
     {

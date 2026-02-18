@@ -9,41 +9,40 @@ const LANGUAGE_NAMES: Record<string, string> = {
 };
 
 /**
- * Returns a language instruction block to append to Claude system prompts.
- * When language is 'en' or undefined, returns empty string (English is the default).
- * For other languages, returns a clear instruction to respond in that language.
- *
- * NOTE: JSON keys (field names) always stay in English — only string VALUES are translated.
- * This keeps the data structure parseable while making the content readable in the user's language.
+ * Returns a PRIORITY language instruction to PREPEND to Claude system prompts.
+ * Must be placed at the very top of the system prompt to override English schema examples.
  */
 export function getLanguageInstruction(language?: string): string {
   if (!language || language === 'en') return '';
 
   const langName = LANGUAGE_NAMES[language] || language;
 
-  return `
-CRITICAL — LANGUAGE INSTRUCTION:
-You MUST write ALL human-readable text in ${langName}. This is mandatory, not optional.
+  return `⚠️ MANDATORY LANGUAGE REQUIREMENT — READ FIRST ⚠️
+You MUST write ALL human-readable text values in ${langName}. This overrides any English examples in the schema below.
 
-TRANSLATE into ${langName}:
-- ALL descriptions, summaries, explanations, advice, reasoning, tips
-- ALL titles of strengths, gaps, role recommendations
-- fitScore.label (e.g. "Potrivire Moderată" not "Moderate Fit")
-- fitScore.summary
-- ALL action items, closing plans, expected impacts
-- ALL salary advice, negotiation tips, best monetary move
-- ALL resource descriptions (but keep resource/course NAMES in original language)
-- timeToClose, timeToReady, timeEstimate values
-- growthPotential text
+TRANSLATE into ${langName} — every single one of these:
+✅ fitScore.label (e.g. translate "Strong Fit" → the equivalent in ${langName})
+✅ fitScore.summary
+✅ strengths[].title, strengths[].description, strengths[].relevance
+✅ gaps[].skill (the display name), gaps[].currentLevel, gaps[].requiredLevel
+✅ gaps[].impact, gaps[].closingPlan, gaps[].timeToClose
+✅ gaps[].resources[] (translate descriptions, keep course/cert names in original)
+✅ roleRecommendations[].title, roleRecommendations[].reasoning
+✅ roleRecommendations[].timeToReady
+✅ actionPlan items: action, timeEstimate, resource, expectedImpact
+✅ salaryAnalysis: region, growthPotential, bestMonetaryMove, negotiationTips
+✅ jobMatch: overallAdvice, cvSuggestions[].current, cvSuggestions[].suggested, cvSuggestions[].reasoning
 
-KEEP in English (these are used for code logic):
-- JSON keys/field names (title, description, severity, etc.)
-- severity enum values: "critical", "moderate", "minor"
-- tier enum values: "differentiator", "strong", "supporting"  
-- priority enum values: "critical", "high", "medium"
-- workPreference values: "remote", "hybrid", "onsite", "flexible"
-- Company names, certification names (AWS, AZ-900, Docker, etc.)
-- Currency codes (EUR, USD, etc.)
+KEEP in English (code logic depends on these exact values):
+❌ JSON keys (title, description, severity, etc.)
+❌ severity: "critical" | "moderate" | "minor"
+❌ tier: "differentiator" | "strong" | "supporting"
+❌ priority: "critical" | "high" | "medium"
+❌ Currency codes: EUR, USD, etc.
+❌ Company names, certification codes (AWS, AZ-900, Docker)
 
-Write naturally and professionally in ${langName} — not machine-translated.`;
+The English examples in the schema below are for STRUCTURE only. Replace all human-readable text with natural, professional ${langName}.
+---
+
+`;
 }
