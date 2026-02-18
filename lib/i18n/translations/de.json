@@ -11,7 +11,14 @@
     "required": "*",
     "optional": "optional",
     "free": "Kostenlos",
-    "builtBy": "Erstellt von"
+    "builtBy": "Erstellt von",
+    "back": "Zurück",
+    "next": "Weiter",
+    "skip": "Überspringen",
+    "edit": "Bearbeiten",
+    "fetch": "Abrufen",
+    "added": "Hinzugefügt",
+    "remove": "Entfernen"
   },
   "hero": {
     "badge": "KI-gesteuerter Karriereberater",
@@ -334,5 +341,55 @@
     "currentRoleMarket": "Markt Aktuelle Rolle",
     "targetRoleMarket": "Markt Zielrolle",
     "companies": "Unternehmen"
+  },
+  "wizard": {
+    "steps": {
+      "linkedin": "LinkedIn-Profil",
+      "cv": "Lebenslauf",
+      "details": "Karrieredetails",
+      "jobs": "Zielstellen",
+      "review": "Überprüfen & Analysieren"
+    },
+    "linkedin": {
+      "title": "Laden Sie Ihr LinkedIn-Profil hoch",
+      "subtitle": "Exportieren Sie Ihr Profil als PDF von LinkedIn für die umfassendste Analyse. Wir erkennen automatisch Ihre Rolle, Erfahrung und Ihren Standort.",
+      "dropHere": "LinkedIn-PDF hier ablegen",
+      "orBrowse": "oder klicken zum Durchsuchen",
+      "detecting": "Profilinformationen werden erkannt...",
+      "howToExport": "So exportieren Sie Ihr LinkedIn-Profil als PDF",
+      "optional": "Dieser Schritt ist optional, wird aber für die beste Analyse empfohlen."
+    },
+    "cv": {
+      "title": "Laden Sie Ihren Lebenslauf hoch",
+      "subtitle": "Ihr Lebenslauf ist das Hauptdokument, das wir analysieren. PDF-Format, max. 5MB.",
+      "dropHere": "Lebenslauf hier ablegen",
+      "orBrowse": "PDF-Format, max. 5MB",
+      "needAtLeastOne": "Laden Sie mindestens einen Lebenslauf oder ein LinkedIn-PDF hoch, um fortzufahren."
+    },
+    "details": {
+      "title": "Erzählen Sie uns von Ihren Karrierezielen",
+      "subtitle": "Dies hilft uns, die Analyse auf Ihre Situation zuzuschneiden.",
+      "prefilled": "Wir haben einige Felder aus Ihrem Profil vorausgefüllt. Überprüfen und vervollständigen Sie den Rest."
+    },
+    "jobs": {
+      "title": "Zielstellenanzeigen hinzufügen",
+      "subtitle": "Fügen Sie 3 oder mehr Jobs hinzu, die Sie interessieren. Dies verbessert die Analyse dramatisch — wir identifizieren gemeinsame Anforderungen, fehlende Fähigkeiten und passen Ihren Fahrplan an.",
+      "minimum": "Minimum",
+      "moreIsBetter": "Mehr Jobs = bessere Analyse",
+      "posting": "Stellenanzeige",
+      "urlPlaceholder": "LinkedIn/Indeed-Job-URL einfügen...",
+      "pasteHere": "Oder fügen Sie die vollständige Stellenbeschreibung hier ein...",
+      "addAnother": "Weitere Stellenanzeige hinzufügen",
+      "skipNote": "Sie können diesen Schritt überspringen, aber Stellenanzeigen verbessern die Analysequalität erheblich."
+    },
+    "review": {
+      "title": "Überprüfen & Analyse starten",
+      "subtitle": "Überprüfen Sie alles und starten Sie dann Ihre KI-Karriereanalyse.",
+      "notProvided": "Nicht angegeben",
+      "incomplete": "Unvollständig",
+      "noJobs": "Keine Stellenanzeigen — Analyse wird allgemeiner",
+      "needFile": "Laden Sie mindestens einen Lebenslauf oder LinkedIn-PDF hoch",
+      "needDetails": "Füllen Sie alle Pflichtfelder aus"
+    }
   }
 }

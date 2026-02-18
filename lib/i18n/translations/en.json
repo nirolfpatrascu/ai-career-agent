@@ -11,7 +11,14 @@
     "required": "*",
     "optional": "optional",
     "free": "Free",
-    "builtBy": "Built by"
+    "builtBy": "Built by",
+    "back": "Back",
+    "next": "Next",
+    "skip": "Skip",
+    "edit": "Edit",
+    "fetch": "Fetch",
+    "added": "Added",
+    "remove": "Remove"
   },
   "hero": {
     "badge": "AI-Powered Career Advisor",
@@ -334,5 +341,55 @@
     "currentRoleMarket": "Current Role Market",
     "targetRoleMarket": "Target Role Market",
     "companies": "Companies"
+  },
+  "wizard": {
+    "steps": {
+      "linkedin": "LinkedIn Profile",
+      "cv": "CV / Resume",
+      "details": "Career Details",
+      "jobs": "Target Jobs",
+      "review": "Review & Analyze"
+    },
+    "linkedin": {
+      "title": "Upload your LinkedIn Profile",
+      "subtitle": "Export your profile as PDF from LinkedIn for the most comprehensive analysis. We auto-detect your current role, experience, and location.",
+      "dropHere": "Drop LinkedIn PDF here",
+      "orBrowse": "or click to browse",
+      "detecting": "Detecting profile info...",
+      "howToExport": "How to export your LinkedIn profile as PDF",
+      "optional": "This step is optional but recommended for the best analysis."
+    },
+    "cv": {
+      "title": "Upload your CV / Resume",
+      "subtitle": "Your CV is the primary document we analyze. PDF format, max 5MB.",
+      "dropHere": "Drop your CV here",
+      "orBrowse": "PDF format, max 5MB",
+      "needAtLeastOne": "Upload at least a CV or LinkedIn PDF to proceed."
+    },
+    "details": {
+      "title": "Tell us about your career goals",
+      "subtitle": "This helps us tailor the analysis to your specific situation.",
+      "prefilled": "We pre-filled some fields from your profile. Verify and complete the rest."
+    },
+    "jobs": {
+      "title": "Add target job postings",
+      "subtitle": "Add 3 or more jobs you are interested in. This dramatically improves the analysis — we identify common requirements, missing skills, and tailor your roadmap.",
+      "minimum": "minimum",
+      "moreIsBetter": "More jobs = better analysis",
+      "posting": "Job Posting",
+      "urlPlaceholder": "Paste LinkedIn/Indeed job URL...",
+      "pasteHere": "Or paste the full job description here...",
+      "addAnother": "Add another job posting",
+      "skipNote": "You can skip this step, but providing job postings significantly improves the analysis quality."
+    },
+    "review": {
+      "title": "Review & Launch Analysis",
+      "subtitle": "Verify everything looks good, then launch your AI career analysis.",
+      "notProvided": "Not provided",
+      "incomplete": "Incomplete",
+      "noJobs": "No job postings — analysis will be more general",
+      "needFile": "Upload at least a CV or LinkedIn PDF",
+      "needDetails": "Complete all required career details"
+    }
   }
 }

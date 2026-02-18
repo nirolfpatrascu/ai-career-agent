@@ -478,7 +478,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
                   }`}
               >
                 {WORK_PREF_ICONS[wp]}
-                {t(`questionnaire.${wp}`) || wp.charAt(0).toUpperCase() + wp.slice(1)}
+                {t(`questionnaire.workOptions.${wp}`) || wp.charAt(0).toUpperCase() + wp.slice(1)}
               </button>
             ))}
           </div>

@@ -11,7 +11,14 @@
     "required": "*",
     "optional": "opțional",
     "free": "Gratuit",
-    "builtBy": "Creat de"
+    "builtBy": "Creat de",
+    "back": "Înapoi",
+    "next": "Următorul",
+    "skip": "Sari",
+    "edit": "Editează",
+    "fetch": "Preia",
+    "added": "Adăugat",
+    "remove": "Șterge"
   },
   "hero": {
     "badge": "Consilier de Carieră cu AI",
@@ -334,5 +341,55 @@
     "currentRoleMarket": "Piața Rolului Actual",
     "targetRoleMarket": "Piața Rolului Țintă",
     "companies": "Companii"
+  },
+  "wizard": {
+    "steps": {
+      "linkedin": "Profil LinkedIn",
+      "cv": "CV / Rezumat",
+      "details": "Detalii Carieră",
+      "jobs": "Joburi Țintă",
+      "review": "Verificare & Analiză"
+    },
+    "linkedin": {
+      "title": "Încarcă profilul tău LinkedIn",
+      "subtitle": "Exportă profilul ca PDF din LinkedIn pentru cea mai completă analiză. Detectăm automat rolul, experiența și locația ta.",
+      "dropHere": "Trage PDF-ul LinkedIn aici",
+      "orBrowse": "sau click pentru a căuta",
+      "detecting": "Detectare informații profil...",
+      "howToExport": "Cum exporti profilul LinkedIn ca PDF",
+      "optional": "Acest pas este opțional dar recomandat pentru cea mai bună analiză."
+    },
+    "cv": {
+      "title": "Încarcă CV-ul tău",
+      "subtitle": "CV-ul este documentul principal pe care îl analizăm. Format PDF, maxim 5MB.",
+      "dropHere": "Trage CV-ul aici",
+      "orBrowse": "Format PDF, maxim 5MB",
+      "needAtLeastOne": "Încarcă cel puțin un CV sau PDF LinkedIn pentru a continua."
+    },
+    "details": {
+      "title": "Spune-ne despre obiectivele tale de carieră",
+      "subtitle": "Ne ajută să personalizăm analiza pentru situația ta.",
+      "prefilled": "Am completat automat câteva câmpuri din profilul tău. Verifică și completează restul."
+    },
+    "jobs": {
+      "title": "Adaugă anunțuri de job țintă",
+      "subtitle": "Adaugă 3 sau mai multe joburi care te interesează. Aceasta îmbunătățește dramatic analiza — identificăm cerințe comune, competențe lipsă și personalizăm planul.",
+      "minimum": "minim",
+      "moreIsBetter": "Mai multe joburi = analiză mai bună",
+      "posting": "Anunț Job",
+      "urlPlaceholder": "Lipește URL job LinkedIn/Indeed...",
+      "pasteHere": "Sau lipește descrierea completă a jobului aici...",
+      "addAnother": "Adaugă alt anunț de job",
+      "skipNote": "Poți sări peste acest pas, dar adăugarea de anunțuri îmbunătățește semnificativ calitatea analizei."
+    },
+    "review": {
+      "title": "Verificare & Lansare Analiză",
+      "subtitle": "Verifică totul, apoi lansează analiza AI de carieră.",
+      "notProvided": "Nespecificat",
+      "incomplete": "Incomplet",
+      "noJobs": "Fără anunțuri de job — analiza va fi mai generală",
+      "needFile": "Încarcă cel puțin un CV sau PDF LinkedIn",
+      "needDetails": "Completează toate detaliile obligatorii"
+    }
   }
 }

@@ -11,7 +11,14 @@
     "required": "*",
     "optional": "opzionale",
     "free": "Gratuito",
-    "builtBy": "Sviluppato da"
+    "builtBy": "Sviluppato da",
+    "back": "Indietro",
+    "next": "Avanti",
+    "skip": "Salta",
+    "edit": "Modifica",
+    "fetch": "Recupera",
+    "added": "Aggiunto",
+    "remove": "Rimuovi"
   },
   "hero": {
     "badge": "Consulente di Carriera con IA",
@@ -334,5 +341,55 @@
     "currentRoleMarket": "Mercato del Ruolo Attuale",
     "targetRoleMarket": "Mercato del Ruolo Target",
     "companies": "Aziende"
+  },
+  "wizard": {
+    "steps": {
+      "linkedin": "Profilo LinkedIn",
+      "cv": "CV / Curriculum",
+      "details": "Dettagli Carriera",
+      "jobs": "Posizioni Target",
+      "review": "Verifica & Analizza"
+    },
+    "linkedin": {
+      "title": "Carica il tuo profilo LinkedIn",
+      "subtitle": "Esporta il tuo profilo come PDF da LinkedIn per l'analisi più completa. Rileviamo automaticamente il tuo ruolo, esperienza e posizione.",
+      "dropHere": "Trascina il PDF LinkedIn qui",
+      "orBrowse": "o clicca per sfogliare",
+      "detecting": "Rilevamento informazioni profilo...",
+      "howToExport": "Come esportare il profilo LinkedIn come PDF",
+      "optional": "Questo passaggio è opzionale ma consigliato per la migliore analisi."
+    },
+    "cv": {
+      "title": "Carica il tuo CV / Curriculum",
+      "subtitle": "Il tuo CV è il documento principale che analizziamo. Formato PDF, max 5MB.",
+      "dropHere": "Trascina il tuo CV qui",
+      "orBrowse": "Formato PDF, max 5MB",
+      "needAtLeastOne": "Carica almeno un CV o PDF LinkedIn per continuare."
+    },
+    "details": {
+      "title": "Raccontaci dei tuoi obiettivi di carriera",
+      "subtitle": "Questo ci aiuta a personalizzare l'analisi per la tua situazione.",
+      "prefilled": "Abbiamo precompilato alcuni campi dal tuo profilo. Verifica e completa il resto."
+    },
+    "jobs": {
+      "title": "Aggiungi annunci di lavoro target",
+      "subtitle": "Aggiungi 3 o più lavori che ti interessano. Questo migliora drasticamente l'analisi — identifichiamo requisiti comuni e competenze mancanti.",
+      "minimum": "minimo",
+      "moreIsBetter": "Più lavori = analisi migliore",
+      "posting": "Annuncio di Lavoro",
+      "urlPlaceholder": "Incolla URL LinkedIn/Indeed...",
+      "pasteHere": "Oppure incolla la descrizione completa del lavoro qui...",
+      "addAnother": "Aggiungi un altro annuncio",
+      "skipNote": "Puoi saltare questo passaggio, ma gli annunci migliorano significativamente la qualità dell'analisi."
+    },
+    "review": {
+      "title": "Verifica & Lancia Analisi",
+      "subtitle": "Verifica che tutto sia corretto, poi lancia la tua analisi di carriera IA.",
+      "notProvided": "Non fornito",
+      "incomplete": "Incompleto",
+      "noJobs": "Nessun annuncio — l'analisi sarà più generale",
+      "needFile": "Carica almeno un CV o PDF LinkedIn",
+      "needDetails": "Completa tutti i dettagli obbligatori"
+    }
   }
 }

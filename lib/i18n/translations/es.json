@@ -11,7 +11,14 @@
     "required": "*",
     "optional": "opcional",
     "free": "Gratis",
-    "builtBy": "Desarrollado por"
+    "builtBy": "Desarrollado por",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "skip": "Saltar",
+    "edit": "Editar",
+    "fetch": "Obtener",
+    "added": "Añadido",
+    "remove": "Eliminar"
   },
   "hero": {
     "badge": "Asesor de Carrera con IA",
@@ -334,5 +341,55 @@
     "currentRoleMarket": "Mercado del Puesto Actual",
     "targetRoleMarket": "Mercado del Puesto Objetivo",
     "companies": "Empresas"
+  },
+  "wizard": {
+    "steps": {
+      "linkedin": "Perfil LinkedIn",
+      "cv": "CV / Currículum",
+      "details": "Detalles de Carrera",
+      "jobs": "Empleos Objetivo",
+      "review": "Revisar & Analizar"
+    },
+    "linkedin": {
+      "title": "Sube tu perfil de LinkedIn",
+      "subtitle": "Exporta tu perfil como PDF desde LinkedIn para el análisis más completo. Detectamos automáticamente tu rol, experiencia y ubicación.",
+      "dropHere": "Arrastra el PDF de LinkedIn aquí",
+      "orBrowse": "o haz clic para buscar",
+      "detecting": "Detectando información del perfil...",
+      "howToExport": "Cómo exportar tu perfil de LinkedIn como PDF",
+      "optional": "Este paso es opcional pero recomendado para el mejor análisis."
+    },
+    "cv": {
+      "title": "Sube tu CV / Currículum",
+      "subtitle": "Tu CV es el documento principal que analizamos. Formato PDF, máximo 5MB.",
+      "dropHere": "Arrastra tu CV aquí",
+      "orBrowse": "Formato PDF, máximo 5MB",
+      "needAtLeastOne": "Sube al menos un CV o PDF de LinkedIn para continuar."
+    },
+    "details": {
+      "title": "Cuéntanos sobre tus objetivos profesionales",
+      "subtitle": "Esto nos ayuda a personalizar el análisis para tu situación.",
+      "prefilled": "Hemos completado algunos campos de tu perfil. Verifica y completa el resto."
+    },
+    "jobs": {
+      "title": "Añade ofertas de empleo objetivo",
+      "subtitle": "Añade 3 o más empleos que te interesen. Esto mejora drásticamente el análisis — identificamos requisitos comunes y competencias faltantes.",
+      "minimum": "mínimo",
+      "moreIsBetter": "Más empleos = mejor análisis",
+      "posting": "Oferta de Empleo",
+      "urlPlaceholder": "Pega URL de LinkedIn/Indeed...",
+      "pasteHere": "O pega la descripción completa del empleo aquí...",
+      "addAnother": "Añadir otra oferta",
+      "skipNote": "Puedes saltar este paso, pero las ofertas mejoran significativamente la calidad del análisis."
+    },
+    "review": {
+      "title": "Revisar & Lanzar Análisis",
+      "subtitle": "Verifica que todo esté correcto y lanza tu análisis de carrera con IA.",
+      "notProvided": "No proporcionado",
+      "incomplete": "Incompleto",
+      "noJobs": "Sin ofertas — el análisis será más general",
+      "needFile": "Sube al menos un CV o PDF de LinkedIn",
+      "needDetails": "Completa todos los detalles obligatorios"
+    }
   }
 }
