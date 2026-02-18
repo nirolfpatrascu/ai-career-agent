@@ -2,29 +2,33 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-
-const ROTATING_WORDS = [
-  'career strategy',
-  'skill gap analysis',
-  'salary benchmarks',
-  'action plan',
-  'role recommendations',
-];
+import { useTranslation } from '@/lib/i18n';
 
 export default function Hero() {
+  const { t } = useTranslation();
   const [wordIndex, setWordIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
+
+  // Parse rotating words from translations (stored as JSON array)
+  const rotatingWords: string[] = (() => {
+    try {
+      const val = t('hero.rotatingWords');
+      return typeof val === 'string' ? JSON.parse(val) : ['career strategy'];
+    } catch {
+      return ['career strategy'];
+    }
+  })();
 
   useEffect(() => {
     const interval = setInterval(() => {
       setIsVisible(false);
       setTimeout(() => {
-        setWordIndex((prev) => (prev + 1) % ROTATING_WORDS.length);
+        setWordIndex((prev) => (prev + 1) % rotatingWords.length);
         setIsVisible(true);
       }, 300);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [rotatingWords.length]);
 
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
@@ -51,29 +55,27 @@ export default function Hero() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
           </span>
-          AI-Powered Career Advisor
+          {t('hero.badge')}
         </div>
 
         {/* Main headline */}
         <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-text-primary leading-[1.1] mb-6">
-          Upload your CV.
+          {t('hero.headline1')}
           <br />
-          <span className="text-text-secondary">Get a personalized</span>
+          <span className="text-text-secondary">{t('hero.headline2')}</span>
           <br />
           <span
             className={`text-primary inline-block transition-all duration-300 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
             }`}
           >
-            {ROTATING_WORDS[wordIndex]}
+            {rotatingWords[wordIndex]}
           </span>
         </h1>
 
         {/* Subtitle */}
         <p className="text-lg sm:text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed mb-10">
-          Gap analysis, learning plans, salary benchmarks, role recommendations,
-          and CV optimization — all in 60 seconds. Career coaching that used to cost
-          $500/hour, now powered by AI.
+          {t('hero.subtitle')}
         </p>
 
         {/* CTA buttons */}
@@ -82,7 +84,7 @@ export default function Hero() {
             href="/analyze"
             className="group btn-primary text-lg px-8 py-4 flex items-center gap-3 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300"
           >
-            Analyze My Career
+            {t('hero.analyzeFree')}
             <svg
               className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1"
               fill="none"
@@ -99,17 +101,17 @@ export default function Hero() {
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polygon points="5 3 19 12 5 21 5 3" />
             </svg>
-            Try Demo
+            {t('common.tryDemo')}
           </Link>
         </div>
 
         {/* Stats bar */}
         <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 text-center">
           {[
-            { value: '60s', label: 'Analysis Time' },
-            { value: '10+', label: 'Data Points' },
-            { value: '3', label: 'AI-Powered Steps' },
-            { value: 'Free', label: 'To Use' },
+            { value: '~90s', label: t('hero.stats.analysisTime') },
+            { value: '10+', label: t('hero.stats.dataPoints') },
+            { value: '3', label: t('hero.stats.aiSteps') },
+            { value: t('common.free'), label: t('hero.stats.toUse') },
           ].map((stat, i) => (
             <div key={i} className="flex flex-col items-center">
               <span className="text-2xl sm:text-3xl font-bold text-text-primary">

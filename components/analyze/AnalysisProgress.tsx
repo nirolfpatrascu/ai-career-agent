@@ -1,17 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslation } from '@/lib/i18n';
 
-const PROGRESS_MESSAGES = [
-  { text: 'Reading your CV...', icon: '📄' },
-  { text: 'Extracting skills and experience...', icon: '🔍' },
-  { text: 'Analyzing market positioning...', icon: '📊' },
-  { text: 'Identifying skill gaps...', icon: '🎯' },
-  { text: 'Matching against target roles...', icon: '🏢' },
-  { text: 'Building your career roadmap...', icon: '🗺️' },
-  { text: 'Calculating salary benchmarks...', icon: '💰' },
-  { text: 'Generating your personalized report...', icon: '✨' },
-];
+const MESSAGE_ICONS = ['📄', '🔍', '📊', '🎯', '🏢', '🗺️', '💰', '✨'];
 
 const CHECKPOINTS = [
   { seconds: 0, progress: 0 },
@@ -40,28 +32,46 @@ function getTargetProgress(elapsedSeconds: number): number {
 }
 
 export default function AnalysisProgress() {
+  const { t } = useTranslation();
   const [messageIndex, setMessageIndex] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [elapsed, setElapsed] = useState(0);
+
+  // Parse messages array from translations
+  const messages: string[] = (() => {
+    try {
+      const val = t('progress.messages');
+      return typeof val === 'string' ? JSON.parse(val) : MESSAGE_ICONS.map((_, i) => `Step ${i + 1}...`);
+    } catch {
+      return MESSAGE_ICONS.map((_, i) => `Step ${i + 1}...`);
+    }
+  })();
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setMessageIndex((prev) =>
-        prev < PROGRESS_MESSAGES.length - 1 ? prev + 1 : prev
-      );
+      setMessageIndex((prev) => (prev < messages.length - 1 ? prev + 1 : prev));
     }, 12000);
     return () => clearInterval(interval);
-  }, []);
+  }, [messages.length]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setElapsed((prev) => {
-        const newElapsed = prev + 0.5;
-        setProgress(getTargetProgress(newElapsed));
-        return newElapsed;
+      setProgress((prev) => {
+        const elapsed = prev;
+        return getTargetProgress(elapsed + 0.5);
       });
     }, 500);
-    return () => clearInterval(interval);
+
+    // Use a separate counter for elapsed time
+    let elapsed = 0;
+    const timer = setInterval(() => {
+      elapsed += 0.5;
+      setProgress(getTargetProgress(elapsed));
+    }, 500);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(timer);
+    };
   }, []);
 
   return (
@@ -71,18 +81,16 @@ export default function AnalysisProgress() {
           <div className="absolute inset-0 rounded-full border-2 border-card-border" />
           <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-primary animate-spin" />
           <div className="absolute inset-3 rounded-full bg-primary/5 animate-pulse flex items-center justify-center">
-            <span className="text-2xl">
-              {PROGRESS_MESSAGES[messageIndex].icon}
-            </span>
+            <span className="text-2xl">{MESSAGE_ICONS[messageIndex]}</span>
           </div>
         </div>
 
         <div className="space-y-2">
           <p className="text-xl font-semibold text-text-primary transition-all duration-300">
-            {PROGRESS_MESSAGES[messageIndex].text}
+            {messages[messageIndex]}
           </p>
           <p className="text-sm text-text-secondary">
-            This typically takes 60-90 seconds
+            {t('progress.typicallyTakes')}
           </p>
         </div>
 
@@ -93,19 +101,17 @@ export default function AnalysisProgress() {
               style={{ width: `${progress}%` }}
             />
           </div>
-          <div className="text-center text-xs text-text-secondary">
-            <span>{Math.round(progress)}% complete</span>
-          </div>
+          <p className="text-xs text-text-secondary">
+            {t('progress.percentComplete', { percent: String(Math.round(progress)) })}
+          </p>
         </div>
 
         <div className="flex items-center justify-center gap-3">
-          {PROGRESS_MESSAGES.map((_, i) => (
+          {MESSAGE_ICONS.map((_, i) => (
             <div
               key={i}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                i <= messageIndex
-                  ? 'bg-primary scale-100'
-                  : 'bg-card-border scale-75'
+                i <= messageIndex ? 'bg-primary scale-100' : 'bg-card-border scale-75'
               }`}
             />
           ))}

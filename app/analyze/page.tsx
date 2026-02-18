@@ -385,8 +385,8 @@ export default function AnalyzePage() {
                 </h2>
                 <p className="text-xs text-text-secondary mb-5">
                   {autoDetected
-                    ? 'We pre-filled what we could from your upload. Complete the remaining fields — especially your target role.'
-                    : 'Tell us about your current position and where you want to go.'}
+                    ? t('analyze.preFilled')
+                    : t('analyze.tellUsGoals')}
                 </p>
                 <Questionnaire data={questionnaire} onChange={setQuestionnaire} />
               </div>
@@ -411,7 +411,7 @@ export default function AnalyzePage() {
             {!isFormValid && (
               <p className="text-sm text-text-secondary text-center">
                 {!hasFile
-                  ? 'Upload a LinkedIn PDF or CV to get started'
+                  ? t('analyze.uploadAtLeastOne')
                   : t('analyze.fillFields')}
               </p>
             )}

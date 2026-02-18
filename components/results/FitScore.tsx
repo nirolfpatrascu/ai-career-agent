@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { getFitScoreColor } from '@/lib/utils';
+import { useTranslation } from '@/lib/i18n';
 import type { FitScore } from '@/lib/types';
 
 interface FitScoreGaugeProps {
@@ -9,6 +10,7 @@ interface FitScoreGaugeProps {
 }
 
 export default function FitScoreGauge({ fitScore }: FitScoreGaugeProps) {
+  const { t } = useTranslation();
   const [animated, setAnimated] = useState(false);
   const color = getFitScoreColor(fitScore.score);
   const percentage = fitScore.score / 10;

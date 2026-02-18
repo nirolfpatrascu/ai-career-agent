@@ -111,16 +111,16 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
           </svg>
-          Add alternative target roles (optional)
+          {t('questionnaire.addAlternativeRoles')}
         </button>
       ) : (
         <div className="space-y-3 pl-3 border-l-2 border-primary/20">
           <p className="text-xs text-text-secondary">
-            Add 1-2 alternative roles you&apos;re considering. We&apos;ll analyze your fit for each.
+            {t('questionnaire.alternativeRolesHint')}
           </p>
           <div>
             <label htmlFor="targetRole2" className="label">
-              Alternative Role 1
+              {t('questionnaire.targetRole2Label')}
               <span className="text-text-secondary font-normal ml-1">({t('common.optional')})</span>
             </label>
             <input
@@ -134,7 +134,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
           </div>
           <div>
             <label htmlFor="targetRole3" className="label">
-              Alternative Role 2
+              {t('questionnaire.targetRole3Label')}
               <span className="text-text-secondary font-normal ml-1">({t('common.optional')})</span>
             </label>
             <input
@@ -259,8 +259,8 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
       <div>
         <div className="flex items-center justify-between mb-2">
           <label className="label mb-0">
-            Job Posting
-            <span className="text-text-secondary font-normal ml-1">(optional — for targeted advice)</span>
+            {t('questionnaire.jobPostingLabel')}
+            <span className="text-text-secondary font-normal ml-1">({t('questionnaire.jobPostingOptional')})</span>
           </label>
         </div>
 
@@ -280,7 +280,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
               </svg>
-              Paste URL
+              {t('questionnaire.jobUrl.tabUrl')}
             </span>
           </button>
           <button
@@ -297,7 +297,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
                 <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
                 <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
               </svg>
-              Paste Text
+              {t('questionnaire.jobUrl.tabPaste')}
             </span>
           </button>
         </div>
@@ -314,7 +314,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
                   setJobFetchError('');
                   setJobFetched(false);
                 }}
-                placeholder="https://linkedin.com/jobs/view/... or any job page"
+                placeholder={t('questionnaire.jobUrl.placeholder')}
               />
               <button
                 type="button"
@@ -328,7 +328,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                     </svg>
-                    Fetching...
+                    {t('questionnaire.jobUrl.fetching')}
                   </>
                 ) : (
                   <>
@@ -337,7 +337,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
                       <polyline points="7 10 12 15 17 10" />
                       <line x1="12" y1="15" x2="12" y2="3" />
                     </svg>
-                    Fetch
+                    {t('questionnaire.jobUrl.fetch')}
                   </>
                 )}
               </button>
@@ -356,7 +356,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
                 <div className="min-w-0">
-                  <p className="text-xs text-success font-medium">Job posting fetched successfully</p>
+                  <p className="text-xs text-success font-medium">{t('questionnaire.jobUrl.fetchSuccess')}</p>
                   <p className="text-xs text-text-secondary mt-0.5 line-clamp-2">{data.jobPosting.slice(0, 150)}...</p>
                 </div>
                 <button
@@ -368,14 +368,12 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
                   }}
                   className="text-text-secondary hover:text-danger text-xs flex-shrink-0"
                 >
-                  Clear
+                  {t('questionnaire.jobUrl.clear')}
                 </button>
               </div>
             )}
 
-            <p className="text-xs text-text-secondary mt-1.5">
-              Paste a LinkedIn, Indeed, Glassdoor, or any job page link. Some sites may block fetching — use &quot;Paste Text&quot; as a fallback.
-            </p>
+            <p className="text-xs text-text-secondary mt-1.5">{t('questionnaire.jobUrl.urlHint')}</p>
           </div>
         ) : (
           <div>
@@ -384,11 +382,9 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
               className="input-field min-h-[120px] resize-y"
               value={data.jobPosting || ''}
               onChange={(e) => update('jobPosting', e.target.value)}
-              placeholder="Paste the full job description text here..."
+              placeholder={t('questionnaire.jobUrl.pastePlaceholder')}
             />
-            <p className="text-xs text-text-secondary mt-1">
-              Copy the full job description from the job posting page and paste it above.
-            </p>
+            <p className="text-xs text-text-secondary mt-1">{t('questionnaire.jobUrl.pasteHint')}</p>
           </div>
         )}
       </div>
