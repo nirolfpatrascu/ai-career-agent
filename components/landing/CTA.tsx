@@ -7,34 +7,34 @@ export default function CTA() {
   const { t } = useTranslation();
 
   return (
-    <section className="py-24">
-      <div className="max-w-container mx-auto px-6">
-        <div className="relative overflow-hidden rounded-2xl border border-card-border bg-card p-12 sm:p-16 text-center">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-primary/10 rounded-full blur-[100px]" />
-          </div>
-          <div className="relative z-10">
-            <h2 className="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
+    <section className="relative py-28 sm:py-36">
+      <div className="max-w-container mx-auto px-4 sm:px-6">
+        <div className="relative overflow-hidden rounded-3xl border border-white/[0.06]">
+          {/* Gradient bg */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.08] via-transparent to-accent-cyan/[0.06]" />
+          <div className="absolute inset-0 grid-bg opacity-30" />
+
+          {/* Glow orbs */}
+          <div className="absolute -top-20 -left-20 w-60 h-60 rounded-full bg-primary/10 blur-[80px]" />
+          <div className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full bg-accent-cyan/[0.08] blur-[80px]" />
+
+          <div className="relative z-10 text-center py-16 sm:py-20 px-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-text-primary mb-5">
               {t('cta.title')}
             </h2>
-            <p className="text-lg text-text-secondary max-w-xl mx-auto mb-8">
+            <p className="max-w-xl mx-auto text-text-secondary text-base sm:text-lg leading-relaxed mb-10">
               {t('cta.subtitle')}
             </p>
             <Link
               href="/analyze"
-              className="group btn-primary text-lg px-10 py-4 inline-flex items-center gap-3 shadow-lg shadow-primary/20"
+              className="group btn-primary text-base sm:text-lg px-10 py-4 inline-flex items-center gap-3 rounded-2xl"
             >
               {t('cta.button')}
-              <svg
-                className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </Link>
-            <p className="text-sm text-text-secondary mt-6">
+            <p className="mt-6 text-sm text-text-tertiary">
               {t('cta.footer')}
             </p>
           </div>

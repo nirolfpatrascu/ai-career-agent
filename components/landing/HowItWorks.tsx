@@ -1,109 +1,86 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import { useTranslation } from '@/lib/i18n';
+
+const STEP_ICONS = [
+  // Upload
+  <svg key="0" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>,
+  // Tell Us
+  <svg key="1" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>,
+  // Get Roadmap
+  <svg key="2" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>,
+];
 
 export default function HowItWorks() {
   const { t } = useTranslation();
+  const sectionRef = useRef<HTMLElement>(null);
 
-  const visuals = [
-    // Step 1: Upload visual
-    <div key="v1" className="bg-background rounded-xl border border-card-border p-6">
-      <div className="flex items-center gap-3 mb-4">
-        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="17 8 12 3 7 8" />
-            <line x1="12" y1="3" x2="12" y2="15" />
-          </svg>
-        </div>
-        <div>
-          <p className="text-sm font-medium text-text-primary">resume_2026.pdf</p>
-          <p className="text-xs text-text-secondary">1.2 MB • PDF</p>
-        </div>
-      </div>
-      <div className="h-2 rounded-full bg-card-border overflow-hidden">
-        <div className="h-full w-full bg-primary rounded-full" />
-      </div>
-      <p className="text-xs text-success mt-2">{t('howItWorks.visual.uploadComplete')}</p>
-    </div>,
-    // Step 2: Form visual
-    <div key="v2" className="bg-background rounded-xl border border-card-border p-6 space-y-3">
-      {[
-        { label: t('howItWorks.visual.currentRole'), value: 'Software Engineer' },
-        { label: t('howItWorks.visual.targetRole'), value: 'AI Solutions Architect' },
-        { label: t('howItWorks.visual.country'), value: 'Romania' },
-      ].map((field, i) => (
-        <div key={i}>
-          <p className="text-xs text-text-secondary mb-1">{field.label}</p>
-          <div className="bg-card border border-card-border rounded-lg px-3 py-2 text-sm text-text-primary">
-            {field.value}
-          </div>
-        </div>
-      ))}
-    </div>,
-    // Step 3: Results visual
-    <div key="v3" className="bg-background rounded-xl border border-card-border p-6">
-      <div className="flex items-center justify-center mb-4">
-        <div className="relative w-20 h-20">
-          <svg className="w-20 h-20 -rotate-90" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="40" fill="none" stroke="#27272A" strokeWidth="8" />
-            <circle cx="50" cy="50" r="40" fill="none" stroke="#3B82F6" strokeWidth="8" strokeDasharray="251.3" strokeDashoffset="50.3" strokeLinecap="round" />
-          </svg>
-          <span className="absolute inset-0 flex items-center justify-center text-xl font-bold text-text-primary">8/10</span>
-        </div>
-      </div>
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-success" />
-          <span className="text-xs text-text-secondary">{t('howItWorks.visual.strengthsIdentified')}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-warning" />
-          <span className="text-xs text-text-secondary">{t('howItWorks.visual.gapsToClose')}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-primary" />
-          <span className="text-xs text-text-secondary">{t('howItWorks.visual.actionItems')}</span>
-        </div>
-      </div>
-    </div>,
-  ];
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    const els = sectionRef.current?.querySelectorAll('.fade-in-up');
+    els?.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const steps = t('howItWorks.steps') as unknown as { title: string; description: string }[];
 
   return (
-    <section id="how-it-works" className="py-24">
-      <div className="max-w-container mx-auto px-6">
-        <div className="text-center mb-16">
-          <p className="text-sm font-medium text-primary uppercase tracking-wider mb-3">
+    <section id="how-it-works" ref={sectionRef} className="relative py-28 sm:py-36">
+      {/* Subtle top divider */}
+      <div className="absolute top-0 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+
+      <div className="max-w-container mx-auto px-4 sm:px-6">
+        {/* Header */}
+        <div className="text-center mb-16 sm:mb-20 fade-in-up">
+          <div className="section-badge mb-5">
             {t('howItWorks.sectionLabel')}
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-text-primary mb-5">
             {t('howItWorks.title')}
           </h2>
-          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+          <p className="max-w-2xl mx-auto text-text-secondary text-base sm:text-lg leading-relaxed">
             {t('howItWorks.subtitle')}
           </p>
         </div>
 
-        <div className="space-y-20">
-          {[0, 1, 2].map((i) => (
-            <div
-              key={i}
-              className={`flex flex-col ${
-                i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-              } items-center gap-12 lg:gap-16`}
-            >
-              <div className="flex-1 space-y-4">
-                <span className="text-5xl font-bold text-primary/20">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <h3 className="text-2xl font-bold text-text-primary">
-                  {t(`howItWorks.steps.${i}.title`)}
+        {/* Steps */}
+        <div className="max-w-3xl mx-auto">
+          {Array.isArray(steps) && steps.map((step, i) => (
+            <div key={i} className="fade-in-up relative flex gap-6 sm:gap-8" style={{ transitionDelay: `${i * 120}ms` }}>
+              {/* Timeline */}
+              <div className="flex flex-col items-center flex-shrink-0">
+                {/* Number circle */}
+                <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-accent-cyan/10 border border-primary/20 flex items-center justify-center text-primary">
+                  {STEP_ICONS[i]}
+                  {/* Step number badge */}
+                  <div className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-gradient-to-r from-primary to-accent-cyan text-[10px] font-bold text-white flex items-center justify-center">
+                    {i + 1}
+                  </div>
+                </div>
+                {/* Connector line */}
+                {i < steps.length - 1 && (
+                  <div className="w-px flex-1 my-3 bg-gradient-to-b from-primary/20 to-transparent min-h-[40px]" />
+                )}
+              </div>
+
+              {/* Content */}
+              <div className={`pb-12 ${i === steps.length - 1 ? 'pb-0' : ''}`}>
+                <h3 className="text-xl sm:text-2xl font-bold text-text-primary mb-2 tracking-tight">
+                  {step.title}
                 </h3>
-                <p className="text-lg text-text-secondary leading-relaxed">
-                  {t(`howItWorks.steps.${i}.description`)}
+                <p className="text-text-secondary leading-relaxed text-sm sm:text-base">
+                  {step.description}
                 </p>
               </div>
-              <div className="flex-1 w-full max-w-md">{visuals[i]}</div>
             </div>
           ))}
         </div>

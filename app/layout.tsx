@@ -1,18 +1,26 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Plus_Jakarta_Sans, Bricolage_Grotesque } from 'next/font/google';
 import { I18nProvider } from '@/lib/i18n';
 import './globals.css';
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-jakarta',
   display: 'swap',
+  weight: ['300', '400', '500', '600', '700', '800'],
+});
+
+const bricolage = Bricolage_Grotesque({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-display',
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
 });
 
 export const metadata: Metadata = {
-  title: 'GapZero — AI-Powered Career Growth Advisor',
+  title: 'GapZero — AI Career Gap Analysis & Career Roadmap',
   description:
-    'Upload your CV, get a personalized career strategy in 60 seconds. AI-powered gap analysis, learning plans, salary benchmarks, and CV optimization.',
+    'Upload your CV, get a personalized career strategy in under 2 minutes. AI-powered skill gap analysis, salary benchmarks, role recommendations, and 30/90/365-day action plans.',
   keywords: [
     'career advice',
     'AI career coach',
@@ -20,21 +28,41 @@ export const metadata: Metadata = {
     'skill gap analysis',
     'salary benchmarks',
     'career transition',
+    'resume analysis',
+    'career roadmap',
+    'job match score',
+    'career planning tool',
   ],
-  metadataBase: new URL('https://ai-career-agent-gamma.vercel.app'),
+  metadataBase: new URL('https://gapzero.app'),
   openGraph: {
-    title: 'GapZero — AI-Powered Career Growth Advisor',
+    title: 'GapZero — AI Career Gap Analysis & Career Roadmap',
     description:
-      'Upload your CV, get a personalized career strategy in 60 seconds. Gap analysis, salary benchmarks, role recommendations, and a 30/90/365-day action plan — powered by AI.',
+      'Upload your CV, get a personalized career strategy in under 2 minutes. Gap analysis, salary benchmarks, role recommendations, and a 30/90/365-day action plan — powered by AI.',
     type: 'website',
-    url: 'https://ai-career-agent-gamma.vercel.app',
+    url: 'https://gapzero.app',
     siteName: 'GapZero',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'GapZero — AI-Powered Career Gap Analysis',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'GapZero — AI-Powered Career Growth Advisor',
+    title: 'GapZero — AI Career Gap Analysis & Career Roadmap',
     description:
-      'Upload your CV, get a personalized career strategy in 60 seconds.',
+      'Upload your CV, get a personalized career strategy in under 2 minutes.',
+    images: ['/og-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: 'https://gapzero.app',
   },
 };
 
@@ -44,7 +72,34 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} dark`}>
+    <html lang="en" className={`${jakarta.variable} ${bricolage.variable} dark`}>
+      <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebApplication',
+              name: 'GapZero',
+              description:
+                'AI-powered career gap analysis and career roadmap tool. Upload your CV and get personalized career advice.',
+              url: 'https://gapzero.app',
+              applicationCategory: 'BusinessApplication',
+              operatingSystem: 'Any',
+              offers: {
+                '@type': 'Offer',
+                price: '0',
+                priceCurrency: 'USD',
+              },
+              author: {
+                '@type': 'Person',
+                name: 'Florin Pătrascu',
+              },
+            }),
+          }}
+        />
+      </head>
       <body className="min-h-screen bg-background font-sans antialiased">
         <I18nProvider>{children}</I18nProvider>
       </body>
