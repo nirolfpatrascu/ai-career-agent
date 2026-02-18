@@ -293,6 +293,12 @@
   animation: wordFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Wizard step slide-in */
+@keyframes slideIn {
+  0% { opacity: 0; transform: translateX(24px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
 /* Pulse ring for score */
 @keyframes pulseRing {
   0% { transform: scale(0.95); opacity: 0.5; }
@@ -306,6 +312,20 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
+}
+
+/* Hide scrollbar for tab bars */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Safe area padding for mobile bottom bar (notch devices) */
+.safe-bottom {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
 }
 
 @media print {

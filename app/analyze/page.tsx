@@ -17,7 +17,7 @@ import SalaryBenchmark from '@/components/results/SalaryBenchmark';
 import JobMatchPanel from '@/components/results/JobMatchPanel';
 import PDFReport from '@/components/shared/PDFReport';
 import ChatPanel from '@/components/results/ChatPanel';
-import ChapterNav from '@/components/results/ChapterNav';
+import ChapterNav, { DEFAULT_TAB } from '@/components/results/ChapterNav';
 import { getSampleAnalysis } from '@/lib/demo';
 import { useTranslation } from '@/lib/i18n';
 import type { AnalysisResult, CareerQuestionnaire } from '@/lib/types';
@@ -30,6 +30,7 @@ export default function AnalyzePage() {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState<string>('');
   const [isDemo, setIsDemo] = useState(false);
+  const [activeTab, setActiveTab] = useState(DEFAULT_TAB);
 
   // Streaming analysis hook
   const streaming = useStreamingAnalysis();
@@ -102,6 +103,7 @@ export default function AnalyzePage() {
     setResult(null);
     setError('');
     setIsDemo(false);
+    setActiveTab(DEFAULT_TAB);
     streaming.reset();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [streaming]);
@@ -123,18 +125,78 @@ export default function AnalyzePage() {
   }
 
   // ==========================================================================
-  // RESULTS STATE (Action Plan first — #6 from feature list)
+  // RESULTS STATE — Tabbed dashboard
   // ==========================================================================
   if (state === 'results' && result) {
+    const renderActiveTab = () => {
+      switch (activeTab) {
+        case 'fit-score':
+          return (
+            <div role="tabpanel" id="tabpanel-fit-score" aria-labelledby="tab-fit-score">
+              <FitScoreGauge fitScore={result.fitScore} />
+            </div>
+          );
+        case 'strengths':
+          return (
+            <div role="tabpanel" id="tabpanel-strengths" aria-labelledby="tab-strengths">
+              <StrengthsPanel strengths={result.strengths} />
+            </div>
+          );
+        case 'gaps':
+          return (
+            <div role="tabpanel" id="tabpanel-gaps" aria-labelledby="tab-gaps">
+              <GapsPanel gaps={result.gaps} />
+            </div>
+          );
+        case 'action-plan':
+          return (
+            <div role="tabpanel" id="tabpanel-action-plan" aria-labelledby="tab-action-plan">
+              <ActionPlan plan={result.actionPlan} />
+            </div>
+          );
+        case 'roles':
+          return (
+            <div role="tabpanel" id="tabpanel-roles" aria-labelledby="tab-roles">
+              <RoleRecommendations roles={result.roleRecommendations} />
+            </div>
+          );
+        case 'salary':
+          return (
+            <div role="tabpanel" id="tabpanel-salary" aria-labelledby="tab-salary">
+              <SalaryBenchmark salary={result.salaryAnalysis} />
+            </div>
+          );
+        case 'job-match':
+          return result.jobMatch ? (
+            <div role="tabpanel" id="tabpanel-job-match" aria-labelledby="tab-job-match">
+              <JobMatchPanel match={result.jobMatch} />
+            </div>
+          ) : null;
+        case 'ai-coach':
+          return (
+            <div role="tabpanel" id="tabpanel-ai-coach" aria-labelledby="tab-ai-coach">
+              <ChatPanel analysis={result} />
+            </div>
+          );
+        default:
+          return null;
+      }
+    };
+
     return (
       <ErrorBoundary>
         <Header />
-        <ChapterNav hasJobMatch={!!result.jobMatch} />
-        <main className="pt-24 pb-12 px-4 sm:px-6">
-          <div className="max-w-container mx-auto space-y-12">
+        <ChapterNav
+          hasJobMatch={!!result.jobMatch}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
+        {/* pt-[7.5rem] = header(64px) + tab bar(~56px) */}
+        <main className="pt-[7.5rem] pb-20 sm:pb-12 px-4 sm:px-6 min-h-screen">
+          <div className="max-w-container mx-auto">
             {/* Demo banner */}
             {isDemo && (
-              <div className="flex items-center justify-between bg-primary/[0.06] border border-primary/15 rounded-2xl px-5 py-3 text-sm">
+              <div className="flex items-center justify-between bg-primary/[0.06] border border-primary/15 rounded-2xl px-5 py-3 text-sm mb-6">
                 <span className="text-text-secondary">
                   👆 {t('analyze.demoNotice')}
                 </span>
@@ -144,8 +206,8 @@ export default function AnalyzePage() {
               </div>
             )}
 
-            {/* Header */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            {/* Header with metadata + actions */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
               <div>
                 <h1 className="text-2xl sm:text-3xl font-bold text-text-primary font-display">
                   {t('analyze.yourAnalysis')}
@@ -167,46 +229,8 @@ export default function AnalyzePage() {
               </div>
             </div>
 
-            {/* Sections — Action Plan FIRST (#6 from feature list) */}
-            <div id="action-plan" className="scroll-mt-24">
-              <ActionPlan plan={result.actionPlan} />
-            </div>
-            <div id="gaps" className="scroll-mt-24">
-              <GapsPanel gaps={result.gaps} />
-            </div>
-            <div id="fit-score" className="scroll-mt-24">
-              <FitScoreGauge fitScore={result.fitScore} />
-            </div>
-            <div id="strengths" className="scroll-mt-24">
-              <StrengthsPanel strengths={result.strengths} />
-            </div>
-            <div id="roles" className="scroll-mt-24">
-              <RoleRecommendations roles={result.roleRecommendations} />
-            </div>
-            <div id="salary" className="scroll-mt-24">
-              <SalaryBenchmark salary={result.salaryAnalysis} />
-            </div>
-            {result.jobMatch && (
-              <div id="job-match" className="scroll-mt-24">
-                <JobMatchPanel match={result.jobMatch} />
-              </div>
-            )}
-
-            <div id="ai-coach" className="scroll-mt-24">
-              <ChatPanel analysis={result} />
-            </div>
-
-            {/* Bottom CTA */}
-            <div className="text-center pt-8 pb-4">
-              <div className="inline-flex flex-col items-center gap-4 px-8 py-6 rounded-2xl border border-white/[0.10] bg-white/[0.05]">
-                <p className="text-text-tertiary text-sm">
-                  {t('analyze.wantDifferent')}
-                </p>
-                <button onClick={handleReset} className="btn-primary text-sm">
-                  {t('common.startNewAnalysis')}
-                </button>
-              </div>
-            </div>
+            {/* Active tab content */}
+            {renderActiveTab()}
           </div>
         </main>
         <Footer />
