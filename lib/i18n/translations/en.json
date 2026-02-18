@@ -207,7 +207,15 @@
       "Calculating salary benchmarks...",
       "Generating your personalized report...",
       "Finalizing your report..."
-    ]
+    ],
+    "stepLabel": "Step",
+    "steps": {
+      "parsing": "Reading your documents",
+      "extraction": "Extracting skills & experience",
+      "gap_analysis": "Analyzing gaps & matching roles",
+      "career_plan": "Building career roadmap & salary benchmarks",
+      "translating": "Translating your report"
+    }
   },
   "results": {
     "fitScore": {

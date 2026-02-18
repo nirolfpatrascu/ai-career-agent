@@ -207,7 +207,15 @@
       "Berechnung der Gehaltsbenchmarks...",
       "Generierung Ihres personalisierten Berichts...",
       "Übersetzen Ihres Berichts..."
-    ]
+    ],
+    "stepLabel": "Schritt",
+    "steps": {
+      "parsing": "Ihre Dokumente werden gelesen",
+      "extraction": "Fähigkeiten & Erfahrung werden extrahiert",
+      "gap_analysis": "Lückenanalyse & Rollenabgleich",
+      "career_plan": "Karriereplan & Gehaltsvergleich erstellen",
+      "translating": "Ihr Bericht wird übersetzt"
+    }
   },
   "results": {
     "fitScore": {

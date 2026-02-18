@@ -7,7 +7,8 @@ import Footer from '@/components/shared/Footer';
 import ErrorBoundary from '@/components/shared/ErrorBoundary';
 import DocumentUpload from '@/components/analyze/DocumentUpload';
 import Questionnaire from '@/components/analyze/Questionnaire';
-import AnalysisProgress from '@/components/analyze/AnalysisProgress';
+import StreamingProgress from '@/components/analyze/StreamingProgress';
+import { useStreamingAnalysis } from '@/lib/hooks/useStreamingAnalysis';
 import FitScoreGauge from '@/components/results/FitScore';
 import StrengthsPanel from '@/components/results/StrengthsPanel';
 import GapsPanel from '@/components/results/GapsPanel';
@@ -40,6 +41,26 @@ export default function AnalyzePage() {
     country: '',
     workPreference: 'remote',
   });
+
+  // Streaming analysis hook
+  const streaming = useStreamingAnalysis();
+
+  // React to streaming completion → show results
+  useEffect(() => {
+    if (streaming.result) {
+      setResult(streaming.result);
+      setState('results');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [streaming.result]);
+
+  // React to streaming error
+  useEffect(() => {
+    if (streaming.error && state === 'processing') {
+      setError(streaming.error);
+      setState('upload');
+    }
+  }, [streaming.error, state]);
 
   // Auto-trigger demo mode if ?demo=true is in URL
   useEffect(() => {
@@ -154,42 +175,25 @@ export default function AnalyzePage() {
     setError('');
     setIsDemo(false);
 
-    try {
-      const formData = new FormData();
+    const formData = new FormData();
 
-      // Primary file for analysis: prefer CV, fall back to LinkedIn PDF
-      const primaryFile = cvFile || linkedInFile;
-      formData.append('cv', primaryFile!);
+    // Primary file for analysis: prefer CV, fall back to LinkedIn PDF
+    const primaryFile = cvFile || linkedInFile;
+    formData.append('cv', primaryFile!);
 
-      // If both files exist, also send LinkedIn PDF for enrichment
-      if (cvFile && linkedInFile) {
-        formData.append('linkedInPdf', linkedInFile);
-      }
-
-      formData.append('questionnaire', JSON.stringify({
-        ...questionnaire,
-        language: locale,
-      }));
-
-      const response = await fetch('/api/analyze', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || t('analyze.somethingWrong'));
-      }
-
-      const data: AnalysisResult = await response.json();
-      setResult(data);
-      setState('results');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (err) {
-      setError(err instanceof Error ? err.message : t('analyze.somethingWrong'));
-      setState('error');
+    // If both files exist, also send LinkedIn PDF for enrichment
+    if (cvFile && linkedInFile) {
+      formData.append('linkedInPdf', linkedInFile);
     }
-  }, [hasFile, cvFile, linkedInFile, isFormValid, questionnaire, locale, t]);
+
+    formData.append('questionnaire', JSON.stringify({
+      ...questionnaire,
+      language: locale,
+    }));
+
+    streaming.startAnalysis(formData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasFile, cvFile, linkedInFile, isFormValid, questionnaire, locale, streaming.startAnalysis]);
 
   const handleDemo = useCallback(() => {
     setResult(getSampleAnalysis(locale));
@@ -206,6 +210,7 @@ export default function AnalyzePage() {
     setError('');
     setIsDemo(false);
     setAutoDetected('');
+    streaming.reset();
     setQuestionnaire({
       currentRole: '',
       targetRole: '',
@@ -214,11 +219,12 @@ export default function AnalyzePage() {
       workPreference: 'remote',
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [streaming.reset]);
 
   // --- PROCESSING STATE ---
   if (state === 'processing') {
-    return <AnalysisProgress />;
+    return <StreamingProgress currentStep={streaming.currentStep} />;
   }
 
   // --- RESULTS STATE ---

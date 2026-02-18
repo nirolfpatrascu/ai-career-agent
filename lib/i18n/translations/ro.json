@@ -207,7 +207,15 @@
       "Calculăm benchmark-urile salariale...",
       "Generăm raportul personalizat...",
       "Traducem raportul în limba ta..."
-    ]
+    ],
+    "stepLabel": "Pasul",
+    "steps": {
+      "parsing": "Citim documentele tale",
+      "extraction": "Extragem competențele și experiența",
+      "gap_analysis": "Analizăm lacunele și potrivim rolurile",
+      "career_plan": "Construim planul de carieră și benchmark-urile salariale",
+      "translating": "Traducem raportul tău"
+    }
   },
   "results": {
     "fitScore": {
