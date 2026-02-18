@@ -11,13 +11,17 @@ import {
 } from '@react-pdf/renderer';
 import type { AnalysisResult, Gap, ActionItem, Strength, RoleRecommendation } from '@/lib/types';
 
-// Register Inter font (fallback to Helvetica if unavailable)
+// Register Poppins font — local TTF files with FULL Latin Extended charset
+// Poppins is a clean, modern Google Font that supports:
+// Romanian: ș (U+0219), ț (U+021B), ă (U+0103), â (U+00E2), î (U+00EE)
+// German: ä (U+00E4), ö (U+00F6), ü (U+00FC), ß (U+00DF)
+// Plus € (U+20AC) and all Latin Extended characters
 Font.register({
-  family: 'Inter',
+  family: 'Poppins',
   fonts: [
-    { src: 'https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiA.woff2', fontWeight: 400 },
-    { src: 'https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fAZ9hiA.woff2', fontWeight: 600 },
-    { src: 'https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuFuYAZ9hiA.woff2', fontWeight: 700 },
+    { src: '/fonts/Poppins-Regular.ttf', fontWeight: 400 },
+    { src: '/fonts/Poppins-Medium.ttf', fontWeight: 600 },
+    { src: '/fonts/Poppins-Bold.ttf', fontWeight: 700 },
   ],
 });
 
@@ -26,8 +30,8 @@ Font.registerHyphenationCallback((word) => [word]);
 
 /**
  * Sanitize text for @react-pdf/renderer.
- * Replaces Unicode characters that cause DataView encoding errors
- * with safe ASCII equivalents.
+ * Poppins TTF supports most Latin Extended + € natively.
+ * We only need to replace chars outside Poppins' glyph set (arrows, bullets, etc.)
  */
 function clean(text: string | undefined | null): string {
   if (!text) return '';
@@ -36,29 +40,17 @@ function clean(text: string | undefined | null): string {
     .replace(/[\u201C\u201D\u201E]/g, '"')    // smart double quotes
     .replace(/[\u2013\u2014]/g, '-')          // en/em dashes
     .replace(/\u2026/g, '...')                // ellipsis
-    .replace(/\u20AC/g, 'EUR ')               // euro sign
-    .replace(/\u00A3/g, 'GBP ')               // pound sign
-    .replace(/\u00A5/g, 'JPY ')               // yen sign
+    .replace(/\u00A3/g, 'GBP ')               // pound sign (not in Poppins)
+    .replace(/\u00A5/g, 'JPY ')               // yen sign (not in Poppins)
     .replace(/\u2192/g, '->')                  // right arrow
     .replace(/\u2190/g, '<-')                  // left arrow
     .replace(/\u2191/g, '^')                   // up arrow
     .replace(/\u2193/g, 'v')                   // down arrow
     .replace(/\u2022/g, '-')                   // bullet
     .replace(/\u00B7/g, '-')                   // middle dot
-    .replace(/\u2019/g, "'")                   // right single quotation
-    .replace(/[\u00E0-\u00FF]/g, (c) => {      // accented latin chars
-      const map: Record<string, string> = {
-        '\u00E0': 'a', '\u00E1': 'a', '\u00E2': 'a', '\u00E3': 'a', '\u00E4': 'a',
-        '\u00E8': 'e', '\u00E9': 'e', '\u00EA': 'e', '\u00EB': 'e',
-        '\u00EC': 'i', '\u00ED': 'i', '\u00EE': 'i', '\u00EF': 'i',
-        '\u00F2': 'o', '\u00F3': 'o', '\u00F4': 'o', '\u00F5': 'o', '\u00F6': 'o',
-        '\u00F9': 'u', '\u00FA': 'u', '\u00FB': 'u', '\u00FC': 'u',
-        '\u00E7': 'c', '\u00F1': 'n', '\u00FD': 'y', '\u00FF': 'y',
-        '\u00DF': 'ss',
-      };
-      return map[c] || c;
-    })
-    .replace(/[^\x00-\x7F]/g, '');            // strip any remaining non-ASCII
+    // Preserve Latin Extended + Euro (all supported by Poppins TTF)
+    // Only strip characters outside these safe ranges
+    .replace(/[^\x00-\x7F\u00C0-\u024F\u1E00-\u1EFF\u20AC]/g, '');
 }
 
 const colors = {
@@ -78,7 +70,7 @@ const styles = StyleSheet.create({
   page: {
     backgroundColor: colors.bg,
     padding: 40,
-    fontFamily: 'Inter',
+    fontFamily: 'Poppins',
     color: colors.textPrimary,
     fontSize: 10,
   },
@@ -301,7 +293,53 @@ function getTierBadge(tier: string) {
 }
 
 // --- PDF Document ---
-function CareerReport({ result }: { result: AnalysisResult }) {
+
+export interface PDFLabels {
+  brandLine: string;
+  strengths: string;
+  gaps: string;
+  roles: string;
+  salaryAnalysis: string;
+  actionPlan30: string;
+  actionPlan90: string;
+  actionPlan12m: string;
+  negotiationTips: string;
+  current: string;
+  required: string;
+  growthPotential: string;
+  currentRoleMarket: string;
+  targetRoleMarket: string;
+  companies: string;
+  salarySubtitle: string;
+  generatedOn: string;
+  fitScoreLabel: string;
+  dateLocale?: string;
+}
+
+const DEFAULT_LABELS: PDFLabels = {
+  brandLine: 'GapZero - AI-Powered Career Advisor',
+  strengths: 'Your Strengths',
+  gaps: 'Skill Gaps',
+  roles: 'Recommended Roles',
+  salaryAnalysis: 'Salary Analysis',
+  actionPlan30: '30-Day Quick Wins',
+  actionPlan90: '90-Day Skill Building',
+  actionPlan12m: '12-Month Career Trajectory',
+  negotiationTips: 'Negotiation Tips',
+  current: 'Current',
+  required: 'Required',
+  growthPotential: 'Growth Potential',
+  currentRoleMarket: 'Current Role Market',
+  targetRoleMarket: 'Target Role Market',
+  companies: 'Companies',
+  salarySubtitle: 'All figures are gross annual (before tax)',
+  generatedOn: 'Generated on',
+  fitScoreLabel: 'Career Fit Score',
+  dateLocale: 'en-US',
+};
+
+function CareerReport({ result, labels: l }: { result: AnalysisResult; labels?: PDFLabels }) {
+  const labels = l || DEFAULT_LABELS;
   return (
     <Document>
       {/* PAGE 1: Overview + Strengths */}
@@ -309,13 +347,13 @@ function CareerReport({ result }: { result: AnalysisResult }) {
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.logo}>
-            Career<Text style={styles.logoAccent}>Lens</Text> AI
+            Gap<Text style={styles.logoAccent}>Zero</Text>
           </Text>
           <Text style={styles.headerMeta}>
-            Career Analysis Report - {clean(result.metadata.targetRole)} - {clean(result.metadata.country)}
+            {clean(labels.fitScoreLabel)} - {clean(result.metadata.targetRole)} - {clean(result.metadata.country)}
           </Text>
           <Text style={styles.headerMeta}>
-            Generated {new Date(result.metadata.analyzedAt).toLocaleDateString('en-US', {
+            {clean(labels.generatedOn)} {new Date(result.metadata.analyzedAt).toLocaleDateString(labels.dateLocale || 'en-US', {
               year: 'numeric', month: 'long', day: 'numeric',
             })} - CV: {clean(result.metadata.cvFileName)}
           </Text>
@@ -330,7 +368,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
 
         {/* Strengths */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Your Strengths</Text>
+          <Text style={styles.sectionTitle}>{clean(labels.strengths)}</Text>
           {result.strengths.map((str: Strength, i: number) => (
             <View key={i} style={styles.card}>
               <View style={styles.row}>
@@ -344,7 +382,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
         </View>
 
         <View style={styles.footer}>
-          <Text>GapZero - AI-Powered Career Advisor</Text>
+          <Text>{clean(labels.brandLine)}</Text>
           <Text>Page 1</Text>
         </View>
       </Page>
@@ -352,7 +390,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
       {/* PAGE 2: Skill Gaps */}
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Skill Gaps</Text>
+          <Text style={styles.sectionTitle}>{clean(labels.gaps)}</Text>
           {result.gaps.map((g: Gap, i: number) => (
             <View key={i} style={styles.card}>
               <View style={styles.row}>
@@ -363,11 +401,11 @@ function CareerReport({ result }: { result: AnalysisResult }) {
               <Text style={[styles.cardText, { color: colors.danger }]}>{clean(g.impact)}</Text>
               <View style={[styles.twoCol, styles.mt8]}>
                 <View style={styles.col}>
-                  <Text style={[styles.textSmall, styles.bold]}>Current</Text>
+                  <Text style={[styles.textSmall, styles.bold]}>{clean(labels.current)}</Text>
                   <Text style={styles.cardText}>{clean(g.currentLevel)}</Text>
                 </View>
                 <View style={styles.col}>
-                  <Text style={[styles.textSmall, styles.bold]}>Required</Text>
+                  <Text style={[styles.textSmall, styles.bold]}>{clean(labels.required)}</Text>
                   <Text style={styles.cardText}>{clean(g.requiredLevel)}</Text>
                 </View>
               </View>
@@ -384,7 +422,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
         </View>
 
         <View style={styles.footer}>
-          <Text>GapZero - AI-Powered Career Advisor</Text>
+          <Text>{clean(labels.brandLine)}</Text>
           <Text>Page 2</Text>
         </View>
       </Page>
@@ -393,7 +431,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
       <Page size="A4" style={styles.page}>
         {/* Roles */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Recommended Roles</Text>
+          <Text style={styles.sectionTitle}>{clean(labels.roles)}</Text>
           {result.roleRecommendations.map((role: RoleRecommendation, i: number) => (
             <View key={i} style={styles.card}>
               <View style={styles.row}>
@@ -408,7 +446,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
                 <Text style={[styles.textSmall, { marginLeft: 12 }]}>{clean(role.timeToReady)}</Text>
               </View>
               <Text style={[styles.textSmall, styles.mt8]}>
-                Companies: {role.exampleCompanies.map(c => clean(c)).join(', ')}
+                {clean(labels.companies)}: {role.exampleCompanies.map(c => clean(c)).join(', ')}
               </Text>
             </View>
           ))}
@@ -416,11 +454,11 @@ function CareerReport({ result }: { result: AnalysisResult }) {
 
         {/* Salary Analysis */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Salary Analysis</Text>
-          <Text style={[styles.textSmall, styles.mb8]}>All figures are gross annual (before tax)</Text>
+          <Text style={styles.sectionTitle}>{clean(labels.salaryAnalysis)}</Text>
+          <Text style={[styles.textSmall, styles.mb8]}>{clean(labels.salarySubtitle)}</Text>
           <View style={[styles.twoCol, styles.mb8]}>
             <View style={styles.salaryCard}>
-              <Text style={styles.salaryLabel}>Current Role Market</Text>
+              <Text style={styles.salaryLabel}>{clean(labels.currentRoleMarket)}</Text>
               <Text style={[styles.salaryValue, styles.textPrimary]}>
                 {formatCurrency(result.salaryAnalysis.currentRoleMarket.mid, result.salaryAnalysis.currentRoleMarket.currency)}
               </Text>
@@ -430,7 +468,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
               <Text style={[styles.textSmall, styles.mt8]}>{clean(result.salaryAnalysis.currentRoleMarket.region)}</Text>
             </View>
             <View style={styles.salaryCard}>
-              <Text style={styles.salaryLabel}>Target Role Market</Text>
+              <Text style={styles.salaryLabel}>{clean(labels.targetRoleMarket)}</Text>
               <Text style={[styles.salaryValue, styles.textSuccess]}>
                 {formatCurrency(result.salaryAnalysis.targetRoleMarket.mid, result.salaryAnalysis.targetRoleMarket.currency)}
               </Text>
@@ -441,13 +479,13 @@ function CareerReport({ result }: { result: AnalysisResult }) {
             </View>
           </View>
           <View style={styles.card}>
-            <Text style={[styles.cardText, styles.textSuccess, styles.bold]}>Growth Potential: {clean(result.salaryAnalysis.growthPotential)}</Text>
+            <Text style={[styles.cardText, styles.textSuccess, styles.bold]}>{clean(labels.growthPotential)}: {clean(result.salaryAnalysis.growthPotential)}</Text>
             <Text style={[styles.cardText, styles.mt8]}>{clean(result.salaryAnalysis.bestMonetaryMove)}</Text>
           </View>
         </View>
 
         <View style={styles.footer}>
-          <Text>GapZero - AI-Powered Career Advisor</Text>
+          <Text>{clean(labels.brandLine)}</Text>
           <Text>Page 3</Text>
         </View>
       </Page>
@@ -455,7 +493,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
       {/* PAGE 4: Action Plan */}
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>30-Day Quick Wins</Text>
+          <Text style={styles.sectionTitle}>{clean(labels.actionPlan30)}</Text>
           {result.actionPlan.thirtyDays.map((item: ActionItem, i: number) => (
             <View key={i} style={styles.actionItem}>
               <View style={styles.row}>
@@ -472,7 +510,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>90-Day Skill Building</Text>
+          <Text style={styles.sectionTitle}>{clean(labels.actionPlan90)}</Text>
           {result.actionPlan.ninetyDays.map((item: ActionItem, i: number) => (
             <View key={i} style={styles.actionItem}>
               <View style={styles.row}>
@@ -489,7 +527,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
         </View>
 
         <View style={styles.footer}>
-          <Text>GapZero - AI-Powered Career Advisor</Text>
+          <Text>{clean(labels.brandLine)}</Text>
           <Text>Page 4</Text>
         </View>
       </Page>
@@ -497,7 +535,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
       {/* PAGE 5: 12-Month + Negotiation Tips */}
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>12-Month Career Trajectory</Text>
+          <Text style={styles.sectionTitle}>{clean(labels.actionPlan12m)}</Text>
           {result.actionPlan.twelveMonths.map((item: ActionItem, i: number) => (
             <View key={i} style={styles.actionItem}>
               <View style={styles.row}>
@@ -516,7 +554,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
         {/* Negotiation tips */}
         {result.salaryAnalysis.negotiationTips.length > 0 && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Negotiation Tips</Text>
+            <Text style={styles.sectionTitle}>{clean(labels.negotiationTips)}</Text>
             {result.salaryAnalysis.negotiationTips.map((tip: string, i: number) => (
               <View key={i} style={[styles.card, styles.mb8]}>
                 <Text style={styles.cardText}>
@@ -529,7 +567,7 @@ function CareerReport({ result }: { result: AnalysisResult }) {
         )}
 
         <View style={styles.footer}>
-          <Text>GapZero - AI-Powered Career Advisor</Text>
+          <Text>{clean(labels.brandLine)}</Text>
           <Text>Page 5</Text>
         </View>
       </Page>
@@ -538,12 +576,12 @@ function CareerReport({ result }: { result: AnalysisResult }) {
 }
 
 // --- Download Button ---
-export function PDFDownloadButton({ result }: { result: AnalysisResult }) {
+export function PDFDownloadButton({ result, buttonLabel, labels }: { result: AnalysisResult; buttonLabel?: string; labels?: PDFLabels }) {
   const filename = `GapZero_Analysis_${result.metadata.targetRole.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
 
   return (
     <PDFDownloadLink
-      document={<CareerReport result={result} />}
+      document={<CareerReport result={result} labels={labels} />}
       fileName={filename}
     >
       {({ loading }) => (
@@ -556,7 +594,7 @@ export function PDFDownloadButton({ result }: { result: AnalysisResult }) {
             <polyline points="7 10 12 15 17 10" />
             <line x1="12" y1="15" x2="12" y2="3" />
           </svg>
-          {loading ? 'Generating PDF...' : 'Download Report'}
+          {loading ? '...' : (buttonLabel || 'Download Report')}
         </button>
       )}
     </PDFDownloadLink>

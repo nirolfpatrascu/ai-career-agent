@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import type { AnalysisResult } from '@/lib/types';
+import { useTranslation } from '@/lib/i18n';
 
 interface ChatMessage {
   role: 'user' | 'assistant';
@@ -53,6 +54,7 @@ function renderMarkdown(text: string): string {
 }
 
 export default function ChatPanel({ analysis }: ChatPanelProps) {
+  const { t, locale } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
@@ -103,6 +105,7 @@ export default function ChatPanel({ analysis }: ChatPanelProps) {
         body: JSON.stringify({
           messages: newMessages,
           analysis,
+          language: locale,
         }),
       });
 
@@ -132,19 +135,19 @@ export default function ChatPanel({ analysis }: ChatPanelProps) {
         });
       }
     } catch (error) {
-      const errMsg = error instanceof Error ? error.message : 'Something went wrong';
+      const errMsg = error instanceof Error ? error.message : 'Unknown error';
       setMessages((prev) => {
         const updated = [...prev];
         updated[updated.length - 1] = {
           role: 'assistant',
-          content: `Sorry, I couldn't process that request. ${errMsg}. Please try again.`,
+          content: `${t('chat.errorPrefix')} ${errMsg}`,
         };
         return updated;
       });
     } finally {
       setIsStreaming(false);
     }
-  }, [messages, isStreaming, analysis]);
+  }, [messages, isStreaming, analysis, locale, t]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -187,8 +190,8 @@ export default function ChatPanel({ analysis }: ChatPanelProps) {
             </svg>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-text-primary">AI Career Coach</h3>
-            <p className="text-xs text-text-secondary">Ask anything about your analysis</p>
+            <h3 className="text-sm font-semibold text-text-primary">{t('chat.title')}</h3>
+            <p className="text-xs text-text-secondary">{t('chat.subtitle')}</p>
           </div>
         </div>
         <div className="flex items-center gap-1">
@@ -196,8 +199,8 @@ export default function ChatPanel({ analysis }: ChatPanelProps) {
             <button
               onClick={() => { setMessages([]); setShowQuickActions(true); }}
               className="p-2 text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-background"
-              aria-label="Clear chat"
-              title="Clear chat"
+              aria-label={t('chat.clearChat')}
+              title={t('chat.clearChat')}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="1 4 1 10 7 10" />
@@ -224,16 +227,16 @@ export default function ChatPanel({ analysis }: ChatPanelProps) {
           <div className="space-y-4">
             <div className="bg-primary/5 border border-primary/10 rounded-xl p-4">
               <p className="text-sm text-text-primary font-medium mb-1">
-                👋 I&apos;ve read your full career analysis.
+                👋 {t('chat.welcome')}
               </p>
               <p className="text-xs text-text-secondary leading-relaxed">
-                Ask me anything — deep-dive into gaps, get interview prep, rewrite your CV, compare roles, or plan your week. I have all your data.
+                {t('chat.welcomeHint')}
               </p>
             </div>
 
             {showQuickActions && (
               <div>
-                <p className="text-xs text-text-secondary font-medium mb-2 uppercase tracking-wider">Quick actions</p>
+                <p className="text-xs text-text-secondary font-medium mb-2 uppercase tracking-wider">{t('chat.quickActions')}</p>
                 <div className="grid grid-cols-1 gap-1.5">
                   {QUICK_ACTIONS.map((action, i) => (
                     <button
@@ -289,7 +292,7 @@ export default function ChatPanel({ analysis }: ChatPanelProps) {
             value={input}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
-            placeholder="Ask about your analysis..."
+            placeholder={t('chat.inputPlaceholder')}
             rows={1}
             disabled={isStreaming}
             className="flex-1 bg-background border border-card-border rounded-xl px-3 py-2.5 text-sm text-text-primary placeholder:text-text-secondary resize-none focus:outline-none focus:border-primary/50 transition-colors disabled:opacity-50"

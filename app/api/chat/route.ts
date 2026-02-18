@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server';
 import { streamClaude } from '@/lib/claude';
+import { getLanguageInstruction } from '@/lib/prompts/language';
 import type { AnalysisResult } from '@/lib/types';
 
 export const maxDuration = 60;
@@ -12,6 +13,7 @@ interface ChatMessage {
 interface ChatRequest {
   messages: ChatMessage[];
   analysis: AnalysisResult;
+  language?: string;
 }
 
 /**
@@ -127,7 +129,8 @@ export async function POST(request: NextRequest) {
     }
 
     const analysisContext = buildAnalysisContext(body.analysis);
-    const system = `${SYSTEM_PROMPT}\n\n---\n${analysisContext}\n---`;
+    const langInstruction = getLanguageInstruction(body.language);
+    const system = `${SYSTEM_PROMPT}${langInstruction ? `\n\n${langInstruction}` : ''}\n\n---\n${analysisContext}\n---`;
 
     const stream = streamClaude({
       system,
