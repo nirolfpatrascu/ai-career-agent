@@ -46,7 +46,7 @@ export default function Features() {
           <div className="section-badge mb-5">
             {t('features.sectionLabel')}
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-5">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-text-primary mb-5">
             {t('features.title')}
           </h2>
           <p className="max-w-2xl mx-auto text-text-secondary text-base sm:text-lg leading-relaxed">
@@ -59,16 +59,16 @@ export default function Features() {
           {Array.isArray(cards) && cards.map((card, i) => (
             <div
               key={i}
-              className="fade-in-up group relative bg-white/[0.05] border border-white/[0.10] rounded-2xl p-7 transition-all duration-500 hover:bg-white/[0.08] hover:border-white/[0.16] hover:-translate-y-1"
+              className="fade-in-up group relative bg-black/[0.03] border border-black/[0.08] rounded-2xl p-7 transition-all duration-500 hover:bg-black/[0.05] hover:border-black/[0.10] hover:-translate-y-1"
               style={{ transitionDelay: `${i * 80}ms` }}
             >
               {/* Icon */}
-              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary/20 to-accent-cyan/15 border border-primary/15 flex items-center justify-center text-primary mb-5 transition-transform duration-500 group-hover:scale-110">
+              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary/20 to-accent-orange/15 border border-primary/15 flex items-center justify-center text-primary mb-5 transition-transform duration-500 group-hover:scale-110">
                 {FEATURE_ICONS[i]}
               </div>
 
               {/* Content */}
-              <h3 className="text-lg font-semibold text-white mb-2.5 tracking-tight">
+              <h3 className="text-lg font-semibold text-text-primary mb-2.5 tracking-tight">
                 {card.title}
               </h3>
               <p className="text-sm text-text-secondary leading-relaxed">
@@ -78,7 +78,7 @@ export default function Features() {
               {/* Hover glow effect */}
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{
-                  background: 'radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59,130,246,0.08), transparent 60%)',
+                  background: 'radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(245,158,11,0.08), transparent 60%)',
                 }}
               />
             </div>

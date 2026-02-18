@@ -58,7 +58,7 @@ export default function StreamingProgress({ currentStep }: StreamingProgressProp
       {/* Background effects */}
       <div className="absolute inset-0 grid-bg opacity-30" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-primary/[0.04] blur-[100px]" />
-      <div className="absolute top-1/3 right-1/4 w-[300px] h-[300px] rounded-full bg-accent-cyan/[0.03] blur-[80px]" />
+      <div className="absolute top-1/3 right-1/4 w-[300px] h-[300px] rounded-full bg-accent-orange/[0.03] blur-[80px]" />
 
       <div className="relative z-10 max-w-md w-full space-y-10">
         {/* Orbital spinner */}
@@ -74,18 +74,18 @@ export default function StreamingProgress({ currentStep }: StreamingProgressProp
                 strokeLinecap="round"
                 strokeDasharray={2 * Math.PI * 56}
                 strokeDashoffset={2 * Math.PI * 56 * (1 - currentStep.progress / 100)}
-                style={{ transition: 'stroke-dashoffset 0.8s ease-out', filter: 'drop-shadow(0 0 6px rgba(59,130,246,0.3))' }}
+                style={{ transition: 'stroke-dashoffset 0.8s ease-out', filter: 'drop-shadow(0 0 6px rgba(245,158,11,0.3))' }}
               />
               <defs>
                 <linearGradient id="progressGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#3B82F6" />
-                  <stop offset="100%" stopColor="#06B6D4" />
+                  <stop offset="0%" stopColor="#E8890A" />
+                  <stop offset="100%" stopColor="#EA7E2E" />
                 </linearGradient>
               </defs>
             </svg>
 
             {/* Inner content */}
-            <div className="absolute inset-4 rounded-full bg-white/[0.03] border border-white/[0.06] flex flex-col items-center justify-center">
+            <div className="absolute inset-4 rounded-full bg-black/[0.04] border border-black/[0.08] flex flex-col items-center justify-center">
               <span className="text-2xl font-bold font-display text-text-primary tabular-nums">{Math.round(currentStep.progress)}%</span>
             </div>
           </div>
@@ -113,7 +113,7 @@ export default function StreamingProgress({ currentStep }: StreamingProgressProp
                     ? 'bg-success/[0.04] border border-success/15'
                     : status === 'active'
                     ? 'bg-primary/[0.06] border border-primary/20'
-                    : 'bg-white/[0.01] border border-white/[0.04] opacity-40'
+                    : 'bg-black/[0.02] border border-black/[0.06] opacity-40'
                 }`}
               >
                 {/* Status indicator */}
@@ -129,7 +129,7 @@ export default function StreamingProgress({ currentStep }: StreamingProgressProp
                       <div className="w-3 h-3 rounded-full border-2 border-primary border-t-transparent animate-spin" />
                     </div>
                   ) : (
-                    <div className="w-6 h-6 rounded-full bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-text-tertiary">
+                    <div className="w-6 h-6 rounded-full bg-black/[0.04] border border-black/[0.08] flex items-center justify-center text-text-tertiary">
                       {STEP_ICONS[i]}
                     </div>
                   )}
@@ -162,12 +162,12 @@ export default function StreamingProgress({ currentStep }: StreamingProgressProp
 
         {/* Bottom progress bar */}
         <div className="space-y-2.5">
-          <div className="h-1.5 rounded-full bg-white/[0.04] border border-white/[0.04] overflow-hidden">
+          <div className="h-1.5 rounded-full bg-black/[0.04] border border-black/[0.08] overflow-hidden">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-primary to-accent-cyan transition-all duration-700 ease-out"
+              className="h-full rounded-full bg-gradient-to-r from-primary to-accent-orange transition-all duration-700 ease-out"
               style={{
                 width: `${currentStep.progress}%`,
-                boxShadow: '0 0 12px rgba(59,130,246,0.3)',
+                boxShadow: '0 0 12px rgba(245,158,11,0.3)',
               }}
             />
           </div>

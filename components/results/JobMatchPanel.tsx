@@ -13,8 +13,8 @@ export default function JobMatchPanel({ match }: JobMatchPanelProps) {
   const [showSuggestions, setShowSuggestions] = useState(false);
 
   const getScoreColor = (score: number) => {
-    if (score >= 80) return '#22C55E';
-    if (score >= 60) return '#3B82F6';
+    if (score >= 80) return '#10B981';
+    if (score >= 60) return '#E8890A';
     if (score >= 40) return '#EAB308';
     return '#EF4444';
   };
@@ -34,7 +34,7 @@ export default function JobMatchPanel({ match }: JobMatchPanelProps) {
 
       <div className="space-y-4">
         {/* Score */}
-        <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] text-center py-10 relative overflow-hidden">
+        <div className="rounded-2xl border border-black/[0.08] bg-black/[0.03] text-center py-10 relative overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full blur-[60px] opacity-15" style={{ backgroundColor: color }} />
           <div className="relative z-10">
             <div className="text-5xl font-extrabold font-display mb-2" style={{ color }}>{match.matchScore}%</div>
@@ -44,9 +44,9 @@ export default function JobMatchPanel({ match }: JobMatchPanelProps) {
 
         {/* Skills comparison */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
+          <div className="rounded-2xl border border-black/[0.08] bg-black/[0.03] p-5">
             <div className="flex items-center gap-2 mb-3">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
               <h3 className="text-sm font-semibold text-success">{t('results.jobMatch.matchingSkills')} ({match.matchingSkills.length})</h3>
             </div>
             <div className="flex flex-wrap gap-1.5">
@@ -56,7 +56,7 @@ export default function JobMatchPanel({ match }: JobMatchPanelProps) {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
+          <div className="rounded-2xl border border-black/[0.08] bg-black/[0.03] p-5">
             <div className="flex items-center gap-2 mb-3">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
               <h3 className="text-sm font-semibold text-danger">{t('results.jobMatch.missingSkills')} ({match.missingSkills.length})</h3>
@@ -70,7 +70,7 @@ export default function JobMatchPanel({ match }: JobMatchPanelProps) {
         </div>
 
         {/* Assessment */}
-        <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6">
+        <div className="rounded-2xl border border-black/[0.08] bg-black/[0.03] p-6">
           <h3 className="font-semibold text-text-primary mb-2.5">Assessment</h3>
           <p className="text-sm text-text-secondary leading-relaxed whitespace-pre-line">{match.overallAdvice}</p>
         </div>
@@ -91,7 +91,7 @@ export default function JobMatchPanel({ match }: JobMatchPanelProps) {
             {showSuggestions && (
               <div className="space-y-3 animate-fade-in">
                 {match.cvSuggestions.map((suggestion, i) => (
-                  <div key={i} className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
+                  <div key={i} className="rounded-2xl border border-black/[0.08] bg-black/[0.03] p-5">
                     <p className="text-xs font-semibold text-primary mb-3 uppercase tracking-wider">{suggestion.section}</p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                       <div className="rounded-xl bg-danger/[0.04] border border-danger/10 p-3.5">

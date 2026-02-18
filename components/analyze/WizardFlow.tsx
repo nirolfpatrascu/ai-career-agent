@@ -248,7 +248,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
   const renderLinkedInStep = () => (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-white font-display mb-2">
+        <h2 className="text-2xl sm:text-3xl font-bold text-text-primary font-display mb-2">
           {t('wizard.linkedin.title') || 'Upload your LinkedIn Profile'}
         </h2>
         <p className="text-text-secondary text-sm sm:text-base leading-relaxed">
@@ -261,7 +261,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
         className={`relative rounded-2xl border-2 border-dashed p-8 sm:p-12 text-center transition-all duration-300 cursor-pointer
           ${linkedInFile
             ? 'border-[#0A66C2]/30 bg-[#0A66C2]/[0.06]'
-            : 'border-white/[0.12] bg-white/[0.03] hover:border-primary/30 hover:bg-white/[0.05]'
+            : 'border-black/[0.08] bg-black/[0.02] hover:border-primary/30 hover:bg-black/[0.03]'
           }`}
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => handleFileDrop(e, 'linkedin')}
@@ -284,7 +284,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             </div>
             <div>
-              <p className="font-semibold text-white">{linkedInFile.name}</p>
+              <p className="font-semibold text-text-primary">{linkedInFile.name}</p>
               <p className="text-sm text-text-tertiary mt-0.5">{(linkedInFile.size / 1024).toFixed(0)} KB</p>
             </div>
             {isDetecting && (
@@ -311,7 +311,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
             </div>
             <div>
-              <p className="font-semibold text-white mb-1">{t('wizard.linkedin.dropHere') || 'Drop LinkedIn PDF here'}</p>
+              <p className="font-semibold text-text-primary mb-1">{t('wizard.linkedin.dropHere') || 'Drop LinkedIn PDF here'}</p>
               <p className="text-sm text-text-tertiary">{t('wizard.linkedin.orBrowse') || 'or click to browse'}</p>
             </div>
           </div>
@@ -319,8 +319,8 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
       </div>
 
       {/* How to export guide */}
-      <details className="group rounded-xl border border-white/[0.10] bg-white/[0.03]">
-        <summary className="flex items-center justify-between p-4 cursor-pointer text-sm font-medium text-text-secondary hover:text-white transition-colors">
+      <details className="group rounded-xl border border-black/[0.08] bg-black/[0.02]">
+        <summary className="flex items-center justify-between p-4 cursor-pointer text-sm font-medium text-text-secondary hover:text-text-primary transition-colors">
           <span className="flex items-center gap-2">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
             {t('wizard.linkedin.howToExport') || 'How to export your LinkedIn profile as PDF'}
@@ -329,8 +329,8 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
         </summary>
         <div className="px-4 pb-4 text-sm text-text-secondary space-y-2">
           <p>1. Go to your LinkedIn profile page</p>
-          <p>2. Click the <strong className="text-white">More</strong> button (⋯) below your profile photo</p>
-          <p>3. Select <strong className="text-white">Save to PDF</strong></p>
+          <p>2. Click the <strong className="text-text-primary">More</strong> button (⋯) below your profile photo</p>
+          <p>3. Select <strong className="text-text-primary">Save to PDF</strong></p>
           <p>4. Upload the downloaded PDF here</p>
         </div>
       </details>
@@ -344,7 +344,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
   const renderCVStep = () => (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-white font-display mb-2">
+        <h2 className="text-2xl sm:text-3xl font-bold text-text-primary font-display mb-2">
           {t('wizard.cv.title') || 'Upload your CV / Resume'}
         </h2>
         <p className="text-text-secondary text-sm sm:text-base leading-relaxed">
@@ -357,7 +357,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
         className={`relative rounded-2xl border-2 border-dashed p-8 sm:p-12 text-center transition-all duration-300 cursor-pointer
           ${cvFile
             ? 'border-primary/30 bg-primary/[0.06]'
-            : 'border-white/[0.12] bg-white/[0.03] hover:border-primary/30 hover:bg-white/[0.05]'
+            : 'border-black/[0.08] bg-black/[0.02] hover:border-primary/30 hover:bg-black/[0.03]'
           }`}
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => handleFileDrop(e, 'cv')}
@@ -377,7 +377,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             </div>
             <div>
-              <p className="font-semibold text-white">{cvFile.name}</p>
+              <p className="font-semibold text-text-primary">{cvFile.name}</p>
               <p className="text-sm text-text-tertiary mt-0.5">{(cvFile.size / 1024).toFixed(0)} KB</p>
             </div>
             <button
@@ -393,7 +393,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
             </div>
             <div>
-              <p className="font-semibold text-white mb-1">{t('wizard.cv.dropHere') || 'Drop your CV here'}</p>
+              <p className="font-semibold text-text-primary mb-1">{t('wizard.cv.dropHere') || 'Drop your CV here'}</p>
               <p className="text-sm text-text-tertiary">{t('wizard.cv.orBrowse') || 'PDF format, max 5MB'}</p>
             </div>
           </div>
@@ -412,7 +412,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
   const renderDetailsStep = () => (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-white font-display mb-2">
+        <h2 className="text-2xl sm:text-3xl font-bold text-text-primary font-display mb-2">
           {t('wizard.details.title') || 'Tell us about your career goals'}
         </h2>
         <p className="text-text-secondary text-sm sm:text-base leading-relaxed">
@@ -474,7 +474,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
                 className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-sm font-medium transition-all duration-200 border
                   ${questionnaire.workPreference === wp
                     ? 'bg-primary/[0.10] border-primary/25 text-primary'
-                    : 'bg-white/[0.03] border-white/[0.10] text-text-tertiary hover:border-white/[0.16] hover:text-text-secondary'
+                    : 'bg-black/[0.02] border-black/[0.08] text-text-tertiary hover:border-black/[0.10] hover:text-text-secondary'
                   }`}
               >
                 {WORK_PREF_ICONS[wp]}
@@ -493,7 +493,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
             </label>
             <div className="relative">
               <input id="w-curSalary" type="number" className="input-field pr-14" value={questionnaire.currentSalary || ''} onChange={(e) => updateQ('currentSalary', parseInt(e.target.value) || undefined)} placeholder="e.g., 55000" />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-text-tertiary bg-white/[0.07] px-2 py-0.5 rounded-md">{currency.code}</span>
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-text-tertiary bg-black/[0.04] px-2 py-0.5 rounded-md">{currency.code}</span>
             </div>
           </div>
           <div>
@@ -503,7 +503,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
             </label>
             <div className="relative">
               <input id="w-tarSalary" type="number" className="input-field pr-14" value={questionnaire.targetSalary || ''} onChange={(e) => updateQ('targetSalary', parseInt(e.target.value) || undefined)} placeholder="e.g., 85000" />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-text-tertiary bg-white/[0.07] px-2 py-0.5 rounded-md">{currency.code}</span>
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-text-tertiary bg-black/[0.04] px-2 py-0.5 rounded-md">{currency.code}</span>
             </div>
           </div>
         </div>
@@ -514,7 +514,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
   const renderJobsStep = () => (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-white font-display mb-2">
+        <h2 className="text-2xl sm:text-3xl font-bold text-text-primary font-display mb-2">
           {t('wizard.jobs.title') || 'Add target job postings'}
         </h2>
         <p className="text-text-secondary text-sm sm:text-base leading-relaxed">
@@ -524,7 +524,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
 
       {/* Job counter */}
       <div className="flex items-center gap-3">
-        <div className={`px-3 py-1.5 rounded-full text-sm font-medium border ${filledJobPostings.length >= 3 ? 'bg-success/[0.08] border-success/15 text-success' : filledJobPostings.length > 0 ? 'bg-primary/[0.08] border-primary/15 text-primary' : 'bg-white/[0.05] border-white/[0.10] text-text-tertiary'}`}>
+        <div className={`px-3 py-1.5 rounded-full text-sm font-medium border ${filledJobPostings.length >= 3 ? 'bg-success/[0.08] border-success/15 text-success' : filledJobPostings.length > 0 ? 'bg-primary/[0.08] border-primary/15 text-primary' : 'bg-black/[0.03] border-black/[0.08] text-text-tertiary'}`}>
           {filledJobPostings.length} / 3 {t('wizard.jobs.minimum') || 'minimum'}
         </div>
         {filledJobPostings.length < 3 && (
@@ -535,9 +535,9 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
       {/* Job posting cards */}
       <div className="space-y-4">
         {jobPostings.map((job, idx) => (
-          <div key={idx} className="rounded-2xl border border-white/[0.10] bg-white/[0.03] p-5">
+          <div key={idx} className="rounded-2xl border border-black/[0.08] bg-black/[0.02] p-5">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-text-primary flex items-center gap-2">
                 <span className="w-6 h-6 rounded-lg bg-primary/[0.10] border border-primary/15 text-primary text-xs font-bold flex items-center justify-center">{idx + 1}</span>
                 {job.title || `${t('wizard.jobs.posting') || 'Job Posting'} ${idx + 1}`}
               </h3>
@@ -606,7 +606,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
   const renderReviewStep = () => (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-white font-display mb-2">
+        <h2 className="text-2xl sm:text-3xl font-bold text-text-primary font-display mb-2">
           {t('wizard.review.title') || 'Review & Launch Analysis'}
         </h2>
         <p className="text-text-secondary text-sm sm:text-base leading-relaxed">
@@ -722,7 +722,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
                 onClick={() => isClickable ? goToStep(step) : undefined}
                 className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200
                   ${isActive ? 'bg-primary/[0.10] border border-primary/25 text-primary' : ''}
-                  ${isPast ? 'text-success cursor-pointer hover:bg-white/[0.05]' : ''}
+                  ${isPast ? 'text-success cursor-pointer hover:bg-black/[0.03]' : ''}
                   ${!isActive && !isPast ? 'text-text-tertiary' : ''}
                   ${isClickable ? 'cursor-pointer' : 'cursor-default opacity-60'}
                 `}
@@ -730,7 +730,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
                 <span className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 transition-all
                   ${isActive ? 'bg-primary/20 text-primary' : ''}
                   ${isPast ? 'bg-success/15 text-success' : ''}
-                  ${!isActive && !isPast ? 'bg-white/[0.05] text-text-tertiary' : ''}
+                  ${!isActive && !isPast ? 'bg-black/[0.03] text-text-tertiary' : ''}
                 `}>
                   {isPast ? (
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
@@ -745,7 +745,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
         </div>
 
         {/* Progress bar */}
-        <div className="h-1 rounded-full bg-white/[0.06]">
+        <div className="h-1 rounded-full bg-black/[0.04]">
           <div
             className="h-full rounded-full bg-gradient-to-r from-primary to-accent-orange transition-all duration-500 ease-out"
             style={{ width: `${((stepIndex + 1) / STEPS.length) * 100}%` }}
@@ -765,7 +765,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
       </div>
 
       {/* Navigation */}
-      <div className="flex items-center justify-between mt-8 pt-6 border-t border-white/[0.08]">
+      <div className="flex items-center justify-between mt-8 pt-6 border-t border-black/[0.06]">
         <div>
           {stepIndex > 0 ? (
             <button onClick={goBack} className="btn-secondary text-sm flex items-center gap-2">
@@ -821,17 +821,17 @@ function ReviewCard({ label, icon, status, done, required, onEdit, t }: {
 }) {
   return (
     <div className={`flex items-center gap-4 p-4 rounded-xl border transition-all
-      ${required ? 'border-danger/20 bg-danger/[0.04]' : done ? 'border-success/15 bg-success/[0.04]' : 'border-white/[0.10] bg-white/[0.03]'}
+      ${required ? 'border-danger/20 bg-danger/[0.04]' : done ? 'border-success/15 bg-success/[0.04]' : 'border-black/[0.08] bg-black/[0.02]'}
     `}>
       <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0
-        ${required ? 'bg-danger/10 text-danger' : done ? 'bg-success/10 text-success' : 'bg-white/[0.06] text-text-tertiary'}
+        ${required ? 'bg-danger/10 text-danger' : done ? 'bg-success/10 text-success' : 'bg-black/[0.04] text-text-tertiary'}
       `}>
         {done ? (
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         ) : icon}
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-white">{label}</p>
+        <p className="text-sm font-medium text-text-primary">{label}</p>
         <p className="text-xs text-text-secondary truncate">{status}</p>
       </div>
       <button onClick={onEdit} className="text-xs text-primary hover:text-primary-light transition-colors flex-shrink-0">

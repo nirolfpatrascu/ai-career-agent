@@ -151,10 +151,10 @@ export default function DashboardPage() {
           {loading && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[1, 2, 3].map(i => (
-                <div key={i} className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-5 animate-pulse">
-                  <div className="h-5 bg-white/[0.06] rounded w-3/4 mb-3" />
-                  <div className="h-4 bg-white/[0.04] rounded w-1/2 mb-2" />
-                  <div className="h-4 bg-white/[0.04] rounded w-1/3" />
+                <div key={i} className="bg-black/[0.03] border border-black/[0.06] rounded-2xl p-5 animate-pulse">
+                  <div className="h-5 bg-black/[0.04] rounded w-3/4 mb-3" />
+                  <div className="h-4 bg-black/[0.03] rounded w-1/2 mb-2" />
+                  <div className="h-4 bg-black/[0.03] rounded w-1/3" />
                 </div>
               ))}
             </div>
@@ -163,7 +163,7 @@ export default function DashboardPage() {
           {/* Empty state */}
           {!loading && analyses.length === 0 && (
             <div className="text-center py-16">
-              <div className="w-14 h-14 rounded-2xl bg-white/[0.06] border border-white/[0.08] flex items-center justify-center mx-auto mb-4">
+              <div className="w-14 h-14 rounded-2xl bg-black/[0.04] border border-black/[0.06] flex items-center justify-center mx-auto mb-4">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-text-tertiary">
                   <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
                 </svg>
@@ -182,7 +182,7 @@ export default function DashboardPage() {
               {analyses.map((a) => (
                 <div
                   key={a.id}
-                  className="group bg-white/[0.04] border border-white/[0.08] rounded-2xl p-5 hover:border-primary/20 hover:bg-white/[0.06] transition-all duration-200 cursor-pointer relative"
+                  className="group bg-black/[0.03] border border-black/[0.06] rounded-2xl p-5 hover:border-primary/20 hover:bg-black/[0.04] transition-all duration-200 cursor-pointer relative"
                   onClick={() => handleOpen(a.id)}
                 >
                   <div className="flex items-start justify-between gap-3 mb-3">
@@ -215,7 +215,7 @@ export default function DashboardPage() {
                   </div>
 
                   {/* Actions */}
-                  <div className="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+                  <div className="flex items-center justify-between pt-3 border-t border-black/[0.06]">
                     <span className="text-xs text-primary font-medium group-hover:underline">
                       {t('dashboard.viewAnalysis')} →
                     </span>

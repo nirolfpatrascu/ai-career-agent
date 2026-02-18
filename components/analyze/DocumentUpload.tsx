@@ -28,10 +28,10 @@ function FileCard({
 }) {
   const colors = accent === 'linkedin'
     ? { bg: 'bg-[#0A66C2]/[0.08]', icon: '#0A66C2', border: 'border-[#0A66C2]/15' }
-    : { bg: 'bg-primary/[0.08]', icon: '#3B82F6', border: 'border-primary/15' };
+    : { bg: 'bg-primary/[0.08]', icon: '#E8890A', border: 'border-primary/15' };
 
   return (
-    <div className={`rounded-xl border ${colors.border} bg-white/[0.02] p-4 flex items-center gap-3 transition-all duration-200`}>
+    <div className={`rounded-xl border ${colors.border} bg-black/[0.03] p-4 flex items-center gap-3 transition-all duration-200`}>
       <div className={`w-10 h-10 rounded-xl ${colors.bg} flex items-center justify-center flex-shrink-0`}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={colors.icon} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -43,7 +43,7 @@ function FileCard({
         <p className="text-xs text-text-tertiary">{formatFileSize(file.size)} · {label}</p>
       </div>
       <div className="w-6 h-6 rounded-full bg-success/[0.1] border border-success/15 flex items-center justify-center flex-shrink-0">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="20 6 9 17 4 12" />
         </svg>
       </div>
@@ -99,7 +99,7 @@ function DropZone({
         className={`relative border-2 border-dashed rounded-2xl ${compact ? 'p-5' : 'p-8'} text-center cursor-pointer transition-all duration-300 ${
           isDragging
             ? 'border-primary/60 bg-primary/[0.06] scale-[1.01]'
-            : 'border-white/[0.08] hover:border-white/[0.15] hover:bg-white/[0.02]'
+            : 'border-black/[0.08] hover:border-black/[0.12] hover:bg-black/[0.03]'
         }`}
       >
         <input
@@ -110,7 +110,7 @@ function DropZone({
           className="hidden"
         />
         <div className="flex flex-col items-center gap-2.5">
-          <div className={`${compact ? 'w-10 h-10' : 'w-12 h-12'} rounded-xl flex items-center justify-center transition-all duration-300 ${isDragging ? 'bg-primary/15 text-primary scale-110' : 'bg-white/[0.04] border border-white/[0.06] text-text-tertiary'}`}>
+          <div className={`${compact ? 'w-10 h-10' : 'w-12 h-12'} rounded-xl flex items-center justify-center transition-all duration-300 ${isDragging ? 'bg-primary/15 text-primary scale-110' : 'bg-black/[0.04] border border-black/[0.08] text-text-tertiary'}`}>
             {icon}
           </div>
           <div>
@@ -153,7 +153,7 @@ export default function DocumentUpload({
             </svg>
           </div>
           <label className="text-sm font-medium text-text-primary">{t('docUpload.linkedInTitle')}</label>
-          <span className="text-[11px] text-text-tertiary bg-white/[0.04] border border-white/[0.06] px-2 py-0.5 rounded-full">{t('docUpload.linkedInRecommended')}</span>
+          <span className="text-[11px] text-text-tertiary bg-black/[0.04] border border-black/[0.08] px-2 py-0.5 rounded-full">{t('docUpload.linkedInRecommended')}</span>
         </div>
 
         {linkedInFile ? (
@@ -190,7 +190,7 @@ export default function DocumentUpload({
 
         {autoDetected && !detecting && (
           <div className="mt-2.5 flex items-start gap-2 px-3.5 py-2.5 bg-success/[0.04] border border-success/15 rounded-xl">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 mt-0.5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 mt-0.5">
               <polyline points="20 6 9 17 4 12" />
             </svg>
             <div className="min-w-0 flex-1">
@@ -207,7 +207,7 @@ export default function DocumentUpload({
         {!linkedInFile && (
           <button
             onClick={() => setShowGuide(!showGuide)}
-            className="mt-2.5 w-full text-left flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.1] transition-all duration-200"
+            className="mt-2.5 w-full text-left flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-black/[0.03] border border-black/[0.08] hover:border-black/[0.10] transition-all duration-200"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-text-tertiary flex-shrink-0">
               <circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><line x1="12" y1="17" x2="12.01" y2="17" />
@@ -223,7 +223,7 @@ export default function DocumentUpload({
         )}
 
         {showGuide && !linkedInFile && (
-          <div className="mt-2 rounded-2xl border border-white/[0.06] bg-white/[0.02] overflow-hidden">
+          <div className="mt-2 rounded-2xl border border-black/[0.08] bg-black/[0.03] overflow-hidden">
             <div className="px-4 pt-4 pb-3 space-y-3">
               <div className="flex items-start gap-3">
                 <span className="w-5 h-5 rounded-full bg-[#0A66C2] text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
@@ -233,7 +233,7 @@ export default function DocumentUpload({
                   {t('docUpload.guideStep1b')} <strong className="text-text-primary">{t('docUpload.guideStep1bold')}</strong>
                 </p>
               </div>
-              <div className="rounded-xl overflow-hidden border border-white/[0.06]">
+              <div className="rounded-xl overflow-hidden border border-black/[0.08]">
                 <Image src="/linkedin-step1.png" alt="Step 1" width={1060} height={600} className="w-full h-auto" priority={false} />
               </div>
               <div className="flex items-start gap-3 pt-2">
@@ -242,11 +242,11 @@ export default function DocumentUpload({
                   {t('docUpload.guideStep2a')} <strong className="text-text-primary">{t('docUpload.guideStep2bold')}</strong>{t('docUpload.guideStep2b')}
                 </p>
               </div>
-              <div className="rounded-xl overflow-hidden border border-white/[0.06]">
+              <div className="rounded-xl overflow-hidden border border-black/[0.08]">
                 <Image src="/linkedin-step2.png" alt="Step 2" width={1060} height={790} className="w-full h-auto" priority={false} />
               </div>
             </div>
-            <div className="px-4 py-3 bg-white/[0.02] border-t border-white/[0.06]">
+            <div className="px-4 py-3 bg-black/[0.03] border-t border-black/[0.08]">
               <p className="text-xs text-text-tertiary">💡 {t('docUpload.guideTip')}</p>
             </div>
           </div>
@@ -255,22 +255,22 @@ export default function DocumentUpload({
 
       {/* Divider */}
       <div className="flex items-center gap-3">
-        <div className="flex-1 h-px bg-white/[0.06]" />
+        <div className="flex-1 h-px bg-black/[0.04]" />
         <span className="text-[11px] text-text-tertiary font-semibold uppercase tracking-wider">{t('docUpload.divider')}</span>
-        <div className="flex-1 h-px bg-white/[0.06]" />
+        <div className="flex-1 h-px bg-black/[0.04]" />
       </div>
 
       {/* CV Section */}
       <div>
         <div className="flex items-center gap-2 mb-3">
           <div className="w-5 h-5 rounded flex items-center justify-center bg-primary/[0.08]">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#E8890A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
               <polyline points="14 2 14 8 20 8" />
             </svg>
           </div>
           <label className="text-sm font-medium text-text-primary">{t('docUpload.cvTitle')}</label>
-          <span className="text-[11px] text-text-tertiary bg-white/[0.04] border border-white/[0.06] px-2 py-0.5 rounded-full">{linkedInFile ? t('docUpload.cvOptional') : t('docUpload.cvRequired')}</span>
+          <span className="text-[11px] text-text-tertiary bg-black/[0.04] border border-black/[0.08] px-2 py-0.5 rounded-full">{linkedInFile ? t('docUpload.cvOptional') : t('docUpload.cvRequired')}</span>
         </div>
 
         {cvFile ? (

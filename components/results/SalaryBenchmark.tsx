@@ -48,14 +48,14 @@ export default function SalaryBenchmark({ salary }: SalaryBenchmarkProps) {
 
       <div className="space-y-4">
         {/* Salary comparison */}
-        <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 space-y-6">
+        <div className="rounded-2xl border border-black/[0.08] bg-black/[0.03] p-6 space-y-6">
           {/* Current role bar */}
           <div>
             <div className="flex items-center justify-between mb-2.5">
               <p className="text-sm font-medium text-text-secondary">{t('results.salary.currentRoleMarket')}</p>
               <p className="text-xs text-text-tertiary">{salary.currentRoleMarket.region}</p>
             </div>
-            <div className="h-11 rounded-xl bg-white/[0.03] border border-white/[0.04] overflow-hidden relative">
+            <div className="h-11 rounded-xl bg-black/[0.04] border border-black/[0.08] overflow-hidden relative">
               <div
                 className="h-full rounded-xl bg-gradient-to-r from-zinc-700/80 to-zinc-600/80 flex items-center justify-end px-4 transition-all duration-1000 ease-out"
                 style={{ width: `${Math.max(currentWidth, 25)}%` }}
@@ -71,12 +71,12 @@ export default function SalaryBenchmark({ salary }: SalaryBenchmarkProps) {
 
           {/* Growth indicator */}
           <div className="flex items-center gap-3">
-            <div className="flex-1 h-px bg-white/[0.06]" />
+            <div className="flex-1 h-px bg-black/[0.04]" />
             <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-success/[0.08] border border-success/15">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="19" x2="12" y2="5" /><polyline points="5 12 12 5 19 12" /></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="19" x2="12" y2="5" /><polyline points="5 12 12 5 19 12" /></svg>
               <span className="text-sm font-bold text-success">{salary.growthPotential}</span>
             </div>
-            <div className="flex-1 h-px bg-white/[0.06]" />
+            <div className="flex-1 h-px bg-black/[0.04]" />
           </div>
 
           {/* Target role bar */}
@@ -85,12 +85,12 @@ export default function SalaryBenchmark({ salary }: SalaryBenchmarkProps) {
               <p className="text-sm font-medium text-text-secondary">{t('results.salary.targetRoleMarket')}</p>
               <p className="text-xs text-text-tertiary">{salary.targetRoleMarket.region}</p>
             </div>
-            <div className="h-11 rounded-xl bg-white/[0.03] border border-white/[0.04] overflow-hidden relative">
+            <div className="h-11 rounded-xl bg-black/[0.04] border border-black/[0.08] overflow-hidden relative">
               <div
                 className="h-full rounded-xl bg-gradient-to-r from-success/70 to-success/90 flex items-center justify-end px-4 transition-all duration-1000 ease-out"
                 style={{ width: `${Math.max(targetWidth, 25)}%` }}
               >
-                <span className="text-sm font-bold text-white font-display">{formatCurrency(targetMid, targetCurrency)}</span>
+                <span className="text-sm font-bold text-text-primary font-display">{formatCurrency(targetMid, targetCurrency)}</span>
               </div>
             </div>
             <div className="flex justify-between mt-1.5 text-[11px] text-text-tertiary px-1">
@@ -101,7 +101,7 @@ export default function SalaryBenchmark({ salary }: SalaryBenchmarkProps) {
         </div>
 
         {/* Best move */}
-        <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6">
+        <div className="rounded-2xl border border-black/[0.08] bg-black/[0.03] p-6">
           <div className="flex items-center gap-2.5 mb-3">
             <div className="w-7 h-7 rounded-lg bg-warning/10 border border-warning/15 flex items-center justify-center text-warning text-sm">💡</div>
             <h3 className="font-semibold text-text-primary">{t('results.salary.bestMove')}</h3>
@@ -111,7 +111,7 @@ export default function SalaryBenchmark({ salary }: SalaryBenchmarkProps) {
 
         {/* Negotiation tips */}
         {salary.negotiationTips.length > 0 && (
-          <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6">
+          <div className="rounded-2xl border border-black/[0.08] bg-black/[0.03] p-6">
             <div className="flex items-center gap-2.5 mb-4">
               <div className="w-7 h-7 rounded-lg bg-primary/10 border border-primary/15 flex items-center justify-center text-primary text-sm">🎯</div>
               <h3 className="font-semibold text-text-primary">{t('results.salary.negotiationTips')}</h3>

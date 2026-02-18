@@ -13,19 +13,19 @@ const LOCALE_SHORT: Record<Locale, string> = {
 
 function Logo() {
   return (
-    <Link href="/" className="flex items-center gap-2.5 group">
-      <svg width="28" height="28" viewBox="0 0 32 32" fill="none" className="flex-shrink-0">
+    <Link href="/" className="flex items-center gap-3 group">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" className="flex-shrink-0">
         <defs>
           <linearGradient id="hlogo" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#F59E0B"/>
-            <stop offset="100%" stopColor="#FB923C"/>
+            <stop offset="0%" stopColor="#E8890A"/>
+            <stop offset="100%" stopColor="#EA7E2E"/>
           </linearGradient>
         </defs>
-        <rect width="32" height="32" rx="8" fill="#111113" className="transition-all duration-300 group-hover:fill-[#161618]"/>
-        <rect x="1" y="1" width="30" height="30" rx="7" stroke="url(#hlogo)" strokeWidth="1.5" fill="none" opacity="0.3" className="transition-all duration-300 group-hover:opacity-50"/>
+        <rect width="32" height="32" rx="8" fill="#1C1410" className="transition-all duration-300 group-hover:fill-[#2A2118]"/>
+        <rect x="1" y="1" width="30" height="30" rx="7" stroke="url(#hlogo)" strokeWidth="1.5" fill="none" opacity="0.4"/>
         <path d="M9 16 L14 21 L23 11" stroke="url(#hlogo)" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
       </svg>
-      <span className="text-lg font-bold tracking-tight font-display">
+      <span className="text-xl font-bold tracking-tight font-display">
         <span className="text-text-primary">Gap</span>
         <span className="text-gradient">Zero</span>
       </span>
@@ -35,7 +35,7 @@ function Logo() {
 
 function GlobeIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-60">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-50">
       <circle cx="12" cy="12" r="10" />
       <line x1="2" y1="12" x2="22" y2="12" />
       <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
@@ -63,17 +63,17 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 no-print">
       <div className="mx-auto max-w-container px-4 sm:px-6 py-3">
-        <nav className="flex items-center justify-between bg-background/60 backdrop-blur-2xl border border-white/[0.10] rounded-2xl px-4 sm:px-5 py-2.5 shadow-lg shadow-black/10">
+        <nav className="flex items-center justify-between bg-white/80 backdrop-blur-2xl border border-black/[0.06] rounded-2xl px-5 sm:px-6 py-3 shadow-sm shadow-black/[0.04]">
           <Logo />
 
-          <div className="flex items-center gap-1 sm:gap-2">
-            {/* Landing page nav links */}
+          <div className="flex items-center gap-2 sm:gap-4">
+            {/* Landing page nav links — bigger, more spaced */}
             {isLanding && (
-              <div className="hidden sm:flex items-center gap-1">
-                <a href="#features" className="text-sm text-text-secondary hover:text-text-primary transition-colors px-3 py-1.5 rounded-lg hover:bg-white/[0.06]">
+              <div className="hidden sm:flex items-center gap-2">
+                <a href="#features" className="text-base font-medium text-text-secondary hover:text-text-primary transition-colors px-4 py-2 rounded-xl hover:bg-black/[0.04]">
                   {t('common.features')}
                 </a>
-                <a href="#how-it-works" className="text-sm text-text-secondary hover:text-text-primary transition-colors px-3 py-1.5 rounded-lg hover:bg-white/[0.06]">
+                <a href="#how-it-works" className="text-base font-medium text-text-secondary hover:text-text-primary transition-colors px-4 py-2 rounded-xl hover:bg-black/[0.04]">
                   {t('common.howItWorks')}
                 </a>
               </div>
@@ -83,25 +83,25 @@ export default function Header() {
             <div ref={langRef} className="relative">
               <button
                 onClick={() => setLangOpen(!langOpen)}
-                className="flex items-center gap-1.5 text-sm text-text-secondary hover:text-text-primary transition-colors px-2.5 py-1.5 rounded-lg hover:bg-white/[0.06]"
+                className="flex items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-text-primary transition-colors px-3 py-2 rounded-xl hover:bg-black/[0.04]"
               >
                 <GlobeIcon />
-                <span className="text-xs font-medium">{LOCALE_SHORT[locale]}</span>
+                <span>{LOCALE_SHORT[locale]}</span>
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform duration-200 opacity-40 ${langOpen ? 'rotate-180' : ''}`}>
                   <polyline points="6 9 12 15 18 9" />
                 </svg>
               </button>
 
               {langOpen && (
-                <div className="absolute right-0 top-full mt-2 w-40 bg-surface/95 backdrop-blur-xl border border-white/[0.12] rounded-xl shadow-xl shadow-black/50 py-1.5 z-50">
+                <div className="absolute right-0 top-full mt-2 w-44 bg-white/95 backdrop-blur-xl border border-black/[0.08] rounded-xl shadow-lg shadow-black/[0.06] py-1.5 z-50">
                   {(Object.keys(LOCALE_NAMES) as Locale[]).map((loc) => (
                     <button
                       key={loc}
                       onClick={() => { setLocale(loc); setLangOpen(false); }}
-                      className={`w-full text-left px-3 py-2 text-sm flex items-center justify-between transition-colors rounded-lg mx-0.5 ${
+                      className={`w-full text-left px-3.5 py-2.5 text-sm flex items-center justify-between transition-colors rounded-lg mx-0.5 ${
                         locale === loc
-                          ? 'text-primary bg-primary/5 font-medium'
-                          : 'text-text-secondary hover:text-text-primary hover:bg-white/[0.06]'
+                          ? 'text-primary bg-primary/[0.06] font-medium'
+                          : 'text-text-secondary hover:text-text-primary hover:bg-black/[0.03]'
                       }`}
                       style={{ width: 'calc(100% - 4px)' }}
                     >
@@ -119,7 +119,7 @@ export default function Header() {
             {/* CTA */}
             <Link
               href="/analyze"
-              className="btn-primary text-sm !py-2 !px-4 !rounded-xl ml-1"
+              className="btn-primary text-sm !py-2.5 !px-5 !rounded-xl ml-1"
             >
               <span className="hidden sm:inline">{t('common.analyzeMyCareer')}</span>
               <span className="sm:hidden">Analyze</span>

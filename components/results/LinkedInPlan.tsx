@@ -45,8 +45,8 @@ function CopyButton({ text }: { text: string }) {
 
 function SectionCard({ title, icon, children }: { title: string; icon: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl overflow-hidden">
-      <div className="flex items-center gap-3 px-6 py-4 border-b border-white/[0.06]">
+    <div className="bg-black/[0.03] border border-black/[0.06] rounded-2xl overflow-hidden">
+      <div className="flex items-center gap-3 px-6 py-4 border-b border-black/[0.06]">
         <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/15 flex items-center justify-center text-primary">
           {icon}
         </div>
@@ -166,7 +166,7 @@ I'm passionate about the intersection of enterprise process automation and moder
         </p>
         <div className="space-y-3">
           {plan.headlines.map((h, i) => (
-            <div key={i} className="flex items-start justify-between gap-3 bg-white/[0.04] border border-white/[0.06] rounded-xl px-4 py-3">
+            <div key={i} className="flex items-start justify-between gap-3 bg-black/[0.03] border border-black/[0.06] rounded-xl px-4 py-3">
               <div className="flex items-start gap-2 min-w-0">
                 <span className="text-xs font-bold text-primary/60 bg-primary/[0.08] rounded-md px-1.5 py-0.5 mt-0.5 flex-shrink-0">
                   {i + 1}
@@ -187,7 +187,7 @@ I'm passionate about the intersection of enterprise process automation and moder
         <p className="text-sm text-text-secondary mb-4">
           {t('linkedin.aboutAdvice')}
         </p>
-        <div className="relative bg-white/[0.04] border border-white/[0.06] rounded-xl p-4">
+        <div className="relative bg-black/[0.03] border border-black/[0.06] rounded-xl p-4">
           <pre className="text-sm text-text-primary whitespace-pre-wrap font-sans leading-relaxed">
             {plan.about}
           </pre>
@@ -207,7 +207,7 @@ I'm passionate about the intersection of enterprise process automation and moder
         </p>
         <div className="space-y-3">
           {plan.featuredItems.map((item, i) => (
-            <div key={i} className="flex items-start gap-3 bg-white/[0.04] border border-white/[0.06] rounded-xl px-4 py-3">
+            <div key={i} className="flex items-start gap-3 bg-black/[0.03] border border-black/[0.06] rounded-xl px-4 py-3">
               <div className="w-6 h-6 rounded-lg bg-accent-orange/10 border border-accent-orange/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                 <span className="text-xs font-bold text-accent-orange">{i + 1}</span>
               </div>
@@ -250,7 +250,7 @@ I'm passionate about the intersection of enterprise process automation and moder
             </p>
             <div className="space-y-1.5">
               {plan.skillsToRemove.slice(0, 6).map((skill, i) => (
-                <div key={i} className="flex items-center gap-2 text-sm text-text-tertiary bg-white/[0.03] border border-white/[0.06] rounded-lg px-3 py-2">
+                <div key={i} className="flex items-center gap-2 text-sm text-text-tertiary bg-black/[0.02] border border-black/[0.06] rounded-lg px-3 py-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-text-tertiary flex-shrink-0" />
                   {skill}
                   <span className="text-xs text-text-tertiary/60 ml-auto">{t('linkedin.moveDown')}</span>
@@ -274,7 +274,7 @@ I'm passionate about the intersection of enterprise process automation and moder
         </p>
         <div className="space-y-3">
           {plan.contentIdeas.map((idea, i) => (
-            <div key={i} className="flex items-start justify-between gap-3 bg-white/[0.04] border border-white/[0.06] rounded-xl px-4 py-3">
+            <div key={i} className="flex items-start justify-between gap-3 bg-black/[0.03] border border-black/[0.06] rounded-xl px-4 py-3">
               <div className="flex items-start gap-3 min-w-0">
                 <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md flex-shrink-0 mt-1 ${
                   idea.type === 'project' ? 'bg-primary/[0.08] text-primary' :
@@ -305,7 +305,7 @@ I'm passionate about the intersection of enterprise process automation and moder
         </p>
         <div className="space-y-2">
           {plan.connectionTargets.map((target, i) => (
-            <div key={i} className="flex items-center gap-3 text-sm text-text-secondary bg-white/[0.04] border border-white/[0.06] rounded-xl px-4 py-3">
+            <div key={i} className="flex items-center gap-3 text-sm text-text-secondary bg-black/[0.03] border border-black/[0.06] rounded-xl px-4 py-3">
               <span className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
               {target}
             </div>

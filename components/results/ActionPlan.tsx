@@ -13,7 +13,7 @@ const TAB_KEYS = ['thirtyDays', 'ninetyDays', 'twelveMonths'] as const;
 const TAB_META = [
   { icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>, color: '#EF4444' },
   { icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>, color: '#EAB308' },
-  { icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>, color: '#22C55E' },
+  { icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>, color: '#10B981' },
 ];
 
 const PRIORITY_STYLES: Record<string, string> = {
@@ -41,7 +41,7 @@ export default function ActionPlan({ plan }: ActionPlanProps) {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 mb-6 p-1 bg-white/[0.02] border border-white/[0.06] rounded-xl w-fit">
+      <div className="flex gap-2 mb-6 p-1 bg-black/[0.03] border border-black/[0.08] rounded-xl w-fit">
         {TAB_KEYS.map((key, idx) => {
           const count = plan[key].length;
           const label = t(`results.actionPlan.tabs.${key}`);
@@ -52,15 +52,15 @@ export default function ActionPlan({ plan }: ActionPlanProps) {
               onClick={() => setActiveTab(key)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
                 isActive
-                  ? 'bg-white/[0.08] text-text-primary shadow-sm'
-                  : 'text-text-tertiary hover:text-text-secondary hover:bg-white/[0.03]'
+                  ? 'bg-black/[0.05] text-text-primary shadow-sm'
+                  : 'text-text-tertiary hover:text-text-secondary hover:bg-black/[0.04]'
               }`}
             >
               <span className={`transition-colors duration-200 ${isActive ? '' : 'opacity-50'}`} style={{ color: isActive ? TAB_META[idx].color : undefined }}>
                 {TAB_META[idx].icon}
               </span>
               <span className="hidden sm:inline">{label}</span>
-              <span className={`text-[11px] px-1.5 py-0.5 rounded-md font-semibold ${isActive ? 'bg-white/[0.1]' : 'bg-white/[0.04]'}`}>{count}</span>
+              <span className={`text-[11px] px-1.5 py-0.5 rounded-md font-semibold ${isActive ? 'bg-black/[0.06]' : 'bg-black/[0.04]'}`}>{count}</span>
             </button>
           );
         })}
@@ -69,7 +69,7 @@ export default function ActionPlan({ plan }: ActionPlanProps) {
       {/* Items */}
       <div className="space-y-3">
         {items.map((item: ActionItem, i: number) => (
-          <div key={i} className="relative rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 transition-all duration-300 hover:bg-white/[0.04] hover:border-white/[0.1]">
+          <div key={i} className="relative rounded-2xl border border-black/[0.08] bg-black/[0.03] p-5 transition-all duration-300 hover:bg-black/[0.04] hover:border-black/[0.10]">
             <div className="flex items-start gap-4">
               {/* Step number */}
               <div

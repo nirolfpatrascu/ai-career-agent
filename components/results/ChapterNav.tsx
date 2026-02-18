@@ -81,7 +81,7 @@ export default function ChapterNav({ hasJobMatch, activeTab, onTabChange }: Chap
   return (
     <>
       {/* ===== DESKTOP TAB BAR (below header) ===== */}
-      <nav className="hidden sm:block fixed top-16 left-0 right-0 z-40 no-print bg-background/80 backdrop-blur-xl border-b border-white/[0.08]">
+      <nav className="hidden sm:block fixed top-16 left-0 right-0 z-40 no-print bg-white/85 backdrop-blur-xl border-b border-black/[0.06]">
         <div className="max-w-container mx-auto px-4 sm:px-6">
           <div
             role="tablist"
@@ -103,7 +103,7 @@ export default function ChapterNav({ hasJobMatch, activeTab, onTabChange }: Chap
                   className={`relative flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition-all duration-200 cursor-pointer ${
                     isActive
                       ? 'text-primary bg-primary/[0.10]'
-                      : 'text-text-tertiary hover:text-text-secondary hover:bg-white/[0.06]'
+                      : 'text-text-tertiary hover:text-text-secondary hover:bg-black/[0.04]'
                   }`}
                 >
                   <span className={`flex-shrink-0 transition-colors duration-200 ${isActive ? 'text-primary' : ''}`}>
@@ -123,7 +123,7 @@ export default function ChapterNav({ hasJobMatch, activeTab, onTabChange }: Chap
       </nav>
 
       {/* ===== MOBILE BOTTOM TAB BAR ===== */}
-      <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-50 no-print bg-background/90 backdrop-blur-xl border-t border-white/[0.10] safe-bottom">
+      <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-50 no-print bg-white/90 backdrop-blur-xl border-t border-black/[0.08] safe-bottom">
         <div
           role="tablist"
           aria-label="Analysis sections"

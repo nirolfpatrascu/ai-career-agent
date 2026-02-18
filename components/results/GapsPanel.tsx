@@ -65,7 +65,7 @@ export default function GapsPanel({ gaps }: GapsPanelProps) {
           return (
             <div
               key={i}
-              className="relative rounded-2xl border border-white/[0.06] bg-white/[0.02] overflow-hidden transition-all duration-300 cursor-pointer hover:border-white/[0.1]"
+              className="relative rounded-2xl border border-black/[0.08] bg-black/[0.03] overflow-hidden transition-all duration-300 cursor-pointer hover:border-black/[0.10]"
               style={{ backgroundColor: isExpanded ? sev.glow : undefined }}
               onClick={() => setExpandedIndex(isExpanded ? null : i)}
             >
@@ -97,13 +97,13 @@ export default function GapsPanel({ gaps }: GapsPanelProps) {
 
                 {/* Expanded details */}
                 {isExpanded && (
-                  <div className="mt-5 pt-5 border-t border-white/[0.06] space-y-4 animate-fade-in">
+                  <div className="mt-5 pt-5 border-t border-black/[0.08] space-y-4 animate-fade-in">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div className="rounded-xl bg-white/[0.03] border border-white/[0.04] p-3.5">
+                      <div className="rounded-xl bg-black/[0.04] border border-black/[0.08] p-3.5">
                         <p className="text-[11px] font-medium text-text-tertiary uppercase tracking-wider mb-1.5">{t('results.gaps.currentLevel')}</p>
                         <p className="text-sm text-text-primary">{gap.currentLevel}</p>
                       </div>
-                      <div className="rounded-xl bg-white/[0.03] border border-white/[0.04] p-3.5">
+                      <div className="rounded-xl bg-black/[0.04] border border-black/[0.08] p-3.5">
                         <p className="text-[11px] font-medium text-text-tertiary uppercase tracking-wider mb-1.5">{t('results.gaps.requiredLevel')}</p>
                         <p className="text-sm text-text-primary">{gap.requiredLevel}</p>
                       </div>

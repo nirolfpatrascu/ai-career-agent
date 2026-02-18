@@ -204,7 +204,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
               className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-sm font-medium border transition-all duration-200 ${
                 data.workPreference === key
                   ? 'border-primary/40 bg-primary/[0.08] text-primary'
-                  : 'border-white/[0.06] bg-white/[0.02] text-text-tertiary hover:border-white/[0.12] hover:text-text-secondary'
+                  : 'border-black/[0.08] bg-black/[0.03] text-text-tertiary hover:border-black/[0.10] hover:text-text-secondary'
               }`}
             >
               <span className={`transition-colors ${data.workPreference === key ? 'text-primary' : 'text-text-tertiary'}`}>
@@ -232,7 +232,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
               onChange={(e) => update('currentSalary', e.target.value ? parseInt(e.target.value) : undefined)}
               placeholder="e.g. 55000"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-text-tertiary text-xs font-semibold bg-white/[0.04] px-2 py-0.5 rounded-md">{currency.code}</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-text-tertiary text-xs font-semibold bg-black/[0.04] px-2 py-0.5 rounded-md">{currency.code}</span>
           </div>
           <p className="text-[11px] text-text-tertiary mt-1.5">{t('questionnaire.grossAnnual')}</p>
         </div>
@@ -250,7 +250,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
               onChange={(e) => update('targetSalary', e.target.value ? parseInt(e.target.value) : undefined)}
               placeholder="e.g. 85000"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-text-tertiary text-xs font-semibold bg-white/[0.04] px-2 py-0.5 rounded-md">{currency.code}</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-text-tertiary text-xs font-semibold bg-black/[0.04] px-2 py-0.5 rounded-md">{currency.code}</span>
           </div>
           <p className="text-[11px] text-text-tertiary mt-1.5">{t('questionnaire.grossAnnual')}</p>
         </div>
@@ -274,13 +274,13 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
         </div>
 
         {/* Toggle between URL and Paste */}
-        <div className="flex items-center gap-1 mb-3 bg-white/[0.02] border border-white/[0.06] rounded-xl p-1 w-fit">
+        <div className="flex items-center gap-1 mb-3 bg-black/[0.03] border border-black/[0.08] rounded-xl p-1 w-fit">
           <button
             type="button"
             onClick={() => setJobMode('url')}
             className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 ${
               jobMode === 'url'
-                ? 'bg-white/[0.08] text-primary shadow-sm'
+                ? 'bg-black/[0.05] text-primary shadow-sm'
                 : 'text-text-tertiary hover:text-text-secondary'
             }`}
           >
@@ -297,7 +297,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
             onClick={() => setJobMode('paste')}
             className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 ${
               jobMode === 'paste'
-                ? 'bg-white/[0.08] text-primary shadow-sm'
+                ? 'bg-black/[0.05] text-primary shadow-sm'
                 : 'text-text-tertiary hover:text-text-secondary'
             }`}
           >
@@ -361,7 +361,7 @@ export default function Questionnaire({ data, onChange }: QuestionnaireProps) {
 
             {jobFetched && data.jobPosting && (
               <div className="mt-2.5 bg-success/[0.04] border border-success/15 rounded-xl px-3.5 py-2.5 flex items-start gap-2">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 mt-0.5">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 mt-0.5">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
                 <div className="min-w-0">

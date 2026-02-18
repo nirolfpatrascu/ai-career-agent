@@ -24,7 +24,7 @@ export default function FitScoreGauge({ fitScore }: FitScoreGaugeProps) {
   }, []);
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] py-12 px-6">
+    <div className="relative overflow-hidden rounded-2xl border border-black/[0.08] bg-black/[0.03] py-12 px-6">
       {/* Subtle radial glow behind gauge */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full blur-[80px] opacity-20 transition-opacity duration-1000"
@@ -39,7 +39,7 @@ export default function FitScoreGauge({ fitScore }: FitScoreGaugeProps) {
             <circle
               cx="64" cy="64" r={radius}
               fill="none"
-              stroke="rgba(255,255,255,0.04)"
+              stroke="rgba(0,0,0,0.06)"
               strokeWidth="10"
             />
             {/* Animated arc */}

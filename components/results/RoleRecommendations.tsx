@@ -30,13 +30,13 @@ export default function RoleRecommendations({ roles }: RoleRecommendationsProps)
           return (
             <div
               key={i}
-              className={`relative rounded-2xl border bg-white/[0.02] p-6 transition-all duration-300 hover:bg-white/[0.04] ${
-                isBest ? 'border-primary/30 hover:border-primary/40' : 'border-white/[0.06] hover:border-white/[0.1]'
+              className={`relative rounded-2xl border bg-black/[0.03] p-6 transition-all duration-300 hover:bg-black/[0.04] ${
+                isBest ? 'border-primary/30 hover:border-primary/40' : 'border-black/[0.08] hover:border-black/[0.10]'
               }`}
             >
               {/* Best fit badge */}
               {isBest && (
-                <div className="absolute -top-px -right-px bg-gradient-to-r from-primary to-accent-cyan text-white text-[11px] font-semibold px-3 py-1 rounded-bl-xl rounded-tr-2xl">
+                <div className="absolute -top-px -right-px bg-gradient-to-r from-primary to-accent-orange text-white text-[11px] font-semibold px-3 py-1 rounded-bl-xl rounded-tr-2xl">
                   {t('results.roles.bestFit')}
                 </div>
               )}
@@ -60,7 +60,7 @@ export default function RoleRecommendations({ roles }: RoleRecommendationsProps)
               <p className="text-sm text-text-secondary leading-relaxed mb-5">{role.reasoning}</p>
 
               {/* Salary */}
-              <div className="rounded-xl bg-white/[0.03] border border-white/[0.05] p-4 mb-4">
+              <div className="rounded-xl bg-black/[0.04] border border-black/[0.06] p-4 mb-4">
                 <p className="text-[11px] font-medium text-text-tertiary uppercase tracking-wider mb-1.5">{t('results.roles.salaryRange')}</p>
                 <p className="text-lg font-bold text-success font-display">
                   {formatCurrency(role.salaryRange.low, role.salaryRange.currency)} – {formatCurrency(role.salaryRange.high, role.salaryRange.currency)}
@@ -77,7 +77,7 @@ export default function RoleRecommendations({ roles }: RoleRecommendationsProps)
               {/* Companies */}
               <div className="flex flex-wrap gap-1.5">
                 {role.exampleCompanies.map((company, ci) => (
-                  <span key={ci} className="text-xs px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.06] text-text-secondary">{company}</span>
+                  <span key={ci} className="text-xs px-2.5 py-1 rounded-lg bg-black/[0.04] border border-black/[0.08] text-text-secondary">{company}</span>
                 ))}
               </div>
             </div>

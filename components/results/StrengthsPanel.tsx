@@ -42,7 +42,7 @@ export default function StrengthsPanel({ strengths }: StrengthsPanelProps) {
         {strengths.map((s, i) => (
           <div
             key={i}
-            className="group relative rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 transition-all duration-300 hover:bg-white/[0.04] hover:border-white/[0.1]"
+            className="group relative rounded-2xl border border-black/[0.08] bg-black/[0.03] p-6 transition-all duration-300 hover:bg-black/[0.04] hover:border-black/[0.10]"
           >
             {/* Tier accent line */}
             <div className={`absolute left-0 top-4 bottom-4 w-[3px] rounded-full ${

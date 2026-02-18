@@ -270,7 +270,7 @@ export default function AnalyzePage() {
                 {/* Save status */}
                 {user && saveStatus !== 'idle' && (
                   <span className={`text-xs font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-lg border ${
-                    saveStatus === 'saving' ? 'text-text-tertiary border-white/[0.08] bg-white/[0.04]' :
+                    saveStatus === 'saving' ? 'text-text-tertiary border-black/[0.06] bg-black/[0.03]' :
                     saveStatus === 'saved' ? 'text-success border-success/15 bg-success/[0.04]' :
                     'text-danger border-danger/15 bg-danger/[0.04]'
                   }`}>
@@ -323,7 +323,7 @@ export default function AnalyzePage() {
               </svg>
               {t('common.backToHome')}
             </Link>
-            <h1 className="text-2xl sm:text-3xl font-bold text-white font-display mb-2">
+            <h1 className="text-2xl sm:text-3xl font-bold text-text-primary font-display mb-2">
               {t('analyze.title')}
             </h1>
             <p className="text-text-secondary text-sm sm:text-base">
