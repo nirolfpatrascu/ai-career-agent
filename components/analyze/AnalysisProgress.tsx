@@ -3,19 +3,21 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from '@/lib/i18n';
 
-const MESSAGE_ICONS = ['📄', '🔍', '📊', '🎯', '🏢', '🗺️', '💰', '✨'];
+const MESSAGE_ICONS = ['📄', '🔍', '📊', '🎯', '🏢', '🗺️', '💰', '✨', '🌐'];
 
 const CHECKPOINTS = [
   { seconds: 0, progress: 0 },
-  { seconds: 10, progress: 12 },
-  { seconds: 20, progress: 25 },
-  { seconds: 30, progress: 38 },
-  { seconds: 45, progress: 52 },
-  { seconds: 60, progress: 68 },
-  { seconds: 75, progress: 80 },
-  { seconds: 90, progress: 90 },
-  { seconds: 105, progress: 94 },
-  { seconds: 120, progress: 95 },
+  { seconds: 10, progress: 10 },
+  { seconds: 20, progress: 20 },
+  { seconds: 35, progress: 32 },
+  { seconds: 50, progress: 45 },
+  { seconds: 65, progress: 55 },
+  { seconds: 80, progress: 65 },
+  { seconds: 95, progress: 75 },
+  { seconds: 110, progress: 83 },
+  { seconds: 125, progress: 90 },
+  { seconds: 140, progress: 94 },
+  { seconds: 160, progress: 96 },
 ];
 
 function getTargetProgress(elapsedSeconds: number): number {
@@ -36,15 +38,8 @@ export default function AnalysisProgress() {
   const [messageIndex, setMessageIndex] = useState(0);
   const [progress, setProgress] = useState(0);
 
-  // Parse messages array from translations
-  const messages: string[] = (() => {
-    try {
-      const val = t('progress.messages');
-      return typeof val === 'string' ? JSON.parse(val) : MESSAGE_ICONS.map((_, i) => `Step ${i + 1}...`);
-    } catch {
-      return MESSAGE_ICONS.map((_, i) => `Step ${i + 1}...`);
-    }
-  })();
+  // Load translated messages individually by index
+  const messages: string[] = MESSAGE_ICONS.map((_, i) => t(`progress.messages.${i}`));
 
   useEffect(() => {
     const interval = setInterval(() => {

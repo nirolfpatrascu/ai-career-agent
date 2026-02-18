@@ -13,6 +13,7 @@ import {
   buildJobMatchPrompt,
   JOB_MATCH_FALLBACK,
 } from '@/lib/prompts';
+import { buildTranslationPrompt } from '@/lib/prompts/translate';
 import type {
   CareerQuestionnaire,
   ExtractedProfile,
@@ -129,6 +130,24 @@ export async function POST(request: NextRequest) {
       `[analyze] PDF parsed: ${parsedPDF.pageCount} pages, ${cvText.length} chars`
     );
 
+    // --- Parse LinkedIn PDF if provided separately ---
+    const linkedInPdf = formData.get('linkedInPdf') as File | null;
+    if (linkedInPdf) {
+      try {
+        const liBuffer = Buffer.from(await linkedInPdf.arrayBuffer());
+        if (validatePDFBuffer(liBuffer)) {
+          const liParsed = await parsePDF(liBuffer);
+          const liText = truncateCVText(liParsed.text);
+          if (liText.length > 100) {
+            questionnaire.linkedInProfile = liText;
+            console.log(`[analyze] LinkedIn PDF parsed: ${liText.length} chars`);
+          }
+        }
+      } catch (e) {
+        console.log('[analyze] LinkedIn PDF parse failed (non-critical):', e);
+      }
+    }
+
     // --- Step 1: Extract Skills & Profile ---
     console.log('[analyze] Step 1: Extracting skills and profile...');
     const extractionPrompt = buildSkillExtractionPrompt(cvText, questionnaire);
@@ -194,7 +213,7 @@ export async function POST(request: NextRequest) {
       console.log(`[analyze] Job match score: ${jobMatchResult.matchScore}%`);
     }
 
-// --- Normalize salary currencies (ensure both markets use same currency) ---
+    // --- Normalize salary currencies (ensure both markets use same currency) ---
     const salaryAnalysis = careerPlan.salaryAnalysis;
     const currentCur = salaryAnalysis.currentRoleMarket.currency;
     const targetCur = salaryAnalysis.targetRoleMarket.currency;
@@ -225,7 +244,7 @@ export async function POST(request: NextRequest) {
     }
 
     // --- Assemble Final Result ---
-    const result: AnalysisResult = {
+    let result: AnalysisResult = {
       metadata: {
         analyzedAt: new Date().toISOString(),
         cvFileName: cvFile.name,
@@ -240,6 +259,33 @@ export async function POST(request: NextRequest) {
       salaryAnalysis: salaryAnalysis,
       ...(jobMatchResult && { jobMatch: jobMatchResult }),
     };
+
+    // --- Post-processing Translation (non-English languages) ---
+    const language = questionnaire.language || 'en';
+    if (language !== 'en') {
+      console.log(`[analyze] Translating result to ${language}...`);
+      try {
+        const translationPrompt = buildTranslationPrompt(
+          JSON.stringify(result),
+          language
+        );
+        const translated = await callClaude<AnalysisResult>({
+          ...translationPrompt,
+          maxTokens: 16384,
+          temperature: 0.1,
+          fallback: result, // fallback to English if translation fails
+        });
+        // Verify translation preserved structure
+        if (translated.fitScore && translated.strengths && translated.gaps) {
+          result = translated;
+          console.log(`[analyze] Translation to ${language} complete`);
+        } else {
+          console.log('[analyze] Translation returned invalid structure, using English');
+        }
+      } catch (e) {
+        console.log('[analyze] Translation failed (non-critical), using English:', e);
+      }
+    }
 
     const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
     console.log(`[analyze] Complete in ${totalTime}s`);

@@ -256,13 +256,9 @@ export function sanitizeText(text: string): string {
     .replace(/\u2013/g, ' - ')
     .replace(/[\u2018\u2019\u201A]/g, "'")
     .replace(/[\u201C\u201D\u201E]/g, '"')
-    .replace(/\u20AC/g, 'EUR ')
     .replace(/\u2026/g, '...')
     .replace(/\u2192/g, '->')
-    .replace(/\u2022/g, '-')
-    .replace(/\u0103/g, 'a')
-    .replace(/\u0219/g, 's')
-    .replace(/\u021B/g, 't');
+    .replace(/\u2022/g, '-');
 }
 
 /**
