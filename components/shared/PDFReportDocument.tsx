@@ -54,15 +54,15 @@ function clean(text: string | undefined | null): string {
 }
 
 const colors = {
-  bg: '#0A0A0B',
-  card: '#141416',
-  border: '#27272A',
-  primary: '#3B82F6',
-  success: '#22C55E',
-  warning: '#EAB308',
+  bg: '#FFFBF5',
+  card: '#FFFFFF',
+  border: '#E8DDD2',
+  primary: '#E8890A',
+  success: '#10B981',
+  warning: '#FBBF24',
   danger: '#EF4444',
-  textPrimary: '#FAFAFA',
-  textSecondary: '#A1A1AA',
+  textPrimary: '#1C1410',
+  textSecondary: '#6B5D52',
   white: '#FFFFFF',
 };
 
@@ -170,19 +170,19 @@ const styles = StyleSheet.create({
     color: colors.warning,
   },
   badgeMinor: {
-    backgroundColor: '#22C55E20',
+    backgroundColor: '#10B98120',
     color: colors.success,
   },
   badgeDifferentiator: {
-    backgroundColor: '#3B82F620',
+    backgroundColor: '#E8890A20',
     color: colors.primary,
   },
   badgeStrong: {
-    backgroundColor: '#22C55E20',
+    backgroundColor: '#10B98120',
     color: colors.success,
   },
   badgeSupporting: {
-    backgroundColor: '#27272A',
+    backgroundColor: '#E8DDD2',
     color: colors.textSecondary,
   },
   // Row layouts

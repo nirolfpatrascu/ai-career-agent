@@ -30,7 +30,7 @@ export default function Hero() {
 
       {/* Radial fade from center */}
       <div className="absolute inset-0" style={{
-        background: 'radial-gradient(ellipse 70% 50% at 50% 40%, transparent 0%, #0C0A09 100%)',
+        background: 'radial-gradient(ellipse 70% 50% at 50% 40%, transparent 0%, #FFFBF5 100%)',
       }} />
 
       <div className={`relative z-10 max-w-container mx-auto px-4 sm:px-6 text-center transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>

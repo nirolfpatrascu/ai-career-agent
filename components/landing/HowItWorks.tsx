@@ -36,7 +36,7 @@ export default function HowItWorks() {
   return (
     <section id="how-it-works" ref={sectionRef} className="relative py-28 sm:py-36">
       {/* Subtle top divider */}
-      <div className="absolute top-0 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+      <div className="absolute top-0 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-black/[0.08] to-transparent" />
 
       <div className="max-w-container mx-auto px-4 sm:px-6">
         {/* Header */}
@@ -59,16 +59,16 @@ export default function HowItWorks() {
               {/* Timeline */}
               <div className="flex flex-col items-center flex-shrink-0">
                 {/* Number circle */}
-                <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-accent-cyan/10 border border-primary/20 flex items-center justify-center text-primary">
+                <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-accent-orange/15 border border-primary/25 flex items-center justify-center text-primary">
                   {STEP_ICONS[i]}
                   {/* Step number badge */}
-                  <div className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-gradient-to-r from-primary to-accent-cyan text-[10px] font-bold text-white flex items-center justify-center">
+                  <div className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-gradient-to-r from-primary to-accent-orange text-[10px] font-bold text-white flex items-center justify-center">
                     {i + 1}
                   </div>
                 </div>
                 {/* Connector line */}
                 {i < steps.length - 1 && (
-                  <div className="w-px flex-1 my-3 bg-gradient-to-b from-primary/20 to-transparent min-h-[40px]" />
+                  <div className="w-px flex-1 my-3 bg-gradient-to-b from-primary/30 to-transparent min-h-[40px]" />
                 )}
               </div>
 

@@ -38,7 +38,7 @@ export default function Features() {
   return (
     <section id="features" ref={sectionRef} className="relative py-28 sm:py-36">
       {/* Top border glow */}
-      <div className="absolute top-0 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-white/[0.10] to-transparent" />
+      <div className="absolute top-0 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-black/[0.08] to-transparent" />
 
       <div className="max-w-container mx-auto px-4 sm:px-6">
         {/* Header */}
@@ -59,7 +59,7 @@ export default function Features() {
           {Array.isArray(cards) && cards.map((card, i) => (
             <div
               key={i}
-              className="fade-in-up group relative bg-black/[0.03] border border-black/[0.08] rounded-2xl p-7 transition-all duration-500 hover:bg-black/[0.05] hover:border-black/[0.10] hover:-translate-y-1"
+              className="fade-in-up group relative bg-white border border-black/[0.06] rounded-2xl p-7 transition-all duration-500 hover:shadow-lg hover:shadow-black/[0.06] hover:border-black/[0.10] hover:-translate-y-1"
               style={{ transitionDelay: `${i * 80}ms` }}
             >
               {/* Icon */}
@@ -78,7 +78,7 @@ export default function Features() {
               {/* Hover glow effect */}
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{
-                  background: 'radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(245,158,11,0.08), transparent 60%)',
+                  background: 'radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(232,137,10,0.06), transparent 60%)',
                 }}
               />
             </div>
