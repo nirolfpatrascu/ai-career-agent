@@ -24,70 +24,80 @@
   "hero": {
     "badge": "Conseiller de Carrière IA",
     "headline1": "Téléchargez votre CV.",
-    "headline2": "Obtenez une stratégie",
+    "headline2": "Obtenez un plan personnalisé de",
     "rotatingWords": [
-      "de carrière personnalisée",
-      "d'analyse des compétences",
-      "de benchmarks salariaux",
+      "stratégie de carrière",
+      "analyse des compétences",
+      "benchmark salarial",
       "plan d'action",
-      "de rôles recommandés"
+      "correspondance de rôles"
     ],
-    "subtitle": "Analyse des écarts, plans d'apprentissage, benchmarks salariaux, recommandations de rôles et optimisation de CV — le tout en moins de 2 minutes. Un coaching de carrière qui coûtait 500$/h, désormais propulsé par l'IA.",
-    "analyzeFree": "Analyser Ma Carrière",
+    "subtitle": "Notre IA analyse vos compétences, identifie les lacunes, compare les salaires et construit un plan étape par étape. Ce qui coûtait 500$/heure avec un coach de carrière, en 90 secondes.",
+    "analyzeFree": "Analyser ma Carrière →",
     "stats": {
       "analysisTime": "Temps d'Analyse",
       "dataPoints": "Points de Données",
       "aiSteps": "Étapes IA",
       "toUse": "Utilisation"
-    }
+    },
+    "trust": "Utilisé par des professionnels en transition vers l'IA, le cloud et les rôles tech modernes"
   },
   "features": {
-    "sectionLabel": "Fonctionnalités",
-    "title": "Tout ce qu'il vous faut pour réussir votre transition de carrière",
-    "subtitle": "Propulsé par une analyse IA avancée de votre CV, des exigences du poste visé et des données du marché.",
+    "sectionLabel": "Ce que vous obtenez",
+    "title": "Six perspectives puissantes sur votre carrière",
+    "subtitle": "Chaque analyse vous donne une image complète — pas des conseils génériques, mais des perspectives personnalisées basées sur VOTRE expérience, VOTRE rôle cible et VOTRE marché.",
     "cards": [
       {
-        "title": "Analyse Approfondie du CV",
-        "description": "Téléchargez votre CV au format PDF et notre IA extrait chaque compétence, certification et expérience — même celles que vous avez oubliées."
+        "title": "Analyse CV Approfondie",
+        "description": "Notre IA lit l'intégralité de votre CV et extrait chaque compétence, certification, projet et compétence implicite — même celles que vous avez oubliées.",
+        "highlight": "Trouve des compétences cachées"
       },
       {
-        "title": "Analyse des Écarts",
-        "description": "Identifiez exactement les compétences manquantes pour votre poste cible — classées par sévérité avec des plans spécifiques pour combler chaque écart."
+        "title": "Analyse des Lacunes",
+        "description": "Voyez exactement ce qui vous sépare de votre rôle cible. Chaque lacune est codée par couleur selon la sévérité avec un plan concret pour la combler.",
+        "highlight": "Priorisé par impact sur votre recherche"
       },
       {
-        "title": "Benchmarks Salariaux",
-        "description": "Fourchettes salariales adaptées à votre localisation pour vos postes actuel et cible, plus des conseils de négociation spécifiques à votre expérience."
+        "title": "Intelligence Salariale",
+        "description": "Connaissez votre valeur. Fourchettes salariales par localisation pour vos rôles actuel et cible, plus des scripts de négociation adaptés.",
+        "highlight": "Données de marché régionales"
       },
       {
         "title": "Recommandations de Rôles",
-        "description": "Obtenez 3 rôles optimaux basés sur votre profil — avec des scores de compatibilité, fourchettes salariales et entreprises à cibler."
+        "description": "Découvrez 3 rôles où vos compétences créent le plus de valeur — avec scores, fourchettes salariales, entreprises cibles et délais de préparation.",
+        "highlight": "Des rôles auxquels vous n'avez peut-être pas pensé"
       },
       {
-        "title": "Plan d'Action",
-        "description": "Gains rapides à 30 jours, développement de compétences à 90 jours et trajectoire de carrière à 12 mois — avec des ressources et estimations de temps."
+        "title": "Plan d'Action Personnalisé",
+        "description": "Pas de conseils vagues — des actions spécifiques avec des échéances. Gains rapides en 30 jours, sprints de 90 jours et trajectoire sur 12 mois.",
+        "highlight": "Chaque action a une ressource et une estimation"
       },
       {
-        "title": "Matching d'Emploi",
-        "description": "Collez une offre d'emploi pour obtenir un score ATS, les mots-clés manquants et des suggestions de réécriture de CV."
+        "title": "Coach IA de Carrière",
+        "description": "Posez des questions de suivi, préparez vos entretiens, demandez des modèles de messages LinkedIn ou approfondissez toute partie de votre analyse.",
+        "highlight": "Conversations de suivi illimitées"
       }
     ]
   },
   "howItWorks": {
     "sectionLabel": "Comment ça marche",
-    "title": "Du CV à la feuille de route en 3 étapes",
-    "subtitle": "Pas d'inscription requise. Téléchargez, répondez à quelques questions et obtenez votre analyse personnalisée.",
+    "title": "Du CV à la clarté de carrière en 3 étapes",
+    "subtitle": "Pas de compte nécessaire. Pas de carte de crédit. Téléchargez votre CV, répondez à quelques questions et laissez l'IA travailler.",
     "steps": [
       {
-        "title": "Téléchargez Votre CV",
-        "description": "Glissez-déposez votre CV au format PDF. Notre IA lit chaque détail — compétences, certifications, expérience, et même les aptitudes implicites."
+        "title": "Téléchargez votre CV",
+        "description": "Glissez-déposez votre PDF. Notre IA lit chaque détail — titres de poste, technologies, certifications et déduit même les compétences non listées.",
+        "detail": "Supporte les PDF jusqu'à 5 Mo. Vos données sont traitées en toute sécurité et jamais stockées."
       },
       {
-        "title": "Indiquez Vos Objectifs",
-        "description": "Répondez à un court questionnaire sur votre poste actuel, votre poste cible, votre localisation et vos attentes salariales. Moins de 2 minutes."
+        "title": "Dites-nous votre objectif",
+        "description": "Quel rôle visez-vous? Où voulez-vous travailler? Quel est votre objectif salarial? Un questionnaire rapide de 2 minutes donne le contexte nécessaire.",
+        "detail": "Collez optionnellement une offre d'emploi pour une analyse ciblée."
       },
       {
-        "title": "Recevez Votre Feuille de Route",
-        "description": "En moins de 2 minutes, recevez une analyse complète : score de compatibilité, forces, écarts de compétences, benchmarks salariaux et plan d'action personnalisé."
+        "title": "Obtenez votre feuille de route",
+        "description": "En environ 90 secondes, recevez une analyse complète: score de correspondance, forces, lacunes, benchmarks salariaux et un plan étape par étape.",
+        "detail": "Téléchargez en PDF, discutez avec votre coach IA ou comparez avec des offres spécifiques."
       }
     ],
     "visual": {
@@ -98,13 +108,19 @@
       "strengthsIdentified": "5 forces identifiées",
       "gapsToClose": "3 écarts à combler",
       "actionItems": "12 actions à entreprendre"
-    }
+    },
+    "timeEstimate": "Temps total: environ 3 minutes du téléchargement à la feuille de route complète"
   },
   "cta": {
-    "title": "Prêt à accélérer votre carrière ?",
-    "subtitle": "Téléchargez votre CV et obtenez une analyse de carrière complète en moins de 2 minutes. Gratuit, sans inscription.",
-    "button": "Analyser Ma Carrière — Gratuit",
-    "footer": "Sans inscription • Sans carte bancaire • Résultats en moins de 2 minutes"
+    "title": "Votre prochain mouvement de carrière commence ici",
+    "subtitle": "Rejoignez les professionnels qui ont utilisé GapZero pour trouver leur voie vers l'IA, le cloud et les rôles tech modernes.",
+    "button": "Analyser ma Carrière — Gratuit",
+    "footer": "Sans inscription • Sans carte bancaire • Résultats en moins de 2 minutes",
+    "quote": "J'ai passé des semaines à me demander si j'étais prêt à passer du développement backend à l'architecture de solutions. GapZero m'a montré exactement quoi combler en 90 jours. J'ai obtenu le poste.",
+    "quoteAuthor": "— Ce que nous construisons GapZero pour vous aider à dire",
+    "noSignup": "Sans inscription",
+    "noCreditCard": "Sans carte de crédit",
+    "resultsIn2Min": "Résultats en ~90 secondes"
   },
   "analyze": {
     "title": "Analysez Votre Carrière",
@@ -449,6 +465,7 @@
     "startFirst": "Lancer ma première analyse",
     "viewAnalysis": "Voir l'analyse",
     "delete": "Supprimer",
-    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette analyse ?"
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette analyse ?",
+    "useSignIn": "Cliquez sur Connexion dans l'en-tête pour commencer"
   }
 }

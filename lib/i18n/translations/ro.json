@@ -24,70 +24,80 @@
   "hero": {
     "badge": "Consilier de Carieră cu AI",
     "headline1": "Încarcă CV-ul tău.",
-    "headline2": "Primește o",
+    "headline2": "Obține un plan personalizat de",
     "rotatingWords": [
       "strategie de carieră",
       "analiză de competențe",
       "benchmark salarial",
       "plan de acțiune",
-      "recomandări de roluri"
+      "potrivire de roluri"
     ],
-    "subtitle": "Analiză de competențe, planuri de învățare, benchmark-uri salariale, recomandări de roluri și optimizare CV — totul în sub 2 minute. Coaching de carieră care costa 500$/oră, acum alimentat de AI.",
-    "analyzeFree": "Analizează Cariera",
+    "subtitle": "AI-ul nostru îți analizează competențele, identifică lacunele, benchmarkează salariul și construiește un plan pas cu pas pentru a ajunge unde vrei. Ce costa $500/oră la un coach de carieră, acum în 90 de secunde.",
+    "analyzeFree": "Analizează-mi Cariera →",
     "stats": {
       "analysisTime": "Durata Analizei",
       "dataPoints": "Puncte de Date",
       "aiSteps": "Pași cu AI",
       "toUse": "De Folosit"
-    }
+    },
+    "trust": "Folosit de profesioniști care fac tranziția spre AI, cloud și roluri tech moderne"
   },
   "features": {
-    "sectionLabel": "Funcționalități",
-    "title": "Tot ce ai nevoie pentru a naviga tranziția ta de carieră",
-    "subtitle": "Alimentat de analiza AI avansată a CV-ului tău, cerințele rolului țintă și datele de piață.",
+    "sectionLabel": "Ce Primești",
+    "title": "Șase perspective puternice asupra carierei tale",
+    "subtitle": "Fiecare analiză îți oferă o imagine completă — nu sfaturi generice, ci perspective personalizate bazate pe experiența TA, rolul TĂU țintă și piața TA.",
     "cards": [
       {
-        "title": "Analiza CV-ului",
-        "description": "Încarcă CV-ul în format PDF și AI-ul nostru extrage fiecare competență, certificare și experiență — inclusiv pe cele pe care ai uitat să le listezi."
+        "title": "Analiză CV Profundă",
+        "description": "AI-ul nostru citește întregul CV și extrage fiecare competență, certificare, proiect și competență implicită — chiar și cele pe care ai uitat să le menționezi.",
+        "highlight": "Găsește competențe ascunse pe care le-ai ratat"
       },
       {
-        "title": "Analiză de Gap-uri",
-        "description": "Vezi exact ce competențe îți lipsesc pentru rolul țintă — codificate pe culori după severitate, cu planuri specifice pentru a le acoperi."
+        "title": "Analiză de Lacune",
+        "description": "Vezi exact ce te separă de rolul tău țintă. Fiecare lacună este codificată color după severitate cu un plan concret și un calendar de închidere.",
+        "highlight": "Prioritizat după impact asupra căutării de job"
       },
       {
-        "title": "Benchmark Salarial",
-        "description": "Intervale salariale ajustate la locație pentru rolurile tale curente și țintă, plus sfaturi de negociere specifice experienței tale."
+        "title": "Inteligență Salarială",
+        "description": "Află-ți valoarea. Obține intervale salariale bazate pe locație pentru rolul actual și cel țintă, plus scripturi de negociere adaptate nivelului tău de experiență.",
+        "highlight": "Date de piață specifice regiunii"
       },
       {
         "title": "Recomandări de Roluri",
-        "description": "Primește cele mai potrivite 3 roluri bazate pe profilul tău — cu scoruri de potrivire, intervale salariale și companii specifice."
+        "description": "Descoperă 3 roluri unde competențele tale creează cea mai mare valoare — cu scoruri de potrivire, intervale salariale, companii țintă și estimări de pregătire.",
+        "highlight": "Roluri la care poate nu te-ai gândit"
       },
       {
-        "title": "Plan de Acțiune",
-        "description": "Câștiguri rapide în 30 de zile, dezvoltarea competențelor în 90 de zile și traiectoria carierei pe 12 luni — fiecare cu resurse și estimări de timp."
+        "title": "Plan de Acțiune Personalizat",
+        "description": "Nu sfaturi vagi — acțiuni specifice cu termene. Câștiguri rapide în 30 de zile, sprinturi de competențe în 90 de zile și o traiectorie de carieră pe 12 luni.",
+        "highlight": "Fiecare acțiune are o resursă și estimare de timp"
       },
       {
-        "title": "Potrivire Job",
-        "description": "Lipește orice anunț de job și primește scor de potrivire ATS, cuvinte cheie lipsă și sugestii de rescriere CV."
+        "title": "Coach AI de Carieră",
+        "description": "Pune întrebări de follow-up, pregătește-te pentru interviu, cere template-uri de mesaje LinkedIn sau aprofundează orice parte a analizei tale.",
+        "highlight": "Conversații de follow-up nelimitate"
       }
     ]
   },
   "howItWorks": {
     "sectionLabel": "Cum Funcționează",
-    "title": "De la CV la foaie de parcurs în 3 pași",
-    "subtitle": "Fără înregistrare. Încarcă, răspunde la câteva întrebări și primește analiza personalizată.",
+    "title": "De la CV la claritate în carieră în 3 pași",
+    "subtitle": "Fără cont necesar. Fără card de credit. Încarcă CV-ul, răspunde la câteva întrebări și lasă AI-ul să facă munca grea.",
     "steps": [
       {
         "title": "Încarcă CV-ul",
-        "description": "Trage și plasează CV-ul în format PDF. AI-ul nostru citește fiecare detaliu — competențe, certificări, experiență și competențe implicite pe care nu le-ai listat explicit."
+        "description": "Trage și plasează PDF-ul tău. AI-ul nostru citește fiecare detaliu — titluri de job, tehnologii, certificări, descrieri de proiecte și chiar deduce competențe pe care nu le-ai listat explicit.",
+        "detail": "Suportă PDF-uri până la 5MB. Datele tale sunt procesate securizat și nu sunt stocate niciodată."
       },
       {
-        "title": "Spune-ne Obiectivele",
-        "description": "Răspunde la un chestionar scurt despre rolul tău actual, poziția țintă, locația și așteptările salariale. Durează sub 2 minute."
+        "title": "Spune-ne Unde Te Îndrepți",
+        "description": "Ce rol vizezi? Unde vrei să lucrezi? Care e obiectivul tău salarial? Un chestionar rapid de 2 minute oferă AI-ului nostru contextul necesar.",
+        "detail": "Opțional poți lipi o postare de job specifică pentru o analiză de potrivire țintită."
       },
       {
-        "title": "Primește Foaia de Parcurs",
-        "description": "În sub 2 minute, primești o analiză completă: scor de potrivire, puncte forte, lacune de competențe, benchmark salarial și plan de acțiune personalizat."
+        "title": "Primește Foaia de Drum",
+        "description": "În aproximativ 90 de secunde, primești o analiză comprehensivă: scor de potrivire, puncte forte, lacune de închis, benchmarkuri salariale și un plan pas cu pas.",
+        "detail": "Descarcă ca PDF, discută cu coach-ul AI sau potrivește-te cu postări specifice de job."
       }
     ],
     "visual": {
@@ -98,13 +108,19 @@
       "strengthsIdentified": "5 puncte forte identificate",
       "gapsToClose": "3 lacune de acoperit",
       "actionItems": "12 acțiuni de făcut"
-    }
+    },
+    "timeEstimate": "Timp total: aproximativ 3 minute de la încărcare la foaia de drum completă"
   },
   "cta": {
-    "title": "Pregătit să-ți accelerezi cariera?",
-    "subtitle": "Încarcă CV-ul și primește o analiză completă de carieră în sub 2 minute. Gratuit, fără înregistrare.",
-    "button": "Analizează Cariera — Gratuit",
-    "footer": "Fără înregistrare • Fără card • Rezultate în sub 2 minute"
+    "title": "Următoarea ta mișcare de carieră începe aici",
+    "subtitle": "Alătură-te profesioniștilor care au folosit GapZero pentru a-și găsi calea spre AI, cloud și roluri tech moderne.",
+    "button": "Analizează-mi Cariera — Gratuit",
+    "footer": "Fără înregistrare • Fără card • Rezultate în sub 2 minute",
+    "quote": "Am petrecut săptămâni întrebându-mă dacă sunt pregătit să fac tranziția de la dezvoltare backend la arhitectură de soluții. GapZero mi-a arătat exact ce trebuie să închid în 90 de zile. Am obținut jobul.",
+    "quoteAuthor": "— Ce construim GapZero să te ajute să spui",
+    "noSignup": "Fără înregistrare",
+    "noCreditCard": "Fără card de credit",
+    "resultsIn2Min": "Rezultate în ~90 secunde"
   },
   "analyze": {
     "title": "Analizează-ți Cariera",
@@ -449,6 +465,7 @@
     "startFirst": "Începe Prima Analiză",
     "viewAnalysis": "Vezi analiza",
     "delete": "Șterge",
-    "confirmDelete": "Sigur vrei să ștergi această analiză?"
+    "confirmDelete": "Sigur vrei să ștergi această analiză?",
+    "useSignIn": "Click pe Autentificare din header pentru a începe"
   }
 }

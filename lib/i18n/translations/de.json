@@ -28,66 +28,76 @@
     "rotatingWords": [
       "Karrierestrategie",
       "Kompetenzanalyse",
-      "Gehaltsbenchmarks",
+      "Gehaltsvergleich",
       "Aktionsplan",
-      "Rollenempfehlungen"
+      "Rollenmatch"
     ],
-    "subtitle": "Kompetenzanalyse, Lernpläne, Gehaltsbenchmarks, Rollenempfehlungen und Lebenslauf-Optimierung — alles in unter 2 Minuten. Karrierecoaching, das früher 500$/Stunde kostete, jetzt mit KI.",
-    "analyzeFree": "Karriere Analysieren",
+    "subtitle": "Unsere KI analysiert Ihre Fähigkeiten, identifiziert Lücken, vergleicht Gehälter und erstellt einen Schritt-für-Schritt-Plan. Was früher $500/Stunde beim Karrierecoach kostete, in 90 Sekunden.",
+    "analyzeFree": "Karriere analysieren →",
     "stats": {
       "analysisTime": "Analysezeit",
       "dataPoints": "Datenpunkte",
       "aiSteps": "KI-Schritte",
       "toUse": "Zu Nutzen"
-    }
+    },
+    "trust": "Genutzt von Fachleuten beim Wechsel in KI-, Cloud- und moderne Tech-Rollen"
   },
   "features": {
-    "sectionLabel": "Funktionen",
-    "title": "Alles, was Sie für Ihren Karrierewechsel brauchen",
-    "subtitle": "Basierend auf fortschrittlicher KI-Analyse Ihres Lebenslaufs, der Zielrolle und aktueller Marktdaten.",
+    "sectionLabel": "Was Sie bekommen",
+    "title": "Sechs leistungsstarke Perspektiven auf Ihre Karriere",
+    "subtitle": "Jede Analyse gibt Ihnen ein vollständiges Bild — keine generischen Ratschläge, sondern personalisierte Einblicke basierend auf IHRER Erfahrung, IHRER Zielrolle und IHREM Markt.",
     "cards": [
       {
-        "title": "Lebenslauf-Tiefenanalyse",
-        "description": "Laden Sie Ihren Lebenslauf als PDF hoch und unsere KI extrahiert jede Fähigkeit, Zertifizierung und Erfahrung — auch die, die Sie vergessen haben zu erwähnen."
+        "title": "Tiefe CV-Analyse",
+        "description": "Unsere KI liest Ihren gesamten Lebenslauf und extrahiert jede Fähigkeit, Zertifizierung, jedes Projekt und implizite Kompetenz — auch die, die Sie vergessen haben.",
+        "highlight": "Findet versteckte Fähigkeiten"
       },
       {
-        "title": "Gap-Analyse",
-        "description": "Sehen Sie genau, welche Fähigkeiten Ihnen für Ihre Zielrolle fehlen — farbcodiert nach Schweregrad mit konkreten Plänen zur Schließung jeder Lücke."
+        "title": "Kompetenzlücken-Analyse",
+        "description": "Sehen Sie genau, was zwischen Ihnen und Ihrer Zielrolle steht. Jede Lücke ist farbcodiert nach Schweregrad mit einem konkreten Schließungsplan.",
+        "highlight": "Priorisiert nach Auswirkung auf Ihre Jobsuche"
       },
       {
-        "title": "Gehaltsbenchmarks",
-        "description": "Standortbezogene Gehaltsspannen für Ihre aktuelle und Zielrolle, plus Verhandlungstipps speziell für Ihre Erfahrung."
+        "title": "Gehaltsintelligenz",
+        "description": "Kennen Sie Ihren Wert. Standortbezogene Gehaltsspannen für aktuelle und Zielrollen, plus Verhandlungsskripte für Ihr Erfahrungsniveau.",
+        "highlight": "Regionsspezifische Marktdaten"
       },
       {
         "title": "Rollenempfehlungen",
-        "description": "Erhalten Sie die 3 am besten passenden Rollen basierend auf Ihrem Profil — mit Passungswerten, Gehaltsspannen und konkreten Unternehmen."
+        "description": "Entdecken Sie 3 Rollen, wo Ihre Fähigkeiten den größten Wert schaffen — mit Fit-Scores, Gehaltsspannen, Zielunternehmen und Bereitschaftsschätzungen.",
+        "highlight": "Rollen, die Sie vielleicht nicht bedacht haben"
       },
       {
-        "title": "Aktionsplan",
-        "description": "Schnelle Erfolge in 30 Tagen, Kompetenzaufbau in 90 Tagen und Karriereverlauf über 12 Monate — jeweils mit Ressourcen und Zeitschätzungen."
+        "title": "Personalisierter Aktionsplan",
+        "description": "Keine vagen Ratschläge — konkrete Aktionen mit Fristen. 30-Tage-Schnellgewinne, 90-Tage-Kompetenzsprints und eine 12-Monats-Karriereentwicklung.",
+        "highlight": "Jede Aktion hat eine Ressource und Zeitschätzung"
       },
       {
-        "title": "Job-Matching",
-        "description": "Fügen Sie eine Stellenanzeige ein und erhalten Sie einen ATS-Matchscore, fehlende Schlüsselwörter und CV-Optimierungsvorschläge."
+        "title": "KI-Karrierecoach",
+        "description": "Stellen Sie Folgefragen, bereiten Sie sich auf Interviews vor, fordern Sie LinkedIn-Nachrichtenvorlagen an oder vertiefen Sie jeden Teil Ihrer Analyse.",
+        "highlight": "Unbegrenzte Folgegespräche"
       }
     ]
   },
   "howItWorks": {
-    "sectionLabel": "So Funktioniert's",
-    "title": "Vom Lebenslauf zur Karriere-Roadmap in 3 Schritten",
-    "subtitle": "Keine Registrierung nötig. Hochladen, ein paar Fragen beantworten und Ihre personalisierte Analyse erhalten.",
+    "sectionLabel": "So funktioniert es",
+    "title": "Vom Lebenslauf zur Karriereklarheit in 3 Schritten",
+    "subtitle": "Kein Konto erforderlich. Keine Kreditkarte. Laden Sie Ihren CV hoch, beantworten Sie ein paar Fragen und lassen Sie die KI arbeiten.",
     "steps": [
       {
-        "title": "Lebenslauf Hochladen",
-        "description": "Ziehen Sie Ihren Lebenslauf per Drag & Drop als PDF. Unsere KI liest jedes Detail — Fähigkeiten, Zertifizierungen, Erfahrung und implizite Kompetenzen."
+        "title": "Lebenslauf hochladen",
+        "description": "Ziehen Sie Ihr PDF per Drag & Drop. Unsere KI liest jedes Detail — Jobtitel, Technologien, Zertifizierungen, Projektbeschreibungen und leitet sogar nicht explizit genannte Fähigkeiten ab.",
+        "detail": "Unterstützt PDFs bis 5MB. Ihre Daten werden sicher verarbeitet und nie gespeichert."
       },
       {
-        "title": "Ziele Angeben",
-        "description": "Beantworten Sie einen kurzen Fragebogen zu Ihrer aktuellen Rolle, Zielposition, Standort und Gehaltsvorstellungen. Dauert unter 2 Minuten."
+        "title": "Erzählen Sie uns Ihr Ziel",
+        "description": "Welche Rolle streben Sie an? Wo möchten Sie arbeiten? Was ist Ihr Gehaltsziel? Ein kurzer 2-Minuten-Fragebogen gibt unserer KI den nötigen Kontext.",
+        "detail": "Optional können Sie eine spezifische Stellenausschreibung für eine gezielte Match-Analyse einfügen."
       },
       {
-        "title": "Roadmap Erhalten",
-        "description": "In unter 2 Minuten erhalten Sie eine umfassende Analyse: Passungswert, Stärken, Kompetenzlücken, Gehaltsbenchmarks und einen personalisierten Aktionsplan."
+        "title": "Ihre Karriere-Roadmap",
+        "description": "In etwa 90 Sekunden erhalten Sie eine umfassende Analyse: Fit-Score, Stärken, zu schließende Lücken, Gehaltsvergleiche und einen Schritt-für-Schritt-Plan.",
+        "detail": "Als PDF herunterladen, mit Ihrem KI-Coach chatten oder gegen spezifische Stellenausschreibungen abgleichen."
       }
     ],
     "visual": {
@@ -98,13 +108,19 @@
       "strengthsIdentified": "5 Stärken identifiziert",
       "gapsToClose": "3 Lücken zu schließen",
       "actionItems": "12 Aktionspunkte"
-    }
+    },
+    "timeEstimate": "Gesamtzeit: etwa 3 Minuten vom Upload bis zur vollständigen Karriere-Roadmap"
   },
   "cta": {
-    "title": "Bereit, Ihre Karriere zu beschleunigen?",
-    "subtitle": "Laden Sie Ihren Lebenslauf hoch und erhalten Sie eine umfassende Karriereanalyse in unter 2 Minuten. Kostenlos, ohne Registrierung.",
-    "button": "Karriere Analysieren — Kostenlos",
-    "footer": "Keine Registrierung • Keine Kreditkarte • Ergebnisse in unter 2 Minuten"
+    "title": "Ihr nächster Karriereschritt beginnt hier",
+    "subtitle": "Schließen Sie sich Fachleuten an, die GapZero für ihren Weg in KI, Cloud und moderne Tech-Rollen genutzt haben.",
+    "button": "Karriere analysieren — Kostenlos",
+    "footer": "Keine Registrierung • Keine Kreditkarte • Ergebnisse in unter 2 Minuten",
+    "quote": "Ich habe Wochen damit verbracht, mich zu fragen, ob ich bereit bin, von Backend-Entwicklung zur Lösungsarchitektur zu wechseln. GapZero zeigte mir genau, was ich in 90 Tagen schließen musste. Ich habe den Job bekommen.",
+    "quoteAuthor": "— Was wir mit GapZero ermöglichen wollen",
+    "noSignup": "Keine Anmeldung",
+    "noCreditCard": "Keine Kreditkarte",
+    "resultsIn2Min": "Ergebnisse in ~90 Sekunden"
   },
   "analyze": {
     "title": "Analysieren Sie Ihre Karriere",
@@ -449,6 +465,7 @@
     "startFirst": "Erste Analyse starten",
     "viewAnalysis": "Analyse ansehen",
     "delete": "Löschen",
-    "confirmDelete": "Möchten Sie diese Analyse wirklich löschen?"
+    "confirmDelete": "Möchten Sie diese Analyse wirklich löschen?",
+    "useSignIn": "Klicken Sie auf Anmelden im Header, um loszulegen"
   }
 }
