@@ -1,16 +1,97 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from '@/lib/i18n';
 
-const STEP_ICONS = [
-  // Upload
-  <svg key="0" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>,
-  // Tell Us
-  <svg key="1" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>,
-  // Get Roadmap
-  <svg key="2" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>,
-];
+// Mini mockup UIs for each step
+function UploadMockup() {
+  const [uploaded, setUploaded] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setUploaded(true), 1200);
+    return () => clearTimeout(t);
+  }, []);
+  return (
+    <div className="bg-white border border-black/[0.06] rounded-xl p-4 shadow-sm">
+      <div className={`border-2 border-dashed rounded-lg p-6 text-center transition-all duration-500 ${
+        uploaded ? 'border-success/40 bg-success/[0.04]' : 'border-black/[0.08]'
+      }`}>
+        {uploaded ? (
+          <div className="flex items-center justify-center gap-2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span className="text-xs font-semibold text-success">Resume_2026.pdf uploaded</span>
+          </div>
+        ) : (
+          <>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="mx-auto text-text-tertiary mb-2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span className="text-[11px] text-text-tertiary">Drop your CV here...</span>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function QuestionnaireMockup() {
+  return (
+    <div className="bg-white border border-black/[0.06] rounded-xl p-4 shadow-sm space-y-2.5">
+      {[
+        { label: 'Current Role', value: 'RPA Developer' },
+        { label: 'Target Role', value: 'AI Solutions Architect' },
+        { label: 'Location', value: 'Romania 🇷🇴' },
+      ].map((f) => (
+        <div key={f.label}>
+          <div className="text-[10px] font-medium text-text-tertiary mb-0.5">{f.label}</div>
+          <div className="bg-black/[0.03] border border-black/[0.06] rounded-lg px-2.5 py-1.5 text-xs text-text-primary">{f.value}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ResultsMockup() {
+  const [score, setScore] = useState(0);
+  useEffect(() => {
+    const t = setTimeout(() => setScore(7.2), 800);
+    return () => clearTimeout(t);
+  }, []);
+  return (
+    <div className="bg-white border border-black/[0.06] rounded-xl p-4 shadow-sm">
+      {/* Score */}
+      <div className="flex items-center gap-3 mb-3">
+        <div className="relative w-12 h-12">
+          <svg viewBox="0 0 36 36" className="w-12 h-12 -rotate-90">
+            <circle cx="18" cy="18" r="14" fill="none" stroke="rgba(0,0,0,0.05)" strokeWidth="3" />
+            <circle cx="18" cy="18" r="14" fill="none" stroke="#E8890A" strokeWidth="3" strokeLinecap="round"
+              strokeDasharray={`${score * 8.8} 88`}
+              className="transition-all duration-1000 ease-out" />
+          </svg>
+          <span className="absolute inset-0 flex items-center justify-center text-xs font-bold text-primary">
+            {score > 0 ? score.toFixed(1) : '—'}
+          </span>
+        </div>
+        <div>
+          <div className="text-xs font-semibold text-text-primary">Strong Fit</div>
+          <div className="text-[10px] text-text-tertiary">for AI Solutions Architect</div>
+        </div>
+      </div>
+      {/* Mini results */}
+      <div className="grid grid-cols-3 gap-1.5">
+        {[
+          { label: 'Strengths', val: '5', color: 'text-success' },
+          { label: 'Gaps', val: '3', color: 'text-warning' },
+          { label: 'Actions', val: '12', color: 'text-primary' },
+        ].map((s) => (
+          <div key={s.label} className="bg-black/[0.02] rounded-lg p-2 text-center">
+            <div className={`text-sm font-bold ${s.color}`}>{s.val}</div>
+            <div className="text-[9px] text-text-tertiary font-medium">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const STEP_MOCKUPS = [UploadMockup, QuestionnaireMockup, ResultsMockup];
 
 export default function HowItWorks() {
   const { t } = useTranslation();
@@ -25,22 +106,20 @@ export default function HowItWorks() {
       },
       { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     );
-
     const els = sectionRef.current?.querySelectorAll('.fade-in-up');
     els?.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
-  const steps = t('howItWorks.steps') as unknown as { title: string; description: string }[];
+  const steps = t('howItWorks.steps') as unknown as { title: string; description: string; detail: string }[];
 
   return (
-    <section id="how-it-works" ref={sectionRef} className="relative py-28 sm:py-36">
-      {/* Subtle top divider */}
-      <div className="absolute top-0 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-black/[0.08] to-transparent" />
+    <section id="how-it-works" ref={sectionRef} className="relative py-24 sm:py-32 bg-surface-raised">
+      <div className="absolute top-0 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-black/[0.06] to-transparent" />
 
       <div className="max-w-container mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="text-center mb-16 sm:mb-20 fade-in-up">
+        <div className="text-center mb-14 sm:mb-18 fade-in-up">
           <div className="section-badge mb-5">
             {t('howItWorks.sectionLabel')}
           </div>
@@ -52,37 +131,50 @@ export default function HowItWorks() {
           </p>
         </div>
 
-        {/* Steps */}
-        <div className="max-w-3xl mx-auto">
-          {Array.isArray(steps) && steps.map((step, i) => (
-            <div key={i} className="fade-in-up relative flex gap-6 sm:gap-8" style={{ transitionDelay: `${i * 120}ms` }}>
-              {/* Timeline */}
-              <div className="flex flex-col items-center flex-shrink-0">
-                {/* Number circle */}
-                <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-accent-orange/15 border border-primary/25 flex items-center justify-center text-primary">
-                  {STEP_ICONS[i]}
-                  {/* Step number badge */}
-                  <div className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-gradient-to-r from-primary to-accent-orange text-[10px] font-bold text-white flex items-center justify-center">
-                    {i + 1}
+        {/* Steps — alternating layout */}
+        <div className="max-w-4xl mx-auto space-y-16 sm:space-y-20">
+          {Array.isArray(steps) && steps.map((step, i) => {
+            const Mockup = STEP_MOCKUPS[i];
+            const isEven = i % 2 === 0;
+            return (
+              <div key={i} className="fade-in-up" style={{ transitionDelay: `${i * 120}ms` }}>
+                <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 md:gap-12`}>
+                  {/* Text */}
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent-orange text-white text-sm font-bold flex items-center justify-center flex-shrink-0">
+                        {i + 1}
+                      </span>
+                      <h3 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight">
+                        {step.title}
+                      </h3>
+                    </div>
+                    <p className="text-text-secondary leading-relaxed text-base mb-3">
+                      {step.description}
+                    </p>
+                    {step.detail && (
+                      <p className="text-sm text-text-tertiary leading-relaxed italic">
+                        {step.detail}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Mockup */}
+                  <div className="flex-1 w-full max-w-sm">
+                    {Mockup && <Mockup />}
                   </div>
                 </div>
-                {/* Connector line */}
-                {i < steps.length - 1 && (
-                  <div className="w-px flex-1 my-3 bg-gradient-to-b from-primary/30 to-transparent min-h-[40px]" />
-                )}
               </div>
+            );
+          })}
+        </div>
 
-              {/* Content */}
-              <div className={`pb-12 ${i === steps.length - 1 ? 'pb-0' : ''}`}>
-                <h3 className="text-xl sm:text-2xl font-bold text-text-primary mb-2 tracking-tight">
-                  {step.title}
-                </h3>
-                <p className="text-text-secondary leading-relaxed text-sm sm:text-base">
-                  {step.description}
-                </p>
-              </div>
-            </div>
-          ))}
+        {/* Time estimate */}
+        <div className="text-center mt-16 fade-in-up">
+          <div className="inline-flex items-center gap-2.5 bg-white border border-black/[0.06] rounded-full px-5 py-2.5 shadow-sm">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8890A" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span className="text-sm font-medium text-text-primary">{t('howItWorks.timeEstimate')}</span>
+          </div>
         </div>
       </div>
     </section>
