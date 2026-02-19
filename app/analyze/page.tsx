@@ -177,63 +177,63 @@ export default function AnalyzePage() {
       switch (activeTab) {
         case 'fit-score':
           return (
-            <div role="tabpanel" id="tabpanel-fit-score" aria-labelledby="tab-fit-score">
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-fit-score" aria-labelledby="tab-fit-score">
               <SectionIntro messageKey="motivation.fitScore" variant={fitScore >= 7 ? 'celebratory' : 'encouraging'} />
               <FitScoreGauge fitScore={result.fitScore} />
             </div>
           );
         case 'strengths':
           return (
-            <div role="tabpanel" id="tabpanel-strengths" aria-labelledby="tab-strengths">
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-strengths" aria-labelledby="tab-strengths">
               <SectionIntro messageKey="motivation.strengths" variant="celebratory" />
               <StrengthsPanel strengths={result.strengths} />
             </div>
           );
         case 'gaps':
           return (
-            <div role="tabpanel" id="tabpanel-gaps" aria-labelledby="tab-gaps">
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-gaps" aria-labelledby="tab-gaps">
               <SectionIntro messageKey="motivation.gaps" variant="encouraging" />
               <GapsPanel gaps={result.gaps} />
             </div>
           );
         case 'action-plan':
           return (
-            <div role="tabpanel" id="tabpanel-action-plan" aria-labelledby="tab-action-plan">
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-action-plan" aria-labelledby="tab-action-plan">
               <SectionIntro messageKey="motivation.actionPlan" variant="encouraging" />
               <ActionPlan plan={result.actionPlan} />
             </div>
           );
         case 'roles':
           return (
-            <div role="tabpanel" id="tabpanel-roles" aria-labelledby="tab-roles">
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-roles" aria-labelledby="tab-roles">
               <SectionIntro messageKey="motivation.roles" variant="encouraging" />
               <RoleRecommendations roles={result.roleRecommendations} />
             </div>
           );
         case 'salary':
           return (
-            <div role="tabpanel" id="tabpanel-salary" aria-labelledby="tab-salary">
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-salary" aria-labelledby="tab-salary">
               <SectionIntro messageKey="motivation.salary" variant="encouraging" />
               <SalaryBenchmark salary={result.salaryAnalysis} />
             </div>
           );
         case 'job-match':
           return result.jobMatch ? (
-            <div role="tabpanel" id="tabpanel-job-match" aria-labelledby="tab-job-match">
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-job-match" aria-labelledby="tab-job-match">
               <SectionIntro messageKey="motivation.jobMatch" variant="encouraging" />
               <JobMatchPanel match={result.jobMatch} />
             </div>
           ) : null;
         case 'linkedin':
           return (
-            <div role="tabpanel" id="tabpanel-linkedin" aria-labelledby="tab-linkedin">
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-linkedin" aria-labelledby="tab-linkedin">
               <SectionIntro messageKey="motivation.linkedin" variant="encouraging" />
               <LinkedInPlan analysis={result} />
             </div>
           );
         case 'ai-coach':
           return (
-            <div role="tabpanel" id="tabpanel-ai-coach" aria-labelledby="tab-ai-coach">
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-ai-coach" aria-labelledby="tab-ai-coach">
               <ChatPanel analysis={result} />
             </div>
           );
@@ -305,8 +305,10 @@ export default function AnalyzePage() {
               </div>
             </div>
 
-            {/* Active tab content */}
-            {renderActiveTab()}
+            {/* Active tab content — key forces re-mount for entrance animation */}
+            <div key={activeTab}>
+              {renderActiveTab()}
+            </div>
           </div>
         </main>
         <Footer />

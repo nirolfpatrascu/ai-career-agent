@@ -330,3 +330,35 @@ html {
   .no-print { display: none !important; }
   body { background: white; color: black; }
 }
+
+/* Confetti burst animation for high fit scores */
+@keyframes confettiBurst {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  15% {
+    opacity: 1;
+    transform: scale(1.2) rotate(90deg);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1) rotate(180deg) translateY(-20px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5) rotate(360deg) translateY(40px);
+  }
+}
+.animate-confetti-burst {
+  animation: confettiBurst 2s ease-out forwards;
+}
+
+/* Panel entrance animation */
+@keyframes panelEnter {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-panel-enter {
+  animation: panelEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
