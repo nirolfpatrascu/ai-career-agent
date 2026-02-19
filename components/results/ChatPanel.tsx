@@ -150,7 +150,7 @@ export default function ChatPanel({ analysis }: ChatPanelProps) {
 
   // ── Full-page layout ──
   return (
-    <div className="flex flex-col h-[calc(100vh-10rem)] lg:h-[calc(100vh-7rem)] min-h-[400px] -mx-4 sm:-mx-6 -mb-12">
+    <div className="flex flex-col h-[calc(100vh-14rem)] sm:h-[calc(100vh-12rem)] lg:h-[calc(100vh-11rem)] min-h-[400px] -mx-4 sm:-mx-6 -mb-20 sm:-mb-12">
       {/* Messages area */}
       <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 scrollbar-thin">
         {/* Welcome / empty state */}

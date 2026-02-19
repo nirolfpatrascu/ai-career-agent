@@ -219,3 +219,25 @@ export type TierColor = {
   strong: string;
   supporting: string;
 };
+
+// --- CV Generator types ---
+
+export interface GeneratedCV {
+  professionalSummary: string;
+  skills: {
+    category: string;
+    items: string[];
+  }[];
+  experienceBullets: {
+    role: string;
+    company: string;
+    bullets: string[];
+  }[];
+  certifications: string[];
+  projectHighlights: {
+    name: string;
+    description: string;
+    technologies: string[];
+  }[];
+  coverLetterDraft: string;
+}

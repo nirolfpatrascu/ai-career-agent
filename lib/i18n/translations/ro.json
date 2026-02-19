@@ -476,6 +476,35 @@
     "roles": "Aceste roluri se potrivesc combinației tale unice de competențe și experiență. Unele te-ar putea surprinde — acolo se ascund adesea cele mai bune oportunități.",
     "salary": "Cunoașterea este putere de negociere. Înțelegerea valorii tale pe piață te ajută să iei decizii încrezătoare.",
     "jobMatch": "Iată cum se compară profilul tău cu această oportunitate specifică. Folosește sugestiile de mai jos pentru a-ți personaliza aplicația.",
-    "linkedin": "Profilul tău LinkedIn este adesea prima impresie. Aceste optimizări pot crește semnificativ vizibilitatea ta pentru recruiteri."
+    "linkedin": "Profilul tău LinkedIn este adesea prima impresie. Aceste optimizări pot crește semnificativ vizibilitatea ta pentru recruiteri.",
+    "cvGenerator": "CV-ul tău este prima impresie. Acest cadru generat de AI folosește analiza ta pentru a crea conținut prietenos ATS optimizat pentru rolul tău țintă. Copiază ce funcționează, adaptează restul.",
+    "cvSuggestions": "Acestea sunt modificări targetate pentru a-ți alinia CV-ul cu postul de job pe care l-ai furnizat. Fiecare sugestie arată exact ce să schimbi și de ce contează."
+  },
+  "cv": {
+    "tabTitle": "Generator CV",
+    "title": "Generator CV cu AI",
+    "description": "Generează un CV optimizat pentru ATS bazat pe analiza ta de carieră. Primești un rezumat profesional, experiență reformulată, secțiune de competențe, proiecte cheie și un draft de scrisoare de intenție — toate adaptate rolului tău țintă.",
+    "generate": "Generează CV-ul meu",
+    "generateHint": "Durează aproximativ 15-20 secunde. Bazat pe analiza ta de carieră.",
+    "generating": "Creăm CV-ul tău...",
+    "generatingHint": "AI-ul optimizează experiența ta pentru rolul țintă",
+    "copy": "Copiază",
+    "copied": "Copiat!",
+    "copyAll": "Copiază tot",
+    "regenerate": "Regenerează",
+    "sections": {
+      "summary": "Rezumat Profesional",
+      "skills": "Competențe",
+      "experience": "Experiență",
+      "certifications": "Certificări",
+      "projects": "Proiecte Cheie",
+      "coverLetter": "Draft Scrisoare de Intenție"
+    }
+  },
+  "cvSuggestions": {
+    "tabTitle": "Sugestii CV",
+    "title": "Sugestii Modificări CV",
+    "subtitle": "Modificări specifice pentru a-ți face CV-ul mai puternic pentru acest post",
+    "empty": "Nu sunt disponibile sugestii CV. Trimite o postare de job pentru recomandări personalizate."
   }
 }

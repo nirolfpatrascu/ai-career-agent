@@ -476,6 +476,35 @@
     "roles": "Estos roles coinciden con tu combinación única de habilidades y experiencia. Algunos podrían sorprenderte.",
     "salary": "El conocimiento es poder de negociación. Entender tu valor de mercado te ayuda a tomar decisiones seguras.",
     "jobMatch": "Así se compara tu perfil con esta oportunidad específica. Usa las sugerencias para adaptar tu solicitud.",
-    "linkedin": "Tu perfil de LinkedIn es a menudo la primera impresión. Estas optimizaciones pueden aumentar significativamente tu visibilidad."
+    "linkedin": "Tu perfil de LinkedIn es a menudo la primera impresión. Estas optimizaciones pueden aumentar significativamente tu visibilidad.",
+    "cvGenerator": "Tu CV es tu primera impresión. Este marco generado por IA usa tu análisis para crear contenido ATS-friendly optimizado para tu rol objetivo.",
+    "cvSuggestions": "Estos son cambios específicos para alinear tu CV con la oferta de trabajo. Cada sugerencia muestra exactamente qué cambiar y por qué importa."
+  },
+  "cv": {
+    "tabTitle": "Generador CV",
+    "title": "Generador CV con IA",
+    "description": "Genera un CV optimizado para ATS basado en tu análisis de carrera. Obtén un resumen profesional, experiencia reformulada, sección de habilidades, proyectos destacados y un borrador de carta de presentación.",
+    "generate": "Generar mi CV",
+    "generateHint": "Tarda unos 15-20 segundos. Basado en tu análisis de carrera.",
+    "generating": "Creando tu CV...",
+    "generatingHint": "La IA optimiza tu experiencia para tu rol objetivo",
+    "copy": "Copiar",
+    "copied": "¡Copiado!",
+    "copyAll": "Copiar todo",
+    "regenerate": "Regenerar",
+    "sections": {
+      "summary": "Resumen Profesional",
+      "skills": "Habilidades",
+      "experience": "Experiencia",
+      "certifications": "Certificaciones",
+      "projects": "Proyectos Clave",
+      "coverLetter": "Borrador Carta de Presentación"
+    }
+  },
+  "cvSuggestions": {
+    "tabTitle": "Sugerencias CV",
+    "title": "Sugerencias de Cambios en el CV",
+    "subtitle": "Cambios específicos para fortalecer tu CV para esta oferta",
+    "empty": "No hay sugerencias de CV disponibles. Envía una oferta de trabajo para obtener recomendaciones personalizadas."
   }
 }

@@ -17,6 +17,8 @@ import SalaryBenchmark from '@/components/results/SalaryBenchmark';
 import JobMatchPanel from '@/components/results/JobMatchPanel';
 import PDFReport from '@/components/shared/PDFReport';
 import ChatPanel from '@/components/results/ChatPanel';
+import CVGenerator from '@/components/results/CVGenerator';
+import CVSuggestionsPanel from '@/components/results/CVSuggestionsPanel';
 import LinkedInPlan from '@/components/results/LinkedInPlan';
 import ChapterNav, { DEFAULT_TAB } from '@/components/results/ChapterNav';
 import SectionIntro from '@/components/results/SectionIntro';
@@ -229,6 +231,20 @@ export default function AnalyzePage() {
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-linkedin" aria-labelledby="tab-linkedin">
               <SectionIntro messageKey="motivation.linkedin" variant="encouraging" />
               <LinkedInPlan analysis={result} />
+            </div>
+          );
+        case 'cv-suggestions':
+          return result.jobMatch?.cvSuggestions ? (
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-cv-suggestions" aria-labelledby="tab-cv-suggestions">
+              <SectionIntro messageKey="motivation.cvSuggestions" variant="encouraging" />
+              <CVSuggestionsPanel suggestions={result.jobMatch.cvSuggestions} />
+            </div>
+          ) : null;
+        case 'cv-generator':
+          return (
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-cv-generator" aria-labelledby="tab-cv-generator">
+              <SectionIntro messageKey="motivation.cvGenerator" variant="encouraging" />
+              <CVGenerator analysis={result} />
             </div>
           );
         case 'ai-coach':

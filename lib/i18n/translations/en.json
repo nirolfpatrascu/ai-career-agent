@@ -476,6 +476,35 @@
     "roles": "These roles match your unique combination of skills and experience. Some might surprise you — that's often where the best opportunities hide.",
     "salary": "Knowledge is negotiating power. Understanding your market value helps you make confident decisions about your next move.",
     "jobMatch": "Here's how your profile stacks up against this specific opportunity. Use the suggestions below to tailor your application.",
-    "linkedin": "Your LinkedIn profile is often the first impression. These optimizations can significantly increase your visibility to recruiters."
+    "linkedin": "Your LinkedIn profile is often the first impression. These optimizations can significantly increase your visibility to recruiters.",
+    "cvGenerator": "Your CV is your first impression. This AI-generated framework uses your analysis to create ATS-friendly content optimized for your target role. Copy what works, adapt the rest.",
+    "cvSuggestions": "These are targeted changes to align your CV with the specific job posting you provided. Each suggestion shows exactly what to change and why it matters for this role."
+  },
+  "cv": {
+    "tabTitle": "CV Builder",
+    "title": "AI CV Builder",
+    "description": "Generate an ATS-optimized CV framework based on your career analysis. Get a professional summary, reframed experience bullets, skills section, project highlights, and a cover letter draft — all tailored for your target role.",
+    "generate": "Generate My CV",
+    "generateHint": "Takes about 15-20 seconds. Based on your career analysis.",
+    "generating": "Crafting your CV...",
+    "generatingHint": "AI is optimizing your experience for your target role",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "copyAll": "Copy All",
+    "regenerate": "Regenerate",
+    "sections": {
+      "summary": "Professional Summary",
+      "skills": "Skills",
+      "experience": "Experience",
+      "certifications": "Certifications",
+      "projects": "Key Projects",
+      "coverLetter": "Cover Letter Draft"
+    }
+  },
+  "cvSuggestions": {
+    "tabTitle": "CV Suggestions",
+    "title": "CV Change Suggestions",
+    "subtitle": "Specific changes to make your CV stronger for this job posting",
+    "empty": "No CV suggestions available. Submit a job posting to get personalized CV change recommendations."
   }
 }

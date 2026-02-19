@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import type { JobMatch } from '@/lib/types';
 import { useTranslation } from '@/lib/i18n';
 
@@ -10,7 +9,6 @@ interface JobMatchPanelProps {
 
 export default function JobMatchPanel({ match }: JobMatchPanelProps) {
   const { t } = useTranslation();
-  const [showSuggestions, setShowSuggestions] = useState(false);
 
   const getScoreColor = (score: number) => {
     if (score >= 80) return '#10B981';
@@ -74,42 +72,6 @@ export default function JobMatchPanel({ match }: JobMatchPanelProps) {
           <h3 className="font-semibold text-text-primary mb-2.5">Assessment</h3>
           <p className="text-sm text-text-secondary leading-relaxed whitespace-pre-line">{match.overallAdvice}</p>
         </div>
-
-        {/* CV Suggestions */}
-        {match.cvSuggestions.length > 0 && (
-          <div>
-            <button
-              onClick={() => setShowSuggestions(!showSuggestions)}
-              className="flex items-center gap-2 text-primary hover:text-primary-light transition-colors text-sm font-medium mb-3"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`transition-transform duration-300 ${showSuggestions ? 'rotate-180' : ''}`}>
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
-              {t('results.jobMatch.cvSuggestions')} ({match.cvSuggestions.length})
-            </button>
-
-            {showSuggestions && (
-              <div className="space-y-3 animate-fade-in">
-                {match.cvSuggestions.map((suggestion, i) => (
-                  <div key={i} className="rounded-2xl border border-black/[0.08] bg-black/[0.03] p-5">
-                    <p className="text-xs font-semibold text-primary mb-3 uppercase tracking-wider">{suggestion.section}</p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
-                      <div className="rounded-xl bg-danger/[0.04] border border-danger/10 p-3.5">
-                        <p className="text-[11px] font-medium text-danger uppercase tracking-wider mb-1.5">{t('results.jobMatch.current')}</p>
-                        <p className="text-sm text-text-secondary">{suggestion.current}</p>
-                      </div>
-                      <div className="rounded-xl bg-success/[0.04] border border-success/10 p-3.5">
-                        <p className="text-[11px] font-medium text-success uppercase tracking-wider mb-1.5">{t('results.jobMatch.suggested')}</p>
-                        <p className="text-sm text-text-primary">{suggestion.suggested}</p>
-                      </div>
-                    </div>
-                    <p className="text-xs text-text-tertiary">{suggestion.reasoning}</p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
       </div>
     </section>
   );

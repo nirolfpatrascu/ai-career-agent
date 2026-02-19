@@ -476,6 +476,35 @@
     "roles": "Questi ruoli corrispondono alla tua combinazione unica di competenze ed esperienza. Alcuni potrebbero sorprenderti.",
     "salary": "La conoscenza è potere negoziale. Capire il tuo valore di mercato ti aiuta a prendere decisioni sicure.",
     "jobMatch": "Ecco come si confronta il tuo profilo con questa opportunità specifica. Usa i suggerimenti per personalizzare la candidatura.",
-    "linkedin": "Il tuo profilo LinkedIn è spesso la prima impressione. Queste ottimizzazioni possono aumentare significativamente la tua visibilità."
+    "linkedin": "Il tuo profilo LinkedIn è spesso la prima impressione. Queste ottimizzazioni possono aumentare significativamente la tua visibilità.",
+    "cvGenerator": "Il tuo CV è la tua prima impressione. Questo framework generato dall'IA usa la tua analisi per creare contenuto ATS-friendly ottimizzato per il tuo ruolo target.",
+    "cvSuggestions": "Queste sono modifiche mirate per allineare il tuo CV con l'offerta di lavoro specifica. Ogni suggerimento mostra esattamente cosa cambiare e perché è importante."
+  },
+  "cv": {
+    "tabTitle": "Generatore CV",
+    "title": "Generatore CV con IA",
+    "description": "Genera un CV ottimizzato per ATS basato sulla tua analisi di carriera. Ottieni un riepilogo professionale, esperienza riformulata, sezione competenze, progetti chiave e una bozza di lettera di presentazione.",
+    "generate": "Genera il mio CV",
+    "generateHint": "Circa 15-20 secondi. Basato sulla tua analisi di carriera.",
+    "generating": "Creiamo il tuo CV...",
+    "generatingHint": "L'IA ottimizza la tua esperienza per il ruolo target",
+    "copy": "Copia",
+    "copied": "Copiato!",
+    "copyAll": "Copia tutto",
+    "regenerate": "Rigenera",
+    "sections": {
+      "summary": "Riepilogo Professionale",
+      "skills": "Competenze",
+      "experience": "Esperienza",
+      "certifications": "Certificazioni",
+      "projects": "Progetti Chiave",
+      "coverLetter": "Bozza Lettera di Presentazione"
+    }
+  },
+  "cvSuggestions": {
+    "tabTitle": "Suggerimenti CV",
+    "title": "Suggerimenti Modifiche CV",
+    "subtitle": "Modifiche specifiche per rafforzare il tuo CV per questa offerta",
+    "empty": "Nessun suggerimento CV disponibile. Invia un annuncio di lavoro per ricevere raccomandazioni personalizzate."
   }
 }
