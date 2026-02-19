@@ -116,7 +116,7 @@ const FEATURE_PREVIEWS = [
 ];
 
 export default function Features() {
-  const { t } = useTranslation();
+  const { t, tRaw } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
@@ -138,7 +138,7 @@ export default function Features() {
     return () => { observer.disconnect(); clearTimeout(timeout); };
   }, []);
 
-  const cards = t('features.cards') as unknown as { title: string; description: string; highlight: string }[];
+  const cards = tRaw('features.cards') as { title: string; description: string; highlight: string }[];
 
   return (
     <section id="features" ref={sectionRef} className="relative py-24 sm:py-32">

@@ -94,7 +94,7 @@ function ResultsMockup() {
 const STEP_MOCKUPS = [UploadMockup, QuestionnaireMockup, ResultsMockup];
 
 export default function HowItWorks() {
-  const { t } = useTranslation();
+  const { t, tRaw } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -114,7 +114,7 @@ export default function HowItWorks() {
     return () => { observer.disconnect(); clearTimeout(timeout); };
   }, []);
 
-  const steps = t('howItWorks.steps') as unknown as { title: string; description: string; detail: string }[];
+  const steps = tRaw('howItWorks.steps') as { title: string; description: string; detail: string }[];
 
   return (
     <section id="how-it-works" ref={sectionRef} className="relative py-24 sm:py-32 bg-surface-raised">

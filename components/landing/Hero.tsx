@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { useTranslation } from '@/lib/i18n';
 
 export default function Hero() {
-  const { t } = useTranslation();
-  const words = t('hero.rotatingWords') as unknown as string[];
+  const { t, tRaw } = useTranslation();
+  const words = tRaw('hero.rotatingWords') as string[];
   const [wordIndex, setWordIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [animKey, setAnimKey] = useState(0);

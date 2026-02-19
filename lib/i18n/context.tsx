@@ -35,11 +35,12 @@ interface I18nContextType {
   locale: Locale;
   setLocale: (locale: Locale) => void;
   t: (key: string, params?: Record<string, string | number>) => string;
+  tRaw: (key: string) => unknown;
 }
 
 const I18nContext = createContext<I18nContextType | null>(null);
 
-function getNestedValue(obj: unknown, path: string): string {
+function getNestedValue(obj: unknown, path: string): unknown {
   const keys = path.split('.');
   let current: unknown = obj;
   for (const key of keys) {
@@ -48,7 +49,8 @@ function getNestedValue(obj: unknown, path: string): string {
     }
     current = (current as Record<string, unknown>)[key];
   }
-  return typeof current === 'string' ? current : path;
+  if (current === null || current === undefined) return path;
+  return current;
 }
 
 function interpolate(str: string, params?: Record<string, string | number>): string {
@@ -93,7 +95,18 @@ export function I18nProvider({ children }: { children: ReactNode }) {
       const value = getNestedValue(dict, key);
       // Fallback to English if key not found in current locale
       const resolved = value === key ? getNestedValue(translations.en, key) : value;
-      return interpolate(resolved, params);
+      if (typeof resolved === 'string') return interpolate(resolved, params);
+      return String(resolved);
+    },
+    [locale]
+  );
+
+  const tRaw = useCallback(
+    (key: string): unknown => {
+      const dict = translations[locale] || translations.en;
+      const value = getNestedValue(dict, key);
+      if (value === key) return getNestedValue(translations.en, key);
+      return value;
     },
     [locale]
   );
@@ -101,14 +114,14 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   // Prevent hydration mismatch by rendering children only after mount
   if (!mounted) {
     return (
-      <I18nContext.Provider value={{ locale: 'en', setLocale, t: (key) => getNestedValue(translations.en, key) }}>
+      <I18nContext.Provider value={{ locale: 'en', setLocale, t: (key) => { const v = getNestedValue(translations.en, key); return typeof v === 'string' ? v : String(v); }, tRaw: (key) => getNestedValue(translations.en, key) }}>
         {children}
       </I18nContext.Provider>
     );
   }
 
   return (
-    <I18nContext.Provider value={{ locale, setLocale, t }}>
+    <I18nContext.Provider value={{ locale, setLocale, t, tRaw }}>
       {children}
     </I18nContext.Provider>
   );
