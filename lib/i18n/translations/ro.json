@@ -467,5 +467,15 @@
     "delete": "Șterge",
     "confirmDelete": "Sigur vrei să ștergi această analiză?",
     "useSignIn": "Click pe Autentificare din header pentru a începe"
+  },
+  "motivation": {
+    "fitScore": "Acest scor reflectă unde ești astăzi — nu unde poți ajunge. Fiecare lacună pe care o închizi ridică acest număr.",
+    "strengths": "Acestea sunt superputerile tale. Competențele și experiențele care te fac să ieși în evidență. Conduce cu acestea la interviuri.",
+    "gaps": "Lacunele nu sunt slăbiciuni — sunt harta ta de creștere. Fiecare tranziție de carieră reușită implică închiderea câtorva dintre acestea. Poți reuși.",
+    "actionPlan": "Iată planul tău pas cu pas. Începe cu câștigurile de 30 de zile pentru a construi impuls, apoi abordează mișcările mai mari.",
+    "roles": "Aceste roluri se potrivesc combinației tale unice de competențe și experiență. Unele te-ar putea surprinde — acolo se ascund adesea cele mai bune oportunități.",
+    "salary": "Cunoașterea este putere de negociere. Înțelegerea valorii tale pe piață te ajută să iei decizii încrezătoare.",
+    "jobMatch": "Iată cum se compară profilul tău cu această oportunitate specifică. Folosește sugestiile de mai jos pentru a-ți personaliza aplicația.",
+    "linkedin": "Profilul tău LinkedIn este adesea prima impresie. Aceste optimizări pot crește semnificativ vizibilitatea ta pentru recruiteri."
   }
 }

@@ -19,6 +19,7 @@ import PDFReport from '@/components/shared/PDFReport';
 import ChatPanel from '@/components/results/ChatPanel';
 import LinkedInPlan from '@/components/results/LinkedInPlan';
 import ChapterNav, { DEFAULT_TAB } from '@/components/results/ChapterNav';
+import SectionIntro from '@/components/results/SectionIntro';
 import { getSampleAnalysis } from '@/lib/demo';
 import { useTranslation } from '@/lib/i18n';
 import { useAuth } from '@/lib/auth/context';
@@ -171,53 +172,62 @@ export default function AnalyzePage() {
   // RESULTS STATE — Tabbed dashboard
   // ==========================================================================
   if (state === 'results' && result) {
+    const fitScore = result.fitScore.score;
     const renderActiveTab = () => {
       switch (activeTab) {
         case 'fit-score':
           return (
             <div role="tabpanel" id="tabpanel-fit-score" aria-labelledby="tab-fit-score">
+              <SectionIntro messageKey="motivation.fitScore" variant={fitScore >= 7 ? 'celebratory' : 'encouraging'} />
               <FitScoreGauge fitScore={result.fitScore} />
             </div>
           );
         case 'strengths':
           return (
             <div role="tabpanel" id="tabpanel-strengths" aria-labelledby="tab-strengths">
+              <SectionIntro messageKey="motivation.strengths" variant="celebratory" />
               <StrengthsPanel strengths={result.strengths} />
             </div>
           );
         case 'gaps':
           return (
             <div role="tabpanel" id="tabpanel-gaps" aria-labelledby="tab-gaps">
+              <SectionIntro messageKey="motivation.gaps" variant="encouraging" />
               <GapsPanel gaps={result.gaps} />
             </div>
           );
         case 'action-plan':
           return (
             <div role="tabpanel" id="tabpanel-action-plan" aria-labelledby="tab-action-plan">
+              <SectionIntro messageKey="motivation.actionPlan" variant="encouraging" />
               <ActionPlan plan={result.actionPlan} />
             </div>
           );
         case 'roles':
           return (
             <div role="tabpanel" id="tabpanel-roles" aria-labelledby="tab-roles">
+              <SectionIntro messageKey="motivation.roles" variant="encouraging" />
               <RoleRecommendations roles={result.roleRecommendations} />
             </div>
           );
         case 'salary':
           return (
             <div role="tabpanel" id="tabpanel-salary" aria-labelledby="tab-salary">
+              <SectionIntro messageKey="motivation.salary" variant="encouraging" />
               <SalaryBenchmark salary={result.salaryAnalysis} />
             </div>
           );
         case 'job-match':
           return result.jobMatch ? (
             <div role="tabpanel" id="tabpanel-job-match" aria-labelledby="tab-job-match">
+              <SectionIntro messageKey="motivation.jobMatch" variant="encouraging" />
               <JobMatchPanel match={result.jobMatch} />
             </div>
           ) : null;
         case 'linkedin':
           return (
             <div role="tabpanel" id="tabpanel-linkedin" aria-labelledby="tab-linkedin">
+              <SectionIntro messageKey="motivation.linkedin" variant="encouraging" />
               <LinkedInPlan analysis={result} />
             </div>
           );
@@ -240,9 +250,9 @@ export default function AnalyzePage() {
           activeTab={activeTab}
           onTabChange={setActiveTab}
         />
-        {/* pt-[7.5rem] = header(64px) + tab bar(~56px) */}
-        <main className="pt-[7.5rem] pb-20 sm:pb-12 px-4 sm:px-6 min-h-screen">
-          <div className="max-w-container mx-auto">
+        {/* pt: sm has horizontal bar below header, lg has sidebar so only header offset */}
+        <main className="pt-[7.5rem] lg:pt-24 pb-20 sm:pb-12 px-4 sm:px-6 min-h-screen lg:pl-60">
+          <div className="max-w-4xl mx-auto lg:mx-0 lg:max-w-none">
             {/* Demo banner */}
             {isDemo && (
               <div className="flex items-center justify-between bg-primary/[0.06] border border-primary/15 rounded-2xl px-5 py-3 text-sm mb-6">

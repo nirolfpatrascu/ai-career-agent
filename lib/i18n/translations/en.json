@@ -467,5 +467,15 @@
     "delete": "Delete",
     "confirmDelete": "Are you sure you want to delete this analysis?",
     "useSignIn": "Click Sign In in the header to get started"
+  },
+  "motivation": {
+    "fitScore": "This score reflects where you stand today — not where you can be. Every gap you close pushes this number higher.",
+    "strengths": "These are your superpowers. The skills and experiences that make you stand out from other candidates. Lead with these in interviews.",
+    "gaps": "Gaps aren't weaknesses — they're your growth roadmap. Every successful career transition involves closing a few of these. You've got this.",
+    "actionPlan": "Here's your step-by-step playbook. Start with the 30-day wins to build momentum, then tackle the bigger moves. Small consistent actions compound into career transformation.",
+    "roles": "These roles match your unique combination of skills and experience. Some might surprise you — that's often where the best opportunities hide.",
+    "salary": "Knowledge is negotiating power. Understanding your market value helps you make confident decisions about your next move.",
+    "jobMatch": "Here's how your profile stacks up against this specific opportunity. Use the suggestions below to tailor your application.",
+    "linkedin": "Your LinkedIn profile is often the first impression. These optimizations can significantly increase your visibility to recruiters."
   }
 }

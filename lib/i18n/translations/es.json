@@ -467,5 +467,15 @@
     "delete": "Eliminar",
     "confirmDelete": "¿Estás seguro de que quieres eliminar este análisis?",
     "useSignIn": "Haz clic en Iniciar Sesión en el encabezado para empezar"
+  },
+  "motivation": {
+    "fitScore": "Este puntaje refleja dónde estás hoy — no dónde puedes estar. Cada brecha que cierras sube este número.",
+    "strengths": "Estos son tus superpoderes. Las habilidades y experiencias que te hacen destacar. Lidera con estas en las entrevistas.",
+    "gaps": "Las brechas no son debilidades — son tu hoja de ruta de crecimiento. Cada transición exitosa implica cerrar algunas de estas. Tú puedes.",
+    "actionPlan": "Aquí está tu plan paso a paso. Empieza con las victorias de 30 días para crear impulso.",
+    "roles": "Estos roles coinciden con tu combinación única de habilidades y experiencia. Algunos podrían sorprenderte.",
+    "salary": "El conocimiento es poder de negociación. Entender tu valor de mercado te ayuda a tomar decisiones seguras.",
+    "jobMatch": "Así se compara tu perfil con esta oportunidad específica. Usa las sugerencias para adaptar tu solicitud.",
+    "linkedin": "Tu perfil de LinkedIn es a menudo la primera impresión. Estas optimizaciones pueden aumentar significativamente tu visibilidad."
   }
 }

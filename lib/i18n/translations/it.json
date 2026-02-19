@@ -467,5 +467,15 @@
     "delete": "Elimina",
     "confirmDelete": "Sei sicuro di voler eliminare questa analisi?",
     "useSignIn": "Clicca su Accedi nell'intestazione per iniziare"
+  },
+  "motivation": {
+    "fitScore": "Questo punteggio riflette dove sei oggi — non dove puoi essere. Ogni lacuna colmata alza questo numero.",
+    "strengths": "Questi sono i tuoi superpoteri. Le competenze ed esperienze che ti distinguono. Guidaci nei colloqui.",
+    "gaps": "Le lacune non sono debolezze — sono la tua mappa di crescita. Ogni transizione di successo comporta la chiusura di alcune. Ce la puoi fare.",
+    "actionPlan": "Ecco il tuo piano passo dopo passo. Inizia con le vittorie dei 30 giorni per creare slancio.",
+    "roles": "Questi ruoli corrispondono alla tua combinazione unica di competenze ed esperienza. Alcuni potrebbero sorprenderti.",
+    "salary": "La conoscenza è potere negoziale. Capire il tuo valore di mercato ti aiuta a prendere decisioni sicure.",
+    "jobMatch": "Ecco come si confronta il tuo profilo con questa opportunità specifica. Usa i suggerimenti per personalizzare la candidatura.",
+    "linkedin": "Il tuo profilo LinkedIn è spesso la prima impressione. Queste ottimizzazioni possono aumentare significativamente la tua visibilità."
   }
 }

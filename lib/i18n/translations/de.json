@@ -467,5 +467,15 @@
     "delete": "Löschen",
     "confirmDelete": "Möchten Sie diese Analyse wirklich löschen?",
     "useSignIn": "Klicken Sie auf Anmelden im Header, um loszulegen"
+  },
+  "motivation": {
+    "fitScore": "Dieser Score zeigt, wo Sie heute stehen — nicht wo Sie sein können. Jede geschlossene Lücke erhöht diese Zahl.",
+    "strengths": "Das sind Ihre Superkräfte. Die Fähigkeiten und Erfahrungen, die Sie von anderen Kandidaten abheben. Führen Sie damit in Interviews.",
+    "gaps": "Lücken sind keine Schwächen — sie sind Ihre Wachstumskarte. Jeder erfolgreiche Karrierewechsel beinhaltet das Schließen einiger davon. Sie schaffen das.",
+    "actionPlan": "Hier ist Ihr Schritt-für-Schritt-Plan. Beginnen Sie mit den 30-Tage-Gewinnen für Schwung, dann die größeren Schritte.",
+    "roles": "Diese Rollen passen zu Ihrer einzigartigen Kombination aus Fähigkeiten und Erfahrung. Einige könnten Sie überraschen.",
+    "salary": "Wissen ist Verhandlungsmacht. Das Verständnis Ihres Marktwerts hilft Ihnen, sichere Entscheidungen zu treffen.",
+    "jobMatch": "So schneidet Ihr Profil bei dieser spezifischen Stelle ab. Nutzen Sie die Vorschläge zur Anpassung Ihrer Bewerbung.",
+    "linkedin": "Ihr LinkedIn-Profil ist oft der erste Eindruck. Diese Optimierungen können Ihre Sichtbarkeit bei Recruitern deutlich erhöhen."
   }
 }
