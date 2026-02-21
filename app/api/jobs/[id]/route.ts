@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAuthenticatedClient } from '@/lib/supabase/server';
-import type { JobApplication, JobStatus } from '@/lib/types';
+import type { JobApplication, JobSource, JobStatus } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
 
@@ -29,6 +29,8 @@ interface DbJobRow {
   notes: string | null;
   contact_name: string | null;
   contact_email: string | null;
+  source: string | null;
+  metadata: Record<string, unknown> | null;
   sort_order: number;
   created_at: string;
   updated_at: string;
@@ -56,6 +58,8 @@ function mapJobRow(row: DbJobRow): JobApplication {
     notes: row.notes ?? undefined,
     contactName: row.contact_name ?? undefined,
     contactEmail: row.contact_email ?? undefined,
+    source: (row.source as JobSource) || 'manual',
+    metadata: row.metadata ?? undefined,
     sortOrder: row.sort_order,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
@@ -151,6 +155,7 @@ export async function PATCH(
     if (body.contactEmail !== undefined) updateData.contact_email = body.contactEmail || null;
     if (body.followUpAt !== undefined) updateData.follow_up_at = body.followUpAt || null;
     if (body.appliedAt !== undefined) updateData.applied_at = body.appliedAt || null;
+    if (body.metadata !== undefined) updateData.metadata = body.metadata || null;
 
     if (body.status !== undefined) {
       updateData.status = body.status;

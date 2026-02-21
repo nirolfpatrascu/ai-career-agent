@@ -368,7 +368,9 @@
       "orBrowse": "o haz clic para buscar",
       "detecting": "Detectando información del perfil...",
       "howToExport": "Cómo exportar tu perfil de LinkedIn como PDF",
-      "optional": "Este paso es opcional pero recomendado para el mejor análisis."
+      "optional": "Este paso es opcional pero recomendado para el mejor análisis.",
+      "tabLinkedin": "LinkedIn PDF",
+      "tabUpwork": "Perfil Upwork"
     },
     "cv": {
       "title": "Sube tu CV / Currículum",
@@ -631,5 +633,85 @@
     "whatBetter": "¿Qué podría ser mejor?",
     "send": "Enviar",
     "placeholder": "Opcional: dinos qué podría mejorarse..."
+  },
+  "upwork": {
+    "import": {
+      "title": "Importar Perfil de Upwork",
+      "instructions": "Copia el texto de tu página de perfil de Upwork y pégalo a continuación. Extraeremos tus habilidades, historial de trabajo y estadísticas.",
+      "pasteLabel": "Texto del Perfil",
+      "pastePlaceholder": "Pega el contenido de tu página de perfil de Upwork aquí (título, resumen, habilidades, historial de trabajo, etc.)...",
+      "urlLabel": "URL del Perfil",
+      "urlPlaceholder": "https://www.upwork.com/freelancers/~...",
+      "urlHint": "Intentaremos extraer los datos del perfil público. Algunos perfiles pueden requerir pegado manual.",
+      "or": "o",
+      "minChars": "Por favor, pega al menos 100 caracteres de texto de perfil.",
+      "parsing": "Analizando perfil...",
+      "parseButton": "Importar Perfil",
+      "preview": "Perfil Importado",
+      "confirm": "Usar Este Perfil",
+      "retry": "Reimportar",
+      "jobsLabel": "trabajos",
+      "earnings": "ganados",
+      "jss": "Éxito Laboral",
+      "jobs": "{count} trabajos extraídos"
+    },
+    "jobs": {
+      "parsed": "Oferta Analizada con Éxito",
+      "minChars": "Por favor, pega al menos 50 caracteres de texto de la oferta.",
+      "pasteLabel": "Pegar oferta de Upwork",
+      "pastePlaceholder": "Copia el texto completo de la oferta de Upwork y pégalo aquí...",
+      "urlLabel": "URL de la oferta (opcional)",
+      "parsing": "Analizando...",
+      "parseButton": "Analizar Oferta",
+      "screeningQs": "preguntas de selección",
+      "repaste": "Pegar otra oferta",
+      "saveToTracker": "Guardar en Candidaturas"
+    },
+    "job": {
+      "fixed": "Precio Fijo",
+      "hourly": "Por Hora"
+    },
+    "analysis": {
+      "title": "Análisis del Perfil Upwork",
+      "score": "Puntuación del Perfil",
+      "titleOpt": "Optimización del Título",
+      "titleCurrent": "Título Actual",
+      "titleSuggested": "Título Sugerido",
+      "overviewOpt": "Optimización del Resumen",
+      "overviewCurrent": "Resumen Actual",
+      "overviewSuggested": "Resumen Sugerido",
+      "rateAdvice": "Consejo de Tarifa",
+      "suggestedRange": "Rango Sugerido",
+      "skills": "Optimización de Habilidades",
+      "skillsKeep": "Mantener",
+      "skillsAdd": "Añadir",
+      "skillsRemove": "Eliminar",
+      "skillsReorder": "Reordenar",
+      "strengths": "Fortalezas del Perfil",
+      "weaknesses": "Áreas de Mejora",
+      "niching": "Estrategia de Nicho",
+      "proposalTips": "Consejos para Propuestas",
+      "competitive": "Posición Competitiva"
+    },
+    "coverLetter": {
+      "title": "Generador de Carta de Presentación",
+      "generate": "Generar Carta de Presentación",
+      "generating": "Generando tu carta de presentación personalizada...",
+      "tone": "Tono",
+      "opening": "Gancho de Apertura",
+      "screeningAnswers": "Respuestas de Selección",
+      "question": "P{number}",
+      "strategy": "Estrategia",
+      "body": "Cuerpo Principal",
+      "closing": "Llamada a la Acción Final",
+      "rateSuggestion": "Sugerencia de Tarifa",
+      "profileTips": "Consejos para el Perfil",
+      "copyFull": "Copiar Propuesta Completa",
+      "copySection": "Copiar",
+      "copied": "¡Copiado!",
+      "regenerate": "Regenerar",
+      "saveDraft": "Guardar Borrador",
+      "saved": "¡Guardado!"
+    }
   }
 }

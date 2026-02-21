@@ -1,9 +1,11 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { X } from 'lucide-react';
+import { X, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n';
-import type { JobApplication, JobApplicationInput } from '@/lib/types';
+import type { JobApplication, JobApplicationInput, UpworkJobPosting } from '@/lib/types';
+
+type ImportMode = 'standard' | 'upwork';
 
 interface AddJobModalProps {
   isOpen: boolean;
@@ -28,6 +30,14 @@ export default function AddJobModal({
 }: AddJobModalProps) {
   const { t } = useTranslation();
   const [saving, setSaving] = useState(false);
+  const [mode, setMode] = useState<ImportMode>('standard');
+
+  // Upwork import state
+  const [upworkJobText, setUpworkJobText] = useState('');
+  const [upworkJobUrl, setUpworkJobUrl] = useState('');
+  const [parsingUpwork, setParsingUpwork] = useState(false);
+  const [upworkError, setUpworkError] = useState('');
+  const [parsedUpworkJob, setParsedUpworkJob] = useState<UpworkJobPosting | null>(null);
 
   const [company, setCompany] = useState('');
   const [roleTitle, setRoleTitle] = useState('');
@@ -78,6 +88,13 @@ export default function AddJobModal({
       setContactEmail('');
       setNotes('');
     }
+    // Reset Upwork state on modal open/close
+    setMode('standard');
+    setUpworkJobText('');
+    setUpworkJobUrl('');
+    setParsingUpwork(false);
+    setUpworkError('');
+    setParsedUpworkJob(null);
   }, [initialData, isOpen]);
 
   const isValid = company.trim().length > 0 && roleTitle.trim().length > 0;
@@ -115,6 +132,63 @@ export default function AddJobModal({
     contactName, contactEmail, notes, onSave, onClose,
   ]);
 
+  const handleUpworkParse = useCallback(async () => {
+    const text = upworkJobText.trim();
+    if (text.length < 50) {
+      setUpworkError(t('upwork.jobs.minChars') || 'Please paste at least 50 characters of job posting text.');
+      return;
+    }
+    setParsingUpwork(true);
+    setUpworkError('');
+    try {
+      const res = await fetch('/api/parse-upwork-job', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jobText: text }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.message || 'Failed to parse job posting');
+      }
+      const data = await res.json();
+      setParsedUpworkJob(data.posting);
+    } catch (err) {
+      setUpworkError(err instanceof Error ? err.message : 'Something went wrong');
+    } finally {
+      setParsingUpwork(false);
+    }
+  }, [upworkJobText, t]);
+
+  const handleUpworkSave = useCallback(async () => {
+    if (!parsedUpworkJob || saving) return;
+    setSaving(true);
+    try {
+      const input: JobApplicationInput = {
+        company: parsedUpworkJob.title || 'Upwork Client',
+        roleTitle: parsedUpworkJob.title,
+        jobUrl: upworkJobUrl.trim() || undefined,
+        jobPostingText: parsedUpworkJob.description,
+        location: parsedUpworkJob.clientInfo?.country || undefined,
+        workType: 'remote',
+        source: 'upwork',
+        metadata: {
+          upworkJob: parsedUpworkJob,
+          screeningQuestions: parsedUpworkJob.screeningQuestions || [],
+        },
+      };
+      if (parsedUpworkJob.budget) {
+        if (parsedUpworkJob.budget.min) input.salaryMin = parsedUpworkJob.budget.min;
+        if (parsedUpworkJob.budget.max) input.salaryMax = parsedUpworkJob.budget.max;
+      }
+      await onSave(input);
+      onClose();
+    } catch {
+      // Error handled by parent
+    } finally {
+      setSaving(false);
+    }
+  }, [parsedUpworkJob, saving, upworkJobUrl, onSave, onClose]);
+
   if (!isOpen) return null;
 
   const inputClass =
@@ -143,7 +217,152 @@ export default function AddJobModal({
           </button>
         </div>
 
-        {/* Form */}
+        {/* Mode Toggle — only show when adding, not editing */}
+        {!initialData && (
+          <div className="px-6 pt-4 pb-0 flex gap-2">
+            <button
+              onClick={() => { setMode('standard'); setParsedUpworkJob(null); setUpworkError(''); }}
+              className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-all border ${
+                mode === 'standard'
+                  ? 'bg-primary/[0.08] border-primary/20 text-primary'
+                  : 'bg-black/[0.02] border-black/[0.08] text-text-tertiary hover:text-text-secondary'
+              }`}
+            >
+              {t('jobs.modeStandard') || 'Standard Job'}
+            </button>
+            <button
+              onClick={() => setMode('upwork')}
+              className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-all border ${
+                mode === 'upwork'
+                  ? 'bg-[#14A800]/[0.08] border-[#14A800]/20 text-[#14A800]'
+                  : 'bg-black/[0.02] border-black/[0.08] text-text-tertiary hover:text-text-secondary'
+              }`}
+            >
+              {t('jobs.modeUpwork') || 'Upwork Job'}
+            </button>
+          </div>
+        )}
+
+        {/* Upwork Import Mode */}
+        {mode === 'upwork' && !initialData && (
+          <div className="px-6 py-5 space-y-4">
+            {parsedUpworkJob ? (
+              /* Parsed preview */
+              <div className="space-y-4">
+                <div className="rounded-2xl border border-[#14A800]/20 bg-[#14A800]/[0.04] p-5">
+                  <div className="flex items-center gap-2 mb-3">
+                    <CheckCircle size={18} className="text-[#14A800]" />
+                    <span className="text-sm font-semibold text-[#14A800]">
+                      {t('upwork.jobs.parsed') || 'Job Parsed Successfully'}
+                    </span>
+                  </div>
+                  <p className="text-lg font-bold text-text-primary">{parsedUpworkJob.title}</p>
+                  {parsedUpworkJob.clientInfo?.country && (
+                    <p className="text-sm text-text-secondary mt-0.5">{parsedUpworkJob.clientInfo.country}</p>
+                  )}
+                  <div className="flex flex-wrap items-center gap-3 text-xs text-text-tertiary mt-2">
+                    {parsedUpworkJob.budget && (
+                      <span>
+                        {parsedUpworkJob.budget.type === 'fixed' ? 'Fixed' : 'Hourly'}
+                        {parsedUpworkJob.budget.min != null && ` $${parsedUpworkJob.budget.min}`}
+                        {parsedUpworkJob.budget.max != null && `-$${parsedUpworkJob.budget.max}`}
+                      </span>
+                    )}
+                    {parsedUpworkJob.projectLength && <span>{parsedUpworkJob.projectLength}</span>}
+                    {parsedUpworkJob.experienceLevel && <span>{parsedUpworkJob.experienceLevel}</span>}
+                  </div>
+                  {parsedUpworkJob.skills && parsedUpworkJob.skills.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5 mt-3">
+                      {parsedUpworkJob.skills.slice(0, 8).map((s) => (
+                        <span key={s} className="px-2 py-0.5 text-xs rounded-md bg-[#14A800]/[0.08] text-[#14A800] font-medium">
+                          {s}
+                        </span>
+                      ))}
+                      {parsedUpworkJob.skills.length > 8 && (
+                        <span className="px-2 py-0.5 text-xs rounded-md bg-black/[0.04] text-text-tertiary">
+                          +{parsedUpworkJob.skills.length - 8}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  {parsedUpworkJob.screeningQuestions && parsedUpworkJob.screeningQuestions.length > 0 && (
+                    <p className="text-xs text-text-tertiary mt-2">
+                      {parsedUpworkJob.screeningQuestions.length} {t('upwork.jobs.screeningQs') || 'screening questions'}
+                    </p>
+                  )}
+                </div>
+
+                <button
+                  onClick={() => { setParsedUpworkJob(null); setUpworkError(''); }}
+                  className="text-sm text-text-tertiary hover:text-text-secondary transition-colors"
+                >
+                  {t('upwork.jobs.repaste') || 'Paste different job'}
+                </button>
+              </div>
+            ) : (
+              /* Paste form */
+              <div className="space-y-4">
+                <div>
+                  <label className={labelClass}>
+                    {t('upwork.jobs.pasteLabel') || 'Paste Upwork job posting'}
+                  </label>
+                  <textarea
+                    className={`${inputClass} min-h-[160px] resize-y`}
+                    value={upworkJobText}
+                    onChange={(e) => { setUpworkJobText(e.target.value); setUpworkError(''); }}
+                    placeholder={t('upwork.jobs.pastePlaceholder') || 'Copy the full Upwork job posting text and paste it here...'}
+                    maxLength={50000}
+                  />
+                  {upworkJobText.length > 0 && (
+                    <p className="text-xs text-text-tertiary mt-1">{upworkJobText.length.toLocaleString()} characters</p>
+                  )}
+                </div>
+
+                <div>
+                  <label className={labelClass}>
+                    {t('upwork.jobs.urlLabel') || 'Job URL (optional)'}
+                  </label>
+                  <input
+                    type="url"
+                    className={inputClass}
+                    value={upworkJobUrl}
+                    onChange={(e) => setUpworkJobUrl(e.target.value)}
+                    placeholder="https://www.upwork.com/jobs/..."
+                  />
+                </div>
+
+                {upworkError && (
+                  <div className="flex items-center gap-2 text-sm text-danger">
+                    <AlertCircle size={15} />
+                    <span>{upworkError}</span>
+                  </div>
+                )}
+
+                <button
+                  onClick={handleUpworkParse}
+                  disabled={parsingUpwork || upworkJobText.trim().length < 50}
+                  className="btn-primary text-sm !py-2.5 !px-5 !rounded-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  style={{
+                    backgroundColor: upworkJobText.trim().length >= 50 && !parsingUpwork ? '#14A800' : undefined,
+                    borderColor: upworkJobText.trim().length >= 50 && !parsingUpwork ? '#14A800' : undefined,
+                  }}
+                >
+                  {parsingUpwork ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" />
+                      {t('upwork.jobs.parsing') || 'Parsing...'}
+                    </>
+                  ) : (
+                    t('upwork.jobs.parseButton') || 'Parse Job Posting'
+                  )}
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Standard Form — show when standard mode OR editing */}
+        {(mode === 'standard' || initialData) && (
         <div className="px-6 py-5 space-y-4">
           {/* Company */}
           <div>
@@ -343,6 +562,7 @@ export default function AddJobModal({
             />
           </div>
         </div>
+        )}
 
         {/* Footer */}
         <div className="sticky bottom-0 bg-white border-t border-black/[0.06] px-6 py-4 flex items-center justify-end gap-3 rounded-b-2xl">
@@ -352,13 +572,24 @@ export default function AddJobModal({
           >
             {t('jobs.cancel')}
           </button>
-          <button
-            onClick={handleSave}
-            disabled={!isValid || saving}
-            className="btn-primary text-sm !py-2.5 !px-5 !rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {saving ? t('jobs.saving') : t('jobs.save')}
-          </button>
+          {mode === 'upwork' && parsedUpworkJob ? (
+            <button
+              onClick={handleUpworkSave}
+              disabled={saving}
+              className="btn-primary text-sm !py-2.5 !px-5 !rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{ backgroundColor: '#14A800', borderColor: '#14A800' }}
+            >
+              {saving ? t('jobs.saving') : (t('upwork.jobs.saveToTracker') || 'Save to Tracker')}
+            </button>
+          ) : mode === 'standard' || initialData ? (
+            <button
+              onClick={handleSave}
+              disabled={!isValid || saving}
+              className="btn-primary text-sm !py-2.5 !px-5 !rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {saving ? t('jobs.saving') : t('jobs.save')}
+            </button>
+          ) : null}
         </div>
       </div>
     </div>

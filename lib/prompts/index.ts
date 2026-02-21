@@ -25,3 +25,23 @@ export {
   CV_REWRITE_FALLBACK,
   type CVRewriteResult,
 } from './cv-rewriter';
+
+export {
+  buildUpworkProfileParsePrompt,
+  UPWORK_PROFILE_PARSE_FALLBACK,
+} from './upwork-profile';
+
+export {
+  buildUpworkAnalysisPrompt,
+  UPWORK_ANALYSIS_FALLBACK,
+} from './upwork-analysis';
+
+export {
+  buildUpworkJobParsePrompt,
+  UPWORK_JOB_PARSE_FALLBACK,
+} from './upwork-job-parser';
+
+export {
+  buildUpworkCoverLetterPrompt,
+  UPWORK_COVER_LETTER_FALLBACK,
+} from './upwork-cover-letter';

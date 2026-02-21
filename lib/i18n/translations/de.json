@@ -368,7 +368,9 @@
       "orBrowse": "oder klicken zum Durchsuchen",
       "detecting": "Profilinformationen werden erkannt...",
       "howToExport": "So exportieren Sie Ihr LinkedIn-Profil als PDF",
-      "optional": "Dieser Schritt ist optional, wird aber für die beste Analyse empfohlen."
+      "optional": "Dieser Schritt ist optional, wird aber für die beste Analyse empfohlen.",
+      "tabLinkedin": "LinkedIn PDF",
+      "tabUpwork": "Upwork-Profil"
     },
     "cv": {
       "title": "Laden Sie Ihren Lebenslauf hoch",
@@ -631,5 +633,85 @@
     "whatBetter": "Was könnte besser sein?",
     "send": "Senden",
     "placeholder": "Optional: sagen Sie uns, was verbessert werden könnte..."
+  },
+  "upwork": {
+    "import": {
+      "title": "Upwork-Profil importieren",
+      "instructions": "Kopieren Sie den Text Ihrer Upwork-Profilseite und fügen Sie ihn unten ein. Wir extrahieren Ihre Fähigkeiten, Arbeitshistorie und Statistiken.",
+      "pasteLabel": "Profiltext",
+      "pastePlaceholder": "Fügen Sie den Inhalt Ihrer Upwork-Profilseite hier ein (Titel, Übersicht, Fähigkeiten, Arbeitshistorie usw.)...",
+      "urlLabel": "Profil-URL",
+      "urlPlaceholder": "https://www.upwork.com/freelancers/~...",
+      "urlHint": "Wir versuchen, öffentliche Profildaten zu extrahieren. Einige Profile erfordern möglicherweise manuelles Einfügen.",
+      "or": "oder",
+      "minChars": "Bitte fügen Sie mindestens 100 Zeichen Profiltext ein.",
+      "parsing": "Profil wird analysiert...",
+      "parseButton": "Profil importieren",
+      "preview": "Profil importiert",
+      "confirm": "Dieses Profil verwenden",
+      "retry": "Erneut importieren",
+      "jobsLabel": "Jobs",
+      "earnings": "verdient",
+      "jss": "Job-Erfolg",
+      "jobs": "{count} Jobs extrahiert"
+    },
+    "jobs": {
+      "parsed": "Job erfolgreich analysiert",
+      "minChars": "Bitte fügen Sie mindestens 50 Zeichen des Stellenausschreibungstexts ein.",
+      "pasteLabel": "Upwork-Stellenanzeige einfügen",
+      "pastePlaceholder": "Kopieren Sie den vollständigen Text der Upwork-Stellenanzeige und fügen Sie ihn hier ein...",
+      "urlLabel": "Job-URL (optional)",
+      "parsing": "Wird analysiert...",
+      "parseButton": "Stellenanzeige analysieren",
+      "screeningQs": "Auswahlverfahren-Fragen",
+      "repaste": "Anderen Job einfügen",
+      "saveToTracker": "Im Tracker speichern"
+    },
+    "job": {
+      "fixed": "Festpreis",
+      "hourly": "Stündlich"
+    },
+    "analysis": {
+      "title": "Upwork-Profilanalyse",
+      "score": "Profil-Score",
+      "titleOpt": "Titel-Optimierung",
+      "titleCurrent": "Aktueller Titel",
+      "titleSuggested": "Vorgeschlagener Titel",
+      "overviewOpt": "Übersicht-Optimierung",
+      "overviewCurrent": "Aktuelle Übersicht",
+      "overviewSuggested": "Vorgeschlagene Übersicht",
+      "rateAdvice": "Stundensatz-Beratung",
+      "suggestedRange": "Vorgeschlagene Spanne",
+      "skills": "Fähigkeiten-Optimierung",
+      "skillsKeep": "Behalten",
+      "skillsAdd": "Hinzufügen",
+      "skillsRemove": "Entfernen",
+      "skillsReorder": "Neu ordnen",
+      "strengths": "Profilstärken",
+      "weaknesses": "Verbesserungsbereiche",
+      "niching": "Nischen-Strategie",
+      "proposalTips": "Vorschlags-Tipps",
+      "competitive": "Wettbewerbsposition"
+    },
+    "coverLetter": {
+      "title": "Anschreiben-Generator",
+      "generate": "Anschreiben generieren",
+      "generating": "Ihr personalisiertes Anschreiben wird erstellt...",
+      "tone": "Ton",
+      "opening": "Eröffnungshaken",
+      "screeningAnswers": "Screening-Antworten",
+      "question": "F{number}",
+      "strategy": "Strategie",
+      "body": "Hauptteil",
+      "closing": "Abschluss-CTA",
+      "rateSuggestion": "Stundensatz-Vorschlag",
+      "profileTips": "Profil-Tipps",
+      "copyFull": "Vollständigen Vorschlag kopieren",
+      "copySection": "Kopieren",
+      "copied": "Kopiert!",
+      "regenerate": "Neu generieren",
+      "saveDraft": "Entwurf speichern",
+      "saved": "Gespeichert!"
+    }
   }
 }

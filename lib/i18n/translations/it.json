@@ -368,7 +368,9 @@
       "orBrowse": "o clicca per sfogliare",
       "detecting": "Rilevamento informazioni profilo...",
       "howToExport": "Come esportare il profilo LinkedIn come PDF",
-      "optional": "Questo passaggio è opzionale ma consigliato per la migliore analisi."
+      "optional": "Questo passaggio è opzionale ma consigliato per la migliore analisi.",
+      "tabLinkedin": "LinkedIn PDF",
+      "tabUpwork": "Profilo Upwork"
     },
     "cv": {
       "title": "Carica il tuo CV / Curriculum",
@@ -631,5 +633,85 @@
     "whatBetter": "Cosa potrebbe essere migliorato?",
     "send": "Invia",
     "placeholder": "Opzionale: dicci cosa potrebbe essere migliorato..."
+  },
+  "upwork": {
+    "import": {
+      "title": "Importa Profilo Upwork",
+      "instructions": "Copia il testo della tua pagina profilo Upwork e incollalo qui sotto. Estrarremo le tue competenze, la cronologia lavorativa e le statistiche.",
+      "pasteLabel": "Testo del Profilo",
+      "pastePlaceholder": "Incolla il contenuto della tua pagina profilo Upwork qui (titolo, presentazione, competenze, cronologia lavorativa, ecc.)...",
+      "urlLabel": "URL del Profilo",
+      "urlPlaceholder": "https://www.upwork.com/freelancers/~...",
+      "urlHint": "Proveremo a estrarre i dati del profilo pubblico. Alcuni profili potrebbero richiedere il copia-incolla manuale.",
+      "or": "oppure",
+      "minChars": "Incolla almeno 100 caratteri di testo del profilo.",
+      "parsing": "Analisi del profilo...",
+      "parseButton": "Importa Profilo",
+      "preview": "Profilo Importato",
+      "confirm": "Usa Questo Profilo",
+      "retry": "Reimporta",
+      "jobsLabel": "lavori",
+      "earnings": "guadagnati",
+      "jss": "Successo Lavorativo",
+      "jobs": "{count} lavori estratti"
+    },
+    "jobs": {
+      "parsed": "Annuncio Analizzato con Successo",
+      "minChars": "Incolla almeno 50 caratteri di testo dell'annuncio.",
+      "pasteLabel": "Incolla annuncio Upwork",
+      "pastePlaceholder": "Copia il testo completo dell'annuncio Upwork e incollalo qui...",
+      "urlLabel": "URL dell'annuncio (opzionale)",
+      "parsing": "Analisi in corso...",
+      "parseButton": "Analizza Annuncio",
+      "screeningQs": "domande di preselezione",
+      "repaste": "Incolla un altro annuncio",
+      "saveToTracker": "Salva nelle Candidature"
+    },
+    "job": {
+      "fixed": "Prezzo Fisso",
+      "hourly": "A Ore"
+    },
+    "analysis": {
+      "title": "Analisi del Profilo Upwork",
+      "score": "Punteggio del Profilo",
+      "titleOpt": "Ottimizzazione del Titolo",
+      "titleCurrent": "Titolo Attuale",
+      "titleSuggested": "Titolo Suggerito",
+      "overviewOpt": "Ottimizzazione della Presentazione",
+      "overviewCurrent": "Presentazione Attuale",
+      "overviewSuggested": "Presentazione Suggerita",
+      "rateAdvice": "Consiglio sulla Tariffa",
+      "suggestedRange": "Fascia Suggerita",
+      "skills": "Ottimizzazione delle Competenze",
+      "skillsKeep": "Mantieni",
+      "skillsAdd": "Aggiungi",
+      "skillsRemove": "Rimuovi",
+      "skillsReorder": "Riordina",
+      "strengths": "Punti di Forza del Profilo",
+      "weaknesses": "Aree da Migliorare",
+      "niching": "Strategia di Nicchia",
+      "proposalTips": "Consigli per le Proposte",
+      "competitive": "Posizione Competitiva"
+    },
+    "coverLetter": {
+      "title": "Generatore di Lettera di Presentazione",
+      "generate": "Genera Lettera di Presentazione",
+      "generating": "Generazione della tua lettera di presentazione personalizzata...",
+      "tone": "Tono",
+      "opening": "Gancio di Apertura",
+      "screeningAnswers": "Risposte di Preselezione",
+      "question": "D{number}",
+      "strategy": "Strategia",
+      "body": "Corpo Principale",
+      "closing": "Invito all'Azione Finale",
+      "rateSuggestion": "Suggerimento Tariffa",
+      "profileTips": "Consigli per il Profilo",
+      "copyFull": "Copia Proposta Completa",
+      "copySection": "Copia",
+      "copied": "Copiato!",
+      "regenerate": "Rigenera",
+      "saveDraft": "Salva Bozza",
+      "saved": "Salvato!"
+    }
   }
 }

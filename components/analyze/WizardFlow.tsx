@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
-import type { CareerQuestionnaire, JobPostingInput } from '@/lib/types';
+import type { CareerQuestionnaire, JobPostingInput, UpworkProfile } from '@/lib/types';
 import { COUNTRIES, COUNTRY_CURRENCY } from '@/lib/utils';
 import { useTranslation } from '@/lib/i18n';
+import UpworkImport from './UpworkImport';
 
 // ============================================================================
 // Types
@@ -14,6 +15,7 @@ interface WizardFlowProps {
     linkedInFile: File | null;
     cvFile: File | null;
     questionnaire: CareerQuestionnaire;
+    upworkProfile?: UpworkProfile;
   }) => void;
   onDemo: () => void;
 }
@@ -50,11 +52,17 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
   const [direction, setDirection] = useState<'forward' | 'back'>('forward');
   const contentRef = useRef<HTMLDivElement>(null);
 
+  // --- Import source toggle ---
+  const [importSource, setImportSource] = useState<'linkedin' | 'upwork'>('linkedin');
+
   // --- File state ---
   const [linkedInFile, setLinkedInFile] = useState<File | null>(null);
   const [cvFile, setCvFile] = useState<File | null>(null);
   const linkedInInputRef = useRef<HTMLInputElement>(null);
   const cvInputRef = useRef<HTMLInputElement>(null);
+
+  // --- Upwork profile state ---
+  const [upworkProfile, setUpworkProfile] = useState<UpworkProfile | null>(null);
 
   // --- Auto-detection state ---
   const [isDetecting, setIsDetecting] = useState(false);
@@ -113,12 +121,12 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
   const currency = useMemo(() => COUNTRY_CURRENCY[questionnaire.country] || { code: 'EUR', symbol: 'EUR' }, [questionnaire.country]);
 
   // --- Validation ---
-  const hasLinkedInOrCV = linkedInFile || cvFile;
+  const hasLinkedInOrCV = linkedInFile || cvFile || upworkProfile;
   const filledJobPostings = jobPostings.filter(j => j.text.trim().length > 50);
 
   const canProceed: Record<Step, boolean> = {
     linkedin: true, // LinkedIn is encouraged, not required
-    cv: hasLinkedInOrCV as unknown as boolean, // At least one file needed
+    cv: !!hasLinkedInOrCV, // At least one file/profile needed
     details: !!(questionnaire.currentRole.trim() && questionnaire.targetRole.trim() && questionnaire.yearsExperience > 0 && questionnaire.country),
     jobs: true, // Jobs are encouraged but not blocking
     review: !!(hasLinkedInOrCV && questionnaire.currentRole.trim() && questionnaire.targetRole.trim() && questionnaire.yearsExperience > 0 && questionnaire.country),
@@ -217,8 +225,8 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
       // Backward compat: set jobPosting to first posting text
       jobPosting: filled.length > 0 ? filled.map(j => j.text).join('\n\n---JOB POSTING SEPARATOR---\n\n') : undefined,
     };
-    onSubmit({ linkedInFile, cvFile, questionnaire: mergedQ });
-  }, [questionnaire, jobPostings, linkedInFile, cvFile, onSubmit]);
+    onSubmit({ linkedInFile, cvFile, questionnaire: mergedQ, upworkProfile: upworkProfile || undefined });
+  }, [questionnaire, jobPostings, linkedInFile, cvFile, upworkProfile, onSubmit]);
 
   // --- File drop handler ---
   const handleFileDrop = useCallback((e: React.DragEvent, type: 'linkedin' | 'cv') => {
@@ -245,6 +253,14 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
   // Render Steps
   // ============================================================================
 
+  const handleUpworkProfileImported = useCallback((profile: UpworkProfile) => {
+    setUpworkProfile(profile);
+    // Auto-fill questionnaire fields from Upwork profile
+    if (profile.title && !questionnaire.currentRole) {
+      setQuestionnaire(prev => ({ ...prev, currentRole: profile.title }));
+    }
+  }, [questionnaire.currentRole]);
+
   const renderLinkedInStep = () => (
     <div className="space-y-6">
       <div>
@@ -256,7 +272,48 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
         </p>
       </div>
 
-      {/* Drop zone */}
+      {/* Source toggle tabs */}
+      <div className="flex gap-2">
+        <button
+          onClick={() => setImportSource('linkedin')}
+          className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-all border flex items-center justify-center gap-2 ${
+            importSource === 'linkedin'
+              ? 'bg-[#0A66C2]/[0.08] border-[#0A66C2]/20 text-[#0A66C2]'
+              : 'bg-black/[0.02] border-black/[0.08] text-text-tertiary hover:text-text-secondary'
+          }`}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          {t('wizard.linkedin.tabLinkedin') || 'LinkedIn PDF'}
+        </button>
+        <button
+          onClick={() => setImportSource('upwork')}
+          className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-all border flex items-center justify-center gap-2 ${
+            importSource === 'upwork'
+              ? 'bg-[#14A800]/[0.08] border-[#14A800]/20 text-[#14A800]'
+              : 'bg-black/[0.02] border-black/[0.08] text-text-tertiary hover:text-text-secondary'
+          }`}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          {t('wizard.linkedin.tabUpwork') || 'Upwork Profile'}
+        </button>
+      </div>
+
+      {/* Upwork Import */}
+      {importSource === 'upwork' && (
+        <div>
+          <UpworkImport
+            onProfileImported={handleUpworkProfileImported}
+            importedProfile={upworkProfile}
+          />
+          <p className="text-xs text-text-tertiary text-center mt-4">
+            {t('wizard.linkedin.optional') || 'This step is optional but recommended for the best analysis.'}
+          </p>
+        </div>
+      )}
+
+      {/* LinkedIn Drop zone — only when linkedin tab selected */}
+      {importSource === 'linkedin' && (
+      <>
       <div
         className={`relative rounded-2xl border-2 border-dashed p-8 sm:p-12 text-center transition-all duration-300 cursor-pointer
           ${linkedInFile
@@ -338,6 +395,8 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
       <p className="text-xs text-text-tertiary text-center">
         {t('wizard.linkedin.optional') || 'This step is optional but recommended for the best analysis.'}
       </p>
+      </>
+      )}
     </div>
   );
 
@@ -403,7 +462,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
       {!hasLinkedInOrCV && (
         <div className="flex items-center gap-2 px-4 py-3 bg-warning/[0.06] border border-warning/15 rounded-xl text-sm text-warning">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          {t('wizard.cv.needAtLeastOne') || 'Upload at least a CV or LinkedIn PDF to proceed.'}
+          {t('wizard.cv.needAtLeastOne') || 'Upload at least a CV, LinkedIn PDF, or Upwork profile to proceed.'}
         </div>
       )}
     </div>
@@ -621,8 +680,12 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
           step="linkedin"
           label={STEP_LABELS.linkedin}
           icon={STEP_ICONS.linkedin}
-          status={linkedInFile ? linkedInFile.name : (t('wizard.review.notProvided') || 'Not provided')}
-          done={!!linkedInFile}
+          status={
+            linkedInFile ? linkedInFile.name
+            : upworkProfile ? `Upwork: ${upworkProfile.name}`
+            : (t('wizard.review.notProvided') || 'Not provided')
+          }
+          done={!!linkedInFile || !!upworkProfile}
           onEdit={() => goToStep('linkedin')}
           t={t}
         />

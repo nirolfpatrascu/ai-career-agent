@@ -335,6 +335,8 @@ export interface GeneratedCV {
 
 export type JobStatus = 'saved' | 'applied' | 'interviewing' | 'offer' | 'rejected' | 'withdrawn';
 
+export type JobSource = 'manual' | 'upwork' | 'linkedin';
+
 export interface JobApplication {
   id: string;
   userId: string;
@@ -356,6 +358,8 @@ export interface JobApplication {
   notes?: string;
   contactName?: string;
   contactEmail?: string;
+  source: JobSource;
+  metadata?: Record<string, unknown>;
   sortOrder: number;
   createdAt: string;
   updatedAt: string;
@@ -377,6 +381,8 @@ export interface JobApplicationInput {
   notes?: string;
   contactName?: string;
   contactEmail?: string;
+  source?: JobSource;
+  metadata?: Record<string, unknown>;
 }
 
 export interface JobTrackerStats {
@@ -393,4 +399,165 @@ export interface KanbanColumn {
   label: string;
   color: string;
   icon: string;
+}
+
+// --- Upwork Types ---
+
+export interface UpworkProfile {
+  name: string;
+  title: string;
+  overview: string;
+  hourlyRate?: number;
+  currency?: string;
+  totalEarnings?: number;
+  totalJobs?: number;
+  totalHours?: number;
+  jobSuccessScore?: number;
+  profileUrl?: string;
+  location?: string;
+  memberSince?: string;
+  skills: string[];
+  categories: string[];
+  employmentHistory: UpworkEmployment[];
+  education: UpworkEducation[];
+  certifications: string[];
+  portfolio: UpworkPortfolioItem[];
+  workHistory: UpworkJobHistory[];
+  languages: Array<{ language: string; proficiency: string }>;
+  availability?: string;
+  responseTime?: string;
+}
+
+export interface UpworkEmployment {
+  title: string;
+  company: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+}
+
+export interface UpworkEducation {
+  degree: string;
+  institution: string;
+  year?: string;
+}
+
+export interface UpworkPortfolioItem {
+  title: string;
+  description: string;
+  url?: string;
+}
+
+export interface UpworkJobHistory {
+  title: string;
+  client?: string;
+  dateRange: string;
+  earnings?: number;
+  hours?: number;
+  feedback?: string;
+  rating?: number;
+  skills: string[];
+  description: string;
+}
+
+export interface UpworkJobPosting {
+  title: string;
+  description: string;
+  clientInfo: {
+    country?: string;
+    paymentVerified?: boolean;
+    totalSpent?: string;
+    hireRate?: string;
+    totalJobs?: number;
+    avgHourlyRate?: string;
+    companySize?: string;
+    memberSince?: string;
+    rating?: number;
+  };
+  budget: {
+    type: 'hourly' | 'fixed';
+    min?: number;
+    max?: number;
+    currency?: string;
+  };
+  skills: string[];
+  experienceLevel?: 'entry' | 'intermediate' | 'expert';
+  projectLength?: string;
+  weeklyHours?: string;
+  screeningQuestions: UpworkScreeningQuestion[];
+  proposals?: number;
+  connects?: number;
+  postedDate?: string;
+  category?: string;
+  subcategory?: string;
+}
+
+export interface UpworkScreeningQuestion {
+  question: string;
+  type: 'text' | 'yesno' | 'choice' | 'attachment';
+  required: boolean;
+  order: number;
+  options?: string[];
+  maxLength?: number;
+}
+
+export interface UpworkCoverLetter {
+  openingHook: string;
+  screeningAnswers: UpworkScreeningAnswer[];
+  body: string;
+  closingCta: string;
+  suggestedRate: {
+    amount: number;
+    type: 'hourly' | 'fixed';
+    currency: string;
+    reasoning: string;
+  };
+  profileOptimization: string[];
+}
+
+export interface UpworkScreeningAnswer {
+  question: string;
+  answer: string;
+  order: number;
+  strategy: string;
+}
+
+export interface UpworkProfileAnalysis {
+  overallScore: number;
+  profileStrengths: Array<{
+    area: string;
+    description: string;
+    impact: string;
+  }>;
+  profileWeaknesses: Array<{
+    area: string;
+    description: string;
+    fix: string;
+    priority: 'critical' | 'high' | 'medium';
+  }>;
+  titleOptimization: {
+    current: string;
+    suggested: string;
+    reasoning: string;
+  };
+  overviewRewrite: {
+    current: string;
+    suggested: string;
+    reasoning: string;
+  };
+  rateAdvice: {
+    currentRate?: number;
+    suggestedRange: { min: number; max: number };
+    reasoning: string;
+    positioningStrategy: string;
+  };
+  skillsAdvice: {
+    keep: string[];
+    add: string[];
+    remove: string[];
+    reorder: string[];
+  };
+  nichingStrategy: string;
+  proposalTips: string[];
+  competitivePosition: string;
 }

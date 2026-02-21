@@ -368,7 +368,9 @@
       "orBrowse": "or click to browse",
       "detecting": "Detecting profile info...",
       "howToExport": "How to export your LinkedIn profile as PDF",
-      "optional": "This step is optional but recommended for the best analysis."
+      "optional": "This step is optional but recommended for the best analysis.",
+      "tabLinkedin": "LinkedIn PDF",
+      "tabUpwork": "Upwork Profile"
     },
     "cv": {
       "title": "Upload your CV / Resume",
@@ -631,5 +633,85 @@
     "whatBetter": "What could be better?",
     "send": "Send",
     "placeholder": "Optional: tell us what could be improved..."
+  },
+  "upwork": {
+    "import": {
+      "title": "Import Upwork Profile",
+      "instructions": "Copy your Upwork profile page text and paste it below. We'll extract your skills, work history, and stats.",
+      "pasteLabel": "Profile Text",
+      "pastePlaceholder": "Paste your Upwork profile page content here (title, overview, skills, work history, etc.)...",
+      "urlLabel": "Profile URL",
+      "urlPlaceholder": "https://www.upwork.com/freelancers/~...",
+      "urlHint": "We'll try to extract public profile data. Some profiles may require manual paste.",
+      "or": "or",
+      "minChars": "Please paste at least 100 characters of profile text.",
+      "parsing": "Analyzing profile...",
+      "parseButton": "Import Profile",
+      "preview": "Profile Imported",
+      "confirm": "Use This Profile",
+      "retry": "Re-import",
+      "jobsLabel": "jobs",
+      "earnings": "earned",
+      "jss": "Job Success",
+      "jobs": "{count} jobs extracted"
+    },
+    "jobs": {
+      "parsed": "Job Parsed Successfully",
+      "minChars": "Please paste at least 50 characters of job posting text.",
+      "pasteLabel": "Paste Upwork job posting",
+      "pastePlaceholder": "Copy the full Upwork job posting text and paste it here...",
+      "urlLabel": "Job URL (optional)",
+      "parsing": "Parsing...",
+      "parseButton": "Parse Job Posting",
+      "screeningQs": "screening questions",
+      "repaste": "Paste different job",
+      "saveToTracker": "Save to Tracker"
+    },
+    "job": {
+      "fixed": "Fixed",
+      "hourly": "Hourly"
+    },
+    "analysis": {
+      "title": "Upwork Profile Analysis",
+      "score": "Profile Score",
+      "titleOpt": "Title Optimization",
+      "titleCurrent": "Current Title",
+      "titleSuggested": "Suggested Title",
+      "overviewOpt": "Overview Optimization",
+      "overviewCurrent": "Current Overview",
+      "overviewSuggested": "Suggested Overview",
+      "rateAdvice": "Rate Advice",
+      "suggestedRange": "Suggested Range",
+      "skills": "Skills Optimization",
+      "skillsKeep": "Keep",
+      "skillsAdd": "Add",
+      "skillsRemove": "Remove",
+      "skillsReorder": "Reorder",
+      "strengths": "Profile Strengths",
+      "weaknesses": "Areas to Improve",
+      "niching": "Niching Strategy",
+      "proposalTips": "Proposal Tips",
+      "competitive": "Competitive Position"
+    },
+    "coverLetter": {
+      "title": "Cover Letter Generator",
+      "generate": "Generate Cover Letter",
+      "generating": "Generating your personalized cover letter...",
+      "tone": "Tone",
+      "opening": "Opening Hook",
+      "screeningAnswers": "Screening Answers",
+      "question": "Q{number}",
+      "strategy": "Strategy",
+      "body": "Main Body",
+      "closing": "Closing CTA",
+      "rateSuggestion": "Rate Suggestion",
+      "profileTips": "Profile Tips",
+      "copyFull": "Copy Full Proposal",
+      "copySection": "Copy",
+      "copied": "Copied!",
+      "regenerate": "Regenerate",
+      "saveDraft": "Save Draft",
+      "saved": "Saved!"
+    }
   }
 }

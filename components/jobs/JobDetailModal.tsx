@@ -18,8 +18,9 @@ import {
   BarChart3,
 } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n';
-import type { JobApplication, JobApplicationInput, JobStatus } from '@/lib/types';
+import type { JobApplication, JobApplicationInput, JobStatus, UpworkJobPosting } from '@/lib/types';
 import DeleteConfirmDialog from './DeleteConfirmDialog';
+import CoverLetterGenerator from './CoverLetterGenerator';
 
 interface JobDetailModalProps {
   isOpen: boolean;
@@ -84,6 +85,7 @@ export default function JobDetailModal({
   const { t } = useTranslation();
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [showCoverLetter, setShowCoverLetter] = useState(false);
   const [editingNotes, setEditingNotes] = useState(false);
   const [notesValue, setNotesValue] = useState('');
   const [notesSaved, setNotesSaved] = useState(false);
@@ -486,6 +488,27 @@ export default function JobDetailModal({
               </div>
             )}
 
+            {/* Upwork Cover Letter Button */}
+            {job.source === 'upwork' && !!job.metadata?.upworkJob && (
+              <button
+                onClick={() => setShowCoverLetter(true)}
+                className="w-full py-3 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all border"
+                style={{
+                  backgroundColor: '#14A800' + '0A',
+                  borderColor: '#14A800' + '30',
+                  color: '#14A800',
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                {t('upwork.coverLetter.generate') || 'Generate Cover Letter'}
+                {Array.isArray(job.metadata?.screeningQuestions) && (job.metadata!.screeningQuestions as unknown[]).length > 0 ? (
+                  <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-[#14A800]/15">
+                    {(job.metadata!.screeningQuestions as unknown[]).length} Qs
+                  </span>
+                ) : null}
+              </button>
+            )}
+
             {/* Notes */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
@@ -589,6 +612,15 @@ export default function JobDetailModal({
         onCancel={() => setShowDeleteConfirm(false)}
         loading={deleting}
       />
+
+      {/* Cover Letter Generator */}
+      {showCoverLetter && job.source === 'upwork' && !!job.metadata?.upworkJob && (
+        <CoverLetterGenerator
+          isOpen={showCoverLetter}
+          onClose={() => setShowCoverLetter(false)}
+          jobPosting={job.metadata.upworkJob as UpworkJobPosting}
+        />
+      )}
     </>
   );
 }

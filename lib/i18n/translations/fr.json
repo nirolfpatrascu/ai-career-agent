@@ -368,7 +368,9 @@
       "orBrowse": "ou cliquez pour parcourir",
       "detecting": "Détection des informations du profil...",
       "howToExport": "Comment exporter votre profil LinkedIn en PDF",
-      "optional": "Cette étape est optionnelle mais recommandée pour la meilleure analyse."
+      "optional": "Cette étape est optionnelle mais recommandée pour la meilleure analyse.",
+      "tabLinkedin": "LinkedIn PDF",
+      "tabUpwork": "Profil Upwork"
     },
     "cv": {
       "title": "Téléchargez votre CV",
@@ -631,5 +633,85 @@
     "whatBetter": "Qu'est-ce qui pourrait être amélioré ?",
     "send": "Envoyer",
     "placeholder": "Optionnel : dites-nous ce qui pourrait être amélioré..."
+  },
+  "upwork": {
+    "import": {
+      "title": "Importer le Profil Upwork",
+      "instructions": "Copiez le texte de votre page de profil Upwork et collez-le ci-dessous. Nous extrairons vos compétences, historique de travail et statistiques.",
+      "pasteLabel": "Texte du Profil",
+      "pastePlaceholder": "Collez le contenu de votre page de profil Upwork ici (titre, présentation, compétences, historique de travail, etc.)...",
+      "urlLabel": "URL du Profil",
+      "urlPlaceholder": "https://www.upwork.com/freelancers/~...",
+      "urlHint": "Nous essaierons d'extraire les données du profil public. Certains profils peuvent nécessiter un collage manuel.",
+      "or": "ou",
+      "minChars": "Veuillez coller au moins 100 caractères de texte de profil.",
+      "parsing": "Analyse du profil...",
+      "parseButton": "Importer le Profil",
+      "preview": "Profil Importé",
+      "confirm": "Utiliser Ce Profil",
+      "retry": "Réimporter",
+      "jobsLabel": "missions",
+      "earnings": "gagnés",
+      "jss": "Taux de Réussite",
+      "jobs": "{count} missions extraites"
+    },
+    "jobs": {
+      "parsed": "Offre Analysée avec Succès",
+      "minChars": "Veuillez coller au moins 50 caractères de texte d'offre.",
+      "pasteLabel": "Coller l'offre Upwork",
+      "pastePlaceholder": "Copiez le texte complet de l'offre Upwork et collez-le ici...",
+      "urlLabel": "URL de l'offre (optionnel)",
+      "parsing": "Analyse en cours...",
+      "parseButton": "Analyser l'Offre",
+      "screeningQs": "questions de présélection",
+      "repaste": "Coller une autre offre",
+      "saveToTracker": "Enregistrer dans le Suivi"
+    },
+    "job": {
+      "fixed": "Fixe",
+      "hourly": "À l'heure"
+    },
+    "analysis": {
+      "title": "Analyse du Profil Upwork",
+      "score": "Score du Profil",
+      "titleOpt": "Optimisation du Titre",
+      "titleCurrent": "Titre Actuel",
+      "titleSuggested": "Titre Suggéré",
+      "overviewOpt": "Optimisation de la Présentation",
+      "overviewCurrent": "Présentation Actuelle",
+      "overviewSuggested": "Présentation Suggérée",
+      "rateAdvice": "Conseil Tarifaire",
+      "suggestedRange": "Fourchette Suggérée",
+      "skills": "Optimisation des Compétences",
+      "skillsKeep": "Garder",
+      "skillsAdd": "Ajouter",
+      "skillsRemove": "Supprimer",
+      "skillsReorder": "Réordonner",
+      "strengths": "Points Forts du Profil",
+      "weaknesses": "Points à Améliorer",
+      "niching": "Stratégie de Niche",
+      "proposalTips": "Conseils pour les Propositions",
+      "competitive": "Position Concurrentielle"
+    },
+    "coverLetter": {
+      "title": "Générateur de Lettre de Motivation",
+      "generate": "Générer la Lettre de Motivation",
+      "generating": "Génération de votre lettre de motivation personnalisée...",
+      "tone": "Ton",
+      "opening": "Accroche d'Ouverture",
+      "screeningAnswers": "Réponses de Présélection",
+      "question": "Q{number}",
+      "strategy": "Stratégie",
+      "body": "Corps Principal",
+      "closing": "Appel à l'Action Final",
+      "rateSuggestion": "Suggestion de Tarif",
+      "profileTips": "Conseils pour le Profil",
+      "copyFull": "Copier la Proposition Complète",
+      "copySection": "Copier",
+      "copied": "Copié !",
+      "regenerate": "Régénérer",
+      "saveDraft": "Enregistrer le Brouillon",
+      "saved": "Enregistré !"
+    }
   }
 }

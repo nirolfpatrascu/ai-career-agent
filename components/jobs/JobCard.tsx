@@ -89,6 +89,25 @@ export default function JobCard({ job, onClick, onDragStart, isDragging }: JobCa
         </p>
       )}
 
+      {/* Upwork badges */}
+      {job.source === 'upwork' && (
+        <div className="flex items-center gap-1.5 mb-1">
+          <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-md bg-[#14A800]/10 text-[#14A800]">
+            Upwork
+          </span>
+          {Array.isArray(job.metadata?.screeningQuestions) && (job.metadata!.screeningQuestions as unknown[]).length > 0 && (
+            <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-[#14A800]/[0.06] text-[#14A800]/80">
+              {(job.metadata!.screeningQuestions as unknown[]).length} Qs
+            </span>
+          )}
+          {job.metadata?.coverLetterGenerated ? (
+            <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-[#14A800]/[0.06] text-[#14A800]/80">
+              CL
+            </span>
+          ) : null}
+        </div>
+      )}
+
       {/* Date */}
       <p className="text-[11px] text-text-tertiary">
         {job.appliedAt ? t('jobs.applied') : t('jobs.added')}: {displayDate}

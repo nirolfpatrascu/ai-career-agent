@@ -368,7 +368,9 @@
       "orBrowse": "sau click pentru a căuta",
       "detecting": "Detectare informații profil...",
       "howToExport": "Cum exporti profilul LinkedIn ca PDF",
-      "optional": "Acest pas este opțional dar recomandat pentru cea mai bună analiză."
+      "optional": "Acest pas este opțional dar recomandat pentru cea mai bună analiză.",
+      "tabLinkedin": "LinkedIn PDF",
+      "tabUpwork": "Profil Upwork"
     },
     "cv": {
       "title": "Încarcă CV-ul tău",
@@ -631,5 +633,85 @@
     "whatBetter": "Ce ar putea fi mai bine?",
     "send": "Trimite",
     "placeholder": "Opțional: spune-ne ce ar putea fi îmbunătățit..."
+  },
+  "upwork": {
+    "import": {
+      "title": "Importă Profil Upwork",
+      "instructions": "Copiază textul paginii tale de profil Upwork și lipește-l mai jos. Vom extrage competențele, istoricul de lucru și statisticile tale.",
+      "pasteLabel": "Text Profil",
+      "pastePlaceholder": "Lipește conținutul paginii tale de profil Upwork aici (titlu, prezentare generală, competențe, istoric de lucru etc.)...",
+      "urlLabel": "URL Profil",
+      "urlPlaceholder": "https://www.upwork.com/freelancers/~...",
+      "urlHint": "Vom încerca să extragem datele publice ale profilului. Unele profiluri pot necesita lipire manuală.",
+      "or": "sau",
+      "minChars": "Te rugăm să lipești cel puțin 100 de caractere de text de profil.",
+      "parsing": "Se analizează profilul...",
+      "parseButton": "Importă Profilul",
+      "preview": "Profil Importat",
+      "confirm": "Folosește Acest Profil",
+      "retry": "Reimportă",
+      "jobsLabel": "joburi",
+      "earnings": "câștigat",
+      "jss": "Succes la Joburi",
+      "jobs": "{count} joburi extrase"
+    },
+    "jobs": {
+      "parsed": "Job Analizat cu Succes",
+      "minChars": "Te rugăm să lipești cel puțin 50 de caractere din textul anunțului de job.",
+      "pasteLabel": "Lipește anunțul de job Upwork",
+      "pastePlaceholder": "Copiază textul complet al anunțului de job Upwork și lipește-l aici...",
+      "urlLabel": "URL Job (opțional)",
+      "parsing": "Se analizează...",
+      "parseButton": "Analizează Anunțul de Job",
+      "screeningQs": "întrebări de selecție",
+      "repaste": "Lipește alt job",
+      "saveToTracker": "Salvează în Tracker"
+    },
+    "job": {
+      "fixed": "Preț Fix",
+      "hourly": "Pe Oră"
+    },
+    "analysis": {
+      "title": "Analiză Profil Upwork",
+      "score": "Scor Profil",
+      "titleOpt": "Optimizare Titlu",
+      "titleCurrent": "Titlu Actual",
+      "titleSuggested": "Titlu Sugerat",
+      "overviewOpt": "Optimizare Prezentare",
+      "overviewCurrent": "Prezentare Actuală",
+      "overviewSuggested": "Prezentare Sugerată",
+      "rateAdvice": "Sfaturi pentru Tarif",
+      "suggestedRange": "Interval Sugerat",
+      "skills": "Optimizare Competențe",
+      "skillsKeep": "Păstrează",
+      "skillsAdd": "Adaugă",
+      "skillsRemove": "Elimină",
+      "skillsReorder": "Reordonează",
+      "strengths": "Puncte Forte ale Profilului",
+      "weaknesses": "Aspecte de Îmbunătățit",
+      "niching": "Strategie de Nișare",
+      "proposalTips": "Sfaturi pentru Propuneri",
+      "competitive": "Poziție Competitivă"
+    },
+    "coverLetter": {
+      "title": "Generator Scrisoare de Intenție",
+      "generate": "Generează Scrisoare de Intenție",
+      "generating": "Se generează scrisoarea ta personalizată de intenție...",
+      "tone": "Ton",
+      "opening": "Introducere Captivantă",
+      "screeningAnswers": "Răspunsuri la Selecție",
+      "question": "Î{number}",
+      "strategy": "Strategie",
+      "body": "Corp Principal",
+      "closing": "Încheiere cu Îndemn",
+      "rateSuggestion": "Sugestie de Tarif",
+      "profileTips": "Sfaturi pentru Profil",
+      "copyFull": "Copiază Propunerea Completă",
+      "copySection": "Copiază",
+      "copied": "Copiat!",
+      "regenerate": "Regenerează",
+      "saveDraft": "Salvează Ciornă",
+      "saved": "Salvat!"
+    }
   }
 }
