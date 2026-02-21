@@ -1,0 +1,125 @@
+{
+  "source": "UK Office for National Statistics, Annual Survey of Hours and Earnings (ASHE) 2024",
+  "sourceUrl": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours",
+  "lastUpdated": "2024",
+  "currency": "GBP",
+  "region": "United Kingdom",
+  "occupations": {
+    "2134": {
+      "socTitle": "Programmers/Software Devs",
+      "annual": { "p10": 28000, "p25": 35000, "median": 45000, "p75": 58000, "p90": 72000 }
+    },
+    "2135": {
+      "socTitle": "IT Business Analysts/Architects/Systems Designers",
+      "annual": { "p10": 32000, "p25": 40000, "median": 52000, "p75": 65000, "p90": 82000 }
+    },
+    "2136": {
+      "socTitle": "IT Project Managers",
+      "annual": { "p10": 35000, "p25": 42000, "median": 55000, "p75": 70000, "p90": 88000 }
+    },
+    "2137": {
+      "socTitle": "Web Design/Development Professionals",
+      "annual": { "p10": 22000, "p25": 27000, "median": 35000, "p75": 45000, "p90": 58000 }
+    },
+    "2133": {
+      "socTitle": "IT Specialist Managers",
+      "annual": { "p10": 38000, "p25": 48000, "median": 62000, "p75": 80000, "p90": 102000 }
+    },
+    "2139": {
+      "socTitle": "IT Professionals NEC",
+      "annual": { "p10": 30000, "p25": 38000, "median": 50000, "p75": 65000, "p90": 82000 }
+    },
+    "3131": {
+      "socTitle": "IT Operations Technicians",
+      "annual": { "p10": 22000, "p25": 26000, "median": 32000, "p75": 40000, "p90": 50000 }
+    },
+    "3132": {
+      "socTitle": "IT User Support Technicians",
+      "annual": { "p10": 20000, "p25": 24000, "median": 30000, "p75": 38000, "p90": 48000 }
+    },
+    "1132": {
+      "socTitle": "Marketing/Sales Directors",
+      "annual": { "p10": 28000, "p25": 38000, "median": 55000, "p75": 78000, "p90": 108000 }
+    },
+    "1131": {
+      "socTitle": "Financial Managers/Directors",
+      "annual": { "p10": 32000, "p25": 42000, "median": 58000, "p75": 82000, "p90": 115000 }
+    },
+    "1135": {
+      "socTitle": "HR Managers/Directors",
+      "annual": { "p10": 30000, "p25": 38000, "median": 50000, "p75": 65000, "p90": 85000 }
+    },
+    "1139": {
+      "socTitle": "Other Functional Managers",
+      "annual": { "p10": 28000, "p25": 36000, "median": 48000, "p75": 62000, "p90": 82000 }
+    },
+    "2421": {
+      "socTitle": "Chartered Accountants",
+      "annual": { "p10": 28000, "p25": 35000, "median": 48000, "p75": 65000, "p90": 88000 }
+    },
+    "2422": {
+      "socTitle": "Finance/Investment Analysts",
+      "annual": { "p10": 30000, "p25": 38000, "median": 52000, "p75": 72000, "p90": 98000 }
+    },
+    "2423": {
+      "socTitle": "Management Consultants/Analysts",
+      "annual": { "p10": 28000, "p25": 36000, "median": 50000, "p75": 68000, "p90": 92000 }
+    },
+    "2461": {
+      "socTitle": "Quality Control/Planning Engineers",
+      "annual": { "p10": 28000, "p25": 34000, "median": 42000, "p75": 54000, "p90": 68000 }
+    },
+    "2121": {
+      "socTitle": "Civil Engineers",
+      "annual": { "p10": 28000, "p25": 34000, "median": 42000, "p75": 55000, "p90": 68000 }
+    },
+    "2123": {
+      "socTitle": "Electrical Engineers",
+      "annual": { "p10": 30000, "p25": 36000, "median": 45000, "p75": 58000, "p90": 72000 }
+    },
+    "2122": {
+      "socTitle": "Mechanical Engineers",
+      "annual": { "p10": 28000, "p25": 34000, "median": 43000, "p75": 55000, "p90": 70000 }
+    },
+    "2142": {
+      "socTitle": "Design Engineers",
+      "annual": { "p10": 26000, "p25": 32000, "median": 40000, "p75": 52000, "p90": 65000 }
+    },
+    "3422": {
+      "socTitle": "Product/Clothing/UX Designers",
+      "annual": { "p10": 22000, "p25": 28000, "median": 38000, "p75": 50000, "p90": 65000 }
+    },
+    "3414": {
+      "socTitle": "Technical Writers",
+      "annual": { "p10": 25000, "p25": 30000, "median": 38000, "p75": 48000, "p90": 60000 }
+    },
+    "3545": {
+      "socTitle": "Sales Accounts/Business Dev Managers",
+      "annual": { "p10": 25000, "p25": 32000, "median": 45000, "p75": 62000, "p90": 85000 }
+    },
+    "3542": {
+      "socTitle": "Business Sales Executives",
+      "annual": { "p10": 22000, "p25": 28000, "median": 38000, "p75": 55000, "p90": 78000 }
+    },
+    "3544": {
+      "socTitle": "Estate Agents/Auctioneers",
+      "annual": { "p10": 18000, "p25": 22000, "median": 28000, "p75": 38000, "p90": 52000 }
+    },
+    "2431": {
+      "socTitle": "Recruitment Consultants",
+      "annual": { "p10": 22000, "p25": 28000, "median": 36000, "p75": 48000, "p90": 65000 }
+    },
+    "2472": {
+      "socTitle": "Public Relations Professionals",
+      "annual": { "p10": 24000, "p25": 30000, "median": 40000, "p75": 55000, "p90": 72000 }
+    },
+    "4122": {
+      "socTitle": "Administrative/Executive Assistants",
+      "annual": { "p10": 18000, "p25": 22000, "median": 28000, "p75": 35000, "p90": 42000 }
+    },
+    "7211": {
+      "socTitle": "Customer Service Supervisors",
+      "annual": { "p10": 20000, "p25": 24000, "median": 30000, "p75": 38000, "p90": 48000 }
+    }
+  }
+}

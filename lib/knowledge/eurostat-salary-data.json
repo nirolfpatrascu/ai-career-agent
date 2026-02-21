@@ -1,0 +1,1752 @@
+{
+  "source": "Eurostat Structure of Earnings Survey 2022, extrapolated to 2024 via LCI",
+  "sourceUrl": "https://ec.europa.eu/eurostat/web/labour-market/information-data/earnings",
+  "methodology": "ISCO-08 2-digit occupation groups. For tech roles, multiply by sectorAdjustment_J (NACE Section J: Information and Communication) to get industry-accurate salaries.",
+  "lastUpdated": "2022-10 (extrapolated to 2024)",
+  "countries": {
+    "Germany": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 60480,
+        "medianAnnualGross": 56000,
+        "p25": 42000,
+        "p75": 75600,
+        "sectorAdjustment_J": 1.35,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 36288,
+        "medianAnnualGross": 33600,
+        "p25": 25200,
+        "p75": 45360,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 57456,
+        "medianAnnualGross": 53200,
+        "p25": 39900,
+        "p75": 71820,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 73440,
+        "medianAnnualGross": 68000,
+        "p25": 51000,
+        "p75": 91800,
+        "sectorAdjustment_J": 1.35,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 49594,
+        "medianAnnualGross": 45920,
+        "p25": 34440,
+        "p75": 61992,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 56160,
+        "medianAnnualGross": 52000,
+        "p25": 39000,
+        "p75": 70200,
+        "sectorAdjustment_J": 1.35,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 41126,
+        "medianAnnualGross": 38080,
+        "p25": 28560,
+        "p75": 51408,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 35078,
+        "medianAnnualGross": 32480,
+        "p25": 24360,
+        "p75": 43848,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 31450,
+        "medianAnnualGross": 29120,
+        "p25": 21840,
+        "p75": 39312,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "France": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 47520,
+        "medianAnnualGross": 44000,
+        "p25": 33000,
+        "p75": 59400,
+        "sectorAdjustment_J": 1.40,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 28512,
+        "medianAnnualGross": 26400,
+        "p25": 19800,
+        "p75": 35640,
+        "sectorAdjustment_J": 1.19,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 45144,
+        "medianAnnualGross": 41800,
+        "p25": 31350,
+        "p75": 56430,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 62640,
+        "medianAnnualGross": 58000,
+        "p25": 43500,
+        "p75": 78300,
+        "sectorAdjustment_J": 1.40,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 38938,
+        "medianAnnualGross": 36080,
+        "p25": 27060,
+        "p75": 48708,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 45360,
+        "medianAnnualGross": 42000,
+        "p25": 31500,
+        "p75": 56700,
+        "sectorAdjustment_J": 1.40,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 32314,
+        "medianAnnualGross": 29920,
+        "p25": 22440,
+        "p75": 40392,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 27562,
+        "medianAnnualGross": 25520,
+        "p25": 19140,
+        "p75": 34452,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 24710,
+        "medianAnnualGross": 22880,
+        "p25": 17160,
+        "p75": 30888,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Netherlands": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 56160,
+        "medianAnnualGross": 52000,
+        "p25": 39000,
+        "p75": 70200,
+        "sectorAdjustment_J": 1.35,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 33696,
+        "medianAnnualGross": 31200,
+        "p25": 23400,
+        "p75": 42120,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 53352,
+        "medianAnnualGross": 49400,
+        "p25": 37050,
+        "p75": 66690,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 66960,
+        "medianAnnualGross": 62000,
+        "p25": 46500,
+        "p75": 83700,
+        "sectorAdjustment_J": 1.35,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 46042,
+        "medianAnnualGross": 42640,
+        "p25": 31980,
+        "p75": 57564,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 51840,
+        "medianAnnualGross": 48000,
+        "p25": 36000,
+        "p75": 64800,
+        "sectorAdjustment_J": 1.35,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 38189,
+        "medianAnnualGross": 35360,
+        "p25": 26520,
+        "p75": 47736,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 32573,
+        "medianAnnualGross": 30160,
+        "p25": 22620,
+        "p75": 40716,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 29203,
+        "medianAnnualGross": 27040,
+        "p25": 20280,
+        "p75": 36504,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Belgium": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 51840,
+        "medianAnnualGross": 48000,
+        "p25": 36000,
+        "p75": 64800,
+        "sectorAdjustment_J": 1.30,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 31104,
+        "medianAnnualGross": 28800,
+        "p25": 21600,
+        "p75": 38880,
+        "sectorAdjustment_J": 1.11,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 49248,
+        "medianAnnualGross": 45600,
+        "p25": 34200,
+        "p75": 61560,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 64800,
+        "medianAnnualGross": 60000,
+        "p25": 45000,
+        "p75": 81000,
+        "sectorAdjustment_J": 1.30,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 42509,
+        "medianAnnualGross": 39360,
+        "p25": 29520,
+        "p75": 53136,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 49680,
+        "medianAnnualGross": 46000,
+        "p25": 34500,
+        "p75": 62100,
+        "sectorAdjustment_J": 1.30,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 35251,
+        "medianAnnualGross": 32640,
+        "p25": 24480,
+        "p75": 44064,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 30067,
+        "medianAnnualGross": 27840,
+        "p25": 20880,
+        "p75": 37584,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 26957,
+        "medianAnnualGross": 24960,
+        "p25": 18720,
+        "p75": 33696,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Austria": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 54000,
+        "medianAnnualGross": 50000,
+        "p25": 37500,
+        "p75": 67500,
+        "sectorAdjustment_J": 1.30,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 32400,
+        "medianAnnualGross": 30000,
+        "p25": 22500,
+        "p75": 40500,
+        "sectorAdjustment_J": 1.11,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 51300,
+        "medianAnnualGross": 47500,
+        "p25": 35625,
+        "p75": 64125,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 66960,
+        "medianAnnualGross": 62000,
+        "p25": 46500,
+        "p75": 83700,
+        "sectorAdjustment_J": 1.30,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 44280,
+        "medianAnnualGross": 41000,
+        "p25": 30750,
+        "p75": 55350,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 51840,
+        "medianAnnualGross": 48000,
+        "p25": 36000,
+        "p75": 64800,
+        "sectorAdjustment_J": 1.30,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 36720,
+        "medianAnnualGross": 34000,
+        "p25": 25500,
+        "p75": 45900,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 31320,
+        "medianAnnualGross": 29000,
+        "p25": 21750,
+        "p75": 39150,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 28080,
+        "medianAnnualGross": 26000,
+        "p25": 19500,
+        "p75": 35100,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Ireland": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 59400,
+        "medianAnnualGross": 55000,
+        "p25": 41250,
+        "p75": 74250,
+        "sectorAdjustment_J": 1.40,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 35640,
+        "medianAnnualGross": 33000,
+        "p25": 24750,
+        "p75": 44550,
+        "sectorAdjustment_J": 1.19,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 56430,
+        "medianAnnualGross": 52250,
+        "p25": 39188,
+        "p75": 70538,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 70200,
+        "medianAnnualGross": 65000,
+        "p25": 48750,
+        "p75": 87750,
+        "sectorAdjustment_J": 1.40,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 48708,
+        "medianAnnualGross": 45100,
+        "p25": 33825,
+        "p75": 60885,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 51840,
+        "medianAnnualGross": 48000,
+        "p25": 36000,
+        "p75": 64800,
+        "sectorAdjustment_J": 1.40,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 40392,
+        "medianAnnualGross": 37400,
+        "p25": 28050,
+        "p75": 50490,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 34452,
+        "medianAnnualGross": 31900,
+        "p25": 23925,
+        "p75": 43065,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 30888,
+        "medianAnnualGross": 28600,
+        "p25": 21450,
+        "p75": 38610,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Luxembourg": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 66960,
+        "medianAnnualGross": 62000,
+        "p25": 46500,
+        "p75": 83700,
+        "sectorAdjustment_J": 1.25,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 40176,
+        "medianAnnualGross": 37200,
+        "p25": 27900,
+        "p75": 50220,
+        "sectorAdjustment_J": 1.06,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 63558,
+        "medianAnnualGross": 58900,
+        "p25": 44175,
+        "p75": 79515,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 77760,
+        "medianAnnualGross": 72000,
+        "p25": 54000,
+        "p75": 97200,
+        "sectorAdjustment_J": 1.25,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 54907,
+        "medianAnnualGross": 50840,
+        "p25": 38130,
+        "p75": 68634,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 59400,
+        "medianAnnualGross": 55000,
+        "p25": 41250,
+        "p75": 74250,
+        "sectorAdjustment_J": 1.25,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 45532,
+        "medianAnnualGross": 42160,
+        "p25": 31620,
+        "p75": 56916,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 38837,
+        "medianAnnualGross": 35960,
+        "p25": 26970,
+        "p75": 48546,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 34819,
+        "medianAnnualGross": 32240,
+        "p25": 24180,
+        "p75": 43524,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Sweden": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 51840,
+        "medianAnnualGross": 48000,
+        "p25": 36000,
+        "p75": 64800,
+        "sectorAdjustment_J": 1.25,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 31104,
+        "medianAnnualGross": 28800,
+        "p25": 21600,
+        "p75": 38880,
+        "sectorAdjustment_J": 1.06,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 49248,
+        "medianAnnualGross": 45600,
+        "p25": 34200,
+        "p75": 61560,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 62640,
+        "medianAnnualGross": 58000,
+        "p25": 43500,
+        "p75": 78300,
+        "sectorAdjustment_J": 1.25,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 42509,
+        "medianAnnualGross": 39360,
+        "p25": 29520,
+        "p75": 53136,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 47520,
+        "medianAnnualGross": 44000,
+        "p25": 33000,
+        "p75": 59400,
+        "sectorAdjustment_J": 1.25,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 35251,
+        "medianAnnualGross": 32640,
+        "p25": 24480,
+        "p75": 44064,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 30067,
+        "medianAnnualGross": 27840,
+        "p25": 20880,
+        "p75": 37584,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 26957,
+        "medianAnnualGross": 24960,
+        "p25": 18720,
+        "p75": 33696,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Denmark": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 62640,
+        "medianAnnualGross": 58000,
+        "p25": 43500,
+        "p75": 78300,
+        "sectorAdjustment_J": 1.22,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 37584,
+        "medianAnnualGross": 34800,
+        "p25": 26100,
+        "p75": 46980,
+        "sectorAdjustment_J": 1.04,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 59508,
+        "medianAnnualGross": 55100,
+        "p25": 41325,
+        "p75": 74385,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 73440,
+        "medianAnnualGross": 68000,
+        "p25": 51000,
+        "p75": 91800,
+        "sectorAdjustment_J": 1.22,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 51365,
+        "medianAnnualGross": 47560,
+        "p25": 35670,
+        "p75": 64206,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 56160,
+        "medianAnnualGross": 52000,
+        "p25": 39000,
+        "p75": 70200,
+        "sectorAdjustment_J": 1.22,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 42595,
+        "medianAnnualGross": 39440,
+        "p25": 29580,
+        "p75": 53244,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 36331,
+        "medianAnnualGross": 33640,
+        "p25": 25230,
+        "p75": 45414,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 32573,
+        "medianAnnualGross": 30160,
+        "p25": 22620,
+        "p75": 40716,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Finland": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 48600,
+        "medianAnnualGross": 45000,
+        "p25": 33750,
+        "p75": 60750,
+        "sectorAdjustment_J": 1.28,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 29160,
+        "medianAnnualGross": 27000,
+        "p25": 20250,
+        "p75": 36450,
+        "sectorAdjustment_J": 1.09,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 46170,
+        "medianAnnualGross": 42750,
+        "p25": 32063,
+        "p75": 57713,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 59400,
+        "medianAnnualGross": 55000,
+        "p25": 41250,
+        "p75": 74250,
+        "sectorAdjustment_J": 1.28,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 39852,
+        "medianAnnualGross": 36900,
+        "p25": 27675,
+        "p75": 49815,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 45360,
+        "medianAnnualGross": 42000,
+        "p25": 31500,
+        "p75": 56700,
+        "sectorAdjustment_J": 1.28,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 33048,
+        "medianAnnualGross": 30600,
+        "p25": 22950,
+        "p75": 41310,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 28188,
+        "medianAnnualGross": 26100,
+        "p25": 19575,
+        "p75": 35235,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 25272,
+        "medianAnnualGross": 23400,
+        "p25": 17550,
+        "p75": 31590,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Spain": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 36720,
+        "medianAnnualGross": 34000,
+        "p25": 25500,
+        "p75": 45900,
+        "sectorAdjustment_J": 1.38,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 22032,
+        "medianAnnualGross": 20400,
+        "p25": 15300,
+        "p75": 27540,
+        "sectorAdjustment_J": 1.17,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 34884,
+        "medianAnnualGross": 32300,
+        "p25": 24225,
+        "p75": 43605,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 48600,
+        "medianAnnualGross": 45000,
+        "p25": 33750,
+        "p75": 60750,
+        "sectorAdjustment_J": 1.38,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 30101,
+        "medianAnnualGross": 27880,
+        "p25": 20910,
+        "p75": 37638,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 34560,
+        "medianAnnualGross": 32000,
+        "p25": 24000,
+        "p75": 43200,
+        "sectorAdjustment_J": 1.38,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 24970,
+        "medianAnnualGross": 23120,
+        "p25": 17340,
+        "p75": 31212,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 21298,
+        "medianAnnualGross": 19720,
+        "p25": 14790,
+        "p75": 26622,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 19094,
+        "medianAnnualGross": 17680,
+        "p25": 13260,
+        "p75": 23868,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Italy": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 37800,
+        "medianAnnualGross": 35000,
+        "p25": 26250,
+        "p75": 47250,
+        "sectorAdjustment_J": 1.35,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 22680,
+        "medianAnnualGross": 21000,
+        "p25": 15750,
+        "p75": 28350,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 35910,
+        "medianAnnualGross": 33250,
+        "p25": 24938,
+        "p75": 44888,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 51840,
+        "medianAnnualGross": 48000,
+        "p25": 36000,
+        "p75": 64800,
+        "sectorAdjustment_J": 1.35,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 30996,
+        "medianAnnualGross": 28700,
+        "p25": 21525,
+        "p75": 38745,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 36720,
+        "medianAnnualGross": 34000,
+        "p25": 25500,
+        "p75": 45900,
+        "sectorAdjustment_J": 1.35,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 25704,
+        "medianAnnualGross": 23800,
+        "p25": 17850,
+        "p75": 32130,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 21924,
+        "medianAnnualGross": 20300,
+        "p25": 15225,
+        "p75": 27405,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 19656,
+        "medianAnnualGross": 18200,
+        "p25": 13650,
+        "p75": 24570,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Portugal": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 25920,
+        "medianAnnualGross": 24000,
+        "p25": 18000,
+        "p75": 32400,
+        "sectorAdjustment_J": 1.42,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 15552,
+        "medianAnnualGross": 14400,
+        "p25": 10800,
+        "p75": 19440,
+        "sectorAdjustment_J": 1.21,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 24624,
+        "medianAnnualGross": 22800,
+        "p25": 17100,
+        "p75": 30780,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 37800,
+        "medianAnnualGross": 35000,
+        "p25": 26250,
+        "p75": 47250,
+        "sectorAdjustment_J": 1.42,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 21254,
+        "medianAnnualGross": 19680,
+        "p25": 14760,
+        "p75": 26568,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 23760,
+        "medianAnnualGross": 22000,
+        "p25": 16500,
+        "p75": 29700,
+        "sectorAdjustment_J": 1.42,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 17625,
+        "medianAnnualGross": 16320,
+        "p25": 12240,
+        "p75": 22032,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 15034,
+        "medianAnnualGross": 13920,
+        "p25": 10440,
+        "p75": 18792,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 13478,
+        "medianAnnualGross": 12480,
+        "p25": 9360,
+        "p75": 16848,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Greece": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 23760,
+        "medianAnnualGross": 22000,
+        "p25": 16500,
+        "p75": 29700,
+        "sectorAdjustment_J": 1.35,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 14256,
+        "medianAnnualGross": 13200,
+        "p25": 9900,
+        "p75": 17820,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 22572,
+        "medianAnnualGross": 20900,
+        "p25": 15675,
+        "p75": 28215,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 34560,
+        "medianAnnualGross": 32000,
+        "p25": 24000,
+        "p75": 43200,
+        "sectorAdjustment_J": 1.35,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 19483,
+        "medianAnnualGross": 18040,
+        "p25": 13530,
+        "p75": 24354,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 21600,
+        "medianAnnualGross": 20000,
+        "p25": 15000,
+        "p75": 27000,
+        "sectorAdjustment_J": 1.35,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 16157,
+        "medianAnnualGross": 14960,
+        "p25": 11220,
+        "p75": 20196,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 13781,
+        "medianAnnualGross": 12760,
+        "p25": 9570,
+        "p75": 17226,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 12355,
+        "medianAnnualGross": 11440,
+        "p25": 8580,
+        "p75": 15444,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Romania": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 19440,
+        "medianAnnualGross": 18000,
+        "p25": 13500,
+        "p75": 24300,
+        "sectorAdjustment_J": 1.90,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 11664,
+        "medianAnnualGross": 10800,
+        "p25": 8100,
+        "p75": 14580,
+        "sectorAdjustment_J": 1.62,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 18468,
+        "medianAnnualGross": 17100,
+        "p25": 12825,
+        "p75": 23085,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 28080,
+        "medianAnnualGross": 26000,
+        "p25": 19500,
+        "p75": 35100,
+        "sectorAdjustment_J": 1.90,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 15941,
+        "medianAnnualGross": 14760,
+        "p25": 11070,
+        "p75": 19926,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 15120,
+        "medianAnnualGross": 14000,
+        "p25": 10500,
+        "p75": 18900,
+        "sectorAdjustment_J": 1.90,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 13219,
+        "medianAnnualGross": 12240,
+        "p25": 9180,
+        "p75": 16524,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 11275,
+        "medianAnnualGross": 10440,
+        "p25": 7830,
+        "p75": 14094,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 10109,
+        "medianAnnualGross": 9360,
+        "p25": 7020,
+        "p75": 12636,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Poland": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 25920,
+        "medianAnnualGross": 24000,
+        "p25": 18000,
+        "p75": 32400,
+        "sectorAdjustment_J": 1.60,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 15552,
+        "medianAnnualGross": 14400,
+        "p25": 10800,
+        "p75": 19440,
+        "sectorAdjustment_J": 1.36,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 24624,
+        "medianAnnualGross": 22800,
+        "p25": 17100,
+        "p75": 30780,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 34560,
+        "medianAnnualGross": 32000,
+        "p25": 24000,
+        "p75": 43200,
+        "sectorAdjustment_J": 1.60,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 21254,
+        "medianAnnualGross": 19680,
+        "p25": 14760,
+        "p75": 26568,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 21600,
+        "medianAnnualGross": 20000,
+        "p25": 15000,
+        "p75": 27000,
+        "sectorAdjustment_J": 1.60,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 17625,
+        "medianAnnualGross": 16320,
+        "p25": 12240,
+        "p75": 22032,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 15034,
+        "medianAnnualGross": 13920,
+        "p25": 10440,
+        "p75": 18792,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 13478,
+        "medianAnnualGross": 12480,
+        "p25": 9360,
+        "p75": 16848,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Czechia": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 28080,
+        "medianAnnualGross": 26000,
+        "p25": 19500,
+        "p75": 35100,
+        "sectorAdjustment_J": 1.55,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 16848,
+        "medianAnnualGross": 15600,
+        "p25": 11700,
+        "p75": 21060,
+        "sectorAdjustment_J": 1.32,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 26676,
+        "medianAnnualGross": 24700,
+        "p25": 18525,
+        "p75": 33345,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 36720,
+        "medianAnnualGross": 34000,
+        "p25": 25500,
+        "p75": 45900,
+        "sectorAdjustment_J": 1.55,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 23026,
+        "medianAnnualGross": 21320,
+        "p25": 15990,
+        "p75": 28782,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 23760,
+        "medianAnnualGross": 22000,
+        "p25": 16500,
+        "p75": 29700,
+        "sectorAdjustment_J": 1.55,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 19094,
+        "medianAnnualGross": 17680,
+        "p25": 13260,
+        "p75": 23868,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 16286,
+        "medianAnnualGross": 15080,
+        "p25": 11310,
+        "p75": 20358,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 14602,
+        "medianAnnualGross": 13520,
+        "p25": 10140,
+        "p75": 18252,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Hungary": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 21600,
+        "medianAnnualGross": 20000,
+        "p25": 15000,
+        "p75": 27000,
+        "sectorAdjustment_J": 1.65,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 12960,
+        "medianAnnualGross": 12000,
+        "p25": 9000,
+        "p75": 16200,
+        "sectorAdjustment_J": 1.40,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 20520,
+        "medianAnnualGross": 19000,
+        "p25": 14250,
+        "p75": 25650,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 30240,
+        "medianAnnualGross": 28000,
+        "p25": 21000,
+        "p75": 37800,
+        "sectorAdjustment_J": 1.65,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 17712,
+        "medianAnnualGross": 16400,
+        "p25": 12300,
+        "p75": 22140,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 17280,
+        "medianAnnualGross": 16000,
+        "p25": 12000,
+        "p75": 21600,
+        "sectorAdjustment_J": 1.65,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 14688,
+        "medianAnnualGross": 13600,
+        "p25": 10200,
+        "p75": 18360,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 12528,
+        "medianAnnualGross": 11600,
+        "p25": 8700,
+        "p75": 15660,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 11232,
+        "medianAnnualGross": 10400,
+        "p25": 7800,
+        "p75": 14040,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Croatia": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 19440,
+        "medianAnnualGross": 18000,
+        "p25": 13500,
+        "p75": 24300,
+        "sectorAdjustment_J": 1.45,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 11664,
+        "medianAnnualGross": 10800,
+        "p25": 8100,
+        "p75": 14580,
+        "sectorAdjustment_J": 1.23,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 18468,
+        "medianAnnualGross": 17100,
+        "p25": 12825,
+        "p75": 23085,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 28080,
+        "medianAnnualGross": 26000,
+        "p25": 19500,
+        "p75": 35100,
+        "sectorAdjustment_J": 1.45,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 15941,
+        "medianAnnualGross": 14760,
+        "p25": 11070,
+        "p75": 19926,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 17280,
+        "medianAnnualGross": 16000,
+        "p25": 12000,
+        "p75": 21600,
+        "sectorAdjustment_J": 1.45,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 13219,
+        "medianAnnualGross": 12240,
+        "p25": 9180,
+        "p75": 16524,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 11275,
+        "medianAnnualGross": 10440,
+        "p25": 7830,
+        "p75": 14094,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 10109,
+        "medianAnnualGross": 9360,
+        "p25": 7020,
+        "p75": 12636,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Bulgaria": {
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 15120,
+        "medianAnnualGross": 14000,
+        "p25": 10500,
+        "p75": 18900,
+        "sectorAdjustment_J": 1.75,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 9072,
+        "medianAnnualGross": 8400,
+        "p25": 6300,
+        "p75": 11340,
+        "sectorAdjustment_J": 1.49,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 14364,
+        "medianAnnualGross": 13300,
+        "p25": 9975,
+        "p75": 17955,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 21600,
+        "medianAnnualGross": 20000,
+        "p25": 15000,
+        "p75": 27000,
+        "sectorAdjustment_J": 1.75,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 12398,
+        "medianAnnualGross": 11480,
+        "p25": 8610,
+        "p75": 15498,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 12960,
+        "medianAnnualGross": 12000,
+        "p25": 9000,
+        "p75": 16200,
+        "sectorAdjustment_J": 1.75,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 10282,
+        "medianAnnualGross": 9520,
+        "p25": 7140,
+        "p75": 12852,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 8770,
+        "medianAnnualGross": 8120,
+        "p25": 6090,
+        "p75": 10962,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 7862,
+        "medianAnnualGross": 7280,
+        "p25": 5460,
+        "p75": 9828,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    },
+    "Switzerland": {
+      "note": "CHF values stored as EUR equivalent (\u00d71.04 conversion rate)",
+      "ISCO_25": {
+        "title": "Information and communications technology professionals",
+        "meanAnnualGross": 105840,
+        "medianAnnualGross": 98000,
+        "p25": 73500,
+        "p75": 132300,
+        "sectorAdjustment_J": 1.18,
+        "mappedRoles": ["Software Engineer", "Full Stack Developer", "Frontend Developer", "Backend Developer", "DevOps Engineer", "Cloud Engineer", "Cloud Architect", "Data Engineer", "Data Scientist", "AI Engineer", "Machine Learning Engineer", "NLP Engineer", "Computer Vision Engineer", "MLOps Engineer", "Database Administrator", "Network Engineer", "Cybersecurity Analyst", "Security Engineer", "Solutions Architect", "Site Reliability Engineer", "Platform Engineer", "Penetration Tester", "Security Architect", "Blockchain Developer", "Mobile Developer", "Game Developer", "Embedded Systems Engineer"]
+      },
+      "ISCO_35": {
+        "title": "Information and communications technology technicians",
+        "meanAnnualGross": 63504,
+        "medianAnnualGross": 58800,
+        "p25": 44100,
+        "p75": 79380,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["IT Support Specialist", "Help Desk", "Systems Administrator", "Network Administrator", "Technical Support Engineer"]
+      },
+      "ISCO_12": {
+        "title": "Administrative and commercial managers",
+        "meanAnnualGross": 100548,
+        "medianAnnualGross": 93100,
+        "p25": 69825,
+        "p75": 125685,
+        "sectorAdjustment_J": 1.10,
+        "mappedRoles": ["Marketing Manager", "Digital Marketing Manager", "Sales Manager", "HR Manager", "Operations Manager", "Brand Manager", "Growth Marketing Manager", "Revenue Operations Manager"]
+      },
+      "ISCO_13": {
+        "title": "Production and specialised services managers",
+        "meanAnnualGross": 124200,
+        "medianAnnualGross": 115000,
+        "p25": 86250,
+        "p75": 155250,
+        "sectorAdjustment_J": 1.18,
+        "mappedRoles": ["IT Manager", "IT Director", "Engineering Manager", "VP of Engineering", "CTO", "Product Manager", "Technical Program Manager", "Project Manager", "Program Manager", "Scrum Master", "Chief Data Officer"]
+      },
+      "ISCO_21": {
+        "title": "Science and engineering professionals",
+        "meanAnnualGross": 86789,
+        "medianAnnualGross": 80360,
+        "p25": 60270,
+        "p75": 108486,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "IoT Engineer", "Robotics Engineer"]
+      },
+      "ISCO_24": {
+        "title": "Business and administration professionals",
+        "meanAnnualGross": 95040,
+        "medianAnnualGross": 88000,
+        "p25": 66000,
+        "p75": 118800,
+        "sectorAdjustment_J": 1.18,
+        "mappedRoles": ["Accountant", "Financial Analyst", "Business Analyst", "Management Consultant", "Strategy Consultant", "Recruiter", "Talent Acquisition Specialist", "Compliance Manager", "Implementation Consultant", "ERP Consultant", "SAP Consultant", "Transformation Manager"]
+      },
+      "ISCO_26": {
+        "title": "Legal, social and cultural professionals",
+        "meanAnnualGross": 71971,
+        "medianAnnualGross": 66640,
+        "p25": 49980,
+        "p75": 89964,
+        "sectorAdjustment_J": 1.15,
+        "mappedRoles": ["UX Designer", "UI Designer", "Product Designer", "Graphic Designer", "Technical Writer", "UX Researcher", "Design Manager"]
+      },
+      "ISCO_33": {
+        "title": "Business and administration associate professionals",
+        "meanAnnualGross": 61387,
+        "medianAnnualGross": 56840,
+        "p25": 42630,
+        "p75": 76734,
+        "sectorAdjustment_J": 1.05,
+        "mappedRoles": ["Account Executive", "Sales Representative", "BDR", "SDR", "Sales Engineer", "Pre-Sales Engineer", "Solutions Consultant", "Technical Account Manager", "Partner Manager"]
+      },
+      "ISCO_34": {
+        "title": "Legal, social, cultural and related associate professionals",
+        "meanAnnualGross": 55037,
+        "medianAnnualGross": 50960,
+        "p25": 38220,
+        "p75": 68796,
+        "sectorAdjustment_J": 1.00,
+        "mappedRoles": ["Social Media Manager", "Content Strategist", "Content Marketing Manager", "Junior Designer", "Event Manager"]
+      }
+    }
+  }
+}

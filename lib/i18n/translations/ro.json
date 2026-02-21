@@ -300,7 +300,17 @@
       "growthPotential": "Potențial de Creștere",
       "sourceMarket": "Date de piață",
       "sourceEstimate": "Estimare AI",
-      "sources": "Surse: Glassdoor, Levels.fyi, LinkedIn Salary, Stack Overflow Survey (2024-2025)"
+      "sources": "Surse: Glassdoor, Levels.fyi, LinkedIn Salary, Stack Overflow Survey (2024-2025)",
+      "source": {
+        "government_bls": "Gov SUA (BLS)",
+        "government_ons": "Gov UK (ONS)",
+        "government_eurostat": "Gov UE (Eurostat)",
+        "survey_stackoverflow": "Sondaj Dev (SO)",
+        "market": "Date de piață",
+        "estimate": "Estimare AI",
+        "footer": "Surse: US Bureau of Labor Statistics OEWS (2024), UK ONS ASHE (2024), Eurostat Structure of Earnings Survey (2022), Stack Overflow Developer Survey (2024), Glassdoor, Levels.fyi",
+        "tooltip": "Datele salariale provin din statistici oficiale guvernamentale unde sunt disponibile (US BLS, UK ONS, Eurostat SES), completate de Stack Overflow Developer Survey (65.000+ respondenti) si cercetare de piata. Datele marcate 'Estimare AI' sunt generate cand nu exista date oficiale pentru aceasta combinatie rol/regiune."
+      }
     },
     "jobMatch": {
       "title": "Analiză Potrivire Job",

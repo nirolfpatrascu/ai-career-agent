@@ -1,6 +1,7 @@
 'use client';
 
-import type { SalaryAnalysis } from '@/lib/types';
+import { useState } from 'react';
+import type { SalaryAnalysis, SalaryDataSource } from '@/lib/types';
 import { formatCurrency } from '@/lib/utils';
 import { useTranslation } from '@/lib/i18n';
 
@@ -8,8 +9,43 @@ interface SalaryBenchmarkProps {
   salary: SalaryAnalysis;
 }
 
+function SourceBadge({ source, t }: { source?: SalaryDataSource; t: (key: string) => string }) {
+  if (!source) return null;
+
+  const isGov = source === 'government_bls' || source === 'government_ons' || source === 'government_eurostat';
+  const isSurvey = source === 'survey_stackoverflow' || source === 'market';
+  const isEstimate = source === 'estimate';
+
+  if (isGov) {
+    return (
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-success/[0.08] text-success border border-success/15">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        {t(`results.salary.source.${source}`)}
+      </span>
+    );
+  }
+  if (isSurvey) {
+    return (
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-primary/[0.08] text-primary border border-primary/15">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        {t(`results.salary.source.${source}`)}
+      </span>
+    );
+  }
+  if (isEstimate) {
+    return (
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-warning/[0.08] text-warning border border-warning/15">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        {t(`results.salary.source.${source}`)}
+      </span>
+    );
+  }
+  return null;
+}
+
 export default function SalaryBenchmark({ salary }: SalaryBenchmarkProps) {
   const { t } = useTranslation();
+  const [showTooltip, setShowTooltip] = useState(false);
   const currentMid = salary.currentRoleMarket.mid;
   const targetMid = salary.targetRoleMarket.mid;
   const currentCurrency = salary.currentRoleMarket.currency;
@@ -40,8 +76,26 @@ export default function SalaryBenchmark({ salary }: SalaryBenchmarkProps) {
             <line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
           </svg>
         </div>
-        <div>
-          <h2 className="text-xl font-bold text-text-primary font-display">{t('results.salary.title')}</h2>
+        <div className="flex-1">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-bold text-text-primary font-display">{t('results.salary.title')}</h2>
+            <div className="relative">
+              <button
+                onClick={() => setShowTooltip(!showTooltip)}
+                onMouseEnter={() => setShowTooltip(true)}
+                onMouseLeave={() => setShowTooltip(false)}
+                className="w-5 h-5 rounded-full border border-black/[0.12] bg-black/[0.04] flex items-center justify-center text-text-tertiary hover:bg-black/[0.08] transition-colors"
+                aria-label="Salary data info"
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              </button>
+              {showTooltip && (
+                <div className="absolute left-1/2 -translate-x-1/2 top-7 z-50 w-72 p-3 rounded-xl bg-white border border-black/[0.1] shadow-lg text-xs text-text-secondary leading-relaxed">
+                  {t('results.salary.source.tooltip')}
+                </div>
+              )}
+            </div>
+          </div>
           <p className="text-xs text-text-tertiary">{t('results.salary.subtitle')}</p>
         </div>
       </div>
@@ -54,18 +108,7 @@ export default function SalaryBenchmark({ salary }: SalaryBenchmarkProps) {
             <div className="flex items-center justify-between mb-2.5">
               <div className="flex items-center gap-2">
                 <p className="text-sm font-medium text-text-secondary">{t('results.salary.currentRoleMarket')}</p>
-                {salary.currentRoleMarket.source === 'market' && (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-success/[0.08] text-success border border-success/15">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                    {t('results.salary.sourceMarket')}
-                  </span>
-                )}
-                {salary.currentRoleMarket.source === 'estimate' && (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-warning/[0.08] text-warning border border-warning/15">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-                    {t('results.salary.sourceEstimate')}
-                  </span>
-                )}
+                <SourceBadge source={salary.currentRoleMarket.source} t={t} />
               </div>
               <p className="text-xs text-text-tertiary">{salary.currentRoleMarket.region}</p>
             </div>
@@ -98,18 +141,7 @@ export default function SalaryBenchmark({ salary }: SalaryBenchmarkProps) {
             <div className="flex items-center justify-between mb-2.5">
               <div className="flex items-center gap-2">
                 <p className="text-sm font-medium text-text-secondary">{t('results.salary.targetRoleMarket')}</p>
-                {salary.targetRoleMarket.source === 'market' && (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-success/[0.08] text-success border border-success/15">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                    {t('results.salary.sourceMarket')}
-                  </span>
-                )}
-                {salary.targetRoleMarket.source === 'estimate' && (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-warning/[0.08] text-warning border border-warning/15">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-                    {t('results.salary.sourceEstimate')}
-                  </span>
-                )}
+                <SourceBadge source={salary.targetRoleMarket.source} t={t} />
               </div>
               <p className="text-xs text-text-tertiary">{salary.targetRoleMarket.region}</p>
             </div>
@@ -157,7 +189,7 @@ export default function SalaryBenchmark({ salary }: SalaryBenchmarkProps) {
 
         {/* Sources footer */}
         <p className="text-[11px] text-text-tertiary text-center mt-2 px-1">
-          {t('results.salary.sources')}
+          {t('results.salary.source.footer')}
         </p>
       </div>
     </section>

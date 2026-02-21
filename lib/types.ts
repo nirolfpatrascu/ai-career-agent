@@ -109,7 +109,7 @@ export interface SalaryAnalysis {
   growthPotential: string;
   bestMonetaryMove: string;
   negotiationTips: string[];
-  dataSource?: 'market' | 'estimate';
+  dataSource?: SalaryDataSource;
 }
 
 export interface MarketSalary {
@@ -118,7 +118,7 @@ export interface MarketSalary {
   high: number;
   currency: string;
   region: string;
-  source?: 'market' | 'estimate';
+  source?: SalaryDataSource;
 }
 
 export interface JobMatch {
@@ -208,6 +208,10 @@ export interface APIError {
   message: string;
   status: number;
 }
+
+// --- Salary Data Source Types ---
+
+export type SalaryDataSource = 'government_bls' | 'government_ons' | 'government_eurostat' | 'survey_stackoverflow' | 'market' | 'estimate';
 
 // --- Utility Types ---
 

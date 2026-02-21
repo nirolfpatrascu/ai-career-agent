@@ -59,8 +59,8 @@ SALARY ANALYSIS RULES:
 5. Growth potential should be a realistic percentage range, not aspirational
 6. "Best monetary move" should be a specific, actionable recommendation — not generic career advice. For remote candidates, emphasize that remote roles for Western EU/US companies pay significantly above local market.
 7. Negotiation tips should be specific to this person's situation, referencing their actual experience
-8. IMPORTANT — If CURATED SALARY DATA is provided below for a role, you MUST use those exact figures for low/mid/high and set source to "market". Only estimate when no curated data is available — in that case set source to "estimate" and provide wider ranges.
-9. If you are not confident about salary for a specific role/region combination, explicitly mark the source as "estimate" and widen the range (e.g., +/- 20%)
+8. IMPORTANT — If SALARY REFERENCE DATA is provided below, you MUST use those exact figures for low/mid/high and set the source field to the value specified (e.g., "government_bls", "government_ons", "government_eurostat", "survey_stackoverflow", or "market"). Only estimate when no data is available — in that case set source to "estimate" and provide wider ranges.
+9. Valid source values: "government_bls", "government_ons", "government_eurostat", "survey_stackoverflow", "market", "estimate". Use the source specified in the reference data. If not confident, mark source as "estimate" and widen the range (e.g., +/- 20%)
 
 JSON SCHEMA:
 {
@@ -84,7 +84,7 @@ JSON SCHEMA:
       "high": number,
       "currency": "string",
       "region": "string — specific market description",
-      "source": "market | estimate"
+      "source": "government_bls | government_ons | government_eurostat | survey_stackoverflow | market | estimate"
     },
     "targetRoleMarket": {
       "low": number,
@@ -92,12 +92,12 @@ JSON SCHEMA:
       "high": number,
       "currency": "string",
       "region": "string",
-      "source": "market | estimate"
+      "source": "government_bls | government_ons | government_eurostat | survey_stackoverflow | market | estimate"
     },
     "growthPotential": "string — percentage range and timeframe",
     "bestMonetaryMove": "string — specific, actionable paragraph (3-5 sentences). Reference real companies and strategies.",
     "negotiationTips": ["string array — 3 specific tips referencing this person's actual experience and strengths"],
-    "dataSource": "market | estimate — 'market' if BOTH roles used curated data, otherwise 'estimate'"
+    "dataSource": "government_bls | government_ons | government_eurostat | survey_stackoverflow | market | estimate — use the most authoritative source used, or 'estimate' if both roles were estimated"
   }
 }`;
 
@@ -106,32 +106,32 @@ JSON SCHEMA:
     ? `- Primary Target Role: ${questionnaire.targetRole}\n- Alternative Target Roles: ${alternativeRoles.join(', ')}`
     : `- Target Role: ${questionnaire.targetRole}`;
 
-  // --- Curated salary lookup ---
+  // --- Salary data lookup (priority cascade: BLS → ONS → SO → Eurostat → curated) ---
   const isRemote = questionnaire.workPreference === 'remote' || questionnaire.workPreference === 'flexible';
-  const currentSalaryBand = lookupSalary(questionnaire.currentRole, questionnaire.country);
-  const targetSalaryBand = isRemote
+  const expLevel = questionnaire.yearsExperience <= 3 ? 'junior' as const : questionnaire.yearsExperience <= 8 ? 'mid' as const : questionnaire.yearsExperience <= 15 ? 'senior' as const : 'lead' as const;
+
+  const currentLookup = lookupSalary(questionnaire.currentRole, questionnaire.country, expLevel);
+  const targetLookup = isRemote
     ? lookupRemoteSalary(questionnaire.targetRole)
-    : lookupSalary(questionnaire.targetRole, questionnaire.country);
+    : lookupSalary(questionnaire.targetRole, questionnaire.country, expLevel);
 
   let curatedSalaryContext = '';
-  if (currentSalaryBand || targetSalaryBand) {
-    curatedSalaryContext += '\nCURATED SALARY DATA (use these exact figures, set source to "market"):\n';
-    if (currentSalaryBand) {
-      const level = questionnaire.yearsExperience <= 3 ? 'junior' : questionnaire.yearsExperience <= 8 ? 'mid' : questionnaire.yearsExperience <= 15 ? 'senior' : 'lead';
-      const band = currentSalaryBand[level];
-      curatedSalaryContext += `CURRENT ROLE (${questionnaire.currentRole} in ${questionnaire.country}): ${currentSalaryBand.currency} ${band.low}-${band.mid}-${band.high} (${level} level)\n`;
+  if (currentLookup || targetLookup) {
+    curatedSalaryContext += '\nSALARY REFERENCE DATA (use these figures for the corresponding role, set source accordingly):\n';
+    if (currentLookup) {
+      curatedSalaryContext += `CURRENT ROLE (${questionnaire.currentRole} in ${questionnaire.country}): ${currentLookup.currency} ${currentLookup.low}-${currentLookup.mid}-${currentLookup.high} (p25/median/p75, ${expLevel} level) — Source: ${currentLookup.sourceLabel}, set source to "${currentLookup.source}"\n`;
     }
-    if (targetSalaryBand) {
-      curatedSalaryContext += `TARGET ROLE (${questionnaire.targetRole}${isRemote ? ' Remote EU' : ` in ${questionnaire.country}`}): ${targetSalaryBand.currency} junior ${targetSalaryBand.junior.low}-${targetSalaryBand.junior.high} | mid ${targetSalaryBand.mid.low}-${targetSalaryBand.mid.high} | senior ${targetSalaryBand.senior.low}-${targetSalaryBand.senior.high} | lead ${targetSalaryBand.lead.low}-${targetSalaryBand.lead.high}\n`;
+    if (targetLookup) {
+      curatedSalaryContext += `TARGET ROLE (${questionnaire.targetRole}${isRemote ? ' Remote EU' : ` in ${questionnaire.country}`}): ${targetLookup.currency} ${targetLookup.low}-${targetLookup.mid}-${targetLookup.high} (p25/median/p75) — Source: ${targetLookup.sourceLabel}, set source to "${targetLookup.source}"\n`;
     }
-    if (!currentSalaryBand) {
-      curatedSalaryContext += `NOTE: No curated data for current role "${questionnaire.currentRole}" in ${questionnaire.country}. Estimate it and set source to "estimate".\n`;
+    if (!currentLookup) {
+      curatedSalaryContext += `NOTE: No data for current role "${questionnaire.currentRole}" in ${questionnaire.country}. Estimate it and set source to "estimate".\n`;
     }
-    if (!targetSalaryBand) {
-      curatedSalaryContext += `NOTE: No curated data for target role "${questionnaire.targetRole}". Estimate it and set source to "estimate".\n`;
+    if (!targetLookup) {
+      curatedSalaryContext += `NOTE: No data for target role "${questionnaire.targetRole}". Estimate it and set source to "estimate".\n`;
     }
   } else {
-    curatedSalaryContext = '\nNO CURATED SALARY DATA available for these roles/regions. Estimate both and set source to "estimate" and dataSource to "estimate". If not confident, provide wider ranges.\n';
+    curatedSalaryContext = '\nNO SALARY DATA available for these roles/regions. Estimate both and set source to "estimate" and dataSource to "estimate". If not confident, provide wider ranges.\n';
   }
 
   const userMessage = `CANDIDATE PROFILE SUMMARY:

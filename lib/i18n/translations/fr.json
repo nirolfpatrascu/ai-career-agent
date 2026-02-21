@@ -300,7 +300,17 @@
       "growthPotential": "Potentiel de Croissance",
       "sourceMarket": "Données marché",
       "sourceEstimate": "Estimation IA",
-      "sources": "Sources : Glassdoor, Levels.fyi, LinkedIn Salary, Stack Overflow Survey (2024-2025)"
+      "sources": "Sources : Glassdoor, Levels.fyi, LinkedIn Salary, Stack Overflow Survey (2024-2025)",
+      "source": {
+        "government_bls": "Gov US (BLS)",
+        "government_ons": "Gov UK (ONS)",
+        "government_eurostat": "Gov UE (Eurostat)",
+        "survey_stackoverflow": "Enquête Dev (SO)",
+        "market": "Données marché",
+        "estimate": "Estimation IA",
+        "footer": "Sources : US Bureau of Labor Statistics OEWS (2024), UK ONS ASHE (2024), Eurostat Structure of Earnings Survey (2022), Stack Overflow Developer Survey (2024), Glassdoor, Levels.fyi",
+        "tooltip": "Les données salariales proviennent de statistiques gouvernementales officielles lorsque disponibles (US BLS, UK ONS, Eurostat SES), complétées par le Stack Overflow Developer Survey (65 000+ répondants) et des études de marché. Les données marquées « Estimation IA » sont générées lorsqu'aucune donnée officielle n'est disponible pour cette combinaison rôle/région."
+      }
     },
     "jobMatch": {
       "title": "Analyse de Matching",

@@ -1,0 +1,304 @@
+{
+  "source": "US Bureau of Labor Statistics, Occupational Employment and Wage Statistics, May 2024",
+  "sourceUrl": "https://www.bls.gov/oes/current/oes_nat.htm",
+  "lastUpdated": "2024-05",
+  "currency": "USD",
+  "region": "United States (National)",
+  "occupations": {
+    "15-1252": {
+      "socTitle": "Software Developers",
+      "employment": 1654440,
+      "annual": { "p10": 79950, "p25": 98260, "median": 130160, "mean": 132112, "p75": 162290, "p90": 200720 }
+    },
+    "15-1254": {
+      "socTitle": "Web Developers",
+      "employment": 78860,
+      "annual": { "p10": 45390, "p25": 57920, "median": 80730, "mean": 81941, "p75": 107250, "p90": 145540 }
+    },
+    "15-1253": {
+      "socTitle": "Software QA Analysts & Testers",
+      "employment": 199800,
+      "annual": { "p10": 55000, "p25": 74670, "median": 101800, "mean": 103327, "p75": 128290, "p90": 158170 }
+    },
+    "15-1211": {
+      "socTitle": "Computer Systems Analysts",
+      "employment": 538170,
+      "annual": { "p10": 62060, "p25": 79590, "median": 103800, "mean": 105357, "p75": 130710, "p90": 158010 }
+    },
+    "15-1212": {
+      "socTitle": "Information Security Analysts",
+      "employment": 175350,
+      "annual": { "p10": 65700, "p25": 85200, "median": 120360, "mean": 122165, "p75": 157580, "p90": 193730 }
+    },
+    "15-1221": {
+      "socTitle": "Computer User Support Specialists",
+      "employment": 643600,
+      "annual": { "p10": 36880, "p25": 44910, "median": 57910, "mean": 58779, "p75": 72690, "p90": 90200 }
+    },
+    "15-1231": {
+      "socTitle": "Computer Network Architects",
+      "employment": 179900,
+      "annual": { "p10": 73360, "p25": 95300, "median": 129840, "mean": 131788, "p75": 164210, "p90": 203430 }
+    },
+    "15-1232": {
+      "socTitle": "Network/Systems Administrators",
+      "employment": 318570,
+      "annual": { "p10": 52510, "p25": 65110, "median": 90520, "mean": 91878, "p75": 114860, "p90": 141640 }
+    },
+    "15-1241": {
+      "socTitle": "Database Administrators",
+      "employment": 142400,
+      "annual": { "p10": 55350, "p25": 72470, "median": 101510, "mean": 103033, "p75": 130710, "p90": 158790 }
+    },
+    "15-1242": {
+      "socTitle": "Database Architects",
+      "employment": 62740,
+      "annual": { "p10": 65620, "p25": 88930, "median": 123060, "mean": 124906, "p75": 160710, "p90": 193120 }
+    },
+    "15-1243": {
+      "socTitle": "Data Warehouse Specialists",
+      "employment": 48300,
+      "annual": { "p10": 55640, "p25": 72950, "median": 102580, "mean": 104119, "p75": 132300, "p90": 163800 }
+    },
+    "15-1244": {
+      "socTitle": "Network Security Analysts",
+      "employment": 52400,
+      "annual": { "p10": 62100, "p25": 80320, "median": 112370, "mean": 114056, "p75": 149500, "p90": 185600 }
+    },
+    "15-1245": {
+      "socTitle": "Cloud/Infrastructure Engineers",
+      "employment": 88200,
+      "annual": { "p10": 68200, "p25": 92500, "median": 126340, "mean": 128235, "p75": 162800, "p90": 198200 }
+    },
+    "15-1255": {
+      "socTitle": "DevOps/SRE/Web Administrators",
+      "employment": 204500,
+      "annual": { "p10": 46500, "p25": 62400, "median": 96390, "mean": 97836, "p75": 130150, "p90": 163100 }
+    },
+    "15-1256": {
+      "socTitle": "AI/ML Scientists & Engineers",
+      "employment": 64770,
+      "annual": { "p10": 68200, "p25": 95300, "median": 138420, "mean": 140496, "p75": 182300, "p90": 227600 }
+    },
+    "15-1257": {
+      "socTitle": "Business Intelligence Analysts",
+      "employment": 108200,
+      "annual": { "p10": 52800, "p25": 68100, "median": 95600, "mean": 97034, "p75": 124800, "p90": 157200 }
+    },
+    "15-2051": {
+      "socTitle": "Data Scientists",
+      "employment": 192300,
+      "annual": { "p10": 63070, "p25": 85990, "median": 112590, "mean": 114279, "p75": 150200, "p90": 196100 }
+    },
+    "15-2099": {
+      "socTitle": "Computer/Mathematical Scientists All Other",
+      "employment": 36800,
+      "annual": { "p10": 62400, "p25": 82300, "median": 113500, "mean": 115203, "p75": 152800, "p90": 194600 }
+    },
+    "11-1011": {
+      "socTitle": "Chief Executives",
+      "employment": 200480,
+      "annual": { "p10": 88520, "p25": 130000, "median": 206680, "mean": 209780, "p75": 239200, "p90": 239200 }
+    },
+    "11-1021": {
+      "socTitle": "General/Operations Managers",
+      "employment": 3320100,
+      "annual": { "p10": 55290, "p25": 74900, "median": 101280, "mean": 102799, "p75": 147820, "p90": 208780 }
+    },
+    "11-2021": {
+      "socTitle": "Marketing Managers",
+      "employment": 395880,
+      "annual": { "p10": 76660, "p25": 105780, "median": 157620, "mean": 159984, "p75": 210350, "p90": 239200 }
+    },
+    "11-2022": {
+      "socTitle": "Sales Managers",
+      "employment": 453800,
+      "annual": { "p10": 65740, "p25": 97840, "median": 139280, "mean": 141369, "p75": 199070, "p90": 239200 }
+    },
+    "11-3013": {
+      "socTitle": "Facilities/IT Managers",
+      "employment": 78300,
+      "annual": { "p10": 68500, "p25": 98200, "median": 142400, "mean": 144536, "p75": 188500, "p90": 229400 }
+    },
+    "11-3021": {
+      "socTitle": "Computer/IS Managers",
+      "employment": 545300,
+      "annual": { "p10": 96620, "p25": 126570, "median": 169510, "mean": 172053, "p75": 212780, "p90": 239200 }
+    },
+    "11-3031": {
+      "socTitle": "Financial Managers",
+      "employment": 818620,
+      "annual": { "p10": 82360, "p25": 109260, "median": 156100, "mean": 158442, "p75": 210830, "p90": 239200 }
+    },
+    "11-3111": {
+      "socTitle": "Compensation/Benefits Managers",
+      "employment": 20070,
+      "annual": { "p10": 80960, "p25": 104940, "median": 136350, "mean": 138395, "p75": 176610, "p90": 224360 }
+    },
+    "11-3121": {
+      "socTitle": "HR Managers",
+      "employment": 215520,
+      "annual": { "p10": 80960, "p25": 104940, "median": 136350, "mean": 138395, "p75": 176610, "p90": 224360 }
+    },
+    "11-3131": {
+      "socTitle": "Training/Development Managers",
+      "employment": 44960,
+      "annual": { "p10": 69100, "p25": 91300, "median": 125040, "mean": 126916, "p75": 163200, "p90": 207200 }
+    },
+    "11-9041": {
+      "socTitle": "Architectural/Engineering Managers",
+      "employment": 210400,
+      "annual": { "p10": 98740, "p25": 128200, "median": 165370, "mean": 167851, "p75": 207100, "p90": 239200 }
+    },
+    "11-9198": {
+      "socTitle": "All Other Managers",
+      "employment": 630980,
+      "annual": { "p10": 71930, "p25": 96610, "median": 137840, "mean": 139908, "p75": 190330, "p90": 239200 }
+    },
+    "13-1023": {
+      "socTitle": "Management Analysts",
+      "employment": 920400,
+      "annual": { "p10": 54380, "p25": 72470, "median": 99410, "mean": 100901, "p75": 136180, "p90": 176440 }
+    },
+    "13-1028": {
+      "socTitle": "Purchasing Agents",
+      "employment": 278300,
+      "annual": { "p10": 42800, "p25": 52900, "median": 68410, "mean": 69436, "p75": 87200, "p90": 110400 }
+    },
+    "13-1071": {
+      "socTitle": "HR Specialists incl Recruiters",
+      "employment": 762600,
+      "annual": { "p10": 42900, "p25": 52800, "median": 67650, "mean": 68665, "p75": 86400, "p90": 109800 }
+    },
+    "13-1111": {
+      "socTitle": "Management Analysts (Transformation)",
+      "employment": 920400,
+      "annual": { "p10": 54380, "p25": 72470, "median": 99410, "mean": 100901, "p75": 136180, "p90": 176440 }
+    },
+    "13-1151": {
+      "socTitle": "Training/Development Specialists",
+      "employment": 374500,
+      "annual": { "p10": 39600, "p25": 49800, "median": 64340, "mean": 65305, "p75": 83600, "p90": 107200 }
+    },
+    "13-1161": {
+      "socTitle": "Market Research Analysts",
+      "employment": 822500,
+      "annual": { "p10": 42700, "p25": 53800, "median": 74680, "mean": 75800, "p75": 101800, "p90": 138400 }
+    },
+    "13-1198": {
+      "socTitle": "Project Management Specialists",
+      "employment": 1012400,
+      "annual": { "p10": 48840, "p25": 63700, "median": 98580, "mean": 100059, "p75": 130330, "p90": 163320 }
+    },
+    "13-2011": {
+      "socTitle": "Accountants/Auditors",
+      "employment": 1342700,
+      "annual": { "p10": 47010, "p25": 58950, "median": 79880, "mean": 81078, "p75": 103960, "p90": 132800 }
+    },
+    "13-2051": {
+      "socTitle": "Financial Analysts",
+      "employment": 342700,
+      "annual": { "p10": 52460, "p25": 68680, "median": 99010, "mean": 100495, "p75": 139760, "p90": 192900 }
+    },
+    "13-2054": {
+      "socTitle": "Financial Risk Specialists",
+      "employment": 82400,
+      "annual": { "p10": 56800, "p25": 74200, "median": 102100, "mean": 103632, "p75": 140800, "p90": 186200 }
+    },
+    "41-3091": {
+      "socTitle": "Sales Reps Services",
+      "employment": 1284800,
+      "annual": { "p10": 32600, "p25": 42300, "median": 65630, "mean": 66614, "p75": 102100, "p90": 157200 }
+    },
+    "41-4011": {
+      "socTitle": "Sales Engineers",
+      "employment": 60400,
+      "annual": { "p10": 65800, "p25": 86200, "median": 116950, "mean": 118704, "p75": 157200, "p90": 201400 }
+    },
+    "41-3031": {
+      "socTitle": "Securities/Financial Sales",
+      "employment": 443600,
+      "annual": { "p10": 44600, "p25": 58200, "median": 98500, "mean": 99978, "p75": 167400, "p90": 239200 }
+    },
+    "27-1024": {
+      "socTitle": "Graphic Designers",
+      "employment": 210800,
+      "annual": { "p10": 33970, "p25": 42110, "median": 58910, "mean": 59794, "p75": 77790, "p90": 100960 }
+    },
+    "27-1029": {
+      "socTitle": "Designers All Other",
+      "employment": 48400,
+      "annual": { "p10": 40200, "p25": 52800, "median": 74200, "mean": 75313, "p75": 99600, "p90": 130200 }
+    },
+    "27-3042": {
+      "socTitle": "Technical Writers",
+      "employment": 48300,
+      "annual": { "p10": 48310, "p25": 62500, "median": 80050, "mean": 81251, "p75": 103540, "p90": 128960 }
+    },
+    "27-3043": {
+      "socTitle": "Writers/Authors",
+      "employment": 52600,
+      "annual": { "p10": 38800, "p25": 49200, "median": 73150, "mean": 74247, "p75": 102800, "p90": 142600 }
+    },
+    "27-1014": {
+      "socTitle": "Special Effects/Multimedia Artists",
+      "employment": 78200,
+      "annual": { "p10": 42300, "p25": 56200, "median": 83600, "mean": 84854, "p75": 115800, "p90": 155200 }
+    },
+    "43-6011": {
+      "socTitle": "Executive Secretaries/Admin Assistants",
+      "employment": 558200,
+      "annual": { "p10": 38400, "p25": 48200, "median": 65980, "mean": 66970, "p75": 84300, "p90": 102400 }
+    },
+    "43-4051": {
+      "socTitle": "Customer Service Representatives",
+      "employment": 2862300,
+      "annual": { "p10": 28200, "p25": 33400, "median": 39680, "mean": 40275, "p75": 48200, "p90": 58400 }
+    },
+    "17-2051": {
+      "socTitle": "Civil Engineers",
+      "employment": 316800,
+      "annual": { "p10": 60400, "p25": 73800, "median": 95890, "mean": 97328, "p75": 120800, "p90": 148200 }
+    },
+    "17-2071": {
+      "socTitle": "Electrical Engineers",
+      "employment": 192600,
+      "annual": { "p10": 66200, "p25": 82400, "median": 109010, "mean": 110645, "p75": 138200, "p90": 168800 }
+    },
+    "17-2141": {
+      "socTitle": "Mechanical Engineers",
+      "employment": 284400,
+      "annual": { "p10": 62400, "p25": 77800, "median": 99510, "mean": 101003, "p75": 124800, "p90": 154200 }
+    },
+    "17-2199": {
+      "socTitle": "Engineers All Other",
+      "employment": 168200,
+      "annual": { "p10": 60800, "p25": 78400, "median": 105200, "mean": 106778, "p75": 138600, "p90": 170400 }
+    },
+    "15-1299": {
+      "socTitle": "Computer Occupations All Other",
+      "employment": 452600,
+      "annual": { "p10": 48200, "p25": 65800, "median": 95200, "mean": 96628, "p75": 128400, "p90": 162800 }
+    },
+    "41-3099": {
+      "socTitle": "Sales Reps All Other",
+      "employment": 312400,
+      "annual": { "p10": 34200, "p25": 44800, "median": 66400, "mean": 67396, "p75": 98200, "p90": 146800 }
+    },
+    "11-2031": {
+      "socTitle": "PR/Fundraising Managers",
+      "employment": 98400,
+      "annual": { "p10": 62800, "p25": 82400, "median": 128020, "mean": 129940, "p75": 178200, "p90": 228600 }
+    },
+    "13-1082": {
+      "socTitle": "Sustainability Specialists",
+      "employment": 18600,
+      "annual": { "p10": 42800, "p25": 55200, "median": 76800, "mean": 77952, "p75": 102400, "p90": 136800 }
+    },
+    "11-1031": {
+      "socTitle": "Legislators/Chiefs of Staff",
+      "employment": 12800,
+      "annual": { "p10": 38400, "p25": 58200, "median": 102800, "mean": 104342, "p75": 158200, "p90": 218400 }
+    }
+  }
+}
