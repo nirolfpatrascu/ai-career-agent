@@ -64,7 +64,7 @@ export function ATSScorePanel({ atsScore }: ATSScorePanelProps) {
 
   return (
     <div className="animate-panelEnter space-y-6">
-      <SectionIntro section="atsScore" />
+      <SectionIntro messageKey="ats.sectionIntro" />
 
       {/* Score Overview */}
       <div className={`rounded-2xl border p-6 ${scoreBgColor}`}>
