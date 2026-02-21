@@ -32,6 +32,12 @@ const CV_SUGGESTIONS_TAB: Tab = {
   icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>,
 };
 
+const ATS_SCORE_TAB: Tab = {
+  id: 'ats-score',
+  labelKey: 'ats.tab',
+  icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
+};
+
 const COACH_TAB: Tab = {
   id: 'ai-coach',
   labelKey: 'chat.title',
@@ -40,19 +46,21 @@ const COACH_TAB: Tab = {
 
 interface ChapterNavProps {
   hasJobMatch?: boolean;
+  hasAtsScore?: boolean;
   activeTab: string;
   onTabChange: (tabId: string) => void;
 }
 
-export default function ChapterNav({ hasJobMatch, activeTab, onTabChange }: ChapterNavProps) {
+export default function ChapterNav({ hasJobMatch, hasAtsScore, activeTab, onTabChange }: ChapterNavProps) {
   const { t } = useTranslation();
   const activeRefMobile = useRef<HTMLButtonElement>(null);
 
   const tabs: Tab[] = useMemo(() => [
     ...TABS,
     ...(hasJobMatch ? [JOB_MATCH_TAB, CV_SUGGESTIONS_TAB] : []),
+    ...(hasAtsScore ? [ATS_SCORE_TAB] : []),
     COACH_TAB,
-  ], [hasJobMatch]);
+  ], [hasJobMatch, hasAtsScore]);
 
   const activeIndex = tabs.findIndex((tab) => tab.id === activeTab);
 

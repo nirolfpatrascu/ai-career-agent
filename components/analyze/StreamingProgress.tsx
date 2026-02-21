@@ -12,6 +12,7 @@ const PIPELINE_STEPS = [
   { key: 'extraction', doneAt: 'gap_analysis' },
   { key: 'gap_analysis', doneAt: 'gap_done' },
   { key: 'career_plan', doneAt: 'plan_done' },
+  { key: 'ats', doneAt: 'translating' },
   { key: 'translating', doneAt: 'complete' },
 ];
 
@@ -20,7 +21,8 @@ const STEP_ICONS = [
   <svg key="1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
   <svg key="2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>,
   <svg key="3" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
-  <svg key="4" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
+  <svg key="4" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
+  <svg key="5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
 ];
 
 function getStepStatus(
@@ -42,12 +44,14 @@ function getStepStatus(
 export default function StreamingProgress({ currentStep }: StreamingProgressProps) {
   const { t } = useTranslation();
 
-  const isTranslating = ['translating', 'complete'].includes(currentStep.step) &&
-    PIPELINE_STEPS.some((s) => s.key === 'translating');
+  const hasAtsStep = ['ats', 'translating', 'complete'].includes(currentStep.step);
+  const isTranslating = ['translating', 'complete'].includes(currentStep.step);
 
-  const visibleSteps = isTranslating
-    ? PIPELINE_STEPS
-    : PIPELINE_STEPS.filter((s) => s.key !== 'translating');
+  const visibleSteps = PIPELINE_STEPS.filter((s) => {
+    if (s.key === 'translating' && !isTranslating) return false;
+    if (s.key === 'ats' && !hasAtsStep) return false;
+    return true;
+  });
 
   const completedCount = visibleSteps.filter((step, i) =>
     getStepStatus(step.key, currentStep.step, i, visibleSteps) === 'done'

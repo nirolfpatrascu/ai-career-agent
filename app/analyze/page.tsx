@@ -19,6 +19,7 @@ import PDFReport from '@/components/shared/PDFReport';
 import ChatPanel from '@/components/results/ChatPanel';
 import CVGenerator from '@/components/results/CVGenerator';
 import CVSuggestionsPanel from '@/components/results/CVSuggestionsPanel';
+import { ATSScorePanel } from '@/components/results/ATSScorePanel';
 import LinkedInPlan from '@/components/results/LinkedInPlan';
 import ChapterNav, { DEFAULT_TAB } from '@/components/results/ChapterNav';
 import SectionIntro from '@/components/results/SectionIntro';
@@ -240,6 +241,12 @@ export default function AnalyzePage() {
               <CVSuggestionsPanel suggestions={result.jobMatch.cvSuggestions} />
             </div>
           ) : null;
+        case 'ats-score':
+          return result.atsScore ? (
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-ats-score" aria-labelledby="tab-ats-score">
+              <ATSScorePanel atsScore={result.atsScore} />
+            </div>
+          ) : null;
         case 'cv-generator':
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-cv-generator" aria-labelledby="tab-cv-generator">
@@ -263,6 +270,7 @@ export default function AnalyzePage() {
         <Header />
         <ChapterNav
           hasJobMatch={!!result.jobMatch}
+          hasAtsScore={!!result.atsScore}
           activeTab={activeTab}
           onTabChange={setActiveTab}
         />

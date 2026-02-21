@@ -238,6 +238,7 @@
       "extraction": "Extragem competențele și experiența",
       "gap_analysis": "Analizăm lacunele și potrivim rolurile",
       "career_plan": "Construim planul de carieră și benchmark-urile salariale",
+      "ats": "Evaluăm compatibilitatea ATS",
       "translating": "Traducem raportul tău"
     }
   },
@@ -478,7 +479,8 @@
     "jobMatch": "Iată cum se compară profilul tău cu această oportunitate specifică. Folosește sugestiile de mai jos pentru a-ți personaliza aplicația.",
     "linkedin": "Profilul tău LinkedIn este adesea prima impresie. Aceste optimizări pot crește semnificativ vizibilitatea ta pentru recruiteri.",
     "cvGenerator": "CV-ul tău este prima impresie. Acest cadru generat de AI folosește analiza ta pentru a crea conținut prietenos ATS optimizat pentru rolul tău țintă. Copiază ce funcționează, adaptează restul.",
-    "cvSuggestions": "Acestea sunt modificări targetate pentru a-ți alinia CV-ul cu postul de job pe care l-ai furnizat. Fiecare sugestie arată exact ce să schimbi și de ce contează."
+    "cvSuggestions": "Acestea sunt modificări targetate pentru a-ți alinia CV-ul cu postul de job pe care l-ai furnizat. Fiecare sugestie arată exact ce să schimbi și de ce contează.",
+    "atsScore": "Hai să ne asigurăm că CV-ul tău trece de roboți. Iată cum citesc sistemele ATS aplicația ta și ce poți optimiza."
   },
   "cv": {
     "tabTitle": "Generator CV",

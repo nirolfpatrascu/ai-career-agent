@@ -238,6 +238,7 @@
       "extraction": "Extrayendo competencias y experiencia",
       "gap_analysis": "Analizando brechas y matching de roles",
       "career_plan": "Construyendo plan de carrera y benchmarks salariales",
+      "ats": "Evaluando compatibilidad ATS",
       "translating": "Traduciendo tu informe"
     }
   },
@@ -478,7 +479,8 @@
     "jobMatch": "Así se compara tu perfil con esta oportunidad específica. Usa las sugerencias para adaptar tu solicitud.",
     "linkedin": "Tu perfil de LinkedIn es a menudo la primera impresión. Estas optimizaciones pueden aumentar significativamente tu visibilidad.",
     "cvGenerator": "Tu CV es tu primera impresión. Este marco generado por IA usa tu análisis para crear contenido ATS-friendly optimizado para tu rol objetivo.",
-    "cvSuggestions": "Estos son cambios específicos para alinear tu CV con la oferta de trabajo. Cada sugerencia muestra exactamente qué cambiar y por qué importa."
+    "cvSuggestions": "Estos son cambios específicos para alinear tu CV con la oferta de trabajo. Cada sugerencia muestra exactamente qué cambiar y por qué importa.",
+    "atsScore": "Asegurémonos de que tu CV pase los robots. Así es como los sistemas ATS leerán tu solicitud y qué puedes optimizar."
   },
   "cv": {
     "tabTitle": "Generador CV",

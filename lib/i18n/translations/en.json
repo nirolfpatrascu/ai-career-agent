@@ -238,6 +238,7 @@
       "extraction": "Extracting skills & experience",
       "gap_analysis": "Analyzing gaps & matching roles",
       "career_plan": "Building career roadmap & salary benchmarks",
+      "ats": "Scoring ATS compatibility",
       "translating": "Translating your report"
     }
   },
@@ -478,7 +479,8 @@
     "jobMatch": "Here's how your profile stacks up against this specific opportunity. Use the suggestions below to tailor your application.",
     "linkedin": "Your LinkedIn profile is often the first impression. These optimizations can significantly increase your visibility to recruiters.",
     "cvGenerator": "Your CV is your first impression. This AI-generated framework uses your analysis to create ATS-friendly content optimized for your target role. Copy what works, adapt the rest.",
-    "cvSuggestions": "These are targeted changes to align your CV with the specific job posting you provided. Each suggestion shows exactly what to change and why it matters for this role."
+    "cvSuggestions": "These are targeted changes to align your CV with the specific job posting you provided. Each suggestion shows exactly what to change and why it matters for this role.",
+    "atsScore": "Let's make sure your CV gets past the robots. Here's how ATS systems will read your application and what you can optimize."
   },
   "cv": {
     "tabTitle": "CV Builder",

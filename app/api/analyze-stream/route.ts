@@ -15,11 +15,20 @@ import {
 } from '@/lib/prompts';
 import { buildTranslationPrompt } from '@/lib/prompts/translate';
 import { buildKnowledgeContext } from '@/lib/knowledge';
+import {
+  buildATSKeywordExtractionPrompt,
+  buildATSMatchingPrompt,
+  computeATSScore,
+} from '@/lib/prompts/ats-scoring';
+import { analyzeATSFormat } from '@/lib/ats-format-check';
+import { lookupCompanyATS, getATSSystemTips } from '@/lib/knowledge/company-ats';
 import type {
   CareerQuestionnaire,
   ExtractedProfile,
   AnalysisResult,
   JobMatch,
+  ATSScoreResult,
+  CompanyATSInfo,
 } from '@/lib/types';
 import type { GapAnalysisResult } from '@/lib/prompts/gap-analysis';
 import type { CareerPlanResult } from '@/lib/prompts/career-plan';
@@ -263,6 +272,105 @@ export async function POST(request: NextRequest) {
           },
         });
 
+        // --- Step 5: ATS Scoring (if job posting provided) ---
+        let atsScoreResult: ATSScoreResult | undefined;
+        if (hasJobPosting) {
+          send({ step: 'ats', progress: 82, message: 'Scoring ATS compatibility...' });
+
+          try {
+            // Extract keywords from job posting
+            const extractionPrompt = buildATSKeywordExtractionPrompt(questionnaire.jobPosting!);
+
+            interface ExtractionResult {
+              keywords: Array<{ keyword: string; category: string; importance: string; variants: string[] }>;
+              roleLevel: string;
+              domain: string;
+            }
+
+            const extraction = await callClaude<ExtractionResult>({
+              system: 'You are an expert ATS keyword extraction analyst. Respond with valid JSON only.',
+              userMessage: extractionPrompt,
+              maxTokens: 4000,
+              temperature: 0.1,
+              fallback: { keywords: [], roleLevel: 'mid', domain: 'General' },
+            });
+
+            if (extraction.keywords.length > 0) {
+              // Match keywords against CV
+              const matchingPrompt = buildATSMatchingPrompt(cvText, extraction.keywords);
+
+              interface MatchingResult {
+                matches: Array<{ keyword: string; category: string; importance: string; status: string; matchedAs?: string; cvSection?: string }>;
+                recommendations: Array<{ action: string; section: string; priority: string; keywords: string[]; example?: string }>;
+              }
+
+              const matching = await callClaude<MatchingResult>({
+                system: 'You are an expert ATS keyword matching engine. Respond with valid JSON only.',
+                userMessage: matchingPrompt,
+                maxTokens: 6000,
+                temperature: 0.1,
+                fallback: { matches: [], recommendations: [] },
+              });
+
+              // Compute scores
+              const { keywordScore, keywords } = computeATSScore(matching.matches);
+
+              // Format analysis
+              const formatAnalysis = analyzeATSFormat(
+                cvText,
+                { numpages: parsedPDF.pageCount },
+                buffer.length
+              );
+
+              // Company ATS lookup
+              let companyATS: CompanyATSInfo | undefined;
+              const companyPatterns = [
+                /(?:about|join)\s+([A-Z][A-Za-z0-9\s&.]+?)(?:\s+is|\s+—|\s+-|\s*\n)/i,
+                /(?:at|@)\s+([A-Z][A-Za-z0-9\s&.]+?)(?:\s+we|\s*,|\s*\n)/i,
+                /^([A-Z][A-Za-z0-9\s&.]+?)\s+(?:is hiring|is looking|seeks)/im,
+                /company:\s*([A-Za-z0-9\s&.]+)/i,
+              ];
+              for (const pattern of companyPatterns) {
+                const match = questionnaire.jobPosting!.match(pattern);
+                if (match?.[1] && match[1].trim().length > 1 && match[1].trim().length < 50) {
+                  const atsEntry = lookupCompanyATS(match[1].trim());
+                  if (atsEntry) {
+                    companyATS = {
+                      company: atsEntry.company,
+                      atsSystem: atsEntry.atsSystem,
+                      tips: [...atsEntry.tips, ...getATSSystemTips(atsEntry.atsSystem)],
+                    };
+                    break;
+                  }
+                }
+              }
+
+              // Blend scores (80% keyword, 20% format)
+              const overallScore = Math.round(keywordScore * 0.8 + formatAnalysis.formatScore * 0.2);
+
+              atsScoreResult = {
+                overallScore,
+                keywordScore,
+                formatScore: formatAnalysis.formatScore,
+                keywords,
+                formatIssues: formatAnalysis.issues,
+                recommendations: (matching.recommendations || []).map((r) => ({
+                  action: r.action,
+                  section: r.section,
+                  priority: r.priority as 'critical' | 'high' | 'medium',
+                  keywords: r.keywords,
+                  example: r.example,
+                })),
+                companyATS,
+              };
+
+              console.log(`[stream] ATS score: ${overallScore}% (keyword: ${keywordScore}%, format: ${formatAnalysis.formatScore}%)`);
+            }
+          } catch (e) {
+            console.log('[stream] ATS scoring failed (non-critical):', e);
+          }
+        }
+
         // --- Assemble full result ---
         let result: AnalysisResult = {
           metadata: {
@@ -278,6 +386,7 @@ export async function POST(request: NextRequest) {
           actionPlan: careerPlan.actionPlan,
           salaryAnalysis: salaryAnalysis,
           ...(jobMatchResult && { jobMatch: jobMatchResult }),
+          ...(atsScoreResult && { atsScore: atsScoreResult }),
         };
 
         // --- Post-processing Translation ---
