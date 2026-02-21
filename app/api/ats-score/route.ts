@@ -47,32 +47,29 @@ export async function POST(request: NextRequest) {
 
     // --- Step 1: Extract keywords from job posting ---
     const extractionPrompt = buildATSKeywordExtractionPrompt(jobPosting);
-    const extractionResponse = await callClaude(extractionPrompt, {
+
+    interface ExtractionResult {
+      keywords: Array<{
+        keyword: string;
+        category: string;
+        importance: string;
+        variants: string[];
+      }>;
+      roleLevel: string;
+      domain: string;
+    }
+
+    const extraction = await callClaude<ExtractionResult>({
+      system: 'You are an expert ATS (Applicant Tracking System) keyword extraction analyst. Respond with valid JSON only.',
+      userMessage: extractionPrompt,
       maxTokens: 4000,
-      temperature: 0.1, // Low temperature for consistent extraction
+      temperature: 0.1,
+      fallback: { keywords: [], roleLevel: 'mid', domain: 'General' },
     });
 
-    let jobKeywords: Array<{
-      keyword: string;
-      category: string;
-      importance: string;
-      variants: string[];
-    }>;
-    let roleLevel = 'mid';
-    let domain = 'General';
-
-    try {
-      const parsed = JSON.parse(extractionResponse);
-      jobKeywords = parsed.keywords || [];
-      roleLevel = parsed.roleLevel || 'mid';
-      domain = parsed.domain || 'General';
-    } catch {
-      console.error('Failed to parse keyword extraction response:', extractionResponse.substring(0, 200));
-      return NextResponse.json(
-        { error: 'Failed to analyze job posting. Please try again.' },
-        { status: 500 }
-      );
-    }
+    const jobKeywords = extraction.keywords || [];
+    const roleLevel = extraction.roleLevel || 'mid';
+    const domain = extraction.domain || 'General';
 
     if (jobKeywords.length === 0) {
       return NextResponse.json(
@@ -83,38 +80,35 @@ export async function POST(request: NextRequest) {
 
     // --- Step 2: Match keywords against CV ---
     const matchingPrompt = buildATSMatchingPrompt(cvText, jobKeywords);
-    const matchingResponse = await callClaude(matchingPrompt, {
+
+    interface MatchingResult {
+      matches: Array<{
+        keyword: string;
+        category: string;
+        importance: string;
+        status: string;
+        matchedAs?: string;
+        cvSection?: string;
+      }>;
+      recommendations: Array<{
+        action: string;
+        section: string;
+        priority: string;
+        keywords: string[];
+        example?: string;
+      }>;
+    }
+
+    const matching = await callClaude<MatchingResult>({
+      system: 'You are an expert ATS (Applicant Tracking System) keyword matching engine. Respond with valid JSON only.',
+      userMessage: matchingPrompt,
       maxTokens: 6000,
       temperature: 0.1,
+      fallback: { matches: [], recommendations: [] },
     });
 
-    let matches: Array<{
-      keyword: string;
-      category: string;
-      importance: string;
-      status: string;
-      matchedAs?: string;
-      cvSection?: string;
-    }>;
-    let recommendations: Array<{
-      action: string;
-      section: string;
-      priority: string;
-      keywords: string[];
-      example?: string;
-    }>;
-
-    try {
-      const parsed = JSON.parse(matchingResponse);
-      matches = parsed.matches || [];
-      recommendations = parsed.recommendations || [];
-    } catch {
-      console.error('Failed to parse matching response:', matchingResponse.substring(0, 200));
-      return NextResponse.json(
-        { error: 'Failed to match keywords. Please try again.' },
-        { status: 500 }
-      );
-    }
+    const matches = matching.matches || [];
+    const recommendations = matching.recommendations || [];
 
     // --- Step 3: Compute scores ---
     const { keywordScore, keywords } = computeATSScore(matches);
