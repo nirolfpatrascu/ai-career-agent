@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import { useTranslation } from '@/lib/i18n';
-import { SectionIntro } from './SectionIntro';
+import SectionIntro from './SectionIntro';
 import type { ATSScoreResult } from '@/lib/types';
 import {
   Shield,
