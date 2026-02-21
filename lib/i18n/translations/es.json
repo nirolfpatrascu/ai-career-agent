@@ -21,6 +21,9 @@
     "remove": "Eliminar",
     "close": "Cerrar"
   },
+  "nav": {
+    "cvOptimizer": "Optimizador de CV"
+  },
   "hero": {
     "badge": "Asesor de Carrera con IA",
     "headline1": "Sube tu CV.",
@@ -493,7 +496,8 @@
     "linkedin": "Tu perfil de LinkedIn es a menudo la primera impresión. Estas optimizaciones pueden aumentar significativamente tu visibilidad.",
     "cvGenerator": "Tu CV es tu primera impresión. Este marco generado por IA usa tu análisis para crear contenido ATS-friendly optimizado para tu rol objetivo.",
     "cvSuggestions": "Estos son cambios específicos para alinear tu CV con la oferta de trabajo. Cada sugerencia muestra exactamente qué cambiar y por qué importa.",
-    "atsScore": "Asegurémonos de que tu CV pase los robots. Así es como los sistemas ATS leerán tu solicitud y qué puedes optimizar."
+    "atsScore": "Asegurémonos de que tu CV pase los robots. Así es como los sistemas ATS leerán tu solicitud y qué puedes optimizar.",
+    "cvOptimizer": "Tu CV analizado frente a la oferta de empleo — puntuación de compatibilidad ATS, palabras clave faltantes y sugerencias concretas para mejorar tus posibilidades."
   },
   "cv": {
     "tabTitle": "Generador CV",
@@ -576,5 +580,72 @@
     "companyAts": "{{company}} — Sistema ATS detectado",
     "recommendations": "Cómo mejorar tu puntuación",
     "example": "Ejemplo"
+  },
+  "cvOptimizer": {
+    "sectionIntro": "Tu CV analizado frente a la oferta de empleo — puntuación de compatibilidad ATS, palabras clave faltantes y sugerencias concretas para mejorar tus posibilidades.",
+    "whatIsAts": {
+      "title": "¿Qué es un ATS?",
+      "body": "Un Applicant Tracking System (ATS) es un software que las empresas usan para filtrar currículos antes de que un humano los vea. Más del 90% de las grandes empresas usan un ATS como Workday, Greenhouse o Lever. Tu currículo es escaneado por palabras clave, formato y estructura — si no pasa, es rechazado automáticamente.",
+      "collapse": "Ocultar explicación",
+      "expand": "¿Qué es ATS?"
+    },
+    "score": {
+      "title": "Puntuación de Compatibilidad ATS",
+      "keyword": "Coincidencia de Palabras Clave",
+      "format": "Puntuación de Formato",
+      "excellent": "Excelente — tu CV debería pasar la mayoría de los filtros ATS",
+      "good": "Bueno — mejoras menores recomendadas",
+      "needsWork": "Necesita mejoras — brechas significativas encontradas",
+      "poor": "Deficiente — alto riesgo de rechazo automático"
+    },
+    "keywords": {
+      "title": "Análisis de Palabras Clave",
+      "matched": "Encontradas",
+      "semantic": "Coincidencia Parcial",
+      "missing": "Faltantes",
+      "required": "Palabras clave obligatorias",
+      "preferred": "Palabras clave preferidas"
+    },
+    "format": {
+      "title": "Problemas de Formato"
+    },
+    "company": {
+      "title": "Sistema ATS de la Empresa",
+      "detected": "Esta empresa probablemente usa",
+      "tips": "Consejos de formato"
+    },
+    "suggestions": {
+      "title": "Cambios Recomendados en el CV",
+      "current": "Actual",
+      "suggested": "Sugerido",
+      "reason": "Por qué",
+      "section": "Sección",
+      "empty": "Envía una oferta de empleo para obtener sugerencias personalizadas para tu CV"
+    },
+    "editor": {
+      "title": "Tu CV Optimizado",
+      "description": "Revisa y edita tu CV a continuación, luego descárgalo como PDF.",
+      "applyAll": "Aplicar Todas las Sugerencias",
+      "appliedCount": "{count} sugerencias aplicadas",
+      "downloadPdf": "Descargar PDF",
+      "generating": "Generando PDF...",
+      "section": {
+        "summary": "Resumen Profesional",
+        "skills": "Habilidades",
+        "experience": "Experiencia",
+        "education": "Educación",
+        "certifications": "Certificaciones",
+        "languages": "Idiomas"
+      },
+      "suggestion": {
+        "available": "Sugerencia disponible",
+        "view": "Ver sugerencia",
+        "apply": "Aplicar",
+        "dismiss": "Descartar",
+        "applied": "Aplicada",
+        "original": "Original",
+        "suggested": "Sugerido"
+      }
+    }
   }
 }

@@ -17,9 +17,7 @@ import SalaryBenchmark from '@/components/results/SalaryBenchmark';
 import JobMatchPanel from '@/components/results/JobMatchPanel';
 import PDFReport from '@/components/shared/PDFReport';
 import ChatPanel from '@/components/results/ChatPanel';
-import CVGenerator from '@/components/results/CVGenerator';
-import CVSuggestionsPanel from '@/components/results/CVSuggestionsPanel';
-import { ATSScorePanel } from '@/components/results/ATSScorePanel';
+import { CVOptimizerPanel } from '@/components/results/CVOptimizerPanel';
 import LinkedInPlan from '@/components/results/LinkedInPlan';
 import ChapterNav, { DEFAULT_TAB } from '@/components/results/ChapterNav';
 import SectionIntro from '@/components/results/SectionIntro';
@@ -234,26 +232,17 @@ export default function AnalyzePage() {
               <LinkedInPlan analysis={result} />
             </div>
           );
-        case 'cv-suggestions':
-          return result.jobMatch?.cvSuggestions ? (
-            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-cv-suggestions" aria-labelledby="tab-cv-suggestions">
-              <SectionIntro messageKey="motivation.cvSuggestions" variant="encouraging" />
-              <CVSuggestionsPanel suggestions={result.jobMatch.cvSuggestions} />
+        case 'cv-optimizer':
+          return (result.atsScore || result.jobMatch) ? (
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-cv-optimizer" aria-labelledby="tab-cv-optimizer">
+              <SectionIntro messageKey="motivation.cvOptimizer" variant="encouraging" />
+              <CVOptimizerPanel
+                atsScore={result.atsScore}
+                jobMatch={result.jobMatch}
+                analysis={result}
+              />
             </div>
           ) : null;
-        case 'ats-score':
-          return result.atsScore ? (
-            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-ats-score" aria-labelledby="tab-ats-score">
-              <ATSScorePanel atsScore={result.atsScore} />
-            </div>
-          ) : null;
-        case 'cv-generator':
-          return (
-            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-cv-generator" aria-labelledby="tab-cv-generator">
-              <SectionIntro messageKey="motivation.cvGenerator" variant="encouraging" />
-              <CVGenerator analysis={result} />
-            </div>
-          );
         case 'ai-coach':
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-ai-coach" aria-labelledby="tab-ai-coach">

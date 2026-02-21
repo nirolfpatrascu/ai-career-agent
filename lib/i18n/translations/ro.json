@@ -21,6 +21,9 @@
     "remove": "Șterge",
     "close": "Închide"
   },
+  "nav": {
+    "cvOptimizer": "Optimizator CV"
+  },
   "hero": {
     "badge": "Consilier de Carieră cu AI",
     "headline1": "Încarcă CV-ul tău.",
@@ -493,7 +496,8 @@
     "linkedin": "Profilul tău LinkedIn este adesea prima impresie. Aceste optimizări pot crește semnificativ vizibilitatea ta pentru recruiteri.",
     "cvGenerator": "CV-ul tău este prima impresie. Acest cadru generat de AI folosește analiza ta pentru a crea conținut prietenos ATS optimizat pentru rolul tău țintă. Copiază ce funcționează, adaptează restul.",
     "cvSuggestions": "Acestea sunt modificări targetate pentru a-ți alinia CV-ul cu postul de job pe care l-ai furnizat. Fiecare sugestie arată exact ce să schimbi și de ce contează.",
-    "atsScore": "Hai să ne asigurăm că CV-ul tău trece de roboți. Iată cum citesc sistemele ATS aplicația ta și ce poți optimiza."
+    "atsScore": "Hai să ne asigurăm că CV-ul tău trece de roboți. Iată cum citesc sistemele ATS aplicația ta și ce poți optimiza.",
+    "cvOptimizer": "CV-ul tău analizat în raport cu anunțul de job — scor de compatibilitate ATS, cuvinte cheie lipsă și sugestii concrete pentru a-ți crește șansele."
   },
   "cv": {
     "tabTitle": "Generator CV",
@@ -576,5 +580,72 @@
     "companyAts": "{{company}} — Sistem ATS detectat",
     "recommendations": "Cum să îți îmbunătățești scorul",
     "example": "Exemplu"
+  },
+  "cvOptimizer": {
+    "sectionIntro": "CV-ul tău analizat în raport cu anunțul de job — scor de compatibilitate ATS, cuvinte cheie lipsă și sugestii concrete pentru a-ți crește șansele.",
+    "whatIsAts": {
+      "title": "Ce este un ATS?",
+      "body": "Un Applicant Tracking System (ATS) este un software pe care companiile îl folosesc pentru a filtra CV-urile înainte ca un om să le vadă. Peste 90% dintre companiile mari folosesc un ATS precum Workday, Greenhouse sau Lever. CV-ul tău este scanat pentru cuvinte cheie, formatare și structură — dacă nu trece, este respins automat.",
+      "collapse": "Ascunde explicația",
+      "expand": "Ce este ATS?"
+    },
+    "score": {
+      "title": "Scor de Compatibilitate ATS",
+      "keyword": "Potrivire Cuvinte Cheie",
+      "format": "Scor Format",
+      "excellent": "Excelent — CV-ul tău ar trebui să treacă de majoritatea filtrelor ATS",
+      "good": "Bun — îmbunătățiri minore recomandate",
+      "needsWork": "Necesită lucru — lacune semnificative găsite",
+      "poor": "Slab — risc ridicat de respingere automată"
+    },
+    "keywords": {
+      "title": "Analiză Cuvinte Cheie",
+      "matched": "Găsite",
+      "semantic": "Potrivire Parțială",
+      "missing": "Lipsă",
+      "required": "Cuvinte cheie obligatorii",
+      "preferred": "Cuvinte cheie preferate"
+    },
+    "format": {
+      "title": "Probleme de Format"
+    },
+    "company": {
+      "title": "Sistemul ATS al Companiei",
+      "detected": "Această companie probabil folosește",
+      "tips": "Sfaturi de formatare"
+    },
+    "suggestions": {
+      "title": "Modificări Recomandate pentru CV",
+      "current": "Actual",
+      "suggested": "Sugerat",
+      "reason": "De ce",
+      "section": "Secțiune",
+      "empty": "Trimite un anunț de job pentru a primi sugestii personalizate pentru CV"
+    },
+    "editor": {
+      "title": "CV-ul Tău Optimizat",
+      "description": "Revizuiește și editează CV-ul mai jos, apoi descarcă-l ca PDF.",
+      "applyAll": "Aplică Toate Sugestiile",
+      "appliedCount": "{count} sugestii aplicate",
+      "downloadPdf": "Descarcă PDF",
+      "generating": "Se generează PDF-ul...",
+      "section": {
+        "summary": "Rezumat Profesional",
+        "skills": "Competențe",
+        "experience": "Experiență",
+        "education": "Educație",
+        "certifications": "Certificări",
+        "languages": "Limbi Străine"
+      },
+      "suggestion": {
+        "available": "Sugestie disponibilă",
+        "view": "Vezi sugestia",
+        "apply": "Aplică",
+        "dismiss": "Respinge",
+        "applied": "Aplicată",
+        "original": "Original",
+        "suggested": "Sugerat"
+      }
+    }
   }
 }

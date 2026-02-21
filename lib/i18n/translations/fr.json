@@ -21,6 +21,9 @@
     "remove": "Supprimer",
     "close": "Fermer"
   },
+  "nav": {
+    "cvOptimizer": "Optimiseur de CV"
+  },
   "hero": {
     "badge": "Conseiller de Carrière IA",
     "headline1": "Téléchargez votre CV.",
@@ -493,7 +496,8 @@
     "linkedin": "Votre profil LinkedIn est souvent la première impression. Ces optimisations peuvent augmenter significativement votre visibilité.",
     "cvGenerator": "Votre CV est votre première impression. Ce cadre généré par l'IA utilise votre analyse pour créer du contenu ATS-friendly optimisé pour votre rôle cible.",
     "cvSuggestions": "Ce sont des modifications ciblées pour aligner votre CV avec l'offre spécifique. Chaque suggestion montre exactement quoi changer et pourquoi.",
-    "atsScore": "Assurons-nous que votre CV passe les robots. Voici comment les systèmes ATS liront votre candidature et ce que vous pouvez optimiser."
+    "atsScore": "Assurons-nous que votre CV passe les robots. Voici comment les systèmes ATS liront votre candidature et ce que vous pouvez optimiser.",
+    "cvOptimizer": "Votre CV analysé par rapport à l'offre d'emploi — score de compatibilité ATS, mots-clés manquants et suggestions concrètes pour améliorer vos chances."
   },
   "cv": {
     "tabTitle": "Générateur CV",
@@ -576,5 +580,72 @@
     "companyAts": "{{company}} — Système ATS détecté",
     "recommendations": "Comment améliorer votre score",
     "example": "Exemple"
+  },
+  "cvOptimizer": {
+    "sectionIntro": "Votre CV analysé par rapport à l'offre d'emploi — score de compatibilité ATS, mots-clés manquants et suggestions concrètes pour améliorer vos chances.",
+    "whatIsAts": {
+      "title": "Qu'est-ce qu'un ATS ?",
+      "body": "Un Applicant Tracking System (ATS) est un logiciel que les entreprises utilisent pour filtrer les CV avant qu'un humain ne les voie. Plus de 90% des grandes entreprises utilisent un ATS comme Workday, Greenhouse ou Lever. Votre CV est scanné pour les mots-clés, la mise en forme et la structure — s'il ne passe pas, il est automatiquement rejeté.",
+      "collapse": "Masquer l'explication",
+      "expand": "Qu'est-ce qu'un ATS ?"
+    },
+    "score": {
+      "title": "Score de Compatibilité ATS",
+      "keyword": "Correspondance Mots-clés",
+      "format": "Score de Format",
+      "excellent": "Excellent — votre CV devrait passer la plupart des filtres ATS",
+      "good": "Bon — améliorations mineures recommandées",
+      "needsWork": "À améliorer — des lacunes significatives trouvées",
+      "poor": "Insuffisant — risque élevé de rejet automatique"
+    },
+    "keywords": {
+      "title": "Analyse des Mots-clés",
+      "matched": "Trouvés",
+      "semantic": "Correspondance Partielle",
+      "missing": "Manquants",
+      "required": "Mots-clés requis",
+      "preferred": "Mots-clés préférés"
+    },
+    "format": {
+      "title": "Problèmes de Format"
+    },
+    "company": {
+      "title": "Système ATS de l'Entreprise",
+      "detected": "Cette entreprise utilise probablement",
+      "tips": "Conseils de mise en forme"
+    },
+    "suggestions": {
+      "title": "Modifications Recommandées du CV",
+      "current": "Actuel",
+      "suggested": "Suggéré",
+      "reason": "Pourquoi",
+      "section": "Section",
+      "empty": "Soumettez une offre d'emploi pour obtenir des suggestions personnalisées pour votre CV"
+    },
+    "editor": {
+      "title": "Votre CV Optimisé",
+      "description": "Vérifiez et modifiez votre CV ci-dessous, puis téléchargez-le en PDF.",
+      "applyAll": "Appliquer Toutes les Suggestions",
+      "appliedCount": "{count} suggestions appliquées",
+      "downloadPdf": "Télécharger PDF",
+      "generating": "Génération du PDF...",
+      "section": {
+        "summary": "Résumé Professionnel",
+        "skills": "Compétences",
+        "experience": "Expérience",
+        "education": "Formation",
+        "certifications": "Certifications",
+        "languages": "Langues"
+      },
+      "suggestion": {
+        "available": "Suggestion disponible",
+        "view": "Voir la suggestion",
+        "apply": "Appliquer",
+        "dismiss": "Ignorer",
+        "applied": "Appliquée",
+        "original": "Original",
+        "suggested": "Suggéré"
+      }
+    }
   }
 }

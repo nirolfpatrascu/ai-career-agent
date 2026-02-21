@@ -21,6 +21,9 @@
     "remove": "Supprimer",
     "close": "Fermer"
   },
+  "nav": {
+    "cvOptimizer": "Lebenslauf-Optimierer"
+  },
   "hero": {
     "badge": "Conseiller de Carrière IA",
     "headline1": "Téléchargez votre CV.",
@@ -493,7 +496,8 @@
     "linkedin": "Votre profil LinkedIn est souvent la première impression. Ces optimisations peuvent augmenter significativement votre visibilité.",
     "cvGenerator": "Votre CV est votre première impression. Ce cadre généré par l'IA utilise votre analyse pour créer du contenu ATS-friendly optimisé pour votre rôle cible.",
     "cvSuggestions": "Ce sont des modifications ciblées pour aligner votre CV avec l'offre spécifique. Chaque suggestion montre exactement quoi changer et pourquoi.",
-    "atsScore": "Stellen wir sicher, dass Ihr Lebenslauf die Roboter passiert. So lesen ATS-Systeme Ihre Bewerbung und was Sie optimieren können."
+    "atsScore": "Stellen wir sicher, dass Ihr Lebenslauf die Roboter passiert. So lesen ATS-Systeme Ihre Bewerbung und was Sie optimieren können.",
+    "cvOptimizer": "Ihr Lebenslauf analysiert gegen die Stellenausschreibung — ATS-Kompatibilitätsscore, fehlende Keywords und konkrete Vorschläge zur Verbesserung Ihrer Chancen."
   },
   "cv": {
     "tabTitle": "Générateur CV",
@@ -576,5 +580,72 @@
     "companyAts": "{{company}} — ATS-System erkannt",
     "recommendations": "So verbessern Sie Ihren Score",
     "example": "Beispiel"
+  },
+  "cvOptimizer": {
+    "sectionIntro": "Ihr Lebenslauf analysiert gegen die Stellenausschreibung — ATS-Kompatibilitätsscore, fehlende Keywords und konkrete Vorschläge zur Verbesserung Ihrer Chancen.",
+    "whatIsAts": {
+      "title": "Was ist ein ATS?",
+      "body": "Ein Applicant Tracking System (ATS) ist eine Software, die Unternehmen verwenden, um Lebensläufe zu filtern, bevor ein Mensch sie sieht. Über 90% der großen Unternehmen nutzen ein ATS wie Workday, Greenhouse oder Lever. Ihr Lebenslauf wird nach Keywords, Formatierung und Struktur gescannt — wenn er nicht besteht, wird er automatisch abgelehnt.",
+      "collapse": "Erklärung ausblenden",
+      "expand": "Was ist ATS?"
+    },
+    "score": {
+      "title": "ATS-Kompatibilitätsscore",
+      "keyword": "Keyword-Übereinstimmung",
+      "format": "Format-Score",
+      "excellent": "Ausgezeichnet — Ihr Lebenslauf sollte die meisten ATS-Filter passieren",
+      "good": "Gut — kleinere Verbesserungen empfohlen",
+      "needsWork": "Verbesserungsbedarf — erhebliche Lücken gefunden",
+      "poor": "Schlecht — hohes Risiko einer automatischen Ablehnung"
+    },
+    "keywords": {
+      "title": "Keyword-Analyse",
+      "matched": "Gefunden",
+      "semantic": "Teilweise Übereinstimmung",
+      "missing": "Fehlend",
+      "required": "Erforderliche Keywords",
+      "preferred": "Bevorzugte Keywords"
+    },
+    "format": {
+      "title": "Format-Probleme"
+    },
+    "company": {
+      "title": "ATS-System des Unternehmens",
+      "detected": "Dieses Unternehmen verwendet wahrscheinlich",
+      "tips": "Formatierungstipps"
+    },
+    "suggestions": {
+      "title": "Empfohlene Lebenslauf-Änderungen",
+      "current": "Aktuell",
+      "suggested": "Vorgeschlagen",
+      "reason": "Warum",
+      "section": "Abschnitt",
+      "empty": "Reichen Sie eine Stellenausschreibung ein, um personalisierte Lebenslauf-Vorschläge zu erhalten"
+    },
+    "editor": {
+      "title": "Ihr optimierter Lebenslauf",
+      "description": "Überprüfen und bearbeiten Sie Ihren Lebenslauf unten, dann laden Sie ihn als PDF herunter.",
+      "applyAll": "Alle Vorschläge anwenden",
+      "appliedCount": "{count} Vorschläge angewendet",
+      "downloadPdf": "PDF herunterladen",
+      "generating": "PDF wird erstellt...",
+      "section": {
+        "summary": "Berufliches Profil",
+        "skills": "Fähigkeiten",
+        "experience": "Berufserfahrung",
+        "education": "Ausbildung",
+        "certifications": "Zertifizierungen",
+        "languages": "Sprachen"
+      },
+      "suggestion": {
+        "available": "Vorschlag verfügbar",
+        "view": "Vorschlag ansehen",
+        "apply": "Anwenden",
+        "dismiss": "Verwerfen",
+        "applied": "Angewendet",
+        "original": "Original",
+        "suggested": "Vorgeschlagen"
+      }
+    }
   }
 }

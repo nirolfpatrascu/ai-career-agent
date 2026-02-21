@@ -21,6 +21,9 @@
     "remove": "Remove",
     "close": "Close"
   },
+  "nav": {
+    "cvOptimizer": "CV Optimizer"
+  },
   "hero": {
     "badge": "AI-Powered Career Advisor",
     "headline1": "Upload your CV.",
@@ -493,7 +496,8 @@
     "linkedin": "Your LinkedIn profile is often the first impression. These optimizations can significantly increase your visibility to recruiters.",
     "cvGenerator": "Your CV is your first impression. This AI-generated framework uses your analysis to create ATS-friendly content optimized for your target role. Copy what works, adapt the rest.",
     "cvSuggestions": "These are targeted changes to align your CV with the specific job posting you provided. Each suggestion shows exactly what to change and why it matters for this role.",
-    "atsScore": "Let's make sure your CV gets past the robots. Here's how ATS systems will read your application and what you can optimize."
+    "atsScore": "Let's make sure your CV gets past the robots. Here's how ATS systems will read your application and what you can optimize.",
+    "cvOptimizer": "Your CV analyzed against the job posting — ATS compatibility score, keyword gaps, and specific suggestions to improve your chances."
   },
   "cv": {
     "tabTitle": "CV Builder",
@@ -576,5 +580,72 @@
     "companyAts": "{{company}} — ATS System Detected",
     "recommendations": "How to Improve Your Score",
     "example": "Example"
+  },
+  "cvOptimizer": {
+    "sectionIntro": "Your CV analyzed against the job posting — ATS compatibility score, keyword gaps, and specific suggestions to improve your chances.",
+    "whatIsAts": {
+      "title": "What is an ATS?",
+      "body": "An Applicant Tracking System (ATS) is software that companies use to filter resumes before a human ever sees them. Over 90% of large companies use an ATS like Workday, Greenhouse, or Lever. Your resume is scanned for keywords, formatting, and structure — if it doesn't pass, it's automatically rejected.",
+      "collapse": "Hide explanation",
+      "expand": "What is ATS?"
+    },
+    "score": {
+      "title": "ATS Compatibility Score",
+      "keyword": "Keyword Match",
+      "format": "Format Score",
+      "excellent": "Excellent — your CV should pass most ATS filters",
+      "good": "Good — minor improvements recommended",
+      "needsWork": "Needs work — significant gaps found",
+      "poor": "Poor — high risk of automatic rejection"
+    },
+    "keywords": {
+      "title": "Keyword Analysis",
+      "matched": "Matched",
+      "semantic": "Partial Match",
+      "missing": "Missing",
+      "required": "Required keywords",
+      "preferred": "Preferred keywords"
+    },
+    "format": {
+      "title": "Format Issues"
+    },
+    "company": {
+      "title": "Company ATS System",
+      "detected": "This company likely uses",
+      "tips": "Formatting tips"
+    },
+    "suggestions": {
+      "title": "Recommended CV Changes",
+      "current": "Current",
+      "suggested": "Suggested",
+      "reason": "Why",
+      "section": "Section",
+      "empty": "Submit a job posting to get personalized CV suggestions"
+    },
+    "editor": {
+      "title": "Your Optimized CV",
+      "description": "Review and edit your CV below, then download as PDF.",
+      "applyAll": "Apply All Suggestions",
+      "appliedCount": "{count} suggestions applied",
+      "downloadPdf": "Download PDF",
+      "generating": "Generating PDF...",
+      "section": {
+        "summary": "Professional Summary",
+        "skills": "Skills",
+        "experience": "Experience",
+        "education": "Education",
+        "certifications": "Certifications",
+        "languages": "Languages"
+      },
+      "suggestion": {
+        "available": "Suggestion available",
+        "view": "View suggestion",
+        "apply": "Apply",
+        "dismiss": "Dismiss",
+        "applied": "Applied",
+        "original": "Original",
+        "suggested": "Suggested"
+      }
+    }
   }
 }
