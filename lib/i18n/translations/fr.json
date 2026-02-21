@@ -47,73 +47,48 @@
     "trust": "Utilisé par des professionnels en transition vers l'IA, le cloud et les rôles tech modernes"
   },
   "features": {
-    "sectionLabel": "Ce que vous obtenez",
-    "title": "Six perspectives puissantes sur votre carrière",
-    "subtitle": "Chaque analyse vous donne une image complète — pas des conseils génériques, mais des perspectives personnalisées basées sur VOTRE expérience, VOTRE rôle cible et VOTRE marché.",
-    "cards": [
-      {
-        "title": "Analyse CV Approfondie",
-        "description": "Notre IA lit l'intégralité de votre CV et extrait chaque compétence, certification, projet et compétence implicite — même celles que vous avez oubliées.",
-        "highlight": "Trouve des compétences cachées"
-      },
-      {
-        "title": "Analyse des Lacunes",
-        "description": "Voyez exactement ce qui vous sépare de votre rôle cible. Chaque lacune est codée par couleur selon la sévérité avec un plan concret pour la combler.",
-        "highlight": "Priorisé par impact sur votre recherche"
-      },
-      {
-        "title": "Intelligence Salariale",
-        "description": "Connaissez votre valeur. Fourchettes salariales par localisation pour vos rôles actuel et cible, plus des scripts de négociation adaptés.",
-        "highlight": "Données de marché régionales"
-      },
-      {
-        "title": "Recommandations de Rôles",
-        "description": "Découvrez 3 rôles où vos compétences créent le plus de valeur — avec scores, fourchettes salariales, entreprises cibles et délais de préparation.",
-        "highlight": "Des rôles auxquels vous n'avez peut-être pas pensé"
-      },
-      {
-        "title": "Plan d'Action Personnalisé",
-        "description": "Pas de conseils vagues — des actions spécifiques avec des échéances. Gains rapides en 30 jours, sprints de 90 jours et trajectoire sur 12 mois.",
-        "highlight": "Chaque action a une ressource et une estimation"
-      },
-      {
-        "title": "Coach IA de Carrière",
-        "description": "Posez des questions de suivi, préparez vos entretiens, demandez des modèles de messages LinkedIn ou approfondissez toute partie de votre analyse.",
-        "highlight": "Conversations de suivi illimitées"
-      }
-    ]
+    "sectionTitle": "Tout ce dont vous avez besoin pour votre prochain pas de carrière",
+    "sectionSubtitle": "Téléchargez votre CV une seule fois — obtenez une analyse des écarts, des données salariales, un score ATS, une feuille de route et un coach IA. Tout en un seul endroit.",
+    "gapAnalysis": {
+      "title": "Analyse des Écarts de Carrière",
+      "desc": "L'IA identifie vos forces et vos lacunes par rapport à votre poste cible. Chaque écart est évalué par sévérité — critique, modéré ou mineur — avec un plan concret pour le combler."
+    },
+    "salary": {
+      "title": "Données Salariales Réelles",
+      "desc": "Données salariales provenant de sources gouvernementales (US BLS, UK ONS, EU Eurostat) et d'enquêtes développeurs dans plus de 20 pays. Connaissez votre valeur avec des données, pas des suppositions."
+    },
+    "ats": {
+      "title": "Optimisation ATS",
+      "desc": "Voyez comment votre CV se positionne face aux offres d'emploi. Correspondance de mots-clés, vérifications de format et corrections ciblées pour passer les systèmes ATS utilisés par 90 % des grandes entreprises."
+    },
+    "coach": {
+      "title": "Coach Carrière IA",
+      "desc": "Discutez avec un coach IA qui connaît votre profil complet — forces, lacunes, données salariales et objectifs de carrière. Posez n'importe quelle question sur votre prochain pas et recevez des conseils personnalisés."
+    },
+    "cv": {
+      "title": "Constructeur & Optimiseur de CV",
+      "desc": "Recevez des suggestions de réécriture section par section adaptées à votre poste cible. Appliquez les modifications en un clic et téléchargez un PDF optimisé pour les ATS."
+    },
+    "roadmap": {
+      "title": "Feuille de Route Carrière",
+      "desc": "Un plan d'action concret réparti en gains rapides à 30 jours, développement de compétences à 90 jours et trajectoire à 12 mois. Chaque élément inclut estimations de temps, ressources et impact attendu."
+    }
   },
   "howItWorks": {
-    "sectionLabel": "Comment ça marche",
-    "title": "Du CV à la clarté de carrière en 3 étapes",
-    "subtitle": "Pas de compte nécessaire. Pas de carte de crédit. Téléchargez votre CV, répondez à quelques questions et laissez l'IA travailler.",
-    "steps": [
-      {
-        "title": "Téléchargez votre CV",
-        "description": "Glissez-déposez votre PDF. Notre IA lit chaque détail — titres de poste, technologies, certifications et déduit même les compétences non listées.",
-        "detail": "Supporte les PDF jusqu'à 5 Mo. Vos données sont traitées en toute sécurité et jamais stockées."
-      },
-      {
-        "title": "Dites-nous votre objectif",
-        "description": "Quel rôle visez-vous? Où voulez-vous travailler? Quel est votre objectif salarial? Un questionnaire rapide de 2 minutes donne le contexte nécessaire.",
-        "detail": "Collez optionnellement une offre d'emploi pour une analyse ciblée."
-      },
-      {
-        "title": "Obtenez votre feuille de route",
-        "description": "En environ 90 secondes, recevez une analyse complète: score de correspondance, forces, lacunes, benchmarks salariaux et un plan étape par étape.",
-        "detail": "Téléchargez en PDF, discutez avec votre coach IA ou comparez avec des offres spécifiques."
-      }
-    ],
-    "visual": {
-      "uploadComplete": "Téléchargement terminé",
-      "currentRole": "Poste Actuel",
-      "targetRole": "Poste Cible",
-      "country": "Pays",
-      "strengthsIdentified": "5 forces identifiées",
-      "gapsToClose": "3 écarts à combler",
-      "actionItems": "12 actions à entreprendre"
+    "sectionTitle": "Comment ça marche",
+    "sectionSubtitle": "Du téléchargement de CV à la stratégie de carrière en moins de 60 secondes.",
+    "step1": {
+      "title": "Téléchargez et Définissez Vos Objectifs",
+      "desc": "Téléchargez votre CV en PDF et indiquez votre poste cible, votre niveau d'expérience et votre pays. Optionnellement, collez une offre d'emploi pour une analyse ciblée."
     },
-    "timeEstimate": "Temps total: environ 3 minutes du téléchargement à la feuille de route complète"
+    "step2": {
+      "title": "L'IA Analyse Tout",
+      "desc": "Notre IA lit votre CV, extrait vos compétences, compare les salaires avec des données gouvernementales, identifie les écarts et construit votre stratégie de carrière personnalisée — le tout en moins de 60 secondes."
+    },
+    "step3": {
+      "title": "Recevez Votre Plan de Carrière",
+      "desc": "Explorez vos résultats dans plus de 10 sections : score de compatibilité, analyse des écarts, données salariales, score ATS, feuille de route, recommandations de postes et un coach IA pour répondre à vos questions."
+    }
   },
   "cta": {
     "title": "Votre prochain mouvement de carrière commence ici",

@@ -47,73 +47,48 @@
     "trust": "Trusted by professionals transitioning into AI, cloud, and modern tech roles"
   },
   "features": {
-    "sectionLabel": "What You Get",
-    "title": "Six powerful lenses on your career",
-    "subtitle": "Each analysis gives you a complete picture — not generic advice, but personalized insights based on YOUR experience, YOUR target role, and YOUR market.",
-    "cards": [
-      {
-        "title": "CV Deep Analysis",
-        "description": "Our AI reads your entire CV and extracts every skill, certification, project, and implicit competency — even the ones you forgot to mention.",
-        "highlight": "Finds hidden skills you missed"
-      },
-      {
-        "title": "Skill Gap Analysis",
-        "description": "See exactly what stands between you and your target role. Each gap is color-coded by severity with a concrete plan and timeline to close it.",
-        "highlight": "Prioritized by impact on your job search"
-      },
-      {
-        "title": "Salary Intelligence",
-        "description": "Know your worth. Get location-aware salary ranges for both your current and target roles, plus negotiation scripts tailored to your experience level.",
-        "highlight": "Region-specific market data"
-      },
-      {
-        "title": "Role Recommendations",
-        "description": "Discover 3 roles where your skills create the most value — complete with fit scores, salary ranges, target companies, and time-to-ready estimates.",
-        "highlight": "Roles you might not have considered"
-      },
-      {
-        "title": "Personalized Action Plan",
-        "description": "Not vague advice — specific actions with deadlines. 30-day quick wins to build momentum, 90-day skill sprints, and a 12-month career trajectory.",
-        "highlight": "Every action has a resource and time estimate"
-      },
-      {
-        "title": "AI Career Coach",
-        "description": "Ask follow-up questions, get interview prep, request LinkedIn message templates, or dive deeper into any part of your analysis. Your AI coach knows your full profile.",
-        "highlight": "Unlimited follow-up conversations"
-      }
-    ]
+    "sectionTitle": "Everything you need for your next career move",
+    "sectionSubtitle": "Upload your CV once — get gap analysis, salary data, ATS scoring, a career roadmap, and an AI coach. All in one place.",
+    "gapAnalysis": {
+      "title": "Career Gap Analysis",
+      "desc": "AI identifies your strengths and skill gaps against your target role. Each gap is rated by severity — critical, moderate, or minor — with a specific plan to close it."
+    },
+    "salary": {
+      "title": "Real Salary Benchmarks",
+      "desc": "Salary data from government sources (US BLS, UK ONS, EU Eurostat) and developer surveys across 20+ countries. Know your market value with data, not guesswork."
+    },
+    "ats": {
+      "title": "ATS Optimization",
+      "desc": "See how your CV scores against job postings. Keyword matching, format checks, and specific fixes to pass Applicant Tracking Systems used by 90% of large companies."
+    },
+    "coach": {
+      "title": "AI Career Coach",
+      "desc": "Chat with an AI coach that knows your full profile — strengths, gaps, salary data, and career goals. Ask anything about your next move and get personalized advice."
+    },
+    "cv": {
+      "title": "CV Builder & Optimizer",
+      "desc": "Get section-by-section CV rewrite suggestions tailored to your target role. Apply changes with one click and download an ATS-optimized PDF."
+    },
+    "roadmap": {
+      "title": "Career Roadmap",
+      "desc": "A concrete action plan split into 30-day quick wins, 90-day skill building, and 12-month career trajectory. Every item includes time estimates, resources, and expected impact."
+    }
   },
   "howItWorks": {
-    "sectionLabel": "How It Works",
-    "title": "From CV to career clarity in 3 steps",
-    "subtitle": "No account required. No credit card. Upload your CV, answer a few questions, and let AI do the heavy lifting.",
-    "steps": [
-      {
-        "title": "Upload Your CV",
-        "description": "Drag and drop your PDF resume. Our AI reads every detail — job titles, technologies, certifications, project descriptions, and even infers skills you didn't explicitly list.",
-        "detail": "Supports PDFs up to 5MB. Your data is processed securely and never stored."
-      },
-      {
-        "title": "Tell Us Where You're Headed",
-        "description": "What role are you targeting? Where do you want to work? What's your salary goal? A quick 2-minute questionnaire gives our AI the context it needs.",
-        "detail": "Optionally paste a specific job posting for a targeted match analysis."
-      },
-      {
-        "title": "Get Your Career Roadmap",
-        "description": "In about 90 seconds, receive a comprehensive analysis: fit score, strengths that make you stand out, gaps to close, salary benchmarks, and a step-by-step plan.",
-        "detail": "Download as PDF, chat with your AI coach, or match against specific job postings."
-      }
-    ],
-    "visual": {
-      "uploadComplete": "Upload complete",
-      "currentRole": "Current Role",
-      "targetRole": "Target Role",
-      "country": "Country",
-      "strengthsIdentified": "5 strengths identified",
-      "gapsToClose": "3 gaps to close",
-      "actionItems": "12 action items"
+    "sectionTitle": "How it works",
+    "sectionSubtitle": "From CV upload to career strategy in under 60 seconds.",
+    "step1": {
+      "title": "Upload & Set Your Goals",
+      "desc": "Upload your CV as a PDF and tell us your target role, experience level, and country. Optionally paste a job posting for a targeted analysis."
     },
-    "timeEstimate": "Total time: about 3 minutes from upload to full career roadmap"
+    "step2": {
+      "title": "AI Analyzes Everything",
+      "desc": "Our AI reads your CV, extracts your skills, benchmarks salaries from government data, identifies gaps, and builds your personalized career strategy — all in under 60 seconds."
+    },
+    "step3": {
+      "title": "Get Your Career Playbook",
+      "desc": "Explore your results across 10+ sections: fit score, gap analysis, salary benchmarks, ATS scoring, career roadmap, role recommendations, and an AI coach to answer your questions."
+    }
   },
   "cta": {
     "title": "Your next career move starts here",

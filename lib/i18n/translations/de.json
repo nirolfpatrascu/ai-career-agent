@@ -47,73 +47,48 @@
     "trust": "Utilisé par des professionnels en transition vers l'IA, le cloud et les rôles tech modernes"
   },
   "features": {
-    "sectionLabel": "Ce que vous obtenez",
-    "title": "Six perspectives puissantes sur votre carrière",
-    "subtitle": "Chaque analyse vous donne une image complète — pas des conseils génériques, mais des perspectives personnalisées basées sur VOTRE expérience, VOTRE rôle cible et VOTRE marché.",
-    "cards": [
-      {
-        "title": "Analyse CV Approfondie",
-        "description": "Notre IA lit l'intégralité de votre CV et extrait chaque compétence, certification, projet et compétence implicite — même celles que vous avez oubliées.",
-        "highlight": "Trouve des compétences cachées"
-      },
-      {
-        "title": "Analyse des Lacunes",
-        "description": "Voyez exactement ce qui vous sépare de votre rôle cible. Chaque lacune est codée par couleur selon la sévérité avec un plan concret pour la combler.",
-        "highlight": "Priorisé par impact sur votre recherche"
-      },
-      {
-        "title": "Intelligence Salariale",
-        "description": "Connaissez votre valeur. Fourchettes salariales par localisation pour vos rôles actuel et cible, plus des scripts de négociation adaptés.",
-        "highlight": "Données de marché régionales"
-      },
-      {
-        "title": "Recommandations de Rôles",
-        "description": "Découvrez 3 rôles où vos compétences créent le plus de valeur — avec scores, fourchettes salariales, entreprises cibles et délais de préparation.",
-        "highlight": "Des rôles auxquels vous n'avez peut-être pas pensé"
-      },
-      {
-        "title": "Plan d'Action Personnalisé",
-        "description": "Pas de conseils vagues — des actions spécifiques avec des échéances. Gains rapides en 30 jours, sprints de 90 jours et trajectoire sur 12 mois.",
-        "highlight": "Chaque action a une ressource et une estimation"
-      },
-      {
-        "title": "Coach IA de Carrière",
-        "description": "Posez des questions de suivi, préparez vos entretiens, demandez des modèles de messages LinkedIn ou approfondissez toute partie de votre analyse.",
-        "highlight": "Conversations de suivi illimitées"
-      }
-    ]
+    "sectionTitle": "Alles, was Sie für Ihren nächsten Karriereschritt brauchen",
+    "sectionSubtitle": "Laden Sie Ihren Lebenslauf einmal hoch — erhalten Sie Gap-Analyse, Gehaltsdaten, ATS-Scoring, eine Karriere-Roadmap und einen KI-Coach. Alles an einem Ort.",
+    "gapAnalysis": {
+      "title": "Karriere-Gap-Analyse",
+      "desc": "KI identifiziert Ihre Stärken und Kompetenzlücken für Ihre Zielrolle. Jede Lücke wird nach Schweregrad bewertet — kritisch, moderat oder gering — mit einem konkreten Plan zur Schließung."
+    },
+    "salary": {
+      "title": "Echte Gehaltsbenchmarks",
+      "desc": "Gehaltsdaten aus staatlichen Quellen (US BLS, UK ONS, EU Eurostat) und Entwicklerumfragen aus über 20 Ländern. Kennen Sie Ihren Marktwert mit Daten, nicht Vermutungen."
+    },
+    "ats": {
+      "title": "ATS-Optimierung",
+      "desc": "Sehen Sie, wie Ihr Lebenslauf bei Stellenanzeigen abschneidet. Keyword-Matching, Formatprüfungen und gezielte Korrekturen, um die Bewerbermanagementsysteme zu bestehen, die 90 % der großen Unternehmen nutzen."
+    },
+    "coach": {
+      "title": "KI-Karrierecoach",
+      "desc": "Chatten Sie mit einem KI-Coach, der Ihr gesamtes Profil kennt — Stärken, Lücken, Gehaltsdaten und Karriereziele. Fragen Sie alles zu Ihrem nächsten Schritt und erhalten Sie personalisierte Beratung."
+    },
+    "cv": {
+      "title": "Lebenslauf-Builder & Optimizer",
+      "desc": "Erhalten Sie abschnittsweise Umformulierungsvorschläge, die auf Ihre Zielrolle zugeschnitten sind. Übernehmen Sie Änderungen mit einem Klick und laden Sie ein ATS-optimiertes PDF herunter."
+    },
+    "roadmap": {
+      "title": "Karriere-Roadmap",
+      "desc": "Ein konkreter Aktionsplan aufgeteilt in 30-Tage-Quick-Wins, 90-Tage-Kompetenzaufbau und 12-Monats-Karriereverlauf. Jeder Punkt enthält Zeitschätzungen, Ressourcen und erwartete Wirkung."
+    }
   },
   "howItWorks": {
-    "sectionLabel": "Comment ça marche",
-    "title": "Du CV à la clarté de carrière en 3 étapes",
-    "subtitle": "Pas de compte nécessaire. Pas de carte de crédit. Téléchargez votre CV, répondez à quelques questions et laissez l'IA travailler.",
-    "steps": [
-      {
-        "title": "Téléchargez votre CV",
-        "description": "Glissez-déposez votre PDF. Notre IA lit chaque détail — titres de poste, technologies, certifications et déduit même les compétences non listées.",
-        "detail": "Supporte les PDF jusqu'à 5 Mo. Vos données sont traitées en toute sécurité et jamais stockées."
-      },
-      {
-        "title": "Dites-nous votre objectif",
-        "description": "Quel rôle visez-vous? Où voulez-vous travailler? Quel est votre objectif salarial? Un questionnaire rapide de 2 minutes donne le contexte nécessaire.",
-        "detail": "Collez optionnellement une offre d'emploi pour une analyse ciblée."
-      },
-      {
-        "title": "Obtenez votre feuille de route",
-        "description": "En environ 90 secondes, recevez une analyse complète: score de correspondance, forces, lacunes, benchmarks salariaux et un plan étape par étape.",
-        "detail": "Téléchargez en PDF, discutez avec votre coach IA ou comparez avec des offres spécifiques."
-      }
-    ],
-    "visual": {
-      "uploadComplete": "Téléchargement terminé",
-      "currentRole": "Poste Actuel",
-      "targetRole": "Poste Cible",
-      "country": "Pays",
-      "strengthsIdentified": "5 forces identifiées",
-      "gapsToClose": "3 écarts à combler",
-      "actionItems": "12 actions à entreprendre"
+    "sectionTitle": "So funktioniert es",
+    "sectionSubtitle": "Vom Lebenslauf-Upload zur Karrierestrategie in unter 60 Sekunden.",
+    "step1": {
+      "title": "Hochladen & Ziele setzen",
+      "desc": "Laden Sie Ihren Lebenslauf als PDF hoch und nennen Sie uns Ihre Zielrolle, Erfahrungsstufe und Ihr Land. Optional können Sie eine Stellenanzeige einfügen für eine gezielte Analyse."
     },
-    "timeEstimate": "Temps total: environ 3 minutes du téléchargement à la feuille de route complète"
+    "step2": {
+      "title": "KI analysiert alles",
+      "desc": "Unsere KI liest Ihren Lebenslauf, extrahiert Ihre Fähigkeiten, vergleicht Gehälter mit Regierungsdaten, identifiziert Lücken und erstellt Ihre personalisierte Karrierestrategie — alles in unter 60 Sekunden."
+    },
+    "step3": {
+      "title": "Ihr Karriere-Playbook erhalten",
+      "desc": "Erkunden Sie Ihre Ergebnisse in über 10 Bereichen: Fit-Score, Gap-Analyse, Gehaltsbenchmarks, ATS-Scoring, Karriere-Roadmap, Rollenempfehlungen und ein KI-Coach für Ihre Fragen."
+    }
   },
   "cta": {
     "title": "Votre prochain mouvement de carrière commence ici",

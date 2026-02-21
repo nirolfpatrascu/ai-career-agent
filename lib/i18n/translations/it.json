@@ -47,73 +47,48 @@
     "trust": "Usato da professionisti in transizione verso IA, cloud e ruoli tech moderni"
   },
   "features": {
-    "sectionLabel": "Cosa Ottieni",
-    "title": "Sei prospettive potenti sulla tua carriera",
-    "subtitle": "Ogni analisi ti dà un quadro completo — non consigli generici, ma insight personalizzati basati sulla TUA esperienza, il TUO ruolo target e il TUO mercato.",
-    "cards": [
-      {
-        "title": "Analisi CV Approfondita",
-        "description": "La nostra IA legge l'intero CV ed estrae ogni competenza, certificazione, progetto e competenza implicita — anche quelle che hai dimenticato.",
-        "highlight": "Trova competenze nascoste"
-      },
-      {
-        "title": "Analisi delle Lacune",
-        "description": "Vedi esattamente cosa ti separa dal tuo ruolo target. Ogni lacuna è codificata per colore secondo la gravità con un piano concreto per colmarla.",
-        "highlight": "Prioritizzato per impatto sulla ricerca"
-      },
-      {
-        "title": "Intelligenza Salariale",
-        "description": "Conosci il tuo valore. Range salariali per località per i tuoi ruoli attuale e target, più script di negoziazione adattati al tuo livello.",
-        "highlight": "Dati di mercato regionali"
-      },
-      {
-        "title": "Raccomandazioni di Ruoli",
-        "description": "Scopri 3 ruoli dove le tue competenze creano il massimo valore — con punteggi, range salariali, aziende target e stime di preparazione.",
-        "highlight": "Ruoli a cui potresti non aver pensato"
-      },
-      {
-        "title": "Piano d'Azione Personalizzato",
-        "description": "Non consigli vaghi — azioni specifiche con scadenze. Vittorie rapide in 30 giorni, sprint di 90 giorni e traiettoria di 12 mesi.",
-        "highlight": "Ogni azione ha una risorsa e stima temporale"
-      },
-      {
-        "title": "Coach IA di Carriera",
-        "description": "Fai domande di follow-up, preparati per i colloqui, chiedi template di messaggi LinkedIn o approfondisci qualsiasi parte della tua analisi.",
-        "highlight": "Conversazioni di follow-up illimitate"
-      }
-    ]
+    "sectionTitle": "Tutto ciò che serve per il tuo prossimo passo di carriera",
+    "sectionSubtitle": "Carica il tuo CV una sola volta — ottieni analisi delle lacune, dati salariali, punteggio ATS, roadmap di carriera e un coach IA. Tutto in un unico posto.",
+    "gapAnalysis": {
+      "title": "Analisi Gap di Carriera",
+      "desc": "L'IA identifica i tuoi punti di forza e le lacune di competenze rispetto al ruolo desiderato. Ogni gap è valutato per gravità — critico, moderato o minore — con un piano concreto per colmarlo."
+    },
+    "salary": {
+      "title": "Dati Salariali Reali",
+      "desc": "Dati salariali da fonti governative (US BLS, UK ONS, EU Eurostat) e sondaggi sviluppatori in oltre 20 paesi. Conosci il tuo valore di mercato con dati, non supposizioni."
+    },
+    "ats": {
+      "title": "Ottimizzazione ATS",
+      "desc": "Scopri come il tuo CV si posiziona rispetto alle offerte di lavoro. Corrispondenza parole chiave, controlli formato e correzioni mirate per superare i sistemi ATS usati dal 90% delle grandi aziende."
+    },
+    "coach": {
+      "title": "Coach Carriera IA",
+      "desc": "Chatta con un coach IA che conosce il tuo profilo completo — punti di forza, lacune, dati salariali e obiettivi di carriera. Chiedi qualsiasi cosa sul tuo prossimo passo e ricevi consigli personalizzati."
+    },
+    "cv": {
+      "title": "Costruttore & Ottimizzatore CV",
+      "desc": "Ricevi suggerimenti di riscrittura sezione per sezione adattati al tuo ruolo target. Applica le modifiche con un clic e scarica un PDF ottimizzato per ATS."
+    },
+    "roadmap": {
+      "title": "Roadmap di Carriera",
+      "desc": "Un piano d'azione concreto suddiviso in risultati rapidi a 30 giorni, sviluppo competenze a 90 giorni e traiettoria a 12 mesi. Ogni elemento include stime di tempo, risorse e impatto atteso."
+    }
   },
   "howItWorks": {
-    "sectionLabel": "Come Funziona",
-    "title": "Dal CV alla chiarezza professionale in 3 passi",
-    "subtitle": "Nessun account necessario. Nessuna carta di credito. Carica il CV, rispondi a qualche domanda e lascia che l'IA faccia il lavoro pesante.",
-    "steps": [
-      {
-        "title": "Carica il tuo CV",
-        "description": "Trascina il tuo PDF. La nostra IA legge ogni dettaglio — titoli, tecnologie, certificazioni e deduce anche competenze non elencate esplicitamente.",
-        "detail": "Supporta PDF fino a 5MB. I tuoi dati sono elaborati in sicurezza e mai memorizzati."
-      },
-      {
-        "title": "Dicci il tuo Obiettivo",
-        "description": "Quale ruolo cerchi? Dove vuoi lavorare? Qual è il tuo obiettivo salariale? Un questionario rapido di 2 minuti dà il contesto necessario.",
-        "detail": "Opzionalmente incolla un annuncio specifico per un'analisi di match mirata."
-      },
-      {
-        "title": "Ottieni la tua Roadmap",
-        "description": "In circa 90 secondi, ricevi un'analisi completa: punteggio di match, punti di forza, lacune, benchmark salariali e un piano passo dopo passo.",
-        "detail": "Scarica come PDF, chatta con il tuo coach IA o confronta con annunci specifici."
-      }
-    ],
-    "visual": {
-      "uploadComplete": "Caricamento completato",
-      "currentRole": "Ruolo Attuale",
-      "targetRole": "Ruolo Target",
-      "country": "Paese",
-      "strengthsIdentified": "5 punti di forza identificati",
-      "gapsToClose": "3 gap da colmare",
-      "actionItems": "12 azioni da intraprendere"
+    "sectionTitle": "Come funziona",
+    "sectionSubtitle": "Dal caricamento del CV alla strategia di carriera in meno di 60 secondi.",
+    "step1": {
+      "title": "Carica e Definisci i Tuoi Obiettivi",
+      "desc": "Carica il tuo CV in PDF e indicaci il ruolo desiderato, il livello di esperienza e il paese. Opzionalmente, incolla un annuncio di lavoro per un'analisi mirata."
     },
-    "timeEstimate": "Tempo totale: circa 3 minuti dal caricamento alla roadmap completa"
+    "step2": {
+      "title": "L'IA Analizza Tutto",
+      "desc": "La nostra IA legge il tuo CV, estrae le tue competenze, confronta gli stipendi con dati governativi, identifica le lacune e costruisce la tua strategia di carriera personalizzata — il tutto in meno di 60 secondi."
+    },
+    "step3": {
+      "title": "Ricevi il Tuo Piano di Carriera",
+      "desc": "Esplora i tuoi risultati in oltre 10 sezioni: punteggio di compatibilità, analisi delle lacune, dati salariali, punteggio ATS, roadmap di carriera, raccomandazioni di ruoli e un coach IA per rispondere alle tue domande."
+    }
   },
   "cta": {
     "title": "La tua prossima mossa di carriera inizia qui",
