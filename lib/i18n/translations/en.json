@@ -22,7 +22,8 @@
     "close": "Close"
   },
   "nav": {
-    "cvOptimizer": "CV Optimizer"
+    "cvOptimizer": "CV Optimizer",
+    "jobTracker": "Job Tracker"
   },
   "hero": {
     "badge": "AI-Powered Career Advisor",

@@ -6,6 +6,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useTranslation, LOCALE_NAMES } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 import UserMenu from '@/components/auth/UserMenu';
+import { useAuth } from '@/lib/auth/context';
 
 const LOCALE_SHORT: Record<Locale, string> = {
   en: 'EN', ro: 'RO', de: 'DE', fr: 'FR', es: 'ES', it: 'IT',
@@ -46,6 +47,7 @@ function GlobeIcon() {
 export default function Header() {
   const pathname = usePathname();
   const { t, locale, setLocale } = useTranslation();
+  const { user } = useAuth();
   const [langOpen, setLangOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
   const isLanding = pathname === '/';
@@ -77,6 +79,23 @@ export default function Header() {
                   {t('common.howItWorks')}
                 </a>
               </div>
+            )}
+
+            {/* Job Tracker link — only when authenticated */}
+            {user && !isLanding && (
+              <Link
+                href="/dashboard/jobs"
+                className={`hidden sm:flex items-center gap-1.5 text-sm font-medium transition-colors px-3 py-2 rounded-xl hover:bg-black/[0.04] ${
+                  pathname === '/dashboard/jobs'
+                    ? 'text-primary'
+                    : 'text-text-secondary hover:text-text-primary'
+                }`}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                </svg>
+                {t('nav.jobTracker')}
+              </Link>
             )}
 
             {/* Language switcher */}

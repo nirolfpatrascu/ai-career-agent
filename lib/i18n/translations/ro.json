@@ -22,7 +22,8 @@
     "close": "Închide"
   },
   "nav": {
-    "cvOptimizer": "Optimizator CV"
+    "cvOptimizer": "Optimizator CV",
+    "jobTracker": "Aplicări"
   },
   "hero": {
     "badge": "Consilier de Carieră cu AI",

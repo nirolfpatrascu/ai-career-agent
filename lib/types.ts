@@ -330,3 +330,67 @@ export interface GeneratedCV {
   }[];
   coverLetterDraft: string;
 }
+
+// --- Job Tracker Types ---
+
+export type JobStatus = 'saved' | 'applied' | 'interviewing' | 'offer' | 'rejected' | 'withdrawn';
+
+export interface JobApplication {
+  id: string;
+  userId: string;
+  company: string;
+  roleTitle: string;
+  jobUrl?: string;
+  jobPostingText?: string;
+  location?: string;
+  workType: 'remote' | 'hybrid' | 'onsite' | 'flexible';
+  salaryMin?: number;
+  salaryMax?: number;
+  currency: string;
+  status: JobStatus;
+  statusUpdatedAt: string;
+  appliedAt?: string;
+  followUpAt?: string;
+  analysisId?: string;
+  matchScore?: number;
+  notes?: string;
+  contactName?: string;
+  contactEmail?: string;
+  sortOrder: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface JobApplicationInput {
+  company: string;
+  roleTitle: string;
+  jobUrl?: string;
+  jobPostingText?: string;
+  location?: string;
+  workType?: 'remote' | 'hybrid' | 'onsite' | 'flexible';
+  salaryMin?: number;
+  salaryMax?: number;
+  currency?: string;
+  status?: JobStatus;
+  appliedAt?: string;
+  followUpAt?: string;
+  notes?: string;
+  contactName?: string;
+  contactEmail?: string;
+}
+
+export interface JobTrackerStats {
+  total: number;
+  byStatus: Record<JobStatus, number>;
+  avgMatchScore: number | null;
+  followUpsDue: number;
+  appliedThisWeek: number;
+  appliedThisMonth: number;
+}
+
+export interface KanbanColumn {
+  id: JobStatus;
+  label: string;
+  color: string;
+  icon: string;
+}

@@ -22,7 +22,8 @@
     "close": "Cerrar"
   },
   "nav": {
-    "cvOptimizer": "Optimizador de CV"
+    "cvOptimizer": "Optimizador de CV",
+    "jobTracker": "Candidaturas"
   },
   "hero": {
     "badge": "Asesor de Carrera con IA",

@@ -8,6 +8,13 @@ import Footer from '@/components/shared/Footer';
 import { useAuth } from '@/lib/auth/context';
 import { useTranslation } from '@/lib/i18n';
 
+interface JobPipelineStats {
+  total: number;
+  byStatus: Record<string, number>;
+  avgMatchScore: number | null;
+  followUpsDue: number;
+}
+
 interface SavedAnalysis {
   id: string;
   target_role: string;
@@ -39,6 +46,7 @@ export default function DashboardPage() {
   const [analyses, setAnalyses] = useState<SavedAnalysis[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [pipelineStats, setPipelineStats] = useState<JobPipelineStats | null>(null);
 
   // Fetch analyses
   const fetchAnalyses = useCallback(async () => {
@@ -60,13 +68,32 @@ export default function DashboardPage() {
     }
   }, [session?.access_token]);
 
+  // Fetch pipeline stats
+  const fetchPipelineStats = useCallback(async () => {
+    if (!session?.access_token) return;
+    try {
+      const res = await fetch('/api/jobs', {
+        headers: { Authorization: `Bearer ${session.access_token}` },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.stats && data.stats.total > 0) {
+          setPipelineStats(data.stats);
+        }
+      }
+    } catch {
+      // Silently fail — pipeline card is optional
+    }
+  }, [session?.access_token]);
+
   useEffect(() => {
     if (user && session) {
       fetchAnalyses();
+      fetchPipelineStats();
     } else if (!authLoading) {
       setLoading(false);
     }
-  }, [user, session, authLoading, fetchAnalyses]);
+  }, [user, session, authLoading, fetchAnalyses, fetchPipelineStats]);
 
   // Delete analysis
   const handleDelete = useCallback(async (id: string) => {
@@ -129,6 +156,55 @@ export default function DashboardPage() {
       <Header />
       <main className="pt-24 pb-12 px-4 sm:px-6 min-h-screen">
         <div className="max-w-container mx-auto">
+          {/* Pipeline summary card */}
+          {pipelineStats && (
+            <Link
+              href="/dashboard/jobs"
+              className="block mb-6 bg-white border border-black/[0.08] rounded-2xl p-5 hover:border-primary/20 hover:shadow-sm transition-all group"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                  </svg>
+                  <span className="text-sm font-semibold text-text-primary">{t('jobs.pipeline.title')}</span>
+                </div>
+                <span className="text-xs text-primary font-medium group-hover:underline">{t('jobs.pipeline.viewTracker')} →</span>
+              </div>
+              <div className="flex flex-wrap items-center gap-3 text-xs">
+                <span className="text-text-secondary">{pipelineStats.total} {t('jobs.stats.total').toLowerCase()}</span>
+                {Object.entries(pipelineStats.byStatus).map(([status, count]) =>
+                  count > 0 ? (
+                    <span key={status} className="flex items-center gap-1.5 text-text-secondary">
+                      <span
+                        className="inline-block w-2 h-2 rounded-full"
+                        style={{
+                          backgroundColor:
+                            status === 'saved' ? '#6B7280' :
+                            status === 'applied' ? '#3B82F6' :
+                            status === 'interviewing' ? '#8B5CF6' :
+                            status === 'offer' ? '#22C55E' :
+                            status === 'rejected' ? '#EF4444' : '#9CA3AF'
+                        }}
+                      />
+                      {count} {t(`jobs.status.${status}`).toLowerCase()}
+                    </span>
+                  ) : null
+                )}
+                {pipelineStats.followUpsDue > 0 && (
+                  <span className="text-orange-500 font-medium">
+                    {pipelineStats.followUpsDue} {t('jobs.stats.followUpsDue').toLowerCase()}
+                  </span>
+                )}
+                {pipelineStats.avgMatchScore != null && (
+                  <span className="text-text-tertiary">
+                    {t('jobs.stats.avgMatch')}: {Math.round(pipelineStats.avgMatchScore)}%
+                  </span>
+                )}
+              </div>
+            </Link>
+          )}
+
           {/* Page header */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
             <div>
