@@ -2,6 +2,7 @@
 
 import type { JobMatch } from '@/lib/types';
 import { useTranslation } from '@/lib/i18n';
+import { FeedbackButton } from './FeedbackButton';
 
 interface JobMatchPanelProps {
   match: JobMatch;
@@ -21,13 +22,16 @@ export default function JobMatchPanel({ match }: JobMatchPanelProps) {
 
   return (
     <section>
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-          </svg>
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+            </svg>
+          </div>
+          <h2 className="text-xl font-bold text-text-primary font-display">{t('results.jobMatch.title')}</h2>
         </div>
-        <h2 className="text-xl font-bold text-text-primary font-display">{t('results.jobMatch.title')}</h2>
+        <FeedbackButton section="jobMatch" />
       </div>
 
       <div className="space-y-4">

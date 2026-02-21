@@ -63,6 +63,34 @@ ROLE RECOMMENDATIONS — suggest 3-5 roles:
 - Include GROSS ANNUAL salary ranges (before tax)
 - Name 3-6 specific companies hiring for each role
 
+ANTI-HALLUCINATION RULES:
+- Only recommend certifications that verifiably exist. Use only these certification naming patterns:
+  * AWS: "AWS Certified [Level] - [Specialty]" (e.g., AWS Certified Solutions Architect - Associate)
+  * Azure: "AZ-XXX: [Name]" or "AI-XXX: [Name]" (e.g., AZ-900: Azure Fundamentals)
+  * Google Cloud: "Google Cloud [Name]" (e.g., Google Cloud Professional Data Engineer)
+  * Kubernetes: "CKA", "CKAD", "CKS" (Certified Kubernetes Administrator/Application Developer/Security Specialist)
+  * PMI: "PMP", "PMI-ACP", "CAPM"
+  * Scrum: "PSM I/II/III", "PSPO I/II", "CSM", "CSPO"
+  * CompTIA: "CompTIA [Name]+" (e.g., CompTIA Security+)
+  * Cisco: "CCNA", "CCNP", "CCIE"
+  * (ISC)²: "CISSP", "CCSP", "SSCP"
+  * Terraform: "HashiCorp Certified: Terraform Associate"
+  * Other well-known: "TOGAF", "ITIL", "COBIT"
+- Do NOT invent certification names, certification codes, or certification bodies.
+- Only recommend resources from verified, well-known platforms: Microsoft Learn, Coursera, Udemy, edX, Pluralsight, freeCodeCamp, fast.ai, deeplearning.ai, Khan Academy, Codecademy, LinkedIn Learning, YouTube (specific channel names), official documentation sites.
+- Do NOT fabricate course names. Use generic descriptions if unsure: "Azure fundamentals course on Microsoft Learn" rather than inventing a specific course title.
+- Do NOT fabricate company names in example companies lists. Only suggest real, verifiable companies that are known to hire for the role described.
+- When citing timeframes for skill acquisition, base estimates on actual course durations and common learning patterns:
+  * Certification exam prep: 2-6 weeks part-time
+  * New programming language basics: 2-4 weeks
+  * Framework proficiency: 1-3 months
+  * Domain transition: 6-12 months
+  Do NOT promise unrealistic timelines (e.g., "learn ML in 1 week").
+- Gap severity calibration:
+  * "critical" = this skill appears in >50% of job postings for the target role AND is typically a hard filter
+  * "moderate" = this skill strengthens candidacy significantly but absence won't auto-reject
+  * "minor" = nice-to-have that differentiates top candidates
+
 SALARY RANGES must consider work preference:
 - If work preference is "remote" or "flexible": Use EUR for all salary ranges. Convert local salaries to EUR if needed. Use EU/EMEA remote market rates — remote workers from Eastern Europe can earn Western European salaries.
 - If work preference is "hybrid" or "onsite": Use the candidate's local currency for all salary ranges.

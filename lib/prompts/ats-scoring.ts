@@ -31,6 +31,14 @@ IMPORTANT RULES:
 - Include years of experience requirements as keywords (e.g., "5+ years Python")
 - Do NOT invent keywords not present in the posting
 
+ANTI-HALLUCINATION RULES:
+- Only extract keywords that are EXPLICITLY present in the job posting text. Do NOT add assumed requirements.
+- Category assignment must be based on the actual text:
+  * "required" = explicitly stated as "required", "must have", "minimum qualification", or listed under "Requirements"
+  * "preferred" = explicitly stated as "preferred", "nice to have", "bonus", or listed under "Preferred Qualifications"
+  * "nice-to-have" = mentioned in the job description body but not in requirements sections
+- Do NOT inflate keyword counts by splitting compound terms (e.g., "React and TypeScript" is 2 keywords, not 4).
+
 Respond ONLY with this JSON (no markdown, no backticks, no preamble):
 {
   "keywords": [

@@ -3,6 +3,7 @@
 import type { RoleRecommendation } from '@/lib/types';
 import { getFitScoreColor, formatCurrency } from '@/lib/utils';
 import { useTranslation } from '@/lib/i18n';
+import { FeedbackButton } from './FeedbackButton';
 
 interface RoleRecommendationsProps {
   roles: RoleRecommendation[];
@@ -14,13 +15,16 @@ export default function RoleRecommendations({ roles }: RoleRecommendationsProps)
 
   return (
     <section>
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-          </svg>
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+          </div>
+          <h2 className="text-xl font-bold text-text-primary font-display">{t('results.roles.title')}</h2>
         </div>
-        <h2 className="text-xl font-bold text-text-primary font-display">{t('results.roles.title')}</h2>
+        <FeedbackButton section="roleRecommendations" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">

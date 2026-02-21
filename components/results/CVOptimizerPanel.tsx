@@ -23,6 +23,7 @@ import {
   Plus,
   Trash2,
 } from 'lucide-react';
+import { FeedbackButton } from './FeedbackButton';
 
 // ============================================================================
 // Types
@@ -65,6 +66,11 @@ export function CVOptimizerPanel({ atsScore, jobMatch, analysis }: CVOptimizerPa
 
   return (
     <div className="animate-panelEnter space-y-6">
+      {/* Section header with feedback */}
+      <div className="flex items-center justify-end">
+        <FeedbackButton section="atsScore" />
+      </div>
+
       {/* Section A: What is ATS? */}
       <ATSExplainer t={t} />
 

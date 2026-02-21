@@ -4,6 +4,7 @@ import { useState } from 'react';
 import type { SalaryAnalysis, SalaryDataSource } from '@/lib/types';
 import { formatCurrency } from '@/lib/utils';
 import { useTranslation } from '@/lib/i18n';
+import { FeedbackButton } from './FeedbackButton';
 
 interface SalaryBenchmarkProps {
   salary: SalaryAnalysis;
@@ -77,24 +78,27 @@ export default function SalaryBenchmark({ salary }: SalaryBenchmarkProps) {
           </svg>
         </div>
         <div className="flex-1">
-          <div className="flex items-center gap-2">
-            <h2 className="text-xl font-bold text-text-primary font-display">{t('results.salary.title')}</h2>
-            <div className="relative">
-              <button
-                onClick={() => setShowTooltip(!showTooltip)}
-                onMouseEnter={() => setShowTooltip(true)}
-                onMouseLeave={() => setShowTooltip(false)}
-                className="w-5 h-5 rounded-full border border-black/[0.12] bg-black/[0.04] flex items-center justify-center text-text-tertiary hover:bg-black/[0.08] transition-colors"
-                aria-label="Salary data info"
-              >
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-              </button>
-              {showTooltip && (
-                <div className="absolute left-1/2 -translate-x-1/2 top-7 z-50 w-72 p-3 rounded-xl bg-white border border-black/[0.1] shadow-lg text-xs text-text-secondary leading-relaxed">
-                  {t('results.salary.source.tooltip')}
-                </div>
-              )}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <h2 className="text-xl font-bold text-text-primary font-display">{t('results.salary.title')}</h2>
+              <div className="relative">
+                <button
+                  onClick={() => setShowTooltip(!showTooltip)}
+                  onMouseEnter={() => setShowTooltip(true)}
+                  onMouseLeave={() => setShowTooltip(false)}
+                  className="w-5 h-5 rounded-full border border-black/[0.12] bg-black/[0.04] flex items-center justify-center text-text-tertiary hover:bg-black/[0.08] transition-colors"
+                  aria-label="Salary data info"
+                >
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                </button>
+                {showTooltip && (
+                  <div className="absolute left-1/2 -translate-x-1/2 top-7 z-50 w-72 p-3 rounded-xl bg-white border border-black/[0.1] shadow-lg text-xs text-text-secondary leading-relaxed">
+                    {t('results.salary.source.tooltip')}
+                  </div>
+                )}
+              </div>
             </div>
+            <FeedbackButton section="salaryAnalysis" />
           </div>
           <p className="text-xs text-text-tertiary">{t('results.salary.subtitle')}</p>
         </div>

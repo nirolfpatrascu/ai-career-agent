@@ -15,6 +15,8 @@ import {
 } from '@/lib/prompts';
 import { buildTranslationPrompt } from '@/lib/prompts/translate';
 import { buildKnowledgeContext } from '@/lib/knowledge';
+import { validateAnalysisResult, autoFixResult } from '@/lib/validation';
+import { lookupSalary } from '@/lib/salary-lookup';
 import {
   buildATSKeywordExtractionPrompt,
   buildATSMatchingPrompt,
@@ -416,6 +418,27 @@ export async function POST(request: NextRequest) {
             console.log('[stream] Translation failed, using English:', e);
           }
         }
+
+        // --- Validation Layer ---
+        const validationReport = validateAnalysisResult(result, lookupSalary);
+        if (validationReport.autoFixed > 0) {
+          result = autoFixResult(result, validationReport.issues);
+          console.log(`[Validation] Auto-fixed ${validationReport.autoFixed} issues`);
+        }
+        if (!validationReport.isValid) {
+          console.warn('[Validation] Issues found:', validationReport.issues.filter(i => i.severity === 'error'));
+        }
+        if (validationReport.issues.length > 0) {
+          console.log(`[Validation] ${validationReport.issues.length} total issues (${validationReport.issues.filter(i => i.severity === 'error').length} errors, ${validationReport.issues.filter(i => i.severity === 'warning').length} warnings)`);
+        }
+        // Attach validation metadata for potential UI display
+        Object.assign(result, {
+          _validation: {
+            issueCount: validationReport.issues.length,
+            autoFixed: validationReport.autoFixed,
+            hasErrors: !validationReport.isValid,
+          },
+        });
 
         // Sanitize and send final result
         const sanitized = sanitizeResult(result);

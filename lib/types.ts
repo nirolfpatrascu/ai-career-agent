@@ -291,6 +291,24 @@ export interface ATSScoreRequest {
   jobUrl?: string;
 }
 
+// --- Validation Types ---
+
+export interface ValidationIssue {
+  section: string;           // 'fitScore' | 'strengths' | 'gaps' | 'actionPlan' | 'salaryAnalysis' | 'roleRecommendations' | 'jobMatch'
+  severity: 'error' | 'warning' | 'info';
+  field: string;             // specific field path, e.g., 'fitScore.score', 'gaps[0].severity'
+  message: string;           // human-readable issue description
+  autoFixable: boolean;      // can the system fix this automatically?
+  autoFixAction?: string;    // description of what auto-fix would do
+}
+
+export interface ValidationReport {
+  isValid: boolean;          // true if no errors (warnings OK)
+  issues: ValidationIssue[];
+  autoFixed: number;         // count of issues auto-fixed
+  sections: Record<string, { valid: boolean; issueCount: number }>;
+}
+
 // --- CV Generator types ---
 
 export interface GeneratedCV {

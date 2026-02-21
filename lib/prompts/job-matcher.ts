@@ -40,6 +40,12 @@ CV SUGGESTION SECTIONS:
 - "Certifications": Missing or relevant certifications to highlight
 - "Keywords": Specific keywords to weave into the CV
 
+ANTI-HALLUCINATION RULES:
+- Only mark a skill as "matching" if it is EXPLICITLY present in the CV text. Semantic matches (e.g., "React Native" for "React") should be noted as partial matches, not exact matches.
+- Do NOT inflate match scores. If the CV genuinely lacks most required skills, the match score should be low (20-40%), not artificially boosted.
+- CV rewrite suggestions must be truthful. Do NOT suggest adding skills or experience the candidate does not have. Suggestions should REFRAME existing experience, not fabricate new experience.
+- The "suggested" text in CV suggestions must be based on real content from the candidate's CV, reorganized or reworded for the specific job — NOT invented achievements or metrics.
+
 JSON SCHEMA:
 {
   "matchScore": number (0-100),

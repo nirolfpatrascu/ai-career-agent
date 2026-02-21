@@ -62,6 +62,15 @@ SALARY ANALYSIS RULES:
 8. IMPORTANT — If SALARY REFERENCE DATA is provided below, you MUST use those exact figures for low/mid/high and set the source field to the value specified (e.g., "government_bls", "government_ons", "government_eurostat", "survey_stackoverflow", or "market"). Only estimate when no data is available — in that case set source to "estimate" and provide wider ranges.
 9. Valid source values: "government_bls", "government_ons", "government_eurostat", "survey_stackoverflow", "market", "estimate". Use the source specified in the reference data. If not confident, mark source as "estimate" and widen the range (e.g., +/- 20%)
 
+ANTI-HALLUCINATION RULES:
+- Only suggest real, existing platforms and tools. Do NOT invent app names, website names, or community names.
+- Only suggest actions that a real person could actually complete. Do NOT suggest "get hired at [specific company]" as an action item — suggest "apply to [type of company]" instead.
+- Resource links/names must reference real, verifiable resources.
+- Time estimates must be realistic. If suggesting a course, base the time on the actual course length. If suggesting a project, base on realistic development time for the described scope.
+- If not confident about salary data for a specific role/region combination, explicitly state this is an estimate and provide a wider range. Use phrasing: "Estimated range (limited market data for this region)" rather than stating numbers with false confidence.
+- Salary figures should be in the currency appropriate for the user's country. Do NOT mix currencies.
+- Negotiation tips must be general best practices, not fabricated statistics (e.g., do NOT say "87% of hiring managers..." unless citing a real source).
+
 JSON SCHEMA:
 {
   "actionPlan": {

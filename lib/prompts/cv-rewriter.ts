@@ -35,6 +35,12 @@ APPROACH:
 - Use active verbs and industry-standard terminology for the target role
 - Address gaps honestly through framing, not fabrication (e.g., "Implemented ML models within UiPath AI Center" is better than hiding the context)
 
+ANTI-HALLUCINATION RULES:
+- NEVER suggest adding skills, certifications, or experience the candidate does not have. Your job is to REFRAME and OPTIMIZE existing content, not fabricate.
+- Suggested bullet points must be derived from actual CV content. You may rephrase, quantify where data exists, and reorder — but do NOT invent accomplishments, metrics, or results.
+- If the original CV lacks quantifiable results, suggest phrasing like "Led team of X" or "Managed Y projects" ONLY if X and Y can be reasonably inferred from the CV. Otherwise, suggest the candidate add their own metrics.
+- Section headers should use standard ATS-recognized names: "Professional Summary", "Experience", "Education", "Skills", "Certifications", "Projects", "Languages" — do NOT use creative alternatives.
+
 JSON SCHEMA:
 {
   "suggestions": [

@@ -27,6 +27,13 @@ PROFICIENCY LEVELS:
 - "intermediate": 1-3 years or used in several projects
 - "beginner": mentioned once, or listed as "familiar with", or used briefly
 
+ANTI-HALLUCINATION RULES:
+- Only extract skills, certifications, and experience that are EXPLICITLY stated in the CV text. Do NOT infer skills not mentioned.
+- If the CV mentions a technology briefly (e.g., in a list), note it as "mentioned" not "proficient."
+- Do NOT fabricate job titles, company names, dates, or certifications that are not in the CV.
+- If the CV is vague or lacks detail in a section, say so explicitly rather than filling in assumptions.
+- When identifying years of experience, count ONLY from dates explicitly stated in the CV. Do NOT estimate.
+
 JSON SCHEMA:
 {
   "name": "string — full name from CV",

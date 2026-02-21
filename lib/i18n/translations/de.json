@@ -647,5 +647,12 @@
         "suggested": "Vorgeschlagen"
       }
     }
+  },
+  "feedback": {
+    "helpful": "War das hilfreich?",
+    "thankYou": "Danke für Ihr Feedback!",
+    "whatBetter": "Was könnte besser sein?",
+    "send": "Senden",
+    "placeholder": "Optional: sagen Sie uns, was verbessert werden könnte..."
   }
 }

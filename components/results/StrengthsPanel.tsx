@@ -3,6 +3,7 @@
 import type { Strength } from '@/lib/types';
 import { getTierBg } from '@/lib/utils';
 import { useTranslation } from '@/lib/i18n';
+import { FeedbackButton } from './FeedbackButton';
 
 interface StrengthsPanelProps {
   strengths: Strength[];
@@ -26,16 +27,19 @@ export default function StrengthsPanel({ strengths }: StrengthsPanelProps) {
 
   return (
     <section>
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-9 h-9 rounded-xl bg-success/10 border border-success/20 flex items-center justify-center text-success">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-xl bg-success/10 border border-success/20 flex items-center justify-center text-success">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <div>
+            <h2 className="text-xl font-bold text-text-primary font-display">{t('results.strengths.title')}</h2>
+            <p className="text-xs text-text-tertiary">{strengths.length} {strengths.length === 1 ? 'strength' : 'strengths'} identified</p>
+          </div>
         </div>
-        <div>
-          <h2 className="text-xl font-bold text-text-primary font-display">{t('results.strengths.title')}</h2>
-          <p className="text-xs text-text-tertiary">{strengths.length} {strengths.length === 1 ? 'strength' : 'strengths'} identified</p>
-        </div>
+        <FeedbackButton section="strengths" />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

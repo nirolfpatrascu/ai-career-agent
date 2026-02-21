@@ -647,5 +647,12 @@
         "suggested": "Sugerido"
       }
     }
+  },
+  "feedback": {
+    "helpful": "¿Te fue útil?",
+    "thankYou": "¡Gracias por tu opinión!",
+    "whatBetter": "¿Qué podría ser mejor?",
+    "send": "Enviar",
+    "placeholder": "Opcional: dinos qué podría mejorarse..."
   }
 }

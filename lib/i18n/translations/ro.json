@@ -647,5 +647,12 @@
         "suggested": "Sugerat"
       }
     }
+  },
+  "feedback": {
+    "helpful": "A fost util?",
+    "thankYou": "Mulțumim pentru feedback!",
+    "whatBetter": "Ce ar putea fi mai bine?",
+    "send": "Trimite",
+    "placeholder": "Opțional: spune-ne ce ar putea fi îmbunătățit..."
   }
 }
