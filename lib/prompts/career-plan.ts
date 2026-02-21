@@ -6,6 +6,7 @@ import type {
   ActionPlan,
   SalaryAnalysis,
 } from '../types';
+import { lookupSalary, lookupRemoteSalary } from '../salary-lookup';
 
 // ============================================================================
 // Prompt #3: Career Plan + Salary Benchmarks
@@ -58,6 +59,8 @@ SALARY ANALYSIS RULES:
 5. Growth potential should be a realistic percentage range, not aspirational
 6. "Best monetary move" should be a specific, actionable recommendation — not generic career advice. For remote candidates, emphasize that remote roles for Western EU/US companies pay significantly above local market.
 7. Negotiation tips should be specific to this person's situation, referencing their actual experience
+8. IMPORTANT — If CURATED SALARY DATA is provided below for a role, you MUST use those exact figures for low/mid/high and set source to "market". Only estimate when no curated data is available — in that case set source to "estimate" and provide wider ranges.
+9. If you are not confident about salary for a specific role/region combination, explicitly mark the source as "estimate" and widen the range (e.g., +/- 20%)
 
 JSON SCHEMA:
 {
@@ -80,18 +83,21 @@ JSON SCHEMA:
       "mid": number,
       "high": number,
       "currency": "string",
-      "region": "string — specific market description"
+      "region": "string — specific market description",
+      "source": "market | estimate"
     },
     "targetRoleMarket": {
       "low": number,
       "mid": number,
       "high": number,
       "currency": "string",
-      "region": "string"
+      "region": "string",
+      "source": "market | estimate"
     },
     "growthPotential": "string — percentage range and timeframe",
     "bestMonetaryMove": "string — specific, actionable paragraph (3-5 sentences). Reference real companies and strategies.",
-    "negotiationTips": ["string array — 3 specific tips referencing this person's actual experience and strengths"]
+    "negotiationTips": ["string array — 3 specific tips referencing this person's actual experience and strengths"],
+    "dataSource": "market | estimate — 'market' if BOTH roles used curated data, otherwise 'estimate'"
   }
 }`;
 
@@ -99,6 +105,34 @@ JSON SCHEMA:
   const targetRolesText = alternativeRoles.length > 0
     ? `- Primary Target Role: ${questionnaire.targetRole}\n- Alternative Target Roles: ${alternativeRoles.join(', ')}`
     : `- Target Role: ${questionnaire.targetRole}`;
+
+  // --- Curated salary lookup ---
+  const isRemote = questionnaire.workPreference === 'remote' || questionnaire.workPreference === 'flexible';
+  const currentSalaryBand = lookupSalary(questionnaire.currentRole, questionnaire.country);
+  const targetSalaryBand = isRemote
+    ? lookupRemoteSalary(questionnaire.targetRole)
+    : lookupSalary(questionnaire.targetRole, questionnaire.country);
+
+  let curatedSalaryContext = '';
+  if (currentSalaryBand || targetSalaryBand) {
+    curatedSalaryContext += '\nCURATED SALARY DATA (use these exact figures, set source to "market"):\n';
+    if (currentSalaryBand) {
+      const level = questionnaire.yearsExperience <= 3 ? 'junior' : questionnaire.yearsExperience <= 8 ? 'mid' : questionnaire.yearsExperience <= 15 ? 'senior' : 'lead';
+      const band = currentSalaryBand[level];
+      curatedSalaryContext += `CURRENT ROLE (${questionnaire.currentRole} in ${questionnaire.country}): ${currentSalaryBand.currency} ${band.low}-${band.mid}-${band.high} (${level} level)\n`;
+    }
+    if (targetSalaryBand) {
+      curatedSalaryContext += `TARGET ROLE (${questionnaire.targetRole}${isRemote ? ' Remote EU' : ` in ${questionnaire.country}`}): ${targetSalaryBand.currency} junior ${targetSalaryBand.junior.low}-${targetSalaryBand.junior.high} | mid ${targetSalaryBand.mid.low}-${targetSalaryBand.mid.high} | senior ${targetSalaryBand.senior.low}-${targetSalaryBand.senior.high} | lead ${targetSalaryBand.lead.low}-${targetSalaryBand.lead.high}\n`;
+    }
+    if (!currentSalaryBand) {
+      curatedSalaryContext += `NOTE: No curated data for current role "${questionnaire.currentRole}" in ${questionnaire.country}. Estimate it and set source to "estimate".\n`;
+    }
+    if (!targetSalaryBand) {
+      curatedSalaryContext += `NOTE: No curated data for target role "${questionnaire.targetRole}". Estimate it and set source to "estimate".\n`;
+    }
+  } else {
+    curatedSalaryContext = '\nNO CURATED SALARY DATA available for these roles/regions. Estimate both and set source to "estimate" and dataSource to "estimate". If not confident, provide wider ranges.\n';
+  }
 
   const userMessage = `CANDIDATE PROFILE SUMMARY:
 - Name: ${profile.name}
@@ -123,9 +157,11 @@ ${JSON.stringify(gaps, null, 2)}
 RECOMMENDED ROLES:
 ${JSON.stringify(roleRecommendations, null, 2)}
 
+${curatedSalaryContext}
+
 ${knowledgeContext ? `REFERENCE DATA (use to calibrate salary ranges, action items, and negotiation tips — do NOT copy verbatim, synthesize into personalized recommendations):\n${knowledgeContext}` : ''}
 
-Create the action plan and salary analysis as JSON. Remember: ALL salary figures must be GROSS ANNUAL.`;
+Create the action plan and salary analysis as JSON. Remember: ALL salary figures must be GROSS ANNUAL. Use curated data when provided (source: "market"), estimate otherwise (source: "estimate").`;
 
   return { system, userMessage };
 }
@@ -140,10 +176,11 @@ export const CAREER_PLAN_FALLBACK: CareerPlanResult = {
     twelveMonths: [],
   },
   salaryAnalysis: {
-    currentRoleMarket: { low: 0, mid: 0, high: 0, currency: 'EUR', region: 'Unknown' },
-    targetRoleMarket: { low: 0, mid: 0, high: 0, currency: 'EUR', region: 'Unknown' },
+    currentRoleMarket: { low: 0, mid: 0, high: 0, currency: 'EUR', region: 'Unknown', source: 'estimate' },
+    targetRoleMarket: { low: 0, mid: 0, high: 0, currency: 'EUR', region: 'Unknown', source: 'estimate' },
     growthPotential: 'Unable to estimate',
     bestMonetaryMove: 'Unable to generate recommendation. Please try again.',
     negotiationTips: [],
+    dataSource: 'estimate',
   },
 };

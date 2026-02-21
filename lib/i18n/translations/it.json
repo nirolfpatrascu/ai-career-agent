@@ -297,7 +297,10 @@
       "targetRoleMarket": "Mercato del Ruolo Target",
       "bestMove": "Miglior Mossa Finanziaria",
       "negotiationTips": "Consigli di Negoziazione",
-      "growthPotential": "Potenziale di Crescita"
+      "growthPotential": "Potenziale di Crescita",
+      "sourceMarket": "Dati di mercato",
+      "sourceEstimate": "Stima IA",
+      "sources": "Fonti: Glassdoor, Levels.fyi, LinkedIn Salary, Stack Overflow Survey (2024-2025)"
     },
     "jobMatch": {
       "title": "Analisi di Matching",

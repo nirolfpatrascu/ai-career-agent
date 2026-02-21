@@ -109,6 +109,7 @@ export interface SalaryAnalysis {
   growthPotential: string;
   bestMonetaryMove: string;
   negotiationTips: string[];
+  dataSource?: 'market' | 'estimate';
 }
 
 export interface MarketSalary {
@@ -117,6 +118,7 @@ export interface MarketSalary {
   high: number;
   currency: string;
   region: string;
+  source?: 'market' | 'estimate';
 }
 
 export interface JobMatch {

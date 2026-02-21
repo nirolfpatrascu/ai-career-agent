@@ -297,7 +297,10 @@
       "targetRoleMarket": "Marché du Poste Cible",
       "bestMove": "Meilleur Mouvement Financier",
       "negotiationTips": "Conseils de Négociation",
-      "growthPotential": "Potentiel de Croissance"
+      "growthPotential": "Potentiel de Croissance",
+      "sourceMarket": "Données marché",
+      "sourceEstimate": "Estimation IA",
+      "sources": "Sources : Glassdoor, Levels.fyi, LinkedIn Salary, Stack Overflow Survey (2024-2025)"
     },
     "jobMatch": {
       "title": "Analyse de Matching",

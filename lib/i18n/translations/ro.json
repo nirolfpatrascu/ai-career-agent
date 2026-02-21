@@ -297,7 +297,10 @@
       "targetRoleMarket": "Piața Rolului Țintă",
       "bestMove": "Cea Mai Bună Mișcare Financiară",
       "negotiationTips": "Sfaturi de Negociere",
-      "growthPotential": "Potențial de Creștere"
+      "growthPotential": "Potențial de Creștere",
+      "sourceMarket": "Date de piață",
+      "sourceEstimate": "Estimare AI",
+      "sources": "Surse: Glassdoor, Levels.fyi, LinkedIn Salary, Stack Overflow Survey (2024-2025)"
     },
     "jobMatch": {
       "title": "Analiză Potrivire Job",
