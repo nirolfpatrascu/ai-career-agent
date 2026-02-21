@@ -39,6 +39,7 @@ export interface AnalysisResult {
   actionPlan: ActionPlan;
   salaryAnalysis: SalaryAnalysis;
   jobMatch?: JobMatch;
+  atsScore?: ATSScoreResult;
 }
 
 export interface AnalysisMetadata {
@@ -219,6 +220,70 @@ export type TierColor = {
   strong: string;
   supporting: string;
 };
+
+// --- CV Generator types ---
+
+// --- ATS Scoring Types ---
+
+export interface ATSScoreResult {
+  overallScore: number; // 0-100
+  keywordScore: number; // 0-100 (weighted: required keywords count more)
+  formatScore: number; // 0-100
+  keywords: ATSKeywordAnalysis;
+  formatIssues: ATSFormatIssue[];
+  recommendations: ATSRecommendation[];
+  companyATS?: CompanyATSInfo;
+}
+
+export interface ATSKeywordAnalysis {
+  matched: ATSKeyword[];
+  semanticMatch: ATSKeyword[]; // e.g., "React" ≈ "React.js"
+  missing: ATSKeyword[];
+  total: {
+    required: number;
+    matched: number;
+    missing: number;
+  };
+}
+
+export interface ATSKeyword {
+  keyword: string;
+  category: 'required' | 'preferred' | 'nice-to-have';
+  matchedAs?: string; // what it matched in CV (for semantic matches)
+  cvSection?: string; // where found / where to add
+  importance: 'high' | 'medium' | 'low';
+}
+
+export interface ATSFormatIssue {
+  issue: string;
+  severity: 'critical' | 'warning' | 'info';
+  description: string;
+  fix: string;
+}
+
+export interface ATSRecommendation {
+  action: string;
+  section: string; // Which CV section to modify
+  priority: 'critical' | 'high' | 'medium';
+  keywords: string[]; // Which keywords this addresses
+  example?: string; // Example of what to add/change
+}
+
+export interface CompanyATSInfo {
+  company: string;
+  atsSystem: string; // "Workday" | "Greenhouse" | "Lever" | "Taleo" | "iCIMS" | "SmartRecruiters" | "Unknown"
+  tips: string[];
+}
+
+// --- ATS Score API Request/Response ---
+
+export interface ATSScoreRequest {
+  cvText: string;
+  jobPosting: string;
+  extractedSkills?: string[];
+  companyName?: string;
+  jobUrl?: string;
+}
 
 // --- CV Generator types ---
 
