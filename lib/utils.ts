@@ -247,6 +247,18 @@ export const WORK_PREFERENCES = [
 ] as const;
 
 /**
+ * Escape HTML special characters to prevent XSS in HTML string contexts.
+ */
+export function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+/**
  * Sanitize text from API responses — replaces Unicode special characters
  * with ASCII equivalents to prevent display issues.
  */

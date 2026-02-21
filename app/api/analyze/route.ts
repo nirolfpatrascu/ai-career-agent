@@ -133,7 +133,7 @@ export async function POST(request: NextRequest) {
 
     // --- Parse LinkedIn PDF if provided separately ---
     const linkedInPdf = formData.get('linkedInPdf') as File | null;
-    if (linkedInPdf) {
+    if (linkedInPdf && linkedInPdf.size <= 5 * 1024 * 1024) {
       try {
         const liBuffer = Buffer.from(await linkedInPdf.arrayBuffer());
         if (validatePDFBuffer(liBuffer)) {

@@ -19,7 +19,8 @@
     "fetch": "Obtener",
     "added": "Añadido",
     "remove": "Eliminar",
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "language": "Idioma"
   },
   "nav": {
     "cvOptimizer": "Optimizador de CV",

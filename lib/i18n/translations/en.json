@@ -19,7 +19,8 @@
     "fetch": "Fetch",
     "added": "Added",
     "remove": "Remove",
-    "close": "Close"
+    "close": "Close",
+    "language": "Language"
   },
   "nav": {
     "cvOptimizer": "CV Optimizer",

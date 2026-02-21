@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useAuth } from '@/lib/auth/context';
 import { useTranslation } from '@/lib/i18n';
 
@@ -184,7 +185,7 @@ export default function UserMenu() {
         className="flex items-center gap-2 px-2 py-1.5 rounded-xl hover:bg-black/[0.04] transition-colors"
       >
         {avatarUrl ? (
-          <img src={avatarUrl} alt="" className="w-7 h-7 rounded-full object-cover" referrerPolicy="no-referrer" />
+          <Image src={avatarUrl} alt="" width={28} height={28} className="w-7 h-7 rounded-full object-cover" referrerPolicy="no-referrer" unoptimized />
         ) : (
           <div className="w-7 h-7 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
             <span className="text-[11px] font-bold text-primary">{initials}</span>

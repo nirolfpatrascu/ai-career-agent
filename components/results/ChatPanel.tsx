@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import type { AnalysisResult } from '@/lib/types';
 import { useTranslation } from '@/lib/i18n';
+import { escapeHtml } from '@/lib/utils';
 
 interface ChatMessage {
   role: 'user' | 'assistant';
@@ -36,7 +37,9 @@ const QUICK_ACTION_ICONS = [
 ];
 
 function renderMarkdown(text: string): string {
-  return text
+  // First escape HTML to prevent XSS, then apply markdown formatting
+  let safe = escapeHtml(text);
+  return safe
     .replace(/```(\w*)\n([\s\S]*?)```/g, '<pre class="bg-black/[0.04] rounded-lg p-3 my-2 overflow-x-auto text-xs border border-black/[0.06]"><code>$2</code></pre>')
     .replace(/`([^`]+)`/g, '<code class="bg-primary/[0.06] rounded px-1.5 py-0.5 text-xs text-primary font-medium">$1</code>')
     .replace(/^### (.+)$/gm, '<h4 class="font-semibold text-text-primary mt-3 mb-1">$1</h4>')

@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import ReactPDF from '@react-pdf/renderer';
-import { Document, Page, Text, View, StyleSheet, Font } from '@react-pdf/renderer';
+import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 import React from 'react';
+import { checkRateLimit } from '@/lib/rate-limit';
 
 // Register Helvetica (built-in, no need to load)
 const styles = StyleSheet.create({
@@ -179,6 +180,19 @@ function buildCVDocument(data: CVData) {
 }
 
 export async function POST(req: NextRequest) {
+  // Rate limiting
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+    || req.headers.get('x-real-ip')
+    || req.headers.get('cf-connecting-ip')
+    || 'unknown';
+  const rateLimit = checkRateLimit(`cvpdf:${ip}`);
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please try again later.' },
+      { status: 429 }
+    );
+  }
+
   try {
     const data: CVData = await req.json();
     const doc = buildCVDocument(data);

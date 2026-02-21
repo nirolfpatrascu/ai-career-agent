@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { useTranslation } from '@/lib/i18n';
 import type { JobApplication, JobStatus } from '@/lib/types';
 import KanbanColumn from './KanbanColumn';
@@ -39,23 +39,26 @@ export default function KanbanBoard({
   ];
 
   // Group jobs by status
-  const jobsByStatus: Record<JobStatus, JobApplication[]> = {
-    saved: [],
-    applied: [],
-    interviewing: [],
-    offer: [],
-    rejected: [],
-    withdrawn: [],
-  };
-  for (const job of jobs) {
-    if (jobsByStatus[job.status]) {
-      jobsByStatus[job.status].push(job);
+  const jobsByStatus = useMemo(() => {
+    const grouped: Record<JobStatus, JobApplication[]> = {
+      saved: [],
+      applied: [],
+      interviewing: [],
+      offer: [],
+      rejected: [],
+      withdrawn: [],
+    };
+    for (const job of jobs) {
+      if (grouped[job.status]) {
+        grouped[job.status].push(job);
+      }
     }
-  }
-  // Sort each column by sortOrder
-  for (const status of Object.keys(jobsByStatus) as JobStatus[]) {
-    jobsByStatus[status].sort((a, b) => a.sortOrder - b.sortOrder);
-  }
+    // Sort each column by sortOrder
+    for (const status of Object.keys(grouped) as JobStatus[]) {
+      grouped[status].sort((a, b) => a.sortOrder - b.sortOrder);
+    }
+    return grouped;
+  }, [jobs]);
 
   const handleDragStart = useCallback((e: React.DragEvent, jobId: string) => {
     setDraggingJobId(jobId);

@@ -122,6 +122,21 @@ export async function POST(request: NextRequest) {
     }
   }
 
+  // Validate string field lengths to prevent oversized inputs
+  const stringFields = ['currentRole', 'targetRole', 'country', 'workPreference'] as const;
+  for (const field of stringFields) {
+    if (typeof questionnaire[field] === 'string' && (questionnaire[field] as string).length > 200) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid field', message: `${field} exceeds maximum length.` }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+  }
+  // Truncate job posting to prevent oversized input to Claude
+  if (questionnaire.jobPosting && questionnaire.jobPosting.length > 50000) {
+    questionnaire.jobPosting = questionnaire.jobPosting.slice(0, 50000);
+  }
+
   // --- All validation passed — open SSE stream ---
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
@@ -151,7 +166,7 @@ export async function POST(request: NextRequest) {
 
         // Parse LinkedIn PDF if provided
         const linkedInPdf = formData.get('linkedInPdf') as File | null;
-        if (linkedInPdf) {
+        if (linkedInPdf && linkedInPdf.size <= 5 * 1024 * 1024) {
           try {
             const liBuffer = Buffer.from(await linkedInPdf.arrayBuffer());
             if (validatePDFBuffer(liBuffer)) {
@@ -454,9 +469,17 @@ export async function POST(request: NextRequest) {
         });
 
       } catch (error) {
-        const msg = error instanceof Error ? error.message : 'Something went wrong. Please try again.';
-        console.error('[stream] Error:', msg);
-        send({ step: 'error', message: msg });
+        console.error('[stream] Error:', error instanceof Error ? error.message : error);
+        // Never send raw error messages to client — could leak internal details
+        let userMessage = 'Something went wrong during the analysis. Please try again.';
+        if (error instanceof Error) {
+          if (error.message.includes('Could not extract')) {
+            userMessage = 'Unable to extract text from this PDF. It may be scanned or corrupted.';
+          } else if (error.message.includes('timeout') || error.message.includes('ETIMEDOUT')) {
+            userMessage = 'The analysis took too long. Please try again with a shorter CV.';
+          }
+        }
+        send({ step: 'error', message: userMessage });
       } finally {
         controller.close();
       }

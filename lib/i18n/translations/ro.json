@@ -19,7 +19,8 @@
     "fetch": "Preia",
     "added": "Adăugat",
     "remove": "Șterge",
-    "close": "Închide"
+    "close": "Închide",
+    "language": "Limbă"
   },
   "nav": {
     "cvOptimizer": "Optimizator CV",

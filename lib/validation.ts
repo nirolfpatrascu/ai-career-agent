@@ -952,25 +952,3 @@ function textSimilarity(a: string, b: string): number {
   return union > 0 ? intersection / union : 0;
 }
 
-// ============================================================================
-// Integration pattern for app/api/analyze-stream/route.ts
-// ============================================================================
-//
-// In analyze-stream/route.ts, after assembling the final result:
-// import { validateAnalysisResult, autoFixResult } from '@/lib/validation';
-// import { lookupSalary } from '@/lib/salary-lookup';
-//
-// const validationReport = validateAnalysisResult(result, lookupSalary);
-// if (validationReport.autoFixed > 0) {
-//   result = autoFixResult(result, validationReport.issues);
-//   console.log(`[Validation] Auto-fixed ${validationReport.autoFixed} issues`);
-// }
-// if (!validationReport.isValid) {
-//   console.warn('[Validation] Issues found:', validationReport.issues.filter(i => i.severity === 'error'));
-// }
-// // Attach validation metadata to result for potential UI display
-// (result as any)._validation = {
-//   issueCount: validationReport.issues.length,
-//   autoFixed: validationReport.autoFixed,
-//   hasErrors: !validationReport.isValid,
-// };

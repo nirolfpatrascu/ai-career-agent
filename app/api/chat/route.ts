@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server';
 import { streamClaude } from '@/lib/claude';
+import { checkRateLimit } from '@/lib/rate-limit';
 import { getLanguageInstruction } from '@/lib/prompts/language';
 import type { AnalysisResult } from '@/lib/types';
 
@@ -111,6 +112,19 @@ RESPONSE STYLE:
 IMPORTANT: Never make up skills, experience, or qualifications the user doesn't have. Reference only what's in their analysis.`;
 
 export async function POST(request: NextRequest) {
+  // Rate limiting
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+    || request.headers.get('x-real-ip')
+    || request.headers.get('cf-connecting-ip')
+    || 'unknown';
+  const rateLimit = checkRateLimit(`chat:${ip}`);
+  if (!rateLimit.allowed) {
+    return new Response(
+      JSON.stringify({ error: 'Too many requests. Please try again later.' }),
+      { status: 429, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
   try {
     const body: ChatRequest = await request.json();
 

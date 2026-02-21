@@ -3,6 +3,7 @@
 
 import { useState, useCallback, useMemo } from 'react';
 import { useTranslation } from '@/lib/i18n';
+import { escapeHtml } from '@/lib/utils';
 import type { ATSScoreResult, JobMatch, AnalysisResult, CVSuggestion } from '@/lib/types';
 import {
   Shield,
@@ -493,6 +494,29 @@ function CVSuggestionsSection({
 }
 
 // ============================================================================
+// Static section name → editor key mapping
+// ============================================================================
+
+const SECTION_MAP: Record<string, keyof CVSections> = {
+  'Professional Summary': 'summary',
+  'Summary': 'summary',
+  'Skills': 'skills',
+  'Technical Skills': 'skills',
+  'Experience': 'experience',
+  'Work Experience': 'experience',
+  'Education': 'education',
+  'Certifications': 'certifications',
+  'Languages': 'languages',
+};
+
+function getSectionKey(sectionName: string): keyof CVSections | null {
+  for (const [key, value] of Object.entries(SECTION_MAP)) {
+    if (sectionName.toLowerCase().includes(key.toLowerCase())) return value;
+  }
+  return null;
+}
+
+// ============================================================================
 // Section D: CV Editor + PDF Download
 // ============================================================================
 
@@ -521,25 +545,7 @@ function CVEditorSection({
   const [showAppliedToast, setShowAppliedToast] = useState(false);
   const [pdfLoading, setPdfLoading] = useState(false);
 
-  // Map suggestion sections to editor sections
-  const sectionMap: Record<string, keyof CVSections> = {
-    'Professional Summary': 'summary',
-    'Summary': 'summary',
-    'Skills': 'skills',
-    'Technical Skills': 'skills',
-    'Experience': 'experience',
-    'Work Experience': 'experience',
-    'Education': 'education',
-    'Certifications': 'certifications',
-    'Languages': 'languages',
-  };
-
-  const getSectionKey = (sectionName: string): keyof CVSections | null => {
-    for (const [key, value] of Object.entries(sectionMap)) {
-      if (sectionName.toLowerCase().includes(key.toLowerCase())) return value;
-    }
-    return null;
-  };
+  // getSectionKey is module-level (uses static SECTION_MAP)
 
   const hasSuggestionForSection = (sectionKey: string): number | null => {
     if (!cvSuggestions) return null;
@@ -945,29 +951,29 @@ function EditorCard({
 function buildPrintHtml(sections: CVSections, targetRole: string): string {
   const experienceHtml = sections.experience.map(e => `
     <div style="margin-bottom:12px">
-      <div style="display:flex;justify-content:space-between"><strong>${e.title}</strong><span style="color:#666">${e.dateRange}</span></div>
-      <div style="color:#444">${e.company}</div>
-      <div style="margin-top:4px;white-space:pre-line">${e.description}</div>
+      <div style="display:flex;justify-content:space-between"><strong>${escapeHtml(e.title)}</strong><span style="color:#666">${escapeHtml(e.dateRange)}</span></div>
+      <div style="color:#444">${escapeHtml(e.company)}</div>
+      <div style="margin-top:4px;white-space:pre-line">${escapeHtml(e.description)}</div>
     </div>
   `).join('');
 
   const educationHtml = sections.education.map(e => `
     <div style="margin-bottom:8px">
-      <div style="display:flex;justify-content:space-between"><strong>${e.degree}</strong><span style="color:#666">${e.year}</span></div>
-      <div style="color:#444">${e.institution}</div>
+      <div style="display:flex;justify-content:space-between"><strong>${escapeHtml(e.degree)}</strong><span style="color:#666">${escapeHtml(e.year)}</span></div>
+      <div style="color:#444">${escapeHtml(e.institution)}</div>
     </div>
   `).join('');
 
-  return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>CV - ${targetRole}</title>
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>CV - ${escapeHtml(targetRole)}</title>
     <style>body{font-family:Helvetica,Arial,sans-serif;max-width:700px;margin:40px auto;color:#1a1a1a;font-size:11pt;line-height:1.5}
     h2{font-size:13pt;border-bottom:1px solid #333;padding-bottom:4px;margin-top:18px;text-transform:uppercase;letter-spacing:1px}
     @media print{body{margin:0;padding:20px}}</style>
   </head><body>
-    ${sections.summary ? `<h2>Professional Summary</h2><p>${sections.summary}</p>` : ''}
-    ${sections.skills ? `<h2>Skills</h2><p>${sections.skills}</p>` : ''}
+    ${sections.summary ? `<h2>Professional Summary</h2><p>${escapeHtml(sections.summary)}</p>` : ''}
+    ${sections.skills ? `<h2>Skills</h2><p>${escapeHtml(sections.skills)}</p>` : ''}
     ${experienceHtml ? `<h2>Experience</h2>${experienceHtml}` : ''}
     ${educationHtml ? `<h2>Education</h2>${educationHtml}` : ''}
-    ${sections.certifications ? `<h2>Certifications</h2><p>${sections.certifications}</p>` : ''}
-    ${sections.languages ? `<h2>Languages</h2><p>${sections.languages}</p>` : ''}
+    ${sections.certifications ? `<h2>Certifications</h2><p>${escapeHtml(sections.certifications)}</p>` : ''}
+    ${sections.languages ? `<h2>Languages</h2><p>${escapeHtml(sections.languages)}</p>` : ''}
   </body></html>`;
 }
