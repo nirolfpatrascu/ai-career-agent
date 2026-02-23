@@ -58,7 +58,7 @@ KEEP in English — do NOT translate:
 - Enum values: "critical", "high", "medium" (priority)
 - Currency codes: EUR, USD, etc.
 - All numbers (scores, salaries, percentages)
-- Company names: UiPath, Microsoft, AWS, Google, n8n, etc.
+- Company names: Microsoft, AWS, Google, Salesforce, SAP, etc.
 - Technology names: Docker, Kubernetes, Python, TypeScript, etc.
 - Certification names: AZ-900, AI-102, AWS Solutions Architect, etc.
 - Course/platform names: Coursera, Microsoft Learn, fast.ai, etc.

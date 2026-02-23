@@ -47,6 +47,8 @@ export interface AnalysisMetadata {
   cvFileName: string;
   targetRole: string;
   country: string;
+  /** Warning message if PDF text extraction quality was suboptimal */
+  pdfQualityWarning?: string;
 }
 
 export interface FitScore {

@@ -12,6 +12,10 @@ export interface ParsedPDF {
     author?: string;
     creationDate?: string;
   };
+  /** 0-100 score indicating text extraction quality */
+  qualityScore: number;
+  /** Warning message if quality is below threshold */
+  qualityWarning?: string;
 }
 
 /**
@@ -38,14 +42,19 @@ export async function parsePDF(buffer: Buffer): Promise<ParsedPDF> {
       );
     }
 
+    const cleaned = cleanText(text);
+    const quality = assessTextQuality(cleaned);
+
     return {
-      text: cleanText(text),
+      text: cleaned,
       pageCount: data.numpages,
       info: {
         title: data.info?.Title || undefined,
         author: data.info?.Author || undefined,
         creationDate: data.info?.CreationDate || undefined,
       },
+      qualityScore: quality.score,
+      qualityWarning: quality.warning,
     };
   } catch (error) {
     if (error instanceof Error && error.message.includes('Could not extract')) {
@@ -56,6 +65,71 @@ export async function parsePDF(buffer: Buffer): Promise<ParsedPDF> {
       'Failed to parse the PDF file. Please ensure it\'s a valid, non-corrupted PDF document.'
     );
   }
+}
+
+/**
+ * Assess the quality of extracted PDF text.
+ * Returns a 0-100 score and an optional warning message.
+ *
+ * Checks for:
+ * - Word ratio: proportion of text that forms recognizable words
+ * - Encoding artifacts: garbled characters, excessive special chars
+ * - Structure signals: presence of typical CV sections
+ */
+function assessTextQuality(text: string): { score: number; warning?: string } {
+  const warnings: string[] = [];
+  let score = 100;
+
+  // 1. Word ratio: split on whitespace, check how many tokens look like real words
+  const tokens = text.split(/\s+/).filter((t) => t.length > 0);
+  if (tokens.length === 0) return { score: 0, warning: 'No readable text extracted from PDF.' };
+
+  const wordPattern = /^[a-zA-ZÀ-ÿ0-9@.,\-/()&'+:;!?#]+$/;
+  const realWords = tokens.filter((t) => wordPattern.test(t));
+  const wordRatio = realWords.length / tokens.length;
+
+  if (wordRatio < 0.4) {
+    score -= 50;
+    warnings.push('Most of the extracted text appears garbled or unreadable.');
+  } else if (wordRatio < 0.65) {
+    score -= 25;
+    warnings.push('Some parts of the extracted text may be garbled.');
+  }
+
+  // 2. Encoding artifact detection: high concentration of replacement chars or control sequences
+  const artifactPattern = /[\uFFFD\u0000-\u0008\u000E-\u001F]|\\x[0-9a-f]{2}/gi;
+  const artifacts = (text.match(artifactPattern) || []).length;
+  const artifactRatio = artifacts / text.length;
+
+  if (artifactRatio > 0.02) {
+    score -= 30;
+    warnings.push('PDF contains encoding artifacts — file may be a scanned image or use non-standard fonts.');
+  } else if (artifactRatio > 0.005) {
+    score -= 10;
+    warnings.push('Minor encoding issues detected in the PDF.');
+  }
+
+  // 3. CV structure signals: check for common section headers
+  const sectionKeywords = [
+    /\b(experience|employment|work history)\b/i,
+    /\b(education|university|degree|bachelor|master)\b/i,
+    /\b(skill|competenc|proficienc)\b/i,
+    /\b(summary|profile|objective|about)\b/i,
+  ];
+  const sectionsFound = sectionKeywords.filter((kw) => kw.test(text)).length;
+
+  if (sectionsFound === 0) {
+    score -= 15;
+    warnings.push('No recognizable CV section headers found — text extraction may be incomplete.');
+  }
+
+  // 4. Text length vs page count heuristic (very short text from multi-page PDFs = likely image-based)
+  // This is checked externally since we need pageCount
+
+  return {
+    score: Math.max(0, Math.min(100, score)),
+    warning: warnings.length > 0 ? warnings.join(' ') : undefined,
+  };
 }
 
 /**

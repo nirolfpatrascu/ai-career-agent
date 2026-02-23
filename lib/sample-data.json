@@ -1,221 +1,219 @@
 {
   "metadata": {
     "analyzedAt": "2026-02-18T14:30:00Z",
-    "cvFileName": "Florin_Patrascu_CV.pdf",
-    "targetRole": "AI Solutions Architect",
-    "country": "Romania"
+    "cvFileName": "Alex_Morgan_CV.pdf",
+    "targetRole": "Cloud Solutions Architect",
+    "country": "Netherlands"
   },
   "fitScore": {
     "score": 6,
     "label": "Moderate Fit",
-    "summary": "Strong enterprise automation architecture background with genuine AI/LLM hands-on experience. The UiPath Solutions Architect foundation transfers well to AI-native roles. Key gaps in cloud platform certification and JavaScript/TypeScript proficiency prevent a higher score, but these are closable within 2-3 months. Positioned well for the AI automation architect niche specifically."
+    "summary": "Strong enterprise software architecture background with genuine cloud-native and DevOps experience. The Solutions Architect foundation transfers well to cloud-focused roles. Key gaps in specific cloud certifications and frontend framework proficiency prevent a higher score, but these are closable within 2-3 months. Well positioned for the cloud infrastructure architect niche specifically."
   },
   "strengths": [
     {
-      "title": "Enterprise Automation Architecture",
-      "description": "5 years at UiPath designing and implementing scalable RPA solutions, including REFramework architectures, Orchestrator deployments, and AI Center ML model pipelines. This is rare  -  most AI applicants have academic or startup backgrounds, not enterprise SA experience.",
-      "relevance": "AI Solutions Architect roles require someone who can design systems that work in complex enterprise environments. This background is a direct match and a genuine differentiator.",
+      "title": "Enterprise Software Architecture",
+      "description": "5 years at TechFlow designing and implementing scalable microservices solutions, including event-driven architectures, CI/CD pipelines, and observability platforms. This is rare — most cloud applicants have startup backgrounds, not enterprise SA experience.",
+      "relevance": "Cloud Solutions Architect roles require someone who can design systems that work in complex enterprise environments. This background is a direct match and a genuine differentiator.",
       "tier": "differentiator"
     },
     {
-      "title": "AI/LLM Application Development",
-      "description": "Active hands-on experience building with Claude API, OpenAI API, n8n, and Make. Building agentic automation prototypes, RAG pipelines, and AI-powered workflow orchestration.",
-      "relevance": "Demonstrates current, practical AI skills  -  not just theoretical knowledge. The combination of enterprise architecture + modern AI tools is exactly what companies hiring AI Solutions Architects need.",
+      "title": "Cloud-Native Application Development",
+      "description": "Active hands-on experience building with AWS, Terraform, Kubernetes, and serverless platforms. Building containerized microservices, data pipelines, and infrastructure-as-code deployments.",
+      "relevance": "Demonstrates current, practical cloud skills — not just theoretical knowledge. The combination of enterprise architecture + modern cloud-native tools is exactly what companies hiring Cloud Solutions Architects need.",
       "tier": "differentiator"
     },
     {
-      "title": "Technical Enablement & Training",
-      "description": "Delivered instructor-led training globally at UiPath. Built training curricula, demo workflows, and technical documentation for complex AI products (Document Understanding, AI Center, Copilot).",
-      "relevance": "AI SA roles require explaining complex technical solutions to non-technical stakeholders. Proven training delivery experience is strong evidence of this capability.",
+      "title": "Technical Consulting & Training",
+      "description": "Delivered technical workshops and architecture reviews globally at TechFlow. Built training programs, demo environments, and technical documentation for complex distributed systems.",
+      "relevance": "Cloud SA roles require explaining complex technical solutions to non-technical stakeholders. Proven consulting and training experience is strong evidence of this capability.",
       "tier": "strong"
     },
     {
       "title": "Systems Engineering Foundation",
-      "description": "7 years developing embedded software for automotive safety-critical systems (ABS/ESP) at Continental. ANSI C, ARM multicore architectures, Automotive SPICE compliance.",
-      "relevance": "Signals deep engineering fundamentals and ability to work on complex, reliability-critical systems. Adds credibility beyond surface-level automation skills.",
+      "description": "6 years developing backend systems for financial services at DataCore Systems. Java, distributed databases, high-availability architectures, SOC 2 compliance.",
+      "relevance": "Signals deep engineering fundamentals and ability to work on complex, reliability-critical systems. Adds credibility beyond surface-level cloud skills.",
       "tier": "supporting"
     },
     {
-      "title": "Document Intelligence / IDP Specialization",
-      "description": "Deep expertise in UiPath Document Understanding, ML model training for document classification and extraction, and intelligent document processing pipelines.",
-      "relevance": "Document AI / IDP is one of the highest-demand AI use cases in enterprise. This specialization maps directly to Claude-powered document processing solutions.",
+      "title": "Data Pipeline & Analytics Specialization",
+      "description": "Deep expertise in data engineering, ETL pipelines, real-time streaming with Kafka, and analytics platforms. Built data processing systems handling millions of events per day.",
+      "relevance": "Data engineering is one of the highest-demand areas in cloud architecture. This specialization maps directly to modern cloud data platform solutions.",
       "tier": "strong"
     }
   ],
   "gaps": [
     {
-      "skill": "Cloud Platform (AWS/Azure/GCP)",
+      "skill": "Cloud Platform Certification (AWS/Azure/GCP)",
       "severity": "critical",
-      "currentLevel": "No formal certification or demonstrated cloud architecture experience",
-      "requiredLevel": "Working knowledge of at least one major cloud platform; certification strongly preferred",
-      "impact": "Auto-reject filter on approximately 60% of AI Solutions Architect job postings. Most enterprise AI deployments are cloud-native.",
-      "closingPlan": "Complete AZ-900 (Azure Fundamentals) in 2-3 weeks, then AI-102 (Azure AI Engineer) in 4-6 weeks. Azure recommended over AWS because of stronger AI services integration and Microsoft's partnership ecosystem with enterprise automation.",
+      "currentLevel": "Hands-on experience but no formal certification",
+      "requiredLevel": "At least one major cloud certification strongly preferred; AWS Solutions Architect Associate most common",
+      "impact": "Auto-reject filter on approximately 60% of Cloud Solutions Architect job postings. Most enterprise cloud roles require certification as proof of structured knowledge.",
+      "closingPlan": "Complete AWS Solutions Architect Associate in 3-4 weeks, then AWS DevOps Professional in 6-8 weeks. AWS recommended due to market dominance and strongest job market demand.",
       "timeToClose": "6-8 weeks for both certifications",
       "resources": [
-        "Microsoft Learn: AZ-900 Learning Path (free)",
-        "Microsoft Learn: AI-102 Learning Path (free)",
-        "John Savill's AZ-900 YouTube Study Cram",
-        "Azure free trial account for hands-on labs"
+        "AWS Skill Builder: Solutions Architect Learning Path (free tier)",
+        "Adrian Cantrill's SAA-C03 Course",
+        "Tutorials Dojo practice exams",
+        "AWS free tier account for hands-on labs"
       ]
     },
     {
-      "skill": "JavaScript / TypeScript",
+      "skill": "React / Frontend Frameworks",
       "severity": "critical",
-      "currentLevel": "Not listed on CV. Limited web development exposure.",
-      "requiredLevel": "Professional working proficiency. Required for n8n custom nodes, modern web development, and most AI integration roles.",
-      "impact": "Blocks applications to companies like n8n (Node.js-based), web-focused AI companies, and full-stack AI roles. Limits ability to build portfolio projects.",
-      "closingPlan": "Complete a focused JavaScript/TypeScript crash course (2 weeks). Then build 2-3 real projects using Next.js to demonstrate proficiency. The portfolio projects planned in the 3-month sprint will serve as proof.",
+      "currentLevel": "Not listed on CV. Limited frontend exposure.",
+      "requiredLevel": "Working proficiency. Required for full-stack cloud demos, internal tooling, and customer-facing solution prototypes.",
+      "impact": "Blocks applications to companies expecting full-stack capability. Limits ability to build compelling solution demos.",
+      "closingPlan": "Complete a focused React + Next.js course (2 weeks). Then build 2-3 real projects to demonstrate proficiency. Portfolio projects in the 3-month sprint will serve as proof.",
       "timeToClose": "2-3 weeks for fundamentals, 2-3 months for professional proficiency",
       "resources": [
-        "JavaScript.info  -  Modern JavaScript Tutorial (free)",
-        "TypeScript official handbook (free)",
+        "React official docs — new tutorial (free)",
         "Next.js Learn course (free, by Vercel)",
         "Build portfolio projects as practice"
       ]
     },
     {
-      "skill": "Production ML/AI Engineering",
+      "skill": "ML/AI Fundamentals",
       "severity": "moderate",
-      "currentLevel": "UiPath AI Center operations (model training, deployment within UiPath ecosystem). Claude/OpenAI API integration. No custom model training outside UiPath.",
-      "requiredLevel": "Understanding of ML pipelines, model evaluation, fine-tuning, and deployment. Not necessarily a data scientist, but should speak the language fluently.",
-      "impact": "May struggle in deep technical interviews at AI-first companies. Less critical for SA roles at automation vendors (where solution design matters more than model building).",
-      "closingPlan": "Complete Andrew Ng's Machine Learning Specialization (or fast.ai Practical Deep Learning). Focus on understanding, not becoming an ML engineer. Build one RAG pipeline with evaluation metrics as a portfolio piece.",
+      "currentLevel": "Basic API integration experience. No model training or MLOps experience.",
+      "requiredLevel": "Understanding of ML pipelines, model serving, and AI service integration. Not a data scientist, but should speak the language fluently.",
+      "impact": "May struggle in interviews where AI/ML workloads are discussed. Less critical for infrastructure-focused SA roles.",
+      "closingPlan": "Complete a practical ML course focused on cloud ML services (SageMaker, Bedrock). Build one project integrating AI APIs with cloud infrastructure.",
       "timeToClose": "2-3 months (part-time)",
       "resources": [
-        "Andrew Ng's Machine Learning Specialization (Coursera)",
+        "AWS Machine Learning Specialty prep course",
         "fast.ai Practical Deep Learning course (free)",
-        "LangChain documentation + tutorials",
-        "Build a RAG pipeline project with evaluation"
+        "Build an AI-integrated project on AWS"
       ]
     },
     {
-      "skill": "Docker / Containerization",
+      "skill": "Service Mesh / Advanced Networking",
       "severity": "moderate",
-      "currentLevel": "Not mentioned on CV",
-      "requiredLevel": "Ability to containerize applications and work with container orchestration basics",
-      "impact": "Expected skill for any modern deployment workflow. Not always a hard requirement but absence raises questions.",
-      "closingPlan": "Containerize one of your portfolio projects with Docker. Learn basics in a weekend  -  Dockerfile, docker-compose, basic commands. This is a quick win.",
-      "timeToClose": "1 weekend",
+      "currentLevel": "Basic networking knowledge",
+      "requiredLevel": "Understanding of service mesh (Istio/Linkerd), advanced networking, and multi-cloud connectivity",
+      "impact": "Expected knowledge for senior cloud architect roles. Not always a hard requirement but absence may raise questions.",
+      "closingPlan": "Deploy Istio on a Kubernetes cluster as a hands-on project. Learn basics in a weekend — traffic management, mTLS, observability. Quick win for interviews.",
+      "timeToClose": "1-2 weekends",
       "resources": [
-        "Docker Getting Started tutorial (official docs)",
-        "Fireship Docker in 100 seconds + follow-up video",
-        "Containerize your Career Agent app as practice"
+        "Istio official documentation and tutorials",
+        "KodeKloud Service Mesh course",
+        "Deploy service mesh on a personal K8s cluster"
       ]
     },
     {
       "skill": "Public Portfolio / GitHub Presence",
       "severity": "moderate",
-      "currentLevel": "GitHub account exists but likely thin. No public projects demonstrating current AI capabilities.",
-      "requiredLevel": "Active GitHub with 3-5 polished repos showing AI/automation work. Clean READMEs with screenshots.",
-      "impact": "Recruiters and hiring managers check GitHub. Empty or inactive profile signals 'talks about AI but doesn't build.' Active portfolio with AI projects is the single best proof of capability.",
-      "closingPlan": "The 3-month portfolio sprint addresses this directly. Pin 6 best repos, write comprehensive READMEs, maintain commit activity.",
+      "currentLevel": "GitHub account exists but limited public activity. No public projects demonstrating current cloud architecture capabilities.",
+      "requiredLevel": "Active GitHub with 3-5 polished repos showing cloud/infrastructure work. Clean READMEs with architecture diagrams.",
+      "impact": "Hiring managers check GitHub. Empty or inactive profile signals lack of hands-on building. Active portfolio with cloud projects is strong proof of capability.",
+      "closingPlan": "The 3-month portfolio sprint addresses this directly. Pin 6 best repos, write comprehensive READMEs with diagrams, maintain commit activity.",
       "timeToClose": "2 weeks for initial setup, ongoing maintenance",
       "resources": [
-        "Follow the Portfolio Sprint 2-Week Plan",
+        "Follow the Portfolio Sprint Plan",
         "GitHub profile README generator",
-        "Study top developer profiles for README inspiration"
+        "Study top cloud engineer profiles for README inspiration"
       ]
     },
     {
-      "skill": "German Language",
+      "skill": "Public Speaking / Content Creation",
       "severity": "minor",
-      "currentLevel": "A2 (elementary)",
-      "requiredLevel": "B1-B2 for DACH market roles, not required for English-first companies",
-      "impact": "Limits access to DACH-specific roles (Germany, Austria, Switzerland) which have the highest salaries in Europe. Not a blocker for international remote roles.",
-      "closingPlan": "Continue learning but don't prioritize over technical skills. Focus on English-first remote roles in the short term.",
-      "timeToClose": "6-12 months to reach B1",
+      "currentLevel": "Internal presentations only",
+      "requiredLevel": "Conference talks or blog posts that demonstrate thought leadership. Not required but strongly differentiating.",
+      "impact": "Limits inbound recruiting opportunities. Less critical for individual contributor roles, more important for senior/principal architect positions.",
+      "closingPlan": "Start a technical blog and submit CFPs to 1-2 cloud conferences. Write about real projects and architectural decisions.",
+      "timeToClose": "3-6 months to build presence",
       "resources": [
-        "DW Learn German (free)",
-        "Tandem language exchange app",
-        "German Podcasts for learners"
+        "Dev.to or Hashnode for technical blogging",
+        "Local cloud meetups for speaking practice",
+        "Conference CFP aggregator sites"
       ]
     }
   ],
   "roleRecommendations": [
     {
-      "title": "Solutions Architect  -  AI/Automation Vendor",
+      "title": "Solutions Architect — Cloud/SaaS Vendor",
       "fitScore": 8,
       "salaryRange": {
-        "low": 55000,
-        "mid": 75000,
-        "high": 100000,
+        "low": 65000,
+        "mid": 85000,
+        "high": 110000,
         "currency": "EUR"
       },
-      "reasoning": "Direct match for your enterprise SA experience + growing AI skills. Companies like n8n, Make, Celonis, Automation Anywhere, and ServiceNow hire this exact profile. Your UiPath insider experience is a differentiator vs. other candidates. Remote-friendly, European timezone compatible.",
+      "reasoning": "Direct match for enterprise SA experience + growing cloud skills. Companies like HashiCorp, Datadog, Elastic, Confluent, and GitLab hire this exact profile. Enterprise architecture background is a differentiator vs. other candidates. Remote-friendly, European timezone compatible.",
       "exampleCompanies": [
-        "n8n",
-        "Make",
-        "Celonis",
-        "Automation Anywhere",
-        "ServiceNow",
-        "Workato"
+        "HashiCorp",
+        "Datadog",
+        "Elastic",
+        "Confluent",
+        "GitLab",
+        "Grafana Labs"
       ],
       "timeToReady": "Ready now (apply immediately)"
     },
     {
-      "title": "Technical Enablement Engineer  -  AI Company",
+      "title": "Cloud Platform Engineer — Tech Company",
       "fitScore": 7,
       "salaryRange": {
-        "low": 50000,
-        "mid": 70000,
-        "high": 90000,
+        "low": 60000,
+        "mid": 80000,
+        "high": 100000,
         "currency": "EUR"
       },
-      "reasoning": "Your Technical Enablement role at UiPath is directly transferable. AI companies (Anthropic, OpenAI, Cohere, Google Cloud, AWS, Dataiku, Databricks) need people who can train partners and customers on AI products. Your experience building training curricula and delivering globally is exactly what they need.",
+      "reasoning": "Technical depth in infrastructure combined with software development skills. Cloud companies need engineers who can build and operate platform services at scale. Proven experience with distributed systems translates directly.",
       "exampleCompanies": [
-        "Anthropic",
-        "Dataiku",
-        "Databricks",
+        "AWS",
         "Google Cloud",
-        "AWS"
+        "Databricks",
+        "Snowflake",
+        "MongoDB"
       ],
       "timeToReady": "Ready now (cloud cert would strengthen application)"
     },
     {
-      "title": "AI Automation Consultant  -  Independent / Consultancy",
+      "title": "Cloud Infrastructure Consultant — Independent / Consultancy",
       "fitScore": 7,
       "salaryRange": {
-        "low": 60000,
-        "mid": 90000,
-        "high": 150000,
+        "low": 70000,
+        "mid": 100000,
+        "high": 160000,
         "currency": "EUR"
       },
-      "reasoning": "Combining your enterprise automation expertise with modern AI tools positions you perfectly for consulting. Businesses need someone who understands both their legacy processes AND modern AI capabilities. You can charge EUR 100-200/hour for this combination. The demo kits you're building become your sales tools.",
+      "reasoning": "Combining enterprise software expertise with modern cloud-native tools positions you perfectly for consulting. Businesses need someone who understands both their legacy systems AND modern cloud capabilities. Strong consulting rates in the European market.",
       "exampleCompanies": [
-        "Independent (SRL-D)",
+        "Independent",
         "Deloitte",
         "Accenture",
         "Capgemini",
-        "Cognizant"
+        "Thoughtworks"
       ],
-      "timeToReady": "1-3 months (portfolio + company setup)"
+      "timeToReady": "1-3 months (portfolio + certification)"
     }
   ],
   "actionPlan": {
     "thirtyDays": [
       {
-        "action": "Complete LinkedIn and Upwork profile overhaul  -  new headline, about section, featured projects",
+        "action": "Complete LinkedIn profile overhaul — new headline emphasizing cloud architecture, updated about section, featured projects",
         "priority": "critical",
         "timeEstimate": "2-3 hours total",
-        "resource": "LinkedIn Audit document (already created)",
-        "expectedImpact": "Immediately visible to recruiters. LinkedIn algorithm starts matching you with AI/automation roles instead of RPA roles."
+        "resource": "LinkedIn Audit checklist",
+        "expectedImpact": "Immediately visible to recruiters. LinkedIn algorithm starts matching you with cloud architecture roles."
       },
       {
-        "action": "Ship Career Growth AI Agent and 2 other portfolio projects to GitHub with polished READMEs",
+        "action": "Ship 2-3 portfolio projects to GitHub with polished READMEs and architecture diagrams",
         "priority": "critical",
         "timeEstimate": "2 weeks at 3 hours/day",
-        "resource": "Portfolio Sprint 2-Week Plan",
-        "expectedImpact": "Proves you can build full-stack AI applications. Transforms empty GitHub into compelling portfolio."
+        "resource": "Portfolio Sprint Plan",
+        "expectedImpact": "Proves you can build cloud-native applications. Transforms empty GitHub into compelling portfolio."
       },
       {
-        "action": "Complete AZ-900 Azure Fundamentals certification",
+        "action": "Complete AWS Solutions Architect Associate certification",
         "priority": "critical",
-        "timeEstimate": "2-3 weeks at 1 hour/day",
-        "resource": "Microsoft Learn AZ-900 path (free)",
-        "expectedImpact": "Removes the 'no cloud experience' blocker from 60% of job postings."
+        "timeEstimate": "3-4 weeks at 1 hour/day",
+        "resource": "AWS Skill Builder + Adrian Cantrill course",
+        "expectedImpact": "Removes the 'no cloud certification' blocker from 60% of job postings."
       },
       {
-        "action": "Apply to 10-15 Tier 1 sweet-spot roles (Solutions Architect, Technical Enablement at AI/automation vendors)",
+        "action": "Apply to 10-15 Tier 1 sweet-spot roles (Solutions Architect, Platform Engineer at cloud/SaaS vendors)",
         "priority": "high",
         "timeEstimate": "3-5 hours total",
         "resource": "Updated CV + tailored cover letters",
@@ -224,28 +222,28 @@
     ],
     "ninetyDays": [
       {
-        "action": "Complete AI-102 Azure AI Engineer Associate certification",
+        "action": "Complete AWS DevOps Professional certification",
         "priority": "high",
         "timeEstimate": "4-6 weeks at 1 hour/day",
-        "resource": "Microsoft Learn AI-102 path (free)",
-        "expectedImpact": "Positions you as cloud AI engineer, not just RPA developer. Combines powerfully with AZ-900."
+        "resource": "AWS Skill Builder DevOps path",
+        "expectedImpact": "Positions you as a cloud DevOps expert, not just a developer. Combines powerfully with SA Associate."
       },
       {
-        "action": "Ship all 5 AI automation demo kits (Invoice, Email, Onboarding, Lead Qual, Meeting Notes)",
+        "action": "Build and publish 3 cloud architecture reference projects (serverless API, data pipeline, multi-service app)",
         "priority": "high",
-        "timeEstimate": "5 weeks at ~4 hours/kit",
-        "resource": "3-Month Master Plan",
-        "expectedImpact": "Creates a sellable service catalog. Each kit is a potential EUR 1,500-5,000 client engagement."
+        "timeEstimate": "5 weeks at ~4 hours/project",
+        "resource": "Architecture Portfolio Plan",
+        "expectedImpact": "Creates a demonstrable portfolio of cloud solutions. Each project is a conversation piece in interviews."
       },
       {
-        "action": "Register SRL-D (micro-enterprise) in Romania",
+        "action": "Set up freelance consulting business registration",
         "priority": "medium",
-        "timeEstimate": "1-2 weeks of paperwork + accountant consultation",
-        "resource": "Romanian accountant, ONRC registration",
-        "expectedImpact": "Enables legal invoicing, 1% revenue tax, professional credibility."
+        "timeEstimate": "1-2 weeks of paperwork",
+        "resource": "Local business registration, accountant consultation",
+        "expectedImpact": "Enables legal invoicing, professional credibility for consulting engagements."
       },
       {
-        "action": "Publish 4-6 LinkedIn posts about projects you've built",
+        "action": "Publish 4-6 LinkedIn posts about cloud projects you've built",
         "priority": "medium",
         "timeEstimate": "1-2 hours per post",
         "resource": "Own project portfolio as content source",
@@ -254,56 +252,56 @@
     ],
     "twelveMonths": [
       {
-        "action": "Transition to AI Solutions Architect role at an automation/AI vendor OR build consulting practice to EUR 8K+/month revenue",
+        "action": "Transition to Cloud Solutions Architect role at a cloud/SaaS vendor OR build consulting practice",
         "priority": "critical",
         "timeEstimate": "Ongoing",
         "resource": "Network, portfolio, certifications built in months 1-3",
-        "expectedImpact": "Career transition complete. Earning EUR 70-100K+ in new domain."
+        "expectedImpact": "Career transition complete. Earning target salary range in new domain."
       },
       {
-        "action": "Launch Ballistics and Pigeon Fancier apps as subscription products",
+        "action": "Build and launch an open-source cloud tool or framework",
         "priority": "medium",
         "timeEstimate": "2-3 months build + ongoing",
-        "resource": "3-Month Master Plan (Phase 3)",
-        "expectedImpact": "Passive/recurring revenue stream. Demonstrates product management + full-stack capability."
+        "resource": "Identified gap in cloud tooling ecosystem",
+        "expectedImpact": "Community visibility, demonstrates deep expertise, potential recurring revenue."
       },
       {
-        "action": "Complete one ML course (Andrew Ng's or fast.ai) and build a RAG project with evaluation metrics",
+        "action": "Complete one advanced course (distributed systems or ML engineering) and build a capstone project",
         "priority": "medium",
         "timeEstimate": "2-3 months part-time",
-        "resource": "Coursera / fast.ai (free)",
-        "expectedImpact": "Closes the ML knowledge gap. Enables conversation with data science teams as a peer, not just a consumer of APIs."
+        "resource": "MIT OpenCourseWare / Coursera (free options available)",
+        "expectedImpact": "Closes the advanced architecture knowledge gap. Enables conversation with principal engineers as a peer."
       },
       {
-        "action": "Speak at 1-2 online meetups or conferences about AI automation",
+        "action": "Speak at 1-2 meetups or conferences about cloud architecture",
         "priority": "medium",
         "timeEstimate": "2-4 hours prep per talk",
-        "resource": "n8n community meetups, local tech meetups, online conferences",
-        "expectedImpact": "Public speaking builds credibility exponentially. One good talk can generate more leads than 50 cold emails."
+        "resource": "Cloud meetups, KubeCon, local tech conferences",
+        "expectedImpact": "Public speaking builds credibility exponentially. One good talk can generate more inbound interest than 50 cold applications."
       }
     ]
   },
   "salaryAnalysis": {
     "currentRoleMarket": {
-      "low": 36000,
-      "mid": 48000,
-      "high": 65000,
+      "low": 45000,
+      "mid": 60000,
+      "high": 80000,
       "currency": "EUR",
-      "region": "Romania - local market equivalent (gross annual)"
+      "region": "Netherlands — local market (gross annual)"
     },
     "targetRoleMarket": {
-      "low": 55000,
-      "mid": 80000,
-      "high": 120000,
+      "low": 65000,
+      "mid": 90000,
+      "high": 130000,
       "currency": "EUR",
       "region": "EU/EMEA remote market (gross annual)"
     },
-    "growthPotential": "+35-65% increase achievable within 6-12 months by transitioning from RPA-focused roles to AI Solutions Architect positions. The highest leverage move is targeting Western European companies hiring remotely  -  they pay Western European salaries to Eastern European talent.",
-    "bestMonetaryMove": "Apply immediately to Solutions Architect roles at n8n, Make, or Celonis. These companies specifically value enterprise automation experience, pay EUR 65-100K for remote European talent, and your UiPath background is a direct competitive advantage. While interviewing, build consulting income through Upwork at $50-75/hour. The combination of employment applications + freelance income creates multiple paths to higher earnings.",
+    "growthPotential": "+30-50% increase achievable within 6-12 months by transitioning from backend engineering roles to Cloud Solutions Architect positions. The highest leverage move is targeting companies hiring remotely for EU timezone with competitive compensation.",
+    "bestMonetaryMove": "Apply immediately to Solutions Architect roles at HashiCorp, Datadog, or Confluent. These companies specifically value enterprise software experience, pay competitive European salaries, and your background is a direct competitive advantage. While interviewing, build consulting income through freelance platforms. The combination of employment applications + freelance income creates multiple paths to higher earnings.",
     "negotiationTips": [
-      "Lead with your UiPath enterprise experience  -  'I've designed automation architectures deployed across Fortune 500 companies' commands higher rates than 'I know n8n.'",
-      "When asked about salary expectations, anchor to Western European ranges (EUR 70-90K) not Romanian local market. You're competing on value delivered, not local cost of living.",
-      "If offered below target, negotiate for sign-on bonus, equity, or accelerated review timeline rather than accepting a lower base. Base salary compounds  -  every EUR 5K higher compounds over your career."
+      "Lead with your enterprise architecture experience — 'I've designed distributed systems deployed across Fortune 500 companies' commands higher rates than listing individual technologies.",
+      "When asked about salary expectations, anchor to competitive EU market ranges rather than local market rates. You're competing on value delivered.",
+      "If offered below target, negotiate for sign-on bonus, equity, or accelerated review timeline rather than accepting a lower base. Base salary compounds over your career."
     ]
   }
 }

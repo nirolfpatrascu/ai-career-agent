@@ -162,7 +162,34 @@ export async function POST(request: NextRequest) {
 
         const parsedPDF = await parsePDF(buffer);
         const cvText = truncateCVText(parsedPDF.text);
-        console.log(`[stream] PDF parsed: ${parsedPDF.pageCount} pages, ${cvText.length} chars`);
+        console.log(`[stream] PDF parsed: ${parsedPDF.pageCount} pages, ${cvText.length} chars, quality: ${parsedPDF.qualityScore}/100`);
+
+        if (parsedPDF.qualityWarning) {
+          console.warn(`[stream] PDF quality warning: ${parsedPDF.qualityWarning}`);
+        }
+
+        // Reject PDFs with extremely poor text quality
+        if (parsedPDF.qualityScore < 25) {
+          send({
+            step: 'error',
+            message:
+              'Could not extract readable text from this PDF. ' +
+              'The file may be a scanned image or use non-standard fonts. ' +
+              'Please upload a text-based PDF.',
+          });
+          controller.close();
+          return;
+        }
+
+        // Warn about moderate quality issues but continue analysis
+        if (parsedPDF.qualityScore < 60) {
+          send({
+            step: 'warning',
+            message:
+              'Some sections of the PDF could not be fully read. ' +
+              'Results may be less accurate for poorly extracted sections.',
+          });
+        }
 
         // Parse LinkedIn PDF if provided
         const linkedInPdf = formData.get('linkedInPdf') as File | null;
@@ -395,6 +422,7 @@ export async function POST(request: NextRequest) {
             cvFileName: cvFile.name,
             targetRole: questionnaire.targetRole,
             country: questionnaire.country,
+            ...(parsedPDF.qualityWarning && { pdfQualityWarning: parsedPDF.qualityWarning }),
           },
           fitScore: gapAnalysis.fitScore,
           strengths: gapAnalysis.strengths,

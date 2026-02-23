@@ -1,290 +1,288 @@
 {
   "metadata": {
     "analyzedAt": "2026-02-18T14:30:00Z",
-    "cvFileName": "Florin_Patrascu_CV.pdf",
-    "targetRole": "AI Solutions Architect",
-    "country": "Rumänien"
+    "cvFileName": "Alex_Morgan_CV.pdf",
+    "targetRole": "Cloud Solutions Architect",
+    "country": "Niederlande"
   },
   "fitScore": {
     "score": 6,
-    "label": "Mäßige Passung",
-    "summary": "Solider Hintergrund in Enterprise-Automatisierungsarchitektur mit echter praktischer AI/LLM-Erfahrung. Die UiPath Solutions Architect Grundlage lässt sich gut auf AI-native Rollen übertragen. Wesentliche Lücken bei Cloud-Plattform-Zertifizierung und JavaScript/TypeScript-Kenntnissen verhindern eine höhere Bewertung, sind aber innerhalb von 2-3 Monaten schließbar. Besonders gut positioniert für die Nische AI-Automatisierungsarchitekt."
+    "label": "Massige Passung",
+    "summary": "Solider Hintergrund in Enterprise-Softwarearchitektur mit echter praktischer Cloud-Native- und DevOps-Erfahrung. Die Solutions-Architect-Grundlage lasst sich gut auf Cloud-fokussierte Rollen ubertragen. Wesentliche Lucken bei Cloud-Zertifizierungen und Frontend-Framework-Kenntnissen verhindern eine hohere Bewertung, sind aber innerhalb von 2-3 Monaten schliessbar. Besonders gut positioniert fur die Cloud-Infrastruktur-Architekt-Nische."
   },
   "strengths": [
     {
-      "title": "Enterprise-Automatisierungsarchitektur",
-      "description": "5 Jahre bei UiPath mit Entwurf und Implementierung skalierbarer RPA-Lösungen, einschließlich REFramework-Architekturen, Orchestrator-Deployments und AI Center ML-Modell-Pipelines. Das ist selten — die meisten AI-Bewerber haben akademische oder Startup-Hintergründe, keine Enterprise-SA-Erfahrung.",
-      "relevance": "AI Solutions Architect Rollen erfordern jemanden, der Systeme entwerfen kann, die in komplexen Enterprise-Umgebungen funktionieren. Dieser Hintergrund ist ein direkter Match und ein echtes Alleinstellungsmerkmal.",
+      "title": "Enterprise-Softwarearchitektur",
+      "description": "5 Jahre bei TechFlow mit Entwurf und Implementierung skalierbarer Microservices-Losungen, einschliesslich Event-Driven-Architekturen, CI/CD-Pipelines und Observability-Plattformen. Das ist selten — die meisten Cloud-Bewerber haben Startup-Hintergrunde, keine Enterprise-SA-Erfahrung.",
+      "relevance": "Cloud Solutions Architect Rollen erfordern jemanden, der Systeme entwerfen kann, die in komplexen Enterprise-Umgebungen funktionieren. Dieser Hintergrund ist ein direkter Match und ein echtes Alleinstellungsmerkmal.",
       "tier": "differentiator"
     },
     {
-      "title": "AI/LLM-Anwendungsentwicklung",
-      "description": "Aktive praktische Erfahrung mit Claude API, OpenAI API, n8n und Make. Baut agentische Automatisierungsprototypen, RAG-Pipelines und AI-gesteuerte Workflow-Orchestrierung.",
-      "relevance": "Zeigt aktuelle, praktische AI-Fähigkeiten — nicht nur theoretisches Wissen. Die Kombination Enterprise-Architektur + moderne AI-Tools ist genau das, was Unternehmen suchen, die AI Solutions Architects einstellen.",
+      "title": "Cloud-Native-Anwendungsentwicklung",
+      "description": "Aktive praktische Erfahrung mit AWS, Terraform, Kubernetes und serverlosen Plattformen. Baut containerisierte Microservices, Datenpipelines und Infrastructure-as-Code-Deployments.",
+      "relevance": "Zeigt aktuelle, praktische Cloud-Fahigkeiten — nicht nur theoretisches Wissen. Die Kombination Enterprise-Architektur + moderne Cloud-Native-Tools ist genau das, was Unternehmen suchen.",
       "tier": "differentiator"
     },
     {
-      "title": "Technische Befähigung & Training",
-      "description": "Hat weltweit Instructor-led Trainings bei UiPath durchgeführt. Hat Trainingscurricula, Demo-Workflows und technische Dokumentation für komplexe AI-Produkte erstellt (Document Understanding, AI Center, Copilot).",
-      "relevance": "AI-SA-Rollen erfordern die Erklärung komplexer technischer Lösungen für nicht-technische Stakeholder. Nachgewiesene Training-Delivery-Erfahrung ist ein starker Beleg dieser Fähigkeit.",
+      "title": "Technische Beratung & Training",
+      "description": "Hat weltweit technische Workshops und Architektur-Reviews bei TechFlow durchgefuhrt. Hat Trainingsprogramme, Demo-Umgebungen und technische Dokumentation fur komplexe verteilte Systeme erstellt.",
+      "relevance": "Cloud-SA-Rollen erfordern die Erklarung komplexer technischer Losungen fur nicht-technische Stakeholder. Nachgewiesene Beratungs- und Training-Erfahrung ist ein starker Beleg.",
       "tier": "strong"
     },
     {
       "title": "Systems-Engineering-Grundlage",
-      "description": "7 Jahre Entwicklung eingebetteter Software für sicherheitskritische Automobilsysteme (ABS/ESP) bei Continental. ANSI C, ARM-Multicore-Architekturen, Automotive-SPICE-Konformität.",
-      "relevance": "Signalisiert tiefe Engineering-Grundlagen und die Fähigkeit, an komplexen, zuverlässigkeitskritischen Systemen zu arbeiten. Erhöht die Glaubwürdigkeit über oberflächliche Automatisierungsfähigkeiten hinaus.",
+      "description": "6 Jahre Entwicklung von Backend-Systemen fur Finanzdienstleistungen bei DataCore Systems. Java, verteilte Datenbanken, Hochverfugbarkeitsarchitekturen, SOC-2-Konformitat.",
+      "relevance": "Signalisiert tiefe Engineering-Grundlagen und die Fahigkeit, an komplexen, zuverlassigkeitskritischen Systemen zu arbeiten.",
       "tier": "supporting"
     },
     {
-      "title": "Document Intelligence / IDP-Spezialisierung",
-      "description": "Tiefgehende Expertise in UiPath Document Understanding, ML-Modelltraining für Dokumentenklassifizierung und -extraktion sowie intelligente Dokumentenverarbeitungspipelines.",
-      "relevance": "Document AI / IDP ist einer der meistgefragten AI-Anwendungsfälle im Enterprise-Bereich. Diese Spezialisierung passt direkt zu Claude-basierten Dokumentenverarbeitungslösungen.",
+      "title": "Datenpipeline- & Analytics-Spezialisierung",
+      "description": "Tiefgehende Expertise in Datenengineering, ETL-Pipelines, Echtzeit-Streaming mit Kafka und Analytics-Plattformen. Hat Datenverarbeitungssysteme gebaut, die Millionen von Events pro Tag verarbeiten.",
+      "relevance": "Datenengineering ist einer der meistgefragten Bereiche in der Cloud-Architektur. Diese Spezialisierung passt direkt zu modernen Cloud-Datenplattformlosungen.",
       "tier": "strong"
     }
   ],
   "gaps": [
     {
-      "skill": "Cloud-Plattform (AWS/Azure/GCP)",
+      "skill": "Cloud-Plattform-Zertifizierung (AWS/Azure/GCP)",
       "severity": "critical",
-      "currentLevel": "Keine formale Zertifizierung oder nachgewiesene Cloud-Architektur-Erfahrung",
-      "requiredLevel": "Arbeitskenntnisse mindestens einer großen Cloud-Plattform; Zertifizierung stark bevorzugt",
-      "impact": "Auto-Ablehnungsfilter bei ca. 60% der AI Solutions Architect Stellenanzeigen. Die meisten Enterprise-AI-Deployments sind Cloud-native.",
-      "closingPlan": "AZ-900 (Azure Fundamentals) in 2-3 Wochen abschließen, dann AI-102 (Azure AI Engineer) in 4-6 Wochen. Azure wird gegenüber AWS empfohlen wegen stärkerer AI-Services-Integration und Microsofts Partnerschaftsökosystem mit Enterprise-Automatisierung.",
-      "timeToClose": "6-8 Wochen für beide Zertifizierungen",
+      "currentLevel": "Praktische Erfahrung aber keine formale Zertifizierung",
+      "requiredLevel": "Mindestens eine grosse Cloud-Zertifizierung stark bevorzugt; AWS Solutions Architect Associate am haufigsten",
+      "impact": "Auto-Ablehnungsfilter bei ca. 60% der Cloud Solutions Architect Stellenanzeigen.",
+      "closingPlan": "AWS Solutions Architect Associate in 3-4 Wochen abschliessen, dann AWS DevOps Professional in 6-8 Wochen.",
+      "timeToClose": "6-8 Wochen fur beide Zertifizierungen",
       "resources": [
-        "Microsoft Learn: AZ-900 Lernpfad (kostenlos)",
-        "Microsoft Learn: AI-102 Lernpfad (kostenlos)",
-        "John Savill's AZ-900 YouTube Study Cram",
-        "Azure Testkonto für praktische Übungen"
+        "AWS Skill Builder: Solutions Architect Lernpfad (kostenlos)",
+        "Adrian Cantrill's SAA-C03 Kurs",
+        "Tutorials Dojo Prufungsubungen",
+        "AWS Free-Tier-Konto fur praktische Ubungen"
       ]
     },
     {
-      "skill": "JavaScript / TypeScript",
+      "skill": "React / Frontend-Frameworks",
       "severity": "critical",
-      "currentLevel": "Nicht im Lebenslauf aufgeführt. Begrenzte Webentwicklungserfahrung.",
-      "requiredLevel": "Professionelle Arbeitskompetenz. Erforderlich für n8n Custom Nodes, moderne Webentwicklung und die meisten AI-Integrationsrollen.",
-      "impact": "Blockiert Bewerbungen bei Unternehmen wie n8n (Node.js-basiert), webfokussierten AI-Unternehmen und Full-Stack-AI-Rollen. Schränkt die Fähigkeit ein, Portfolio-Projekte zu erstellen.",
-      "closingPlan": "Einen fokussierten JavaScript/TypeScript-Intensivkurs absolvieren (2 Wochen). Dann 2-3 echte Projekte mit Next.js erstellen, um Kompetenz zu demonstrieren. Die im 3-Monats-Sprint geplanten Portfolio-Projekte dienen als Nachweis.",
-      "timeToClose": "2-3 Wochen für Grundlagen, 2-3 Monate für professionelle Kompetenz",
+      "currentLevel": "Nicht im Lebenslauf aufgefuhrt. Begrenzte Frontend-Erfahrung.",
+      "requiredLevel": "Arbeitskompetenz. Erforderlich fur Full-Stack-Cloud-Demos, internes Tooling und Losungsprototypen.",
+      "impact": "Blockiert Bewerbungen bei Unternehmen, die Full-Stack-Fahigkeit erwarten.",
+      "closingPlan": "Einen fokussierten React + Next.js Kurs absolvieren (2 Wochen). Dann 2-3 echte Projekte erstellen.",
+      "timeToClose": "2-3 Wochen fur Grundlagen, 2-3 Monate fur professionelle Kompetenz",
       "resources": [
-        "JavaScript.info — Modernes JavaScript Tutorial (kostenlos)",
-        "TypeScript offizielles Handbuch (kostenlos)",
+        "Offizielle React-Dokumentation — neues Tutorial (kostenlos)",
         "Next.js Learn Kurs (kostenlos, von Vercel)",
         "Portfolio-Projekte als Praxis erstellen"
       ]
     },
     {
-      "skill": "Produktions-ML/AI-Engineering",
+      "skill": "ML/AI-Grundlagen",
       "severity": "moderate",
-      "currentLevel": "UiPath AI Center Betrieb (Modelltraining, Deployment innerhalb des UiPath-Ökosystems). Claude/OpenAI API-Integration. Kein Custom-Modelltraining außerhalb von UiPath.",
-      "requiredLevel": "Verständnis von ML-Pipelines, Modellbewertung, Fine-Tuning und Deployment. Nicht unbedingt ein Data Scientist, aber sollte die Sprache fließend sprechen.",
-      "impact": "Könnte Schwierigkeiten in tiefen technischen Interviews bei AI-first Unternehmen haben. Weniger kritisch für SA-Rollen bei Automatisierungsanbietern (wo Lösungsdesign wichtiger ist als Modellentwicklung).",
-      "closingPlan": "Andrew Ngs Machine Learning Specialization (oder fast.ai Practical Deep Learning) abschließen. Fokus auf Verständnis, nicht darauf, ML-Ingenieur zu werden. Eine RAG-Pipeline mit Bewertungsmetriken als Portfolio-Stück erstellen.",
+      "currentLevel": "Grundlegende API-Integrationserfahrung. Keine Modelltraining- oder MLOps-Erfahrung.",
+      "requiredLevel": "Verstandnis von ML-Pipelines, Model-Serving und AI-Service-Integration.",
+      "impact": "Konnte Schwierigkeiten in Interviews haben, wenn AI/ML-Workloads besprochen werden.",
+      "closingPlan": "Einen praktischen ML-Kurs mit Fokus auf Cloud-ML-Services absolvieren. Ein Projekt mit AI-API-Integration und Cloud-Infrastruktur bauen.",
       "timeToClose": "2-3 Monate (Teilzeit)",
       "resources": [
-        "Andrew Ng's Machine Learning Specialization (Coursera)",
+        "AWS Machine Learning Specialty Vorbereitungskurs",
         "fast.ai Practical Deep Learning Kurs (kostenlos)",
-        "LangChain Dokumentation + Tutorials",
-        "RAG-Pipeline-Projekt mit Bewertung erstellen"
+        "AI-integriertes Projekt auf AWS bauen"
       ]
     },
     {
-      "skill": "Docker / Containerisierung",
+      "skill": "Service Mesh / Erweitertes Networking",
       "severity": "moderate",
-      "currentLevel": "Nicht im Lebenslauf erwähnt",
-      "requiredLevel": "Fähigkeit, Anwendungen zu containerisieren und Grundkenntnisse in Container-Orchestrierung",
-      "impact": "Erwartete Fähigkeit für jeden modernen Deployment-Workflow. Nicht immer eine harte Anforderung, aber Abwesenheit wirft Fragen auf.",
-      "closingPlan": "Eines Ihrer Portfolio-Projekte mit Docker containerisieren. Grundlagen an einem Wochenende lernen — Dockerfile, docker-compose, grundlegende Befehle. Das ist ein schneller Gewinn.",
-      "timeToClose": "1 Wochenende",
+      "currentLevel": "Grundlegende Netzwerkkenntnisse",
+      "requiredLevel": "Verstandnis von Service Mesh (Istio/Linkerd), erweitertem Networking und Multi-Cloud-Konnektivitat",
+      "impact": "Erwartetes Wissen fur Senior Cloud Architect Rollen.",
+      "closingPlan": "Istio auf einem Kubernetes-Cluster als Hands-on-Projekt deployen. Grundlagen an einem Wochenende lernen.",
+      "timeToClose": "1-2 Wochenenden",
       "resources": [
-        "Docker Getting Started Tutorial (offizielle Dokumentation)",
-        "Fireship Docker in 100 Sekunden + Folgevideo",
-        "Career Agent App als Übung containerisieren"
+        "Offizielle Istio-Dokumentation und Tutorials",
+        "KodeKloud Service Mesh Kurs",
+        "Service Mesh auf einem personlichen K8s-Cluster deployen"
       ]
     },
     {
-      "skill": "Öffentliches Portfolio / GitHub-Präsenz",
+      "skill": "Offentliches Portfolio / GitHub-Prasenz",
       "severity": "moderate",
-      "currentLevel": "GitHub-Konto existiert, aber wahrscheinlich dünn. Keine öffentlichen Projekte, die aktuelle AI-Fähigkeiten demonstrieren.",
-      "requiredLevel": "Aktives GitHub mit 3-5 ausgefeilten Repos, die AI/Automatisierungsarbeit zeigen. Saubere READMEs mit Screenshots.",
-      "impact": "Recruiter und Hiring Manager überprüfen GitHub. Ein leeres oder inaktives Profil signalisiert 'redet über AI, baut aber nicht.' Ein aktives Portfolio mit AI-Projekten ist der beste Fähigkeitsnachweis.",
-      "closingPlan": "Der 3-monatige Portfolio-Sprint adressiert dies direkt. 6 beste Repos anpinnen, umfassende READMEs schreiben, Commit-Aktivität aufrechterhalten.",
-      "timeToClose": "2 Wochen für initiale Einrichtung, laufende Pflege",
+      "currentLevel": "GitHub-Konto existiert aber begrenzte offentliche Aktivitat.",
+      "requiredLevel": "Aktives GitHub mit 3-5 ausgefeilten Repos, die Cloud/Infrastruktur-Arbeit zeigen.",
+      "impact": "Hiring Manager uberprufen GitHub. Inaktives Profil signalisiert mangelndes Hands-on-Building.",
+      "closingPlan": "Der 3-monatige Portfolio-Sprint adressiert dies direkt. 6 beste Repos anpinnen, umfassende READMEs mit Diagrammen schreiben.",
+      "timeToClose": "2 Wochen fur initiale Einrichtung, laufende Pflege",
       "resources": [
-        "Dem Portfolio Sprint 2-Wochen-Plan folgen",
+        "Dem Portfolio Sprint Plan folgen",
         "GitHub-Profil README Generator",
-        "Top-Entwicklerprofile für README-Inspiration studieren"
+        "Top-Cloud-Ingenieur-Profile fur Inspiration studieren"
       ]
     },
     {
-      "skill": "Deutsche Sprache",
+      "skill": "Offentliches Sprechen / Content-Erstellung",
       "severity": "minor",
-      "currentLevel": "A2 (Grundkenntnisse)",
-      "requiredLevel": "B1-B2 für DACH-Marktrollen, nicht erforderlich für English-first Unternehmen",
-      "impact": "Beschränkt den Zugang zu DACH-spezifischen Rollen (Deutschland, Österreich, Schweiz), die die höchsten Gehälter in Europa haben. Kein Blocker für internationale Remote-Rollen.",
-      "closingPlan": "Weiterlernen, aber nicht über technische Fähigkeiten priorisieren. Kurzfristig auf English-first Remote-Rollen konzentrieren.",
-      "timeToClose": "6-12 Monate bis B1",
+      "currentLevel": "Nur interne Prasentationen",
+      "requiredLevel": "Konferenzgesprache oder Blogbeitrage, die Thought Leadership demonstrieren.",
+      "impact": "Begrenzt Inbound-Recruiting-Moglichkeiten. Wichtiger fur Senior/Principal Architect Positionen.",
+      "closingPlan": "Einen technischen Blog starten und CFPs an 1-2 Cloud-Konferenzen einreichen.",
+      "timeToClose": "3-6 Monate um Prasenz aufzubauen",
       "resources": [
-        "DW Deutsch Lernen (kostenlos)",
-        "Tandem Sprachaustausch-App",
-        "Deutsche Podcasts für Lernende"
+        "Dev.to oder Hashnode fur technisches Blogging",
+        "Lokale Cloud-Meetups fur Sprechpraxis",
+        "Konferenz-CFP-Aggregator-Seiten"
       ]
     }
   ],
   "roleRecommendations": [
     {
-      "title": "Solutions Architect — AI/Automatisierungsanbieter",
+      "title": "Solutions Architect — Cloud/SaaS-Anbieter",
       "fitScore": 8,
       "salaryRange": {
-        "low": 55000,
-        "mid": 75000,
-        "high": 100000,
+        "low": 65000,
+        "mid": 85000,
+        "high": 110000,
         "currency": "EUR"
       },
-      "reasoning": "Direkter Match für Ihre Enterprise-SA-Erfahrung + wachsende AI-Fähigkeiten. Unternehmen wie n8n, Make, Celonis, Automation Anywhere und ServiceNow stellen genau dieses Profil ein. Ihre UiPath-Insider-Erfahrung ist ein Differentiator gegenüber anderen Kandidaten. Remote-freundlich, kompatibel mit europäischer Zeitzone.",
-      "exampleCompanies": ["n8n", "Make", "Celonis", "Automation Anywhere", "ServiceNow", "Workato"],
+      "reasoning": "Direkter Match fur Enterprise-SA-Erfahrung + wachsende Cloud-Fahigkeiten. Unternehmen wie HashiCorp, Datadog, Elastic, Confluent und GitLab stellen genau dieses Profil ein. Remote-freundlich, kompatibel mit europaischer Zeitzone.",
+      "exampleCompanies": ["HashiCorp", "Datadog", "Elastic", "Confluent", "GitLab", "Grafana Labs"],
       "timeToReady": "Sofort bereit (jetzt bewerben)"
     },
     {
-      "title": "Technical Enablement Engineer — AI-Unternehmen",
-      "fitScore": 7,
-      "salaryRange": {
-        "low": 50000,
-        "mid": 70000,
-        "high": 90000,
-        "currency": "EUR"
-      },
-      "reasoning": "Ihre Technical Enablement Rolle bei UiPath ist direkt übertragbar. AI-Unternehmen (Anthropic, OpenAI, Cohere, Google Cloud, AWS, Dataiku, Databricks) brauchen Leute, die Partner und Kunden in AI-Produkten schulen können. Ihre Erfahrung in der Erstellung von Trainingscurricula und weltweiter Durchführung ist genau das, was sie brauchen.",
-      "exampleCompanies": ["Anthropic", "Dataiku", "Databricks", "Google Cloud", "AWS"],
-      "timeToReady": "Sofort bereit (Cloud-Zertifizierung würde Bewerbung stärken)"
-    },
-    {
-      "title": "AI-Automatisierungsberater — Selbständig / Beratung",
+      "title": "Cloud Platform Engineer — Tech-Unternehmen",
       "fitScore": 7,
       "salaryRange": {
         "low": 60000,
-        "mid": 90000,
-        "high": 150000,
+        "mid": 80000,
+        "high": 100000,
         "currency": "EUR"
       },
-      "reasoning": "Die Kombination Ihrer Enterprise-Automatisierungsexpertise mit modernen AI-Tools positioniert Sie perfekt für Beratung. Unternehmen brauchen jemanden, der sowohl ihre Legacy-Prozesse ALS AUCH moderne AI-Fähigkeiten versteht. Sie können 100-200 EUR/Stunde für diese Kombination berechnen. Die Demo-Kits, die Sie erstellen, werden zu Ihren Verkaufswerkzeugen.",
-      "exampleCompanies": ["Selbständig (SRL-D)", "Deloitte", "Accenture", "Capgemini", "Cognizant"],
-      "timeToReady": "1-3 Monate (Portfolio + Firmengründung)"
+      "reasoning": "Technische Tiefe in Infrastruktur kombiniert mit Softwareentwicklungsfahigkeiten. Cloud-Unternehmen brauchen Ingenieure, die Plattformdienste im grossen Massstab bauen und betreiben konnen.",
+      "exampleCompanies": ["AWS", "Google Cloud", "Databricks", "Snowflake", "MongoDB"],
+      "timeToReady": "Sofort bereit (Cloud-Zertifizierung wurde Bewerbung starken)"
+    },
+    {
+      "title": "Cloud-Infrastruktur-Berater — Selbstandig / Beratung",
+      "fitScore": 7,
+      "salaryRange": {
+        "low": 70000,
+        "mid": 100000,
+        "high": 160000,
+        "currency": "EUR"
+      },
+      "reasoning": "Die Kombination Ihrer Enterprise-Software-Expertise mit modernen Cloud-Native-Tools positioniert Sie perfekt fur Beratung. Unternehmen brauchen jemanden, der sowohl ihre Legacy-Systeme ALS AUCH moderne Cloud-Fahigkeiten versteht.",
+      "exampleCompanies": ["Selbstandig", "Deloitte", "Accenture", "Capgemini", "Thoughtworks"],
+      "timeToReady": "1-3 Monate (Portfolio + Zertifizierung)"
     }
   ],
   "actionPlan": {
     "thirtyDays": [
       {
-        "action": "LinkedIn- und Upwork-Profil-Überarbeitung abschließen — neue Überschrift, Über-mich-Bereich, vorgestellte Projekte",
+        "action": "LinkedIn-Profil-Uberarbeitung abschliessen — neue Uberschrift mit Cloud-Architektur-Schwerpunkt, aktualisierter Uber-mich-Bereich, vorgestellte Projekte",
         "priority": "critical",
         "timeEstimate": "2-3 Stunden gesamt",
-        "resource": "LinkedIn Audit Dokument (bereits erstellt)",
-        "expectedImpact": "Sofort sichtbar für Recruiter. LinkedIn-Algorithmus beginnt Sie mit AI/Automatisierungsrollen statt RPA-Rollen zu matchen."
+        "resource": "LinkedIn Audit Checkliste",
+        "expectedImpact": "Sofort sichtbar fur Recruiter. LinkedIn-Algorithmus beginnt Sie mit Cloud-Architektur-Rollen zu matchen."
       },
       {
-        "action": "Career Growth AI Agent und 2 weitere Portfolio-Projekte auf GitHub mit ausgefeilten READMEs veröffentlichen",
+        "action": "2-3 Portfolio-Projekte auf GitHub mit ausgefeilten READMEs und Architekturdiagrammen veroffentlichen",
         "priority": "critical",
-        "timeEstimate": "2 Wochen à 3 Stunden/Tag",
-        "resource": "Portfolio Sprint 2-Wochen-Plan",
-        "expectedImpact": "Beweist, dass Sie Full-Stack-AI-Anwendungen erstellen können. Verwandelt ein leeres GitHub in ein überzeugendes Portfolio."
+        "timeEstimate": "2 Wochen a 3 Stunden/Tag",
+        "resource": "Portfolio Sprint Plan",
+        "expectedImpact": "Beweist, dass Sie Cloud-Native-Anwendungen erstellen konnen. Verwandelt ein leeres GitHub in ein uberzeugendes Portfolio."
       },
       {
-        "action": "AZ-900 Azure Fundamentals Zertifizierung abschließen",
+        "action": "AWS Solutions Architect Associate Zertifizierung abschliessen",
         "priority": "critical",
-        "timeEstimate": "2-3 Wochen à 1 Stunde/Tag",
-        "resource": "Microsoft Learn AZ-900 Pfad (kostenlos)",
-        "expectedImpact": "Entfernt den 'keine Cloud-Erfahrung'-Blocker aus 60% der Stellenanzeigen."
+        "timeEstimate": "3-4 Wochen a 1 Stunde/Tag",
+        "resource": "AWS Skill Builder + Adrian Cantrill Kurs",
+        "expectedImpact": "Entfernt den 'keine Cloud-Zertifizierung'-Blocker aus 60% der Stellenanzeigen."
       },
       {
-        "action": "Auf 10-15 Tier-1-Rollen bewerben (Solutions Architect, Technical Enablement bei AI/Automatisierungsanbietern)",
+        "action": "Auf 10-15 Tier-1-Rollen bewerben (Solutions Architect, Platform Engineer bei Cloud/SaaS-Anbietern)",
         "priority": "high",
         "timeEstimate": "3-5 Stunden gesamt",
-        "resource": "Aktualisierter Lebenslauf + maßgeschneiderte Anschreiben",
+        "resource": "Aktualisierter Lebenslauf + massgeschneiderte Anschreiben",
         "expectedImpact": "Startet die Interview-Pipeline. Selbst Ablehnungen liefern Marktfeedback."
       }
     ],
     "ninetyDays": [
       {
-        "action": "AI-102 Azure AI Engineer Associate Zertifizierung abschließen",
+        "action": "AWS DevOps Professional Zertifizierung abschliessen",
         "priority": "high",
-        "timeEstimate": "4-6 Wochen à 1 Stunde/Tag",
-        "resource": "Microsoft Learn AI-102 Pfad (kostenlos)",
-        "expectedImpact": "Positioniert Sie als Cloud-AI-Ingenieur, nicht nur als RPA-Entwickler. Kombiniert sich stark mit AZ-900."
+        "timeEstimate": "4-6 Wochen a 1 Stunde/Tag",
+        "resource": "AWS Skill Builder DevOps Pfad",
+        "expectedImpact": "Positioniert Sie als Cloud-DevOps-Experte, nicht nur als Entwickler. Kombiniert sich stark mit SA Associate."
       },
       {
-        "action": "Alle 5 AI-Automatisierungs-Demo-Kits veröffentlichen (Rechnung, E-Mail, Onboarding, Lead-Qualifizierung, Besprechungsnotizen)",
+        "action": "3 Cloud-Architektur-Referenzprojekte bauen und veroffentlichen (Serverless API, Datenpipeline, Multi-Service-App)",
         "priority": "high",
-        "timeEstimate": "5 Wochen à ~4 Stunden/Kit",
-        "resource": "3-Monats-Masterplan",
-        "expectedImpact": "Erstellt einen verkaufsfähigen Servicekatalog. Jedes Kit ist ein potenzielles Kundenengagement von 1.500-5.000 EUR."
+        "timeEstimate": "5 Wochen a ~4 Stunden/Projekt",
+        "resource": "Architektur-Portfolio-Plan",
+        "expectedImpact": "Erstellt ein demonstrierbares Portfolio von Cloud-Losungen. Jedes Projekt ist ein Gesprachspunkt in Interviews."
       },
       {
-        "action": "SRL-D (Kleinstunternehmen) in Rumänien registrieren",
+        "action": "Freelance-Beratungsgeschaft registrieren",
         "priority": "medium",
-        "timeEstimate": "1-2 Wochen Papierarbeit + Steuerberaterkonsultation",
-        "resource": "Rumänischer Steuerberater, ONRC-Registrierung",
-        "expectedImpact": "Ermöglicht legale Rechnungsstellung, 1% Umsatzsteuer, professionelle Glaubwürdigkeit."
+        "timeEstimate": "1-2 Wochen Papierarbeit",
+        "resource": "Lokale Gewerberegistrierung, Steuerberaterkonsultation",
+        "expectedImpact": "Ermoglicht legale Rechnungsstellung, professionelle Glaubwurdigkeit fur Beratungsengagements."
       },
       {
-        "action": "4-6 LinkedIn-Beiträge über erstellte Projekte veröffentlichen",
+        "action": "4-6 LinkedIn-Beitrage uber Cloud-Projekte veroffentlichen",
         "priority": "medium",
         "timeEstimate": "1-2 Stunden pro Beitrag",
         "resource": "Eigenes Projektportfolio als Inhaltsquelle",
-        "expectedImpact": "Baut Sichtbarkeit auf, etabliert Thought Leadership, zieht Inbound-Möglichkeiten an."
+        "expectedImpact": "Baut Sichtbarkeit auf, etabliert Thought Leadership, zieht Inbound-Moglichkeiten an."
       }
     ],
     "twelveMonths": [
       {
-        "action": "Übergang zur AI Solutions Architect Rolle bei einem Automatisierungs-/AI-Anbieter ODER Beratungspraxis auf 8K+ EUR/Monat Umsatz aufbauen",
+        "action": "Ubergang zur Cloud Solutions Architect Rolle bei einem Cloud/SaaS-Anbieter ODER Beratungspraxis aufbauen",
         "priority": "critical",
         "timeEstimate": "Laufend",
         "resource": "Netzwerk, Portfolio, Zertifizierungen aus Monaten 1-3",
-        "expectedImpact": "Karrierewechsel abgeschlossen. Verdienst von 70-100K+ EUR in neuer Domäne."
+        "expectedImpact": "Karrierewechsel abgeschlossen. Verdienst im Zielgehaltsbereich in neuer Domane."
       },
       {
-        "action": "Ballistics und Pigeon Fancier Apps als Abo-Produkte launchen",
+        "action": "Ein Open-Source-Cloud-Tool oder -Framework bauen und launchen",
         "priority": "medium",
         "timeEstimate": "2-3 Monate Entwicklung + laufend",
-        "resource": "3-Monats-Masterplan (Phase 3)",
-        "expectedImpact": "Passiver/wiederkehrender Einkommensstrom. Demonstriert Produktmanagement + Full-Stack-Fähigkeit."
+        "resource": "Identifizierte Lucke im Cloud-Tooling-Okosystem",
+        "expectedImpact": "Community-Sichtbarkeit, demonstriert tiefe Expertise, potenziell wiederkehrende Einnahmen."
       },
       {
-        "action": "Einen ML-Kurs abschließen (Andrew Ng oder fast.ai) und ein RAG-Projekt mit Bewertungsmetriken erstellen",
+        "action": "Einen fortgeschrittenen Kurs (Verteilte Systeme oder ML-Engineering) abschliessen und ein Capstone-Projekt bauen",
         "priority": "medium",
         "timeEstimate": "2-3 Monate Teilzeit",
-        "resource": "Coursera / fast.ai (kostenlos)",
-        "expectedImpact": "Schließt die ML-Wissenslücke. Ermöglicht Gespräche mit Data-Science-Teams auf Augenhöhe, nicht nur als API-Konsument."
+        "resource": "MIT OpenCourseWare / Coursera (kostenlose Optionen verfugbar)",
+        "expectedImpact": "Schliesst die fortgeschrittene Architektur-Wissenslucke. Ermoglicht Gesprache mit Principal Engineers auf Augenhohe."
       },
       {
-        "action": "Bei 1-2 Online-Meetups oder Konferenzen über AI-Automatisierung sprechen",
+        "action": "Bei 1-2 Meetups oder Konferenzen uber Cloud-Architektur sprechen",
         "priority": "medium",
         "timeEstimate": "2-4 Stunden Vorbereitung pro Vortrag",
-        "resource": "n8n Community Meetups, lokale Tech-Meetups, Online-Konferenzen",
-        "expectedImpact": "Öffentliches Sprechen baut Glaubwürdigkeit exponentiell auf. Ein guter Vortrag kann mehr Leads generieren als 50 Kalt-E-Mails."
+        "resource": "Cloud-Meetups, KubeCon, lokale Tech-Konferenzen",
+        "expectedImpact": "Offentliches Sprechen baut Glaubwurdigkeit exponentiell auf. Ein guter Vortrag kann mehr Inbound-Interesse generieren als 50 Kaltbewerbungen."
       }
     ]
   },
   "salaryAnalysis": {
     "currentRoleMarket": {
-      "low": 36000,
-      "mid": 48000,
-      "high": 65000,
+      "low": 45000,
+      "mid": 60000,
+      "high": 80000,
       "currency": "EUR",
-      "region": "Rumänien — lokaler Marktäquivalent (Bruttojahresgehalt)"
+      "region": "Niederlande — lokaler Markt (Bruttojahresgehalt)"
     },
     "targetRoleMarket": {
-      "low": 55000,
-      "mid": 80000,
-      "high": 120000,
+      "low": 65000,
+      "mid": 90000,
+      "high": 130000,
       "currency": "EUR",
       "region": "EU/EMEA Remote-Markt (Bruttojahresgehalt)"
     },
-    "growthPotential": "+35-65% Steigerung erreichbar innerhalb von 6-12 Monaten durch Übergang von RPA-fokussierten Rollen zu AI Solutions Architect Positionen. Der größte Hebel ist die Ausrichtung auf westeuropäische Unternehmen, die remote einstellen — sie zahlen westeuropäische Gehälter an osteuropäische Talente.",
-    "bestMonetaryMove": "Bewerben Sie sich sofort auf Solutions Architect Rollen bei n8n, Make oder Celonis. Diese Unternehmen schätzen spezifisch Enterprise-Automatisierungserfahrung, zahlen 65-100K EUR für remote europäische Talente, und Ihr UiPath-Hintergrund ist ein direkter Wettbewerbsvorteil. Während der Interviews bauen Sie Beratungseinkommen über Upwork bei 50-75$/Stunde auf. Die Kombination Bewerbungen + Freelance-Einkommen schafft mehrere Wege zu höheren Einnahmen.",
+    "growthPotential": "+30-50% Steigerung erreichbar innerhalb von 6-12 Monaten durch Ubergang von Backend-Engineering-Rollen zu Cloud Solutions Architect Positionen. Der grosste Hebel ist die Ausrichtung auf Unternehmen, die fur EU-Zeitzone remote einstellen mit wettbewerbsfahiger Vergutung.",
+    "bestMonetaryMove": "Bewerben Sie sich sofort auf Solutions Architect Rollen bei HashiCorp, Datadog oder Confluent. Diese Unternehmen schatzen spezifisch Enterprise-Software-Erfahrung, zahlen wettbewerbsfahige europaische Gehalter, und Ihr Hintergrund ist ein direkter Wettbewerbsvorteil. Wahrend der Interviews bauen Sie Beratungseinkommen uber Freelance-Plattformen auf.",
     "negotiationTips": [
-      "Führen Sie mit Ihrer UiPath Enterprise-Erfahrung — 'Ich habe Automatisierungsarchitekturen entworfen, die bei Fortune-500-Unternehmen eingesetzt werden' erzielt höhere Raten als 'Ich kenne n8n.'",
-      "Wenn nach Gehaltsvorstellungen gefragt, verankern Sie auf westeuropäischen Bereichen (70-90K EUR) nicht auf dem rumänischen lokalen Markt. Sie konkurrieren über gelieferten Wert, nicht über lokale Lebenshaltungskosten.",
-      "Wenn unter Zielgehalt angeboten, verhandeln Sie Signing-Bonus, Beteiligungen oder beschleunigten Bewertungszeitraum, anstatt ein niedrigeres Grundgehalt zu akzeptieren. Das Grundgehalt zinst sich — jede 5K EUR mehr zinst sich über Ihre gesamte Karriere."
+      "Fuhren Sie mit Ihrer Enterprise-Architektur-Erfahrung — 'Ich habe verteilte Systeme entworfen, die bei Fortune-500-Unternehmen eingesetzt werden' erzielt hohere Raten als einzelne Technologien aufzulisten.",
+      "Wenn nach Gehaltsvorstellungen gefragt, verankern Sie auf wettbewerbsfahigen EU-Marktbereichen statt auf lokalen Marktraten.",
+      "Wenn unter Zielgehalt angeboten, verhandeln Sie Signing-Bonus, Beteiligungen oder beschleunigten Bewertungszeitraum. Das Grundgehalt zinst sich uber Ihre gesamte Karriere."
     ]
   }
 }
