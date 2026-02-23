@@ -31,6 +31,9 @@ IMPORTANT RULES:
 - Include years of experience requirements as keywords (e.g., "5+ years Python")
 - Do NOT invent keywords not present in the posting
 
+STRICT DATA SOURCING:
+- Extract keywords ONLY from the provided job posting text. Do NOT add skills or requirements from other sources.
+
 ANTI-HALLUCINATION RULES:
 - Only extract keywords that are EXPLICITLY present in the job posting text. Do NOT add assumed requirements.
 - Category assignment must be based on the actual text:
@@ -71,7 +74,7 @@ ${JSON.stringify(jobKeywords, null, 2)}
 For each keyword, determine:
 1. **status**: "exact_match" (keyword or variant found verbatim), "semantic_match" (related skill found, e.g., CV says "React Native" and keyword is "React"), or "missing" (not found)
 2. **matchedAs**: if matched, what text in the CV matched it
-3. **cvSection**: which section of the CV contains the match (e.g., "Experience - UiPath", "Skills", "Education", "Summary"), or if missing, which section it SHOULD be added to
+3. **cvSection**: which section of the CV contains the match (e.g., "Experience - [Company Name]", "Skills", "Education", "Summary"), or if missing, which section it SHOULD be added to
 
 MATCHING RULES:
 - Case-insensitive matching

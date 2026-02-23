@@ -62,6 +62,12 @@ SALARY ANALYSIS RULES:
 8. IMPORTANT — If SALARY REFERENCE DATA is provided below, you MUST use those exact figures for low/mid/high and set the source field to the value specified (e.g., "government_bls", "government_ons", "government_eurostat", "survey_stackoverflow", or "market"). Only estimate when no data is available — in that case set source to "estimate" and provide wider ranges.
 9. Valid source values: "government_bls", "government_ons", "government_eurostat", "survey_stackoverflow", "market", "estimate". Use the source specified in the reference data. If not confident, mark source as "estimate" and widen the range (e.g., +/- 20%)
 
+STRICT DATA SOURCING:
+- Base your action plan STRICTLY on the provided candidate profile, identified gaps, and role recommendations.
+- Every action item must be relevant to THIS candidate's actual skills, gaps, and goals — not generic career advice.
+- Use the provided salary reference data and knowledge context for benchmarking. Do NOT copy example data verbatim.
+- Do NOT invent, assume, or infer any skills, experience, or career details not present in the provided data.
+
 ANTI-HALLUCINATION RULES:
 - Only suggest real, existing platforms and tools. Do NOT invent app names, website names, or community names.
 - Only suggest actions that a real person could actually complete. Do NOT suggest "get hired at [specific company]" as an action item — suggest "apply to [type of company]" instead.

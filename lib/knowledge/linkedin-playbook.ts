@@ -11,8 +11,8 @@ PROFILE OPTIMIZATION (in priority order):
 
 1. HEADLINE (most important — shows in search results, comments, messages)
    - Formula: [Target Role] | [Key Differentiator] | [Proof Point]
-   - BAD: "Technical Enablement Engineer at UiPath"
-   - GOOD: "AI Solutions Architect | Enterprise Automation → AI Transformation | Building with Claude API, n8n, Azure AI"
+   - BAD: "Software Engineer at [Company]" (just a job title, no differentiation)
+   - GOOD: "[Target Role] | [Key Differentiator] | [Proof Point or Tech Stack]"
    - Include target role keywords (recruiters search by keywords)
    - Update BEFORE job searching — your current title auto-populates from Experience
    - Max 220 characters, front-load keywords (truncates in mobile/search)

@@ -36,7 +36,7 @@ export const TRANSITION_PATTERNS: TransitionPattern[] = [
     criticalGaps: ['Cloud platform certification (AWS/Azure/GCP)', 'System design at scale', 'API architecture & microservices', 'Cost optimization & capacity planning'],
     successPattern: 'RPA developers who become SAs leverage their unique advantage: they understand how enterprise processes actually work, not just how technology works. The best pivot is into SA roles at automation/AI vendors where their domain expertise is the differentiator.',
     commonMistakes: ['Applying to pure cloud SA roles without any cloud certification', 'Underselling their enterprise experience', 'Not building a portfolio of architecture diagrams and design documents'],
-    fastTrackTip: 'Get AZ-900 + one specialty cert (AI-102 or AZ-305) within 8 weeks. Then target SA roles at automation vendors (UiPath competitors, n8n, Make, Celonis) where your domain knowledge gives you an unfair advantage.',
+    fastTrackTip: 'Get AZ-900 + one specialty cert (AI-102 or AZ-305) within 8 weeks. Then target SA roles at automation vendors (n8n, Make, Celonis, Workato) where your domain knowledge gives you an unfair advantage.',
   },
   {
     from: 'Backend Developer',
@@ -100,7 +100,7 @@ export const TRANSITION_PATTERNS: TransitionPattern[] = [
     timeToTransition: '3-6 months',
     transferableSkills: ['Customer-facing communication', 'Product deep knowledge', 'Troubleshooting complex systems', 'Technical documentation', 'Cross-functional collaboration', 'Demo/presentation skills'],
     criticalGaps: ['System design at enterprise scale', 'Cloud architecture', 'Pre-sales methodology', 'Business case / ROI analysis', 'Competitive landscape knowledge'],
-    successPattern: 'Technical enablement engineers at vendors (UiPath, Salesforce, ServiceNow etc) have the perfect springboard to SA roles. They already know the product deeply and can communicate technically. The gap is usually strategic thinking and architecture skills.',
+    successPattern: 'Technical enablement engineers at software vendors have the perfect springboard to SA roles. They already know the product deeply and can communicate technically. The gap is usually strategic thinking and architecture skills.',
     commonMistakes: ['Not positioning their training experience as "customer success" and "solution design"', 'Undervaluing their product expertise', 'Trying to move to a completely different technology stack instead of leveraging their vendor ecosystem'],
     fastTrackTip: 'Target SA roles at competitors or adjacent vendors. Your inside knowledge of one platform is extremely valuable when selling against it. Get a cloud cert to signal architecture capability. Lead with your customer-facing experience in applications.',
   },

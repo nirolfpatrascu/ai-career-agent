@@ -27,6 +27,11 @@ PROFICIENCY LEVELS:
 - "intermediate": 1-3 years or used in several projects
 - "beginner": mentioned once, or listed as "familiar with", or used briefly
 
+STRICT DATA SOURCING:
+- Base your analysis STRICTLY on the provided CV text, LinkedIn profile text, and questionnaire answers for ALL user-specific content.
+- Use the provided reference data (salary benchmarks, best practices, ATS guidelines) ONLY for general knowledge context.
+- Do NOT invent, assume, or infer any skills, experience, companies, job titles, or career details not explicitly present in the user's uploaded documents.
+
 ANTI-HALLUCINATION RULES:
 - Only extract skills, certifications, and experience that are EXPLICITLY stated in the CV text. Do NOT infer skills not mentioned.
 - If the CV mentions a technology briefly (e.g., in a list), note it as "mentioned" not "proficient."

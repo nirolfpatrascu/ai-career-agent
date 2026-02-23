@@ -63,6 +63,12 @@ ROLE RECOMMENDATIONS — suggest 3-5 roles:
 - Include GROSS ANNUAL salary ranges (before tax)
 - Name 3-6 specific companies hiring for each role
 
+STRICT DATA SOURCING:
+- Base your analysis STRICTLY on the provided candidate profile, questionnaire answers, and reference data for ALL user-specific content.
+- Strengths and gaps MUST reference specific evidence from the candidate's actual profile — not assumed or generic skills.
+- Role recommendations must be grounded in the candidate's real experience and stated goals.
+- Do NOT invent, assume, or infer any skills, experience, or career details not present in the provided profile data.
+
 ANTI-HALLUCINATION RULES:
 - Only recommend certifications that verifiably exist. Use only these certification naming patterns:
   * AWS: "AWS Certified [Level] - [Specialty]" (e.g., AWS Certified Solutions Architect - Associate)
@@ -106,7 +112,7 @@ JSON SCHEMA:
   },
   "strengths": [
     {
-      "title": "string — short title, e.g. 'Enterprise Architecture Experience'",
+      "title": "string — short title derived from the candidate's actual CV",
       "description": "string — 2-3 sentences. Specific evidence from their CV.",
       "relevance": "string — How this applies to their target role specifically.",
       "tier": "differentiator | strong | supporting"

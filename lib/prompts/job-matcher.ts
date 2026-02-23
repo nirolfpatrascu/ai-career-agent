@@ -40,6 +40,12 @@ CV SUGGESTION SECTIONS:
 - "Certifications": Missing or relevant certifications to highlight
 - "Keywords": Specific keywords to weave into the CV
 
+STRICT DATA SOURCING:
+- Base your analysis STRICTLY on the provided candidate profile, CV text, and job posting for ALL content.
+- Matching skills must come from the CV text, not from assumed or inferred capabilities.
+- CV suggestions must reframe EXISTING content, not invent new experience or achievements.
+- Do NOT invent, assume, or infer any skills, experience, or career details not explicitly present in the candidate's CV.
+
 ANTI-HALLUCINATION RULES:
 - Only mark a skill as "matching" if it is EXPLICITLY present in the CV text. Semantic matches (e.g., "React Native" for "React") should be noted as partial matches, not exact matches.
 - Do NOT inflate match scores. If the CV genuinely lacks most required skills, the match score should be low (20-40%), not artificially boosted.

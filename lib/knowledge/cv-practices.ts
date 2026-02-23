@@ -18,7 +18,7 @@ STRUCTURE (reverse chronological, 2 pages max for <15 years, 3 max for 15+):
 1. PROFESSIONAL SUMMARY (3-4 lines)
    - Formula: [Years] experience in [domain]. Specializing in [2-3 key skills]. [Quantified achievement]. Seeking [target role] at [company type].
    - BAD: "Passionate team player with excellent communication skills"
-   - GOOD: "14-year software engineer with enterprise automation architecture expertise. Led UiPath deployments across 3 Fortune 500 clients reducing manual processing by 85%. Transitioning to AI Solutions Architecture."
+   - GOOD: "14-year software engineer with enterprise architecture expertise. Led platform deployments across 3 Fortune 500 clients reducing manual processing by 85%. Transitioning to [Target Role]."
 
 2. SKILLS SECTION (immediately after summary)
    - Group by category: Languages, Frameworks, Cloud, AI/ML, Tools, Certifications

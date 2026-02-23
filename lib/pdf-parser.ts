@@ -34,11 +34,11 @@ export async function parsePDF(buffer: Buffer): Promise<ParsedPDF> {
 
     const text = data.text?.trim();
 
-    if (!text || text.length < 50) {
+    if (!text || text.length < 200) {
       throw new Error(
         'Could not extract meaningful text from this PDF. ' +
         'The file might be a scanned image without OCR, or it may be empty. ' +
-        'Please upload a text-based PDF.'
+        'Please upload a text-based PDF (you can test by selecting text in your PDF viewer).'
       );
     }
 
@@ -96,7 +96,20 @@ function assessTextQuality(text: string): { score: number; warning?: string } {
     warnings.push('Some parts of the extracted text may be garbled.');
   }
 
-  // 2. Encoding artifact detection: high concentration of replacement chars or control sequences
+  // 2. Non-alphanumeric ratio: if >50% of chars are non-alphanumeric (excluding spaces/newlines), text is garbled
+  const alnumChars = (text.match(/[a-zA-ZÀ-ÿ0-9]/g) || []).length;
+  const contentChars = text.replace(/[\s\n\r]/g, '').length;
+  const nonAlnumRatio = contentChars > 0 ? 1 - (alnumChars / contentChars) : 1;
+
+  if (nonAlnumRatio > 0.5) {
+    score -= 40;
+    warnings.push('More than 50% of extracted text is non-alphanumeric — file likely contains garbled or image-based content.');
+  } else if (nonAlnumRatio > 0.35) {
+    score -= 15;
+    warnings.push('High proportion of special characters in extracted text.');
+  }
+
+  // 3. Encoding artifact detection: high concentration of replacement chars or control sequences
   const artifactPattern = /[\uFFFD\u0000-\u0008\u000E-\u001F]|\\x[0-9a-f]{2}/gi;
   const artifacts = (text.match(artifactPattern) || []).length;
   const artifactRatio = artifacts / text.length;
@@ -109,7 +122,7 @@ function assessTextQuality(text: string): { score: number; warning?: string } {
     warnings.push('Minor encoding issues detected in the PDF.');
   }
 
-  // 3. CV structure signals: check for common section headers
+  // 4. CV structure signals: check for common section headers
   const sectionKeywords = [
     /\b(experience|employment|work history)\b/i,
     /\b(education|university|degree|bachelor|master)\b/i,
@@ -123,7 +136,7 @@ function assessTextQuality(text: string): { score: number; warning?: string } {
     warnings.push('No recognizable CV section headers found — text extraction may be incomplete.');
   }
 
-  // 4. Text length vs page count heuristic (very short text from multi-page PDFs = likely image-based)
+  // 5. Text length vs page count heuristic (very short text from multi-page PDFs = likely image-based)
   // This is checked externally since we need pageCount
 
   return {
