@@ -19,6 +19,8 @@ import ChatPanel from '@/components/results/ChatPanel';
 import { CVOptimizerPanel } from '@/components/results/CVOptimizerPanel';
 import LinkedInPlan from '@/components/results/LinkedInPlan';
 import UpworkPanel from '@/components/results/UpworkPanel';
+import CoverLetterPanel from '@/components/results/CoverLetterPanel';
+import GitHubAnalysisPanel from '@/components/results/GitHubAnalysisPanel';
 import ChapterNav, { DEFAULT_TAB } from '@/components/results/ChapterNav';
 import SectionIntro from '@/components/results/SectionIntro';
 import { getSampleAnalysis } from '@/lib/demo';
@@ -40,6 +42,7 @@ export default function AnalyzePage() {
   const [upworkProfile, setUpworkProfile] = useState<UpworkProfile | null>(null);
   const [upworkAnalysis, setUpworkAnalysis] = useState<UpworkProfileAnalysis | null>(null);
   const [upworkAnalyzing, setUpworkAnalyzing] = useState(false);
+  const [githubUrl, setGithubUrl] = useState<string | null>(null);
 
   // Streaming analysis hook
   const streaming = useStreamingAnalysis();
@@ -117,6 +120,7 @@ export default function AnalyzePage() {
     upworkProfile?: UpworkProfile;
   }) => {
     if (wizardUpwork) setUpworkProfile(wizardUpwork);
+    if (questionnaire.githubUrl) setGithubUrl(questionnaire.githubUrl);
     setState('processing');
     setError('');
     setIsDemo(false);
@@ -243,6 +247,24 @@ export default function AnalyzePage() {
               />
             </div>
           );
+        case 'cover-letter':
+          return (
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-cover-letter" aria-labelledby="tab-cover-letter">
+              <SectionIntro messageKey="motivation.coverLetter" variant="encouraging" />
+              <CoverLetterPanel analysis={result} />
+            </div>
+          );
+        case 'github-analysis':
+          return githubUrl ? (
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-github-analysis" aria-labelledby="tab-github-analysis">
+              <SectionIntro messageKey="motivation.githubAnalysis" variant="encouraging" />
+              <GitHubAnalysisPanel
+                githubUrl={githubUrl}
+                targetRole={result.metadata.targetRole}
+                jobPosting={result.metadata.jobPosting}
+              />
+            </div>
+          ) : null;
         case 'upwork':
           return upworkProfile ? (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-upwork" aria-labelledby="tab-upwork">
@@ -288,6 +310,8 @@ export default function AnalyzePage() {
         <ChapterNav
           hasJobMatch={!!result.jobMatch}
           hasUpwork={!!upworkProfile}
+          hasCoverLetter={!!result.metadata.jobPosting}
+          hasGitHub={!!githubUrl}
           activeTab={activeTab}
           onTabChange={setActiveTab}
         />

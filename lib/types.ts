@@ -20,6 +20,7 @@ export interface CareerQuestionnaire {
   jobPostings?: JobPostingInput[];  // Multiple postings for richer context
   language?: string;          // 'en' | 'ro' | 'de' — for localized AI responses
   linkedInProfile?: string;   // Raw LinkedIn profile text for supplementary data
+  githubUrl?: string;         // GitHub profile URL for repo/language analysis
 }
 
 export interface JobPostingInput {
@@ -50,6 +51,8 @@ export interface AnalysisMetadata {
   country: string;
   /** Original job posting text (for CV re-scoring) */
   jobPosting?: string;
+  /** GitHub profile URL for repo analysis */
+  githubUrl?: string;
   /** Warning message if PDF text extraction quality was suboptimal */
   pdfQualityWarning?: string;
   /** Tracks which data came from Claude vs fallback */

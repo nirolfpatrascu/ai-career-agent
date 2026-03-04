@@ -45,3 +45,15 @@ export {
   buildUpworkCoverLetterPrompt,
   UPWORK_COVER_LETTER_FALLBACK,
 } from './upwork-cover-letter';
+
+export {
+  buildCoverLetterPrompt,
+  COVER_LETTER_FALLBACK,
+  type CoverLetter,
+} from './cover-letter';
+
+export {
+  buildGitHubAnalysisPrompt,
+  GITHUB_ANALYSIS_FALLBACK,
+  type GitHubAnalysis,
+} from './github-analysis';

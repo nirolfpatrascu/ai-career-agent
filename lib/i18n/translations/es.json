@@ -25,7 +25,9 @@
   "nav": {
     "cvOptimizer": "Optimizador de CV",
     "jobTracker": "Candidaturas",
-    "upwork": "Upwork"
+    "upwork": "Upwork",
+    "coverLetter": "Carta de Presentación",
+    "githubAnalysis": "Análisis GitHub"
   },
   "hero": {
     "badge": "Asesor de Carrera con IA",
@@ -411,7 +413,10 @@
       "subtitle": "Tu CV es el documento principal que analizamos. Formato PDF, máximo 5MB.",
       "dropHere": "Arrastra tu CV aquí",
       "orBrowse": "Formato PDF, máximo 5MB",
-      "needAtLeastOne": "Sube al menos un CV o PDF de LinkedIn para continuar."
+      "needAtLeastOne": "Sube al menos un CV o PDF de LinkedIn para continuar.",
+      "githubLabel": "URL del Perfil de GitHub",
+      "githubHint": "Analizaremos tus repositorios, lenguajes y contribuciones",
+      "githubInvalid": "La URL debe comenzar con https://github.com/"
     },
     "details": {
       "title": "Cuéntanos sobre tus objetivos profesionales",
@@ -513,7 +518,9 @@
     "cvGenerator": "Tu CV es tu primera impresión. Este marco generado por IA usa tu análisis para crear contenido ATS-friendly optimizado para tu rol objetivo.",
     "cvSuggestions": "Estos son cambios específicos para alinear tu CV con la oferta de trabajo. Cada sugerencia muestra exactamente qué cambiar y por qué importa.",
     "atsScore": "Asegurémonos de que tu CV pase los robots. Así es como los sistemas ATS leerán tu solicitud y qué puedes optimizar.",
-    "cvOptimizer": "Tu CV analizado frente a la oferta de empleo — puntuación de compatibilidad ATS, palabras clave faltantes y sugerencias concretas para mejorar tus posibilidades."
+    "cvOptimizer": "Tu CV analizado frente a la oferta de empleo — puntuación de compatibilidad ATS, palabras clave faltantes y sugerencias concretas para mejorar tus posibilidades.",
+    "coverLetter": "Una carta de presentación que destaca tus fortalezas y aborda honestamente las brechas. Edítala para añadir tu toque personal.",
+    "githubAnalysis": "Tu perfil de GitHub cuenta una historia. Esto es lo que verían los reclutadores — y cómo fortalecerlo para tu rol objetivo."
   },
   "cv": {
     "tabTitle": "Generador CV",
@@ -761,6 +768,49 @@
       "regenerate": "Regenerar",
       "saveDraft": "Guardar Borrador",
       "saved": "¡Guardado!"
+    }
+  },
+  "coverLetter": {
+    "title": "Carta de Presentación",
+    "subtitle": "Generada por IA, adaptada a la oferta de empleo",
+    "generate": "Generar Carta",
+    "generating": "Generando tu carta...",
+    "regenerate": "Regenerar",
+    "copy": "Copiar al Portapapeles",
+    "copied": "¡Copiado!",
+    "tone": "Tono",
+    "tones": {
+      "professional": "Profesional",
+      "conversational": "Conversacional",
+      "bold": "Audaz"
+    },
+    "strengthsHighlighted": "Fortalezas Destacadas",
+    "gapsAddressed": "Brechas Abordadas",
+    "editHint": "Edita la carta a continuación para personalizarla",
+    "noJobPosting": "Añade una oferta de empleo en el asistente para generar una carta personalizada."
+  },
+  "github": {
+    "title": "Análisis GitHub",
+    "subtitle": "Repositorios, lenguajes y contribuciones",
+    "analyze": "Analizar Perfil GitHub",
+    "analyzing": "Analizando tu perfil de GitHub...",
+    "stats": "Estadísticas",
+    "totalRepos": "Total Repos",
+    "topLanguages": "Lenguajes Principales",
+    "avgStars": "Estrellas Prom.",
+    "accountAge": "Antigüedad",
+    "recentActivity": "Actividad Reciente",
+    "strengths": "Fortalezas",
+    "improvements": "Áreas de Mejora",
+    "projectIdea": "Proyecto Recomendado",
+    "techStack": "Stack Tecnológico",
+    "whyRelevant": "Por Qué Ayuda",
+    "estimatedTime": "Tiempo Estimado",
+    "error": "Error al analizar el perfil de GitHub",
+    "priority": {
+      "high": "Alta",
+      "medium": "Media",
+      "low": "Baja"
     }
   },
   "jobs": {

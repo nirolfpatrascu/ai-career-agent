@@ -25,7 +25,9 @@
   "nav": {
     "cvOptimizer": "CV Optimizer",
     "jobTracker": "Job Tracker",
-    "upwork": "Upwork"
+    "upwork": "Upwork",
+    "coverLetter": "Cover Letter",
+    "githubAnalysis": "GitHub Analysis"
   },
   "hero": {
     "badge": "AI-Powered Career Advisor",
@@ -409,7 +411,10 @@
       "subtitle": "Your CV is the primary document we analyze. PDF format, max 5MB.",
       "dropHere": "Drop your CV here",
       "orBrowse": "PDF format, max 5MB",
-      "needAtLeastOne": "Upload at least a CV or LinkedIn PDF to proceed."
+      "needAtLeastOne": "Upload at least a CV or LinkedIn PDF to proceed.",
+      "githubLabel": "GitHub Profile URL",
+      "githubHint": "We'll analyze your repos, languages, and contributions",
+      "githubInvalid": "URL must start with https://github.com/"
     },
     "details": {
       "title": "Tell us about your career goals",
@@ -511,7 +516,9 @@
     "cvGenerator": "Your CV is your first impression. This AI-generated framework uses your analysis to create ATS-friendly content optimized for your target role. Copy what works, adapt the rest.",
     "cvSuggestions": "These are targeted changes to align your CV with the specific job posting you provided. Each suggestion shows exactly what to change and why it matters for this role.",
     "atsScore": "Let's make sure your CV gets past the robots. Here's how ATS systems will read your application and what you can optimize.",
-    "cvOptimizer": "Your CV analyzed against the job posting — ATS compatibility score, keyword gaps, and specific suggestions to improve your chances."
+    "cvOptimizer": "Your CV analyzed against the job posting — ATS compatibility score, keyword gaps, and specific suggestions to improve your chances.",
+    "coverLetter": "A tailored cover letter that highlights your strengths and honestly addresses gaps. Edit it to add your personal touch before sending.",
+    "githubAnalysis": "Your GitHub profile tells a story. Here's what hiring managers would see — and how to make it stronger for your target role."
   },
   "cv": {
     "tabTitle": "CV Builder",
@@ -759,6 +766,49 @@
       "regenerate": "Regenerate",
       "saveDraft": "Save Draft",
       "saved": "Saved!"
+    }
+  },
+  "coverLetter": {
+    "title": "Cover Letter",
+    "subtitle": "AI-generated, tailored to the job posting",
+    "generate": "Generate Cover Letter",
+    "generating": "Generating your cover letter...",
+    "regenerate": "Regenerate",
+    "copy": "Copy to Clipboard",
+    "copied": "Copied!",
+    "tone": "Tone",
+    "tones": {
+      "professional": "Professional",
+      "conversational": "Conversational",
+      "bold": "Bold"
+    },
+    "strengthsHighlighted": "Strengths Highlighted",
+    "gapsAddressed": "Gaps Addressed",
+    "editHint": "Edit the letter below to personalize it further",
+    "noJobPosting": "Add a job posting in the wizard to generate a tailored cover letter."
+  },
+  "github": {
+    "title": "GitHub Analysis",
+    "subtitle": "Repos, languages, and contribution insights",
+    "analyze": "Analyze GitHub Profile",
+    "analyzing": "Analyzing your GitHub profile...",
+    "stats": "Stats",
+    "totalRepos": "Total Repos",
+    "topLanguages": "Top Languages",
+    "avgStars": "Avg Stars",
+    "accountAge": "Account Age",
+    "recentActivity": "Recent Activity",
+    "strengths": "Strengths",
+    "improvements": "Areas to Improve",
+    "projectIdea": "Recommended Project",
+    "techStack": "Tech Stack",
+    "whyRelevant": "Why This Helps",
+    "estimatedTime": "Estimated Time",
+    "error": "Failed to analyze GitHub profile",
+    "priority": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
     }
   },
   "jobs": {

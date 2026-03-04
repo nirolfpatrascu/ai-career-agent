@@ -25,7 +25,9 @@
   "nav": {
     "cvOptimizer": "Lebenslauf-Optimierer",
     "jobTracker": "Bewerbungen",
-    "upwork": "Upwork"
+    "upwork": "Upwork",
+    "coverLetter": "Anschreiben",
+    "githubAnalysis": "GitHub-Analyse"
   },
   "hero": {
     "badge": "KI-Karriereberater",
@@ -411,7 +413,10 @@
       "subtitle": "Ihr Lebenslauf ist das Hauptdokument, das wir analysieren. PDF-Format, max. 5 MB.",
       "dropHere": "Lebenslauf hier ablegen",
       "orBrowse": "PDF-Format, max. 5 MB",
-      "needAtLeastOne": "Laden Sie mindestens einen Lebenslauf oder ein LinkedIn-PDF hoch, um fortzufahren."
+      "needAtLeastOne": "Laden Sie mindestens einen Lebenslauf oder ein LinkedIn-PDF hoch, um fortzufahren.",
+      "githubLabel": "GitHub-Profil-URL",
+      "githubHint": "Wir analysieren Ihre Repos, Programmiersprachen und Beiträge",
+      "githubInvalid": "URL muss mit https://github.com/ beginnen"
     },
     "details": {
       "title": "Erzählen Sie uns von Ihren Karrierezielen",
@@ -513,7 +518,9 @@
     "cvGenerator": "Ihr Lebenslauf ist Ihr erster Eindruck. Dieses KI-generierte Framework nutzt Ihre Analyse, um ATS-freundliche Inhalte zu erstellen, die auf Ihre Zielrolle optimiert sind.",
     "cvSuggestions": "Dies sind gezielte Änderungen, um Ihren Lebenslauf an die spezifische Stellenausschreibung anzupassen. Jeder Vorschlag zeigt genau, was zu ändern ist und warum es für diese Rolle wichtig ist.",
     "atsScore": "Stellen wir sicher, dass Ihr Lebenslauf die Roboter passiert. So lesen ATS-Systeme Ihre Bewerbung und was Sie optimieren können.",
-    "cvOptimizer": "Ihr Lebenslauf analysiert gegen die Stellenausschreibung — ATS-Kompatibilitätsscore, fehlende Keywords und konkrete Vorschläge zur Verbesserung Ihrer Chancen."
+    "cvOptimizer": "Ihr Lebenslauf analysiert gegen die Stellenausschreibung — ATS-Kompatibilitätsscore, fehlende Keywords und konkrete Vorschläge zur Verbesserung Ihrer Chancen.",
+    "coverLetter": "Ein maßgeschneidertes Anschreiben, das Ihre Stärken hervorhebt und Lücken ehrlich anspricht. Bearbeiten Sie es, um Ihre persönliche Note hinzuzufügen.",
+    "githubAnalysis": "Ihr GitHub-Profil erzählt eine Geschichte. So würden Personalverantwortliche es sehen — und wie Sie es für Ihre Zielrolle stärken können."
   },
   "cv": {
     "tabTitle": "Lebenslauf-Generator",
@@ -761,6 +768,49 @@
       "regenerate": "Neu generieren",
       "saveDraft": "Entwurf speichern",
       "saved": "Gespeichert!"
+    }
+  },
+  "coverLetter": {
+    "title": "Anschreiben",
+    "subtitle": "KI-generiert, auf die Stellenanzeige zugeschnitten",
+    "generate": "Anschreiben Generieren",
+    "generating": "Anschreiben wird generiert...",
+    "regenerate": "Neu Generieren",
+    "copy": "In Zwischenablage Kopieren",
+    "copied": "Kopiert!",
+    "tone": "Tonfall",
+    "tones": {
+      "professional": "Professionell",
+      "conversational": "Gesprächig",
+      "bold": "Selbstbewusst"
+    },
+    "strengthsHighlighted": "Hervorgehobene Stärken",
+    "gapsAddressed": "Angesprochene Lücken",
+    "editHint": "Bearbeiten Sie das Anschreiben unten, um es weiter zu personalisieren",
+    "noJobPosting": "Fügen Sie eine Stellenanzeige im Wizard hinzu, um ein maßgeschneidertes Anschreiben zu erstellen."
+  },
+  "github": {
+    "title": "GitHub-Analyse",
+    "subtitle": "Repos, Programmiersprachen und Beiträge",
+    "analyze": "GitHub-Profil Analysieren",
+    "analyzing": "GitHub-Profil wird analysiert...",
+    "stats": "Statistiken",
+    "totalRepos": "Repos Gesamt",
+    "topLanguages": "Top-Sprachen",
+    "avgStars": "Durchschn. Sterne",
+    "accountAge": "Kontoalter",
+    "recentActivity": "Letzte Aktivität",
+    "strengths": "Stärken",
+    "improvements": "Verbesserungsbereiche",
+    "projectIdea": "Empfohlenes Projekt",
+    "techStack": "Tech-Stack",
+    "whyRelevant": "Warum Das Hilft",
+    "estimatedTime": "Geschätzte Zeit",
+    "error": "GitHub-Profilanalyse fehlgeschlagen",
+    "priority": {
+      "high": "Hoch",
+      "medium": "Mittel",
+      "low": "Niedrig"
     }
   },
   "jobs": {
