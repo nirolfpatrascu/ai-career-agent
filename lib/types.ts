@@ -57,6 +57,8 @@ export interface AnalysisMetadata {
   pdfQualityWarning?: string;
   /** Tracks which data came from Claude vs fallback */
   dataSources?: Record<string, 'claude' | 'fallback'>;
+  /** Whether a real CV was uploaded (false = LinkedIn PDF only) */
+  hasRealCV?: boolean;
 }
 
 export interface FitScore {
@@ -132,10 +134,15 @@ export interface MarketSalary {
   source?: SalaryDataSource;
 }
 
+export interface MissingSkill {
+  skill: string;
+  importance: 'important' | 'not_a_deal_breaker' | 'unimportant';
+}
+
 export interface JobMatch {
   matchScore: number;
   matchingSkills: string[];
-  missingSkills: string[];
+  missingSkills: MissingSkill[];
   cvSuggestions: CVSuggestion[];
   overallAdvice: string;
 }

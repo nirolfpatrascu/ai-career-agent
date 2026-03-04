@@ -43,6 +43,7 @@ export default function AnalyzePage() {
   const [upworkAnalysis, setUpworkAnalysis] = useState<UpworkProfileAnalysis | null>(null);
   const [upworkAnalyzing, setUpworkAnalyzing] = useState(false);
   const [githubUrl, setGithubUrl] = useState<string | null>(null);
+  const [hasRealCV, setHasRealCV] = useState(false);
 
   // Streaming analysis hook
   const streaming = useStreamingAnalysis();
@@ -50,7 +51,11 @@ export default function AnalyzePage() {
   // React to streaming completion — save if logged in
   useEffect(() => {
     if (streaming.result) {
-      setResult(streaming.result);
+      const enrichedResult = {
+        ...streaming.result,
+        metadata: { ...streaming.result.metadata, hasRealCV },
+      };
+      setResult(enrichedResult);
       setState('results');
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -63,7 +68,7 @@ export default function AnalyzePage() {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${session.access_token}`,
           },
-          body: JSON.stringify({ result: streaming.result }),
+          body: JSON.stringify({ result: enrichedResult }),
         })
           .then(res => {
             setSaveStatus(res.ok ? 'saved' : 'error');
@@ -71,7 +76,7 @@ export default function AnalyzePage() {
           .catch(() => setSaveStatus('error'));
       }
     }
-  }, [streaming.result, session?.access_token]);
+  }, [streaming.result, session?.access_token, hasRealCV]);
 
   // React to streaming error
   useEffect(() => {
@@ -121,6 +126,7 @@ export default function AnalyzePage() {
   }) => {
     if (wizardUpwork) setUpworkProfile(wizardUpwork);
     if (questionnaire.githubUrl) setGithubUrl(questionnaire.githubUrl);
+    setHasRealCV(!!cvFile);
     setState('processing');
     setError('');
     setIsDemo(false);

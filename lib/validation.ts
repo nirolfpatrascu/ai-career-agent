@@ -739,12 +739,12 @@ export function validateJobMatch(jobMatch: JobMatch): ValidationIssue[] {
   if (jobMatch.matchingSkills && jobMatch.missingSkills) {
     const matchingSet = new Set(jobMatch.matchingSkills.map(s => s.toLowerCase()));
     jobMatch.missingSkills.forEach((skill, i) => {
-      if (matchingSet.has(skill.toLowerCase())) {
+      if (matchingSet.has(skill.skill.toLowerCase())) {
         issues.push({
           section: 'jobMatch',
           severity: 'error',
           field: `jobMatch.missingSkills[${i}]`,
-          message: `Skill "${skill}" appears in both matchingSkills and missingSkills.`,
+          message: `Skill "${skill.skill}" appears in both matchingSkills and missingSkills.`,
           autoFixable: true,
           autoFixAction: 'Remove from matchingSkills',
         });
@@ -907,7 +907,7 @@ export function autoFixResult(result: AnalysisResult, issues: ValidationIssue[])
     }
     if (issue.field?.match(/^jobMatch\.missingSkills/) && issue.autoFixAction === 'Remove from matchingSkills') {
       if (fixed.jobMatch) {
-        const missingSet = new Set(fixed.jobMatch.missingSkills.map(s => s.toLowerCase()));
+        const missingSet = new Set(fixed.jobMatch.missingSkills.map(s => s.skill.toLowerCase()));
         fixed.jobMatch.matchingSkills = fixed.jobMatch.matchingSkills.filter(
           s => !missingSet.has(s.toLowerCase())
         );

@@ -335,7 +335,12 @@
       "section": "Sección",
       "current": "Actual",
       "suggested": "Sugerido",
-      "reasoning": "Razón"
+      "reasoning": "Razón",
+      "importance": {
+        "important": "Importante",
+        "not_a_deal_breaker": "No es decisivo",
+        "unimportant": "Sin importancia"
+      }
     }
   },
   "chat": {
@@ -675,6 +680,11 @@
       "atsAnalysis": "Análisis ATS",
       "optimizedCv": "Tu CV Optimizado ATS",
       "rewriteSuggestions": "Sugerencias de Reescritura del CV"
+    },
+    "noCV": {
+      "title": "No se subió CV",
+      "description": "La puntuación ATS requiere un CV. Tu análisis usó una exportación PDF de LinkedIn. Genera primero un CV optimizado y luego vuelve a evaluar.",
+      "button": "Genera tu CV"
     },
     "rescore": "Re-evaluar CV",
     "rescoring": "Evaluando...",

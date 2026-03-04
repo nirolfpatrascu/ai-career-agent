@@ -1,4 +1,4 @@
-import type { ExtractedProfile, JobMatch } from '../types';
+import type { ExtractedProfile, JobMatch, MissingSkill } from '../types';
 import { getLanguageInstruction } from './language';
 
 // ============================================================================
@@ -23,8 +23,12 @@ MATCHING RULES:
 2. Consider both explicit skills AND transferable experience
 3. Identify ALL matching keywords between CV and job posting — ATS systems look for exact matches
 4. Identify ALL missing keywords that the posting requires but the CV doesn't mention
-5. For CV suggestions, be SPECIFIC — show exactly what to change and why
-6. CV suggestions should make the CV more ATS-friendly WITHOUT being dishonest
+5. For each missing skill, classify its importance:
+   - "important": explicitly required in the posting, core to the role (must-have)
+   - "not_a_deal_breaker": preferred or nice-to-have, learnable on the job
+   - "unimportant": tangential mention, easily substituted, or generic filler
+6. For CV suggestions, be SPECIFIC — show exactly what to change and why
+7. CV suggestions should make the CV more ATS-friendly WITHOUT being dishonest
 
 MATCH SCORE CALIBRATION:
 - 90-100%: Near-perfect match. All required skills present, strong experience alignment.
@@ -56,7 +60,12 @@ JSON SCHEMA:
 {
   "matchScore": number (0-100),
   "matchingSkills": ["string array — skills/keywords that match between CV and posting"],
-  "missingSkills": ["string array — skills/keywords in posting but not in CV"],
+  "missingSkills": [
+    {
+      "skill": "string — the skill/keyword missing from the CV",
+      "importance": "important | not_a_deal_breaker | unimportant"
+    }
+  ],
   "cvSuggestions": [
     {
       "section": "string — which CV section to modify",

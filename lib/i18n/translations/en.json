@@ -333,7 +333,12 @@
       "section": "Section",
       "current": "Current",
       "suggested": "Suggested",
-      "reasoning": "Why"
+      "reasoning": "Why",
+      "importance": {
+        "important": "Important",
+        "not_a_deal_breaker": "Not a Deal Breaker",
+        "unimportant": "Unimportant"
+      }
     }
   },
   "chat": {
@@ -673,6 +678,11 @@
       "atsAnalysis": "ATS Analysis",
       "optimizedCv": "Your ATS Optimized CV",
       "rewriteSuggestions": "CV Rewrite Suggestions"
+    },
+    "noCV": {
+      "title": "No CV Uploaded",
+      "description": "ATS scoring requires a CV. Your analysis used a LinkedIn PDF export. Generate an optimized CV first, then re-score.",
+      "button": "Generate Your CV"
     },
     "rescore": "Re-score CV",
     "rescoring": "Scoring...",

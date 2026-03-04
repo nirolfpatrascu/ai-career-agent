@@ -83,7 +83,7 @@ Current role market: ${salary.currentRoleMarket.low}-${salary.currentRoleMarket.
 Target role market: ${salary.targetRoleMarket.low}-${salary.targetRoleMarket.high} ${salary.targetRoleMarket.currency} (${salary.targetRoleMarket.region})
 Growth potential: ${salary.growthPotential}
 Best move: ${salary.bestMonetaryMove}
-${a.jobMatch ? `\nJOB MATCH: ${a.jobMatch.matchScore}% match. Missing: ${a.jobMatch.missingSkills.join(', ')}` : ''}`;
+${a.jobMatch ? `\nJOB MATCH: ${a.jobMatch.matchScore}% match. Missing: ${a.jobMatch.missingSkills.map(s => s.skill).join(', ')}` : ''}`;
 }
 
 const SYSTEM_PROMPT = `You are an expert AI career coach embedded in GapZero, a career analysis tool. The user has just received their personalized career analysis and is now chatting with you about it.

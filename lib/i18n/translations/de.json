@@ -335,7 +335,12 @@
       "section": "Abschnitt",
       "current": "Aktuell",
       "suggested": "Vorgeschlagen",
-      "reasoning": "Begründung"
+      "reasoning": "Begründung",
+      "importance": {
+        "important": "Wichtig",
+        "not_a_deal_breaker": "Kein Ausschlusskriterium",
+        "unimportant": "Unwichtig"
+      }
     }
   },
   "chat": {
@@ -675,6 +680,11 @@
       "atsAnalysis": "ATS-Analyse",
       "optimizedCv": "Ihr ATS-optimierter Lebenslauf",
       "rewriteSuggestions": "Vorschläge zur Lebenslauf-Überarbeitung"
+    },
+    "noCV": {
+      "title": "Kein Lebenslauf hochgeladen",
+      "description": "Die ATS-Bewertung erfordert einen Lebenslauf. Ihre Analyse verwendete einen LinkedIn-PDF-Export. Erstellen Sie zuerst einen optimierten Lebenslauf und bewerten Sie dann erneut.",
+      "button": "Lebenslauf erstellen"
     },
     "rescore": "Lebenslauf neu bewerten",
     "rescoring": "Bewertung läuft...",

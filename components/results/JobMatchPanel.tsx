@@ -1,12 +1,19 @@
 'use client';
 
-import type { JobMatch } from '@/lib/types';
+import { useMemo } from 'react';
+import type { JobMatch, MissingSkill } from '@/lib/types';
 import { useTranslation } from '@/lib/i18n';
 import { FeedbackButton } from './FeedbackButton';
 
 interface JobMatchPanelProps {
   match: JobMatch;
 }
+
+const IMPORTANCE_CONFIG = {
+  important: { color: 'text-danger', bg: 'bg-danger/[0.08]', border: 'border-danger/15' },
+  not_a_deal_breaker: { color: 'text-[#E8890A]', bg: 'bg-[#E8890A]/[0.08]', border: 'border-[#E8890A]/15' },
+  unimportant: { color: 'text-text-tertiary', bg: 'bg-black/[0.04]', border: 'border-black/[0.08]' },
+} as const;
 
 export default function JobMatchPanel({ match }: JobMatchPanelProps) {
   const { t } = useTranslation();
@@ -19,6 +26,19 @@ export default function JobMatchPanel({ match }: JobMatchPanelProps) {
   };
 
   const color = getScoreColor(match.matchScore);
+
+  const groupedMissing = useMemo(() => {
+    const groups: Record<MissingSkill['importance'], MissingSkill[]> = {
+      important: [],
+      not_a_deal_breaker: [],
+      unimportant: [],
+    };
+    for (const skill of match.missingSkills) {
+      const key = skill.importance in groups ? skill.importance : 'not_a_deal_breaker';
+      groups[key].push(skill);
+    }
+    return groups;
+  }, [match.missingSkills]);
 
   return (
     <section>
@@ -63,10 +83,24 @@ export default function JobMatchPanel({ match }: JobMatchPanelProps) {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
               <h3 className="text-sm font-semibold text-danger">{t('results.jobMatch.missingSkills')} ({match.missingSkills.length})</h3>
             </div>
-            <div className="flex flex-wrap gap-1.5">
-              {match.missingSkills.map((skill, i) => (
-                <span key={i} className="text-xs px-2.5 py-1 rounded-lg bg-danger/[0.08] text-danger border border-danger/15">{skill}</span>
-              ))}
+            <div className="space-y-3">
+              {(['important', 'not_a_deal_breaker', 'unimportant'] as const).map((level) => {
+                const skills = groupedMissing[level];
+                if (skills.length === 0) return null;
+                const cfg = IMPORTANCE_CONFIG[level];
+                return (
+                  <div key={level}>
+                    <p className={`text-[11px] font-medium uppercase tracking-wider mb-1.5 ${cfg.color}`}>
+                      {t(`results.jobMatch.importance.${level}`)} ({skills.length})
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {skills.map((s, i) => (
+                        <span key={i} className={`text-xs px-2.5 py-1 rounded-lg border ${cfg.bg} ${cfg.color} ${cfg.border}`}>{s.skill}</span>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

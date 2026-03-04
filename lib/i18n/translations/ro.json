@@ -335,7 +335,12 @@
       "section": "Secțiune",
       "current": "Actual",
       "suggested": "Sugerat",
-      "reasoning": "De ce"
+      "reasoning": "De ce",
+      "importance": {
+        "important": "Important",
+        "not_a_deal_breaker": "Nu e decisiv",
+        "unimportant": "Neimportant"
+      }
     }
   },
   "chat": {
@@ -675,6 +680,11 @@
       "atsAnalysis": "Analiză ATS",
       "optimizedCv": "CV-ul Tău Optimizat ATS",
       "rewriteSuggestions": "Sugestii de Rescriere CV"
+    },
+    "noCV": {
+      "title": "Niciun CV încărcat",
+      "description": "Scorul ATS necesită un CV. Analiza ta a folosit un export PDF de pe LinkedIn. Generează mai întâi un CV optimizat, apoi re-evaluează.",
+      "button": "Generează CV-ul tău"
     },
     "rescore": "Re-evaluează CV-ul",
     "rescoring": "Se evaluează...",

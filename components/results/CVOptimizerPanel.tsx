@@ -124,7 +124,26 @@ export function CVOptimizerPanel({ atsScore, jobMatch, analysis }: CVOptimizerPa
       {view === 'ats-analysis' && (
         <div className="space-y-6">
           <ATSExplainer t={t} />
-          {atsScore && <ATSScoreSection atsScore={atsScore} t={t} />}
+          {!analysis.metadata.hasRealCV ? (
+            <div className="rounded-2xl border border-[#E8890A]/20 bg-[#E8890A]/[0.04] p-6 text-center space-y-4">
+              <div className="w-12 h-12 rounded-xl bg-[#E8890A]/10 border border-[#E8890A]/20 flex items-center justify-center mx-auto">
+                <FileSearch className="h-6 w-6 text-[#E8890A]" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-text-primary mb-1.5">{t('cvOptimizer.noCV.title')}</h3>
+                <p className="text-sm text-text-secondary leading-relaxed max-w-md mx-auto">{t('cvOptimizer.noCV.description')}</p>
+              </div>
+              <button
+                onClick={() => setView('optimized-cv')}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#E8890A] text-white text-sm font-medium hover:bg-[#D07808] transition-colors"
+              >
+                <Sparkles className="h-4 w-4" />
+                {t('cvOptimizer.noCV.button')}
+              </button>
+            </div>
+          ) : (
+            atsScore && <ATSScoreSection atsScore={atsScore} t={t} />
+          )}
         </div>
       )}
 

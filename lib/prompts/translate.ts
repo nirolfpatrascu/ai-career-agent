@@ -62,7 +62,8 @@ KEEP in English — do NOT translate:
 - Technology names: Docker, Kubernetes, Python, TypeScript, etc.
 - Certification names: AZ-900, AI-102, AWS Solutions Architect, etc.
 - Course/platform names: Coursera, Microsoft Learn, fast.ai, etc.
-- matchingSkills[] and missingSkills[] arrays (keep skill names in English)
+- matchingSkills[] and missingSkills[].skill values (keep skill names in English)
+- missingSkills[].importance enum values ("important", "not_a_deal_breaker", "unimportant")
 - cvSuggestions[].section values
 
 Write naturally in ${langName} with professional career advice tone. Not machine-translated.`;

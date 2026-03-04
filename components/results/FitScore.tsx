@@ -197,7 +197,11 @@ export default function FitScoreGauge({ fitScore, jobMatch, onNavigate }: FitSco
               <p className="text-[11px] font-medium text-text-tertiary uppercase tracking-wider mb-1.5">{t('results.fitScore.jobMatch.missing')}</p>
               <div className="flex flex-wrap gap-1.5">
                 {jobMatch.missingSkills.slice(0, 4).map((skill, i) => (
-                  <span key={i} className="text-xs px-2.5 py-1 rounded-full bg-danger/10 text-danger border border-danger/15 font-medium">{skill}</span>
+                  <span key={i} className={`text-xs px-2.5 py-1 rounded-full border font-medium ${
+                    skill.importance === 'important' ? 'bg-danger/10 text-danger border-danger/15' :
+                    skill.importance === 'not_a_deal_breaker' ? 'bg-[#E8890A]/10 text-[#E8890A] border-[#E8890A]/15' :
+                    'bg-black/[0.04] text-text-tertiary border-black/[0.08]'
+                  }`}>{skill.skill}</span>
                 ))}
                 {jobMatch.missingSkills.length > 4 && (
                   <span className="text-xs px-2.5 py-1 rounded-full bg-black/[0.04] text-text-tertiary font-medium">+{jobMatch.missingSkills.length - 4}</span>
