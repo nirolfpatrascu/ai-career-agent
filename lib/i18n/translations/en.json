@@ -24,7 +24,8 @@
   },
   "nav": {
     "cvOptimizer": "CV Optimizer",
-    "jobTracker": "Job Tracker"
+    "jobTracker": "Job Tracker",
+    "upwork": "Upwork"
   },
   "hero": {
     "badge": "AI-Powered Career Advisor",
@@ -231,7 +232,13 @@
         "medium": "Optimize your CV and LinkedIn first, or close key gaps",
         "low": "Major gap detected — follow the Action Plan step by step"
       },
-      "callout": "Before applying, optimize your LinkedIn profile and CV to maximize your chances. Small improvements here can significantly boost your visibility to recruiters."
+      "callout": "Before applying, optimize your LinkedIn profile and CV to maximize your chances. Small improvements here can significantly boost your visibility to recruiters.",
+      "jobMatch": {
+        "title": "Job Match",
+        "matching": "Matching Skills",
+        "missing": "Missing Skills",
+        "viewFull": "View Full Analysis"
+      }
     },
     "strengthsGaps": {
       "title": "Strengths & Gaps"
@@ -654,7 +661,18 @@
         "suggested": "Suggested"
       }
     },
-    "keywordCaveat": "Only add keywords for skills you actually possess — misrepresenting skills will backfire in interviews."
+    "keywordCaveat": "Only add keywords for skills you actually possess — misrepresenting skills will backfire in interviews.",
+    "tabs": {
+      "atsAnalysis": "ATS Analysis",
+      "optimizedCv": "Your ATS Optimized CV",
+      "rewriteSuggestions": "CV Rewrite Suggestions"
+    },
+    "rescore": "Re-score CV",
+    "rescoring": "Scoring...",
+    "scoreImproved": "Score improved by {points} points",
+    "beforeScore": "Before",
+    "afterScore": "After",
+    "noJobPosting": "Submit a job posting to get personalized rewrite suggestions"
   },
   "feedback": {
     "helpful": "Was this helpful?",

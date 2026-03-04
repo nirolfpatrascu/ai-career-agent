@@ -24,7 +24,8 @@
   },
   "nav": {
     "cvOptimizer": "Optimizator CV",
-    "jobTracker": "Aplicări"
+    "jobTracker": "Aplicări",
+    "upwork": "Upwork"
   },
   "hero": {
     "badge": "Consilier de Carieră cu AI",
@@ -231,7 +232,13 @@
         "medium": "Optimizează-ți CV-ul și LinkedIn-ul mai întâi, sau acoperă lacunele cheie",
         "low": "Lacună majoră detectată — urmează Planul de Acțiune pas cu pas"
       },
-      "callout": "Sfat: Îmbunătățește-ți profilul LinkedIn și optimizează-ți CV-ul pentru a crește acest scor"
+      "callout": "Sfat: Îmbunătățește-ți profilul LinkedIn și optimizează-ți CV-ul pentru a crește acest scor",
+      "jobMatch": {
+        "title": "Potrivire Job",
+        "matching": "Competențe Potrivite",
+        "missing": "Competențe Lipsă",
+        "viewFull": "Vezi Analiza Completă"
+      }
     },
     "strengths": {
       "title": "Punctele Tale Forte",
@@ -656,7 +663,18 @@
         "suggested": "Sugerat"
       }
     },
-    "keywordCaveat": "Adaugă doar cuvinte cheie pentru competențe pe care le deții cu adevărat — exagerarea competențelor se va întoarce împotriva ta la interviu."
+    "keywordCaveat": "Adaugă doar cuvinte cheie pentru competențe pe care le deții cu adevărat — exagerarea competențelor se va întoarce împotriva ta la interviu.",
+    "tabs": {
+      "atsAnalysis": "Analiză ATS",
+      "optimizedCv": "CV-ul Tău Optimizat ATS",
+      "rewriteSuggestions": "Sugestii de Rescriere CV"
+    },
+    "rescore": "Re-evaluează CV-ul",
+    "rescoring": "Se evaluează...",
+    "scoreImproved": "Scorul a crescut cu {points} puncte",
+    "beforeScore": "Înainte",
+    "afterScore": "După",
+    "noJobPosting": "Trimite un anunț de job pentru a primi sugestii personalizate de rescriere"
   },
   "feedback": {
     "helpful": "A fost util?",

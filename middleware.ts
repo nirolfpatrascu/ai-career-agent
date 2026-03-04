@@ -1,8 +1,33 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+const SUPPORTED_LOCALES = ['en', 'ro', 'de', 'fr', 'es', 'it'];
+const DEFAULT_LOCALE = 'en';
+
+function detectLocale(request: NextRequest): string {
+  // 1. Check locale cookie
+  const cookieLocale = request.cookies.get('locale')?.value;
+  if (cookieLocale && SUPPORTED_LOCALES.includes(cookieLocale)) return cookieLocale;
+
+  // 2. Check Accept-Language header
+  const acceptLang = request.headers.get('Accept-Language');
+  if (acceptLang) {
+    const preferred = acceptLang
+      .split(',')
+      .map(part => part.split(';')[0].trim().split('-')[0])
+      .find(lang => SUPPORTED_LOCALES.includes(lang));
+    if (preferred) return preferred;
+  }
+
+  return DEFAULT_LOCALE;
+}
+
 export function middleware(request: NextRequest) {
   const response = NextResponse.next();
+
+  // Locale detection — set header for layout.tsx to read
+  const locale = detectLocale(request);
+  response.headers.set('x-locale', locale);
 
   // Security headers
   response.headers.set('X-Frame-Options', 'DENY');
@@ -12,6 +37,9 @@ export function middleware(request: NextRequest) {
     'Permissions-Policy',
     'camera=(), microphone=(), geolocation=(), interest-cohort=()'
   );
+  // CSP: unsafe-eval is required by Next.js in development but kept in production
+  // because some Next.js runtime features (dynamic imports, HMR in dev) rely on it.
+  // TODO: test removing unsafe-eval after upgrading to Next.js 15+ which may not need it.
   response.headers.set(
     'Content-Security-Policy',
     [

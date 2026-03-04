@@ -25,6 +25,12 @@ const JOB_MATCH_TAB: Tab = {
   icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>,
 };
 
+const UPWORK_TAB: Tab = {
+  id: 'upwork',
+  labelKey: 'nav.upwork',
+  icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>,
+};
+
 const COACH_TAB: Tab = {
   id: 'ai-coach',
   labelKey: 'chat.title',
@@ -33,19 +39,21 @@ const COACH_TAB: Tab = {
 
 interface ChapterNavProps {
   hasJobMatch?: boolean;
+  hasUpwork?: boolean;
   activeTab: string;
   onTabChange: (tabId: string) => void;
 }
 
-export default function ChapterNav({ hasJobMatch, activeTab, onTabChange }: ChapterNavProps) {
+export default function ChapterNav({ hasJobMatch, hasUpwork, activeTab, onTabChange }: ChapterNavProps) {
   const { t } = useTranslation();
   const activeRefMobile = useRef<HTMLButtonElement>(null);
 
   const tabs: Tab[] = useMemo(() => [
     ...TABS,
     ...(hasJobMatch ? [JOB_MATCH_TAB] : []),
+    ...(hasUpwork ? [UPWORK_TAB] : []),
     COACH_TAB,
-  ], [hasJobMatch]);
+  ], [hasJobMatch, hasUpwork]);
 
   const activeIndex = tabs.findIndex((tab) => tab.id === activeTab);
 

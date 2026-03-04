@@ -23,6 +23,7 @@ import {
   FileCheck,
   Plus,
   Trash2,
+  RefreshCw,
 } from 'lucide-react';
 import { FeedbackButton } from './FeedbackButton';
 
@@ -58,12 +59,17 @@ interface CVSections {
   languages: string;
 }
 
+type CVOptimizerView = 'ats-analysis' | 'optimized-cv' | 'cv-rewrite';
+
 // ============================================================================
-// Main Component
+// Main Component — 3-Page Toggle
 // ============================================================================
 
 export function CVOptimizerPanel({ atsScore, jobMatch, analysis }: CVOptimizerPanelProps) {
   const { t } = useTranslation();
+  const [view, setView] = useState<CVOptimizerView>('ats-analysis');
+
+  const suggestionsCount = jobMatch?.cvSuggestions?.length || 0;
 
   return (
     <div className="animate-panelEnter space-y-6">
@@ -72,25 +78,205 @@ export function CVOptimizerPanel({ atsScore, jobMatch, analysis }: CVOptimizerPa
         <FeedbackButton section="atsScore" />
       </div>
 
-      {/* Section A: What is ATS? */}
-      <ATSExplainer t={t} />
+      {/* Toggle pill tabs */}
+      <div className="flex gap-2 mb-6 p-1 bg-black/[0.03] border border-black/[0.08] rounded-xl w-fit flex-wrap">
+        <button
+          onClick={() => setView('ats-analysis')}
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+            view === 'ats-analysis'
+              ? 'bg-white text-text-primary shadow-sm'
+              : 'text-text-tertiary hover:text-text-secondary'
+          }`}
+        >
+          <Shield className={`h-4 w-4 ${view === 'ats-analysis' ? 'text-[#E8890A]' : ''}`} />
+          {t('cvOptimizer.tabs.atsAnalysis')}
+        </button>
+        <button
+          onClick={() => setView('optimized-cv')}
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+            view === 'optimized-cv'
+              ? 'bg-white text-text-primary shadow-sm'
+              : 'text-text-tertiary hover:text-text-secondary'
+          }`}
+        >
+          <FileCheck className={`h-4 w-4 ${view === 'optimized-cv' ? 'text-[#E8890A]' : ''}`} />
+          {t('cvOptimizer.tabs.optimizedCv')}
+        </button>
+        <button
+          onClick={() => setView('cv-rewrite')}
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+            view === 'cv-rewrite'
+              ? 'bg-white text-text-primary shadow-sm'
+              : 'text-text-tertiary hover:text-text-secondary'
+          }`}
+        >
+          <Sparkles className={`h-4 w-4 ${view === 'cv-rewrite' ? 'text-[#E8890A]' : ''}`} />
+          {t('cvOptimizer.tabs.rewriteSuggestions')}
+          {suggestionsCount > 0 && (
+            <span className={`text-[11px] px-1.5 py-0.5 rounded-md font-semibold ${view === 'cv-rewrite' ? 'bg-[#E8890A]/10 text-[#E8890A]' : 'bg-black/[0.04]'}`}>
+              {suggestionsCount}
+            </span>
+          )}
+        </button>
+      </div>
 
-      {/* Section B: ATS Score Overview */}
-      {atsScore && <ATSScoreSection atsScore={atsScore} t={t} />}
+      {/* Page 1: ATS Analysis */}
+      {view === 'ats-analysis' && (
+        <div className="space-y-6">
+          <ATSExplainer t={t} />
+          {atsScore && <ATSScoreSection atsScore={atsScore} t={t} />}
+        </div>
+      )}
 
-      {/* Section C: CV Suggestions */}
-      <CVSuggestionsSection
-        cvSuggestions={jobMatch?.cvSuggestions}
-        recommendations={atsScore?.recommendations}
-        t={t}
-      />
+      {/* Page 2: Your ATS Optimized CV */}
+      {view === 'optimized-cv' && (
+        <div className="space-y-6">
+          <RescoreSection atsScore={atsScore} analysis={analysis} t={t} />
+          <CVEditorSection
+            analysis={analysis}
+            cvSuggestions={jobMatch?.cvSuggestions}
+            t={t}
+          />
+        </div>
+      )}
 
-      {/* Section D: Editable CV + PDF Download */}
-      <CVEditorSection
-        analysis={analysis}
-        cvSuggestions={jobMatch?.cvSuggestions}
-        t={t}
-      />
+      {/* Page 3: CV Rewrite Suggestions */}
+      {view === 'cv-rewrite' && (
+        <CVSuggestionsSection
+          cvSuggestions={jobMatch?.cvSuggestions}
+          recommendations={atsScore?.recommendations}
+          t={t}
+        />
+      )}
+    </div>
+  );
+}
+
+// ============================================================================
+// Re-score Section (Page 2 header)
+// ============================================================================
+
+function RescoreSection({
+  atsScore,
+  analysis,
+  t,
+}: {
+  atsScore?: ATSScoreResult;
+  analysis: AnalysisResult;
+  t: (key: string, vars?: Record<string, string>) => string;
+}) {
+  const [rescoreResult, setRescoreResult] = useState<ATSScoreResult | null>(null);
+  const [rescoring, setRescoring] = useState(false);
+  const jobPosting = analysis.metadata.jobPosting;
+  const originalScore = atsScore?.overallScore ?? 0;
+  const afterScore = rescoreResult?.overallScore ?? null;
+  const delta = afterScore !== null ? afterScore - originalScore : null;
+
+  const handleRescore = useCallback(async () => {
+    if (!jobPosting) return;
+    setRescoring(true);
+    try {
+      // We re-score by calling the ATS score endpoint
+      const editorEl = document.querySelector('[data-cv-editor]');
+      const cvText = editorEl?.getAttribute('data-cv-text') || '';
+      if (!cvText) {
+        setRescoring(false);
+        return;
+      }
+      const res = await fetch('/api/ats-score', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cvText, jobPosting }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setRescoreResult(data);
+      }
+    } catch {
+      // Non-critical
+    } finally {
+      setRescoring(false);
+    }
+  }, [jobPosting]);
+
+  if (!atsScore) return null;
+
+  return (
+    <div className="rounded-2xl border border-black/[0.08] bg-white p-6">
+      <div className="flex flex-col sm:flex-row items-center gap-6">
+        {/* Before gauge */}
+        <div className="text-center">
+          <p className="text-xs font-medium text-text-tertiary uppercase tracking-wider mb-2">{t('cvOptimizer.beforeScore')}</p>
+          <MiniGauge score={originalScore} />
+        </div>
+
+        {/* Arrow */}
+        {afterScore !== null && (
+          <>
+            <div className="flex flex-col items-center gap-1">
+              <ArrowRight className="h-6 w-6 text-text-tertiary" />
+              {delta !== null && delta !== 0 && (
+                <span className={`text-sm font-bold ${delta > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                  {delta > 0 ? '+' : ''}{delta}
+                </span>
+              )}
+            </div>
+
+            {/* After gauge */}
+            <div className="text-center">
+              <p className="text-xs font-medium text-text-tertiary uppercase tracking-wider mb-2">{t('cvOptimizer.afterScore')}</p>
+              <MiniGauge score={afterScore} />
+            </div>
+          </>
+        )}
+
+        {/* Delta badge & rescore button */}
+        <div className="flex-1 flex flex-col items-start gap-3 sm:ml-4">
+          {delta !== null && delta > 0 && (
+            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-green-700 bg-green-50 border border-green-200 px-3 py-1.5 rounded-full">
+              <CheckCircle2 className="h-4 w-4" />
+              {t('cvOptimizer.scoreImproved', { points: String(delta) })}
+            </span>
+          )}
+          {jobPosting && (
+            <button
+              onClick={handleRescore}
+              disabled={rescoring}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#E8890A] text-white text-sm font-medium hover:bg-[#D07A08] transition-all active:scale-95 disabled:opacity-60"
+            >
+              <RefreshCw className={`h-4 w-4 ${rescoring ? 'animate-spin' : ''}`} />
+              {rescoring ? t('cvOptimizer.rescoring') : t('cvOptimizer.rescore')}
+            </button>
+          )}
+          {!jobPosting && (
+            <p className="text-sm text-text-tertiary italic">{t('cvOptimizer.noJobPosting')}</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MiniGauge({ score }: { score: number }) {
+  const color = score >= 75 ? '#22C55E' : score >= 50 ? '#EAB308' : '#EF4444';
+  const circumference = 2 * Math.PI * 36;
+  const strokeDashoffset = circumference - (score / 100) * circumference;
+
+  return (
+    <div className="relative w-24 h-24">
+      <svg width="96" height="96" viewBox="0 0 96 96">
+        <circle cx="48" cy="48" r="36" fill="none" stroke="#e5e7eb" strokeWidth="6" />
+        <circle
+          cx="48" cy="48" r="36" fill="none"
+          stroke={color} strokeWidth="6" strokeLinecap="round"
+          strokeDasharray={circumference} strokeDashoffset={strokeDashoffset}
+          transform="rotate(-90 48 48)"
+          className="transition-all duration-700 ease-out"
+        />
+      </svg>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span className="text-xl font-bold" style={{ color }}>{score}%</span>
+      </div>
     </div>
   );
 }
@@ -431,7 +617,7 @@ function ATSScoreSection({ atsScore, t }: { atsScore: ATSScoreResult; t: (key: s
 }
 
 // ============================================================================
-// Section C: CV Suggestions
+// Section C: CV Suggestions (Page 3)
 // ============================================================================
 
 function CVSuggestionsSection({
@@ -449,12 +635,19 @@ function CVSuggestionsSection({
     return (
       <div className="rounded-2xl border border-black/[0.08] bg-white p-8 text-center">
         <FileCheck className="h-10 w-10 text-gray-300 mx-auto mb-3" />
-        <p className="text-sm text-text-tertiary">{t('cvOptimizer.suggestions.empty')}</p>
+        <p className="text-sm text-text-tertiary">{t('cvOptimizer.noJobPosting')}</p>
       </div>
     );
   }
 
-  if (!hasSuggestions) return null; // recommendations already shown in ATS section
+  if (!hasSuggestions) {
+    return (
+      <div className="rounded-2xl border border-black/[0.08] bg-white p-8 text-center">
+        <FileCheck className="h-10 w-10 text-gray-300 mx-auto mb-3" />
+        <p className="text-sm text-text-tertiary">{t('cvOptimizer.suggestions.empty')}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4">
@@ -521,8 +714,30 @@ function getSectionKey(sectionName: string): keyof CVSections | null {
 }
 
 // ============================================================================
-// Section D: CV Editor + PDF Download
+// Section D: CV Editor + PDF Download (Page 2)
 // ============================================================================
+
+function serializeSectionsToText(sections: CVSections): string {
+  let text = '';
+  if (sections.summary) text += `PROFESSIONAL SUMMARY\n${sections.summary}\n\n`;
+  if (sections.skills) text += `SKILLS\n${sections.skills}\n\n`;
+  if (sections.experience.length > 0) {
+    text += 'EXPERIENCE\n';
+    for (const exp of sections.experience) {
+      text += `${exp.title} at ${exp.company} (${exp.dateRange})\n${exp.description}\n\n`;
+    }
+  }
+  if (sections.education.length > 0) {
+    text += 'EDUCATION\n';
+    for (const edu of sections.education) {
+      text += `${edu.degree} - ${edu.institution} (${edu.year})\n`;
+    }
+    text += '\n';
+  }
+  if (sections.certifications) text += `CERTIFICATIONS\n${sections.certifications}\n\n`;
+  if (sections.languages) text += `LANGUAGES\n${sections.languages}\n`;
+  return text;
+}
 
 function CVEditorSection({
   analysis,
@@ -560,8 +775,6 @@ function CVEditorSection({
   const [dismissedSuggestions, setDismissedSuggestions] = useState<Set<number>>(new Set());
   const [showAppliedToast, setShowAppliedToast] = useState(false);
   const [pdfLoading, setPdfLoading] = useState(false);
-
-  // getSectionKey is module-level (uses static SECTION_MAP)
 
   const hasSuggestionForSection = (sectionKey: string): number | null => {
     if (!cvSuggestions) return null;
@@ -691,8 +904,11 @@ function CVEditorSection({
     }
   }, [sections, analysis]);
 
+  // Serialize CV text for re-scoring (stored in a data attribute for the rescore section to read)
+  const serializedText = useMemo(() => serializeSectionsToText(sections), [sections]);
+
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" data-cv-editor data-cv-text={serializedText}>
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>

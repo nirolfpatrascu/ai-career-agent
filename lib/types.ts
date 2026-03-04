@@ -48,6 +48,8 @@ export interface AnalysisMetadata {
   cvFileName: string;
   targetRole: string;
   country: string;
+  /** Original job posting text (for CV re-scoring) */
+  jobPosting?: string;
   /** Warning message if PDF text extraction quality was suboptimal */
   pdfQualityWarning?: string;
   /** Tracks which data came from Claude vs fallback */

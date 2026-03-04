@@ -18,12 +18,13 @@ import PDFReport from '@/components/shared/PDFReport';
 import ChatPanel from '@/components/results/ChatPanel';
 import { CVOptimizerPanel } from '@/components/results/CVOptimizerPanel';
 import LinkedInPlan from '@/components/results/LinkedInPlan';
+import UpworkPanel from '@/components/results/UpworkPanel';
 import ChapterNav, { DEFAULT_TAB } from '@/components/results/ChapterNav';
 import SectionIntro from '@/components/results/SectionIntro';
 import { getSampleAnalysis } from '@/lib/demo';
 import { useTranslation } from '@/lib/i18n';
 import { useAuth } from '@/lib/auth/context';
-import type { AnalysisResult, CareerQuestionnaire } from '@/lib/types';
+import type { AnalysisResult, CareerQuestionnaire, UpworkProfile, UpworkProfileAnalysis } from '@/lib/types';
 
 type AppState = 'upload' | 'processing' | 'results' | 'error';
 
@@ -36,6 +37,9 @@ export default function AnalyzePage() {
   const [isDemo, setIsDemo] = useState(false);
   const [activeTab, setActiveTab] = useState(DEFAULT_TAB);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [upworkProfile, setUpworkProfile] = useState<UpworkProfile | null>(null);
+  const [upworkAnalysis, setUpworkAnalysis] = useState<UpworkProfileAnalysis | null>(null);
+  const [upworkAnalyzing, setUpworkAnalyzing] = useState(false);
 
   // Streaming analysis hook
   const streaming = useStreamingAnalysis();
@@ -106,11 +110,13 @@ export default function AnalyzePage() {
   }, [session?.access_token]);
 
   // --- Wizard submit ---
-  const handleWizardSubmit = useCallback(({ linkedInFile, cvFile, questionnaire }: {
+  const handleWizardSubmit = useCallback(({ linkedInFile, cvFile, questionnaire, upworkProfile: wizardUpwork }: {
     linkedInFile: File | null;
     cvFile: File | null;
     questionnaire: CareerQuestionnaire;
+    upworkProfile?: UpworkProfile;
   }) => {
+    if (wizardUpwork) setUpworkProfile(wizardUpwork);
     setState('processing');
     setError('');
     setIsDemo(false);
@@ -179,7 +185,7 @@ export default function AnalyzePage() {
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-fit-score" aria-labelledby="tab-fit-score">
               <SectionIntro messageKey="motivation.fitScore" variant={fitScore >= 7 ? 'celebratory' : 'encouraging'} />
-              <FitScoreGauge fitScore={result.fitScore} onNavigate={setActiveTab} />
+              <FitScoreGauge fitScore={result.fitScore} jobMatch={result.jobMatch} onNavigate={setActiveTab} />
             </div>
           );
         case 'strengths-gaps':
@@ -237,6 +243,34 @@ export default function AnalyzePage() {
               />
             </div>
           );
+        case 'upwork':
+          return upworkProfile ? (
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-upwork" aria-labelledby="tab-upwork">
+              <UpworkPanel
+                profile={upworkProfile}
+                analysis={upworkAnalysis}
+                onAnalyze={async (targetNiche?: string) => {
+                  setUpworkAnalyzing(true);
+                  try {
+                    const res = await fetch('/api/upwork/analyze', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ profile: upworkProfile, targetNiche }),
+                    });
+                    if (res.ok) {
+                      const data = await res.json();
+                      setUpworkAnalysis(data);
+                    }
+                  } catch {
+                    // Non-critical
+                  } finally {
+                    setUpworkAnalyzing(false);
+                  }
+                }}
+                analyzing={upworkAnalyzing}
+              />
+            </div>
+          ) : null;
         case 'ai-coach':
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-ai-coach" aria-labelledby="tab-ai-coach">
@@ -253,6 +287,7 @@ export default function AnalyzePage() {
         <Header />
         <ChapterNav
           hasJobMatch={!!result.jobMatch}
+          hasUpwork={!!upworkProfile}
           activeTab={activeTab}
           onTabChange={setActiveTab}
         />

@@ -24,7 +24,8 @@
   },
   "nav": {
     "cvOptimizer": "Lebenslauf-Optimierer",
-    "jobTracker": "Bewerbungen"
+    "jobTracker": "Bewerbungen",
+    "upwork": "Upwork"
   },
   "hero": {
     "badge": "KI-Karriereberater",
@@ -231,7 +232,13 @@
         "medium": "Optimieren Sie zuerst Ihren Lebenslauf und LinkedIn, oder schließen Sie wichtige Lücken",
         "low": "Große Lücke erkannt — folgen Sie dem Aktionsplan Schritt für Schritt"
       },
-      "callout": "Tipp: Verbessern Sie Ihr LinkedIn-Profil und optimieren Sie Ihren Lebenslauf, um diesen Score zu erhöhen"
+      "callout": "Tipp: Verbessern Sie Ihr LinkedIn-Profil und optimieren Sie Ihren Lebenslauf, um diesen Score zu erhöhen",
+      "jobMatch": {
+        "title": "Job-Match",
+        "matching": "Übereinstimmende Fähigkeiten",
+        "missing": "Fehlende Fähigkeiten",
+        "viewFull": "Vollständige Analyse anzeigen"
+      }
     },
     "strengths": {
       "title": "Ihre Stärken",
@@ -656,7 +663,18 @@
         "suggested": "Vorgeschlagen"
       }
     },
-    "keywordCaveat": "Fügen Sie nur Schlüsselwörter für Fähigkeiten hinzu, die Sie tatsächlich besitzen — Übertreibungen fallen im Vorstellungsgespräch auf."
+    "keywordCaveat": "Fügen Sie nur Schlüsselwörter für Fähigkeiten hinzu, die Sie tatsächlich besitzen — Übertreibungen fallen im Vorstellungsgespräch auf.",
+    "tabs": {
+      "atsAnalysis": "ATS-Analyse",
+      "optimizedCv": "Ihr ATS-optimierter Lebenslauf",
+      "rewriteSuggestions": "Vorschläge zur Lebenslauf-Überarbeitung"
+    },
+    "rescore": "Lebenslauf neu bewerten",
+    "rescoring": "Bewertung läuft...",
+    "scoreImproved": "Score um {points} Punkte verbessert",
+    "beforeScore": "Vorher",
+    "afterScore": "Nachher",
+    "noJobPosting": "Reichen Sie eine Stellenanzeige ein, um personalisierte Überarbeitungsvorschläge zu erhalten"
   },
   "feedback": {
     "helpful": "War das hilfreich?",

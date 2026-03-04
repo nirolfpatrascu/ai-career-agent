@@ -86,7 +86,7 @@ JSON SCHEMA:
         "priority": "critical | high | medium",
         "timeEstimate": "string — e.g. '2-3 weeks at 1hr/day'",
         "resource": "string — specific resource or tool name",
-        "resourceUrl": "string (optional) — direct URL to the resource (course page, certification page, documentation). Only include if you are confident the URL exists.",
+        "resourceUrl": "string (REQUIRED) — a real, working URL to this resource. Use ONLY these trusted domains: Courses: udemy.com, coursera.org, pluralsight.com, edx.org, linkedin.com/learning, freecodecamp.org. Certifications: aws.amazon.com/certification, cloud.google.com/certification, learn.microsoft.com/certifications. Docs: developer.mozilla.org, docs.python.org, react.dev, nextjs.org/docs, kubernetes.io/docs. Practice: leetcode.com, hackerrank.com, exercism.org. Books: amazon.com, oreilly.com. Communities: stackoverflow.com, reddit.com, dev.to. Link to the SPECIFIC resource page. If unsure of the exact page, link to the search results page, e.g. https://www.udemy.com/courses/search/?q=system+design. NEVER omit this field. NEVER invent URLs.",
         "expectedImpact": "string — concrete expected outcome"
       }
     ],

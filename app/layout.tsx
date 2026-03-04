@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import { Plus_Jakarta_Sans, Bricolage_Grotesque } from 'next/font/google';
 import { I18nProvider } from '@/lib/i18n';
 import { AuthProvider } from '@/lib/auth/context';
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
     siteName: 'GapZero',
     images: [
       {
-        url: '/og-image.png',
+        url: '/api/og',
         width: 1200,
         height: 630,
         alt: 'GapZero — AI-Powered Career Gap Analysis',
@@ -56,7 +57,7 @@ export const metadata: Metadata = {
     title: 'GapZero — AI Career Gap Analysis & Career Roadmap',
     description:
       'Upload your CV, get a personalized career strategy in under 2 minutes.',
-    images: ['/og-image.png'],
+    images: ['/api/og'],
   },
   robots: {
     index: true,
@@ -67,13 +68,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const headersList = await headers();
+  const locale = headersList.get('x-locale') || 'en';
+
   return (
-    <html lang="en" className={`${jakarta.variable} ${bricolage.variable}`}>
+    <html lang={locale} className={`${jakarta.variable} ${bricolage.variable}`}>
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <script

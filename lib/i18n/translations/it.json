@@ -24,7 +24,8 @@
   },
   "nav": {
     "cvOptimizer": "Ottimizzatore CV",
-    "jobTracker": "Candidature"
+    "jobTracker": "Candidature",
+    "upwork": "Upwork"
   },
   "hero": {
     "badge": "Consulente di Carriera con IA",
@@ -231,7 +232,13 @@
         "medium": "Ottimizza prima il tuo CV e LinkedIn, oppure colma le lacune chiave",
         "low": "Lacuna importante rilevata — segui il Piano d'Azione passo dopo passo"
       },
-      "callout": "Suggerimento: Migliora il tuo profilo LinkedIn e ottimizza il tuo CV per aumentare questo punteggio"
+      "callout": "Suggerimento: Migliora il tuo profilo LinkedIn e ottimizza il tuo CV per aumentare questo punteggio",
+      "jobMatch": {
+        "title": "Corrispondenza Lavoro",
+        "matching": "Competenze Corrispondenti",
+        "missing": "Competenze Mancanti",
+        "viewFull": "Vedi Analisi Completa"
+      }
     },
     "strengths": {
       "title": "I Tuoi Punti di Forza",
@@ -656,7 +663,18 @@
         "suggested": "Suggerito"
       }
     },
-    "keywordCaveat": "Aggiungi solo parole chiave per competenze che possiedi realmente — esagerare le competenze ti si ritorcerà contro al colloquio."
+    "keywordCaveat": "Aggiungi solo parole chiave per competenze che possiedi realmente — esagerare le competenze ti si ritorcerà contro al colloquio.",
+    "tabs": {
+      "atsAnalysis": "Analisi ATS",
+      "optimizedCv": "Il Tuo CV Ottimizzato ATS",
+      "rewriteSuggestions": "Suggerimenti di Riscrittura CV"
+    },
+    "rescore": "Rivaluta il CV",
+    "rescoring": "Valutazione in corso...",
+    "scoreImproved": "Punteggio migliorato di {points} punti",
+    "beforeScore": "Prima",
+    "afterScore": "Dopo",
+    "noJobPosting": "Invia un'offerta di lavoro per ottenere suggerimenti di riscrittura personalizzati"
   },
   "feedback": {
     "helpful": "È stato utile?",

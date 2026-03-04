@@ -37,6 +37,63 @@ import type { CareerPlanResult } from '@/lib/prompts/career-plan';
 
 export const maxDuration = 300;
 
+const isDev = process.env.NODE_ENV !== 'production';
+
+// ============================================================================
+// Resource URL fallback — ensures every action item has a clickable link
+// ============================================================================
+
+const RESOURCE_DOMAIN_MAP: Record<string, string> = {
+  'Udemy': 'https://www.udemy.com/courses/search/?q=',
+  'Coursera': 'https://www.coursera.org/search?query=',
+  'Pluralsight': 'https://www.pluralsight.com/search?q=',
+  'LinkedIn Learning': 'https://www.linkedin.com/learning/search?keywords=',
+  'edX': 'https://www.edx.org/search?q=',
+  'freeCodeCamp': 'https://www.freecodecamp.org',
+  'LeetCode': 'https://leetcode.com',
+  'HackerRank': 'https://www.hackerrank.com',
+  'Exercism': 'https://exercism.org',
+  'MDN': 'https://developer.mozilla.org/en-US/search?q=',
+  'AWS Certification': 'https://aws.amazon.com/certification/',
+  'Google Cloud': 'https://cloud.google.com/certification',
+  'Microsoft Learn': 'https://learn.microsoft.com/certifications/',
+  'Stack Overflow': 'https://stackoverflow.com/search?q=',
+  'Reddit': 'https://www.reddit.com/search/?q=',
+  'dev.to': 'https://dev.to/search?q=',
+  'O\'Reilly': 'https://www.oreilly.com/search/?q=',
+  'Amazon': 'https://www.amazon.com/s?k=',
+  'React': 'https://react.dev/learn',
+  'Next.js': 'https://nextjs.org/docs',
+  'Kubernetes': 'https://kubernetes.io/docs/',
+  'Docker': 'https://docs.docker.com/',
+  'Python': 'https://docs.python.org/3/',
+  'Terraform': 'https://developer.hashicorp.com/terraform/docs',
+};
+
+import type { ActionPlan, ActionItem } from '@/lib/types';
+
+function ensureResourceUrls(plan: ActionPlan): ActionPlan {
+  const processItems = (items: ActionItem[]): ActionItem[] => items.map(item => {
+    if (item.resourceUrl && item.resourceUrl.startsWith('https://')) return item;
+    // Try matching resource name to known domains
+    const resourceLower = (item.resource || '').toLowerCase();
+    for (const [name, baseUrl] of Object.entries(RESOURCE_DOMAIN_MAP)) {
+      if (resourceLower.includes(name.toLowerCase())) {
+        const query = encodeURIComponent(item.action.slice(0, 60));
+        return { ...item, resourceUrl: baseUrl.includes('?') ? `${baseUrl}${query}` : baseUrl };
+      }
+    }
+    // Last resort: Google search
+    const query = encodeURIComponent(`${item.resource} ${item.action.slice(0, 40)}`);
+    return { ...item, resourceUrl: `https://www.google.com/search?q=${query}` };
+  });
+  return {
+    thirtyDays: processItems(plan.thirtyDays),
+    ninetyDays: processItems(plan.ninetyDays),
+    twelveMonths: processItems(plan.twelveMonths),
+  };
+}
+
 // SSE event helper
 function sseEvent(data: Record<string, unknown>): string {
   return `data: ${JSON.stringify(data)}\n\n`;
@@ -162,7 +219,7 @@ export async function POST(request: NextRequest) {
 
         const parsedPDF = await parsePDF(buffer);
         const cvText = truncateCVText(parsedPDF.text);
-        console.log(`[stream] PDF parsed: ${parsedPDF.pageCount} pages, ${cvText.length} chars, quality: ${parsedPDF.qualityScore}/100`);
+        if (isDev) console.log(`[stream] PDF parsed: ${parsedPDF.pageCount} pages, ${cvText.length} chars, quality: ${parsedPDF.qualityScore}/100`);
 
         if (parsedPDF.qualityWarning) {
           console.warn(`[stream] PDF quality warning: ${parsedPDF.qualityWarning}`);
@@ -201,11 +258,11 @@ export async function POST(request: NextRequest) {
               const liText = truncateCVText(liParsed.text);
               if (liText.length > 100) {
                 questionnaire.linkedInProfile = liText;
-                console.log(`[stream] LinkedIn PDF parsed: ${liText.length} chars`);
+                if (isDev) console.log(`[stream] LinkedIn PDF parsed: ${liText.length} chars`);
               }
             }
           } catch (e) {
-            console.log('[stream] LinkedIn PDF parse failed (non-critical):', e);
+            if (isDev) console.log('[stream] LinkedIn PDF parse failed (non-critical):', e);
           }
         }
 
@@ -223,7 +280,7 @@ export async function POST(request: NextRequest) {
         });
         const profile = profileResult.data;
         dataSources.extraction = profileResult.source;
-        console.log(`[stream] Profile: ${profile.skills.length} categories, ${profile.experience.length} experiences (source: ${profileResult.source})`);
+        if (isDev) console.log(`[stream] Profile: ${profile.skills.length} categories, ${profile.experience.length} experiences (source: ${profileResult.source})`);
 
         // --- Step 2: Gap Analysis ---
         send({ step: 'gap_analysis', progress: 25, message: 'Analyzing skill gaps and matching roles...' });
@@ -240,7 +297,7 @@ export async function POST(request: NextRequest) {
         });
         const gapAnalysis = gapResult.data;
         dataSources.gapAnalysis = gapResult.source;
-        console.log(`[stream] Gaps: ${gapAnalysis.gaps.length}, Strengths: ${gapAnalysis.strengths.length} (source: ${gapResult.source})`);
+        if (isDev) console.log(`[stream] Gaps: ${gapAnalysis.gaps.length}, Strengths: ${gapAnalysis.strengths.length} (source: ${gapResult.source})`);
 
         // Send gap analysis data — frontend can start showing results
         send({
@@ -282,7 +339,7 @@ export async function POST(request: NextRequest) {
         ];
 
         const [careerPlan, jobMatchResult] = await Promise.all(parallelCalls);
-        console.log(`[stream] Plan: ${careerPlan.actionPlan.thirtyDays.length}+${careerPlan.actionPlan.ninetyDays.length}+${careerPlan.actionPlan.twelveMonths.length} actions`);
+        if (isDev) console.log(`[stream] Plan: ${careerPlan.actionPlan.thirtyDays.length}+${careerPlan.actionPlan.ninetyDays.length}+${careerPlan.actionPlan.twelveMonths.length} actions`);
 
         // Normalize salary currencies
         const salaryAnalysis = careerPlan.salaryAnalysis;
@@ -414,12 +471,15 @@ export async function POST(request: NextRequest) {
                 companyATS,
               };
 
-              console.log(`[stream] ATS score: ${overallScore}% (keyword: ${keywordScore}%, format: ${formatAnalysis.formatScore}%)`);
+              if (isDev) console.log(`[stream] ATS score: ${overallScore}% (keyword: ${keywordScore}%, format: ${formatAnalysis.formatScore}%)`);
             }
           } catch (e) {
-            console.log('[stream] ATS scoring failed (non-critical):', e);
+            if (isDev) console.log('[stream] ATS scoring failed (non-critical):', e);
           }
         }
+
+        // --- Post-process action plan URLs ---
+        const actionPlan = ensureResourceUrls(careerPlan.actionPlan);
 
         // --- Assemble full result ---
         let result: AnalysisResult = {
@@ -428,6 +488,7 @@ export async function POST(request: NextRequest) {
             cvFileName: cvFile.name,
             targetRole: questionnaire.targetRole,
             country: questionnaire.country,
+            ...(hasJobPosting && { jobPosting: questionnaire.jobPosting }),
             ...(parsedPDF.qualityWarning && { pdfQualityWarning: parsedPDF.qualityWarning }),
             dataSources,
           },
@@ -435,7 +496,7 @@ export async function POST(request: NextRequest) {
           strengths: gapAnalysis.strengths,
           gaps: gapAnalysis.gaps,
           roleRecommendations: gapAnalysis.roleRecommendations,
-          actionPlan: careerPlan.actionPlan,
+          actionPlan,
           salaryAnalysis: salaryAnalysis,
           profile,
           ...(jobMatchResult && { jobMatch: jobMatchResult }),
@@ -461,12 +522,12 @@ export async function POST(request: NextRequest) {
 
             if (translated.fitScore && translated.strengths && translated.gaps) {
               result = translated;
-              console.log(`[stream] Translation to ${language} complete`);
+              if (isDev) console.log(`[stream] Translation to ${language} complete`);
             } else {
-              console.log('[stream] Translation invalid structure, using English');
+              if (isDev) console.log('[stream] Translation invalid structure, using English');
             }
           } catch (e) {
-            console.log('[stream] Translation failed, using English:', e);
+            if (isDev) console.log('[stream] Translation failed, using English:', e);
           }
         }
 
@@ -474,13 +535,13 @@ export async function POST(request: NextRequest) {
         const validationReport = validateAnalysisResult(result, lookupSalary);
         if (validationReport.autoFixed > 0) {
           result = autoFixResult(result, validationReport.issues);
-          console.log(`[Validation] Auto-fixed ${validationReport.autoFixed} issues`);
+          if (isDev) console.log(`[Validation] Auto-fixed ${validationReport.autoFixed} issues`);
         }
         if (!validationReport.isValid) {
           console.warn('[Validation] Issues found:', validationReport.issues.filter(i => i.severity === 'error'));
         }
         if (validationReport.issues.length > 0) {
-          console.log(`[Validation] ${validationReport.issues.length} total issues (${validationReport.issues.filter(i => i.severity === 'error').length} errors, ${validationReport.issues.filter(i => i.severity === 'warning').length} warnings)`);
+          if (isDev) console.log(`[Validation] ${validationReport.issues.length} total issues (${validationReport.issues.filter(i => i.severity === 'error').length} errors, ${validationReport.issues.filter(i => i.severity === 'warning').length} warnings)`);
         }
         // Attach validation metadata for potential UI display
         Object.assign(result, {
@@ -494,7 +555,7 @@ export async function POST(request: NextRequest) {
         // Sanitize and send final result
         const sanitized = sanitizeResult(result);
         const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
-        console.log(`[stream] Complete in ${totalTime}s`);
+        if (isDev) console.log(`[stream] Complete in ${totalTime}s`);
 
         send({
           step: 'complete',
