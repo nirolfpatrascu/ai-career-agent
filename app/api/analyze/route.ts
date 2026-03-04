@@ -279,6 +279,7 @@ export async function POST(request: NextRequest) {
       roleRecommendations: gapAnalysis.roleRecommendations,
       actionPlan: careerPlan.actionPlan,
       salaryAnalysis: salaryAnalysis,
+      profile,
       ...(jobMatchResult && { jobMatch: jobMatchResult }),
     };
 

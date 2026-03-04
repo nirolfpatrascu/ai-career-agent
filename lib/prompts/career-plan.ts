@@ -86,6 +86,7 @@ JSON SCHEMA:
         "priority": "critical | high | medium",
         "timeEstimate": "string — e.g. '2-3 weeks at 1hr/day'",
         "resource": "string — specific resource or tool name",
+        "resourceUrl": "string (optional) — direct URL to the resource (course page, certification page, documentation). Only include if you are confident the URL exists.",
         "expectedImpact": "string — concrete expected outcome"
       }
     ],

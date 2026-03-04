@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server';
 import { parsePDF, validatePDFBuffer } from '@/lib/pdf-parser';
-import { callClaude, truncateCVText } from '@/lib/claude';
+import { callClaude, callClaudeWithSource, truncateCVText } from '@/lib/claude';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { sanitizeResult } from '@/lib/utils';
 import {
@@ -212,14 +212,18 @@ export async function POST(request: NextRequest) {
         // --- Step 1: Extract Skills ---
         send({ step: 'extraction', progress: 12, message: 'Extracting skills and experience...' });
 
+        const dataSources: Record<string, 'claude' | 'fallback'> = {};
+
         const extractionPrompt = buildSkillExtractionPrompt(cvText, questionnaire);
-        const profile = await callClaude<ExtractedProfile>({
+        const profileResult = await callClaudeWithSource<ExtractedProfile>({
           ...extractionPrompt,
           maxTokens: 4096,
           temperature: 0.2,
           fallback: EXTRACTION_FALLBACK,
         });
-        console.log(`[stream] Profile: ${profile.skills.length} categories, ${profile.experience.length} experiences`);
+        const profile = profileResult.data;
+        dataSources.extraction = profileResult.source;
+        console.log(`[stream] Profile: ${profile.skills.length} categories, ${profile.experience.length} experiences (source: ${profileResult.source})`);
 
         // --- Step 2: Gap Analysis ---
         send({ step: 'gap_analysis', progress: 25, message: 'Analyzing skill gaps and matching roles...' });
@@ -228,13 +232,15 @@ export async function POST(request: NextRequest) {
         const knowledge = buildKnowledgeContext(questionnaire);
 
         const gapPrompt = buildGapAnalysisPrompt(profile, questionnaire, knowledge.forGapAnalysis);
-        const gapAnalysis = await callClaude<GapAnalysisResult>({
+        const gapResult = await callClaudeWithSource<GapAnalysisResult>({
           ...gapPrompt,
           maxTokens: 6144,
           temperature: 0.3,
           fallback: GAP_ANALYSIS_FALLBACK,
         });
-        console.log(`[stream] Gaps: ${gapAnalysis.gaps.length}, Strengths: ${gapAnalysis.strengths.length}`);
+        const gapAnalysis = gapResult.data;
+        dataSources.gapAnalysis = gapResult.source;
+        console.log(`[stream] Gaps: ${gapAnalysis.gaps.length}, Strengths: ${gapAnalysis.strengths.length} (source: ${gapResult.source})`);
 
         // Send gap analysis data — frontend can start showing results
         send({
@@ -423,6 +429,7 @@ export async function POST(request: NextRequest) {
             targetRole: questionnaire.targetRole,
             country: questionnaire.country,
             ...(parsedPDF.qualityWarning && { pdfQualityWarning: parsedPDF.qualityWarning }),
+            dataSources,
           },
           fitScore: gapAnalysis.fitScore,
           strengths: gapAnalysis.strengths,
@@ -430,6 +437,7 @@ export async function POST(request: NextRequest) {
           roleRecommendations: gapAnalysis.roleRecommendations,
           actionPlan: careerPlan.actionPlan,
           salaryAnalysis: salaryAnalysis,
+          profile,
           ...(jobMatchResult && { jobMatch: jobMatchResult }),
           ...(atsScoreResult && { atsScore: atsScoreResult }),
         };

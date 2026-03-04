@@ -17,28 +17,6 @@ export interface TransitionPattern {
 
 export const TRANSITION_PATTERNS: TransitionPattern[] = [
   {
-    from: 'RPA Developer',
-    to: 'AI/ML Engineer',
-    difficulty: 'high',
-    timeToTransition: '6-12 months',
-    transferableSkills: ['Process automation thinking', 'Data pipeline understanding', 'Business process analysis', 'Document processing (IDP/OCR)'],
-    criticalGaps: ['Python proficiency for ML', 'Statistics & linear algebra', 'ML model training & evaluation', 'Cloud ML platforms (SageMaker/Vertex AI)'],
-    successPattern: 'Most successful transitions focus on the automation-AI intersection: building intelligent automation that combines RPA workflows with ML models. The "AI automation architect" niche pays well and has low competition because few people have both skill sets.',
-    commonMistakes: ['Trying to become a pure data scientist (over-indexed on theory, ignores their automation advantage)', 'Spending 12 months on courses before building anything', 'Not leveraging their enterprise network from RPA vendor relationships'],
-    fastTrackTip: 'Build 3 projects that combine automation + AI: e.g., intelligent document processing pipeline, AI-powered email triage agent, predictive process mining dashboard. These prove you bridge both worlds.',
-  },
-  {
-    from: 'RPA Developer',
-    to: 'Solutions Architect',
-    difficulty: 'medium',
-    timeToTransition: '3-6 months',
-    transferableSkills: ['Enterprise system integration', 'Process analysis & optimization', 'Stakeholder management', 'Technical documentation', 'Orchestrator/infrastructure management'],
-    criticalGaps: ['Cloud platform certification (AWS/Azure/GCP)', 'System design at scale', 'API architecture & microservices', 'Cost optimization & capacity planning'],
-    successPattern: 'RPA developers who become SAs leverage their unique advantage: they understand how enterprise processes actually work, not just how technology works. The best pivot is into SA roles at automation/AI vendors where their domain expertise is the differentiator.',
-    commonMistakes: ['Applying to pure cloud SA roles without any cloud certification', 'Underselling their enterprise experience', 'Not building a portfolio of architecture diagrams and design documents'],
-    fastTrackTip: 'Get AZ-900 + one specialty cert (AI-102 or AZ-305) within 8 weeks. Then target SA roles at automation vendors (n8n, Make, Celonis, Workato) where your domain knowledge gives you an unfair advantage.',
-  },
-  {
     from: 'Backend Developer',
     to: 'Full-Stack Developer',
     difficulty: 'low',
@@ -135,12 +113,15 @@ export function findTransitionPatterns(currentRole: string, targetRole: string):
   const current = currentRole.toLowerCase();
   const target = targetRole.toLowerCase();
 
+  // Generic role words that should not trigger fuzzy matches on their own
+  const GENERIC_WORDS = new Set(['engineer', 'developer', 'senior', 'lead', 'junior', 'manager', 'staff', 'principal', 'associate', 'intern', 'analyst', 'specialist', 'consultant', 'head', 'director', 'tech', 'role', 'systems']);
+
   const relevant = TRANSITION_PATTERNS.filter(p => {
     const fromMatch = current.includes(p.from.toLowerCase()) || p.from.toLowerCase().split('/').some(f => current.includes(f.trim().toLowerCase()));
     const toMatch = target.includes(p.to.toLowerCase()) || p.to.toLowerCase().split('/').some(t => target.includes(t.trim().toLowerCase()));
-    // Also match partial: "RPA" in "RPA Developer" from field
-    const fromPartial = p.from.toLowerCase().split(' ').some(w => w.length > 2 && current.includes(w));
-    const toPartial = p.to.toLowerCase().split(' ').some(w => w.length > 2 && target.includes(w));
+    // Fuzzy match: require words > 4 chars AND not generic role words
+    const fromPartial = p.from.toLowerCase().split(' ').some(w => w.length > 4 && !GENERIC_WORDS.has(w) && current.includes(w));
+    const toPartial = p.to.toLowerCase().split(' ').some(w => w.length > 4 && !GENERIC_WORDS.has(w) && target.includes(w));
     return (fromMatch || fromPartial) && (toMatch || toPartial);
   });
 

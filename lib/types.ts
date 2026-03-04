@@ -40,6 +40,7 @@ export interface AnalysisResult {
   salaryAnalysis: SalaryAnalysis;
   jobMatch?: JobMatch;
   atsScore?: ATSScoreResult;
+  profile?: ExtractedProfile;
 }
 
 export interface AnalysisMetadata {
@@ -49,6 +50,8 @@ export interface AnalysisMetadata {
   country: string;
   /** Warning message if PDF text extraction quality was suboptimal */
   pdfQualityWarning?: string;
+  /** Tracks which data came from Claude vs fallback */
+  dataSources?: Record<string, 'claude' | 'fallback'>;
 }
 
 export interface FitScore {
@@ -102,6 +105,7 @@ export interface ActionItem {
   priority: 'critical' | 'high' | 'medium';
   timeEstimate: string;
   resource: string;
+  resourceUrl?: string;
   expectedImpact: string;
 }
 

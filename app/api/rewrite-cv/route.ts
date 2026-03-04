@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { callClaude } from '@/lib/claude';
 import { checkRateLimit, getRateLimitHeaders } from '@/lib/rate-limit';
 import { buildCVRewritePrompt, CV_REWRITE_FALLBACK } from '@/lib/prompts';
+import { buildKnowledgeContext } from '@/lib/knowledge';
 import type { CVRewriteResult } from '@/lib/prompts/cv-rewriter';
 import type { Gap } from '@/lib/types';
 
@@ -38,7 +39,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const prompt = buildCVRewritePrompt(cvText, targetRole, gaps || [], jobPosting);
+    // Build knowledge context for CV rewriting best practices
+    const knowledge = buildKnowledgeContext({
+      currentRole: targetRole,
+      targetRole,
+      yearsExperience: 5,
+      country: 'US',
+      workPreference: 'remote',
+    });
+    const prompt = buildCVRewritePrompt(cvText, targetRole, gaps || [], jobPosting, knowledge.forCVRewrite);
     const result = await callClaude<CVRewriteResult>({
       ...prompt,
       maxTokens: 4096,

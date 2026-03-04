@@ -61,6 +61,19 @@ function SectionCard({ title, icon, children }: { title: string; icon: React.Rea
 export default function LinkedInPlan({ analysis }: LinkedInPlanProps) {
   const { t } = useTranslation();
 
+  // Compute a LinkedIn Profile Grade (0-10)
+  const profileGrade = useMemo(() => {
+    const { strengths, gaps, fitScore } = analysis;
+    const differentiators = strengths.filter(s => s.tier === 'differentiator').length;
+    const criticalGaps = gaps.filter(g => g.severity === 'critical').length;
+    const hasCerts = strengths.some(s => s.title.toLowerCase().includes('certif'));
+    let grade = fitScore.score;
+    grade += Math.min(differentiators, 3) * 0.5;
+    grade -= criticalGaps * 0.5;
+    if (hasCerts) grade += 0.5;
+    return Math.max(0, Math.min(10, Math.round(grade)));
+  }, [analysis]);
+
   const plan = useMemo(() => {
     const { metadata, strengths, gaps, roleRecommendations } = analysis;
     const target = metadata.targetRole;
@@ -114,9 +127,10 @@ I'm passionate about the intersection of enterprise process automation and moder
     // Add target role keywords
     skillsToAdd.push(target, 'AI', 'Machine Learning', 'Cloud Architecture');
 
-    // Skills that might be dragging profile in wrong direction
-    const legacySkills = ['RPA', 'UiPath', 'VB.NET', 'Legacy Systems'];
-    legacySkills.forEach(s => {
+    // Skills to deprioritize: identify skills not aligned with target role
+    // Only suggest removing skills that don't appear in strengths
+    const legacyIndicators = ['Legacy Systems', 'VB.NET', 'COBOL', 'Delphi'];
+    legacyIndicators.forEach(s => {
       if (strengths.every(str => !str.title.toLowerCase().includes(s.toLowerCase()))) {
         skillsToRemove.push(s);
       }
@@ -158,6 +172,19 @@ I'm passionate about the intersection of enterprise process automation and moder
           </div>
         </div>
         <FeedbackButton section="linkedinPlan" />
+      </div>
+
+      {/* Profile Grade Badge */}
+      <div className={`rounded-xl border p-4 flex items-center gap-4 ${profileGrade >= 6 ? 'border-success/20 bg-success/[0.04]' : 'border-warning/20 bg-warning/[0.04]'}`}>
+        <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold font-display text-lg ${profileGrade >= 6 ? 'bg-success/10 text-success border border-success/20' : 'bg-warning/10 text-warning border border-warning/20'}`}>
+          {profileGrade}
+        </div>
+        <div className="flex-1">
+          <p className="text-sm font-semibold text-text-primary">{t('linkedin.grade')}</p>
+          <p className="text-xs text-text-secondary mt-0.5">
+            {profileGrade >= 6 ? t('linkedin.gradeGood') : t('linkedin.gradeNeedsWork')}
+          </p>
+        </div>
       </div>
 
       {/* 1. Headline */}

@@ -142,13 +142,30 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Sanitize messages: only allow 'user' and 'assistant' roles, cap content length
+    const ALLOWED_ROLES = new Set(['user', 'assistant']);
+    const MAX_CONTENT_LENGTH = 10000;
+    const sanitizedMessages: ChatMessage[] = body.messages
+      .filter((m) => ALLOWED_ROLES.has(m.role))
+      .map((m) => ({
+        role: m.role,
+        content: typeof m.content === 'string' ? m.content.slice(0, MAX_CONTENT_LENGTH) : '',
+      }));
+
+    if (sanitizedMessages.length === 0) {
+      return new Response(
+        JSON.stringify({ error: 'No valid messages provided.' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
     const analysisContext = buildAnalysisContext(body.analysis);
     const langInstruction = getLanguageInstruction(body.language);
     const system = `${SYSTEM_PROMPT}${langInstruction ? `\n\n${langInstruction}` : ''}\n\n---\n${analysisContext}\n---`;
 
     const stream = streamClaude({
       system,
-      messages: body.messages,
+      messages: sanitizedMessages,
       maxTokens: 2048,
       temperature: 0.4,
     });

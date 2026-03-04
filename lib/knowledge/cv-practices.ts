@@ -31,7 +31,7 @@ STRUCTURE (reverse chronological, 2 pages max for <15 years, 3 max for 15+):
    - 3-6 bullet points per role using STAR-lite format
    - Formula: [Action verb] + [what you did] + [quantified result]
    - BAD: "Responsible for automation development"
-   - GOOD: "Architected 12 enterprise RPA workflows processing 50,000+ documents/month, reducing manual processing time by 85%"
+   - GOOD: "Architected 12 enterprise integration workflows processing 50,000+ documents/month, reducing manual processing time by 85%"
    - Power verbs: Architected, Built, Delivered, Designed, Implemented, Led, Optimized, Reduced, Scaled, Shipped
    - QUANTIFY EVERYTHING: revenue impact, time saved, users served, systems scaled, team size led
 
@@ -59,7 +59,7 @@ CAREER TRANSITION CV TIPS:
 - Lead with a "Career Transition Summary" that explicitly names the pivot
 - Create a "Relevant Projects" section above experience for new-domain work
 - Map old skills to new domain language:
-  * "RPA orchestration" → "workflow orchestration & distributed systems"
+  * "Legacy system management" → "enterprise infrastructure & platform engineering"
   * "Process analysis" → "systems analysis & requirements engineering"
   * "Training delivery" → "technical enablement & developer advocacy"
 - Include a "Technical Portfolio" section linking to GitHub/live demos

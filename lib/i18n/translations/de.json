@@ -225,7 +225,13 @@
   "results": {
     "fitScore": {
       "title": "Karriere-Fit-Score",
-      "outOf": "von 10"
+      "outOf": "von 10",
+      "guide": {
+        "high": "Sie sind bereit, sich zu bewerben — nur noch ein paar letzte Feinschliffe",
+        "medium": "Optimieren Sie zuerst Ihren Lebenslauf und LinkedIn, oder schließen Sie wichtige Lücken",
+        "low": "Große Lücke erkannt — folgen Sie dem Aktionsplan Schritt für Schritt"
+      },
+      "callout": "Tipp: Verbessern Sie Ihr LinkedIn-Profil und optimieren Sie Ihren Lebenslauf, um diesen Score zu erhöhen"
     },
     "strengths": {
       "title": "Ihre Stärken",
@@ -249,6 +255,11 @@
       "timeToClose": "Zeit zum Schließen",
       "resources": "Ressourcen"
     },
+    "strengthsGaps": {
+      "title": "Stärken & Lücken",
+      "strengths": "Stärken",
+      "gaps": "Lücken"
+    },
     "roles": {
       "title": "Empfohlene Rollen",
       "fitScore": "Fit-Score",
@@ -256,6 +267,8 @@
       "timeToReady": "Vorbereitungszeit",
       "exampleCompanies": "Zielunternehmen",
       "bestFit": "Bester Match",
+      "readyNow": "Sofort Bereit",
+      "companiesLabel": "Unternehmen, die für diese Rolle einstellen:",
       "mid": "Mittel"
     },
     "actionPlan": {
@@ -268,7 +281,11 @@
       "priority": "Priorität",
       "timeEstimate": "Zeitaufwand",
       "resource": "Ressource",
-      "expectedImpact": "Erwartete Wirkung"
+      "expectedImpact": "Erwartete Wirkung",
+      "introHigh": "Kurze Durchsicht der Stellenanforderungen für 1-2 Tage — Sie sind bereits ein starker Kandidat.",
+      "introMedium": "Beginnen Sie mit dem 30-Tage-Plan, um Ihre wichtigsten Lücken zu schließen.",
+      "introLow": "Dies ist ein ehrgeiziger Plan — verpflichten Sie sich zum vollständigen Plan, beginnend mit 30 Tagen.",
+      "quickPrep": "Schnellvorbereitung"
     },
     "salary": {
       "title": "Gehaltsanalyse",
@@ -290,6 +307,14 @@
         "estimate": "KI-Schätzung",
         "footer": "Quellen: US Bureau of Labor Statistics OEWS (2024), UK ONS ASHE (2024), Eurostat Structure of Earnings Survey (2022), Stack Overflow Developer Survey (2024), Glassdoor, Levels.fyi",
         "tooltip": "Gehaltsdaten stammen aus offiziellen Regierungsstatistiken, soweit verfuegbar (US BLS, UK ONS, Eurostat SES), ergaenzt durch den Stack Overflow Developer Survey (65.000+ Teilnehmer) und Marktforschung. Als 'KI-Schaetzung' gekennzeichnete Daten werden generiert, wenn keine offiziellen Daten fuer diese spezifische Rolle/Region verfuegbar sind."
+      },
+      "sourceMethodology": "Methodik und Datenquellen",
+      "sourceExplain": {
+        "bls": "US Bureau of Labor Statistics — offizielle Gehaltserhebung nach Berufen",
+        "ons": "UK Office for National Statistics — jährliche Einkommenserhebung",
+        "eurostat": "Eurostat — EU-Verdienststrukturerhebung",
+        "stackoverflow": "Stack Overflow Developer Survey — Selbstauskunft von über 65.000 Entwicklern",
+        "estimate": "KI-Schätzung basierend auf verfügbaren Marktdaten — verwendet wenn keine offiziellen Statistiken vorliegen"
       }
     },
     "jobMatch": {
@@ -322,7 +347,9 @@
       "🔍 Wie schließe ich meine größte Kompetenzlücke?",
       "💰 Leitfaden zur Gehaltsverhandlung",
       "🏗️ Portfolio-Projektideen"
-    ]
+    ],
+    "signInRequired": "Melden Sie sich an, um Ihren KI-Karrierecoach zu nutzen — er verwendet Ihre vollständige Analyse für personalisierte Beratung.",
+    "signInHint": "Ihre Analysedaten bleiben privat und werden nur während Ihrer Coaching-Sitzung verwendet."
   },
   "errors": {
     "pageTitle": "Etwas ist schiefgelaufen",
@@ -425,7 +452,10 @@
     "connections": "Vernetzungsstrategie",
     "connectionsAdvice": "Vernetzen Sie sich mit Personen in Ihrem Zielbereich. Personalisieren Sie jede Anfrage (max. 3-4 Sätze). Kommentieren Sie 5-10 Posts täglich — das ist effektiver als selbst zu posten.",
     "copy": "Kopieren",
-    "copied": "Kopiert!"
+    "copied": "Kopiert!",
+    "grade": "LinkedIn-Profilbewertung",
+    "gradeGood": "Gute Grundlage — diese Optimierungen helfen Ihnen, sich abzuheben",
+    "gradeNeedsWork": "Ihr Profil benötigt erhebliche Aktualisierungen für Ihre Zielposition"
   },
   "auth": {
     "signIn": "Anmelden",
@@ -625,7 +655,8 @@
         "original": "Original",
         "suggested": "Vorgeschlagen"
       }
-    }
+    },
+    "keywordCaveat": "Fügen Sie nur Schlüsselwörter für Fähigkeiten hinzu, die Sie tatsächlich besitzen — Übertreibungen fallen im Vorstellungsgespräch auf."
   },
   "feedback": {
     "helpful": "War das hilfreich?",
@@ -712,6 +743,26 @@
       "regenerate": "Neu generieren",
       "saveDraft": "Entwurf speichern",
       "saved": "Gespeichert!"
+    }
+  },
+  "jobs": {
+    "title": "Job-Tracker",
+    "subtitle": "Verfolgen Sie Ihre Bewerbungen und Ihren Fortschritt",
+    "addJob": "Job Hinzufügen",
+    "signInRequired": "Melden Sie sich an, um Ihre verfolgten Jobs zu speichern",
+    "signInDescription": "Erstellen Sie ein kostenloses Konto, um Ihre Bewerbungen zu speichern und zu verfolgen",
+    "useSignIn": "Anmelden",
+    "viewKanban": "Kanban",
+    "viewList": "Liste",
+    "empty": "Noch keine verfolgten Jobs",
+    "emptySubtitle": "Fügen Sie Ihren ersten Job hinzu, um die Verfolgung zu starten",
+    "addFirstJob": "Ersten Job Hinzufügen",
+    "toast": {
+      "added": "Job erfolgreich hinzugefügt",
+      "addError": "Job konnte nicht hinzugefügt werden",
+      "updateError": "Job konnte nicht aktualisiert werden",
+      "deleteError": "Job konnte nicht gelöscht werden",
+      "deleted": "Job gelöscht"
     }
   }
 }

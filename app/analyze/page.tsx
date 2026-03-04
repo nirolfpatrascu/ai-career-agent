@@ -9,8 +9,7 @@ import WizardFlow from '@/components/analyze/WizardFlow';
 import StreamingProgress from '@/components/analyze/StreamingProgress';
 import { useStreamingAnalysis } from '@/lib/hooks/useStreamingAnalysis';
 import FitScoreGauge from '@/components/results/FitScore';
-import StrengthsPanel from '@/components/results/StrengthsPanel';
-import GapsPanel from '@/components/results/GapsPanel';
+import StrengthsGapsPanel from '@/components/results/StrengthsGapsPanel';
 import RoleRecommendations from '@/components/results/RoleRecommendations';
 import ActionPlan from '@/components/results/ActionPlan';
 import SalaryBenchmark from '@/components/results/SalaryBenchmark';
@@ -180,28 +179,23 @@ export default function AnalyzePage() {
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-fit-score" aria-labelledby="tab-fit-score">
               <SectionIntro messageKey="motivation.fitScore" variant={fitScore >= 7 ? 'celebratory' : 'encouraging'} />
-              <FitScoreGauge fitScore={result.fitScore} />
+              <FitScoreGauge fitScore={result.fitScore} onNavigate={setActiveTab} />
             </div>
           );
+        case 'strengths-gaps':
         case 'strengths':
-          return (
-            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-strengths" aria-labelledby="tab-strengths">
-              <SectionIntro messageKey="motivation.strengths" variant="celebratory" />
-              <StrengthsPanel strengths={result.strengths} />
-            </div>
-          );
         case 'gaps':
           return (
-            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-gaps" aria-labelledby="tab-gaps">
-              <SectionIntro messageKey="motivation.gaps" variant="encouraging" />
-              <GapsPanel gaps={result.gaps} />
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-strengths-gaps" aria-labelledby="tab-strengths-gaps">
+              <SectionIntro messageKey="motivation.strengths" variant="celebratory" />
+              <StrengthsGapsPanel strengths={result.strengths} gaps={result.gaps} />
             </div>
           );
         case 'action-plan':
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-action-plan" aria-labelledby="tab-action-plan">
               <SectionIntro messageKey="motivation.actionPlan" variant="encouraging" />
-              <ActionPlan plan={result.actionPlan} />
+              <ActionPlan plan={result.actionPlan} fitScore={result.fitScore.score} />
             </div>
           );
         case 'roles':
@@ -233,7 +227,7 @@ export default function AnalyzePage() {
             </div>
           );
         case 'cv-optimizer':
-          return (result.atsScore || result.jobMatch) ? (
+          return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-cv-optimizer" aria-labelledby="tab-cv-optimizer">
               <SectionIntro messageKey="motivation.cvOptimizer" variant="encouraging" />
               <CVOptimizerPanel
@@ -242,7 +236,7 @@ export default function AnalyzePage() {
                 analysis={result}
               />
             </div>
-          ) : null;
+          );
         case 'ai-coach':
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-ai-coach" aria-labelledby="tab-ai-coach">
@@ -259,7 +253,6 @@ export default function AnalyzePage() {
         <Header />
         <ChapterNav
           hasJobMatch={!!result.jobMatch}
-          hasAtsScore={!!result.atsScore}
           activeTab={activeTab}
           onTabChange={setActiveTab}
         />

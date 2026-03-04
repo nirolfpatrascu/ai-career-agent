@@ -168,6 +168,24 @@ export async function callClaude<T>(options: {
 }
 
 /**
+ * Call Claude with source tracking — returns whether data came from Claude or fallback.
+ * Used by analyze-stream to populate metadata.dataSources.
+ */
+export async function callClaudeWithSource<T>(options: {
+  system: string;
+  userMessage: string;
+  maxTokens?: number;
+  temperature?: number;
+  fallback: T;
+}): Promise<{ data: T; source: 'claude' | 'fallback' }> {
+  const { fallback } = options;
+  const result = await callClaude<T>(options);
+  // If the result is the exact same reference as fallback, it was a fallback
+  const isFallback = result === fallback;
+  return { data: result, source: isFallback ? 'fallback' : 'claude' };
+}
+
+/**
  * Call Claude for plain text responses (not JSON).
  * Used for CV rewriting and other text-generation tasks.
  * Includes retry logic with exponential backoff.

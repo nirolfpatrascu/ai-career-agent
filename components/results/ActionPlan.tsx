@@ -7,6 +7,7 @@ import { FeedbackButton } from './FeedbackButton';
 
 interface ActionPlanProps {
   plan: ActionPlanType;
+  fitScore?: number;
 }
 
 const TAB_KEYS = ['thirtyDays', 'ninetyDays', 'twelveMonths'] as const;
@@ -23,7 +24,7 @@ const PRIORITY_STYLES: Record<string, string> = {
   medium: 'bg-primary/10 text-primary border-primary/15',
 };
 
-export default function ActionPlan({ plan }: ActionPlanProps) {
+export default function ActionPlan({ plan, fitScore }: ActionPlanProps) {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<keyof ActionPlanType>('thirtyDays');
 
@@ -43,6 +44,39 @@ export default function ActionPlan({ plan }: ActionPlanProps) {
         </div>
         <FeedbackButton section="actionPlan" />
       </div>
+
+      {/* Contextual intro based on fit score */}
+      {fitScore !== undefined && (
+        <div className={`rounded-xl border p-4 mb-6 ${
+          fitScore >= 8 ? 'border-success/20 bg-success/[0.04]' :
+          fitScore >= 5 ? 'border-warning/20 bg-warning/[0.04]' :
+          'border-danger/20 bg-danger/[0.04]'
+        }`}>
+          <p className="text-sm text-text-secondary leading-relaxed">
+            {fitScore >= 8 ? t('results.actionPlan.introHigh') :
+             fitScore >= 5 ? t('results.actionPlan.introMedium') :
+             t('results.actionPlan.introLow')}
+          </p>
+        </div>
+      )}
+
+      {/* Quick Prep card for high scores */}
+      {fitScore !== undefined && fitScore >= 8 && plan.thirtyDays.length > 0 && (
+        <div className="rounded-2xl border border-success/20 bg-success/[0.03] p-5 mb-6">
+          <div className="flex items-center gap-2 mb-3">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <h3 className="font-semibold text-text-primary text-sm">{t('results.actionPlan.quickPrep')}</h3>
+          </div>
+          <div className="space-y-2">
+            {plan.thirtyDays.filter(i => i.priority === 'critical').slice(0, 3).map((item, i) => (
+              <div key={i} className="flex items-start gap-2 text-sm text-text-secondary">
+                <span className="w-5 h-5 rounded-md bg-success/10 text-success flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">{i + 1}</span>
+                <span>{item.action}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Tabs */}
       <div className="flex gap-2 mb-6 p-1 bg-black/[0.03] border border-black/[0.08] rounded-xl w-fit">
@@ -91,7 +125,11 @@ export default function ActionPlan({ plan }: ActionPlanProps) {
                 <p className="text-text-primary font-medium leading-relaxed text-[15px]">{item.action}</p>
                 <div className="flex items-center gap-1.5 mt-2.5 text-sm text-text-tertiary">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
-                  {item.resource}
+                  {item.resourceUrl ? (
+                    <a href={item.resourceUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary-light hover:underline transition-colors">
+                      {item.resource}
+                    </a>
+                  ) : item.resource}
                 </div>
                 <div className="flex items-center gap-1.5 mt-2 text-sm text-success/80">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>

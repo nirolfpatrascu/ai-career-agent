@@ -14,7 +14,8 @@ export function buildCVRewritePrompt(
   cvText: string,
   targetRole: string,
   gaps: Gap[],
-  jobPosting?: string
+  jobPosting?: string,
+  knowledgeContext?: string
 ): { system: string; userMessage: string } {
   const system = `You are an expert CV/resume writer specializing in tech industry career transitions. You rewrite CVs to maximize ATS pass-through rates and interview callbacks while remaining completely truthful.
 
@@ -71,6 +72,8 @@ IDENTIFIED SKILL GAPS (for context — do NOT add these as fake skills, but DO a
 ${JSON.stringify(gaps.map((g) => ({ skill: g.skill, severity: g.severity, currentLevel: g.currentLevel })), null, 2)}
 
 ${jobPosting ? `SPECIFIC JOB POSTING TO OPTIMIZE FOR:\n---JOB POSTING---\n${jobPosting}\n---END JOB POSTING---` : 'No specific job posting provided — optimize for general target role.'}
+
+${knowledgeContext ? `CV & LINKEDIN BEST PRACTICES (use to guide your suggestions):\n${knowledgeContext}` : ''}
 
 Provide the CV rewrite suggestions as JSON.`;
 

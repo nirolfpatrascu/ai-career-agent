@@ -225,7 +225,16 @@
   "results": {
     "fitScore": {
       "title": "Career Fit Score",
-      "outOf": "out of 10"
+      "outOf": "out of 10",
+      "guide": {
+        "high": "You're ready to apply — do some final polish and prep",
+        "medium": "Optimize your CV and LinkedIn first, or close key gaps",
+        "low": "Major gap detected — follow the Action Plan step by step"
+      },
+      "callout": "Before applying, optimize your LinkedIn profile and CV to maximize your chances. Small improvements here can significantly boost your visibility to recruiters."
+    },
+    "strengthsGaps": {
+      "title": "Strengths & Gaps"
     },
     "strengths": {
       "title": "Your Strengths",
@@ -256,6 +265,8 @@
       "timeToReady": "Time to Ready",
       "exampleCompanies": "Target Companies",
       "bestFit": "Best Fit",
+      "readyNow": "Ready Now",
+      "companiesLabel": "Companies hiring for this role",
       "mid": "Mid"
     },
     "actionPlan": {
@@ -268,7 +279,11 @@
       "priority": "Priority",
       "timeEstimate": "Time",
       "resource": "Resource",
-      "expectedImpact": "Expected Impact"
+      "expectedImpact": "Expected Impact",
+      "introHigh": "Quick review of JD topics for 1-2 days — you're already a strong fit. Focus on polish and preparation.",
+      "introMedium": "Start with the 30-day plan to close your most important gaps. Each completed item improves your chances significantly.",
+      "introLow": "This is aspirational — commit to the full plan starting with 30 days. Every step forward counts.",
+      "quickPrep": "Quick Prep (2-day focus)"
     },
     "salary": {
       "title": "Salary Analysis",
@@ -290,6 +305,14 @@
         "estimate": "AI estimate",
         "footer": "Sources: US Bureau of Labor Statistics OEWS (2024), UK ONS ASHE (2024), Eurostat Structure of Earnings Survey (2022), Stack Overflow Developer Survey (2024), Glassdoor, Levels.fyi",
         "tooltip": "Salary data is sourced from official government statistics where available (US BLS, UK ONS, Eurostat SES), supplemented by the Stack Overflow Developer Survey (65,000+ respondents) and market research. Data marked 'AI estimate' is generated when no official data is available for this specific role/region combination."
+      },
+      "sourceMethodology": "How salary data is sourced",
+      "sourceExplain": {
+        "bls": "U.S. Bureau of Labor Statistics — Occupational Employment and Wage Statistics (OEWS), 2024 data covering 800+ occupations",
+        "ons": "UK Office for National Statistics — Annual Survey of Hours and Earnings (ASHE), 2024 data",
+        "eurostat": "EU Eurostat — Structure of Earnings Survey, covering 27+ EU countries",
+        "stackoverflow": "Stack Overflow Developer Survey — 65,000+ developer respondents, 2024 edition",
+        "estimate": "AI-generated estimate when no official data is available for this role/region. Wider range indicates lower confidence."
       }
     },
     "jobMatch": {
@@ -322,7 +345,9 @@
       "🔍 How do I close my #1 skill gap?",
       "💰 Salary negotiation playbook",
       "🏗️ Portfolio project ideas"
-    ]
+    ],
+    "signInRequired": "Sign in to access your AI Career Coach — it uses your full analysis to give personalized advice.",
+    "signInHint": "Your analysis data stays private and is only used during your coaching session."
   },
   "errors": {
     "pageTitle": "Something went wrong",
@@ -425,7 +450,10 @@
     "connections": "Connection Strategy",
     "connectionsAdvice": "Connect with people in your target domain. Personalize every request (3-4 sentences max). Comment on 5-10 posts daily — this is more effective than posting.",
     "copy": "Copy",
-    "copied": "Copied!"
+    "copied": "Copied!",
+    "grade": "LinkedIn Profile Grade",
+    "gradeGood": "Good foundation — these optimizations will help you stand out",
+    "gradeNeedsWork": "Your profile needs significant updates for your target role"
   },
   "auth": {
     "signIn": "Sign In",
@@ -625,7 +653,8 @@
         "original": "Original",
         "suggested": "Suggested"
       }
-    }
+    },
+    "keywordCaveat": "Only add keywords for skills you actually possess — misrepresenting skills will backfire in interviews."
   },
   "feedback": {
     "helpful": "Was this helpful?",
@@ -712,6 +741,26 @@
       "regenerate": "Regenerate",
       "saveDraft": "Save Draft",
       "saved": "Saved!"
+    }
+  },
+  "jobs": {
+    "title": "Job Tracker",
+    "subtitle": "Track your applications and follow-ups",
+    "addJob": "Add Job",
+    "signInRequired": "Sign in to track jobs",
+    "signInDescription": "Create a free account to save job applications and track your progress.",
+    "useSignIn": "Click Sign In in the header to get started",
+    "viewKanban": "Board",
+    "viewList": "List",
+    "empty": "No jobs tracked yet",
+    "emptySubtitle": "Add your first job application to start tracking",
+    "addFirstJob": "Add Your First Job",
+    "toast": {
+      "added": "Job added to tracker",
+      "addError": "Failed to add job",
+      "updateError": "Failed to update job",
+      "deleteError": "Failed to delete job",
+      "deleted": "Job removed from tracker"
     }
   }
 }

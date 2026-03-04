@@ -191,10 +191,37 @@ export default function SalaryBenchmark({ salary }: SalaryBenchmarkProps) {
           </div>
         )}
 
-        {/* Sources footer */}
-        <p className="text-[11px] text-text-tertiary text-center mt-2 px-1">
-          {t('results.salary.source.footer')}
-        </p>
+        {/* Source methodology card */}
+        <div className="rounded-2xl border border-black/[0.08] bg-black/[0.03] p-5">
+          <div className="flex items-center gap-2.5 mb-3">
+            <div className="w-7 h-7 rounded-lg bg-black/[0.04] border border-black/[0.08] flex items-center justify-center text-text-tertiary text-sm">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            </div>
+            <h3 className="font-semibold text-text-primary text-sm">{t('results.salary.sourceMethodology')}</h3>
+          </div>
+          <div className="space-y-2 text-xs text-text-secondary leading-relaxed">
+            <div className="flex items-start gap-2">
+              <SourceBadge source="government_bls" t={t} />
+              <span>{t('results.salary.sourceExplain.bls')}</span>
+            </div>
+            <div className="flex items-start gap-2">
+              <SourceBadge source="government_ons" t={t} />
+              <span>{t('results.salary.sourceExplain.ons')}</span>
+            </div>
+            <div className="flex items-start gap-2">
+              <SourceBadge source="government_eurostat" t={t} />
+              <span>{t('results.salary.sourceExplain.eurostat')}</span>
+            </div>
+            <div className="flex items-start gap-2">
+              <SourceBadge source="survey_stackoverflow" t={t} />
+              <span>{t('results.salary.sourceExplain.stackoverflow')}</span>
+            </div>
+            <div className="flex items-start gap-2">
+              <SourceBadge source="estimate" t={t} />
+              <span>{t('results.salary.sourceExplain.estimate')}</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import type { AnalysisResult } from '@/lib/types';
 import { useTranslation } from '@/lib/i18n';
+import { useAuth } from '@/lib/auth/context';
 import { escapeHtml } from '@/lib/utils';
 
 interface ChatMessage {
@@ -56,6 +57,7 @@ function renderMarkdown(text: string): string {
 
 export default function ChatPanel({ analysis }: ChatPanelProps) {
   const { t, locale } = useTranslation();
+  const { user } = useAuth();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [isStreaming, setIsStreaming] = useState(false);
@@ -150,6 +152,22 @@ export default function ChatPanel({ analysis }: ChatPanelProps) {
       sendMessage(input);
     }
   };
+
+  // ── Auth gate — require sign-in for AI Coach ──
+  if (!user) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20 px-4">
+        <div className="w-16 h-16 rounded-2xl bg-primary/[0.08] border border-primary/15 flex items-center justify-center mb-6">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8890A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+        </div>
+        <h2 className="text-xl font-bold text-text-primary font-display mb-2">{t('chat.title')}</h2>
+        <p className="text-text-secondary text-sm text-center max-w-md mb-6">{t('chat.signInRequired')}</p>
+        <p className="text-text-tertiary text-xs">{t('chat.signInHint')}</p>
+      </div>
+    );
+  }
 
   // ── Full-page layout ──
   return (

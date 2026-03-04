@@ -45,6 +45,13 @@ export default function RoleRecommendations({ roles }: RoleRecommendationsProps)
                 </div>
               )}
 
+              {/* Ready Now badge */}
+              {(role.fitScore >= 8 || role.timeToReady.toLowerCase().includes('immediate') || role.timeToReady.toLowerCase().includes('ready')) && !isBest && (
+                <div className="absolute -top-px -right-px bg-success text-white text-[11px] font-semibold px-3 py-1 rounded-bl-xl rounded-tr-2xl">
+                  {t('results.roles.readyNow')}
+                </div>
+              )}
+
               {/* Score */}
               <div className="flex items-center gap-3 mb-5">
                 <div
@@ -79,11 +86,16 @@ export default function RoleRecommendations({ roles }: RoleRecommendationsProps)
               </div>
 
               {/* Companies */}
-              <div className="flex flex-wrap gap-1.5">
-                {role.exampleCompanies.map((company, ci) => (
-                  <span key={ci} className="text-xs px-2.5 py-1 rounded-lg bg-black/[0.04] border border-black/[0.08] text-text-secondary">{company}</span>
-                ))}
-              </div>
+              {role.exampleCompanies.length > 0 && (
+                <div>
+                  <p className="text-[11px] font-medium text-text-tertiary uppercase tracking-wider mb-2">{t('results.roles.companiesLabel')}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {role.exampleCompanies.map((company, ci) => (
+                      <span key={ci} className="text-xs px-2.5 py-1 rounded-lg bg-black/[0.04] border border-black/[0.08] text-text-secondary">{company}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           );
         })}

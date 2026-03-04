@@ -111,14 +111,33 @@ function htmlToText(html: string): string {
 /**
  * Validate that the URL looks like a legitimate job posting URL
  */
+function isPrivateOrReservedHost(hostname: string): boolean {
+  // IPv6 loopback
+  if (hostname === '[::1]' || hostname === '::1') return true;
+  // Strip brackets for IPv6
+  const h = hostname.replace(/^\[|\]$/g, '');
+  // IPv4 private & reserved ranges
+  if (/^(127\.|10\.|0\.0\.0\.0)/.test(h)) return true;
+  if (/^192\.168\./.test(h)) return true;
+  // 172.16.0.0 – 172.31.255.255
+  const m172 = h.match(/^172\.(\d+)\./);
+  if (m172 && Number(m172[1]) >= 16 && Number(m172[1]) <= 31) return true;
+  // Link-local & AWS metadata
+  if (/^169\.254\./.test(h)) return true;
+  // IPv6 private/link-local prefixes
+  if (/^(fc|fd|fe80)/i.test(h)) return true;
+  // localhost
+  if (h === 'localhost') return true;
+  return false;
+}
+
 function isValidJobUrl(url: string): boolean {
   try {
     const parsed = new URL(url);
     // Must be http or https
     if (!['http:', 'https:'].includes(parsed.protocol)) return false;
-    // Block obvious non-job URLs
-    const blocked = ['localhost', '127.0.0.1', '0.0.0.0', '192.168.', '10.', '172.16.'];
-    if (blocked.some((b) => parsed.hostname.includes(b))) return false;
+    // Block private/reserved IPs and hostnames
+    if (isPrivateOrReservedHost(parsed.hostname)) return false;
     return true;
   } catch {
     return false;

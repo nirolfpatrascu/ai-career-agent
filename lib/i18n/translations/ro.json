@@ -225,7 +225,13 @@
   "results": {
     "fitScore": {
       "title": "Scor de Potrivire",
-      "outOf": "din 10"
+      "outOf": "din 10",
+      "guide": {
+        "high": "Ești pregătit să aplici — mai e nevoie doar de câteva retușuri",
+        "medium": "Optimizează-ți CV-ul și LinkedIn-ul mai întâi, sau acoperă lacunele cheie",
+        "low": "Lacună majoră detectată — urmează Planul de Acțiune pas cu pas"
+      },
+      "callout": "Sfat: Îmbunătățește-ți profilul LinkedIn și optimizează-ți CV-ul pentru a crește acest scor"
     },
     "strengths": {
       "title": "Punctele Tale Forte",
@@ -249,6 +255,11 @@
       "timeToClose": "Timp Necesar",
       "resources": "Resurse"
     },
+    "strengthsGaps": {
+      "title": "Puncte Forte & Lacune",
+      "strengths": "Puncte Forte",
+      "gaps": "Lacune"
+    },
     "roles": {
       "title": "Roluri Recomandate",
       "fitScore": "Scor Potrivire",
@@ -256,6 +267,8 @@
       "timeToReady": "Timp până la Pregătire",
       "exampleCompanies": "Companii Țintă",
       "bestFit": "Cel mai potrivit",
+      "readyNow": "Pregătit Acum",
+      "companiesLabel": "Companii care angajează pentru acest rol:",
       "mid": "Mediu"
     },
     "actionPlan": {
@@ -268,7 +281,11 @@
       "priority": "Prioritate",
       "timeEstimate": "Timp",
       "resource": "Resursă",
-      "expectedImpact": "Impact Estimat"
+      "expectedImpact": "Impact Estimat",
+      "introHigh": "Revizuire rapidă a subiectelor din fișa postului pentru 1-2 zile — ești deja un candidat puternic.",
+      "introMedium": "Începe cu planul de 30 de zile pentru a închide cele mai importante lacune.",
+      "introLow": "Acesta este un plan ambițios — angajează-te la planul complet, începând cu 30 de zile.",
+      "quickPrep": "Pregătire Rapidă"
     },
     "salary": {
       "title": "Analiză Salarială",
@@ -290,6 +307,14 @@
         "estimate": "Estimare AI",
         "footer": "Surse: US Bureau of Labor Statistics OEWS (2024), UK ONS ASHE (2024), Eurostat Structure of Earnings Survey (2022), Stack Overflow Developer Survey (2024), Glassdoor, Levels.fyi",
         "tooltip": "Datele salariale provin din statistici oficiale guvernamentale unde sunt disponibile (US BLS, UK ONS, Eurostat SES), completate de Stack Overflow Developer Survey (65.000+ respondenti) si cercetare de piata. Datele marcate 'Estimare AI' sunt generate cand nu exista date oficiale pentru aceasta combinatie rol/regiune."
+      },
+      "sourceMethodology": "Metodologie și Surse de Date",
+      "sourceExplain": {
+        "bls": "Biroul de Statistici a Muncii din SUA — sondaj oficial al salariilor pe ocupații",
+        "ons": "Oficiul Național de Statistică din UK — sondaj anual al veniturilor",
+        "eurostat": "Eurostat — Sondajul Structurii Câștigurilor din UE",
+        "stackoverflow": "Stack Overflow Developer Survey — sondaj auto-raportat de la peste 65.000 de dezvoltatori",
+        "estimate": "Estimare AI bazată pe date de piață disponibile — folosită când nu există statistici oficiale"
       }
     },
     "jobMatch": {
@@ -322,7 +347,9 @@
       "🔍 Cum închid lacuna #1 de competențe?",
       "💰 Ghid de negociere salarială",
       "🏗️ Idei de proiecte pentru portofoliu"
-    ]
+    ],
+    "signInRequired": "Autentifică-te pentru a accesa Coach-ul tău AI de Carieră — folosește analiza ta completă pentru sfaturi personalizate.",
+    "signInHint": "Datele tale de analiză rămân private și sunt folosite doar în timpul sesiunii de coaching."
   },
   "errors": {
     "pageTitle": "Ceva nu a mers bine",
@@ -425,7 +452,10 @@
     "connections": "Strategie de Conectare",
     "connectionsAdvice": "Conectează-te cu persoane din domeniul țintă. Personalizează fiecare cerere (max 3-4 propoziții). Comentează la 5-10 postări zilnic — e mai eficient decât să postezi.",
     "copy": "Copiază",
-    "copied": "Copiat!"
+    "copied": "Copiat!",
+    "grade": "Nota Profilului LinkedIn",
+    "gradeGood": "Fundație solidă — aceste optimizări te vor ajuta să ieși în evidență",
+    "gradeNeedsWork": "Profilul tău necesită actualizări semnificative pentru rolul țintă"
   },
   "auth": {
     "signIn": "Autentificare",
@@ -625,7 +655,8 @@
         "original": "Original",
         "suggested": "Sugerat"
       }
-    }
+    },
+    "keywordCaveat": "Adaugă doar cuvinte cheie pentru competențe pe care le deții cu adevărat — exagerarea competențelor se va întoarce împotriva ta la interviu."
   },
   "feedback": {
     "helpful": "A fost util?",
@@ -712,6 +743,26 @@
       "regenerate": "Regenerează",
       "saveDraft": "Salvează Ciornă",
       "saved": "Salvat!"
+    }
+  },
+  "jobs": {
+    "title": "Tracker Joburi",
+    "subtitle": "Urmărește aplicațiile și progresul tău",
+    "addJob": "Adaugă Job",
+    "signInRequired": "Autentifică-te pentru a-ți salva joburile urmărite",
+    "signInDescription": "Creează un cont gratuit pentru a salva și urmări aplicațiile tale de job",
+    "useSignIn": "Autentificare",
+    "viewKanban": "Kanban",
+    "viewList": "Listă",
+    "empty": "Nu ai joburi urmărite încă",
+    "emptySubtitle": "Adaugă primul tău job pentru a începe urmărirea",
+    "addFirstJob": "Adaugă Primul Job",
+    "toast": {
+      "added": "Job adăugat cu succes",
+      "addError": "Nu s-a putut adăuga jobul",
+      "updateError": "Nu s-a putut actualiza jobul",
+      "deleteError": "Nu s-a putut șterge jobul",
+      "deleted": "Job șters"
     }
   }
 }

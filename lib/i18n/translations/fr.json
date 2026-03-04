@@ -225,7 +225,13 @@
   "results": {
     "fitScore": {
       "title": "Score de Compatibilité",
-      "outOf": "sur 10"
+      "outOf": "sur 10",
+      "guide": {
+        "high": "Vous êtes prêt à postuler — quelques dernières retouches suffisent",
+        "medium": "Optimisez d'abord votre CV et LinkedIn, ou comblez les lacunes clés",
+        "low": "Lacune majeure détectée — suivez le Plan d'Action étape par étape"
+      },
+      "callout": "Conseil : Améliorez votre profil LinkedIn et optimisez votre CV pour augmenter ce score"
     },
     "strengths": {
       "title": "Vos Points Forts",
@@ -249,6 +255,11 @@
       "timeToClose": "Temps pour Combler",
       "resources": "Ressources"
     },
+    "strengthsGaps": {
+      "title": "Forces & Lacunes",
+      "strengths": "Forces",
+      "gaps": "Lacunes"
+    },
     "roles": {
       "title": "Rôles Recommandés",
       "fitScore": "Score de Compatibilité",
@@ -256,6 +267,8 @@
       "timeToReady": "Temps de Préparation",
       "exampleCompanies": "Entreprises Cibles",
       "bestFit": "Meilleur Match",
+      "readyNow": "Prêt Maintenant",
+      "companiesLabel": "Entreprises qui recrutent pour ce rôle :",
       "mid": "Méd"
     },
     "actionPlan": {
@@ -268,7 +281,11 @@
       "priority": "Priorité",
       "timeEstimate": "Durée",
       "resource": "Ressource",
-      "expectedImpact": "Impact Attendu"
+      "expectedImpact": "Impact Attendu",
+      "introHigh": "Revue rapide des sujets de la fiche de poste pour 1-2 jours — vous êtes déjà un candidat solide.",
+      "introMedium": "Commencez par le plan de 30 jours pour combler vos lacunes les plus importantes.",
+      "introLow": "C'est un plan ambitieux — engagez-vous dans le plan complet en commençant par 30 jours.",
+      "quickPrep": "Préparation Express"
     },
     "salary": {
       "title": "Analyse Salariale",
@@ -290,6 +307,14 @@
         "estimate": "Estimation IA",
         "footer": "Sources : US Bureau of Labor Statistics OEWS (2024), UK ONS ASHE (2024), Eurostat Structure of Earnings Survey (2022), Stack Overflow Developer Survey (2024), Glassdoor, Levels.fyi",
         "tooltip": "Les données salariales proviennent de statistiques gouvernementales officielles lorsque disponibles (US BLS, UK ONS, Eurostat SES), complétées par le Stack Overflow Developer Survey (65 000+ répondants) et des études de marché. Les données marquées « Estimation IA » sont générées lorsqu'aucune donnée officielle n'est disponible pour cette combinaison rôle/région."
+      },
+      "sourceMethodology": "Méthodologie et Sources de Données",
+      "sourceExplain": {
+        "bls": "Bureau of Labor Statistics américain — enquête officielle sur les salaires par profession",
+        "ons": "Office for National Statistics britannique — enquête annuelle sur les revenus",
+        "eurostat": "Eurostat — Enquête européenne sur la structure des salaires",
+        "stackoverflow": "Stack Overflow Developer Survey — auto-déclaration de plus de 65 000 développeurs",
+        "estimate": "Estimation IA basée sur les données de marché disponibles — utilisée quand aucune statistique officielle n'existe"
       }
     },
     "jobMatch": {
@@ -322,7 +347,9 @@
       "🔍 Comment combler mon écart n°1 ?",
       "💰 Guide de négociation salariale",
       "🏗️ Idées de projets portfolio"
-    ]
+    ],
+    "signInRequired": "Connectez-vous pour accéder à votre Coach IA de Carrière — il utilise votre analyse complète pour des conseils personnalisés.",
+    "signInHint": "Vos données d'analyse restent privées et ne sont utilisées que pendant votre session de coaching."
   },
   "errors": {
     "pageTitle": "Une erreur s'est produite",
@@ -425,7 +452,10 @@
     "connections": "Stratégie de Connexion",
     "connectionsAdvice": "Connectez-vous avec des personnes dans votre domaine cible. Personnalisez chaque demande (3-4 phrases max). Commentez 5-10 posts par jour — c'est plus efficace que publier.",
     "copy": "Copier",
-    "copied": "Copié !"
+    "copied": "Copié !",
+    "grade": "Note du Profil LinkedIn",
+    "gradeGood": "Bonne base — ces optimisations vous aideront à vous démarquer",
+    "gradeNeedsWork": "Votre profil nécessite des mises à jour significatives pour votre rôle cible"
   },
   "auth": {
     "signIn": "Connexion",
@@ -625,7 +655,8 @@
         "original": "Original",
         "suggested": "Suggéré"
       }
-    }
+    },
+    "keywordCaveat": "N'ajoutez que des mots-clés pour des compétences que vous possédez réellement — exagérer vos compétences se retournera contre vous en entretien."
   },
   "feedback": {
     "helpful": "Cela vous a-t-il été utile ?",
@@ -712,6 +743,26 @@
       "regenerate": "Régénérer",
       "saveDraft": "Enregistrer le Brouillon",
       "saved": "Enregistré !"
+    }
+  },
+  "jobs": {
+    "title": "Suivi des Emplois",
+    "subtitle": "Suivez vos candidatures et votre progression",
+    "addJob": "Ajouter un Emploi",
+    "signInRequired": "Connectez-vous pour sauvegarder vos emplois suivis",
+    "signInDescription": "Créez un compte gratuit pour sauvegarder et suivre vos candidatures",
+    "useSignIn": "Se Connecter",
+    "viewKanban": "Kanban",
+    "viewList": "Liste",
+    "empty": "Aucun emploi suivi pour le moment",
+    "emptySubtitle": "Ajoutez votre premier emploi pour commencer le suivi",
+    "addFirstJob": "Ajouter le Premier Emploi",
+    "toast": {
+      "added": "Emploi ajouté avec succès",
+      "addError": "Impossible d'ajouter l'emploi",
+      "updateError": "Impossible de mettre à jour l'emploi",
+      "deleteError": "Impossible de supprimer l'emploi",
+      "deleted": "Emploi supprimé"
     }
   }
 }

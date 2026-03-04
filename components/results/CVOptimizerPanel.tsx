@@ -189,8 +189,8 @@ function ATSScoreSection({ atsScore, t }: { atsScore: ATSScoreResult; t: (key: s
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <span className={`text-3xl font-bold ${scoreColor}`}>{atsScore.overallScore}%</span>
-              <span className="text-xs text-gray-500">{t('cvOptimizer.score.title')}</span>
             </div>
+            <p className="text-xs text-gray-500 text-center mt-1">{t('cvOptimizer.score.title')}</p>
           </div>
 
           {/* Breakdown */}
@@ -332,6 +332,10 @@ function ATSScoreSection({ atsScore, t }: { atsScore: ATSScoreResult; t: (key: s
                 {showAllMissing ? (<>{t('ats.showLess')} <ChevronUp className="h-4 w-4" /></>) : (<>{t('ats.showAll', { count: String(atsScore.keywords.missing.length) })} <ChevronDown className="h-4 w-4" /></>)}
               </button>
             )}
+            <p className="mt-3 text-xs text-text-tertiary flex items-start gap-1.5">
+              <Info className="h-3.5 w-3.5 flex-shrink-0 mt-0.5 text-warning" />
+              {t('cvOptimizer.keywordCaveat')}
+            </p>
           </div>
         )}
       </div>
@@ -529,15 +533,27 @@ function CVEditorSection({
   cvSuggestions?: CVSuggestion[];
   t: (key: string, vars?: Record<string, string>) => string;
 }) {
-  // Initialize from analysis data
-  const initialSections = useMemo<CVSections>(() => ({
-    summary: analysis.fitScore.summary || '',
-    skills: analysis.strengths.map(s => s.title).join(', '),
-    experience: [],
-    education: [],
-    certifications: '',
-    languages: '',
-  }), [analysis]);
+  // Initialize from analysis data — prefill from extracted profile when available
+  const initialSections = useMemo<CVSections>(() => {
+    const profile = analysis.profile;
+    return {
+      summary: analysis.fitScore.summary || '',
+      skills: analysis.strengths.map(s => s.title).join(', '),
+      experience: profile?.experience?.map(e => ({
+        title: e.title,
+        company: e.company,
+        dateRange: e.duration,
+        description: e.highlights?.join('. ') || '',
+      })) || [],
+      education: profile?.education?.map(e => ({
+        degree: e.degree,
+        institution: e.institution,
+        year: e.year || '',
+      })) || [],
+      certifications: profile?.certifications?.join(', ') || '',
+      languages: profile?.languages?.map(l => `${l.language} (${l.level})`).join(', ') || '',
+    };
+  }, [analysis]);
 
   const [sections, setSections] = useState<CVSections>(initialSections);
   const [appliedSuggestions, setAppliedSuggestions] = useState<Set<number>>(new Set());
