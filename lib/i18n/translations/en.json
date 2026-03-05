@@ -397,7 +397,7 @@
       "linkedin": "LinkedIn Profile",
       "cv": "CV / Resume",
       "details": "Career Details",
-      "jobs": "Target Jobs",
+      "jobs": "Target Job",
       "review": "Review & Analyze"
     },
     "linkedin": {
@@ -427,22 +427,20 @@
       "prefilled": "We pre-filled some fields from your profile. Verify and complete the rest."
     },
     "jobs": {
-      "title": "Add target job postings",
-      "subtitle": "Add 3 or more jobs you are interested in. This dramatically improves the analysis — we identify common requirements, missing skills, and tailor your roadmap.",
-      "minimum": "minimum",
-      "moreIsBetter": "More jobs = better analysis",
-      "posting": "Job Posting",
-      "urlPlaceholder": "Paste LinkedIn/Indeed job URL...",
-      "pasteHere": "Or paste the full job description here...",
-      "addAnother": "Add another job posting",
-      "skipNote": "You can skip this step, but providing job postings significantly improves the analysis quality."
+      "title": "Paste your target job description",
+      "subtitle": "Paste the job title and full job description below. This allows us to tailor the analysis to the specific role — identifying missing skills, matching requirements, and building your roadmap.",
+      "label": "Job Title & Description",
+      "pasteHere": "Paste here the job title and job description...",
+      "hint": "Include the full posting: job title, responsibilities, requirements, qualifications, etc.",
+      "skipNote": "You can skip this step, but providing a job description significantly improves the analysis quality."
     },
     "review": {
       "title": "Review & Launch Analysis",
       "subtitle": "Verify everything looks good, then launch your AI career analysis.",
       "notProvided": "Not provided",
       "incomplete": "Incomplete",
-      "noJobs": "No job postings — analysis will be more general",
+      "jobAdded": "Job description added",
+      "noJobs": "No job description — analysis will be more general",
       "needFile": "Upload at least a CV or LinkedIn PDF",
       "needDetails": "Complete all required career details"
     }

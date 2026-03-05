@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
-import type { CareerQuestionnaire, JobPostingInput, UpworkProfile } from '@/lib/types';
+import type { CareerQuestionnaire, UpworkProfile } from '@/lib/types';
 import { COUNTRIES, COUNTRY_CURRENCY } from '@/lib/utils';
 import { useTranslation } from '@/lib/i18n';
 import UpworkImport from './UpworkImport';
@@ -77,14 +77,8 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
     workPreference: 'remote',
   });
 
-  // --- Job postings state ---
-  const [jobPostings, setJobPostings] = useState<JobPostingInput[]>([
-    { text: '', url: '', title: '' },
-    { text: '', url: '', title: '' },
-    { text: '', url: '', title: '' },
-  ]);
-  const [fetchingJobIdx, setFetchingJobIdx] = useState<number | null>(null);
-  const [jobErrors, setJobErrors] = useState<Record<number, string>>({});
+  // --- Job description state (single job) ---
+  const [jobDescription, setJobDescription] = useState('');
 
   // Auto-detect profile from LinkedIn PDF
   useEffect(() => {
@@ -122,7 +116,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
 
   // --- Validation ---
   const hasLinkedInOrCV = linkedInFile || cvFile || upworkProfile;
-  const filledJobPostings = jobPostings.filter(j => j.text.trim().length > 50);
+  const hasJobDescription = jobDescription.trim().length > 50;
 
   const canProceed: Record<Step, boolean> = {
     linkedin: true, // LinkedIn is encouraged, not required
@@ -164,69 +158,16 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
     setQuestionnaire(prev => ({ ...prev, [field]: value }));
   }, []);
 
-  // --- Job posting helpers ---
-  const updateJob = useCallback((idx: number, field: keyof JobPostingInput, value: string) => {
-    setJobPostings(prev => {
-      const updated = [...prev];
-      updated[idx] = { ...updated[idx], [field]: value };
-      return updated;
-    });
-    if (jobErrors[idx]) {
-      setJobErrors(prev => { const n = { ...prev }; delete n[idx]; return n; });
-    }
-  }, [jobErrors]);
-
-  const fetchJobUrl = useCallback(async (idx: number) => {
-    const url = jobPostings[idx]?.url?.trim();
-    if (!url) return;
-    setFetchingJobIdx(idx);
-    setJobErrors(prev => { const n = { ...prev }; delete n[idx]; return n; });
-    try {
-      const response = await fetch('/api/fetch-job', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url }),
-      });
-      const result = await response.json();
-      if (!response.ok) {
-        setJobErrors(prev => ({ ...prev, [idx]: result.message || 'Could not fetch.' }));
-        return;
-      }
-      const text = result.fullText || [result.title, result.company, result.description, result.requirements].filter(Boolean).join('\n\n');
-      if (text) {
-        setJobPostings(prev => {
-          const updated = [...prev];
-          updated[idx] = { text, url, title: result.title || '' };
-          return updated;
-        });
-      } else {
-        setJobErrors(prev => ({ ...prev, [idx]: 'No content found. Try pasting instead.' }));
-      }
-    } catch {
-      setJobErrors(prev => ({ ...prev, [idx]: 'Failed to fetch. Try pasting instead.' }));
-    } finally {
-      setFetchingJobIdx(null);
-    }
-  }, [jobPostings]);
-
-  const addJobSlot = useCallback(() => {
-    if (jobPostings.length < 5) {
-      setJobPostings(prev => [...prev, { text: '', url: '', title: '' }]);
-    }
-  }, [jobPostings.length]);
-
   // --- Submit ---
   const handleSubmit = useCallback(() => {
-    // Merge job postings into questionnaire
-    const filled = jobPostings.filter(j => j.text.trim().length > 50);
+    const trimmed = jobDescription.trim();
     const mergedQ: CareerQuestionnaire = {
       ...questionnaire,
-      jobPostings: filled.length > 0 ? filled : undefined,
-      // Backward compat: set jobPosting to first posting text
-      jobPosting: filled.length > 0 ? filled.map(j => j.text).join('\n\n---JOB POSTING SEPARATOR---\n\n') : undefined,
+      jobPostings: trimmed.length > 50 ? [{ text: trimmed, url: '', title: '' }] : undefined,
+      jobPosting: trimmed.length > 50 ? trimmed : undefined,
     };
     onSubmit({ linkedInFile, cvFile, questionnaire: mergedQ, upworkProfile: upworkProfile || undefined });
-  }, [questionnaire, jobPostings, linkedInFile, cvFile, upworkProfile, onSubmit]);
+  }, [questionnaire, jobDescription, linkedInFile, cvFile, upworkProfile, onSubmit]);
 
   // --- File drop handler ---
   const handleFileDrop = useCallback((e: React.DragEvent, type: 'linkedin' | 'cv') => {
@@ -245,7 +186,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
     linkedin: t('wizard.steps.linkedin') as string || 'LinkedIn Profile',
     cv: t('wizard.steps.cv') as string || 'CV / Resume',
     details: t('wizard.steps.details') as string || 'Career Details',
-    jobs: t('wizard.steps.jobs') as string || 'Target Jobs',
+    jobs: t('wizard.steps.jobs') as string || 'Target Job',
     review: t('wizard.steps.review') as string || 'Review & Analyze',
   };
 
@@ -599,90 +540,42 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl sm:text-3xl font-bold text-text-primary font-display mb-2">
-          {t('wizard.jobs.title') || 'Add target job postings'}
+          {t('wizard.jobs.title') || 'Paste your target job description'}
         </h2>
         <p className="text-text-secondary text-sm sm:text-base leading-relaxed">
-          {t('wizard.jobs.subtitle') || 'Add 3 or more jobs you\'re interested in. This dramatically improves the analysis — we identify common requirements, missing skills, and tailor your roadmap.'}
+          {t('wizard.jobs.subtitle') || 'Paste the job title and full job description below. This allows us to tailor the analysis to the specific role — identifying missing skills, matching requirements, and building your roadmap.'}
         </p>
       </div>
 
-      {/* Job counter */}
-      <div className="flex items-center gap-3">
-        <div className={`px-3 py-1.5 rounded-full text-sm font-medium border ${filledJobPostings.length >= 3 ? 'bg-success/[0.08] border-success/15 text-success' : filledJobPostings.length > 0 ? 'bg-primary/[0.08] border-primary/15 text-primary' : 'bg-black/[0.03] border-black/[0.08] text-text-tertiary'}`}>
-          {filledJobPostings.length} / 3 {t('wizard.jobs.minimum') || 'minimum'}
+      {/* Single job description card */}
+      <div className="rounded-2xl border border-black/[0.08] bg-black/[0.02] p-5">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-sm font-semibold text-text-primary flex items-center gap-2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+            {t('wizard.jobs.label') || 'Job Title & Description'}
+          </h3>
+          {hasJobDescription && (
+            <span className="text-xs text-success flex items-center gap-1">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
+              {t('common.added') || 'Added'}
+            </span>
+          )}
         </div>
-        {filledJobPostings.length < 3 && (
-          <p className="text-xs text-text-tertiary">{t('wizard.jobs.moreIsBetter') || 'More jobs = better analysis'}</p>
-        )}
+
+        <textarea
+          className="input-field text-sm min-h-[200px] resize-y"
+          placeholder={t('wizard.jobs.pasteHere') || 'Paste here the job title and job description...'}
+          value={jobDescription}
+          onChange={(e) => setJobDescription(e.target.value)}
+        />
+
+        <p className="text-xs text-text-tertiary mt-2">
+          {t('wizard.jobs.hint') || 'Include the full posting: job title, responsibilities, requirements, qualifications, etc.'}
+        </p>
       </div>
-
-      {/* Job posting cards */}
-      <div className="space-y-4">
-        {jobPostings.map((job, idx) => (
-          <div key={idx} className="rounded-2xl border border-black/[0.08] bg-black/[0.02] p-5">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-semibold text-text-primary flex items-center gap-2">
-                <span className="w-6 h-6 rounded-lg bg-primary/[0.10] border border-primary/15 text-primary text-xs font-bold flex items-center justify-center">{idx + 1}</span>
-                {job.title || `${t('wizard.jobs.posting') || 'Job Posting'} ${idx + 1}`}
-              </h3>
-              {job.text.trim().length > 50 && (
-                <span className="text-xs text-success flex items-center gap-1">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
-                  {t('common.added') || 'Added'}
-                </span>
-              )}
-            </div>
-
-            {/* URL fetch */}
-            <div className="flex gap-2 mb-3">
-              <input
-                type="url"
-                className="input-field text-sm flex-1"
-                placeholder={t('wizard.jobs.urlPlaceholder') || 'Paste LinkedIn/Indeed job URL...'}
-                value={job.url || ''}
-                onChange={(e) => updateJob(idx, 'url', e.target.value)}
-              />
-              <button
-                type="button"
-                onClick={() => fetchJobUrl(idx)}
-                disabled={!job.url?.trim() || fetchingJobIdx === idx}
-                className="btn-secondary text-xs px-4 whitespace-nowrap disabled:opacity-40"
-              >
-                {fetchingJobIdx === idx ? (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="animate-spin"><circle cx="12" cy="12" r="10" strokeDasharray="60" strokeDashoffset="20"/></svg>
-                ) : (t('common.fetch') || 'Fetch')}
-              </button>
-            </div>
-
-            {jobErrors[idx] && (
-              <p className="text-xs text-danger mb-2">{jobErrors[idx]}</p>
-            )}
-
-            {/* Text area */}
-            <textarea
-              className="input-field text-sm min-h-[100px] resize-y"
-              placeholder={t('wizard.jobs.pasteHere') || 'Or paste the full job description here...'}
-              value={job.text}
-              onChange={(e) => updateJob(idx, 'text', e.target.value)}
-            />
-          </div>
-        ))}
-      </div>
-
-      {/* Add more */}
-      {jobPostings.length < 5 && (
-        <button
-          type="button"
-          onClick={addJobSlot}
-          className="flex items-center gap-2 text-sm text-text-tertiary hover:text-primary transition-colors"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          {t('wizard.jobs.addAnother') || 'Add another job posting'} ({jobPostings.length}/5)
-        </button>
-      )}
 
       <p className="text-xs text-text-tertiary">
-        {t('wizard.jobs.skipNote') || 'You can skip this step, but providing job postings significantly improves the analysis quality.'}
+        {t('wizard.jobs.skipNote') || 'You can skip this step, but providing a job description significantly improves the analysis quality.'}
       </p>
     </div>
   );
@@ -740,16 +633,16 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
           t={t}
         />
 
-        {/* Jobs */}
+        {/* Job description */}
         <ReviewCard
           step="jobs"
           label={STEP_LABELS.jobs}
           icon={STEP_ICONS.jobs}
-          status={filledJobPostings.length > 0
-            ? `${filledJobPostings.length} job${filledJobPostings.length > 1 ? 's' : ''} added`
-            : (t('wizard.review.noJobs') || 'No job postings — analysis will be more general')
+          status={hasJobDescription
+            ? (t('wizard.review.jobAdded') || 'Job description added')
+            : (t('wizard.review.noJobs') || 'No job description — analysis will be more general')
           }
-          done={filledJobPostings.length >= 3}
+          done={hasJobDescription}
           onEdit={() => goToStep('jobs')}
           t={t}
         />
@@ -880,7 +773,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
           >
             {currentStep === 'linkedin' && !linkedInFile
               ? (t('common.skip') || 'Skip')
-              : currentStep === 'jobs' && filledJobPostings.length === 0
+              : currentStep === 'jobs' && !hasJobDescription
                 ? (t('common.skip') || 'Skip')
                 : (t('common.next') || 'Next')
             }

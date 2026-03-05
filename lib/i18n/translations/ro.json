@@ -399,7 +399,7 @@
       "linkedin": "Profil LinkedIn",
       "cv": "CV / Rezumat",
       "details": "Detalii Carieră",
-      "jobs": "Joburi Țintă",
+      "jobs": "Job Țintă",
       "review": "Verificare & Analiză"
     },
     "linkedin": {
@@ -429,22 +429,20 @@
       "prefilled": "Am completat automat câteva câmpuri din profilul tău. Verifică și completează restul."
     },
     "jobs": {
-      "title": "Adaugă anunțuri de job țintă",
-      "subtitle": "Adaugă 3 sau mai multe joburi care te interesează. Aceasta îmbunătățește dramatic analiza — identificăm cerințe comune, competențe lipsă și personalizăm planul.",
-      "minimum": "minim",
-      "moreIsBetter": "Mai multe joburi = analiză mai bună",
-      "posting": "Anunț Job",
-      "urlPlaceholder": "Lipește URL job LinkedIn/Indeed...",
-      "pasteHere": "Sau lipește descrierea completă a jobului aici...",
-      "addAnother": "Adaugă alt anunț de job",
-      "skipNote": "Poți sări peste acest pas, dar adăugarea de anunțuri îmbunătățește semnificativ calitatea analizei."
+      "title": "Lipește descrierea jobului țintă",
+      "subtitle": "Lipește titlul și descrierea completă a jobului mai jos. Acest lucru ne permite să personalizăm analiza pentru rolul specific — identificând competențe lipsă, cerințe potrivite și construind planul tău.",
+      "label": "Titlu Job & Descriere",
+      "pasteHere": "Lipește aici titlul și descrierea jobului...",
+      "hint": "Include anunțul complet: titlul jobului, responsabilități, cerințe, calificări, etc.",
+      "skipNote": "Poți sări peste acest pas, dar adăugarea unei descrieri de job îmbunătățește semnificativ calitatea analizei."
     },
     "review": {
       "title": "Verificare & Lansare Analiză",
       "subtitle": "Verifică totul, apoi lansează analiza AI de carieră.",
       "notProvided": "Nespecificat",
       "incomplete": "Incomplet",
-      "noJobs": "Fără anunțuri de job — analiza va fi mai generală",
+      "jobAdded": "Descriere job adăugată",
+      "noJobs": "Fără descriere de job — analiza va fi mai generală",
       "needFile": "Încarcă cel puțin un CV sau PDF LinkedIn",
       "needDetails": "Completează toate detaliile obligatorii"
     }

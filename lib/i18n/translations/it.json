@@ -399,7 +399,7 @@
       "linkedin": "Profilo LinkedIn",
       "cv": "CV / Curriculum",
       "details": "Dettagli Carriera",
-      "jobs": "Posizioni Target",
+      "jobs": "Posizione Target",
       "review": "Verifica & Analizza"
     },
     "linkedin": {
@@ -429,22 +429,20 @@
       "prefilled": "Abbiamo precompilato alcuni campi dal tuo profilo. Verifica e completa il resto."
     },
     "jobs": {
-      "title": "Aggiungi annunci di lavoro target",
-      "subtitle": "Aggiungi 3 o più lavori che ti interessano. Questo migliora drasticamente l'analisi — identifichiamo requisiti comuni e competenze mancanti.",
-      "minimum": "minimo",
-      "moreIsBetter": "Più lavori = analisi migliore",
-      "posting": "Annuncio di Lavoro",
-      "urlPlaceholder": "Incolla URL LinkedIn/Indeed...",
-      "pasteHere": "Oppure incolla la descrizione completa del lavoro qui...",
-      "addAnother": "Aggiungi un altro annuncio",
-      "skipNote": "Puoi saltare questo passaggio, ma gli annunci migliorano significativamente la qualità dell'analisi."
+      "title": "Incolla la descrizione del lavoro target",
+      "subtitle": "Incolla il titolo e la descrizione completa del lavoro qui sotto. Questo ci permette di adattare l'analisi al ruolo specifico — identificare competenze mancanti, confrontare requisiti e costruire il tuo percorso.",
+      "label": "Titolo Lavoro & Descrizione",
+      "pasteHere": "Incolla qui il titolo e la descrizione del lavoro...",
+      "hint": "Includi l'annuncio completo: titolo del lavoro, responsabilità, requisiti, qualifiche, ecc.",
+      "skipNote": "Puoi saltare questo passaggio, ma una descrizione del lavoro migliora significativamente la qualità dell'analisi."
     },
     "review": {
       "title": "Verifica & Lancia Analisi",
       "subtitle": "Verifica che tutto sia corretto, poi lancia la tua analisi di carriera IA.",
       "notProvided": "Non fornito",
       "incomplete": "Incompleto",
-      "noJobs": "Nessun annuncio — l'analisi sarà più generale",
+      "jobAdded": "Descrizione del lavoro aggiunta",
+      "noJobs": "Nessuna descrizione del lavoro — l'analisi sarà più generale",
       "needFile": "Carica almeno un CV o PDF LinkedIn",
       "needDetails": "Completa tutti i dettagli obbligatori"
     }

@@ -399,7 +399,7 @@
       "linkedin": "LinkedIn-Profil",
       "cv": "Lebenslauf / CV",
       "details": "Karriere-Details",
-      "jobs": "Zielstellen",
+      "jobs": "Zielstelle",
       "review": "Überprüfen & Analysieren"
     },
     "linkedin": {
@@ -429,22 +429,20 @@
       "prefilled": "Wir haben einige Felder aus Ihrem Profil vorausgefüllt. Überprüfen und vervollständigen Sie den Rest."
     },
     "jobs": {
-      "title": "Ziel-Stellenanzeigen hinzufügen",
-      "subtitle": "Fügen Sie 3 oder mehr Stellen hinzu, die Sie interessieren. Das verbessert die Analyse erheblich — wir identifizieren gemeinsame Anforderungen, fehlende Fähigkeiten und passen Ihre Roadmap an.",
-      "minimum": "Minimum",
-      "moreIsBetter": "Mehr Stellen = bessere Analyse",
-      "posting": "Stellenanzeige",
-      "urlPlaceholder": "LinkedIn/Indeed-Stellen-URL einfügen...",
-      "pasteHere": "Oder vollständige Stellenbeschreibung hier einfügen...",
-      "addAnother": "Weitere Stellenanzeige hinzufügen",
-      "skipNote": "Sie können diesen Schritt überspringen, aber Stellenanzeigen verbessern die Analysequalität erheblich."
+      "title": "Fügen Sie die Ziel-Stellenbeschreibung ein",
+      "subtitle": "Fügen Sie den Jobtitel und die vollständige Stellenbeschreibung unten ein. So können wir die Analyse auf die spezifische Stelle zuschneiden — fehlende Fähigkeiten identifizieren, Anforderungen abgleichen und Ihre Roadmap erstellen.",
+      "label": "Jobtitel & Beschreibung",
+      "pasteHere": "Fügen Sie hier den Jobtitel und die Stellenbeschreibung ein...",
+      "hint": "Fügen Sie die vollständige Anzeige ein: Jobtitel, Aufgaben, Anforderungen, Qualifikationen usw.",
+      "skipNote": "Sie können diesen Schritt überspringen, aber eine Stellenbeschreibung verbessert die Analysequalität erheblich."
     },
     "review": {
       "title": "Überprüfen & Analyse starten",
       "subtitle": "Vergewissern Sie sich, dass alles korrekt ist, und starten Sie dann Ihre KI-Karriereanalyse.",
       "notProvided": "Nicht angegeben",
       "incomplete": "Unvollständig",
-      "noJobs": "Keine Stellenanzeigen — Analyse wird allgemeiner",
+      "jobAdded": "Stellenbeschreibung hinzugefügt",
+      "noJobs": "Keine Stellenbeschreibung — Analyse wird allgemeiner",
       "needFile": "Laden Sie mindestens einen Lebenslauf oder ein LinkedIn-PDF hoch",
       "needDetails": "Füllen Sie alle erforderlichen Karriere-Details aus"
     }
