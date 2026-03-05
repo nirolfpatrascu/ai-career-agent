@@ -74,22 +74,21 @@ export async function PUT(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid profile JSON' }, { status: 400 });
   }
 
-  // Build the DB row
+  // Build the DB row — only include fields explicitly provided to avoid wiping missing ones
   const dbRow: Record<string, unknown> = {
     user_id: userId,
-    current_role: input.currentRole ?? null,
-    target_role: input.targetRole ?? null,
-    years_experience: input.yearsExperience ?? null,
-    country: input.country ?? null,
-    work_preference: input.workPreference ?? null,
-    github_url: input.githubUrl ?? null,
-    cv_filename: input.cvFilename ?? null,
-    linkedin_filename: input.linkedinFilename ?? null,
-    extracted_profile: input.extractedProfile ?? null,
-    additional_context: input.additionalContext !== undefined
-      ? (input.additionalContext || '').slice(0, 5000)
-      : undefined,
+    updated_at: new Date().toISOString(),
   };
+  if ('currentRole' in input) dbRow.current_role = input.currentRole ?? null;
+  if ('targetRole' in input) dbRow.target_role = input.targetRole ?? null;
+  if ('yearsExperience' in input) dbRow.years_experience = input.yearsExperience ?? null;
+  if ('country' in input) dbRow.country = input.country ?? null;
+  if ('workPreference' in input) dbRow.work_preference = input.workPreference ?? null;
+  if ('githubUrl' in input) dbRow.github_url = input.githubUrl ?? null;
+  if ('cvFilename' in input) dbRow.cv_filename = input.cvFilename ?? null;
+  if ('linkedinFilename' in input) dbRow.linkedin_filename = input.linkedinFilename ?? null;
+  if ('extractedProfile' in input) dbRow.extracted_profile = input.extractedProfile ?? null;
+  if ('additionalContext' in input) dbRow.additional_context = (input.additionalContext || '').slice(0, 5000);
 
   // Upload CV if provided
   const cvFile = formData.get('cv') as File | null;

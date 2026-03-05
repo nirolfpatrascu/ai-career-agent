@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useTranslation } from '@/lib/i18n';
 import { FeedbackButton } from './FeedbackButton';
 import type { AnalysisResult } from '@/lib/types';
@@ -10,11 +10,8 @@ interface CoverLetterPanelProps {
   analysis: AnalysisResult;
 }
 
-type Tone = 'professional' | 'conversational' | 'bold';
-
 export default function CoverLetterPanel({ analysis }: CoverLetterPanelProps) {
   const { t, locale } = useTranslation();
-  const [tone, setTone] = useState<Tone>('professional');
   const [generating, setGenerating] = useState(false);
   const [coverLetter, setCoverLetter] = useState<CoverLetter | null>(null);
   const [editedContent, setEditedContent] = useState('');
@@ -33,6 +30,14 @@ export default function CoverLetterPanel({ analysis }: CoverLetterPanelProps) {
     ].filter(Boolean).join('\n\n');
   }, []);
 
+  // Auto-populate from pipeline-generated cover letter
+  useEffect(() => {
+    if (analysis.coverLetter && !coverLetter) {
+      setCoverLetter(analysis.coverLetter);
+      setEditedContent(assembleLetter(analysis.coverLetter));
+    }
+  }, [analysis.coverLetter, coverLetter, assembleLetter]);
+
   const handleGenerate = useCallback(async () => {
     if (!jobPosting) return;
     setGenerating(true);
@@ -41,7 +46,7 @@ export default function CoverLetterPanel({ analysis }: CoverLetterPanelProps) {
       const res = await fetch('/api/cover-letter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ analysis, jobPosting, tone, language: locale }),
+        body: JSON.stringify({ analysis, jobPosting, tone: 'professional', language: locale }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -55,7 +60,7 @@ export default function CoverLetterPanel({ analysis }: CoverLetterPanelProps) {
     } finally {
       setGenerating(false);
     }
-  }, [analysis, jobPosting, tone, locale, assembleLetter]);
+  }, [analysis, jobPosting, locale, assembleLetter]);
 
   const handleCopy = useCallback(async () => {
     try {
@@ -100,23 +105,6 @@ export default function CoverLetterPanel({ analysis }: CoverLetterPanelProps) {
           </div>
         </div>
         <FeedbackButton section="cover-letter" />
-      </div>
-
-      {/* Tone toggle */}
-      <div className="flex gap-2 p-1 bg-black/[0.03] border border-black/[0.08] rounded-xl w-fit">
-        {(['professional', 'conversational', 'bold'] as Tone[]).map((t_) => (
-          <button
-            key={t_}
-            onClick={() => setTone(t_)}
-            className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-              tone === t_
-                ? 'bg-white text-text-primary shadow-sm'
-                : 'text-text-tertiary hover:text-text-secondary'
-            }`}
-          >
-            {t(`coverLetter.tones.${t_}`) || t_.charAt(0).toUpperCase() + t_.slice(1)}
-          </button>
-        ))}
       </div>
 
       {/* Error */}

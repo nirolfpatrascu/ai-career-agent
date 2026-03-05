@@ -9,6 +9,7 @@ interface GitHubAnalysisPanelProps {
   githubUrl: string;
   targetRole: string;
   jobPosting?: string;
+  initialAnalysis?: GitHubAnalysis;
 }
 
 const PRIORITY_STYLES: Record<string, string> = {
@@ -17,10 +18,10 @@ const PRIORITY_STYLES: Record<string, string> = {
   low: 'bg-primary/[0.08] border-primary/15 text-primary',
 };
 
-export default function GitHubAnalysisPanel({ githubUrl, targetRole, jobPosting }: GitHubAnalysisPanelProps) {
+export default function GitHubAnalysisPanel({ githubUrl, targetRole, jobPosting, initialAnalysis }: GitHubAnalysisPanelProps) {
   const { t, locale } = useTranslation();
   const [analyzing, setAnalyzing] = useState(false);
-  const [analysis, setAnalysis] = useState<GitHubAnalysis | null>(null);
+  const [analysis, setAnalysis] = useState<GitHubAnalysis | null>(initialAnalysis ?? null);
   const [error, setError] = useState('');
 
   const handleAnalyze = useCallback(async () => {
@@ -192,6 +193,20 @@ export default function GitHubAnalysisPanel({ githubUrl, targetRole, jobPosting 
               </div>
             </div>
           )}
+
+          {/* Re-analyze button */}
+          <div className="text-center pt-2">
+            <button
+              onClick={handleAnalyze}
+              className="btn-secondary text-sm flex items-center gap-2 mx-auto"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="1 4 1 10 7 10"/>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+              </svg>
+              {t('github.reanalyze') || 'Re-analyze'}
+            </button>
+          </div>
         </>
       )}
     </div>

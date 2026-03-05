@@ -3,6 +3,12 @@
 // All interfaces match the PRD data schemas and SAMPLE_ANALYSIS.json structure
 // ============================================================================
 
+import type { GitHubAnalysis } from '@/lib/prompts/github-analysis';
+import type { CoverLetter } from '@/lib/prompts/cover-letter';
+
+// Re-export for consumers
+export type { GitHubAnalysis, CoverLetter };
+
 // --- Input Types ---
 
 export interface CareerQuestionnaire {
@@ -43,6 +49,8 @@ export interface AnalysisResult {
   jobMatch?: JobMatch;
   atsScore?: ATSScoreResult;
   profile?: ExtractedProfile;
+  githubAnalysis?: GitHubAnalysis;
+  coverLetter?: CoverLetter;
 }
 
 export interface AnalysisMetadata {

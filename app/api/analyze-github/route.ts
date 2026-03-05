@@ -2,15 +2,8 @@
 // POST /api/analyze-github — Fetch GitHub profile + repos, analyze with Claude
 
 import { NextRequest, NextResponse } from 'next/server';
-import { callClaude } from '@/lib/claude';
 import { checkRateLimit } from '@/lib/rate-limit';
-import {
-  buildGitHubAnalysisPrompt,
-  GITHUB_ANALYSIS_FALLBACK,
-  type GitHubAnalysis,
-  type GitHubUserData,
-  type GitHubRepoData,
-} from '@/lib/prompts/github-analysis';
+import { analyzeGitHubProfile } from '@/lib/github-analyzer';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
@@ -58,62 +51,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Extract username from URL
-    const usernameMatch = githubUrl.match(/github\.com\/([a-zA-Z0-9-]+)/);
-    if (!usernameMatch) {
+    // --- Analyze using shared function ---
+    const analysis = await analyzeGitHubProfile({ githubUrl, targetRole, jobPosting, language });
+
+    if (!analysis) {
       return NextResponse.json(
-        { error: 'Invalid GitHub URL', message: 'Could not extract username from URL.' },
-        { status: 400 }
-      );
-    }
-    const username = usernameMatch[1];
-
-    // --- Fetch GitHub API (no auth, 60 req/hr) ---
-    console.log(`[analyze-github] Fetching profile for: ${username}`);
-
-    const [userRes, reposRes] = await Promise.all([
-      fetch(`https://api.github.com/users/${username}`, {
-        headers: { 'Accept': 'application/vnd.github.v3+json', 'User-Agent': 'GapZero' },
-      }),
-      fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=30`, {
-        headers: { 'Accept': 'application/vnd.github.v3+json', 'User-Agent': 'GapZero' },
-      }),
-    ]);
-
-    if (!userRes.ok) {
-      if (userRes.status === 404) {
-        return NextResponse.json(
-          { error: 'User not found', message: `GitHub user "${username}" not found.` },
-          { status: 404 }
-        );
-      }
-      if (userRes.status === 403) {
-        return NextResponse.json(
-          { error: 'Rate limited', message: 'GitHub API rate limit reached. Please try again in a few minutes.' },
-          { status: 429 }
-        );
-      }
-      return NextResponse.json(
-        { error: 'GitHub API error', message: 'Failed to fetch GitHub profile.' },
+        { error: 'Analysis failed', message: 'Could not analyze GitHub profile. The user may not exist or GitHub rate limit was reached.' },
         { status: 502 }
       );
     }
-
-    const user: GitHubUserData = await userRes.json();
-    const repos: GitHubRepoData[] = reposRes.ok ? await reposRes.json() : [];
-
-    // --- Call Claude ---
-    console.log(`[analyze-github] Analyzing ${username}: ${repos.length} repos, target: ${targetRole}`);
-
-    const prompt = buildGitHubAnalysisPrompt({ user, repos, targetRole, jobPosting, language });
-    const analysis = await callClaude<GitHubAnalysis>({
-      ...prompt,
-      maxTokens: 4096,
-      temperature: 0.3,
-      fallback: GITHUB_ANALYSIS_FALLBACK,
-    });
-
-    console.log(`[analyze-github] Analysis complete: ${analysis.strengths?.length || 0} strengths, ${analysis.improvements?.length || 0} improvements`);
 
     return NextResponse.json({ analysis }, { status: 200 });
   } catch (error) {

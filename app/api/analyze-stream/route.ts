@@ -34,6 +34,9 @@ import type {
 } from '@/lib/types';
 import type { GapAnalysisResult } from '@/lib/prompts/gap-analysis';
 import type { CareerPlanResult } from '@/lib/prompts/career-plan';
+import type { GitHubAnalysis } from '@/lib/prompts/github-analysis';
+import { analyzeGitHubProfile } from '@/lib/github-analyzer';
+import { buildCoverLetterPrompt, COVER_LETTER_FALLBACK, type CoverLetter } from '@/lib/prompts/cover-letter';
 import { logger } from '@/lib/logger';
 import { MetricsCollector } from '@/lib/metrics';
 import { getAuthenticatedClient } from '@/lib/supabase/server';
@@ -409,7 +412,7 @@ export async function POST(request: NextRequest) {
 
         const hasJobPosting = questionnaire.jobPosting && questionnaire.jobPosting.trim().length > 50;
 
-        const parallelCalls: [Promise<CareerPlanResult>, Promise<JobMatch | undefined>] = [
+        const parallelCalls: [Promise<CareerPlanResult>, Promise<JobMatch | undefined>, Promise<GitHubAnalysis | null>] = [
           callClaude<CareerPlanResult>({
             ...planPrompt,
             maxTokens: 6144,
@@ -424,9 +427,17 @@ export async function POST(request: NextRequest) {
                 fallback: JOB_MATCH_FALLBACK,
               })
             : Promise.resolve(undefined),
+          questionnaire.githubUrl
+            ? analyzeGitHubProfile({
+                githubUrl: questionnaire.githubUrl,
+                targetRole: questionnaire.targetRole,
+                jobPosting: questionnaire.jobPosting,
+                language: questionnaire.language,
+              })
+            : Promise.resolve(null),
         ];
 
-        const [careerPlan, jobMatchResult] = await Promise.all(parallelCalls);
+        const [careerPlan, jobMatchResult, githubAnalysis] = await Promise.all(parallelCalls);
         endCareerPlan();
         metrics.recordStepTokens('career_plan', estimateTokens(planPrompt.system + planPrompt.userMessage), estimateTokens(JSON.stringify(careerPlan)));
         if (jobMatchResult) {
@@ -588,6 +599,37 @@ export async function POST(request: NextRequest) {
         // --- Post-process action plan URLs ---
         const actionPlan = ensureResourceUrls(careerPlan.actionPlan);
 
+        // --- Cover Letter (if job posting provided) ---
+        let coverLetterResult: CoverLetter | undefined;
+        if (hasJobPosting) {
+          send({ step: 'cover_letter', progress: 83, message: 'Generating cover letter...' });
+          try {
+            const clPrompt = buildCoverLetterPrompt({
+              analysis: {
+                metadata: { analyzedAt: new Date().toISOString(), cvFileName: cvFile.name, targetRole: questionnaire.targetRole, country: questionnaire.country },
+                fitScore: gapAnalysis.fitScore,
+                strengths: gapAnalysis.strengths,
+                gaps: gapAnalysis.gaps,
+                roleRecommendations: gapAnalysis.roleRecommendations,
+                actionPlan,
+                salaryAnalysis,
+                profile,
+              },
+              jobPosting: questionnaire.jobPosting!,
+              tone: 'professional',
+              language: questionnaire.language,
+            });
+            coverLetterResult = await callClaude<CoverLetter>({
+              ...clPrompt,
+              maxTokens: 4096,
+              temperature: 0.3,
+              fallback: COVER_LETTER_FALLBACK,
+            });
+          } catch (e) {
+            logger.warn('cover_letter.generation_failed', { error: e instanceof Error ? e.message : String(e) });
+          }
+        }
+
         // --- Assemble full result ---
         let result: AnalysisResult = {
           metadata: {
@@ -596,6 +638,7 @@ export async function POST(request: NextRequest) {
             targetRole: questionnaire.targetRole,
             country: questionnaire.country,
             ...(hasJobPosting && { jobPosting: questionnaire.jobPosting }),
+            ...(questionnaire.githubUrl && { githubUrl: questionnaire.githubUrl }),
             ...(parsedPDF.qualityWarning && { pdfQualityWarning: parsedPDF.qualityWarning }),
             dataSources,
             ...(coherenceWarnings.length > 0 && { warnings: coherenceWarnings }),
@@ -609,6 +652,8 @@ export async function POST(request: NextRequest) {
           profile,
           ...(jobMatchResult && { jobMatch: jobMatchResult }),
           ...(atsScoreResult && { atsScore: atsScoreResult }),
+          ...(githubAnalysis && { githubAnalysis }),
+          ...(coverLetterResult && { coverLetter: coverLetterResult }),
         };
 
         // --- Post-processing Translation ---

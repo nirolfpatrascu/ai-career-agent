@@ -126,9 +126,13 @@ export default function AnalyzePage() {
             method: 'PUT',
             headers: { Authorization: `Bearer ${session.access_token}` },
             body: profileFormData,
-          }).catch(() => {
-            // Profile save is non-critical
-          });
+          })
+            .then(res => {
+              if (!res.ok) console.warn('Profile save failed:', res.status);
+            })
+            .catch(err => {
+              console.warn('Profile save error:', err);
+            });
         }
       }
     }
@@ -234,6 +238,16 @@ export default function AnalyzePage() {
           }
 
           formData.append('questionnaire', JSON.stringify(questionnaire));
+
+          // Set wizardDataRef so profile saves correctly after analysis completes
+          wizardDataRef.current = {
+            cvFile: primaryFile,
+            linkedInFile: cvBlob && linkedinBlob
+              ? new File([linkedinBlob], storedProfile.linkedinFilename || 'linkedin.pdf', { type: 'application/pdf' })
+              : null,
+            questionnaire,
+          };
+
           streaming.startAnalysis(formData);
         } catch {
           setState('upload');
@@ -396,6 +410,7 @@ export default function AnalyzePage() {
                 githubUrl={githubUrl}
                 targetRole={result.metadata.targetRole}
                 jobPosting={result.metadata.jobPosting}
+                initialAnalysis={result.githubAnalysis}
               />
             </div>
           ) : null;
