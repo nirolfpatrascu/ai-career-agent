@@ -47,6 +47,7 @@ export default function AnalyzePage() {
   const [upworkAnalyzing, setUpworkAnalyzing] = useState(false);
   const [githubUrl, setGithubUrl] = useState<string | null>(null);
   const [hasRealCV, setHasRealCV] = useState(false);
+  const [isPro, setIsPro] = useState(false);
 
   // Store wizard files + questionnaire for profile persistence
   const wizardDataRef = useRef<{
@@ -57,6 +58,17 @@ export default function AnalyzePage() {
 
   // Streaming analysis hook
   const streaming = useStreamingAnalysis();
+
+  // Fetch quota status to determine if user is Pro (for coach tab visibility)
+  useEffect(() => {
+    if (!session?.access_token) return;
+    fetch('/api/quota', { headers: { Authorization: `Bearer ${session.access_token}` } })
+      .then(res => res.ok ? res.json() : null)
+      .then(data => {
+        if (data?.coachRequest?.limit > 0) setIsPro(true);
+      })
+      .catch(() => {});
+  }, [session?.access_token]);
 
   // React to streaming completion — save if logged in
   useEffect(() => {
@@ -434,6 +446,7 @@ export default function AnalyzePage() {
           hasUpwork={!!upworkProfile}
           hasCoverLetter={!!result.metadata.jobPosting}
           hasGitHub={!!githubUrl}
+          showCoach={isPro}
           activeTab={activeTab}
           onTabChange={setActiveTab}
         />

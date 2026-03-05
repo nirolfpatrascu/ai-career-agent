@@ -54,11 +54,12 @@ interface ChapterNavProps {
   hasUpwork?: boolean;
   hasCoverLetter?: boolean;
   hasGitHub?: boolean;
+  showCoach?: boolean;
   activeTab: string;
   onTabChange: (tabId: string) => void;
 }
 
-export default function ChapterNav({ hasJobMatch, hasUpwork, hasCoverLetter, hasGitHub, activeTab, onTabChange }: ChapterNavProps) {
+export default function ChapterNav({ hasJobMatch, hasUpwork, hasCoverLetter, hasGitHub, showCoach, activeTab, onTabChange }: ChapterNavProps) {
   const { t } = useTranslation();
   const activeRefMobile = useRef<HTMLButtonElement>(null);
 
@@ -77,9 +78,9 @@ export default function ChapterNav({ hasJobMatch, hasUpwork, hasCoverLetter, has
     }
     if (hasJobMatch) result.push(JOB_MATCH_TAB);
     if (hasUpwork) result.push(UPWORK_TAB);
-    result.push(COACH_TAB);
+    if (showCoach) result.push(COACH_TAB);
     return result;
-  }, [hasJobMatch, hasUpwork, hasCoverLetter, hasGitHub]);
+  }, [hasJobMatch, hasUpwork, hasCoverLetter, hasGitHub, showCoach]);
 
   const activeIndex = tabs.findIndex((tab) => tab.id === activeTab);
 
