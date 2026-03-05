@@ -3,12 +3,17 @@
 import { useEffect, useState, useMemo } from 'react';
 import { getFitScoreColor } from '@/lib/utils';
 import { useTranslation } from '@/lib/i18n';
-import type { FitScore, JobMatch } from '@/lib/types';
+import TaggableToken from '@/components/shared/TaggableToken';
+import type { FitScore, JobMatch, OutputTag } from '@/lib/types';
 
 interface FitScoreGaugeProps {
   fitScore: FitScore;
   jobMatch?: JobMatch;
   onNavigate?: (tabId: string) => void;
+  analysisId?: string;
+  tags?: OutputTag[];
+  onTagCreated?: (tag: OutputTag) => void;
+  onTagDeleted?: (tagId: string) => void;
 }
 
 // Generate confetti particles for high scores
@@ -48,7 +53,7 @@ function ConfettiParticles({ color }: { color: string }) {
   );
 }
 
-export default function FitScoreGauge({ fitScore, jobMatch, onNavigate }: FitScoreGaugeProps) {
+export default function FitScoreGauge({ fitScore, jobMatch, onNavigate, analysisId, tags = [], onTagCreated, onTagDeleted }: FitScoreGaugeProps) {
   const { t } = useTranslation();
   const [animated, setAnimated] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -132,9 +137,11 @@ export default function FitScoreGauge({ fitScore, jobMatch, onNavigate }: FitSco
             <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: color }} />
             {fitScore.label}
           </span>
-          <p className="text-text-secondary leading-relaxed text-sm sm:text-base">
-            {fitScore.summary}
-          </p>
+          <TaggableToken analysisId={analysisId} section="fitScore" elementKey="summary" existingTags={tags} onTagCreated={onTagCreated} onTagDeleted={onTagDeleted}>
+            <p className="text-text-secondary leading-relaxed text-sm sm:text-base">
+              {fitScore.summary}
+            </p>
+          </TaggableToken>
         </div>
       </div>
 

@@ -26,6 +26,7 @@ import SectionIntro from '@/components/results/SectionIntro';
 import { getSampleAnalysis } from '@/lib/demo';
 import { useTranslation } from '@/lib/i18n';
 import { useAuth } from '@/lib/auth/context';
+import { useTags } from '@/lib/hooks/useTags';
 import type { AnalysisResult, CareerQuestionnaire, CareerProfileInput, UpworkProfile, UpworkProfileAnalysis } from '@/lib/types';
 
 type AppState = 'upload' | 'processing' | 'results' | 'error';
@@ -39,6 +40,8 @@ export default function AnalyzePage() {
   const [isDemo, setIsDemo] = useState(false);
   const [activeTab, setActiveTab] = useState(DEFAULT_TAB);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [analysisId, setAnalysisId] = useState<string | undefined>(undefined);
+  const { tags, addTag, removeTag } = useTags(analysisId);
   const [upworkProfile, setUpworkProfile] = useState<UpworkProfile | null>(null);
   const [upworkAnalysis, setUpworkAnalysis] = useState<UpworkProfileAnalysis | null>(null);
   const [upworkAnalyzing, setUpworkAnalyzing] = useState(false);
@@ -77,8 +80,14 @@ export default function AnalyzePage() {
           },
           body: JSON.stringify({ result: enrichedResult }),
         })
-          .then(res => {
-            setSaveStatus(res.ok ? 'saved' : 'error');
+          .then(async res => {
+            if (res.ok) {
+              const data = await res.json();
+              setSaveStatus('saved');
+              if (data.id) setAnalysisId(data.id);
+            } else {
+              setSaveStatus('error');
+            }
           })
           .catch(() => setSaveStatus('error'));
 
@@ -141,6 +150,7 @@ export default function AnalyzePage() {
             setResult(data.analysis.result);
             setState('results');
             setSaveStatus('saved');
+            setAnalysisId(savedId);
           }
         })
         .catch(() => {
@@ -300,7 +310,7 @@ export default function AnalyzePage() {
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-fit-score" aria-labelledby="tab-fit-score">
               <SectionIntro messageKey="motivation.fitScore" variant={fitScore >= 7 ? 'celebratory' : 'encouraging'} />
-              <FitScoreGauge fitScore={result.fitScore} jobMatch={result.jobMatch} onNavigate={setActiveTab} />
+              <FitScoreGauge fitScore={result.fitScore} jobMatch={result.jobMatch} onNavigate={setActiveTab} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
             </div>
           );
         case 'strengths-gaps':
@@ -309,28 +319,28 @@ export default function AnalyzePage() {
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-strengths-gaps" aria-labelledby="tab-strengths-gaps">
               <SectionIntro messageKey="motivation.strengths" variant="celebratory" />
-              <StrengthsGapsPanel strengths={result.strengths} gaps={result.gaps} />
+              <StrengthsGapsPanel strengths={result.strengths} gaps={result.gaps} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
             </div>
           );
         case 'action-plan':
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-action-plan" aria-labelledby="tab-action-plan">
               <SectionIntro messageKey="motivation.actionPlan" variant="encouraging" />
-              <ActionPlan plan={result.actionPlan} fitScore={result.fitScore.score} />
+              <ActionPlan plan={result.actionPlan} fitScore={result.fitScore.score} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
             </div>
           );
         case 'roles':
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-roles" aria-labelledby="tab-roles">
               <SectionIntro messageKey="motivation.roles" variant="encouraging" />
-              <RoleRecommendations roles={result.roleRecommendations} />
+              <RoleRecommendations roles={result.roleRecommendations} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
             </div>
           );
         case 'salary':
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-salary" aria-labelledby="tab-salary">
               <SectionIntro messageKey="motivation.salary" variant="encouraging" />
-              <SalaryBenchmark salary={result.salaryAnalysis} />
+              <SalaryBenchmark salary={result.salaryAnalysis} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
             </div>
           );
         case 'job-match':

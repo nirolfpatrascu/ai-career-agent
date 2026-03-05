@@ -1,13 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import type { SalaryAnalysis, SalaryDataSource } from '@/lib/types';
+import type { SalaryAnalysis, SalaryDataSource, OutputTag } from '@/lib/types';
 import { formatCurrency } from '@/lib/utils';
 import { useTranslation } from '@/lib/i18n';
 import { FeedbackButton } from './FeedbackButton';
+import TaggableToken from '@/components/shared/TaggableToken';
 
 interface SalaryBenchmarkProps {
   salary: SalaryAnalysis;
+  analysisId?: string;
+  tags?: OutputTag[];
+  onTagCreated?: (tag: OutputTag) => void;
+  onTagDeleted?: (tagId: string) => void;
 }
 
 function SourceBadge({ source, t }: { source?: SalaryDataSource; t: (key: string) => string }) {
@@ -44,7 +49,7 @@ function SourceBadge({ source, t }: { source?: SalaryDataSource; t: (key: string
   return null;
 }
 
-export default function SalaryBenchmark({ salary }: SalaryBenchmarkProps) {
+export default function SalaryBenchmark({ salary, analysisId, tags = [], onTagCreated, onTagDeleted }: SalaryBenchmarkProps) {
   const { t } = useTranslation();
   const [showTooltip, setShowTooltip] = useState(false);
   const currentMid = salary.currentRoleMarket.mid;
@@ -170,7 +175,9 @@ export default function SalaryBenchmark({ salary }: SalaryBenchmarkProps) {
             <div className="w-7 h-7 rounded-lg bg-warning/10 border border-warning/15 flex items-center justify-center text-warning text-sm">💡</div>
             <h3 className="font-semibold text-text-primary">{t('results.salary.bestMove')}</h3>
           </div>
-          <p className="text-sm text-text-secondary leading-relaxed">{salary.bestMonetaryMove}</p>
+          <TaggableToken analysisId={analysisId} section="salary" elementKey="bestMove" existingTags={tags} onTagCreated={onTagCreated} onTagDeleted={onTagDeleted}>
+            <p className="text-sm text-text-secondary leading-relaxed">{salary.bestMonetaryMove}</p>
+          </TaggableToken>
         </div>
 
         {/* Negotiation tips */}

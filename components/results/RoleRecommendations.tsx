@@ -1,16 +1,21 @@
 'use client';
 
 import { useMemo } from 'react';
-import type { RoleRecommendation } from '@/lib/types';
+import type { RoleRecommendation, OutputTag } from '@/lib/types';
 import { getFitScoreColor, formatCurrency } from '@/lib/utils';
 import { useTranslation } from '@/lib/i18n';
 import { FeedbackButton } from './FeedbackButton';
+import TaggableToken from '@/components/shared/TaggableToken';
 
 interface RoleRecommendationsProps {
   roles: RoleRecommendation[];
+  analysisId?: string;
+  tags?: OutputTag[];
+  onTagCreated?: (tag: OutputTag) => void;
+  onTagDeleted?: (tagId: string) => void;
 }
 
-export default function RoleRecommendations({ roles }: RoleRecommendationsProps) {
+export default function RoleRecommendations({ roles, analysisId, tags = [], onTagCreated, onTagDeleted }: RoleRecommendationsProps) {
   const { t } = useTranslation();
   const sortedRoles = useMemo(() => [...roles].sort((a, b) => b.fitScore - a.fitScore), [roles]);
   if (sortedRoles.length === 0) return null;
@@ -69,7 +74,9 @@ export default function RoleRecommendations({ roles }: RoleRecommendationsProps)
               </div>
 
               {/* Title + reasoning */}
-              <h3 className="font-semibold text-text-primary text-lg leading-snug mb-2.5 font-display">{role.title}</h3>
+              <TaggableToken analysisId={analysisId} section="roles" elementKey={role.title} elementIndex={i} existingTags={tags} onTagCreated={onTagCreated} onTagDeleted={onTagDeleted}>
+                <h3 className="font-semibold text-text-primary text-lg leading-snug mb-2.5 font-display">{role.title}</h3>
+              </TaggableToken>
               <p className="text-sm text-text-secondary leading-relaxed mb-5">{role.reasoning}</p>
 
               {/* Salary */}

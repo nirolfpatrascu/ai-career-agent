@@ -1,13 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import type { ActionPlan as ActionPlanType, ActionItem } from '@/lib/types';
+import type { ActionPlan as ActionPlanType, ActionItem, OutputTag } from '@/lib/types';
 import { useTranslation } from '@/lib/i18n';
 import { FeedbackButton } from './FeedbackButton';
+import TaggableToken from '@/components/shared/TaggableToken';
 
 interface ActionPlanProps {
   plan: ActionPlanType;
   fitScore?: number;
+  analysisId?: string;
+  tags?: OutputTag[];
+  onTagCreated?: (tag: OutputTag) => void;
+  onTagDeleted?: (tagId: string) => void;
 }
 
 const TAB_KEYS = ['thirtyDays', 'ninetyDays', 'twelveMonths'] as const;
@@ -24,7 +29,7 @@ const PRIORITY_STYLES: Record<string, string> = {
   medium: 'bg-primary/10 text-primary border-primary/15',
 };
 
-export default function ActionPlan({ plan, fitScore }: ActionPlanProps) {
+export default function ActionPlan({ plan, fitScore, analysisId, tags = [], onTagCreated, onTagDeleted }: ActionPlanProps) {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<keyof ActionPlanType>('thirtyDays');
 
@@ -122,7 +127,9 @@ export default function ActionPlan({ plan, fitScore }: ActionPlanProps) {
                   <span className={`text-xs font-medium px-2 py-0.5 rounded-full border capitalize ${PRIORITY_STYLES[item.priority] || PRIORITY_STYLES.medium}`}>{item.priority}</span>
                   <span className="text-xs text-text-tertiary">{item.timeEstimate}</span>
                 </div>
-                <p className="text-text-primary font-medium leading-relaxed text-[15px]">{item.action}</p>
+                <TaggableToken analysisId={analysisId} section="actionPlan" elementKey={`${activeTab}-${i}`} elementIndex={i} existingTags={tags} onTagCreated={onTagCreated} onTagDeleted={onTagDeleted}>
+                  <p className="text-text-primary font-medium leading-relaxed text-[15px]">{item.action}</p>
+                </TaggableToken>
                 <div className="flex items-center gap-1.5 mt-2.5 text-sm text-text-tertiary">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
                   {item.resourceUrl ? (

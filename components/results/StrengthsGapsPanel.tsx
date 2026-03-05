@@ -1,14 +1,19 @@
 'use client';
 
 import { useState } from 'react';
-import type { Strength, Gap } from '@/lib/types';
+import type { Strength, Gap, OutputTag } from '@/lib/types';
 import { getTierBg, getSeverityBg } from '@/lib/utils';
 import { useTranslation } from '@/lib/i18n';
 import { FeedbackButton } from './FeedbackButton';
+import TaggableToken from '@/components/shared/TaggableToken';
 
 interface StrengthsGapsPanelProps {
   strengths: Strength[];
   gaps: Gap[];
+  analysisId?: string;
+  tags?: OutputTag[];
+  onTagCreated?: (tag: OutputTag) => void;
+  onTagDeleted?: (tagId: string) => void;
 }
 
 const TIER_ICON: Record<string, React.ReactNode> = {
@@ -31,7 +36,7 @@ const SEV_STYLES = {
 
 type ViewMode = 'strengths' | 'gaps';
 
-export default function StrengthsGapsPanel({ strengths, gaps }: StrengthsGapsPanelProps) {
+export default function StrengthsGapsPanel({ strengths, gaps, analysisId, tags = [], onTagCreated, onTagDeleted }: StrengthsGapsPanelProps) {
   const { t } = useTranslation();
   const [view, setView] = useState<ViewMode>('strengths');
   const [expandedGap, setExpandedGap] = useState<number | null>(0);
@@ -105,7 +110,9 @@ export default function StrengthsGapsPanel({ strengths, gaps }: StrengthsGapsPan
               }`} />
               <div className="pl-3">
                 <div className="flex items-start justify-between gap-3 mb-3">
-                  <h3 className="font-semibold text-text-primary text-[15px] leading-snug">{s.title}</h3>
+                  <TaggableToken analysisId={analysisId} section="strengths" elementKey={s.title} elementIndex={i} existingTags={tags} onTagCreated={onTagCreated} onTagDeleted={onTagDeleted} inline>
+                    <h3 className="font-semibold text-text-primary text-[15px] leading-snug inline">{s.title}</h3>
+                  </TaggableToken>
                   <span className={`flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full border capitalize whitespace-nowrap flex-shrink-0 ${getTierBg(s.tier)}`}>
                     {TIER_ICON[s.tier]}
                     {t(`results.strengths.tiers.${s.tier}`)}
@@ -165,7 +172,9 @@ export default function StrengthsGapsPanel({ strengths, gaps }: StrengthsGapsPan
                             {gap.timeToClose}
                           </span>
                         </div>
-                        <h3 className="font-semibold text-text-primary text-[15px]">{gap.skill}</h3>
+                        <TaggableToken analysisId={analysisId} section="gaps" elementKey={gap.skill} elementIndex={i} existingTags={tags} onTagCreated={onTagCreated} onTagDeleted={onTagDeleted} inline>
+                          <h3 className="font-semibold text-text-primary text-[15px] inline">{gap.skill}</h3>
+                        </TaggableToken>
                         <p className={`text-sm mt-1 ${sev.text} opacity-80`}>{gap.impact}</p>
                       </div>
                       <svg
