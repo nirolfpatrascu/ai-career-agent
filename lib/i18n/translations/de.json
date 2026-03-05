@@ -903,5 +903,66 @@
       "title": "Job-Pipeline",
       "viewTracker": "Tracker anzeigen"
     }
+  },
+  "tags": {
+    "accurate": "Korrekt",
+    "inaccurate": "Inkorrekt",
+    "irrelevant": "Irrelevant",
+    "missingContext": "Fehlender Kontext",
+    "tooGeneric": "Zu allgemein",
+    "rateOutput": "Dieses Ergebnis bewerten",
+    "commentPlaceholder": "Optionaler Kommentar (max. 500 Zeichen)...",
+    "tagThis": "Dieses Ergebnis taggen"
+  },
+  "pricing": {
+    "title": "Einfache, transparente Preise",
+    "subtitle": "Starte kostenlos mit deiner ersten Karriereanalyse. Upgrade, wenn du mehr Power für deine Jobsuche brauchst.",
+    "weekly": "Wöchentlich",
+    "monthly": "Monatlich",
+    "save25": "25% sparen",
+    "free": {
+      "name": "Kostenlos",
+      "description": "Perfekt für den Einstieg",
+      "price": "$0",
+      "period": "für immer",
+      "cta": "Jetzt starten"
+    },
+    "pro": {
+      "name": "Pro",
+      "description": "Für aktive Jobsuchende",
+      "badge": "AM BELIEBTESTEN",
+      "priceWeekly": "$9.99",
+      "priceMonthly": "$29.99",
+      "periodWeekly": "Woche",
+      "periodMonthly": "Monat",
+      "cta": "Auf Pro upgraden",
+      "loading": "Weiterleitung..."
+    },
+    "features": {
+      "freeAnalyses": "1 Karriereanalyse pro Woche",
+      "initialFree": "Erste Analyse immer kostenlos",
+      "freeCv": "1 Lebenslauf-Generierung pro Woche",
+      "freeCoverLetter": "1 Anschreiben pro Woche",
+      "freeHistory": "Analyse-Verlauf (letzte 5)",
+      "pdfDownload": "PDF-Bericht herunterladen",
+      "outputTagging": "Ergebnis-Qualitäts-Tagging",
+      "proAnalyses": "10 Karriereanalysen pro Woche",
+      "proCv": "10 Lebenslauf-Generierungen pro Woche",
+      "proCoverLetter": "10 Anschreiben pro Woche",
+      "proCoach": "10 AI Career Coach Sitzungen",
+      "unlimitedHistory": "Unbegrenzter Analyse-Verlauf",
+      "prioritySupport": "Prioritäts-Support"
+    },
+    "faq": {
+      "title": "Häufig gestellte Fragen",
+      "initialQ": "Was zählt als meine \"erste Analyse\"?",
+      "initialA": "Deine allererste Karriereanalyse ist immer kostenlos und zählt nicht zu deinem Wochenlimit. Nutze sie, um die Plattform zu erkunden und dein LinkedIn-Profil und deinen Lebenslauf zu optimieren.",
+      "resetQ": "Wann werden meine Wochenlimits zurückgesetzt?",
+      "resetA": "Alle Nutzungszähler werden jeden Montag um Mitternacht UTC zurückgesetzt. Nicht genutzte Kontingente werden nicht übertragen.",
+      "cancelQ": "Kann ich jederzeit kündigen?",
+      "cancelA": "Ja. Kündige dein Abonnement jederzeit über das Abrechnungsportal. Du behältst den Pro-Zugang bis zum Ende deines aktuellen Abrechnungszeitraums.",
+      "dataQ": "Sind meine Daten sicher?",
+      "dataA": "Ja. Dein Lebenslauf und deine persönlichen Daten werden sicher mit Row-Level-Security gespeichert. Wir teilen deine Daten niemals mit Dritten. Du kannst deine Daten jederzeit löschen."
+    }
   }
 }

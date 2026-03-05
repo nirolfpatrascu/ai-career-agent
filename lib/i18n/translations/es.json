@@ -903,5 +903,66 @@
       "title": "Pipeline de empleos",
       "viewTracker": "Ver tracker"
     }
+  },
+  "tags": {
+    "accurate": "Correcto",
+    "inaccurate": "Incorrecto",
+    "irrelevant": "Irrelevante",
+    "missingContext": "Falta contexto",
+    "tooGeneric": "Demasiado genérico",
+    "rateOutput": "Evaluar este resultado",
+    "commentPlaceholder": "Comentario opcional (máx. 500 caracteres)...",
+    "tagThis": "Etiquetar este resultado"
+  },
+  "pricing": {
+    "title": "Precios simples y transparentes",
+    "subtitle": "Comienza gratis con tu primer análisis de carrera. Actualiza cuando necesites más potencia para tu búsqueda de empleo.",
+    "weekly": "Semanal",
+    "monthly": "Mensual",
+    "save25": "Ahorra 25%",
+    "free": {
+      "name": "Gratis",
+      "description": "Perfecto para empezar",
+      "price": "$0",
+      "period": "para siempre",
+      "cta": "Empezar"
+    },
+    "pro": {
+      "name": "Pro",
+      "description": "Para buscadores activos de empleo",
+      "badge": "MÁS POPULAR",
+      "priceWeekly": "$9.99",
+      "priceMonthly": "$29.99",
+      "periodWeekly": "semana",
+      "periodMonthly": "mes",
+      "cta": "Actualizar a Pro",
+      "loading": "Redirigiendo..."
+    },
+    "features": {
+      "freeAnalyses": "1 análisis de carrera por semana",
+      "initialFree": "El primer análisis siempre es gratis",
+      "freeCv": "1 generación de CV por semana",
+      "freeCoverLetter": "1 carta de presentación por semana",
+      "freeHistory": "Historial de análisis (últimos 5)",
+      "pdfDownload": "Descarga de informe PDF",
+      "outputTagging": "Etiquetado de calidad de resultados",
+      "proAnalyses": "10 análisis de carrera por semana",
+      "proCv": "10 generaciones de CV por semana",
+      "proCoverLetter": "10 cartas de presentación por semana",
+      "proCoach": "10 sesiones de AI Career Coach",
+      "unlimitedHistory": "Historial de análisis ilimitado",
+      "prioritySupport": "Soporte prioritario"
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "initialQ": "¿Qué cuenta como mi \"análisis inicial\"?",
+      "initialA": "Tu primer análisis de carrera siempre es gratis y no cuenta para tu límite semanal. Úsalo para explorar la plataforma y optimizar tu perfil de LinkedIn y CV.",
+      "resetQ": "¿Cuándo se restablecen mis límites semanales?",
+      "resetA": "Todos los contadores de uso se restablecen cada lunes a medianoche UTC. La cuota no utilizada no se acumula.",
+      "cancelQ": "¿Puedo cancelar en cualquier momento?",
+      "cancelA": "Sí. Cancela tu suscripción en cualquier momento desde el portal de facturación. Mantendrás el acceso Pro hasta el final de tu período de facturación actual.",
+      "dataQ": "¿Mis datos están seguros?",
+      "dataA": "Sí. Tu CV y datos personales se almacenan de forma segura con seguridad a nivel de fila. Nunca compartimos tus datos con terceros. Puedes eliminar tus datos en cualquier momento."
+    }
   }
 }

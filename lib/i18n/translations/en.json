@@ -901,5 +901,66 @@
       "title": "Job Pipeline",
       "viewTracker": "View tracker"
     }
+  },
+  "tags": {
+    "accurate": "Accurate",
+    "inaccurate": "Inaccurate",
+    "irrelevant": "Irrelevant",
+    "missingContext": "Missing Context",
+    "tooGeneric": "Too Generic",
+    "rateOutput": "Rate this output",
+    "commentPlaceholder": "Optional comment (max 500 chars)...",
+    "tagThis": "Tag this output"
+  },
+  "pricing": {
+    "title": "Simple, transparent pricing",
+    "subtitle": "Start free with your first career analysis. Upgrade when you need more power for your job search.",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "save25": "Save 25%",
+    "free": {
+      "name": "Free",
+      "description": "Perfect for getting started",
+      "price": "$0",
+      "period": "forever",
+      "cta": "Get Started"
+    },
+    "pro": {
+      "name": "Pro",
+      "description": "For active job seekers",
+      "badge": "MOST POPULAR",
+      "priceWeekly": "$9.99",
+      "priceMonthly": "$29.99",
+      "periodWeekly": "week",
+      "periodMonthly": "month",
+      "cta": "Upgrade to Pro",
+      "loading": "Redirecting..."
+    },
+    "features": {
+      "freeAnalyses": "1 career analysis per week",
+      "initialFree": "First analysis is always free",
+      "freeCv": "1 CV generation per week",
+      "freeCoverLetter": "1 cover letter per week",
+      "freeHistory": "Analysis history (last 5)",
+      "pdfDownload": "PDF report download",
+      "outputTagging": "Output quality tagging",
+      "proAnalyses": "10 career analyses per week",
+      "proCv": "10 CV generations per week",
+      "proCoverLetter": "10 cover letters per week",
+      "proCoach": "10 AI Career Coach sessions",
+      "unlimitedHistory": "Unlimited analysis history",
+      "prioritySupport": "Priority support"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "initialQ": "What counts as my \"initial analysis\"?",
+      "initialA": "Your very first career analysis is always free and doesn't count toward your weekly limit. Use it to explore the platform and optimize your LinkedIn profile and CV.",
+      "resetQ": "When do my weekly limits reset?",
+      "resetA": "All usage counters reset every Monday at midnight UTC. Unused quota does not carry over.",
+      "cancelQ": "Can I cancel anytime?",
+      "cancelA": "Yes. Cancel your subscription at any time from the billing portal. You'll keep Pro access until the end of your current billing period.",
+      "dataQ": "Is my data safe?",
+      "dataA": "Yes. Your CV and personal data are stored securely with row-level security. We never share your data with third parties. You can delete your data at any time."
+    }
   }
 }

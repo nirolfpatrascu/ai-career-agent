@@ -903,5 +903,66 @@
       "title": "Pipeline Joburi",
       "viewTracker": "Vezi tracker-ul"
     }
+  },
+  "tags": {
+    "accurate": "Corect",
+    "inaccurate": "Incorect",
+    "irrelevant": "Irelevant",
+    "missingContext": "Lipsă context",
+    "tooGeneric": "Prea generic",
+    "rateOutput": "Evaluează acest rezultat",
+    "commentPlaceholder": "Comentariu opțional (max 500 caractere)...",
+    "tagThis": "Etichetează acest rezultat"
+  },
+  "pricing": {
+    "title": "Prețuri simple și transparente",
+    "subtitle": "Începe gratuit cu prima analiză de carieră. Fă upgrade când ai nevoie de mai multă putere pentru căutarea de job.",
+    "weekly": "Săptămânal",
+    "monthly": "Lunar",
+    "save25": "Economisești 25%",
+    "free": {
+      "name": "Gratuit",
+      "description": "Perfect pentru început",
+      "price": "$0",
+      "period": "pentru totdeauna",
+      "cta": "Începe acum"
+    },
+    "pro": {
+      "name": "Pro",
+      "description": "Pentru căutătorii activi de job",
+      "badge": "CEL MAI POPULAR",
+      "priceWeekly": "$9.99",
+      "priceMonthly": "$29.99",
+      "periodWeekly": "săptămână",
+      "periodMonthly": "lună",
+      "cta": "Fă upgrade la Pro",
+      "loading": "Redirecționare..."
+    },
+    "features": {
+      "freeAnalyses": "1 analiză de carieră pe săptămână",
+      "initialFree": "Prima analiză este mereu gratuită",
+      "freeCv": "1 generare CV pe săptămână",
+      "freeCoverLetter": "1 scrisoare de intenție pe săptămână",
+      "freeHistory": "Istoric analize (ultimele 5)",
+      "pdfDownload": "Descărcare raport PDF",
+      "outputTagging": "Etichetare calitate rezultate",
+      "proAnalyses": "10 analize de carieră pe săptămână",
+      "proCv": "10 generări CV pe săptămână",
+      "proCoverLetter": "10 scrisori de intenție pe săptămână",
+      "proCoach": "10 sesiuni AI Career Coach",
+      "unlimitedHistory": "Istoric nelimitat de analize",
+      "prioritySupport": "Suport prioritar"
+    },
+    "faq": {
+      "title": "Întrebări frecvente",
+      "initialQ": "Ce se consideră \"analiza inițială\"?",
+      "initialA": "Prima ta analiză de carieră este mereu gratuită și nu se pune la socoteală din limita săptămânală. Folosește-o pentru a explora platforma și a-ți optimiza profilul LinkedIn și CV-ul.",
+      "resetQ": "Când se resetează limitele săptămânale?",
+      "resetA": "Toate contoarele de utilizare se resetează în fiecare luni la miezul nopții UTC. Cota neutilizată nu se reportează.",
+      "cancelQ": "Pot anula oricând?",
+      "cancelA": "Da. Anulează abonamentul oricând din portalul de facturare. Vei păstra accesul Pro până la sfârșitul perioadei curente de facturare.",
+      "dataQ": "Datele mele sunt în siguranță?",
+      "dataA": "Da. CV-ul și datele tale personale sunt stocate în siguranță cu securitate la nivel de rând. Nu partajăm niciodată datele tale cu terți. Poți șterge datele oricând."
+    }
   }
 }

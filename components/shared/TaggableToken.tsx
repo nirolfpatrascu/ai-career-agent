@@ -2,14 +2,15 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useAuth } from '@/lib/auth/context';
+import { useTranslation } from '@/lib/i18n';
 import type { OutputTagType, OutputTag } from '@/lib/types';
 
-const TAG_OPTIONS: { value: OutputTagType; label: string; color: string; icon: string }[] = [
-  { value: 'accurate', label: 'Accurate', color: 'bg-success/10 text-success border-success/20', icon: '\u2713' },
-  { value: 'inaccurate', label: 'Inaccurate', color: 'bg-danger/10 text-danger border-danger/20', icon: '\u2717' },
-  { value: 'irrelevant', label: 'Irrelevant', color: 'bg-amber-400/10 text-amber-500 border-amber-400/20', icon: '\u2212' },
-  { value: 'missing_context', label: 'Missing Context', color: 'bg-blue-400/10 text-blue-500 border-blue-400/20', icon: '?' },
-  { value: 'too_generic', label: 'Too Generic', color: 'bg-purple-400/10 text-purple-500 border-purple-400/20', icon: '\u2026' },
+const TAG_META: { value: OutputTagType; labelKey: string; color: string; icon: string }[] = [
+  { value: 'accurate', labelKey: 'tags.accurate', color: 'bg-success/10 text-success border-success/20', icon: '\u2713' },
+  { value: 'inaccurate', labelKey: 'tags.inaccurate', color: 'bg-danger/10 text-danger border-danger/20', icon: '\u2717' },
+  { value: 'irrelevant', labelKey: 'tags.irrelevant', color: 'bg-amber-400/10 text-amber-500 border-amber-400/20', icon: '\u2212' },
+  { value: 'missing_context', labelKey: 'tags.missingContext', color: 'bg-blue-400/10 text-blue-500 border-blue-400/20', icon: '?' },
+  { value: 'too_generic', labelKey: 'tags.tooGeneric', color: 'bg-purple-400/10 text-purple-500 border-purple-400/20', icon: '\u2026' },
 ];
 
 interface TaggableTokenProps {
@@ -37,6 +38,7 @@ export default function TaggableToken({
   inline = false,
 }: TaggableTokenProps) {
   const { session } = useAuth();
+  const { t } = useTranslation();
   const [showPopover, setShowPopover] = useState(false);
   const [comment, setComment] = useState('');
   const [saving, setSaving] = useState(false);
@@ -134,14 +136,14 @@ export default function TaggableToken({
       {myTags.length > 0 && (
         <span className={`${inline ? 'inline-flex ml-1.5' : 'flex mt-1'} flex-wrap gap-1`}>
           {myTags.map(tag => {
-            const opt = TAG_OPTIONS.find(o => o.value === tag.tag);
+            const opt = TAG_META.find(o => o.value === tag.tag);
             return (
               <span
                 key={tag.id}
                 className={`inline-flex items-center gap-0.5 text-[10px] font-medium px-1.5 py-0.5 rounded border ${opt?.color || 'bg-black/[0.04] text-text-tertiary border-black/[0.06]'}`}
                 title={tag.comment || undefined}
               >
-                {opt?.icon} {opt?.label}
+                {opt?.icon} {opt ? t(opt.labelKey) : tag.tag}
                 <button
                   onClick={(e) => { e.stopPropagation(); handleDelete(tag.id); }}
                   disabled={deleting === tag.id}
@@ -161,7 +163,7 @@ export default function TaggableToken({
       <button
         onClick={(e) => { e.stopPropagation(); setShowPopover(!showPopover); }}
         className={`${inline ? 'inline-flex ml-1' : 'absolute -right-1 -top-1'} items-center justify-center w-5 h-5 rounded-md bg-black/[0.04] hover:bg-primary/10 text-text-tertiary hover:text-primary transition-all opacity-0 group-hover/tag:opacity-100 focus:opacity-100`}
-        title="Tag this output"
+        title={t('tags.tagThis')}
       >
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
@@ -177,24 +179,24 @@ export default function TaggableToken({
           onClick={(e) => e.stopPropagation()}
         >
           <p className="text-[11px] font-medium text-text-tertiary uppercase tracking-wider mb-2">
-            Rate this output
+            {t('tags.rateOutput')}
           </p>
           <div className="flex flex-wrap gap-1.5 mb-2">
-            {TAG_OPTIONS.map(opt => (
+            {TAG_META.map(opt => (
               <button
                 key={opt.value}
                 onClick={() => handleTag(opt.value)}
                 disabled={saving}
                 className={`text-[11px] font-medium px-2 py-1 rounded-md border transition-colors hover:opacity-80 disabled:opacity-50 ${opt.color}`}
               >
-                {opt.icon} {opt.label}
+                {opt.icon} {t(opt.labelKey)}
               </button>
             ))}
           </div>
           <textarea
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            placeholder="Optional comment (max 500 chars)..."
+            placeholder={t('tags.commentPlaceholder')}
             className="w-full h-14 text-xs bg-black/[0.02] border border-black/[0.06] rounded-lg px-2.5 py-2 resize-none placeholder:text-text-tertiary/60 focus:outline-none focus:border-primary/30"
             maxLength={500}
           />
