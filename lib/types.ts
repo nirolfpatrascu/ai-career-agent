@@ -453,6 +453,84 @@ export interface KanbanColumn {
   icon: string;
 }
 
+// --- Quota & Subscription Types ---
+
+export type QuotaType = 'analysis' | 'cv_generation' | 'cover_letter' | 'coach_request';
+
+export type PlanType = 'free' | 'pro';
+
+export type SubscriptionStatus = 'active' | 'past_due' | 'canceled' | 'trialing';
+
+export interface QuotaCheck {
+  allowed: boolean;
+  used: number;
+  limit: number;
+  plan: PlanType;
+  isInitialAnalysis?: boolean;
+  resetAt: string; // next Monday 00:00 UTC ISO string
+}
+
+export interface UserQuotaStatus {
+  plan: PlanType;
+  weekStart: string;
+  resetAt: string;
+  analysis: { used: number; limit: number };
+  cvGeneration: { used: number; limit: number };
+  coverLetter: { used: number; limit: number };
+  coachRequest: { used: number; limit: number };
+  hasUsedInitialAnalysis: boolean;
+  subscription: {
+    status: SubscriptionStatus | null;
+    periodEnd: string | null;
+  } | null;
+}
+
+export interface UserQuotaRow {
+  user_id: string;
+  plan: PlanType;
+  week_start: string;
+  analyses_used: number;
+  cv_generations_used: number;
+  cover_letters_used: number;
+  coach_requests_used: number;
+  analyses_limit: number;
+  cv_limit: number;
+  cover_letter_limit: number;
+  coach_limit: number;
+  has_used_initial_analysis: boolean;
+  stripe_customer_id: string | null;
+  stripe_subscription_id: string | null;
+  subscription_status: SubscriptionStatus | null;
+  subscription_period_end: string | null;
+}
+
+// --- Output Tag Types ---
+
+export type OutputTagType = 'accurate' | 'inaccurate' | 'irrelevant' | 'missing_context' | 'too_generic';
+
+export interface OutputTag {
+  id: string;
+  userId: string;
+  analysisId: string;
+  section: string;
+  elementIndex: number | null;
+  elementKey: string | null;
+  taggedText: string | null;
+  tag: OutputTagType;
+  comment: string | null;
+  createdAt: string;
+}
+
+export interface OutputTagInput {
+  analysisId: string;
+  section: string;
+  elementIndex?: number;
+  elementKey?: string;
+  taggedText?: string;
+  tag: OutputTagType;
+  comment?: string;
+}
+
 // --- Upwork Types ---
 
 export interface UpworkProfile {
