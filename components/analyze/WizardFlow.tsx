@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type { CareerQuestionnaire, UpworkProfile } from '@/lib/types';
+import { COUNTRIES } from '@/lib/utils';
 import { useTranslation } from '@/lib/i18n';
 import UpworkImport from './UpworkImport';
 
@@ -115,12 +116,13 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
   // --- Validation ---
   const hasLinkedInOrCV = linkedInFile || cvFile || upworkProfile;
   const hasJobDescription = jobDescription.trim().length > 50;
+  const hasRequiredCareerFields = !!(questionnaire.currentRole.trim() && questionnaire.targetRole.trim() && questionnaire.yearsExperience > 0 && questionnaire.country);
 
   const canProceed: Record<Step, boolean> = {
     linkedin: true, // LinkedIn is encouraged, not required
     cv: !!hasLinkedInOrCV, // At least one file/profile needed
-    jobs: true, // Jobs are encouraged but not blocking
-    review: !!hasLinkedInOrCV,
+    jobs: hasRequiredCareerFields, // Career fields are required to proceed
+    review: !!(hasLinkedInOrCV && hasRequiredCareerFields),
   };
 
   // --- Navigation ---
@@ -442,6 +444,33 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
         </p>
       </div>
 
+      {/* Career fields */}
+      <div className="space-y-4 rounded-2xl border border-black/[0.08] bg-black/[0.02] p-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label htmlFor="w-currentRole" className="label text-sm">{t('questionnaire.currentRole') || 'Current Role'} <span className="text-danger text-xs">*</span></label>
+            <input id="w-currentRole" type="text" className="input-field" value={questionnaire.currentRole} onChange={(e) => updateQ('currentRole', e.target.value)} placeholder="e.g., Frontend Developer" />
+          </div>
+          <div>
+            <label htmlFor="w-targetRole" className="label text-sm">{t('questionnaire.targetRole') || 'Target Role'} <span className="text-danger text-xs">*</span></label>
+            <input id="w-targetRole" type="text" className="input-field" value={questionnaire.targetRole} onChange={(e) => updateQ('targetRole', e.target.value)} placeholder="e.g., AI Solutions Architect" />
+          </div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label htmlFor="w-years" className="label text-sm">{t('questionnaire.yearsExperience') || 'Years of Experience'} <span className="text-danger text-xs">*</span></label>
+            <input id="w-years" type="number" min={0} max={50} className="input-field" value={questionnaire.yearsExperience || ''} onChange={(e) => updateQ('yearsExperience', parseInt(e.target.value) || 0)} placeholder="e.g., 5" />
+          </div>
+          <div>
+            <label htmlFor="w-country" className="label text-sm">{t('questionnaire.country') || 'Country / Region'} <span className="text-danger text-xs">*</span></label>
+            <select id="w-country" className="input-field" value={questionnaire.country} onChange={(e) => updateQ('country', e.target.value)}>
+              <option value="">{t('questionnaire.selectCountry') || 'Select country'}</option>
+              {COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
+          </div>
+        </div>
+      </div>
+
       {/* Job title */}
       <div>
         <label htmlFor="w-jobTitle" className="label text-sm flex items-center gap-2">
@@ -547,16 +576,17 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
           t={t}
         />
 
-        {/* Job description */}
+        {/* Target job & career details */}
         <ReviewCard
           step="jobs"
           label={STEP_LABELS.jobs}
           icon={STEP_ICONS.jobs}
-          status={hasJobDescription
-            ? (t('wizard.review.jobAdded') || 'Job description added')
-            : (t('wizard.review.noJobs') || 'No job description — analysis will be more general')
+          status={hasRequiredCareerFields
+            ? `${questionnaire.currentRole} → ${questionnaire.targetRole} · ${questionnaire.yearsExperience} yrs · ${questionnaire.country}${hasJobDescription ? ' · Job added' : ''}`
+            : (t('wizard.review.incomplete') || 'Incomplete')
           }
-          done={hasJobDescription}
+          done={hasRequiredCareerFields}
+          required={!hasRequiredCareerFields}
           onEdit={() => goToStep('jobs')}
           t={t}
         />
@@ -579,7 +609,9 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
         </button>
         {!canProceed.review && (
           <p className="text-sm text-danger text-center mt-3">
-            {t('wizard.review.needFile') || 'Upload at least a CV or LinkedIn PDF'}
+            {!hasLinkedInOrCV
+              ? (t('wizard.review.needFile') || 'Upload at least a CV or LinkedIn PDF')
+              : (t('wizard.review.needDetails') || 'Complete all required career details')}
           </p>
         )}
       </div>
