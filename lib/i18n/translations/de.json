@@ -512,7 +512,9 @@
       "profile": "Profil",
       "analyses": "Analysen",
       "jobs": "Jobs"
-    }
+    },
+    "paymentSuccess": "Zahlung erfolgreich! Ihr Pro-Plan ist jetzt aktiv.",
+    "paymentCanceled": "Zahlung wurde abgebrochen. Sie können jederzeit von der Preisseite upgraden."
   },
   "profile": {
     "careerDetails": "Karrieredetails",
@@ -529,7 +531,29 @@
     "runAnalysis": "Analyse starten",
     "empty": "Noch kein Profil",
     "emptySubtitle": "Führen Sie Ihre erste Karriereanalyse durch, um Ihr Profil zu erstellen",
-    "runFirstAnalysis": "Erste Analyse starten"
+    "runFirstAnalysis": "Erste Analyse starten",
+    "additionalContext": "Zusätzlicher Kontext",
+    "contextHint": "Teilen Sie Details über Karrierepausen, Freelance-Arbeit, Nebenprojekte, Kurse oder alles, was nicht in Ihrem CV/LinkedIn steht. Dies bereichert Ihre Analyse.",
+    "showExamples": "Beispiele anzeigen",
+    "hideExamples": "Beispiele ausblenden",
+    "examplesTitle": "Gute Kontextbeispiele:",
+    "saveContext": "Speichern",
+    "contextSaved": "Gespeichert!",
+    "recentAnalyses": "Letzte Analysen"
+  },
+  "quota": {
+    "weeklyUsage": "Wöchentliche Nutzung",
+    "analyses": "Analysen",
+    "cvGenerations": "CV-Generierungen",
+    "coverLetters": "Anschreiben",
+    "coachSessions": "Coach-Sitzungen",
+    "resetsOn": "Reset am {date}",
+    "limitReached": "Wochenlimit erreicht",
+    "weeklyLimitReached": "Sie haben Ihr wöchentliches Analyselimit erreicht.",
+    "upgradePro": "Auf Pro upgraden",
+    "upgradeTitle": "Mehr mit Pro",
+    "upgradeDescription": "10 wöchentliche Analysen, CV-Generierungen, Anschreiben und KI-Coaching-Sitzungen.",
+    "viewPlans": "Pläne ansehen"
   },
   "motivation": {
     "fitScore": "Dieser Score zeigt, wo Sie heute stehen — nicht wo Sie sein können. Jede geschlossene Lücke erhöht diese Zahl.",

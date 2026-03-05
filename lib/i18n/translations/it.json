@@ -512,7 +512,9 @@
       "profile": "Profilo",
       "analyses": "Analisi",
       "jobs": "Lavori"
-    }
+    },
+    "paymentSuccess": "Pagamento riuscito! Il tuo piano Pro è ora attivo.",
+    "paymentCanceled": "Pagamento annullato. Puoi effettuare l'upgrade in qualsiasi momento dalla pagina dei prezzi."
   },
   "profile": {
     "careerDetails": "Dettagli carriera",
@@ -529,7 +531,29 @@
     "runAnalysis": "Esegui analisi",
     "empty": "Nessun profilo ancora",
     "emptySubtitle": "Completa la tua prima analisi di carriera per creare il tuo profilo",
-    "runFirstAnalysis": "Esegui la tua prima analisi"
+    "runFirstAnalysis": "Esegui la tua prima analisi",
+    "additionalContext": "Contesto Aggiuntivo",
+    "contextHint": "Condividi dettagli su pause di carriera, lavoro freelance, progetti personali, corsi o qualsiasi cosa non presente nel tuo CV/LinkedIn. Questo arricchisce la tua analisi.",
+    "showExamples": "Mostra esempi",
+    "hideExamples": "Nascondi esempi",
+    "examplesTitle": "Buoni esempi di contesto:",
+    "saveContext": "Salva",
+    "contextSaved": "Salvato!",
+    "recentAnalyses": "Analisi Recenti"
+  },
+  "quota": {
+    "weeklyUsage": "Utilizzo Settimanale",
+    "analyses": "Analisi",
+    "cvGenerations": "Generazioni CV",
+    "coverLetters": "Lettere di Presentazione",
+    "coachSessions": "Sessioni Coach",
+    "resetsOn": "Si ripristina il {date}",
+    "limitReached": "Limite settimanale raggiunto",
+    "weeklyLimitReached": "Hai raggiunto il limite settimanale di analisi.",
+    "upgradePro": "Passa a Pro",
+    "upgradeTitle": "Ottieni di più con Pro",
+    "upgradeDescription": "10 analisi settimanali, generazioni CV, lettere di presentazione e sessioni di coaching.",
+    "viewPlans": "Vedi Piani"
   },
   "motivation": {
     "fitScore": "Questo punteggio riflette dove sei oggi — non dove puoi essere. Ogni lacuna colmata alza questo numero.",

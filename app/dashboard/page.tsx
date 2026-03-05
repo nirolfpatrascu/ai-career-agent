@@ -11,7 +11,7 @@ import DashboardTabs, { type DashboardTab } from '@/components/dashboard/Dashboa
 import AnalysesTab from '@/components/dashboard/AnalysesTab';
 import ProfileTab from '@/components/dashboard/ProfileTab';
 import JobTrackerContent from '@/components/jobs/JobTrackerContent';
-import type { CareerProfile } from '@/lib/types';
+import type { CareerProfile, UserQuotaStatus } from '@/lib/types';
 
 interface SavedAnalysis {
   id: string;
@@ -37,9 +37,13 @@ export default function DashboardPage() {
   const [profile, setProfile] = useState<CareerProfile | null>(null);
   const [profileLoading, setProfileLoading] = useState(true);
   const [jobsCount, setJobsCount] = useState(0);
+  const [quota, setQuota] = useState<UserQuotaStatus | null>(null);
+  const [quotaLoading, setQuotaLoading] = useState(true);
+  const [paymentBanner, setPaymentBanner] = useState<'success' | 'canceled' | null>(null);
 
   // Determine initial tab from URL or defaults
   const tabParam = searchParams.get('tab') as DashboardTab | null;
+  const paymentParam = searchParams.get('payment');
   const [activeTab, setActiveTab] = useState<DashboardTab>(
     tabParam && ['profile', 'analyses', 'jobs'].includes(tabParam)
       ? tabParam
@@ -107,16 +111,49 @@ export default function DashboardPage() {
     }
   }, [session?.access_token]);
 
+  // Fetch quota status
+  const fetchQuota = useCallback(async () => {
+    if (!session?.access_token) return;
+    setQuotaLoading(true);
+    try {
+      const res = await fetch('/api/quota', {
+        headers: { Authorization: `Bearer ${session.access_token}` },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setQuota(data);
+      }
+    } catch {
+      // Non-critical — quota bar just won't show
+    } finally {
+      setQuotaLoading(false);
+    }
+  }, [session?.access_token]);
+
   useEffect(() => {
     if (user && session) {
       fetchProfile();
       fetchAnalyses();
       fetchJobsCount();
+      fetchQuota();
     } else if (!authLoading) {
       setLoading(false);
       setProfileLoading(false);
+      setQuotaLoading(false);
     }
-  }, [user, session, authLoading, fetchProfile, fetchAnalyses, fetchJobsCount]);
+  }, [user, session, authLoading, fetchProfile, fetchAnalyses, fetchJobsCount, fetchQuota]);
+
+  // Handle Stripe payment return params
+  useEffect(() => {
+    if (paymentParam === 'success' || paymentParam === 'canceled') {
+      setPaymentBanner(paymentParam);
+      // Clean URL params after reading
+      window.history.replaceState({}, '', '/dashboard?tab=profile');
+      // Auto-dismiss after 6 seconds
+      const timer = setTimeout(() => setPaymentBanner(null), 6000);
+      return () => clearTimeout(timer);
+    }
+  }, [paymentParam]);
 
   // Set smart default tab after data loads
   useEffect(() => {
@@ -210,6 +247,30 @@ export default function DashboardPage() {
             </Link>
           </div>
 
+          {/* Payment banner */}
+          {paymentBanner === 'success' && (
+            <div className="mb-4 flex items-center gap-3 bg-success/10 border border-success/20 rounded-xl px-4 py-3">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-success flex-shrink-0">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+              <p className="text-sm text-success font-medium">{t('dashboard.paymentSuccess')}</p>
+              <button onClick={() => setPaymentBanner(null)} className="ml-auto text-success/60 hover:text-success">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+          )}
+          {paymentBanner === 'canceled' && (
+            <div className="mb-4 flex items-center gap-3 bg-amber-400/10 border border-amber-400/20 rounded-xl px-4 py-3">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-amber-400 flex-shrink-0">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+              <p className="text-sm text-amber-600 font-medium">{t('dashboard.paymentCanceled')}</p>
+              <button onClick={() => setPaymentBanner(null)} className="ml-auto text-amber-400/60 hover:text-amber-500">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+          )}
+
           {/* Tabs */}
           <DashboardTabs
             activeTab={activeTab}
@@ -224,6 +285,10 @@ export default function DashboardPage() {
             <ProfileTab
               profile={profile}
               onProfileUpdate={fetchProfile}
+              quota={quota}
+              quotaLoading={quotaLoading}
+              recentAnalyses={analyses}
+              onOpenAnalysis={handleOpen}
             />
           )}
 

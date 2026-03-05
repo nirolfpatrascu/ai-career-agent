@@ -512,7 +512,9 @@
       "profile": "Profil",
       "analyses": "Analize",
       "jobs": "Joburi"
-    }
+    },
+    "paymentSuccess": "Plata a fost efectuată cu succes! Planul tău Pro este activ.",
+    "paymentCanceled": "Plata a fost anulată. Poți face upgrade oricând din pagina de prețuri."
   },
   "profile": {
     "careerDetails": "Detalii Carieră",
@@ -529,7 +531,29 @@
     "runAnalysis": "Rulează Analiza",
     "empty": "Niciun profil încă",
     "emptySubtitle": "Completează prima analiză de carieră pentru a crea profilul tău",
-    "runFirstAnalysis": "Rulează Prima Analiză"
+    "runFirstAnalysis": "Rulează Prima Analiză",
+    "additionalContext": "Context Suplimentar",
+    "contextHint": "Adaugă detalii despre pauze în carieră, proiecte freelance, cursuri sau orice nu apare pe CV/LinkedIn. Acestea îmbunătățesc analiza.",
+    "showExamples": "Arată exemple",
+    "hideExamples": "Ascunde exemple",
+    "examplesTitle": "Exemple de context bun:",
+    "saveContext": "Salvează",
+    "contextSaved": "Salvat!",
+    "recentAnalyses": "Analize Recente"
+  },
+  "quota": {
+    "weeklyUsage": "Utilizare Săptămânală",
+    "analyses": "Analize",
+    "cvGenerations": "Generări CV",
+    "coverLetters": "Scrisori de Intenție",
+    "coachSessions": "Sesiuni Coach",
+    "resetsOn": "Se resetează {date}",
+    "limitReached": "Limita săptămânală atinsă",
+    "weeklyLimitReached": "Ai atins limita săptămânală de analize.",
+    "upgradePro": "Treci la Pro",
+    "upgradeTitle": "Obține mai mult cu Pro",
+    "upgradeDescription": "10 analize, generări CV, scrisori de intenție și sesiuni de coaching pe săptămână.",
+    "viewPlans": "Vezi Planurile"
   },
   "motivation": {
     "fitScore": "Acest scor reflectă unde ești astăzi — nu unde poți ajunge. Fiecare lacună pe care o închizi ridică acest număr.",

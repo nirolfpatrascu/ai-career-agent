@@ -510,7 +510,9 @@
       "profile": "Profile",
       "analyses": "Analyses",
       "jobs": "Jobs"
-    }
+    },
+    "paymentSuccess": "Payment successful! Your Pro plan is now active.",
+    "paymentCanceled": "Payment was canceled. You can upgrade anytime from the pricing page."
   },
   "profile": {
     "careerDetails": "Career Details",
@@ -527,7 +529,29 @@
     "runAnalysis": "Run Analysis",
     "empty": "No profile yet",
     "emptySubtitle": "Complete your first career analysis to create your profile",
-    "runFirstAnalysis": "Run Your First Analysis"
+    "runFirstAnalysis": "Run Your First Analysis",
+    "additionalContext": "Additional Context",
+    "contextHint": "Share details about career gaps, freelance work, side projects, courses, or anything not on your CV/LinkedIn. This enriches your analysis.",
+    "showExamples": "Show examples",
+    "hideExamples": "Hide examples",
+    "examplesTitle": "Good context examples:",
+    "saveContext": "Save",
+    "contextSaved": "Saved!",
+    "recentAnalyses": "Recent Analyses"
+  },
+  "quota": {
+    "weeklyUsage": "Weekly Usage",
+    "analyses": "Analyses",
+    "cvGenerations": "CV Generations",
+    "coverLetters": "Cover Letters",
+    "coachSessions": "Coach Sessions",
+    "resetsOn": "Resets {date}",
+    "limitReached": "Weekly limit reached",
+    "weeklyLimitReached": "You've reached your weekly analysis limit.",
+    "upgradePro": "Upgrade to Pro",
+    "upgradeTitle": "Get more with Pro",
+    "upgradeDescription": "10 weekly analyses, CV generations, cover letters, and AI coaching sessions.",
+    "viewPlans": "View Plans"
   },
   "motivation": {
     "fitScore": "This score reflects where you stand today — not where you can be. Every gap you close pushes this number higher.",
