@@ -430,9 +430,7 @@
     },
     "jobs": {
       "title": "Incolla il tuo lavoro target",
-      "subtitle": "Inserisci il titolo del lavoro e incolla la descrizione completa qui sotto. Questo ci permette di adattare l'analisi al ruolo specifico — identificare competenze mancanti, confrontare requisiti e costruire il tuo percorso.",
-      "titleLabel": "Titolo Lavoro",
-      "titlePlaceholder": "es., Ingegnere Frontend Senior",
+      "subtitle": "Incolla la descrizione completa del lavoro qui sotto. Questo ci permette di adattare l'analisi al ruolo specifico — identificare competenze mancanti, confrontare requisiti e costruire il tuo percorso.",
       "descriptionLabel": "Descrizione Lavoro",
       "pasteHere": "Incolla la descrizione completa del lavoro qui...",
       "hint": "Includi l'annuncio completo: responsabilità, requisiti, qualifiche, ecc.",

@@ -77,7 +77,6 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
   });
 
   // --- Job state (single job) ---
-  const [jobTitle, setJobTitle] = useState('');
   const [jobDescription, setJobDescription] = useState('');
 
   // Auto-detect profile from LinkedIn PDF
@@ -160,14 +159,13 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
   // --- Submit ---
   const handleSubmit = useCallback(() => {
     const trimmedDesc = jobDescription.trim();
-    const trimmedTitle = jobTitle.trim();
     const mergedQ: CareerQuestionnaire = {
       ...questionnaire,
-      jobPostings: trimmedDesc.length > 50 ? [{ text: trimmedDesc, url: '', title: trimmedTitle }] : undefined,
+      jobPostings: trimmedDesc.length > 50 ? [{ text: trimmedDesc, url: '', title: '' }] : undefined,
       jobPosting: trimmedDesc.length > 50 ? trimmedDesc : undefined,
     };
     onSubmit({ linkedInFile, cvFile, questionnaire: mergedQ, upworkProfile: upworkProfile || undefined });
-  }, [questionnaire, jobTitle, jobDescription, linkedInFile, cvFile, upworkProfile, onSubmit]);
+  }, [questionnaire, jobDescription, linkedInFile, cvFile, upworkProfile, onSubmit]);
 
   // --- File drop handler ---
   const handleFileDrop = useCallback((e: React.DragEvent, type: 'linkedin' | 'cv') => {
@@ -440,7 +438,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
           {t('wizard.jobs.title') || 'Paste your target job description'}
         </h2>
         <p className="text-text-secondary text-sm sm:text-base leading-relaxed">
-          {t('wizard.jobs.subtitle') || 'Paste the job title and full job description below. This allows us to tailor the analysis to the specific role — identifying missing skills, matching requirements, and building your roadmap.'}
+          {t('wizard.jobs.subtitle') || 'Paste the full job description below. This allows us to tailor the analysis to the specific role — identifying missing skills, matching requirements, and building your roadmap.'}
         </p>
       </div>
 
@@ -469,22 +467,6 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
             </select>
           </div>
         </div>
-      </div>
-
-      {/* Job title */}
-      <div>
-        <label htmlFor="w-jobTitle" className="label text-sm flex items-center gap-2">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-          {t('wizard.jobs.titleLabel') || 'Job Title'}
-        </label>
-        <input
-          id="w-jobTitle"
-          type="text"
-          className="input-field"
-          placeholder={t('wizard.jobs.titlePlaceholder') || 'e.g., Senior Frontend Engineer'}
-          value={jobTitle}
-          onChange={(e) => setJobTitle(e.target.value)}
-        />
       </div>
 
       {/* Job description */}

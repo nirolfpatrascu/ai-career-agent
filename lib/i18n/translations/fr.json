@@ -430,9 +430,7 @@
     },
     "jobs": {
       "title": "Collez votre poste cible",
-      "subtitle": "Entrez le titre du poste et collez la description complète ci-dessous. Cela nous permet d'adapter l'analyse au rôle spécifique — identifier les compétences manquantes, faire correspondre les exigences et construire votre feuille de route.",
-      "titleLabel": "Titre du Poste",
-      "titlePlaceholder": "ex., Ingénieur Frontend Senior",
+      "subtitle": "Collez la description complète du poste ci-dessous. Cela nous permet d'adapter l'analyse au rôle spécifique — identifier les compétences manquantes, faire correspondre les exigences et construire votre feuille de route.",
       "descriptionLabel": "Description du Poste",
       "pasteHere": "Collez la description complète du poste ici...",
       "hint": "Incluez l'annonce complète : responsabilités, exigences, qualifications, etc.",

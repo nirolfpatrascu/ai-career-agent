@@ -428,9 +428,7 @@
     },
     "jobs": {
       "title": "Paste your target job",
-      "subtitle": "Enter the job title and paste the full description below. This allows us to tailor the analysis to the specific role — identifying missing skills, matching requirements, and building your roadmap.",
-      "titleLabel": "Job Title",
-      "titlePlaceholder": "e.g., Senior Frontend Engineer",
+      "subtitle": "Paste the full job description below. This allows us to tailor the analysis to the specific role — identifying missing skills, matching requirements, and building your roadmap.",
       "descriptionLabel": "Job Description",
       "pasteHere": "Paste the full job description here...",
       "hint": "Include the full posting: responsibilities, requirements, qualifications, etc.",

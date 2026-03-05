@@ -430,9 +430,7 @@
     },
     "jobs": {
       "title": "Lipește jobul tău țintă",
-      "subtitle": "Introdu titlul jobului și lipește descrierea completă mai jos. Acest lucru ne permite să personalizăm analiza pentru rolul specific — identificând competențe lipsă, cerințe potrivite și construind planul tău.",
-      "titleLabel": "Titlu Job",
-      "titlePlaceholder": "ex., Inginer Frontend Senior",
+      "subtitle": "Lipește descrierea completă a jobului mai jos. Acest lucru ne permite să personalizăm analiza pentru rolul specific — identificând competențe lipsă, cerințe potrivite și construind planul tău.",
       "descriptionLabel": "Descriere Job",
       "pasteHere": "Lipește descrierea completă a jobului aici...",
       "hint": "Include anunțul complet: responsabilități, cerințe, calificări, etc.",

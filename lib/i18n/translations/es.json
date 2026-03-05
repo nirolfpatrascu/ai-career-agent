@@ -430,9 +430,7 @@
     },
     "jobs": {
       "title": "Pega tu empleo objetivo",
-      "subtitle": "Introduce el título del puesto y pega la descripción completa abajo. Esto nos permite adaptar el análisis al rol específico — identificar competencias faltantes, comparar requisitos y construir tu hoja de ruta.",
-      "titleLabel": "Título del Puesto",
-      "titlePlaceholder": "ej., Ingeniero Frontend Senior",
+      "subtitle": "Pega la descripción completa del empleo abajo. Esto nos permite adaptar el análisis al rol específico — identificar competencias faltantes, comparar requisitos y construir tu hoja de ruta.",
       "descriptionLabel": "Descripción del Empleo",
       "pasteHere": "Pega la descripción completa del empleo aquí...",
       "hint": "Incluye el anuncio completo: responsabilidades, requisitos, cualificaciones, etc.",
