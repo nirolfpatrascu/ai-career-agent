@@ -83,29 +83,48 @@ export function validateAnalysisResult(
   });
 
   // Cross-check: fitScore ↔ gap coherence
+  // Rubric: 9-10 = no critical gaps; 7-8 = minor gaps closable in weeks;
+  //         5-6 = 1-2 critical gaps, months of effort; 3-4 = significant gaps
   const criticalGapCount = result.gaps.filter(g => g.severity === 'critical').length;
+  const moderateGapCount = result.gaps.filter(g => g.severity === 'moderate').length;
   const totalGapCount = result.gaps.length;
 
-  if (result.fitScore.score >= 9 && criticalGapCount >= 2) {
+  // Any critical gap means score cannot be 8+ ("Strong Fit" = minor gaps only)
+  if (result.fitScore.score >= 8 && criticalGapCount >= 1) {
+    const cap = criticalGapCount >= 3 ? 5 : criticalGapCount >= 2 ? 6 : 7;
     issues.push({
       section: 'fitScore',
       severity: 'warning',
       field: 'fitScore.score',
-      message: `Fit score ${result.fitScore.score} is too optimistic with ${criticalGapCount} critical gaps. Auto-capping at 7.`,
+      message: `Fit score ${result.fitScore.score} is too optimistic with ${criticalGapCount} critical gap(s). Auto-capping at ${cap}.`,
+      autoFixable: true,
+      autoFixAction: `Cap fitScore at ${cap} due to critical gaps`,
+    });
+  }
+  // Score 9-10 requires near-perfect fit — many moderate gaps disqualify
+  else if (result.fitScore.score >= 9 && moderateGapCount >= 3) {
+    issues.push({
+      section: 'fitScore',
+      severity: 'warning',
+      field: 'fitScore.score',
+      message: `Fit score ${result.fitScore.score} is too optimistic with ${moderateGapCount} moderate gaps. Auto-capping at 8.`,
+      autoFixable: true,
+      autoFixAction: 'Cap fitScore at 8 due to critical gaps',
+    });
+  }
+  // Score 8+ with 4+ moderate gaps suggests overrating — months of work needed
+  else if (result.fitScore.score >= 8 && moderateGapCount >= 4) {
+    issues.push({
+      section: 'fitScore',
+      severity: 'warning',
+      field: 'fitScore.score',
+      message: `Fit score ${result.fitScore.score} seems high with ${moderateGapCount} moderate gaps requiring months of effort. Auto-capping at 7.`,
       autoFixable: true,
       autoFixAction: 'Cap fitScore at 7 due to critical gaps',
     });
-  } else if (result.fitScore.score >= 8 && criticalGapCount >= 3) {
-    issues.push({
-      section: 'fitScore',
-      severity: 'warning',
-      field: 'fitScore.score',
-      message: `Fit score ${result.fitScore.score} is too optimistic with ${criticalGapCount} critical gaps. Auto-capping at 6.`,
-      autoFixable: true,
-      autoFixAction: 'Cap fitScore at 6 due to critical gaps',
-    });
   }
 
+  // Pessimism check: low score but no real gaps
   if (result.fitScore.score <= 3 && criticalGapCount === 0 && totalGapCount <= 2) {
     issues.push({
       section: 'fitScore',

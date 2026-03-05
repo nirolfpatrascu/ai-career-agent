@@ -334,6 +334,29 @@ export async function POST(request: NextRequest) {
         // Sort role recommendations by fitScore descending so best fit is first
         gapAnalysis.roleRecommendations.sort((a, b) => b.fitScore - a.fitScore);
 
+        // Early fitScore coherence check — cap before sending to frontend
+        // Full validation runs later, but gap_done sends scores immediately
+        {
+          const criticalGaps = gapAnalysis.gaps.filter((g: { severity: string }) => g.severity === 'critical').length;
+          const moderateGaps = gapAnalysis.gaps.filter((g: { severity: string }) => g.severity === 'moderate').length;
+          let cap: number | null = null;
+
+          if (gapAnalysis.fitScore.score >= 8 && criticalGaps >= 1) {
+            cap = criticalGaps >= 3 ? 5 : criticalGaps >= 2 ? 6 : 7;
+          } else if (gapAnalysis.fitScore.score >= 9 && moderateGaps >= 3) {
+            cap = 8;
+          } else if (gapAnalysis.fitScore.score >= 8 && moderateGaps >= 4) {
+            cap = 7;
+          }
+
+          if (cap !== null && gapAnalysis.fitScore.score > cap) {
+            logger.info('gap_done.fitScore_capped', { original: gapAnalysis.fitScore.score, cap, criticalGaps, moderateGaps });
+            gapAnalysis.fitScore.score = cap;
+            // Update label to match capped score (same logic as deriveFitLabel in validation.ts)
+            gapAnalysis.fitScore.label = cap >= 8 ? 'Strong Fit' : cap >= 6 ? 'Moderate Fit' : cap >= 4 ? 'Stretch' : 'Significant Gap';
+          }
+        }
+
         // Send gap analysis data — frontend can start showing results
         send({
           step: 'gap_done',
