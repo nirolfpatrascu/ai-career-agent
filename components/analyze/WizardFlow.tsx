@@ -1,8 +1,7 @@
 'use client';
 
-import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import type { CareerQuestionnaire, UpworkProfile } from '@/lib/types';
-import { COUNTRIES, COUNTRY_CURRENCY } from '@/lib/utils';
 import { useTranslation } from '@/lib/i18n';
 import UpworkImport from './UpworkImport';
 
@@ -20,8 +19,8 @@ interface WizardFlowProps {
   onDemo: () => void;
 }
 
-type Step = 'linkedin' | 'cv' | 'details' | 'jobs' | 'review';
-const STEPS: Step[] = ['linkedin', 'cv', 'details', 'jobs', 'review'];
+type Step = 'linkedin' | 'cv' | 'jobs' | 'review';
+const STEPS: Step[] = ['linkedin', 'cv', 'jobs', 'review'];
 
 // ============================================================================
 // Icons
@@ -30,7 +29,6 @@ const STEPS: Step[] = ['linkedin', 'cv', 'details', 'jobs', 'review'];
 const STEP_ICONS: Record<Step, React.ReactNode> = {
   linkedin: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>,
   cv: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>,
-  details: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
   jobs: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>,
   review: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>,
 };
@@ -112,7 +110,6 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
   }, [linkedInFile]);
 
   const stepIndex = STEPS.indexOf(currentStep);
-  const currency = useMemo(() => COUNTRY_CURRENCY[questionnaire.country] || { code: 'EUR', symbol: 'EUR' }, [questionnaire.country]);
 
   // --- Validation ---
   const hasLinkedInOrCV = linkedInFile || cvFile || upworkProfile;
@@ -121,9 +118,8 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
   const canProceed: Record<Step, boolean> = {
     linkedin: true, // LinkedIn is encouraged, not required
     cv: !!hasLinkedInOrCV, // At least one file/profile needed
-    details: !!(questionnaire.currentRole.trim() && questionnaire.targetRole.trim() && questionnaire.yearsExperience > 0 && questionnaire.country),
     jobs: true, // Jobs are encouraged but not blocking
-    review: !!(hasLinkedInOrCV && questionnaire.currentRole.trim() && questionnaire.targetRole.trim() && questionnaire.yearsExperience > 0 && questionnaire.country),
+    review: !!hasLinkedInOrCV,
   };
 
   // --- Navigation ---
@@ -185,7 +181,6 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
   const STEP_LABELS: Record<Step, string> = {
     linkedin: t('wizard.steps.linkedin') as string || 'LinkedIn Profile',
     cv: t('wizard.steps.cv') as string || 'CV / Resume',
-    details: t('wizard.steps.details') as string || 'Career Details',
     jobs: t('wizard.steps.jobs') as string || 'Target Job',
     review: t('wizard.steps.review') as string || 'Review & Analyze',
   };
@@ -434,108 +429,6 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
     </div>
   );
 
-  const renderDetailsStep = () => (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-text-primary font-display mb-2">
-          {t('wizard.details.title') || 'Tell us about your career goals'}
-        </h2>
-        <p className="text-text-secondary text-sm sm:text-base leading-relaxed">
-          {detectedInfo
-            ? (t('wizard.details.prefilled') || 'We pre-filled some fields from your profile. Verify and complete the rest.')
-            : (t('wizard.details.subtitle') || 'This helps us tailor the analysis to your specific situation.')}
-        </p>
-      </div>
-
-      <div className="space-y-5">
-        {/* Current role */}
-        <div>
-          <label htmlFor="w-currentRole" className="label">{t('questionnaire.currentRole') || 'Current Role'} <span className="text-danger text-xs">*</span></label>
-          <input id="w-currentRole" type="text" className="input-field" value={questionnaire.currentRole} onChange={(e) => updateQ('currentRole', e.target.value)} placeholder="e.g., Technical Enablement Engineer" />
-        </div>
-
-        {/* Target role */}
-        <div>
-          <label htmlFor="w-targetRole" className="label">{t('questionnaire.targetRole') || 'Target Role'} <span className="text-danger text-xs">*</span></label>
-          <input id="w-targetRole" type="text" className="input-field" value={questionnaire.targetRole} onChange={(e) => updateQ('targetRole', e.target.value)} placeholder="e.g., AI Solutions Architect" />
-        </div>
-
-        {/* Alt roles */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pl-4 border-l-2 border-primary/20">
-          <div>
-            <label htmlFor="w-targetRole2" className="label text-xs">{t('questionnaire.targetRole2Label') || 'Alternative Role 2'} <span className="text-text-tertiary font-normal">({t('common.optional') || 'optional'})</span></label>
-            <input id="w-targetRole2" type="text" className="input-field text-sm" value={questionnaire.targetRole2 || ''} onChange={(e) => updateQ('targetRole2', e.target.value || undefined)} placeholder="e.g., Technical Enablement Manager" />
-          </div>
-          <div>
-            <label htmlFor="w-targetRole3" className="label text-xs">{t('questionnaire.targetRole3Label') || 'Alternative Role 3'} <span className="text-text-tertiary font-normal">({t('common.optional') || 'optional'})</span></label>
-            <input id="w-targetRole3" type="text" className="input-field text-sm" value={questionnaire.targetRole3 || ''} onChange={(e) => updateQ('targetRole3', e.target.value || undefined)} placeholder="e.g., AI Consultant" />
-          </div>
-        </div>
-
-        {/* Experience + Country row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="w-years" className="label">{t('questionnaire.yearsExperience') || 'Years of Experience'} <span className="text-danger text-xs">*</span></label>
-            <input id="w-years" type="number" min={0} max={50} className="input-field" value={questionnaire.yearsExperience || ''} onChange={(e) => updateQ('yearsExperience', parseInt(e.target.value) || 0)} placeholder="e.g., 14" />
-          </div>
-          <div>
-            <label htmlFor="w-country" className="label">{t('questionnaire.country') || 'Country / Region'} <span className="text-danger text-xs">*</span></label>
-            <select id="w-country" className="input-field" value={questionnaire.country} onChange={(e) => updateQ('country', e.target.value)}>
-              <option value="">{t('questionnaire.selectCountry') || 'Select country'}</option>
-              {COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
-          </div>
-        </div>
-
-        {/* Work preference */}
-        <div>
-          <label className="label">{t('questionnaire.workPreference') || 'Work Preference'}</label>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            {(['remote', 'hybrid', 'onsite', 'flexible'] as const).map(wp => (
-              <button
-                key={wp}
-                type="button"
-                onClick={() => updateQ('workPreference', wp)}
-                className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-sm font-medium transition-all duration-200 border
-                  ${questionnaire.workPreference === wp
-                    ? 'bg-primary/[0.10] border-primary/25 text-primary'
-                    : 'bg-black/[0.02] border-black/[0.08] text-text-tertiary hover:border-black/[0.10] hover:text-text-secondary'
-                  }`}
-              >
-                {WORK_PREF_ICONS[wp]}
-                {t(`questionnaire.workOptions.${wp}`) || wp.charAt(0).toUpperCase() + wp.slice(1)}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Salary */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="w-curSalary" className="label text-xs">
-              {t('questionnaire.currentSalary') || 'Current Annual Salary'}
-              <span className="text-text-tertiary font-normal ml-1">({t('common.optional') || 'optional'})</span>
-            </label>
-            <div className="relative">
-              <input id="w-curSalary" type="number" className="input-field pr-14" value={questionnaire.currentSalary || ''} onChange={(e) => updateQ('currentSalary', parseInt(e.target.value) || undefined)} placeholder="e.g., 55000" />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-text-tertiary bg-black/[0.04] px-2 py-0.5 rounded-md">{currency.code}</span>
-            </div>
-          </div>
-          <div>
-            <label htmlFor="w-tarSalary" className="label text-xs">
-              {t('questionnaire.targetSalary') || 'Target Annual Salary'}
-              <span className="text-text-tertiary font-normal ml-1">({t('common.optional') || 'optional'})</span>
-            </label>
-            <div className="relative">
-              <input id="w-tarSalary" type="number" className="input-field pr-14" value={questionnaire.targetSalary || ''} onChange={(e) => updateQ('targetSalary', parseInt(e.target.value) || undefined)} placeholder="e.g., 85000" />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-text-tertiary bg-black/[0.04] px-2 py-0.5 rounded-md">{currency.code}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
   const renderJobsStep = () => (
     <div className="space-y-6">
       <div>
@@ -572,6 +465,28 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
         <p className="text-xs text-text-tertiary mt-2">
           {t('wizard.jobs.hint') || 'Include the full posting: job title, responsibilities, requirements, qualifications, etc.'}
         </p>
+      </div>
+
+      {/* Work preference */}
+      <div>
+        <label className="label text-sm">{t('questionnaire.workPreference') || 'Work Preference'}</label>
+        <div className="grid grid-cols-3 gap-2">
+          {(['remote', 'hybrid', 'onsite'] as const).map(wp => (
+            <button
+              key={wp}
+              type="button"
+              onClick={() => updateQ('workPreference', wp)}
+              className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-sm font-medium transition-all duration-200 border
+                ${questionnaire.workPreference === wp
+                  ? 'bg-primary/[0.10] border-primary/25 text-primary'
+                  : 'bg-black/[0.02] border-black/[0.08] text-text-tertiary hover:border-black/[0.10] hover:text-text-secondary'
+                }`}
+            >
+              {WORK_PREF_ICONS[wp]}
+              {t(`questionnaire.workOptions.${wp}`) || wp.charAt(0).toUpperCase() + wp.slice(1)}
+            </button>
+          ))}
+        </div>
       </div>
 
       <p className="text-xs text-text-tertiary">
@@ -618,21 +533,6 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
           t={t}
         />
 
-        {/* Career details */}
-        <ReviewCard
-          step="details"
-          label={STEP_LABELS.details}
-          icon={STEP_ICONS.details}
-          status={questionnaire.currentRole && questionnaire.targetRole
-            ? `${questionnaire.currentRole} → ${questionnaire.targetRole} · ${questionnaire.yearsExperience} yrs · ${questionnaire.country}`
-            : (t('wizard.review.incomplete') || 'Incomplete')
-          }
-          done={canProceed.details}
-          required={!canProceed.details}
-          onEdit={() => goToStep('details')}
-          t={t}
-        />
-
         {/* Job description */}
         <ReviewCard
           step="jobs"
@@ -665,9 +565,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
         </button>
         {!canProceed.review && (
           <p className="text-sm text-danger text-center mt-3">
-            {!hasLinkedInOrCV
-              ? (t('wizard.review.needFile') || 'Upload at least a CV or LinkedIn PDF')
-              : (t('wizard.review.needDetails') || 'Complete all required career details')}
+            {t('wizard.review.needFile') || 'Upload at least a CV or LinkedIn PDF'}
           </p>
         )}
       </div>
@@ -680,7 +578,6 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
   const stepRenderers: Record<Step, () => React.ReactNode> = {
     linkedin: renderLinkedInStep,
     cv: renderCVStep,
-    details: renderDetailsStep,
     jobs: renderJobsStep,
     review: renderReviewStep,
   };
