@@ -429,11 +429,13 @@
       "prefilled": "Abbiamo precompilato alcuni campi dal tuo profilo. Verifica e completa il resto."
     },
     "jobs": {
-      "title": "Incolla la descrizione del lavoro target",
-      "subtitle": "Incolla il titolo e la descrizione completa del lavoro qui sotto. Questo ci permette di adattare l'analisi al ruolo specifico — identificare competenze mancanti, confrontare requisiti e costruire il tuo percorso.",
-      "label": "Titolo Lavoro & Descrizione",
-      "pasteHere": "Incolla qui il titolo e la descrizione del lavoro...",
-      "hint": "Includi l'annuncio completo: titolo del lavoro, responsabilità, requisiti, qualifiche, ecc.",
+      "title": "Incolla il tuo lavoro target",
+      "subtitle": "Inserisci il titolo del lavoro e incolla la descrizione completa qui sotto. Questo ci permette di adattare l'analisi al ruolo specifico — identificare competenze mancanti, confrontare requisiti e costruire il tuo percorso.",
+      "titleLabel": "Titolo Lavoro",
+      "titlePlaceholder": "es., Ingegnere Frontend Senior",
+      "descriptionLabel": "Descrizione Lavoro",
+      "pasteHere": "Incolla la descrizione completa del lavoro qui...",
+      "hint": "Includi l'annuncio completo: responsabilità, requisiti, qualifiche, ecc.",
       "skipNote": "Puoi saltare questo passaggio, ma una descrizione del lavoro migliora significativamente la qualità dell'analisi."
     },
     "review": {

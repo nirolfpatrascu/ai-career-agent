@@ -429,11 +429,13 @@
       "prefilled": "Hemos completado algunos campos de tu perfil. Verifica y completa el resto."
     },
     "jobs": {
-      "title": "Pega la descripción del empleo objetivo",
-      "subtitle": "Pega el título del puesto y la descripción completa abajo. Esto nos permite adaptar el análisis al rol específico — identificar competencias faltantes, comparar requisitos y construir tu hoja de ruta.",
-      "label": "Título del Puesto & Descripción",
-      "pasteHere": "Pega aquí el título del puesto y la descripción...",
-      "hint": "Incluye el anuncio completo: título del puesto, responsabilidades, requisitos, cualificaciones, etc.",
+      "title": "Pega tu empleo objetivo",
+      "subtitle": "Introduce el título del puesto y pega la descripción completa abajo. Esto nos permite adaptar el análisis al rol específico — identificar competencias faltantes, comparar requisitos y construir tu hoja de ruta.",
+      "titleLabel": "Título del Puesto",
+      "titlePlaceholder": "ej., Ingeniero Frontend Senior",
+      "descriptionLabel": "Descripción del Empleo",
+      "pasteHere": "Pega la descripción completa del empleo aquí...",
+      "hint": "Incluye el anuncio completo: responsabilidades, requisitos, cualificaciones, etc.",
       "skipNote": "Puedes saltar este paso, pero una descripción de empleo mejora significativamente la calidad del análisis."
     },
     "review": {

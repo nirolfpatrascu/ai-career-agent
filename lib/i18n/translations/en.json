@@ -427,11 +427,13 @@
       "prefilled": "We pre-filled some fields from your profile. Verify and complete the rest."
     },
     "jobs": {
-      "title": "Paste your target job description",
-      "subtitle": "Paste the job title and full job description below. This allows us to tailor the analysis to the specific role — identifying missing skills, matching requirements, and building your roadmap.",
-      "label": "Job Title & Description",
-      "pasteHere": "Paste here the job title and job description...",
-      "hint": "Include the full posting: job title, responsibilities, requirements, qualifications, etc.",
+      "title": "Paste your target job",
+      "subtitle": "Enter the job title and paste the full description below. This allows us to tailor the analysis to the specific role — identifying missing skills, matching requirements, and building your roadmap.",
+      "titleLabel": "Job Title",
+      "titlePlaceholder": "e.g., Senior Frontend Engineer",
+      "descriptionLabel": "Job Description",
+      "pasteHere": "Paste the full job description here...",
+      "hint": "Include the full posting: responsibilities, requirements, qualifications, etc.",
       "skipNote": "You can skip this step, but providing a job description significantly improves the analysis quality."
     },
     "review": {

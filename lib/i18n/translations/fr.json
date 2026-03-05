@@ -429,11 +429,13 @@
       "prefilled": "Nous avons pré-rempli certains champs à partir de votre profil. Vérifiez et complétez le reste."
     },
     "jobs": {
-      "title": "Collez la description du poste cible",
-      "subtitle": "Collez le titre du poste et la description complète ci-dessous. Cela nous permet d'adapter l'analyse au rôle spécifique — identifier les compétences manquantes, faire correspondre les exigences et construire votre feuille de route.",
-      "label": "Titre du Poste & Description",
-      "pasteHere": "Collez ici le titre du poste et la description...",
-      "hint": "Incluez l'annonce complète : titre du poste, responsabilités, exigences, qualifications, etc.",
+      "title": "Collez votre poste cible",
+      "subtitle": "Entrez le titre du poste et collez la description complète ci-dessous. Cela nous permet d'adapter l'analyse au rôle spécifique — identifier les compétences manquantes, faire correspondre les exigences et construire votre feuille de route.",
+      "titleLabel": "Titre du Poste",
+      "titlePlaceholder": "ex., Ingénieur Frontend Senior",
+      "descriptionLabel": "Description du Poste",
+      "pasteHere": "Collez la description complète du poste ici...",
+      "hint": "Incluez l'annonce complète : responsabilités, exigences, qualifications, etc.",
       "skipNote": "Vous pouvez passer cette étape, mais une description de poste améliore significativement la qualité de l'analyse."
     },
     "review": {

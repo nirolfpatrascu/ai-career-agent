@@ -429,11 +429,13 @@
       "prefilled": "Wir haben einige Felder aus Ihrem Profil vorausgefüllt. Überprüfen und vervollständigen Sie den Rest."
     },
     "jobs": {
-      "title": "Fügen Sie die Ziel-Stellenbeschreibung ein",
-      "subtitle": "Fügen Sie den Jobtitel und die vollständige Stellenbeschreibung unten ein. So können wir die Analyse auf die spezifische Stelle zuschneiden — fehlende Fähigkeiten identifizieren, Anforderungen abgleichen und Ihre Roadmap erstellen.",
-      "label": "Jobtitel & Beschreibung",
-      "pasteHere": "Fügen Sie hier den Jobtitel und die Stellenbeschreibung ein...",
-      "hint": "Fügen Sie die vollständige Anzeige ein: Jobtitel, Aufgaben, Anforderungen, Qualifikationen usw.",
+      "title": "Fügen Sie Ihre Zielstelle ein",
+      "subtitle": "Geben Sie den Jobtitel ein und fügen Sie die vollständige Beschreibung unten ein. So können wir die Analyse auf die spezifische Stelle zuschneiden — fehlende Fähigkeiten identifizieren, Anforderungen abgleichen und Ihre Roadmap erstellen.",
+      "titleLabel": "Jobtitel",
+      "titlePlaceholder": "z.B., Senior Frontend-Entwickler",
+      "descriptionLabel": "Stellenbeschreibung",
+      "pasteHere": "Fügen Sie die vollständige Stellenbeschreibung hier ein...",
+      "hint": "Fügen Sie die vollständige Anzeige ein: Aufgaben, Anforderungen, Qualifikationen usw.",
       "skipNote": "Sie können diesen Schritt überspringen, aber eine Stellenbeschreibung verbessert die Analysequalität erheblich."
     },
     "review": {

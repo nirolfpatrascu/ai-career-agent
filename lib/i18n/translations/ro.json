@@ -429,11 +429,13 @@
       "prefilled": "Am completat automat câteva câmpuri din profilul tău. Verifică și completează restul."
     },
     "jobs": {
-      "title": "Lipește descrierea jobului țintă",
-      "subtitle": "Lipește titlul și descrierea completă a jobului mai jos. Acest lucru ne permite să personalizăm analiza pentru rolul specific — identificând competențe lipsă, cerințe potrivite și construind planul tău.",
-      "label": "Titlu Job & Descriere",
-      "pasteHere": "Lipește aici titlul și descrierea jobului...",
-      "hint": "Include anunțul complet: titlul jobului, responsabilități, cerințe, calificări, etc.",
+      "title": "Lipește jobul tău țintă",
+      "subtitle": "Introdu titlul jobului și lipește descrierea completă mai jos. Acest lucru ne permite să personalizăm analiza pentru rolul specific — identificând competențe lipsă, cerințe potrivite și construind planul tău.",
+      "titleLabel": "Titlu Job",
+      "titlePlaceholder": "ex., Inginer Frontend Senior",
+      "descriptionLabel": "Descriere Job",
+      "pasteHere": "Lipește descrierea completă a jobului aici...",
+      "hint": "Include anunțul complet: responsabilități, cerințe, calificări, etc.",
       "skipNote": "Poți sări peste acest pas, dar adăugarea unei descrieri de job îmbunătățește semnificativ calitatea analizei."
     },
     "review": {
