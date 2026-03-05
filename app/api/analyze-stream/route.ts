@@ -195,6 +195,10 @@ export async function POST(request: NextRequest) {
   if (questionnaire.jobPosting && questionnaire.jobPosting.length > 50000) {
     questionnaire.jobPosting = questionnaire.jobPosting.slice(0, 50000);
   }
+  // Truncate additional context to prevent oversized input
+  if (questionnaire.additionalContext && questionnaire.additionalContext.length > 2000) {
+    questionnaire.additionalContext = questionnaire.additionalContext.slice(0, 2000);
+  }
 
   // --- Quota check for authenticated users ---
   const { client: authClient, userId: authUserId } = await getAuthenticatedClient(request);

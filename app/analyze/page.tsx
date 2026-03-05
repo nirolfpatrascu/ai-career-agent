@@ -204,6 +204,7 @@ export default function AnalyzePage() {
             workPreference: storedProfile.workPreference || 'flexible',
             githubUrl: storedProfile.githubUrl || undefined,
             jobPosting: jobDescription || undefined,
+            additionalContext: storedProfile.additionalContext || undefined,
             language: locale,
           };
 

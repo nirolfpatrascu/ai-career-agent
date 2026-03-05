@@ -187,6 +187,8 @@ ${JSON.stringify(roleRecommendations, null, 2)}
 
 ${curatedSalaryContext}
 
+${questionnaire.additionalContext ? `CANDIDATE-PROVIDED CONTEXT:\n${questionnaire.additionalContext.slice(0, 2000)}\n\nConsider this when creating action items — it may reveal skills, activities, or circumstances that affect the plan's priorities and timeline.` : ''}
+
 ${knowledgeContext ? `REFERENCE DATA (use to calibrate salary ranges, action items, and negotiation tips — do NOT copy verbatim, synthesize into personalized recommendations):\n${knowledgeContext}` : ''}
 
 Create the action plan and salary analysis as JSON. Remember: ALL salary figures must be GROSS ANNUAL. Use curated data when provided (source: "market"), estimate otherwise (source: "estimate").`;

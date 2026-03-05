@@ -109,6 +109,10 @@ export default function ChatPanel({ analysis }: ChatPanelProps) {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
+        if (response.status === 403 && errorData.message) {
+          // Quota exceeded — show the server message (includes upgrade prompt text)
+          throw new Error(errorData.message);
+        }
         throw new Error(errorData.error || 'Chat request failed');
       }
 

@@ -21,6 +21,7 @@ export interface CareerQuestionnaire {
   language?: string;          // 'en' | 'ro' | 'de' — for localized AI responses
   linkedInProfile?: string;   // Raw LinkedIn profile text for supplementary data
   githubUrl?: string;         // GitHub profile URL for repo/language analysis
+  additionalContext?: string; // User-provided context about career gaps, freelance work, etc.
 }
 
 export interface JobPostingInput {
