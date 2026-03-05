@@ -2,6 +2,8 @@ import { NextRequest } from 'next/server';
 import { streamClaude } from '@/lib/claude';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { getLanguageInstruction } from '@/lib/prompts/language';
+import { getAuthenticatedClient } from '@/lib/supabase/server';
+import { checkQuota, incrementQuota } from '@/lib/quota';
 import type { AnalysisResult } from '@/lib/types';
 
 export const maxDuration = 60;
@@ -125,6 +127,24 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  // Quota check — career coach is Pro-only (coach_limit=0 for free)
+  const { client: authClient, userId: authUserId } = await getAuthenticatedClient(request);
+  if (authClient && authUserId) {
+    const quotaCheck = await checkQuota(authClient, authUserId, 'coach_request');
+    if (!quotaCheck.allowed) {
+      return new Response(
+        JSON.stringify({
+          error: 'Quota exceeded',
+          message: quotaCheck.limit === 0
+            ? 'AI Career Coach is available on the Pro plan. Upgrade to get 10 weekly sessions.'
+            : 'You have used all your coach sessions for this week.',
+          quota: { used: quotaCheck.used, limit: quotaCheck.limit, resetAt: quotaCheck.resetAt },
+        }),
+        { status: 403, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+  }
+
   try {
     const body: ChatRequest = await request.json();
 
@@ -169,6 +189,11 @@ export async function POST(request: NextRequest) {
       maxTokens: 2048,
       temperature: 0.4,
     });
+
+    // Increment quota (stream created successfully)
+    if (authClient && authUserId) {
+      try { await incrementQuota(authClient, authUserId, 'coach_request'); } catch { /* fail silently */ }
+    }
 
     return new Response(stream, {
       headers: {

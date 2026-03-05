@@ -3,6 +3,8 @@ import { callClaude } from '@/lib/claude';
 import { checkRateLimit, getRateLimitHeaders } from '@/lib/rate-limit';
 import { buildCVRewritePrompt, CV_REWRITE_FALLBACK } from '@/lib/prompts';
 import { buildKnowledgeContext } from '@/lib/knowledge';
+import { getAuthenticatedClient } from '@/lib/supabase/server';
+import { checkQuota, incrementQuota } from '@/lib/quota';
 import type { CVRewriteResult } from '@/lib/prompts/cv-rewriter';
 import type { Gap } from '@/lib/types';
 
@@ -22,6 +24,22 @@ export async function POST(request: NextRequest) {
         { error: 'Rate limited', message: 'Too many requests. Please try again later.' },
         { status: 429, headers: getRateLimitHeaders(ip) }
       );
+    }
+
+    // Quota check
+    const { client: authClient, userId } = await getAuthenticatedClient(request);
+    if (authClient && userId) {
+      const quotaCheck = await checkQuota(authClient, userId, 'cv_generation');
+      if (!quotaCheck.allowed) {
+        return NextResponse.json(
+          {
+            error: 'Quota exceeded',
+            message: 'You have used all your CV generations for this week. Upgrade to Pro for 10 weekly generations.',
+            quota: { used: quotaCheck.used, limit: quotaCheck.limit, resetAt: quotaCheck.resetAt },
+          },
+          { status: 403 }
+        );
+      }
     }
 
     const body = await request.json();
@@ -54,6 +72,11 @@ export async function POST(request: NextRequest) {
       temperature: 0.4,
       fallback: CV_REWRITE_FALLBACK,
     });
+
+    // Increment quota on success
+    if (authClient && userId) {
+      try { await incrementQuota(authClient, userId, 'cv_generation'); } catch { /* fail silently */ }
+    }
 
     return NextResponse.json(result, {
       status: 200,

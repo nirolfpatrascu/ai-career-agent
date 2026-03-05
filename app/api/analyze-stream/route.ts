@@ -36,6 +36,8 @@ import type { GapAnalysisResult } from '@/lib/prompts/gap-analysis';
 import type { CareerPlanResult } from '@/lib/prompts/career-plan';
 import { logger } from '@/lib/logger';
 import { MetricsCollector } from '@/lib/metrics';
+import { getAuthenticatedClient } from '@/lib/supabase/server';
+import { checkQuota, incrementQuota } from '@/lib/quota';
 
 export const maxDuration = 300;
 
@@ -192,6 +194,29 @@ export async function POST(request: NextRequest) {
   // Truncate job posting to prevent oversized input to Claude
   if (questionnaire.jobPosting && questionnaire.jobPosting.length > 50000) {
     questionnaire.jobPosting = questionnaire.jobPosting.slice(0, 50000);
+  }
+
+  // --- Quota check for authenticated users ---
+  const { client: authClient, userId: authUserId } = await getAuthenticatedClient(request);
+  let isInitialAnalysis = false;
+  if (authClient && authUserId) {
+    try {
+      const quotaCheck = await checkQuota(authClient, authUserId, 'analysis');
+      if (!quotaCheck.allowed) {
+        return new Response(
+          JSON.stringify({
+            error: 'Quota exceeded',
+            message: 'You have used all your analyses for this week. Upgrade to Pro for 10 weekly analyses.',
+            quota: { used: quotaCheck.used, limit: quotaCheck.limit, resetAt: quotaCheck.resetAt },
+          }),
+          { status: 403, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+      isInitialAnalysis = !!quotaCheck.isInitialAnalysis;
+    } catch (e) {
+      logger.warn('quota.check_failed', { error: e instanceof Error ? e.message : String(e) });
+      // Allow analysis to proceed if quota check fails (fail-open)
+    }
   }
 
   // --- All validation passed — open SSE stream ---
@@ -663,6 +688,15 @@ export async function POST(request: NextRequest) {
           warnings: validationReport.issues.filter(i => i.severity === 'warning').length,
           autoFixed: validationReport.autoFixed,
         });
+
+        // Increment quota on success
+        if (authClient && authUserId) {
+          try {
+            await incrementQuota(authClient, authUserId, 'analysis', isInitialAnalysis);
+          } catch (e) {
+            logger.warn('quota.increment_failed', { error: e instanceof Error ? e.message : String(e) });
+          }
+        }
 
         // Sanitize and send final result
         const sanitized = sanitizeResult(result);

@@ -167,7 +167,7 @@ export default function PricingPage() {
           </h2>
           <div className="space-y-6">
             <div>
-              <h3 className="font-semibold text-text-primary mb-1">What counts as my "initial analysis"?</h3>
+              <h3 className="font-semibold text-text-primary mb-1">What counts as my &ldquo;initial analysis&rdquo;?</h3>
               <p className="text-text-secondary text-sm">
                 Your very first career analysis is always free and doesn&apos;t count toward your weekly limit.
                 Use it to explore the platform and optimize your LinkedIn profile and CV.

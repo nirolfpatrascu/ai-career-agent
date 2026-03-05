@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAuthenticatedClient } from '@/lib/supabase/server';
-import { stripe, isStripeConfigured } from '@/lib/stripe';
+import { getStripe, isStripeConfigured } from '@/lib/stripe';
 
 /**
  * POST /api/stripe/portal — Create a Stripe Customer Portal session.
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
 
     const origin = req.headers.get('origin') || 'http://localhost:3000';
 
-    const session = await stripe.billingPortal.sessions.create({
+    const session = await getStripe().billingPortal.sessions.create({
       customer: quota.stripe_customer_id,
       return_url: `${origin}/dashboard?tab=profile`,
     });

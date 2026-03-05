@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { stripe, isStripeConfigured } from '@/lib/stripe';
+import { getStripe, isStripeConfigured } from '@/lib/stripe';
 import { createClient } from '@supabase/supabase-js';
 import { upgradeToPro, downgradeToFree, updateSubscriptionStatus } from '@/lib/quota';
 import type Stripe from 'stripe';
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
 
   let event: Stripe.Event;
   try {
-    event = stripe.webhooks.constructEvent(
+    event = getStripe().webhooks.constructEvent(
       body,
       signature,
       process.env.STRIPE_WEBHOOK_SECRET!
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
         }
 
         // Fetch subscription for period end (v20+: period on items)
-        const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+        const subscription = await getStripe().subscriptions.retrieve(subscriptionId);
         const firstItem = subscription.items?.data?.[0];
         const periodEnd = firstItem
           ? new Date(firstItem.current_period_end * 1000).toISOString()
@@ -119,7 +119,7 @@ export async function POST(req: NextRequest) {
 
         if (!subscriptionId) break;
 
-        const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+        const subscription = await getStripe().subscriptions.retrieve(subscriptionId);
         const userId = subscription.metadata?.userId;
 
         if (!userId) break;

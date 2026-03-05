@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { callClaude } from '@/lib/claude';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { getAuthenticatedClient } from '@/lib/supabase/server';
+import { checkQuota, incrementQuota } from '@/lib/quota';
 import {
   buildUpworkCoverLetterPrompt,
   UPWORK_COVER_LETTER_FALLBACK,
@@ -40,6 +41,19 @@ export async function POST(request: NextRequest) {
           resetAt: new Date(rateLimit.resetAt).toISOString(),
         },
         { status: 429 }
+      );
+    }
+
+    // --- Quota check ---
+    const quotaCheck = await checkQuota(client!, userId!, 'cover_letter');
+    if (!quotaCheck.allowed) {
+      return NextResponse.json(
+        {
+          error: 'Quota exceeded',
+          message: 'You have used all your cover letter generations for this week. Upgrade to Pro for 10 weekly generations.',
+          quota: { used: quotaCheck.used, limit: quotaCheck.limit, resetAt: quotaCheck.resetAt },
+        },
+        { status: 403 }
       );
     }
 
@@ -95,6 +109,9 @@ export async function POST(request: NextRequest) {
     });
 
     console.log(`[generate-cover-letter] Cover letter generated: ${coverLetter.screeningAnswers?.length || 0} screening answers`);
+
+    // Increment quota on success
+    try { await incrementQuota(client!, userId!, 'cover_letter'); } catch { /* fail silently */ }
 
     return NextResponse.json({ coverLetter }, { status: 200 });
   } catch (error) {
