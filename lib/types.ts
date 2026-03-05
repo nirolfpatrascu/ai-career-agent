@@ -211,6 +211,7 @@ export interface CareerProfile {
   cvFilename: string | null;
   linkedinFilename: string | null;
   extractedProfile: ExtractedProfile | null;
+  additionalContext: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -225,6 +226,7 @@ export interface CareerProfileInput {
   cvFilename?: string;
   linkedinFilename?: string;
   extractedProfile?: ExtractedProfile;
+  additionalContext?: string;
 }
 
 // --- API Request/Response Types ---

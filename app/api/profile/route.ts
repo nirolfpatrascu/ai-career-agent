@@ -18,6 +18,7 @@ function mapRow(row: Record<string, unknown>): CareerProfile {
     cvFilename: row.cv_filename as string | null,
     linkedinFilename: row.linkedin_filename as string | null,
     extractedProfile: row.extracted_profile as CareerProfile['extractedProfile'],
+    additionalContext: row.additional_context as string | null,
     createdAt: row.created_at as string,
     updatedAt: row.updated_at as string,
   };
@@ -85,6 +86,9 @@ export async function PUT(req: NextRequest) {
     cv_filename: input.cvFilename ?? null,
     linkedin_filename: input.linkedinFilename ?? null,
     extracted_profile: input.extractedProfile ?? null,
+    additional_context: input.additionalContext !== undefined
+      ? (input.additionalContext || '').slice(0, 5000)
+      : undefined,
   };
 
   // Upload CV if provided
