@@ -509,7 +509,29 @@
     "viewAnalysis": "Vedi analisi",
     "delete": "Elimina",
     "confirmDelete": "Sei sicuro di voler eliminare questa analisi?",
-    "useSignIn": "Clicca su Accedi nell'intestazione per iniziare"
+    "useSignIn": "Clicca su Accedi nell'intestazione per iniziare",
+    "tabs": {
+      "profile": "Profilo",
+      "analyses": "Analisi",
+      "jobs": "Lavori"
+    }
+  },
+  "profile": {
+    "careerDetails": "Dettagli carriera",
+    "documents": "Documenti",
+    "cvDocument": "CV / Curriculum",
+    "linkedinDocument": "LinkedIn PDF",
+    "noFile": "Nessun file caricato",
+    "replace": "Sostituisci",
+    "upload": "Carica",
+    "quickAnalysis": "Analisi rapida",
+    "quickAnalysisHint": "Esegui una nuova analisi usando il tuo profilo e i documenti salvati. Facoltativamente, aggiungi una descrizione del lavoro per un'analisi mirata.",
+    "jobDescriptionPlaceholder": "Incolla una descrizione del lavoro per un'analisi mirata (opzionale)...",
+    "usesStoredProfile": "Usa il tuo CV, LinkedIn PDF e dettagli di carriera salvati",
+    "runAnalysis": "Esegui analisi",
+    "empty": "Nessun profilo ancora",
+    "emptySubtitle": "Completa la tua prima analisi di carriera per creare il tuo profilo",
+    "runFirstAnalysis": "Esegui la tua prima analisi"
   },
   "motivation": {
     "fitScore": "Questo punteggio riflette dove sei oggi — non dove puoi essere. Ogni lacuna colmata alza questo numero.",
@@ -841,6 +863,23 @@
       "updateError": "Impossibile aggiornare il lavoro",
       "deleteError": "Impossibile eliminare il lavoro",
       "deleted": "Lavoro eliminato"
+    },
+    "status": {
+      "saved": "Salvato",
+      "applied": "Candidato",
+      "interviewing": "In colloquio",
+      "offer": "Offerta",
+      "rejected": "Rifiutato",
+      "withdrawn": "Ritirato"
+    },
+    "stats": {
+      "total": "Totale",
+      "avgMatch": "Corrisp. media",
+      "followUpsDue": "Follow-up in scadenza"
+    },
+    "pipeline": {
+      "title": "Pipeline lavori",
+      "viewTracker": "Vedi tracker"
     }
   }
 }

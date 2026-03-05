@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import type { RoleRecommendation } from '@/lib/types';
 import { getFitScoreColor, formatCurrency } from '@/lib/utils';
 import { useTranslation } from '@/lib/i18n';
@@ -11,7 +12,8 @@ interface RoleRecommendationsProps {
 
 export default function RoleRecommendations({ roles }: RoleRecommendationsProps) {
   const { t } = useTranslation();
-  if (roles.length === 0) return null;
+  const sortedRoles = useMemo(() => [...roles].sort((a, b) => b.fitScore - a.fitScore), [roles]);
+  if (sortedRoles.length === 0) return null;
 
   return (
     <section>
@@ -28,7 +30,7 @@ export default function RoleRecommendations({ roles }: RoleRecommendationsProps)
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        {roles.map((role, i) => {
+        {sortedRoles.map((role, i) => {
           const color = getFitScoreColor(role.fitScore);
           const isBest = i === 0;
           return (

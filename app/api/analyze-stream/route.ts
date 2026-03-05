@@ -331,6 +331,9 @@ export async function POST(request: NextRequest) {
         metrics.recordStepTokens('gap_analysis', estimateTokens(gapPrompt.system + gapPrompt.userMessage), estimateTokens(JSON.stringify(gapAnalysis)), gapResult.source);
         logger.debug('gap_analysis.done', { gaps: gapAnalysis.gaps.length, strengths: gapAnalysis.strengths.length, source: gapResult.source });
 
+        // Sort role recommendations by fitScore descending so best fit is first
+        gapAnalysis.roleRecommendations.sort((a, b) => b.fitScore - a.fitScore);
+
         // Send gap analysis data — frontend can start showing results
         send({
           step: 'gap_done',

@@ -196,6 +196,37 @@ export interface LanguageItem {
   level: string;
 }
 
+// --- Career Profile Types (persistent user data) ---
+
+export interface CareerProfile {
+  userId: string;
+  currentRole: string | null;
+  targetRole: string | null;
+  yearsExperience: number | null;
+  country: string | null;
+  workPreference: 'remote' | 'hybrid' | 'onsite' | 'flexible' | null;
+  githubUrl: string | null;
+  cvStoragePath: string | null;
+  linkedinStoragePath: string | null;
+  cvFilename: string | null;
+  linkedinFilename: string | null;
+  extractedProfile: ExtractedProfile | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CareerProfileInput {
+  currentRole?: string;
+  targetRole?: string;
+  yearsExperience?: number;
+  country?: string;
+  workPreference?: 'remote' | 'hybrid' | 'onsite' | 'flexible';
+  githubUrl?: string;
+  cvFilename?: string;
+  linkedinFilename?: string;
+  extractedProfile?: ExtractedProfile;
+}
+
 // --- API Request/Response Types ---
 
 export interface AnalyzeRequest {

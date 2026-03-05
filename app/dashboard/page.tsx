@@ -2,18 +2,16 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
 import { useAuth } from '@/lib/auth/context';
 import { useTranslation } from '@/lib/i18n';
-
-interface JobPipelineStats {
-  total: number;
-  byStatus: Record<string, number>;
-  avgMatchScore: number | null;
-  followUpsDue: number;
-}
+import DashboardTabs, { type DashboardTab } from '@/components/dashboard/DashboardTabs';
+import AnalysesTab from '@/components/dashboard/AnalysesTab';
+import ProfileTab from '@/components/dashboard/ProfileTab';
+import JobTrackerContent from '@/components/jobs/JobTrackerContent';
+import type { CareerProfile } from '@/lib/types';
 
 interface SavedAnalysis {
   id: string;
@@ -27,32 +25,57 @@ interface SavedAnalysis {
   created_at: string;
 }
 
-function ScoreBadge({ score }: { score: number }) {
-  const color = score >= 7 ? 'text-success bg-success/10 border-success/20'
-    : score >= 5 ? 'text-amber-400 bg-amber-400/10 border-amber-400/20'
-    : 'text-danger bg-danger/10 border-danger/20';
-
-  return (
-    <span className={`inline-flex items-center justify-center w-10 h-10 rounded-xl border text-lg font-bold ${color}`}>
-      {score}
-    </span>
-  );
-}
-
 export default function DashboardPage() {
   const { t } = useTranslation();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { user, session, loading: authLoading } = useAuth();
+
   const [analyses, setAnalyses] = useState<SavedAnalysis[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null);
-  const [pipelineStats, setPipelineStats] = useState<JobPipelineStats | null>(null);
+  const [profile, setProfile] = useState<CareerProfile | null>(null);
+  const [profileLoading, setProfileLoading] = useState(true);
+  const [jobsCount, setJobsCount] = useState(0);
+
+  // Determine initial tab from URL or defaults
+  const tabParam = searchParams.get('tab') as DashboardTab | null;
+  const [activeTab, setActiveTab] = useState<DashboardTab>(
+    tabParam && ['profile', 'analyses', 'jobs'].includes(tabParam)
+      ? tabParam
+      : 'profile'
+  );
+
+  // Sync tab changes to URL
+  const handleTabChange = useCallback((tab: DashboardTab) => {
+    setActiveTab(tab);
+    const url = tab === 'profile' ? '/dashboard' : `/dashboard?tab=${tab}`;
+    window.history.replaceState({}, '', url);
+  }, []);
+
+  // Fetch career profile
+  const fetchProfile = useCallback(async () => {
+    if (!session?.access_token) return;
+    setProfileLoading(true);
+    try {
+      const res = await fetch('/api/profile', {
+        headers: { Authorization: `Bearer ${session.access_token}` },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setProfile(data.profile || null);
+      }
+    } catch {
+      // Non-critical
+    } finally {
+      setProfileLoading(false);
+    }
+  }, [session?.access_token]);
 
   // Fetch analyses
   const fetchAnalyses = useCallback(async () => {
     if (!session?.access_token) return;
     setLoading(true);
-
     try {
       const res = await fetch('/api/analyses', {
         headers: { Authorization: `Bearer ${session.access_token}` },
@@ -68,8 +91,8 @@ export default function DashboardPage() {
     }
   }, [session?.access_token]);
 
-  // Fetch pipeline stats
-  const fetchPipelineStats = useCallback(async () => {
+  // Fetch job count for tab badge
+  const fetchJobsCount = useCallback(async () => {
     if (!session?.access_token) return;
     try {
       const res = await fetch('/api/jobs', {
@@ -77,23 +100,36 @@ export default function DashboardPage() {
       });
       if (res.ok) {
         const data = await res.json();
-        if (data.stats && data.stats.total > 0) {
-          setPipelineStats(data.stats);
-        }
+        setJobsCount(data.stats?.total || data.jobs?.length || 0);
       }
     } catch {
-      // Silently fail — pipeline card is optional
+      // Non-critical
     }
   }, [session?.access_token]);
 
   useEffect(() => {
     if (user && session) {
+      fetchProfile();
       fetchAnalyses();
-      fetchPipelineStats();
+      fetchJobsCount();
     } else if (!authLoading) {
       setLoading(false);
+      setProfileLoading(false);
     }
-  }, [user, session, authLoading, fetchAnalyses, fetchPipelineStats]);
+  }, [user, session, authLoading, fetchProfile, fetchAnalyses, fetchJobsCount]);
+
+  // Set smart default tab after data loads
+  useEffect(() => {
+    if (!tabParam && !loading && !profileLoading) {
+      if (profile) {
+        setActiveTab('profile');
+      } else if (analyses.length > 0) {
+        setActiveTab('analyses');
+      } else {
+        setActiveTab('profile');
+      }
+    }
+  }, [tabParam, loading, profileLoading, profile, analyses.length]);
 
   // Delete analysis
   const handleDelete = useCallback(async (id: string) => {
@@ -156,57 +192,8 @@ export default function DashboardPage() {
       <Header />
       <main className="pt-24 pb-12 px-4 sm:px-6 min-h-screen">
         <div className="max-w-container mx-auto">
-          {/* Pipeline summary card */}
-          {pipelineStats && (
-            <Link
-              href="/dashboard/jobs"
-              className="block mb-6 bg-white border border-black/[0.08] rounded-2xl p-5 hover:border-primary/20 hover:shadow-sm transition-all group"
-            >
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
-                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-                  </svg>
-                  <span className="text-sm font-semibold text-text-primary">{t('jobs.pipeline.title')}</span>
-                </div>
-                <span className="text-xs text-primary font-medium group-hover:underline">{t('jobs.pipeline.viewTracker')} →</span>
-              </div>
-              <div className="flex flex-wrap items-center gap-3 text-xs">
-                <span className="text-text-secondary">{pipelineStats.total} {t('jobs.stats.total').toLowerCase()}</span>
-                {Object.entries(pipelineStats.byStatus).map(([status, count]) =>
-                  count > 0 ? (
-                    <span key={status} className="flex items-center gap-1.5 text-text-secondary">
-                      <span
-                        className="inline-block w-2 h-2 rounded-full"
-                        style={{
-                          backgroundColor:
-                            status === 'saved' ? '#6B7280' :
-                            status === 'applied' ? '#3B82F6' :
-                            status === 'interviewing' ? '#8B5CF6' :
-                            status === 'offer' ? '#22C55E' :
-                            status === 'rejected' ? '#EF4444' : '#9CA3AF'
-                        }}
-                      />
-                      {count} {t(`jobs.status.${status}`).toLowerCase()}
-                    </span>
-                  ) : null
-                )}
-                {pipelineStats.followUpsDue > 0 && (
-                  <span className="text-orange-500 font-medium">
-                    {pipelineStats.followUpsDue} {t('jobs.stats.followUpsDue').toLowerCase()}
-                  </span>
-                )}
-                {pipelineStats.avgMatchScore != null && (
-                  <span className="text-text-tertiary">
-                    {t('jobs.stats.avgMatch')}: {Math.round(pipelineStats.avgMatchScore)}%
-                  </span>
-                )}
-              </div>
-            </Link>
-          )}
-
           {/* Page header */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-text-primary font-display">
                 {t('dashboard.title')}
@@ -223,98 +210,35 @@ export default function DashboardPage() {
             </Link>
           </div>
 
-          {/* Loading state */}
-          {loading && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[1, 2, 3].map(i => (
-                <div key={i} className="bg-black/[0.03] border border-black/[0.06] rounded-2xl p-5 animate-pulse">
-                  <div className="h-5 bg-black/[0.04] rounded w-3/4 mb-3" />
-                  <div className="h-4 bg-black/[0.03] rounded w-1/2 mb-2" />
-                  <div className="h-4 bg-black/[0.03] rounded w-1/3" />
-                </div>
-              ))}
-            </div>
+          {/* Tabs */}
+          <DashboardTabs
+            activeTab={activeTab}
+            onTabChange={handleTabChange}
+            analysesCount={analyses.length}
+            jobsCount={jobsCount}
+            hasProfile={!!profile}
+          />
+
+          {/* Tab content */}
+          {activeTab === 'profile' && (
+            <ProfileTab
+              profile={profile}
+              onProfileUpdate={fetchProfile}
+            />
           )}
 
-          {/* Empty state */}
-          {!loading && analyses.length === 0 && (
-            <div className="text-center py-16">
-              <div className="w-14 h-14 rounded-2xl bg-black/[0.04] border border-black/[0.06] flex items-center justify-center mx-auto mb-4">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-text-tertiary">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
-                </svg>
-              </div>
-              <p className="text-text-secondary mb-1">{t('dashboard.empty')}</p>
-              <p className="text-text-tertiary text-sm mb-6">{t('dashboard.emptySubtitle')}</p>
-              <Link href="/analyze" className="btn-primary text-sm">
-                {t('dashboard.startFirst')}
-              </Link>
-            </div>
+          {activeTab === 'analyses' && (
+            <AnalysesTab
+              analyses={analyses}
+              loading={loading}
+              onOpen={handleOpen}
+              onDelete={handleDelete}
+              deleting={deleting}
+            />
           )}
 
-          {/* Analyses grid */}
-          {!loading && analyses.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {analyses.map((a) => (
-                <div
-                  key={a.id}
-                  className="group bg-black/[0.03] border border-black/[0.06] rounded-2xl p-5 hover:border-primary/20 hover:bg-black/[0.04] transition-all duration-200 cursor-pointer relative"
-                  onClick={() => handleOpen(a.id)}
-                >
-                  <div className="flex items-start justify-between gap-3 mb-3">
-                    <div className="min-w-0 flex-1">
-                      <h3 className="text-base font-semibold text-text-primary truncate">
-                        {a.target_role}
-                      </h3>
-                      <p className="text-xs text-text-tertiary mt-0.5">
-                        {a.country} • {new Date(a.created_at).toLocaleDateString(undefined, {
-                          year: 'numeric', month: 'short', day: 'numeric'
-                        })}
-                      </p>
-                    </div>
-                    <ScoreBadge score={a.fit_score} />
-                  </div>
-
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className={`text-xs font-medium px-2 py-0.5 rounded-md ${
-                      a.fit_score >= 7 ? 'bg-success/10 text-success'
-                      : a.fit_score >= 5 ? 'bg-amber-400/10 text-amber-400'
-                      : 'bg-danger/10 text-danger'
-                    }`}>
-                      {a.fit_label}
-                    </span>
-                    {a.cv_filename && (
-                      <span className="text-xs text-text-tertiary truncate max-w-[150px]">
-                        📄 {a.cv_filename}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Actions */}
-                  <div className="flex items-center justify-between pt-3 border-t border-black/[0.06]">
-                    <span className="text-xs text-primary font-medium group-hover:underline">
-                      {t('dashboard.viewAnalysis')} →
-                    </span>
-                    <button
-                      onClick={(e) => { e.stopPropagation(); handleDelete(a.id); }}
-                      disabled={deleting === a.id}
-                      className="text-text-tertiary hover:text-danger transition-colors p-1.5 rounded-lg hover:bg-danger/[0.06] disabled:opacity-50"
-                      title={t('dashboard.delete')}
-                    >
-                      {deleting === a.id ? (
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="animate-spin">
-                          <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-                        </svg>
-                      ) : (
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                        </svg>
-                      )}
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
+          {activeTab === 'jobs' && (
+            <JobTrackerContent />
           )}
         </div>
       </main>

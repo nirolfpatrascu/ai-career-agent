@@ -509,7 +509,29 @@
     "viewAnalysis": "Voir l'analyse",
     "delete": "Supprimer",
     "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette analyse ?",
-    "useSignIn": "Cliquez sur Connexion dans l'en-tête pour commencer"
+    "useSignIn": "Cliquez sur Connexion dans l'en-tête pour commencer",
+    "tabs": {
+      "profile": "Profil",
+      "analyses": "Analyses",
+      "jobs": "Emplois"
+    }
+  },
+  "profile": {
+    "careerDetails": "Détails de carrière",
+    "documents": "Documents",
+    "cvDocument": "CV / Résumé",
+    "linkedinDocument": "LinkedIn PDF",
+    "noFile": "Aucun fichier téléchargé",
+    "replace": "Remplacer",
+    "upload": "Télécharger",
+    "quickAnalysis": "Analyse rapide",
+    "quickAnalysisHint": "Lancez une nouvelle analyse avec votre profil et vos documents enregistrés. Ajoutez éventuellement une description de poste pour une analyse ciblée.",
+    "jobDescriptionPlaceholder": "Collez une description de poste pour une analyse ciblée (optionnel)...",
+    "usesStoredProfile": "Utilise votre CV, LinkedIn PDF et détails de carrière enregistrés",
+    "runAnalysis": "Lancer l'analyse",
+    "empty": "Pas encore de profil",
+    "emptySubtitle": "Complétez votre première analyse de carrière pour créer votre profil",
+    "runFirstAnalysis": "Lancer votre première analyse"
   },
   "motivation": {
     "fitScore": "Ce score reflète où vous en êtes aujourd'hui — pas où vous pouvez être. Chaque lacune comblée fait monter ce chiffre.",
@@ -841,6 +863,23 @@
       "updateError": "Impossible de mettre à jour l'emploi",
       "deleteError": "Impossible de supprimer l'emploi",
       "deleted": "Emploi supprimé"
+    },
+    "status": {
+      "saved": "Enregistré",
+      "applied": "Postulé",
+      "interviewing": "En entretien",
+      "offer": "Offre",
+      "rejected": "Refusé",
+      "withdrawn": "Retiré"
+    },
+    "stats": {
+      "total": "Total",
+      "avgMatch": "Correspond. moy.",
+      "followUpsDue": "Relances en attente"
+    },
+    "pipeline": {
+      "title": "Pipeline d'emplois",
+      "viewTracker": "Voir le tracker"
     }
   }
 }

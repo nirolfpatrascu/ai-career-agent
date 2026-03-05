@@ -432,7 +432,7 @@ function CareerReport({ result, labels: l }: { result: AnalysisResult; labels?: 
         {/* Roles */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{clean(labels.roles)}</Text>
-          {result.roleRecommendations.map((role: RoleRecommendation, i: number) => (
+          {[...result.roleRecommendations].sort((a, b) => b.fitScore - a.fitScore).map((role: RoleRecommendation, i: number) => (
             <View key={i} style={styles.card}>
               <View style={styles.row}>
                 <Text style={[styles.badge, styles.badgeDifferentiator]}>{role.fitScore}/10</Text>

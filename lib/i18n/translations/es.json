@@ -509,7 +509,29 @@
     "viewAnalysis": "Ver análisis",
     "delete": "Eliminar",
     "confirmDelete": "¿Estás seguro de que quieres eliminar este análisis?",
-    "useSignIn": "Haz clic en Iniciar Sesión en el encabezado para empezar"
+    "useSignIn": "Haz clic en Iniciar Sesión en el encabezado para empezar",
+    "tabs": {
+      "profile": "Perfil",
+      "analyses": "Análisis",
+      "jobs": "Empleos"
+    }
+  },
+  "profile": {
+    "careerDetails": "Detalles de carrera",
+    "documents": "Documentos",
+    "cvDocument": "CV / Currículum",
+    "linkedinDocument": "LinkedIn PDF",
+    "noFile": "Ningún archivo subido",
+    "replace": "Reemplazar",
+    "upload": "Subir",
+    "quickAnalysis": "Análisis rápido",
+    "quickAnalysisHint": "Ejecuta un nuevo análisis usando tu perfil y documentos guardados. Opcionalmente, agrega una descripción del puesto para un análisis dirigido.",
+    "jobDescriptionPlaceholder": "Pega una descripción del puesto para análisis dirigido (opcional)...",
+    "usesStoredProfile": "Usa tu CV, LinkedIn PDF y detalles de carrera guardados",
+    "runAnalysis": "Ejecutar análisis",
+    "empty": "Aún no hay perfil",
+    "emptySubtitle": "Completa tu primer análisis de carrera para crear tu perfil",
+    "runFirstAnalysis": "Ejecutar tu primer análisis"
   },
   "motivation": {
     "fitScore": "Este puntaje refleja dónde estás hoy — no dónde puedes estar. Cada brecha que cierras sube este número.",
@@ -841,6 +863,23 @@
       "updateError": "No se pudo actualizar el empleo",
       "deleteError": "No se pudo eliminar el empleo",
       "deleted": "Empleo eliminado"
+    },
+    "status": {
+      "saved": "Guardado",
+      "applied": "Aplicado",
+      "interviewing": "En entrevista",
+      "offer": "Oferta",
+      "rejected": "Rechazado",
+      "withdrawn": "Retirado"
+    },
+    "stats": {
+      "total": "Total",
+      "avgMatch": "Coincidencia prom.",
+      "followUpsDue": "Seguimientos pendientes"
+    },
+    "pipeline": {
+      "title": "Pipeline de empleos",
+      "viewTracker": "Ver tracker"
     }
   }
 }

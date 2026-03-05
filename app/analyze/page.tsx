@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
@@ -26,7 +26,7 @@ import SectionIntro from '@/components/results/SectionIntro';
 import { getSampleAnalysis } from '@/lib/demo';
 import { useTranslation } from '@/lib/i18n';
 import { useAuth } from '@/lib/auth/context';
-import type { AnalysisResult, CareerQuestionnaire, UpworkProfile, UpworkProfileAnalysis } from '@/lib/types';
+import type { AnalysisResult, CareerQuestionnaire, CareerProfileInput, UpworkProfile, UpworkProfileAnalysis } from '@/lib/types';
 
 type AppState = 'upload' | 'processing' | 'results' | 'error';
 
@@ -44,6 +44,13 @@ export default function AnalyzePage() {
   const [upworkAnalyzing, setUpworkAnalyzing] = useState(false);
   const [githubUrl, setGithubUrl] = useState<string | null>(null);
   const [hasRealCV, setHasRealCV] = useState(false);
+
+  // Store wizard files + questionnaire for profile persistence
+  const wizardDataRef = useRef<{
+    cvFile: File | null;
+    linkedInFile: File | null;
+    questionnaire: CareerQuestionnaire | null;
+  }>({ cvFile: null, linkedInFile: null, questionnaire: null });
 
   // Streaming analysis hook
   const streaming = useStreamingAnalysis();
@@ -74,6 +81,34 @@ export default function AnalyzePage() {
             setSaveStatus(res.ok ? 'saved' : 'error');
           })
           .catch(() => setSaveStatus('error'));
+
+        // Save career profile for persistence
+        const wd = wizardDataRef.current;
+        if (wd.questionnaire) {
+          const profileInput: CareerProfileInput = {
+            currentRole: wd.questionnaire.currentRole,
+            targetRole: wd.questionnaire.targetRole,
+            yearsExperience: wd.questionnaire.yearsExperience,
+            country: wd.questionnaire.country,
+            workPreference: wd.questionnaire.workPreference,
+            githubUrl: wd.questionnaire.githubUrl,
+            cvFilename: wd.cvFile?.name,
+            linkedinFilename: wd.linkedInFile?.name,
+            extractedProfile: enrichedResult.profile ?? undefined,
+          };
+          const profileFormData = new FormData();
+          profileFormData.append('profile', JSON.stringify(profileInput));
+          if (wd.cvFile) profileFormData.append('cv', wd.cvFile);
+          if (wd.linkedInFile) profileFormData.append('linkedin', wd.linkedInFile);
+
+          fetch('/api/profile', {
+            method: 'PUT',
+            headers: { Authorization: `Bearer ${session.access_token}` },
+            body: profileFormData,
+          }).catch(() => {
+            // Profile save is non-critical
+          });
+        }
       }
     }
   }, [streaming.result, session?.access_token, hasRealCV]);
@@ -114,6 +149,75 @@ export default function AnalyzePage() {
         });
       window.history.replaceState({}, '', '/analyze');
     }
+    // Profile-aware re-analysis: fetch stored profile + documents, auto-start
+    if (params.get('fromProfile') === 'true' && session?.access_token) {
+      window.history.replaceState({}, '', '/analyze');
+      setState('processing');
+
+      (async () => {
+        try {
+          const profileRes = await fetch('/api/profile', {
+            headers: { Authorization: `Bearer ${session.access_token}` },
+          });
+          if (!profileRes.ok) throw new Error('No profile');
+          const { profile: storedProfile } = await profileRes.json();
+          if (!storedProfile) throw new Error('No profile');
+
+          // Download stored CV (required) or LinkedIn PDF
+          const { supabase } = await import('@/lib/supabase/client');
+          let cvBlob: Blob | null = null;
+          let linkedinBlob: Blob | null = null;
+
+          if (storedProfile.cvStoragePath) {
+            const { data } = await supabase.storage
+              .from('user-documents')
+              .download(storedProfile.cvStoragePath);
+            if (data) cvBlob = data;
+          }
+          if (storedProfile.linkedinStoragePath) {
+            const { data } = await supabase.storage
+              .from('user-documents')
+              .download(storedProfile.linkedinStoragePath);
+            if (data) linkedinBlob = data;
+          }
+
+          if (!cvBlob && !linkedinBlob) throw new Error('No documents stored');
+
+          const jobDescription = sessionStorage.getItem('gapzero_job_description') || '';
+          sessionStorage.removeItem('gapzero_job_description');
+
+          const questionnaire: CareerQuestionnaire = {
+            currentRole: storedProfile.currentRole || '',
+            targetRole: storedProfile.targetRole || '',
+            yearsExperience: storedProfile.yearsExperience || 0,
+            country: storedProfile.country || '',
+            workPreference: storedProfile.workPreference || 'flexible',
+            githubUrl: storedProfile.githubUrl || undefined,
+            jobPosting: jobDescription || undefined,
+            language: locale,
+          };
+
+          if (storedProfile.githubUrl) setGithubUrl(storedProfile.githubUrl);
+          setHasRealCV(!!cvBlob);
+
+          const formData = new FormData();
+          const primaryFile = cvBlob
+            ? new File([cvBlob], storedProfile.cvFilename || 'cv.pdf', { type: 'application/pdf' })
+            : new File([linkedinBlob!], storedProfile.linkedinFilename || 'linkedin.pdf', { type: 'application/pdf' });
+          formData.append('cv', primaryFile);
+
+          if (cvBlob && linkedinBlob) {
+            formData.append('linkedInPdf', new File([linkedinBlob], storedProfile.linkedinFilename || 'linkedin.pdf', { type: 'application/pdf' }));
+          }
+
+          formData.append('questionnaire', JSON.stringify(questionnaire));
+          streaming.startAnalysis(formData);
+        } catch {
+          setState('upload');
+          setError('Could not load stored profile. Please run the wizard manually.');
+        }
+      })();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session?.access_token]);
 
@@ -127,6 +231,7 @@ export default function AnalyzePage() {
     if (wizardUpwork) setUpworkProfile(wizardUpwork);
     if (questionnaire.githubUrl) setGithubUrl(questionnaire.githubUrl);
     setHasRealCV(!!cvFile);
+    wizardDataRef.current = { cvFile, linkedInFile, questionnaire };
     setState('processing');
     setError('');
     setIsDemo(false);

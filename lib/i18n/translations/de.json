@@ -509,7 +509,29 @@
     "viewAnalysis": "Analyse ansehen",
     "delete": "Löschen",
     "confirmDelete": "Sind Sie sicher, dass Sie diese Analyse löschen möchten?",
-    "useSignIn": "Klicken Sie auf Anmelden in der Kopfzeile, um zu starten"
+    "useSignIn": "Klicken Sie auf Anmelden in der Kopfzeile, um zu starten",
+    "tabs": {
+      "profile": "Profil",
+      "analyses": "Analysen",
+      "jobs": "Jobs"
+    }
+  },
+  "profile": {
+    "careerDetails": "Karrieredetails",
+    "documents": "Dokumente",
+    "cvDocument": "Lebenslauf",
+    "linkedinDocument": "LinkedIn PDF",
+    "noFile": "Keine Datei hochgeladen",
+    "replace": "Ersetzen",
+    "upload": "Hochladen",
+    "quickAnalysis": "Schnellanalyse",
+    "quickAnalysisHint": "Führen Sie eine neue Analyse mit Ihrem gespeicherten Profil und Dokumenten durch. Optional können Sie eine Stellenbeschreibung für eine gezielte Analyse hinzufügen.",
+    "jobDescriptionPlaceholder": "Stellenbeschreibung für gezielte Analyse einfügen (optional)...",
+    "usesStoredProfile": "Verwendet Ihren gespeicherten Lebenslauf, LinkedIn PDF und Karrieredetails",
+    "runAnalysis": "Analyse starten",
+    "empty": "Noch kein Profil",
+    "emptySubtitle": "Führen Sie Ihre erste Karriereanalyse durch, um Ihr Profil zu erstellen",
+    "runFirstAnalysis": "Erste Analyse starten"
   },
   "motivation": {
     "fitScore": "Dieser Score zeigt, wo Sie heute stehen — nicht wo Sie sein können. Jede geschlossene Lücke erhöht diese Zahl.",
@@ -841,6 +863,23 @@
       "updateError": "Job konnte nicht aktualisiert werden",
       "deleteError": "Job konnte nicht gelöscht werden",
       "deleted": "Job gelöscht"
+    },
+    "status": {
+      "saved": "Gespeichert",
+      "applied": "Beworben",
+      "interviewing": "Im Gespräch",
+      "offer": "Angebot",
+      "rejected": "Abgelehnt",
+      "withdrawn": "Zurückgezogen"
+    },
+    "stats": {
+      "total": "Gesamt",
+      "avgMatch": "Durchschn. Übereinstimmung",
+      "followUpsDue": "Fällige Nachfragen"
+    },
+    "pipeline": {
+      "title": "Job-Pipeline",
+      "viewTracker": "Tracker anzeigen"
     }
   }
 }

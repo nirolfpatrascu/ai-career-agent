@@ -507,7 +507,29 @@
     "viewAnalysis": "View analysis",
     "delete": "Delete",
     "confirmDelete": "Are you sure you want to delete this analysis?",
-    "useSignIn": "Click Sign In in the header to get started"
+    "useSignIn": "Click Sign In in the header to get started",
+    "tabs": {
+      "profile": "Profile",
+      "analyses": "Analyses",
+      "jobs": "Jobs"
+    }
+  },
+  "profile": {
+    "careerDetails": "Career Details",
+    "documents": "Documents",
+    "cvDocument": "CV / Resume",
+    "linkedinDocument": "LinkedIn PDF",
+    "noFile": "No file uploaded",
+    "replace": "Replace",
+    "upload": "Upload",
+    "quickAnalysis": "Quick Re-Analysis",
+    "quickAnalysisHint": "Run a new analysis using your stored profile and documents. Optionally add a job description for a targeted analysis.",
+    "jobDescriptionPlaceholder": "Paste a job description for targeted analysis (optional)...",
+    "usesStoredProfile": "Uses your stored CV, LinkedIn PDF, and career details",
+    "runAnalysis": "Run Analysis",
+    "empty": "No profile yet",
+    "emptySubtitle": "Complete your first career analysis to create your profile",
+    "runFirstAnalysis": "Run Your First Analysis"
   },
   "motivation": {
     "fitScore": "This score reflects where you stand today — not where you can be. Every gap you close pushes this number higher.",
@@ -839,6 +861,23 @@
       "updateError": "Failed to update job",
       "deleteError": "Failed to delete job",
       "deleted": "Job removed from tracker"
+    },
+    "status": {
+      "saved": "Saved",
+      "applied": "Applied",
+      "interviewing": "Interviewing",
+      "offer": "Offer",
+      "rejected": "Rejected",
+      "withdrawn": "Withdrawn"
+    },
+    "stats": {
+      "total": "Total",
+      "avgMatch": "Avg match",
+      "followUpsDue": "Follow-ups due"
+    },
+    "pipeline": {
+      "title": "Job Pipeline",
+      "viewTracker": "View tracker"
     }
   }
 }

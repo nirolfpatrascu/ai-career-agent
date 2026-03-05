@@ -509,7 +509,29 @@
     "viewAnalysis": "Vezi analiza",
     "delete": "Șterge",
     "confirmDelete": "Sigur vrei să ștergi această analiză?",
-    "useSignIn": "Click pe Autentificare din header pentru a începe"
+    "useSignIn": "Click pe Autentificare din header pentru a începe",
+    "tabs": {
+      "profile": "Profil",
+      "analyses": "Analize",
+      "jobs": "Joburi"
+    }
+  },
+  "profile": {
+    "careerDetails": "Detalii Carieră",
+    "documents": "Documente",
+    "cvDocument": "CV / Rezumat",
+    "linkedinDocument": "LinkedIn PDF",
+    "noFile": "Niciun fișier încărcat",
+    "replace": "Înlocuiește",
+    "upload": "Încarcă",
+    "quickAnalysis": "Analiză rapidă",
+    "quickAnalysisHint": "Rulează o nouă analiză folosind profilul și documentele salvate. Opțional, adaugă o descriere a jobului pentru o analiză țintită.",
+    "jobDescriptionPlaceholder": "Lipește o descriere a jobului pentru analiză țintită (opțional)...",
+    "usesStoredProfile": "Folosește CV-ul, LinkedIn PDF-ul și detaliile de carieră salvate",
+    "runAnalysis": "Rulează Analiza",
+    "empty": "Niciun profil încă",
+    "emptySubtitle": "Completează prima analiză de carieră pentru a crea profilul tău",
+    "runFirstAnalysis": "Rulează Prima Analiză"
   },
   "motivation": {
     "fitScore": "Acest scor reflectă unde ești astăzi — nu unde poți ajunge. Fiecare lacună pe care o închizi ridică acest număr.",
@@ -841,6 +863,23 @@
       "updateError": "Nu s-a putut actualiza jobul",
       "deleteError": "Nu s-a putut șterge jobul",
       "deleted": "Job șters"
+    },
+    "status": {
+      "saved": "Salvat",
+      "applied": "Aplicat",
+      "interviewing": "Interviu",
+      "offer": "Ofertă",
+      "rejected": "Respins",
+      "withdrawn": "Retras"
+    },
+    "stats": {
+      "total": "Total",
+      "avgMatch": "Potrivire medie",
+      "followUpsDue": "Follow-up-uri restante"
+    },
+    "pipeline": {
+      "title": "Pipeline Joburi",
+      "viewTracker": "Vezi tracker-ul"
     }
   }
 }

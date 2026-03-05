@@ -77,7 +77,8 @@ export default function LinkedInPlan({ analysis }: LinkedInPlanProps) {
   const plan = useMemo(() => {
     const { metadata, strengths, gaps, roleRecommendations } = analysis;
     const target = metadata.targetRole;
-    const topRole = roleRecommendations[0];
+    const sortedRoles = [...roleRecommendations].sort((a, b) => b.fitScore - a.fitScore);
+    const topRole = sortedRoles[0];
 
     // --- Headline suggestions ---
     const differentiators = strengths.filter(s => s.tier === 'differentiator').map(s => s.title);
