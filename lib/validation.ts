@@ -82,6 +82,40 @@ export function validateAnalysisResult(
     }
   });
 
+  // Cross-check: fitScore ↔ gap coherence
+  const criticalGapCount = result.gaps.filter(g => g.severity === 'critical').length;
+  const totalGapCount = result.gaps.length;
+
+  if (result.fitScore.score >= 9 && criticalGapCount >= 2) {
+    issues.push({
+      section: 'fitScore',
+      severity: 'warning',
+      field: 'fitScore.score',
+      message: `Fit score ${result.fitScore.score} is too optimistic with ${criticalGapCount} critical gaps. Auto-capping at 7.`,
+      autoFixable: true,
+      autoFixAction: 'Cap fitScore at 7 due to critical gaps',
+    });
+  } else if (result.fitScore.score >= 8 && criticalGapCount >= 3) {
+    issues.push({
+      section: 'fitScore',
+      severity: 'warning',
+      field: 'fitScore.score',
+      message: `Fit score ${result.fitScore.score} is too optimistic with ${criticalGapCount} critical gaps. Auto-capping at 6.`,
+      autoFixable: true,
+      autoFixAction: 'Cap fitScore at 6 due to critical gaps',
+    });
+  }
+
+  if (result.fitScore.score <= 3 && criticalGapCount === 0 && totalGapCount <= 2) {
+    issues.push({
+      section: 'fitScore',
+      severity: 'warning',
+      field: 'fitScore.score',
+      message: `Fit score ${result.fitScore.score} seems too pessimistic with 0 critical gaps and only ${totalGapCount} total gaps.`,
+      autoFixable: false,
+    });
+  }
+
   // Build sections summary
   const sectionNames = ['fitScore', 'strengths', 'gaps', 'actionPlan', 'salaryAnalysis', 'roleRecommendations', 'jobMatch'];
   const sections: Record<string, { valid: boolean; issueCount: number }> = {};
@@ -102,6 +136,7 @@ export function validateAnalysisResult(
     issues,
     autoFixed: autoFixable,
     sections,
+    autoFixDescriptions: [],
   };
 }
 
@@ -317,6 +352,21 @@ export function validateGaps(gaps: Gap[]): ValidationIssue[] {
       }
     }
 
+    // timeToClose format check — must contain a time unit, reject vague values
+    if (g.timeToClose && g.timeToClose.trim().length > 0) {
+      const hasTimeUnit = /\b(day|week|month|year|hr|hour)\b/i.test(g.timeToClose);
+      const isVague = /\b(soon|varies|tbd|depends|unknown)\b/i.test(g.timeToClose);
+      if (!hasTimeUnit || isVague) {
+        issues.push({
+          section: 'gaps',
+          severity: 'warning',
+          field: `gaps[${i}].timeToClose`,
+          message: `Gap "${g.skill}" has vague timeToClose: "${g.timeToClose}". Must include a specific time unit (days/weeks/months).`,
+          autoFixable: false,
+        });
+      }
+    }
+
     // Resources array
     if (!g.resources || g.resources.length === 0) {
       issues.push({
@@ -439,22 +489,37 @@ export function validateActionPlan(actionPlan: ActionPlan): ValidationIssue[] {
     });
   }
 
-  // Cross-check: twelveMonths should not duplicate thirtyDays
-  if (actionPlan.thirtyDays && actionPlan.twelveMonths) {
-    for (const twelveItem of actionPlan.twelveMonths) {
-      for (const thirtyItem of actionPlan.thirtyDays) {
-        const similarity = textSimilarity(twelveItem.action, thirtyItem.action);
+  // Cross-check: adjacent time horizons should not duplicate
+  const checkDuplication = (
+    longItems: typeof actionPlan.thirtyDays,
+    shortItems: typeof actionPlan.thirtyDays,
+    longLabel: string,
+    shortLabel: string
+  ) => {
+    for (const longItem of longItems) {
+      for (const shortItem of shortItems) {
+        const similarity = textSimilarity(longItem.action, shortItem.action);
         if (similarity > 0.8) {
           issues.push({
             section: 'actionPlan',
             severity: 'warning',
-            field: 'actionPlan.twelveMonths',
-            message: `12-month item "${twelveItem.action.slice(0, 60)}..." is very similar to 30-day item "${thirtyItem.action.slice(0, 60)}...".`,
+            field: `actionPlan.${longLabel}`,
+            message: `${longLabel} item "${longItem.action.slice(0, 60)}..." is very similar to ${shortLabel} item "${shortItem.action.slice(0, 60)}...".`,
             autoFixable: false,
           });
         }
       }
     }
+  };
+
+  if (actionPlan.thirtyDays && actionPlan.ninetyDays) {
+    checkDuplication(actionPlan.ninetyDays, actionPlan.thirtyDays, 'ninetyDays', 'thirtyDays');
+  }
+  if (actionPlan.ninetyDays && actionPlan.twelveMonths) {
+    checkDuplication(actionPlan.twelveMonths, actionPlan.ninetyDays, 'twelveMonths', 'ninetyDays');
+  }
+  if (actionPlan.thirtyDays && actionPlan.twelveMonths) {
+    checkDuplication(actionPlan.twelveMonths, actionPlan.thirtyDays, 'twelveMonths', 'thirtyDays');
   }
 
   return issues;
@@ -552,6 +617,21 @@ export function validateSalaryAnalysis(
   return issues;
 }
 
+// Approximate conversion rates to USD for absurdity checking
+const USD_APPROX_RATES: Record<string, number> = {
+  'USD': 1, 'EUR': 1.08, 'GBP': 1.27, 'CHF': 1.12,
+  'CAD': 0.74, 'AUD': 0.65, 'SEK': 0.095, 'DKK': 0.145,
+  'NOK': 0.092, 'PLN': 0.25, 'CZK': 0.043, 'HUF': 0.0027,
+  'RON': 0.22, 'INR': 0.012, 'BRL': 0.19, 'SGD': 0.74,
+  'JPY': 0.0067,
+};
+
+const SALARY_ABSURDITY_BOUNDS = {
+  junior: { min: 5000, max: 250000 },
+  mid: { min: 10000, max: 400000 },
+  senior: { min: 15000, max: 600000 },
+};
+
 function validateSalaryRange(
   range: { low: number; mid: number; high: number; currency: string },
   section: string,
@@ -596,6 +676,31 @@ function validateSalaryRange(
       message: `Salary ${fieldPrefix} has empty currency.`,
       autoFixable: false,
     });
+  }
+
+  // Salary absurdity bounds — convert mid to USD-equivalent and check
+  if (range.mid > 0 && range.currency) {
+    const rate = USD_APPROX_RATES[range.currency] || 1;
+    const midUSD = range.mid * rate;
+    // Use "mid" tier bounds as a reasonable default
+    const bounds = SALARY_ABSURDITY_BOUNDS.mid;
+    if (midUSD < bounds.min) {
+      issues.push({
+        section,
+        severity: 'warning',
+        field: `${section}.${fieldPrefix}.mid`,
+        message: `Salary mid ${range.currency} ${range.mid} (~$${Math.round(midUSD)} USD) seems unrealistically low for a professional role.`,
+        autoFixable: false,
+      });
+    } else if (midUSD > bounds.max) {
+      issues.push({
+        section,
+        severity: 'warning',
+        field: `${section}.${fieldPrefix}.mid`,
+        message: `Salary mid ${range.currency} ${range.mid} (~$${Math.round(midUSD)} USD) seems unrealistically high. Verify the currency and scale.`,
+        autoFixable: false,
+      });
+    }
   }
 
   return issues;
@@ -777,15 +882,27 @@ export function validateJobMatch(jobMatch: JobMatch): ValidationIssue[] {
 // Auto-fix function
 // ============================================================================
 
-export function autoFixResult(result: AnalysisResult, issues: ValidationIssue[]): AnalysisResult {
+export function autoFixResult(result: AnalysisResult, issues: ValidationIssue[]): { result: AnalysisResult; descriptions: string[] } {
   // Deep clone
   const fixed: AnalysisResult = JSON.parse(JSON.stringify(result));
+  const descriptions: string[] = [];
 
   for (const issue of issues) {
     if (!issue.autoFixable) continue;
 
     // FitScore fixes
-    if (issue.field === 'fitScore.score') {
+    if (issue.field === 'fitScore.score' && issue.autoFixAction?.startsWith('Cap fitScore at')) {
+      const capMatch = issue.autoFixAction.match(/Cap fitScore at (\d+)/);
+      if (capMatch) {
+        const cap = parseInt(capMatch[1]);
+        if (fixed.fitScore.score > cap) {
+          descriptions.push(`Capped fitScore from ${fixed.fitScore.score} to ${cap} due to critical gaps`);
+          fixed.fitScore.score = cap;
+          fixed.fitScore.label = deriveFitLabel(cap);
+        }
+      }
+    } else if (issue.field === 'fitScore.score') {
+      descriptions.push(`Clamped fitScore from ${fixed.fitScore.score} to 1-10 range`);
       fixed.fitScore.score = Math.max(1, Math.min(10, Math.round(fixed.fitScore.score)));
     }
     if (issue.field === 'fitScore.label') {
@@ -915,7 +1032,68 @@ export function autoFixResult(result: AnalysisResult, issues: ValidationIssue[])
     }
   }
 
-  return fixed;
+  return { result: fixed, descriptions };
+}
+
+// ============================================================================
+// Translation validation
+// ============================================================================
+
+export function validateTranslation(
+  original: AnalysisResult,
+  translated: AnalysisResult
+): { valid: boolean; mismatches: string[] } {
+  const mismatches: string[] = [];
+
+  // fitScore must be preserved
+  if (translated.fitScore?.score !== original.fitScore.score) {
+    mismatches.push(
+      `fitScore.score changed: ${original.fitScore.score} → ${translated.fitScore?.score}`
+    );
+  }
+
+  // Array lengths must match
+  if ((translated.strengths?.length ?? 0) !== original.strengths.length) {
+    mismatches.push(
+      `strengths count changed: ${original.strengths.length} → ${translated.strengths?.length ?? 0}`
+    );
+  }
+  if ((translated.gaps?.length ?? 0) !== original.gaps.length) {
+    mismatches.push(
+      `gaps count changed: ${original.gaps.length} → ${translated.gaps?.length ?? 0}`
+    );
+  }
+  if ((translated.roleRecommendations?.length ?? 0) !== original.roleRecommendations.length) {
+    mismatches.push(
+      `roleRecommendations count changed: ${original.roleRecommendations.length} → ${translated.roleRecommendations?.length ?? 0}`
+    );
+  }
+
+  // Action plan section lengths
+  const planSections = ['thirtyDays', 'ninetyDays', 'twelveMonths'] as const;
+  for (const section of planSections) {
+    const origLen = original.actionPlan?.[section]?.length ?? 0;
+    const transLen = translated.actionPlan?.[section]?.length ?? 0;
+    if (transLen !== origLen) {
+      mismatches.push(
+        `actionPlan.${section} count changed: ${origLen} → ${transLen}`
+      );
+    }
+  }
+
+  // Salary mid values must be preserved
+  if (translated.salaryAnalysis?.currentRoleMarket?.mid !== original.salaryAnalysis.currentRoleMarket.mid) {
+    mismatches.push(
+      `salaryAnalysis.currentRoleMarket.mid changed: ${original.salaryAnalysis.currentRoleMarket.mid} → ${translated.salaryAnalysis?.currentRoleMarket?.mid}`
+    );
+  }
+  if (translated.salaryAnalysis?.targetRoleMarket?.mid !== original.salaryAnalysis.targetRoleMarket.mid) {
+    mismatches.push(
+      `salaryAnalysis.targetRoleMarket.mid changed: ${original.salaryAnalysis.targetRoleMarket.mid} → ${translated.salaryAnalysis?.targetRoleMarket?.mid}`
+    );
+  }
+
+  return { valid: mismatches.length === 0, mismatches };
 }
 
 // ============================================================================

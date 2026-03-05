@@ -63,15 +63,7 @@ export function analyzeATSFormat(
   }
 
   // --- Check 2: Page count ---
-  if (pageCount > 3) {
-    issues.push({
-      issue: 'ats.format.tooLong',
-      severity: 'warning',
-      description: 'ats.format.tooLongDesc',
-      fix: 'ats.format.tooLongFix',
-    });
-    deductions += 10;
-  } else if (pageCount > 5) {
+  if (pageCount > 5) {
     issues.push({
       issue: 'ats.format.wayTooLong',
       severity: 'critical',
@@ -79,6 +71,14 @@ export function analyzeATSFormat(
       fix: 'ats.format.wayTooLongFix',
     });
     deductions += 20;
+  } else if (pageCount > 3) {
+    issues.push({
+      issue: 'ats.format.tooLong',
+      severity: 'warning',
+      description: 'ats.format.tooLongDesc',
+      fix: 'ats.format.tooLongFix',
+    });
+    deductions += 10;
   }
 
   // --- Check 3: File size ---

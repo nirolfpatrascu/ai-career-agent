@@ -82,6 +82,9 @@ const BASE: Record<string, number> = {
   'Solutions Consultant': 70000,
   'Pre-Sales Engineer': 68000,
   'Full Stack Developer': 70000,
+  'Prompt Engineer': 75000,
+  'AI Safety Engineer': 88000,
+  'Developer Advocate': 68000,
 };
 
 const ROLES = Object.keys(BASE);

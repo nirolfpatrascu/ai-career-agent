@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server';
 import { parsePDF, validatePDFBuffer } from '@/lib/pdf-parser';
-import { callClaude, callClaudeWithSource, truncateCVText } from '@/lib/claude';
+import { callClaude, callClaudeWithSource, truncateCVText, estimateTokens } from '@/lib/claude';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { sanitizeResult } from '@/lib/utils';
 import {
@@ -15,7 +15,7 @@ import {
 } from '@/lib/prompts';
 import { buildTranslationPrompt } from '@/lib/prompts/translate';
 import { buildKnowledgeContext } from '@/lib/knowledge';
-import { validateAnalysisResult, autoFixResult } from '@/lib/validation';
+import { validateAnalysisResult, autoFixResult, validateTranslation } from '@/lib/validation';
 import { lookupSalary } from '@/lib/salary-lookup';
 import {
   buildATSKeywordExtractionPrompt,
@@ -34,10 +34,10 @@ import type {
 } from '@/lib/types';
 import type { GapAnalysisResult } from '@/lib/prompts/gap-analysis';
 import type { CareerPlanResult } from '@/lib/prompts/career-plan';
+import { logger } from '@/lib/logger';
+import { MetricsCollector } from '@/lib/metrics';
 
 export const maxDuration = 300;
-
-const isDev = process.env.NODE_ENV !== 'production';
 
 // ============================================================================
 // Resource URL fallback — ensures every action item has a clickable link
@@ -206,9 +206,12 @@ export async function POST(request: NextRequest) {
         }
       };
 
+      const metrics = new MetricsCollector();
+
       try {
         // --- Parse PDF ---
         send({ step: 'parsing', progress: 5, message: 'Reading your documents...' });
+        const endParsing = metrics.startStep('parsing');
 
         const buffer = Buffer.from(await cvFile.arrayBuffer());
         if (!validatePDFBuffer(buffer)) {
@@ -219,10 +222,10 @@ export async function POST(request: NextRequest) {
 
         const parsedPDF = await parsePDF(buffer);
         const cvText = truncateCVText(parsedPDF.text);
-        if (isDev) console.log(`[stream] PDF parsed: ${parsedPDF.pageCount} pages, ${cvText.length} chars, quality: ${parsedPDF.qualityScore}/100`);
+        logger.debug('pdf.parsed', { pageCount: parsedPDF.pageCount, charCount: cvText.length, quality: parsedPDF.qualityScore });
 
         if (parsedPDF.qualityWarning) {
-          console.warn(`[stream] PDF quality warning: ${parsedPDF.qualityWarning}`);
+          logger.warn('pdf.quality_warning', { warning: parsedPDF.qualityWarning });
         }
 
         // Reject PDFs with extremely poor text quality
@@ -258,16 +261,19 @@ export async function POST(request: NextRequest) {
               const liText = truncateCVText(liParsed.text);
               if (liText.length > 100) {
                 questionnaire.linkedInProfile = liText;
-                if (isDev) console.log(`[stream] LinkedIn PDF parsed: ${liText.length} chars`);
+                logger.debug('linkedin.parsed', { charCount: liText.length });
               }
             }
           } catch (e) {
-            if (isDev) console.log('[stream] LinkedIn PDF parse failed (non-critical):', e);
+            logger.warn('linkedin.parse_failed', { error: e instanceof Error ? e.message : String(e) });
           }
         }
 
+        endParsing();
+
         // --- Step 1: Extract Skills ---
         send({ step: 'extraction', progress: 12, message: 'Extracting skills and experience...' });
+        const endExtraction = metrics.startStep('extraction');
 
         const dataSources: Record<string, 'claude' | 'fallback'> = {};
 
@@ -275,15 +281,39 @@ export async function POST(request: NextRequest) {
         const profileResult = await callClaudeWithSource<ExtractedProfile>({
           ...extractionPrompt,
           maxTokens: 4096,
-          temperature: 0.2,
+          temperature: 0.0,
           fallback: EXTRACTION_FALLBACK,
         });
         const profile = profileResult.data;
         dataSources.extraction = profileResult.source;
-        if (isDev) console.log(`[stream] Profile: ${profile.skills.length} categories, ${profile.experience.length} experiences (source: ${profileResult.source})`);
+        endExtraction();
+        metrics.recordStepTokens('extraction', estimateTokens(extractionPrompt.system + extractionPrompt.userMessage), estimateTokens(JSON.stringify(profile)), profileResult.source);
+        logger.debug('extraction.done', { skillCategories: profile.skills.length, experiences: profile.experience.length, source: profileResult.source });
+
+        // Guard 1: Abort if extraction fell back — pipeline would run on empty profile
+        if (profileResult.source === 'fallback') {
+          send({
+            step: 'error',
+            message: 'Could not extract a meaningful profile from this CV. The document may be corrupted, empty, or in an unsupported format. Please upload a different PDF.',
+          });
+          controller.close();
+          return;
+        }
+
+        // Guard 2: Minimum content — catches gibberish PDFs that pass quality check
+        const totalSkills = profile.skills.reduce((sum, cat) => sum + cat.skills.length, 0);
+        if (totalSkills < 2 && profile.experience.length < 1) {
+          send({
+            step: 'error',
+            message: 'Insufficient CV content detected. The document was readable but contained too little career information to analyze. Please upload a CV with your work experience and skills.',
+          });
+          controller.close();
+          return;
+        }
 
         // --- Step 2: Gap Analysis ---
         send({ step: 'gap_analysis', progress: 25, message: 'Analyzing skill gaps and matching roles...' });
+        const endGapAnalysis = metrics.startStep('gap_analysis');
 
         // Build knowledge context from curated data
         const knowledge = buildKnowledgeContext(questionnaire);
@@ -297,7 +327,9 @@ export async function POST(request: NextRequest) {
         });
         const gapAnalysis = gapResult.data;
         dataSources.gapAnalysis = gapResult.source;
-        if (isDev) console.log(`[stream] Gaps: ${gapAnalysis.gaps.length}, Strengths: ${gapAnalysis.strengths.length} (source: ${gapResult.source})`);
+        endGapAnalysis();
+        metrics.recordStepTokens('gap_analysis', estimateTokens(gapPrompt.system + gapPrompt.userMessage), estimateTokens(JSON.stringify(gapAnalysis)), gapResult.source);
+        logger.debug('gap_analysis.done', { gaps: gapAnalysis.gaps.length, strengths: gapAnalysis.strengths.length, source: gapResult.source });
 
         // Send gap analysis data — frontend can start showing results
         send({
@@ -314,6 +346,7 @@ export async function POST(request: NextRequest) {
 
         // --- Step 3+4: Career Plan + Job Match (parallel) ---
         send({ step: 'career_plan', progress: 55, message: 'Building your career roadmap...' });
+        const endCareerPlan = metrics.startStep('career_plan');
 
         const planPrompt = buildCareerPlanPrompt(
           profile, questionnaire, gapAnalysis.gaps, gapAnalysis.roleRecommendations, knowledge.forCareerPlan
@@ -339,7 +372,26 @@ export async function POST(request: NextRequest) {
         ];
 
         const [careerPlan, jobMatchResult] = await Promise.all(parallelCalls);
-        if (isDev) console.log(`[stream] Plan: ${careerPlan.actionPlan.thirtyDays.length}+${careerPlan.actionPlan.ninetyDays.length}+${careerPlan.actionPlan.twelveMonths.length} actions`);
+        endCareerPlan();
+        metrics.recordStepTokens('career_plan', estimateTokens(planPrompt.system + planPrompt.userMessage), estimateTokens(JSON.stringify(careerPlan)));
+        if (jobMatchResult) {
+          metrics.recordStepTokens('job_match', estimateTokens(JSON.stringify(questionnaire.jobPosting || '')), estimateTokens(JSON.stringify(jobMatchResult)));
+        }
+        logger.debug('career_plan.done', { thirtyDays: careerPlan.actionPlan.thirtyDays.length, ninetyDays: careerPlan.actionPlan.ninetyDays.length, twelveMonths: careerPlan.actionPlan.twelveMonths.length });
+
+        // --- Post-parallel coherence check: fitScore vs matchScore ---
+        const coherenceWarnings: string[] = [];
+        if (jobMatchResult) {
+          const fitScoreNormalized = gapAnalysis.fitScore.score * 10; // 1-10 → 10-100
+          const delta = Math.abs(fitScoreNormalized - jobMatchResult.matchScore);
+          if (delta > 30) {
+            coherenceWarnings.push(
+              `Fit score (${gapAnalysis.fitScore.score}/10 = ${fitScoreNormalized}%) and job match score (${jobMatchResult.matchScore}%) diverge by ${delta} points. ` +
+              `This may indicate the gap analysis and job matcher weighted skills differently. Review both assessments.`
+            );
+            logger.warn('coherence.divergence', { fitScoreNormalized, matchScore: jobMatchResult.matchScore, delta });
+          }
+        }
 
         // Normalize salary currencies
         const salaryAnalysis = careerPlan.salaryAnalysis;
@@ -471,10 +523,10 @@ export async function POST(request: NextRequest) {
                 companyATS,
               };
 
-              if (isDev) console.log(`[stream] ATS score: ${overallScore}% (keyword: ${keywordScore}%, format: ${formatAnalysis.formatScore}%)`);
+              logger.debug('ats.scored', { overallScore, keywordScore, formatScore: formatAnalysis.formatScore });
             }
           } catch (e) {
-            if (isDev) console.log('[stream] ATS scoring failed (non-critical):', e);
+            logger.warn('ats.scoring_failed', { error: e instanceof Error ? e.message : String(e) });
           }
         }
 
@@ -491,6 +543,7 @@ export async function POST(request: NextRequest) {
             ...(hasJobPosting && { jobPosting: questionnaire.jobPosting }),
             ...(parsedPDF.qualityWarning && { pdfQualityWarning: parsedPDF.qualityWarning }),
             dataSources,
+            ...(coherenceWarnings.length > 0 && { warnings: coherenceWarnings }),
           },
           fitScore: gapAnalysis.fitScore,
           strengths: gapAnalysis.strengths,
@@ -520,28 +573,53 @@ export async function POST(request: NextRequest) {
               fallback: result,
             });
 
-            if (translated.fitScore && translated.strengths && translated.gaps) {
+            const translationCheck = validateTranslation(result, translated);
+            if (translationCheck.valid) {
+              // Force-overwrite numeric fields with English originals as safety net
+              translated.fitScore.score = result.fitScore.score;
+              translated.salaryAnalysis.currentRoleMarket.low = result.salaryAnalysis.currentRoleMarket.low;
+              translated.salaryAnalysis.currentRoleMarket.mid = result.salaryAnalysis.currentRoleMarket.mid;
+              translated.salaryAnalysis.currentRoleMarket.high = result.salaryAnalysis.currentRoleMarket.high;
+              translated.salaryAnalysis.targetRoleMarket.low = result.salaryAnalysis.targetRoleMarket.low;
+              translated.salaryAnalysis.targetRoleMarket.mid = result.salaryAnalysis.targetRoleMarket.mid;
+              translated.salaryAnalysis.targetRoleMarket.high = result.salaryAnalysis.targetRoleMarket.high;
+              // Preserve role fitScores
+              translated.roleRecommendations.forEach((role, i) => {
+                if (result.roleRecommendations[i]) {
+                  role.fitScore = result.roleRecommendations[i].fitScore;
+                  role.salaryRange = result.roleRecommendations[i].salaryRange;
+                }
+              });
               result = translated;
-              if (isDev) console.log(`[stream] Translation to ${language} complete`);
+              logger.debug('translation.done', { language });
             } else {
-              if (isDev) console.log('[stream] Translation invalid structure, using English');
+              logger.warn('translation.invalid', { language, mismatches: translationCheck.mismatches });
             }
           } catch (e) {
-            if (isDev) console.log('[stream] Translation failed, using English:', e);
+            logger.warn('translation.failed', { error: e instanceof Error ? e.message : String(e) });
           }
         }
+
+        // --- Record scores for metrics ---
+        metrics.recordScores({
+          fitScore: result.fitScore.score,
+          ...(jobMatchResult && { matchScore: jobMatchResult.matchScore }),
+          ...(atsScoreResult && { atsScore: atsScoreResult.overallScore }),
+        });
 
         // --- Validation Layer ---
         const validationReport = validateAnalysisResult(result, lookupSalary);
         if (validationReport.autoFixed > 0) {
-          result = autoFixResult(result, validationReport.issues);
-          if (isDev) console.log(`[Validation] Auto-fixed ${validationReport.autoFixed} issues`);
+          const fixResult = autoFixResult(result, validationReport.issues);
+          result = fixResult.result;
+          validationReport.autoFixDescriptions = fixResult.descriptions;
+          logger.info('validation.auto_fixed', { count: validationReport.autoFixed, descriptions: fixResult.descriptions });
         }
         if (!validationReport.isValid) {
-          console.warn('[Validation] Issues found:', validationReport.issues.filter(i => i.severity === 'error'));
+          logger.warn('validation.errors', { errors: validationReport.issues.filter(i => i.severity === 'error') });
         }
         if (validationReport.issues.length > 0) {
-          if (isDev) console.log(`[Validation] ${validationReport.issues.length} total issues (${validationReport.issues.filter(i => i.severity === 'error').length} errors, ${validationReport.issues.filter(i => i.severity === 'warning').length} warnings)`);
+          logger.debug('validation.summary', { total: validationReport.issues.length, errors: validationReport.issues.filter(i => i.severity === 'error').length, warnings: validationReport.issues.filter(i => i.severity === 'warning').length });
         }
         // Attach validation metadata for potential UI display
         Object.assign(result, {
@@ -552,10 +630,19 @@ export async function POST(request: NextRequest) {
           },
         });
 
+        // Record validation metrics
+        metrics.recordValidation({
+          totalIssues: validationReport.issues.length,
+          errors: validationReport.issues.filter(i => i.severity === 'error').length,
+          warnings: validationReport.issues.filter(i => i.severity === 'warning').length,
+          autoFixed: validationReport.autoFixed,
+        });
+
         // Sanitize and send final result
         const sanitized = sanitizeResult(result);
         const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
-        if (isDev) console.log(`[stream] Complete in ${totalTime}s`);
+        logger.info('analysis.complete', { totalTimeSeconds: Number(totalTime) });
+        metrics.flush();
 
         send({
           step: 'complete',
@@ -566,7 +653,7 @@ export async function POST(request: NextRequest) {
         });
 
       } catch (error) {
-        console.error('[stream] Error:', error instanceof Error ? error.message : error);
+        logger.error('analysis.failed', error);
         // Never send raw error messages to client — could leak internal details
         let userMessage = 'Something went wrong during the analysis. Please try again.';
         if (error instanceof Error) {

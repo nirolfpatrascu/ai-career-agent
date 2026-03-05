@@ -59,6 +59,8 @@ export interface AnalysisMetadata {
   dataSources?: Record<string, 'claude' | 'fallback'>;
   /** Whether a real CV was uploaded (false = LinkedIn PDF only) */
   hasRealCV?: boolean;
+  /** Pipeline coherence warnings (e.g., fitScore vs matchScore divergence) */
+  warnings?: string[];
 }
 
 export interface FitScore {
@@ -325,6 +327,7 @@ export interface ValidationReport {
   issues: ValidationIssue[];
   autoFixed: number;         // count of issues auto-fixed
   sections: Record<string, { valid: boolean; issueCount: number }>;
+  autoFixDescriptions: string[];  // human-readable descriptions of each auto-fix applied
 }
 
 // --- CV Generator types ---
