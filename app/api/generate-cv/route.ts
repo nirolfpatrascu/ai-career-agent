@@ -53,11 +53,18 @@ RULES:
 2. NEVER fabricate experience. Reframe and optimize existing strengths
 3. Use quantifiable achievements wherever possible (numbers, percentages, scale)
 4. Lead with the most relevant experience for the target role
-5. Use keywords that pass ATS screening for the target role
-6. Skills should be grouped by category (Languages, Frameworks, Cloud, AI/ML, etc.)
-7. Experience bullets should start with strong action verbs
-8. The cover letter should be 3 paragraphs: hook, value proposition, call to action
-9. Project highlights should demonstrate skills relevant to the target role
+5. Skills should be grouped by category (Languages, Frameworks, Cloud, AI/ML, etc.)
+6. Experience bullets should start with strong action verbs
+7. The cover letter should be 3 paragraphs: hook, value proposition, call to action
+8. Project highlights should demonstrate skills relevant to the target role
+
+CRITICAL ATS KEYWORD PRESERVATION RULES:
+9. NEVER remove keywords that already matched in the candidate's CV — these are proven ATS hits
+10. ALWAYS include all matched ATS keywords in the skills section (exact phrasing, not synonyms)
+11. For missing ATS keywords: ONLY add them if the candidate genuinely has the skill (infer from context). Place them in the skills section AND weave into experience bullets
+12. Prioritize "required" and "high importance" keywords over "preferred" or "nice-to-have"
+13. Use the EXACT keyword phrasing from the job posting (e.g., "React.js" not "React", "CI/CD" not "continuous integration") for maximum ATS match rate
+14. If the original CV had a skills section, preserve all existing skills and add new relevant ones — never shrink the skills list
 
 JSON SCHEMA:
 {
@@ -83,6 +90,25 @@ JSON SCHEMA:
   "coverLetterDraft": "string — 3-paragraph cover letter draft for the target role"
 }`;
 
+    // Build ATS keyword context if available
+    const atsContext = analysis.atsScore ? `
+ATS KEYWORDS — MATCHED (MUST PRESERVE — these already pass ATS):
+${analysis.atsScore.keywords.matched.map(k => `- "${k.keyword}" [${k.category}/${k.importance}]`).join('\n') || '- None detected'}
+
+ATS KEYWORDS — MISSING (ADD ONLY IF CANDIDATE HAS THE SKILL):
+${analysis.atsScore.keywords.missing.map(k => `- "${k.keyword}" [${k.category}/${k.importance}]${k.cvSection ? ` — add to ${k.cvSection}` : ''}`).join('\n') || '- None'}
+
+ATS KEYWORDS — PARTIAL MATCH (use exact job posting phrasing instead):
+${analysis.atsScore.keywords.semanticMatch.map(k => `- "${k.keyword}" (matched as "${k.matchedAs}") — use "${k.keyword}" for exact match`).join('\n') || '- None'}` : '';
+
+    // Build job match context if available
+    const jobMatchContext = analysis.jobMatch ? `
+JOB MATCH — MATCHING SKILLS (preserve these):
+${analysis.jobMatch.matchingSkills.map(s => `- ${s}`).join('\n')}
+
+JOB MATCH — MISSING SKILLS (add only if candidate has them):
+${analysis.jobMatch.missingSkills.map(s => `- ${s.skill} [${s.importance}]`).join('\n')}` : '';
+
     const userMessage = `Generate an optimized CV framework for this candidate targeting the role of "${targetRole}" in ${country}.
 
 CANDIDATE ANALYSIS:
@@ -100,8 +126,9 @@ ${analysis.roleRecommendations.map(r => `- ${r.title} (${r.fitScore}/10): ${r.re
 
 ACTION PLAN HIGHLIGHTS:
 ${analysis.actionPlan.thirtyDays.slice(0, 3).map(a => `- ${a.action}`).join('\n')}
+${atsContext}${jobMatchContext}
 
-Generate the complete CV framework as JSON.`;
+Generate the complete CV framework as JSON. Ensure ALL matched ATS keywords appear in the output.`;
 
     const result = await callClaude<GeneratedCV>({
       system,
