@@ -155,13 +155,15 @@ export default function StrengthsGapsPanel({ strengths, gaps, analysisId, tags =
               return (
                 <div
                   key={i}
-                  className="relative rounded-2xl border border-black/[0.08] bg-black/[0.03] overflow-hidden transition-all duration-300 cursor-pointer hover:border-black/[0.10]"
+                  className="relative rounded-2xl border border-black/[0.08] bg-black/[0.03] overflow-hidden transition-all duration-300 hover:border-black/[0.10]"
                   style={{ backgroundColor: isExpanded ? sev.glow : undefined }}
-                  onClick={() => setExpandedGap(isExpanded ? null : i)}
                 >
                   <div className={`absolute left-0 top-0 bottom-0 w-[3px] ${sev.line}`} />
                   <div className="p-5 pl-6">
-                    <div className="flex items-start justify-between gap-3">
+                    <div
+                      className="flex items-start justify-between gap-3 cursor-pointer select-none"
+                      onClick={() => setExpandedGap(isExpanded ? null : i)}
+                    >
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2.5 mb-1.5">
                           <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full border capitalize ${getSeverityBg(gap.severity)}`}>

@@ -12,10 +12,17 @@ interface GitHubAnalysisPanelProps {
   initialAnalysis?: GitHubAnalysis;
 }
 
+type GitHubTab = 'project' | 'strengths' | 'improvements';
+
 const PRIORITY_STYLES: Record<string, string> = {
   high: 'bg-danger/[0.08] border-danger/15 text-danger',
   medium: 'bg-warning/[0.08] border-warning/15 text-warning',
   low: 'bg-primary/[0.08] border-primary/15 text-primary',
+};
+
+const ACTION_TYPE_STYLES: Record<string, string> = {
+  new_project: 'bg-primary/[0.08] border-primary/15 text-primary',
+  polish_existing: 'bg-success/[0.08] border-success/15 text-success',
 };
 
 export default function GitHubAnalysisPanel({ githubUrl, targetRole, jobPosting, initialAnalysis }: GitHubAnalysisPanelProps) {
@@ -23,6 +30,7 @@ export default function GitHubAnalysisPanel({ githubUrl, targetRole, jobPosting,
   const [analyzing, setAnalyzing] = useState(false);
   const [analysis, setAnalysis] = useState<GitHubAnalysis | null>(initialAnalysis ?? null);
   const [error, setError] = useState('');
+  const [activeTab, setActiveTab] = useState<GitHubTab>('project');
 
   const handleAnalyze = useCallback(async () => {
     setAnalyzing(true);
@@ -113,54 +121,61 @@ export default function GitHubAnalysisPanel({ githubUrl, targetRole, jobPosting,
             ))}
           </div>
 
-          {/* Strengths */}
-          {analysis.strengths?.length > 0 && (
-            <div>
-              <h3 className="text-base font-semibold text-text-primary mb-3">{t('github.strengths') || 'Strengths'}</h3>
-              <div className="space-y-3">
-                {analysis.strengths.map((s, i) => (
-                  <div key={i} className="relative rounded-2xl border border-black/[0.08] bg-black/[0.02] p-5">
-                    <div className="absolute left-0 top-4 bottom-4 w-[3px] rounded-full bg-success" />
-                    <div className="pl-4">
-                      <h4 className="font-semibold text-text-primary text-[15px] mb-1">{s.area}</h4>
-                      <p className="text-sm text-text-secondary mb-2">{s.description}</p>
-                      <p className="text-xs text-success/80 italic">{s.evidence}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          {/* Tabs */}
+          <div className="flex gap-2 p-1 bg-black/[0.03] border border-black/[0.08] rounded-xl w-fit">
+            <button
+              onClick={() => setActiveTab('project')}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                activeTab === 'project'
+                  ? 'bg-white text-text-primary shadow-sm'
+                  : 'text-text-tertiary hover:text-text-secondary'
+              }`}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={activeTab === 'project' ? 'text-primary' : ''}>
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
+              </svg>
+              {t('github.tabs.project') || 'Recommended Project'}
+            </button>
+            <button
+              onClick={() => setActiveTab('strengths')}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                activeTab === 'strengths'
+                  ? 'bg-white text-text-primary shadow-sm'
+                  : 'text-text-tertiary hover:text-text-secondary'
+              }`}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={activeTab === 'strengths' ? 'text-success' : ''}>
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              {t('github.tabs.strengths') || 'Strengths'}
+              {analysis.strengths?.length > 0 && (
+                <span className={`text-[11px] px-1.5 py-0.5 rounded-md font-semibold ${activeTab === 'strengths' ? 'bg-success/10 text-success' : 'bg-black/[0.04]'}`}>
+                  {analysis.strengths.length}
+                </span>
+              )}
+            </button>
+            <button
+              onClick={() => setActiveTab('improvements')}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                activeTab === 'improvements'
+                  ? 'bg-white text-text-primary shadow-sm'
+                  : 'text-text-tertiary hover:text-text-secondary'
+              }`}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={activeTab === 'improvements' ? 'text-warning' : ''}>
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              </svg>
+              {t('github.tabs.improvements') || 'Areas to Improve'}
+              {analysis.improvements?.length > 0 && (
+                <span className={`text-[11px] px-1.5 py-0.5 rounded-md font-semibold ${activeTab === 'improvements' ? 'bg-warning/10 text-warning' : 'bg-black/[0.04]'}`}>
+                  {analysis.improvements.length}
+                </span>
+              )}
+            </button>
+          </div>
 
-          {/* Improvements */}
-          {analysis.improvements?.length > 0 && (
-            <div>
-              <h3 className="text-base font-semibold text-text-primary mb-3">{t('github.improvements') || 'Areas to Improve'}</h3>
-              <div className="space-y-3">
-                {analysis.improvements.map((imp, i) => (
-                  <div key={i} className="relative rounded-2xl border border-black/[0.08] bg-black/[0.02] p-5">
-                    <div className="absolute left-0 top-4 bottom-4 w-[3px] rounded-full bg-warning" />
-                    <div className="pl-4">
-                      <div className="flex items-start justify-between gap-3 mb-1">
-                        <h4 className="font-semibold text-text-primary text-[15px]">{imp.area}</h4>
-                        <span className={`text-[11px] font-medium px-2 py-0.5 rounded-full border capitalize ${PRIORITY_STYLES[imp.priority] || PRIORITY_STYLES.medium}`}>
-                          {t(`github.priority.${imp.priority}`) || imp.priority}
-                        </span>
-                      </div>
-                      <p className="text-sm text-text-secondary mb-2">{imp.description}</p>
-                      <div className="flex items-start gap-2 text-xs text-primary">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0 mt-0.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                        <span>{imp.actionable}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Project Idea */}
-          {analysis.projectIdea?.name && (
+          {/* Tab: Recommended Project */}
+          {activeTab === 'project' && analysis.projectIdea?.name && (
             <div className="rounded-2xl border-2 border-primary/20 bg-primary/[0.03] p-6">
               <h3 className="text-base font-semibold text-text-primary mb-1 flex items-center gap-2">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
@@ -191,6 +206,61 @@ export default function GitHubAnalysisPanel({ githubUrl, targetRole, jobPosting,
                   </span>
                 </div>
               </div>
+            </div>
+          )}
+
+          {activeTab === 'project' && !analysis.projectIdea?.name && (
+            <p className="text-sm text-text-tertiary text-center py-6">{t('github.noProjectIdea') || 'No project idea available.'}</p>
+          )}
+
+          {/* Tab: Strengths */}
+          {activeTab === 'strengths' && (
+            <div className="space-y-3">
+              {analysis.strengths?.length > 0 ? analysis.strengths.map((s, i) => (
+                <div key={i} className="relative rounded-2xl border border-black/[0.08] bg-black/[0.02] p-5">
+                  <div className="absolute left-0 top-4 bottom-4 w-[3px] rounded-full bg-success" />
+                  <div className="pl-4">
+                    <h4 className="font-semibold text-text-primary text-[15px] mb-1">{s.area}</h4>
+                    <p className="text-sm text-text-secondary mb-2">{s.description}</p>
+                    <p className="text-xs text-success/80 italic">{s.evidence}</p>
+                  </div>
+                </div>
+              )) : (
+                <p className="text-sm text-text-tertiary text-center py-6">{t('github.noStrengths') || 'No strengths data available.'}</p>
+              )}
+            </div>
+          )}
+
+          {/* Tab: Areas to Improve */}
+          {activeTab === 'improvements' && (
+            <div className="space-y-3">
+              {analysis.improvements?.length > 0 ? analysis.improvements.map((imp, i) => (
+                <div key={i} className="relative rounded-2xl border border-black/[0.08] bg-black/[0.02] p-5">
+                  <div className="absolute left-0 top-4 bottom-4 w-[3px] rounded-full bg-warning" />
+                  <div className="pl-4">
+                    <div className="flex items-start justify-between gap-3 mb-1 flex-wrap">
+                      <h4 className="font-semibold text-text-primary text-[15px]">{imp.area}</h4>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        {imp.actionType && (
+                          <span className={`text-[11px] font-medium px-2 py-0.5 rounded-full border capitalize ${ACTION_TYPE_STYLES[imp.actionType] || ACTION_TYPE_STYLES.polish_existing}`}>
+                            {t(`github.actionType.${imp.actionType}`) || imp.actionType.replace('_', ' ')}
+                          </span>
+                        )}
+                        <span className={`text-[11px] font-medium px-2 py-0.5 rounded-full border capitalize ${PRIORITY_STYLES[imp.priority] || PRIORITY_STYLES.medium}`}>
+                          {t(`github.priority.${imp.priority}`) || imp.priority}
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-sm text-text-secondary mb-2">{imp.description}</p>
+                    <div className="flex items-start gap-2 text-xs text-primary">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0 mt-0.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                      <span>{imp.actionable}</span>
+                    </div>
+                  </div>
+                </div>
+              )) : (
+                <p className="text-sm text-text-tertiary text-center py-6">{t('github.noImprovements') || 'No improvement areas available.'}</p>
+              )}
             </div>
           )}
 

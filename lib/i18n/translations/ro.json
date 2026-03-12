@@ -393,7 +393,29 @@
     "growthPotential": "Potențial de Creștere",
     "currentRoleMarket": "Piața Rolului Actual",
     "targetRoleMarket": "Piața Rolului Țintă",
-    "companies": "Companii"
+    "companies": "Companii",
+    "jobMatch": "Analiza Potrivirii cu Jobul",
+    "matchScore": "Scor Potrivire",
+    "matchingSkills": "Abilități Potrivite",
+    "missingSkills": "Cuvinte Cheie Lipsă",
+    "overallAdvice": "Sfat General",
+    "cvSuggestions": "Sugestii CV",
+    "suggested": "Sugerat",
+    "reasoning": "Motivație",
+    "atsScore": "Analiza Scorului ATS",
+    "keywordScore": "Scor Cuvinte Cheie",
+    "formatScore": "Scor Format",
+    "formatIssues": "Probleme de Format",
+    "recommendations": "Recomandări",
+    "githubAnalysis": "Analiza GitHub",
+    "projectIdea": "Proiect Recomandat",
+    "improvements": "Domenii de Îmbunătățit",
+    "whyRelevant": "De Ce Ajută",
+    "estimatedTime": "Timp Estimat",
+    "coverLetter": "Scrisoare de Intenție",
+    "tone": "Ton",
+    "weaknessAcknowledgments": "Recunoașterea Punctelor Slabe",
+    "strengthHighlights": "Evidențierea Punctelor Forte"
   },
   "wizard": {
     "steps": {
@@ -887,7 +909,19 @@
     "whyRelevant": "De Ce Ajută",
     "estimatedTime": "Timp Estimat",
     "reanalyze": "Actualizează Analiza",
+    "noProjectIdea": "Nu există idee de proiect disponibilă.",
+    "noStrengths": "Nu există date despre puncte forte.",
+    "noImprovements": "Nu există domenii de îmbunătățit.",
     "error": "Analiza profilului GitHub a eșuat",
+    "tabs": {
+      "project": "Proiect Recomandat",
+      "strengths": "Puncte Forte",
+      "improvements": "Domenii de Îmbunătățit"
+    },
+    "actionType": {
+      "new_project": "Proiect Nou",
+      "polish_existing": "Îmbunătățește Existent"
+    },
     "priority": {
       "high": "Ridicat",
       "medium": "Mediu",

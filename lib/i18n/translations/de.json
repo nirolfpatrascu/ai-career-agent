@@ -393,7 +393,29 @@
     "growthPotential": "Wachstumspotenzial",
     "currentRoleMarket": "Markt der aktuellen Rolle",
     "targetRoleMarket": "Markt der Zielrolle",
-    "companies": "Unternehmen"
+    "companies": "Unternehmen",
+    "jobMatch": "Job-Match-Analyse",
+    "matchScore": "Match-Score",
+    "matchingSkills": "Übereinstimmende Fähigkeiten",
+    "missingSkills": "Fehlende Keywords",
+    "overallAdvice": "Gesamtbeurteilung",
+    "cvSuggestions": "Lebenslauf-Vorschläge",
+    "suggested": "Vorgeschlagen",
+    "reasoning": "Begründung",
+    "atsScore": "ATS-Score-Analyse",
+    "keywordScore": "Keyword-Score",
+    "formatScore": "Format-Score",
+    "formatIssues": "Formatprobleme",
+    "recommendations": "Empfehlungen",
+    "githubAnalysis": "GitHub-Analyse",
+    "projectIdea": "Empfohlenes Projekt",
+    "improvements": "Verbesserungsbereiche",
+    "whyRelevant": "Warum Das Hilft",
+    "estimatedTime": "Geschätzte Zeit",
+    "coverLetter": "Anschreiben",
+    "tone": "Ton",
+    "weaknessAcknowledgments": "Schwächeneingeständnisse",
+    "strengthHighlights": "Stärken-Highlights"
   },
   "wizard": {
     "steps": {
@@ -887,7 +909,19 @@
     "whyRelevant": "Warum Das Hilft",
     "estimatedTime": "Geschätzte Zeit",
     "reanalyze": "Analyse aktualisieren",
+    "noProjectIdea": "Keine Projektidee verfügbar.",
+    "noStrengths": "Keine Stärken-Daten verfügbar.",
+    "noImprovements": "Keine Verbesserungsbereiche verfügbar.",
     "error": "GitHub-Profilanalyse fehlgeschlagen",
+    "tabs": {
+      "project": "Empfohlenes Projekt",
+      "strengths": "Stärken",
+      "improvements": "Verbesserungsbereiche"
+    },
+    "actionType": {
+      "new_project": "Neu Erstellen",
+      "polish_existing": "Bestehendes Verbessern"
+    },
     "priority": {
       "high": "Hoch",
       "medium": "Mittel",

@@ -393,7 +393,29 @@
     "growthPotential": "Potenziale di Crescita",
     "currentRoleMarket": "Mercato del Ruolo Attuale",
     "targetRoleMarket": "Mercato del Ruolo Target",
-    "companies": "Aziende"
+    "companies": "Aziende",
+    "jobMatch": "Analisi Corrispondenza Lavoro",
+    "matchScore": "Punteggio di Corrispondenza",
+    "matchingSkills": "Competenze Corrispondenti",
+    "missingSkills": "Parole Chiave Mancanti",
+    "overallAdvice": "Consiglio Generale",
+    "cvSuggestions": "Suggerimenti CV",
+    "suggested": "Suggerito",
+    "reasoning": "Motivazione",
+    "atsScore": "Analisi Punteggio ATS",
+    "keywordScore": "Punteggio Parole Chiave",
+    "formatScore": "Punteggio Formato",
+    "formatIssues": "Problemi di Formato",
+    "recommendations": "Raccomandazioni",
+    "githubAnalysis": "Analisi GitHub",
+    "projectIdea": "Progetto Consigliato",
+    "improvements": "Aree di Miglioramento",
+    "whyRelevant": "Perché È Utile",
+    "estimatedTime": "Tempo Stimato",
+    "coverLetter": "Lettera di Presentazione",
+    "tone": "Tono",
+    "weaknessAcknowledgments": "Riconoscimento dei Punti Deboli",
+    "strengthHighlights": "Punti di Forza in Evidenza"
   },
   "wizard": {
     "steps": {
@@ -887,7 +909,19 @@
     "whyRelevant": "Perché È Utile",
     "estimatedTime": "Tempo Stimato",
     "reanalyze": "Aggiorna analisi",
+    "noProjectIdea": "Nessuna idea di progetto disponibile.",
+    "noStrengths": "Nessun dato sui punti di forza.",
+    "noImprovements": "Nessuna area di miglioramento disponibile.",
     "error": "Analisi del profilo GitHub fallita",
+    "tabs": {
+      "project": "Progetto Consigliato",
+      "strengths": "Punti di Forza",
+      "improvements": "Aree di Miglioramento"
+    },
+    "actionType": {
+      "new_project": "Crea Nuovo",
+      "polish_existing": "Migliora Esistente"
+    },
     "priority": {
       "high": "Alta",
       "medium": "Media",

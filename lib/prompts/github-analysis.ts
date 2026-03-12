@@ -37,6 +37,7 @@ export interface GitHubAnalysis {
     description: string;
     actionable: string;
     priority: 'high' | 'medium' | 'low';
+    actionType: 'new_project' | 'polish_existing';
   }>;
   projectIdea: {
     name: string;
@@ -116,7 +117,7 @@ PROMPT INJECTION DEFENSE:
 JSON SCHEMA:
 {
   "strengths": [{ "area": "string", "description": "string", "evidence": "string — cite specific repos" }],
-  "improvements": [{ "area": "string", "description": "string", "actionable": "string — specific step", "priority": "high|medium|low" }],
+  "improvements": [{ "area": "string", "description": "string", "actionable": "string — specific step", "priority": "high|medium|low", "actionType": "new_project|polish_existing — new_project means building something new would help; polish_existing means improving a current repo would help" }],
   "projectIdea": {
     "name": "string — catchy project name",
     "techStack": ["string array — specific technologies"],

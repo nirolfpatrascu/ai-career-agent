@@ -9,7 +9,9 @@ import {
   PDFDownloadLink,
   Font,
 } from '@react-pdf/renderer';
-import type { AnalysisResult, Gap, ActionItem, Strength, RoleRecommendation } from '@/lib/types';
+import type { AnalysisResult, Gap, ActionItem, Strength, RoleRecommendation, MissingSkill, ATSKeyword, ATSFormatIssue, ATSRecommendation } from '@/lib/types';
+import type { GitHubAnalysis } from '@/lib/prompts/github-analysis';
+import type { CoverLetter } from '@/lib/prompts/cover-letter';
 
 // Register Poppins font — local TTF files with FULL Latin Extended charset
 // Poppins is a clean, modern Google Font that supports:
@@ -314,6 +316,29 @@ export interface PDFLabels {
   generatedOn: string;
   fitScoreLabel: string;
   dateLocale?: string;
+  // New sections
+  jobMatch: string;
+  matchScore: string;
+  matchingSkills: string;
+  missingSkills: string;
+  overallAdvice: string;
+  cvSuggestions: string;
+  suggested: string;
+  reasoning: string;
+  atsScore: string;
+  keywordScore: string;
+  formatScore: string;
+  formatIssues: string;
+  recommendations: string;
+  githubAnalysis: string;
+  projectIdea: string;
+  improvements: string;
+  whyRelevant: string;
+  estimatedTime: string;
+  coverLetter: string;
+  tone: string;
+  weaknessAcknowledgments: string;
+  strengthHighlights: string;
 }
 
 const DEFAULT_LABELS: PDFLabels = {
@@ -336,6 +361,29 @@ const DEFAULT_LABELS: PDFLabels = {
   generatedOn: 'Generated on',
   fitScoreLabel: 'Career Fit Score',
   dateLocale: 'en-US',
+  // New sections
+  jobMatch: 'Job Match Analysis',
+  matchScore: 'Match Score',
+  matchingSkills: 'Matching Skills',
+  missingSkills: 'Missing Keywords',
+  overallAdvice: 'Overall Advice',
+  cvSuggestions: 'CV Suggestions',
+  suggested: 'Suggested',
+  reasoning: 'Reasoning',
+  atsScore: 'ATS Score Analysis',
+  keywordScore: 'Keyword Score',
+  formatScore: 'Format Score',
+  formatIssues: 'Format Issues',
+  recommendations: 'Recommendations',
+  githubAnalysis: 'GitHub Analysis',
+  projectIdea: 'Recommended Project',
+  improvements: 'Areas to Improve',
+  whyRelevant: 'Why This Helps',
+  estimatedTime: 'Estimated Time',
+  coverLetter: 'Cover Letter',
+  tone: 'Tone',
+  weaknessAcknowledgments: 'Weakness Acknowledgments',
+  strengthHighlights: 'Strength Highlights',
 };
 
 function CareerReport({ result, labels: l }: { result: AnalysisResult; labels?: PDFLabels }) {
@@ -571,6 +619,319 @@ function CareerReport({ result, labels: l }: { result: AnalysisResult; labels?: 
           <Text>Page 5</Text>
         </View>
       </Page>
+
+      {/* PAGE 6 (conditional): Job Match */}
+      {result.jobMatch && (
+        <Page size="A4" style={styles.page}>
+          <View style={styles.header}>
+            <Text style={styles.logo}>Gap<Text style={styles.logoAccent}>Zero</Text></Text>
+            <Text style={styles.headerMeta}>{clean(labels.jobMatch)}</Text>
+          </View>
+
+          {/* Match score */}
+          <View style={styles.fitScoreContainer}>
+            <Text style={styles.fitScoreNumber}>{result.jobMatch.matchScore}%</Text>
+            <Text style={styles.fitScoreLabel}>{clean(labels.matchScore)}</Text>
+          </View>
+
+          {/* Matching skills */}
+          {result.jobMatch.matchingSkills.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{clean(labels.matchingSkills)}</Text>
+              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
+                {result.jobMatch.matchingSkills.map((skill: string, i: number) => (
+                  <Text key={i} style={[styles.badge, styles.badgeStrong]}>{clean(skill)}</Text>
+                ))}
+              </View>
+            </View>
+          )}
+
+          {/* Missing skills */}
+          {result.jobMatch.missingSkills.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{clean(labels.missingSkills)}</Text>
+              {result.jobMatch.missingSkills.map((ms: MissingSkill, i: number) => (
+                <View key={i} style={[styles.row, styles.mb4]}>
+                  <Text style={[styles.badge, ms.importance === 'important' ? styles.badgeCritical : ms.importance === 'not_a_deal_breaker' ? styles.badgeModerate : styles.badgeMinor]}>
+                    {ms.importance === 'important' ? 'REQUIRED' : ms.importance === 'not_a_deal_breaker' ? 'PREFERRED' : 'OPTIONAL'}
+                  </Text>
+                  <Text style={styles.cardText}>{clean(ms.skill)}</Text>
+                </View>
+              ))}
+            </View>
+          )}
+
+          {/* CV Suggestions */}
+          {result.jobMatch.cvSuggestions.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{clean(labels.cvSuggestions)}</Text>
+              {result.jobMatch.cvSuggestions.map((s, i) => (
+                <View key={i} style={[styles.card, styles.mb8]}>
+                  <Text style={[styles.textSmall, styles.bold, { color: colors.primary, marginBottom: 4 }]}>{clean(s.section)}</Text>
+                  <Text style={[styles.textSmall, styles.bold]}>{clean(labels.current)}:</Text>
+                  <Text style={[styles.cardText, { fontStyle: 'italic', marginBottom: 4 }]}>{clean(s.current)}</Text>
+                  <Text style={[styles.textSmall, styles.bold]}>{clean(labels.suggested)}:</Text>
+                  <Text style={[styles.cardText, { color: colors.success, marginBottom: 4 }]}>{clean(s.suggested)}</Text>
+                  <Text style={[styles.textSmall, { color: colors.textSecondary }]}>{clean(s.reasoning)}</Text>
+                </View>
+              ))}
+            </View>
+          )}
+
+          {/* Overall advice */}
+          {result.jobMatch.overallAdvice && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{clean(labels.overallAdvice)}</Text>
+              <View style={styles.card}>
+                <Text style={styles.cardText}>{clean(result.jobMatch.overallAdvice)}</Text>
+              </View>
+            </View>
+          )}
+
+          <View style={styles.footer}>
+            <Text>{clean(labels.brandLine)}</Text>
+            <Text>Job Match</Text>
+          </View>
+        </Page>
+      )}
+
+      {/* PAGE 7 (conditional): ATS Score */}
+      {result.atsScore && (
+        <Page size="A4" style={styles.page}>
+          <View style={styles.header}>
+            <Text style={styles.logo}>Gap<Text style={styles.logoAccent}>Zero</Text></Text>
+            <Text style={styles.headerMeta}>{clean(labels.atsScore)}</Text>
+          </View>
+
+          {/* Score cards */}
+          <View style={[styles.twoCol, styles.mb12]}>
+            <View style={[styles.salaryCard, { alignItems: 'center' }]}>
+              <Text style={[styles.salaryValue, { color: colors.primary }]}>{result.atsScore.overallScore}</Text>
+              <Text style={styles.salaryLabel}>Overall Score</Text>
+            </View>
+            <View style={[styles.salaryCard, { alignItems: 'center' }]}>
+              <Text style={[styles.salaryValue, { color: colors.success }]}>{result.atsScore.keywordScore}</Text>
+              <Text style={styles.salaryLabel}>{clean(labels.keywordScore)}</Text>
+            </View>
+            <View style={[styles.salaryCard, { alignItems: 'center' }]}>
+              <Text style={[styles.salaryValue, { color: colors.textPrimary }]}>{result.atsScore.formatScore}</Text>
+              <Text style={styles.salaryLabel}>{clean(labels.formatScore)}</Text>
+            </View>
+          </View>
+
+          {/* Matched keywords */}
+          {result.atsScore.keywords.matched.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{clean(labels.matchingSkills)}</Text>
+              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
+                {result.atsScore.keywords.matched.map((kw: ATSKeyword, i: number) => (
+                  <Text key={i} style={[styles.badge, styles.badgeStrong]}>{clean(kw.keyword)}</Text>
+                ))}
+              </View>
+            </View>
+          )}
+
+          {/* Missing keywords */}
+          {result.atsScore.keywords.missing.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{clean(labels.missingSkills)}</Text>
+              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
+                {result.atsScore.keywords.missing.map((kw: ATSKeyword, i: number) => (
+                  <Text key={i} style={[styles.badge, kw.importance === 'high' ? styles.badgeCritical : kw.importance === 'medium' ? styles.badgeModerate : styles.badgeMinor]}>
+                    {clean(kw.keyword)}
+                  </Text>
+                ))}
+              </View>
+            </View>
+          )}
+
+          {/* Format issues */}
+          {result.atsScore.formatIssues.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{clean(labels.formatIssues)}</Text>
+              {result.atsScore.formatIssues.map((issue: ATSFormatIssue, i: number) => (
+                <View key={i} style={[styles.card, styles.mb8]}>
+                  <View style={styles.row}>
+                    <Text style={[styles.badge, getSeverityBadge(issue.severity === 'critical' ? 'critical' : issue.severity === 'warning' ? 'moderate' : 'minor')]}>
+                      {issue.severity.toUpperCase()}
+                    </Text>
+                    <Text style={styles.cardTitle}>{clean(issue.issue)}</Text>
+                  </View>
+                  <Text style={styles.cardText}>{clean(issue.description)}</Text>
+                  <Text style={[styles.cardText, { color: colors.primary, marginTop: 4 }]}>{clean(issue.fix)}</Text>
+                </View>
+              ))}
+            </View>
+          )}
+
+          {/* Recommendations */}
+          {result.atsScore.recommendations.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{clean(labels.recommendations)}</Text>
+              {result.atsScore.recommendations.map((rec: ATSRecommendation, i: number) => (
+                <View key={i} style={[styles.card, styles.mb8]}>
+                  <View style={styles.row}>
+                    <Text style={[styles.badge, getSeverityBadge(rec.priority === 'critical' ? 'critical' : rec.priority === 'high' ? 'moderate' : 'minor')]}>
+                      {rec.priority.toUpperCase()}
+                    </Text>
+                    <Text style={styles.cardTitle}>{clean(rec.section)}</Text>
+                  </View>
+                  <Text style={styles.cardText}>{clean(rec.action)}</Text>
+                  {rec.example && (
+                    <Text style={[styles.cardText, { color: colors.primary, fontStyle: 'italic', marginTop: 4 }]}>{clean(rec.example)}</Text>
+                  )}
+                </View>
+              ))}
+            </View>
+          )}
+
+          <View style={styles.footer}>
+            <Text>{clean(labels.brandLine)}</Text>
+            <Text>ATS Score</Text>
+          </View>
+        </Page>
+      )}
+
+      {/* PAGE 8 (conditional): GitHub Analysis */}
+      {result.githubAnalysis && (
+        <Page size="A4" style={styles.page}>
+          <View style={styles.header}>
+            <Text style={styles.logo}>Gap<Text style={styles.logoAccent}>Zero</Text></Text>
+            <Text style={styles.headerMeta}>{clean(labels.githubAnalysis)}</Text>
+          </View>
+
+          {/* Stats */}
+          <View style={[styles.twoCol, styles.mb12]}>
+            <View style={[styles.salaryCard, { alignItems: 'center' }]}>
+              <Text style={styles.salaryValue}>{result.githubAnalysis.stats.totalRepos}</Text>
+              <Text style={styles.salaryLabel}>Repos</Text>
+            </View>
+            <View style={[styles.salaryCard, { alignItems: 'center' }]}>
+              <Text style={[styles.salaryValue, { fontSize: 11 }]}>{result.githubAnalysis.stats.topLanguages.slice(0, 3).join(', ')}</Text>
+              <Text style={styles.salaryLabel}>Top Languages</Text>
+            </View>
+            <View style={[styles.salaryCard, { alignItems: 'center' }]}>
+              <Text style={styles.salaryValue}>{result.githubAnalysis.stats.avgStars.toFixed(1)}</Text>
+              <Text style={styles.salaryLabel}>Avg Stars</Text>
+            </View>
+          </View>
+
+          {/* Strengths */}
+          {result.githubAnalysis.strengths.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{clean(labels.strengths)}</Text>
+              {(result.githubAnalysis as GitHubAnalysis).strengths.map((s, i) => (
+                <View key={i} style={styles.card}>
+                  <Text style={styles.cardTitle}>{clean(s.area)}</Text>
+                  <Text style={styles.cardText}>{clean(s.description)}</Text>
+                  <Text style={[styles.textSmall, { color: colors.success, marginTop: 4, fontStyle: 'italic' }]}>{clean(s.evidence)}</Text>
+                </View>
+              ))}
+            </View>
+          )}
+
+          {/* Improvements */}
+          {result.githubAnalysis.improvements.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{clean(labels.improvements)}</Text>
+              {(result.githubAnalysis as GitHubAnalysis).improvements.map((imp, i) => (
+                <View key={i} style={[styles.card, styles.mb8]}>
+                  <View style={styles.row}>
+                    <Text style={[styles.badge, getSeverityBadge(imp.priority === 'high' ? 'critical' : imp.priority === 'medium' ? 'moderate' : 'minor')]}>
+                      {imp.priority.toUpperCase()}
+                    </Text>
+                    <Text style={styles.cardTitle}>{clean(imp.area)}</Text>
+                  </View>
+                  <Text style={styles.cardText}>{clean(imp.description)}</Text>
+                  <Text style={[styles.cardText, { color: colors.primary, marginTop: 4 }]}>{clean(imp.actionable)}</Text>
+                </View>
+              ))}
+            </View>
+          )}
+
+          {/* Project Idea */}
+          {result.githubAnalysis.projectIdea?.name && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{clean(labels.projectIdea)}</Text>
+              <View style={[styles.card, { borderColor: colors.primary, borderWidth: 1.5 }]}>
+                <Text style={[styles.cardTitle, { color: colors.primary, fontSize: 13 }]}>{clean(result.githubAnalysis.projectIdea.name)}</Text>
+                <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4, marginVertical: 6 }}>
+                  {result.githubAnalysis.projectIdea.techStack.map((tech, i) => (
+                    <Text key={i} style={[styles.badge, styles.badgeDifferentiator]}>{clean(tech)}</Text>
+                  ))}
+                </View>
+                <Text style={styles.cardText}>{clean(result.githubAnalysis.projectIdea.description)}</Text>
+                <Text style={[styles.cardText, { color: colors.success, marginTop: 4 }]}>
+                  {clean(labels.whyRelevant)}: {clean(result.githubAnalysis.projectIdea.whyRelevant)}
+                </Text>
+                <Text style={[styles.textSmall, { marginTop: 4 }]}>
+                  {clean(labels.estimatedTime)}: {clean(result.githubAnalysis.projectIdea.estimatedTime)}
+                </Text>
+              </View>
+            </View>
+          )}
+
+          <View style={styles.footer}>
+            <Text>{clean(labels.brandLine)}</Text>
+            <Text>GitHub</Text>
+          </View>
+        </Page>
+      )}
+
+      {/* PAGE 9 (conditional): Cover Letter */}
+      {result.coverLetter && (
+        <Page size="A4" style={styles.page}>
+          <View style={styles.header}>
+            <Text style={styles.logo}>Gap<Text style={styles.logoAccent}>Zero</Text></Text>
+            <Text style={styles.headerMeta}>{clean(labels.coverLetter)}</Text>
+          </View>
+
+          <View style={styles.section}>
+            {/* Letter body */}
+            <View style={[styles.card, { padding: 20 }]}>
+              <Text style={[styles.cardText, styles.mb8]}>{clean((result.coverLetter as CoverLetter).greeting)}</Text>
+              <Text style={[styles.cardText, styles.mb8]}>{clean((result.coverLetter as CoverLetter).openingParagraph)}</Text>
+              {(result.coverLetter as CoverLetter).bodyParagraphs.map((para: string, i: number) => (
+                <Text key={i} style={[styles.cardText, styles.mb8]}>{clean(para)}</Text>
+              ))}
+              <Text style={[styles.cardText, styles.mb8]}>{clean((result.coverLetter as CoverLetter).closingParagraph)}</Text>
+              <Text style={[styles.cardText, styles.bold]}>{clean((result.coverLetter as CoverLetter).signature)}</Text>
+            </View>
+          </View>
+
+          {/* Tone + highlights metadata */}
+          <View style={[styles.twoCol, styles.mb8]}>
+            <View style={styles.col}>
+              <View style={styles.card}>
+                <Text style={[styles.textSmall, styles.bold, styles.mb4]}>{clean(labels.tone)}: {clean((result.coverLetter as CoverLetter).toneUsed)}</Text>
+              </View>
+            </View>
+          </View>
+
+          {(result.coverLetter as CoverLetter).strengthHighlights.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{clean(labels.strengthHighlights)}</Text>
+              {(result.coverLetter as CoverLetter).strengthHighlights.map((h: string, i: number) => (
+                <Text key={i} style={[styles.cardText, styles.mb4]}>- {clean(h)}</Text>
+              ))}
+            </View>
+          )}
+
+          {(result.coverLetter as CoverLetter).weaknessAcknowledgments.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{clean(labels.weaknessAcknowledgments)}</Text>
+              {(result.coverLetter as CoverLetter).weaknessAcknowledgments.map((w: string, i: number) => (
+                <Text key={i} style={[styles.cardText, styles.mb4]}>- {clean(w)}</Text>
+              ))}
+            </View>
+          )}
+
+          <View style={styles.footer}>
+            <Text>{clean(labels.brandLine)}</Text>
+            <Text>Cover Letter</Text>
+          </View>
+        </Page>
+      )}
     </Document>
   );
 }

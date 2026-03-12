@@ -391,7 +391,29 @@
     "growthPotential": "Growth Potential",
     "currentRoleMarket": "Current Role Market",
     "targetRoleMarket": "Target Role Market",
-    "companies": "Companies"
+    "companies": "Companies",
+    "jobMatch": "Job Match Analysis",
+    "matchScore": "Match Score",
+    "matchingSkills": "Matching Skills",
+    "missingSkills": "Missing Keywords",
+    "overallAdvice": "Overall Advice",
+    "cvSuggestions": "CV Suggestions",
+    "suggested": "Suggested",
+    "reasoning": "Reasoning",
+    "atsScore": "ATS Score Analysis",
+    "keywordScore": "Keyword Score",
+    "formatScore": "Format Score",
+    "formatIssues": "Format Issues",
+    "recommendations": "Recommendations",
+    "githubAnalysis": "GitHub Analysis",
+    "projectIdea": "Recommended Project",
+    "improvements": "Areas to Improve",
+    "whyRelevant": "Why This Helps",
+    "estimatedTime": "Estimated Time",
+    "coverLetter": "Cover Letter",
+    "tone": "Tone",
+    "weaknessAcknowledgments": "Weakness Acknowledgments",
+    "strengthHighlights": "Strength Highlights"
   },
   "wizard": {
     "steps": {
@@ -885,7 +907,19 @@
     "whyRelevant": "Why This Helps",
     "estimatedTime": "Estimated Time",
     "reanalyze": "Refresh Analysis",
+    "noProjectIdea": "No project idea available.",
+    "noStrengths": "No strengths data available.",
+    "noImprovements": "No improvement areas available.",
     "error": "Failed to analyze GitHub profile",
+    "tabs": {
+      "project": "Recommended Project",
+      "strengths": "Strengths",
+      "improvements": "Areas to Improve"
+    },
+    "actionType": {
+      "new_project": "Build New",
+      "polish_existing": "Polish Existing"
+    },
     "priority": {
       "high": "High",
       "medium": "Medium",

@@ -393,7 +393,29 @@
     "growthPotential": "Potentiel de Croissance",
     "currentRoleMarket": "Marché du Poste Actuel",
     "targetRoleMarket": "Marché du Poste Cible",
-    "companies": "Entreprises"
+    "companies": "Entreprises",
+    "jobMatch": "Analyse de Correspondance",
+    "matchScore": "Score de Correspondance",
+    "matchingSkills": "Compétences Correspondantes",
+    "missingSkills": "Mots-clés Manquants",
+    "overallAdvice": "Conseil Global",
+    "cvSuggestions": "Suggestions CV",
+    "suggested": "Suggéré",
+    "reasoning": "Justification",
+    "atsScore": "Analyse du Score ATS",
+    "keywordScore": "Score Mots-clés",
+    "formatScore": "Score Format",
+    "formatIssues": "Problèmes de Format",
+    "recommendations": "Recommandations",
+    "githubAnalysis": "Analyse GitHub",
+    "projectIdea": "Projet Recommandé",
+    "improvements": "Axes d'Amélioration",
+    "whyRelevant": "Pourquoi C'est Utile",
+    "estimatedTime": "Temps Estimé",
+    "coverLetter": "Lettre de Motivation",
+    "tone": "Ton",
+    "weaknessAcknowledgments": "Reconnaissances des Faiblesses",
+    "strengthHighlights": "Points Forts Mis en Avant"
   },
   "wizard": {
     "steps": {
@@ -887,7 +909,19 @@
     "whyRelevant": "Pourquoi C'est Utile",
     "estimatedTime": "Temps Estimé",
     "reanalyze": "Actualiser l'analyse",
+    "noProjectIdea": "Aucune idée de projet disponible.",
+    "noStrengths": "Aucune donnée sur les points forts.",
+    "noImprovements": "Aucun domaine d'amélioration disponible.",
     "error": "Échec de l'analyse du profil GitHub",
+    "tabs": {
+      "project": "Projet Recommandé",
+      "strengths": "Points Forts",
+      "improvements": "Axes d'Amélioration"
+    },
+    "actionType": {
+      "new_project": "Créer Nouveau",
+      "polish_existing": "Améliorer l'Existant"
+    },
     "priority": {
       "high": "Haute",
       "medium": "Moyenne",
