@@ -434,7 +434,8 @@
       "descriptionLabel": "Stellenbeschreibung",
       "pasteHere": "Fügen Sie die vollständige Stellenbeschreibung hier ein...",
       "hint": "Fügen Sie die vollständige Anzeige ein: Aufgaben, Anforderungen, Qualifikationen usw.",
-      "skipNote": "Sie können diesen Schritt überspringen, aber eine Stellenbeschreibung verbessert die Analysequalität erheblich."
+      "skipNote": "Sie können diesen Schritt überspringen, aber eine Stellenbeschreibung verbessert die Analysequalität erheblich.",
+      "requiredNote": "Eine Stellenbeschreibung ist erforderlich. Ohne sie können wir weder bestimmen, welche Stelle Sie anstreben, noch die Lückenanalyse und den Aktionsplan auf Ihre spezifische Möglichkeit zuschneiden."
     },
     "review": {
       "title": "Überprüfen & Analyse starten",

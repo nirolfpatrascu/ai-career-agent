@@ -432,7 +432,8 @@
       "descriptionLabel": "Job Description",
       "pasteHere": "Paste the full job description here...",
       "hint": "Include the full posting: responsibilities, requirements, qualifications, etc.",
-      "skipNote": "You can skip this step, but providing a job description significantly improves the analysis quality."
+      "skipNote": "You can skip this step, but providing a job description significantly improves the analysis quality.",
+      "requiredNote": "A job description is required. Without it, we cannot determine what role you are targeting or tailor the gap analysis and action plan to your specific opportunity."
     },
     "review": {
       "title": "Review & Launch Analysis",

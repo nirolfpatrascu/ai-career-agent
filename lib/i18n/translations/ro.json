@@ -434,7 +434,8 @@
       "descriptionLabel": "Descriere Job",
       "pasteHere": "Lipește descrierea completă a jobului aici...",
       "hint": "Include anunțul complet: responsabilități, cerințe, calificări, etc.",
-      "skipNote": "Poți sări peste acest pas, dar adăugarea unei descrieri de job îmbunătățește semnificativ calitatea analizei."
+      "skipNote": "Poți sări peste acest pas, dar adăugarea unei descrieri de job îmbunătățește semnificativ calitatea analizei.",
+      "requiredNote": "Descrierea jobului este obligatorie. Fără ea, nu putem determina ce rol vizezi sau personaliza analiza și planul de acțiune pentru oportunitatea ta specifică."
     },
     "review": {
       "title": "Verificare & Lansare Analiză",

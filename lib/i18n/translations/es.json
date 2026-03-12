@@ -434,7 +434,8 @@
       "descriptionLabel": "Descripción del Empleo",
       "pasteHere": "Pega la descripción completa del empleo aquí...",
       "hint": "Incluye el anuncio completo: responsabilidades, requisitos, cualificaciones, etc.",
-      "skipNote": "Puedes saltar este paso, pero una descripción de empleo mejora significativamente la calidad del análisis."
+      "skipNote": "Puedes saltar este paso, pero una descripción de empleo mejora significativamente la calidad del análisis.",
+      "requiredNote": "Se requiere una descripción del empleo. Sin ella, no podemos determinar qué rol estás buscando ni adaptar el análisis de brechas y el plan de acción a tu oportunidad específica."
     },
     "review": {
       "title": "Revisar & Lanzar Análisis",

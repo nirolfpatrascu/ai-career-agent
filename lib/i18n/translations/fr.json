@@ -434,7 +434,8 @@
       "descriptionLabel": "Description du Poste",
       "pasteHere": "Collez la description complète du poste ici...",
       "hint": "Incluez l'annonce complète : responsabilités, exigences, qualifications, etc.",
-      "skipNote": "Vous pouvez passer cette étape, mais une description de poste améliore significativement la qualité de l'analyse."
+      "skipNote": "Vous pouvez passer cette étape, mais une description de poste améliore significativement la qualité de l'analyse.",
+      "requiredNote": "Une description de poste est obligatoire. Sans elle, nous ne pouvons pas déterminer le rôle que vous ciblez ni adapter l'analyse des écarts et le plan d'action à votre opportunité spécifique."
     },
     "review": {
       "title": "Vérifier & Lancer l'Analyse",

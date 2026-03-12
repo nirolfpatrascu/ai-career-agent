@@ -434,7 +434,8 @@
       "descriptionLabel": "Descrizione Lavoro",
       "pasteHere": "Incolla la descrizione completa del lavoro qui...",
       "hint": "Includi l'annuncio completo: responsabilità, requisiti, qualifiche, ecc.",
-      "skipNote": "Puoi saltare questo passaggio, ma una descrizione del lavoro migliora significativamente la qualità dell'analisi."
+      "skipNote": "Puoi saltare questo passaggio, ma una descrizione del lavoro migliora significativamente la qualità dell'analisi.",
+      "requiredNote": "Una descrizione del lavoro è obbligatoria. Senza di essa, non possiamo determinare quale ruolo stai cercando né adattare l'analisi dei gap e il piano d'azione alla tua specifica opportunità."
     },
     "review": {
       "title": "Verifica & Lancia Analisi",
