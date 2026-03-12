@@ -99,9 +99,9 @@ export default function LinkedInPlan({ analysis }: LinkedInPlanProps) {
     const gapActions = gaps.filter(g => g.severity === 'critical').slice(0, 2).map(g => g.closingPlan);
 
     // Pull top quantified highlight from CV experience (prefer bullets containing a number/metric)
-    const topHighlight = analysis.profile?.experience
-      ?.flatMap(e => e.highlights)
-      .find(h => /\d/.test(h));
+    const topHighlight = (analysis.profile?.experience ?? [])
+      .flatMap(e => e.highlights ?? [])
+      .find(h => typeof h === 'string' && /\d/.test(h));
 
     const about = `As a ${currentTitle} transitioning into ${target}, I bring ${topSkillPhrase} with a track record of delivering results.
 
