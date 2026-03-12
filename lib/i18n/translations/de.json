@@ -222,7 +222,8 @@
       "gap_analysis": "Lücken werden analysiert und Rollen abgeglichen",
       "career_plan": "Karriere-Roadmap und Gehaltsbenchmarks werden erstellt",
       "ats": "ATS-Kompatibilität wird bewertet",
-      "translating": "Ihr Bericht wird übersetzt"
+      "translating": "Ihr Bericht wird übersetzt",
+      "finalizing": "Ihr Bericht wird fertiggestellt"
     }
   },
   "results": {

@@ -7,55 +7,57 @@ interface StreamingProgressProps {
   currentStep: StreamStep;
 }
 
-const PIPELINE_STEPS = [
-  { key: 'parsing', doneAt: 'extraction' },
-  { key: 'extraction', doneAt: 'gap_analysis' },
-  { key: 'gap_analysis', doneAt: 'gap_done' },
-  { key: 'career_plan', doneAt: 'plan_done' },
-  { key: 'ats', doneAt: 'translating' },
-  { key: 'translating', doneAt: 'complete' },
-];
+// Fixed 4 display steps. Multiple API steps map to each display step so the
+// total never changes and unknown steps (cover_letter, plan_done, etc.) never
+// reset the counter.
+const DISPLAY_STEPS = [
+  {
+    key: 'parsing',
+    activeFor: ['starting', 'parsing', 'extraction'],
+    doneFor: ['gap_analysis', 'gap_done', 'career_plan', 'plan_done', 'ats', 'cover_letter', 'translating', 'complete'],
+  },
+  {
+    key: 'gap_analysis',
+    activeFor: ['gap_analysis', 'gap_done'],
+    doneFor: ['career_plan', 'plan_done', 'ats', 'cover_letter', 'translating', 'complete'],
+  },
+  {
+    key: 'career_plan',
+    activeFor: ['career_plan', 'plan_done', 'ats', 'cover_letter'],
+    doneFor: ['translating', 'complete'],
+  },
+  {
+    key: 'finalizing',
+    activeFor: ['translating'],
+    doneFor: ['complete'],
+  },
+] as const;
 
 const STEP_ICONS = [
   <svg key="0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>,
   <svg key="1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
-  <svg key="2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>,
-  <svg key="3" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
-  <svg key="4" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
-  <svg key="5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
+  <svg key="2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
+  <svg key="3" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
 ];
 
-function getStepStatus(
-  stepKey: string,
-  currentStepKey: string,
-  stepIndex: number,
-  allSteps: typeof PIPELINE_STEPS
+function getDisplayStatus(
+  step: typeof DISPLAY_STEPS[number],
+  currentApiStep: string
 ): 'done' | 'active' | 'pending' {
-  const currentIndex = allSteps.findIndex(
-    (s) => s.key === currentStepKey || s.doneAt === currentStepKey
-  );
-  const doneAtIndex = allSteps.findIndex((s) => s.doneAt === currentStepKey);
-  if (doneAtIndex >= stepIndex) return 'done';
-  if (currentIndex === stepIndex) return 'active';
-  if (currentIndex > stepIndex) return 'done';
+  if ((step.doneFor as readonly string[]).includes(currentApiStep)) return 'done';
+  if ((step.activeFor as readonly string[]).includes(currentApiStep)) return 'active';
   return 'pending';
 }
 
 export default function StreamingProgress({ currentStep }: StreamingProgressProps) {
   const { t } = useTranslation();
 
-  const hasAtsStep = ['ats', 'translating', 'complete'].includes(currentStep.step);
-  const isTranslating = ['translating', 'complete'].includes(currentStep.step);
-
-  const visibleSteps = PIPELINE_STEPS.filter((s) => {
-    if (s.key === 'translating' && !isTranslating) return false;
-    if (s.key === 'ats' && !hasAtsStep) return false;
-    return true;
-  });
-
-  const completedCount = visibleSteps.filter((step, i) =>
-    getStepStatus(step.key, currentStep.step, i, visibleSteps) === 'done'
+  const completedCount = DISPLAY_STEPS.filter(
+    (step) => getDisplayStatus(step, currentStep.step) === 'done'
   ).length;
+
+  // Current step number: capped at total so it never shows e.g. 5/4
+  const currentStepNum = Math.min(completedCount + 1, DISPLAY_STEPS.length);
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
@@ -100,15 +102,15 @@ export default function StreamingProgress({ currentStep }: StreamingProgressProp
               {currentStep.message || t('progress.messages.0')}
             </p>
             <p className="text-xs text-text-tertiary">
-              {t('progress.stepLabel')} {completedCount + 1}/{visibleSteps.length}
+              {t('progress.stepLabel')} {currentStepNum}/{DISPLAY_STEPS.length}
             </p>
           </div>
         </div>
 
         {/* Pipeline steps */}
         <div className="space-y-2">
-          {visibleSteps.map((step, i) => {
-            const status = getStepStatus(step.key, currentStep.step, i, visibleSteps);
+          {DISPLAY_STEPS.map((step, i) => {
+            const status = getDisplayStatus(step, currentStep.step);
             return (
               <div
                 key={step.key}
