@@ -271,21 +271,34 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
       </div>
 
       {/* Tab navigation */}
-      <div className="flex gap-2 p-1 bg-black/[0.03] border border-black/[0.08] rounded-xl w-fit flex-wrap">
-        {(['setup', 'brand', 'showcase', 'growth'] as LinkedInTab[]).map((tabId) => (
-          <button
-            key={tabId}
-            onClick={() => setTab(tabId)}
-            className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-              tab === tabId
-                ? 'bg-white text-text-primary shadow-sm'
-                : 'text-text-tertiary hover:text-text-secondary'
-            }`}
-          >
-            {t(`linkedin.tabs.${tabId}`)}
-          </button>
-        ))}
-      </div>
+      {(() => {
+        const TAB_META: Record<LinkedInTab, { icon: React.ReactNode }> = {
+          setup: { icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> },
+          brand: { icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg> },
+          showcase: { icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> },
+          growth: { icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg> },
+        };
+        return (
+          <div className="flex gap-1.5 p-1.5 bg-black/[0.04] border border-black/[0.10] rounded-xl flex-wrap">
+            {(['setup', 'brand', 'showcase', 'growth'] as LinkedInTab[]).map((tabId) => (
+              <button
+                key={tabId}
+                onClick={() => setTab(tabId)}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                  tab === tabId
+                    ? 'bg-white text-text-primary shadow-md border border-black/[0.06]'
+                    : 'text-text-secondary hover:text-text-primary hover:bg-white/60'
+                }`}
+              >
+                <span className={tab === tabId ? 'text-[#0A66C2]' : 'text-text-tertiary'}>
+                  {TAB_META[tabId].icon}
+                </span>
+                {t(`linkedin.tabs.${tabId}`)}
+              </button>
+            ))}
+          </div>
+        );
+      })()}
 
       {/* Tab 1: Profile Setup */}
       {tab === 'setup' && (
@@ -300,11 +313,11 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
             </p>
             <div className="space-y-2">
               {plan.profileSettings.map((item, i) => (
-                <div key={i} className="flex items-start gap-3 bg-black/[0.03] border border-black/[0.06] rounded-xl px-4 py-3">
-                  <div className="w-5 h-5 rounded border-2 border-primary/30 bg-primary/[0.04] flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-primary/40"><polyline points="20 6 9 17 4 12"/></svg>
+                <div key={i} className="flex items-start gap-3 bg-white border border-black/[0.10] rounded-xl px-4 py-3 shadow-sm">
+                  <div className="w-5 h-5 rounded border-2 border-[#0A66C2]/40 bg-[#0A66C2]/[0.07] flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0A66C2" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                   </div>
-                  <p className="text-sm text-text-secondary leading-relaxed">{item.text}</p>
+                  <p className="text-sm text-text-primary leading-relaxed">{item.text}</p>
                 </div>
               ))}
             </div>

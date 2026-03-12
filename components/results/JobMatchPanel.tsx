@@ -55,6 +55,15 @@ export default function JobMatchPanel({ match }: JobMatchPanelProps) {
       </div>
 
       <div className="space-y-4">
+        {/* Assessment — top */}
+        <div className="rounded-2xl border border-primary/15 bg-primary/[0.03] p-6">
+          <div className="flex items-center gap-2 mb-3">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <h3 className="font-semibold text-text-primary">Assessment</h3>
+          </div>
+          <p className="text-sm text-text-secondary leading-relaxed whitespace-pre-line">{match.overallAdvice}</p>
+        </div>
+
         {/* Score */}
         <div className="rounded-2xl border border-black/[0.08] bg-black/[0.03] text-center py-10 relative overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full blur-[60px] opacity-15" style={{ backgroundColor: color }} />
@@ -103,12 +112,6 @@ export default function JobMatchPanel({ match }: JobMatchPanelProps) {
               })}
             </div>
           </div>
-        </div>
-
-        {/* Assessment */}
-        <div className="rounded-2xl border border-black/[0.08] bg-black/[0.03] p-6">
-          <h3 className="font-semibold text-text-primary mb-2.5">Assessment</h3>
-          <p className="text-sm text-text-secondary leading-relaxed whitespace-pre-line">{match.overallAdvice}</p>
         </div>
       </div>
     </section>

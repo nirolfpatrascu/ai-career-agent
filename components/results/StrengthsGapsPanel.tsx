@@ -207,14 +207,26 @@ export default function StrengthsGapsPanel({ strengths, gaps, analysisId, tags =
                           <div>
                             <p className="text-[11px] font-medium text-text-tertiary uppercase tracking-wider mb-2">{t('results.gaps.resources')}</p>
                             <div className="space-y-1.5">
-                              {gap.resources.map((r, ri) => (
-                                <div key={ri} className="flex items-start gap-2 text-sm text-primary/80">
-                                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0 mt-0.5">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" />
-                                  </svg>
-                                  {r}
-                                </div>
-                              ))}
+                              {gap.resources.map((r, ri) => {
+                                const isUrl = /^https?:\/\//i.test(r) || /^www\./i.test(r);
+                                const href = isUrl
+                                  ? (r.startsWith('www.') ? `https://${r}` : r)
+                                  : `https://www.google.com/search?q=${encodeURIComponent(r)}`;
+                                return (
+                                  <a
+                                    key={ri}
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-start gap-2 text-sm text-primary hover:text-primary-light hover:underline transition-colors group"
+                                  >
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0 mt-0.5 group-hover:translate-x-0.5 transition-transform">
+                                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" />
+                                    </svg>
+                                    {r}
+                                  </a>
+                                );
+                              })}
                             </div>
                           </div>
                         )}
