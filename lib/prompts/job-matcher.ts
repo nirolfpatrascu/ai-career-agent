@@ -10,7 +10,8 @@ export function buildJobMatchPrompt(
   profile: ExtractedProfile,
   cvText: string,
   jobPosting: string,
-  language?: string
+  language?: string,
+  linkedInProfile?: string
 ): { system: string; userMessage: string } {
   const langInstruction = getLanguageInstruction(language);
 
@@ -48,6 +49,9 @@ STRICT DATA SOURCING:
 - Base your analysis STRICTLY on the provided candidate profile, CV text, and job posting for ALL content.
 - Matching skills must come from the CV text, not from assumed or inferred capabilities.
 - CV suggestions must reframe EXISTING content, not invent new experience or achievements.
+- If a LinkedIn profile is provided as supplementary input, you MAY suggest adding to the CV content that is (a) explicitly present in the LinkedIn text (e.g., a named certification with issuer, a specific project, a course, a language, a volunteer role) AND (b) completely absent from the CV text. These are factual additions, not inventions — label them in the reasoning field as "From LinkedIn profile".
+- Do NOT use LinkedIn to override, replace, or contradict anything already in the CV. LinkedIn is additive only.
+- Do NOT infer skills from LinkedIn endorsements, connections, or activity. Only use hard facts: named certifications, named institutions, named projects with descriptions, specific dates.
 - Do NOT invent, assume, or infer any skills, experience, or career details not explicitly present in the candidate's CV.
 
 ANTI-HALLUCINATION RULES:
@@ -128,7 +132,12 @@ JOB POSTING TO MATCH AGAINST:
 ---JOB POSTING START---
 ${jobPosting}
 ---JOB POSTING END---
-
+${linkedInProfile ? `
+CANDIDATE'S LINKEDIN PROFILE (supplementary — use only to identify verifiable content absent from the CV above):
+---LINKEDIN START---
+${linkedInProfile.slice(0, 6000)}
+---LINKEDIN END---
+` : ''}
 Analyze the match and provide suggestions as JSON.`;
 
   return { system, userMessage };
