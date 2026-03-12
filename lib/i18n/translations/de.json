@@ -483,6 +483,15 @@
     "profileSettingsAdvice": "Diese Einstellungen beeinflussen direkt, wie Recruiter Sie finden und kontaktieren. Gehen Sie diese Liste vor Ihrem nächsten Outreach-Sprint durch.",
     "profileLink": "Profil-Link & Kernangebot",
     "profileLinkAdvice": "Ihre LinkedIn-URL, das Website-Feld und die Headline bilden zusammen Ihren 3-Sekunden-Eindruck. Stellen Sie sicher, dass alle drei dieselbe Botschaft verstärken: wer Sie sind, was Sie tun und für wen.",
+    "tabs": {
+      "setup": "Profil-Setup",
+      "brand": "Marke & Sichtbarkeit",
+      "showcase": "Showcase",
+      "growth": "Content & Wachstum"
+    },
+    "bannerTitle": "Banner-Design",
+    "bannerAdvice": "Ihr Banner ist das Erste, was Besucher sehen — 1584×396px. Nutzen Sie ihn, um Ihre Headline und Ihr Kernangebot zu verstärken. Ein starkes Banner mit Ihrem Namen, Ihrer Position und einer kurzen Wertaussage steigert Profilaufrufe um bis zu 40%.",
+    "bannerComingSoon": "Die In-App-Bannererstellung kommt bald. Verwenden Sie zunächst Canva (kostenlos) mit einer LinkedIn-Banner-Vorlage. Fügen Sie ein: Ihre Zielposition, 2-3 Kernkompetenzen/Keywords und eine kurze Wertaussage.",
     "copy": "Kopieren",
     "copied": "Kopiert!",
     "grade": "LinkedIn-Profilbewertung",

@@ -483,6 +483,15 @@
     "profileSettingsAdvice": "Aceste setări afectează direct cum te găsesc și contactează recrutorii. Parcurge această listă înainte de sprint-ul tău de outreach.",
     "profileLink": "Link Profil & Ofertă Principală",
     "profileLinkAdvice": "URL-ul LinkedIn, câmpul site-ului web și titlul tău formează împreună impresia de 3 secunde. Fă-le pe toate trei să transmită același mesaj: cine ești, ce faci și pentru cine.",
+    "tabs": {
+      "setup": "Configurare Profil",
+      "brand": "Brand & Vizibilitate",
+      "showcase": "Portofoliu",
+      "growth": "Conținut & Creștere"
+    },
+    "bannerTitle": "Design Banner",
+    "bannerAdvice": "Bannerul tău este primul lucru pe care îl văd vizitatorii — 1584×396px. Folosește-l pentru a întări titlul și oferta principală. Un banner puternic cu numele, rolul și o scurtă propoziție de valoare crește vizualizările profilului cu până la 40%.",
+    "bannerComingSoon": "Generarea banner-ului în aplicație vine în curând. Deocamdată, folosește Canva (gratuit) cu un șablon de Banner LinkedIn. Include: titlul rolului țintă, 2-3 competențe/cuvinte cheie principale și o scurtă declarație de valoare.",
     "copy": "Copiază",
     "copied": "Copiat!",
     "grade": "Nota Profilului LinkedIn",

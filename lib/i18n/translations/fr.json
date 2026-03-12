@@ -483,6 +483,15 @@
     "profileSettingsAdvice": "Ces paramètres affectent directement la façon dont les recruteurs vous trouvent et vous contactent. Parcourez cette liste avant votre prochain sprint de prospection.",
     "profileLink": "Lien de Profil & Offre Principale",
     "profileLinkAdvice": "Votre URL LinkedIn, champ site web et titre forment ensemble votre impression en 3 secondes. Assurez-vous que les trois renforcent le même message : qui vous êtes, ce que vous faites et pour qui.",
+    "tabs": {
+      "setup": "Configuration du Profil",
+      "brand": "Marque & Visibilité",
+      "showcase": "Vitrine",
+      "growth": "Contenu & Croissance"
+    },
+    "bannerTitle": "Design de Bannière",
+    "bannerAdvice": "Votre bannière est la première chose que voient les visiteurs — 1584×396px. Utilisez-la pour renforcer votre titre et votre offre principale. Une bannière forte avec votre nom, rôle et une courte proposition de valeur augmente les vues de profil jusqu'à 40%.",
+    "bannerComingSoon": "La génération de bannière intégrée arrive bientôt. Pour l'instant, utilisez Canva (gratuit) avec un modèle de Bannière LinkedIn. Incluez : votre titre de rôle cible, 2-3 compétences/mots-clés et une courte déclaration de valeur.",
     "copy": "Copier",
     "copied": "Copié !",
     "grade": "Note du Profil LinkedIn",

@@ -483,6 +483,15 @@
     "profileSettingsAdvice": "Queste impostazioni influenzano direttamente come i recruiter ti trovano e contattano. Esamina questa lista prima del tuo prossimo sprint di outreach.",
     "profileLink": "Link Profilo & Offerta Principale",
     "profileLinkAdvice": "Il tuo URL LinkedIn, campo sito web e titolo formano insieme la tua impressione in 3 secondi. Assicurati che tutti e tre rafforzino lo stesso messaggio: chi sei, cosa fai e per chi.",
+    "tabs": {
+      "setup": "Configurazione Profilo",
+      "brand": "Brand & Visibilità",
+      "showcase": "Vetrina",
+      "growth": "Contenuti & Crescita"
+    },
+    "bannerTitle": "Design del Banner",
+    "bannerAdvice": "Il tuo banner è la prima cosa che vedono i visitatori — 1584×396px. Usalo per rafforzare il tuo titolo e la tua offerta principale. Un banner efficace con nome, ruolo e una breve proposta di valore aumenta le visualizzazioni del profilo fino al 40%.",
+    "bannerComingSoon": "La generazione di banner in-app è in arrivo. Per ora, usa Canva (gratuito) con un template per Banner LinkedIn. Includi: il titolo del ruolo target, 2-3 competenze/keyword e una breve dichiarazione di valore.",
     "copy": "Copia",
     "copied": "Copiato!",
     "grade": "Valutazione del Profilo LinkedIn",
