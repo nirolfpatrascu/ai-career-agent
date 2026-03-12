@@ -234,7 +234,7 @@
         "medium": "Optimize your CV and LinkedIn first, or close key gaps",
         "low": "Major gap detected — follow the Action Plan step by step"
       },
-      "callout": "Before applying, optimize your LinkedIn profile and CV to maximize your chances. Small improvements here can significantly boost your visibility to recruiters.",
+      "callout": "Your CV and/or LinkedIn profile do not appear to be optimized for this role or up-to-date. Please fix this using the links below and rerun the analysis with up-to-date inputs for a better action plan on gap closing.",
       "jobMatch": {
         "title": "Job Match",
         "matching": "Matching Skills",

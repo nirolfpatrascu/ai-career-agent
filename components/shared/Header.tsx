@@ -139,13 +139,23 @@ export default function Header() {
             <UserMenu />
 
             {/* CTA */}
-            <Link
-              href="/analyze"
-              className="btn-primary text-sm !py-2.5 !px-5 !rounded-xl ml-1"
-            >
-              <span className="hidden sm:inline">{t('common.analyzeMyCareer')}</span>
-              <span className="sm:hidden">Analyze</span>
-            </Link>
+            {pathname.startsWith('/analyze') ? (
+              <a
+                href="/analyze"
+                className="btn-primary text-sm !py-2.5 !px-5 !rounded-xl ml-1"
+              >
+                <span className="hidden sm:inline">{t('common.analyzeMyCareer')}</span>
+                <span className="sm:hidden">Analyze</span>
+              </a>
+            ) : (
+              <Link
+                href="/analyze"
+                className="btn-primary text-sm !py-2.5 !px-5 !rounded-xl ml-1"
+              >
+                <span className="hidden sm:inline">{t('common.analyzeMyCareer')}</span>
+                <span className="sm:hidden">Analyze</span>
+              </Link>
+            )}
           </div>
         </nav>
       </div>

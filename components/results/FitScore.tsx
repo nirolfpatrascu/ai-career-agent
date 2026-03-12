@@ -85,6 +85,21 @@ export default function FitScoreGauge({ fitScore, jobMatch, onNavigate, analysis
         style={{ backgroundColor: color, opacity: animated ? 0.12 : 0 }}
       />
 
+      {/* Callout for low scores — centered above gauge */}
+      {fitScore.score < 8 && onNavigate && (
+        <div className="relative z-10 mb-6 mx-2 rounded-xl border border-warning/25 bg-warning/[0.05] p-4 text-center">
+          <p className="text-sm text-text-secondary leading-relaxed mb-3">{t('results.fitScore.callout')}</p>
+          <div className="flex flex-wrap justify-center gap-2">
+            <button onClick={() => onNavigate('linkedin')} className="text-xs font-medium text-primary hover:text-primary-light transition-colors px-3 py-1.5 rounded-lg border border-primary/20 hover:bg-primary/[0.06]">
+              {t('linkedin.title')} →
+            </button>
+            <button onClick={() => onNavigate('cv-optimizer')} className="text-xs font-medium text-primary hover:text-primary-light transition-colors px-3 py-1.5 rounded-lg border border-primary/20 hover:bg-primary/[0.06]">
+              {t('nav.cvOptimizer')} →
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="relative z-10 flex flex-col items-center gap-7">
         {/* Gauge */}
         <div className="relative w-44 h-44">
@@ -219,25 +234,6 @@ export default function FitScoreGauge({ fitScore, jobMatch, onNavigate, analysis
         </div>
       )}
 
-      {/* Cross-link callout for scores < 8 */}
-      {fitScore.score < 8 && onNavigate && (
-        <div className="relative z-10 mt-6 mx-2 rounded-xl border border-primary/15 bg-primary/[0.04] p-4 flex items-start gap-3">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary flex-shrink-0 mt-0.5">
-            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
-          </svg>
-          <div className="flex-1">
-            <p className="text-sm text-text-secondary leading-relaxed">{t('results.fitScore.callout')}</p>
-            <div className="flex flex-wrap gap-2 mt-3">
-              <button onClick={() => onNavigate('linkedin')} className="text-xs font-medium text-primary hover:text-primary-light transition-colors px-3 py-1.5 rounded-lg border border-primary/20 hover:bg-primary/[0.06]">
-                {t('linkedin.title')} →
-              </button>
-              <button onClick={() => onNavigate('cv-optimizer')} className="text-xs font-medium text-primary hover:text-primary-light transition-colors px-3 py-1.5 rounded-lg border border-primary/20 hover:bg-primary/[0.06]">
-                {t('nav.cvOptimizer')} →
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
