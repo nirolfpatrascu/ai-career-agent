@@ -110,11 +110,50 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
 🔍 Open to: ${target} roles${metadata.country ? ` | ${metadata.country} / Remote` : ''}`;
 
     // --- Featured projects ---
-    const featuredItems = [
-      { title: `Your Best Portfolio Project`, tip: `Pin your strongest work demonstrating ${topSkillPhrase}. Include a live demo or case study link with clear documentation.` },
-      { title: `Case Study or Article`, tip: `Write about a problem you solved using your key skills (${strengthBullets}). Long-form articles get 5x more visibility than posts.` },
-      { title: `Certification Badge`, tip: `${gaps.find(g => g.severity === 'critical')?.resources?.[0] || 'Cloud certification'} — pin the credential once earned.` },
-    ];
+    const github = analysis.githubAnalysis;
+
+    // Item 1: Portfolio Project
+    let portfolioItem: { title: string; tip: string };
+    if (github && github.strengths.length > 0) {
+      const topStrength = github.strengths[0];
+      const partA = `${topStrength.evidence} — This is your strongest signal for ${target} roles. Optimize the README with: problem statement, tech decisions, live demo link, and measurable results.`;
+      const partB = `💡 Want a stronger signal? Consider building '${github.projectIdea.name}' (${github.projectIdea.techStack.join(', ')}) — ${github.projectIdea.whyRelevant} Estimated effort: ${github.projectIdea.estimatedTime}.`;
+      portfolioItem = { title: topStrength.area, tip: `${partA}\n\n${partB}` };
+    } else if (github) {
+      portfolioItem = {
+        title: `Build: ${github.projectIdea.name}`,
+        tip: `${github.projectIdea.description} Tech stack: ${github.projectIdea.techStack.join(', ')}. ${github.projectIdea.whyRelevant} Estimated: ${github.projectIdea.estimatedTime}. Pin it on LinkedIn as Featured once live.`,
+      };
+    } else {
+      portfolioItem = {
+        title: `Portfolio Project: ${target}`,
+        tip: `Build one focused project that solves a real problem using ${topSkillPhrase}. Deploy it live, write a clear README with screenshots and measurable outcomes. A single well-documented project outperforms 10 half-finished ones for ${target} hiring managers.`,
+      };
+    }
+
+    // Item 2: Case Study / Article
+    const primaryGap = gaps.find(g => g.severity === 'critical') || gaps.find(g => g.severity === 'moderate');
+    const articleTitle = primaryGap
+      ? `"How I applied ${primaryGap.skill} to solve a real problem — and what I'd do differently"`
+      : `"${target} in ${new Date().getFullYear()}: what most people get wrong about ${topSkillPhrase}"`;
+    const caseStudyItem = {
+      title: `Case Study or Article`,
+      tip: `${articleTitle} — Long-form articles targeting '${primaryGap?.skill || topSkillPhrase}' get significant algorithmic reach to recruiters searching for ${target} candidates. Lead with a specific result or number in the first line. Aim for 600–900 words with one concrete takeaway.`,
+    };
+
+    // Item 3: Certification Badge
+    const certGap = gaps.find(g => g.severity === 'critical') || gaps.find(g => g.severity === 'moderate');
+    const certItem = certGap
+      ? {
+          title: `Certification: ${certGap.skill}`,
+          tip: `Earning a recognised credential in ${certGap.skill} directly addresses your most critical gap for ${target} roles. ${certGap.closingPlan.split('.')[0]}. Once earned, pin the Credly/Coursera badge here — credentials with a clickable verification link get 40% more profile views from recruiters filtering for ${certGap.skill}.`,
+        }
+      : {
+          title: `Advanced Certification in ${topSkillPhrase}`,
+          tip: `Your profile is already strong. An advanced or specialisation credential in ${topSkillPhrase} would signal seniority and differentiate you from other ${target} candidates. Look for vendor-specific certs (AWS, GCP, Azure, etc.) or role-specific ones aligned to your top target companies.`,
+        };
+
+    const featuredItems = [portfolioItem, caseStudyItem, certItem];
 
     // --- Skills to add/reorder ---
     const skillsToAdd: string[] = [];
