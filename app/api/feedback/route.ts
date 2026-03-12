@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { checkRateLimit } from '@/lib/rate-limit';
 
-// Valid section names for feedback
-const VALID_SECTIONS = [
+// Top-level section names
+const SECTION_PREFIXES = [
   'fitScore',
   'strengths',
   'gaps',
@@ -15,10 +15,22 @@ const VALID_SECTIONS = [
   'cvSuggestions',
   'atsScore',
   'cvBuilder',
+  'github',
   'overall',
+  // per-item prefixes (followed by -<index> or -<tab>-<index>)
+  'strength',
+  'gap',
+  'role',
+  'github-strength',
+  'github-improvement',
+  'github-analysis',
 ] as const;
 
-type FeedbackSection = (typeof VALID_SECTIONS)[number];
+function isValidSection(section: string): boolean {
+  return SECTION_PREFIXES.some(
+    (prefix) => section === prefix || section.startsWith(`${prefix}-`)
+  );
+}
 
 interface FeedbackBody {
   analysisId?: string;
@@ -52,11 +64,9 @@ export async function POST(request: NextRequest) {
     const { analysisId, section, rating, comment } = body;
 
     // Validate section
-    if (!section || !VALID_SECTIONS.includes(section as FeedbackSection)) {
+    if (!section || !isValidSection(section)) {
       return NextResponse.json(
-        {
-          error: `Invalid section. Must be one of: ${VALID_SECTIONS.join(', ')}`,
-        },
+        { error: 'Invalid section name.' },
         { status: 400 }
       );
     }

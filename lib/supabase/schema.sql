@@ -73,6 +73,33 @@ create policy "Users can insert own profile"
   on public.profiles for insert
   with check (auth.uid() = id);
 
+-- 7. Feedback table — thumbs up/down ratings per output section
+create table if not exists public.feedback (
+  id uuid default gen_random_uuid() primary key,
+  analysis_id uuid references public.analyses(id) on delete set null,
+  user_id uuid references auth.users(id) on delete set null,
+  section text not null,          -- e.g. 'fitScore', 'gap-2', 'actionPlan-thirtyDays-0'
+  rating boolean not null,        -- true = helpful, false = not helpful
+  comment text,                   -- optional free-text (thumbs down only)
+  created_at timestamptz default now() not null
+);
+
+create index if not exists feedback_analysis_id_idx on public.feedback(analysis_id);
+create index if not exists feedback_section_idx on public.feedback(section);
+create index if not exists feedback_rating_idx on public.feedback(rating);
+create index if not exists feedback_created_at_idx on public.feedback(created_at desc);
+
+-- No RLS on feedback — allow anonymous inserts (rate-limited at API level)
+alter table public.feedback enable row level security;
+
+create policy "Anyone can insert feedback"
+  on public.feedback for insert
+  with check (true);
+
+create policy "Admins can read all feedback"
+  on public.feedback for select
+  using (auth.role() = 'service_role');
+
 -- 6. Auto-create profile on signup
 create or replace function public.handle_new_user()
 returns trigger as $$
