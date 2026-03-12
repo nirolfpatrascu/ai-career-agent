@@ -182,18 +182,56 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
     const contentIdeas = [
       { type: 'project', text: `"I just built [${topRole?.title || target} project] with [tech stack]. Here's what I learned and 3 things that surprised me."` },
       { type: 'learning', text: `"Week [X] of my ${gaps[0]?.skill || 'cloud certification'} journey. Key insight: [specific takeaway]. Here's what I'd do differently."` },
-      { type: 'insight', text: `"${strengthBullets} taught me something most ${target}s miss: [counterintuitive insight from your experience]."` },
+      { type: 'opinion', text: `"Hot take: [counterintuitive belief about ${target}]. Most people think X but I've seen Y because [specific reason from your experience]." (Opinion posts drive 3× more comments than neutral takes.)` },
       { type: 'comparison', text: `"I went from [current domain] to ${target}. These 3 skills transferred perfectly — and these 2 didn't."` },
+      { type: 'video', text: `"[1-2 min direct-to-camera] Walk through how you solved [specific ${target} problem]. No editing needed — raw and authentic builds more trust than polished production. 1 video/month is enough."` },
     ];
 
     // --- Connection strategy ---
     const connectionTargets = [
-      ...(topRole?.exampleCompanies?.slice(0, 3) || []).map(c => `Recruiters and engineers at ${c}`),
+      ...(topRole?.exampleCompanies?.slice(0, 3) || []).map(c => `Recruiters and hiring managers at ${c}`),
       `Other ${target}s in ${metadata.country || 'your region'}`,
-      `Content creators in the ${target} space`,
+      `Content creators and thought leaders in the ${target} space`,
     ];
 
-    return { headlines, about, featuredItems, skillsToAdd, skillsToRemove, contentIdeas, connectionTargets };
+    // --- Commenting groups ---
+    const commentGroups = [
+      { label: 'Peers in your field', reason: 'Relationship-building + staying visible to your immediate network' },
+      { label: `Hiring managers & ${target} recruiters`, reason: 'Get on their radar before they post a job — engage with their content early' },
+      { label: 'Big influencers (1M+ followers)', reason: 'Algorithmic amplification — 3-5 thoughtful comments/week puts you in front of their audience' },
+      { label: 'Small creators (1K–10K followers)', reason: 'Community-building — higher response rates, faster relationship formation' },
+    ];
+
+    // --- Profile settings checklist ---
+    const profileSettings = [
+      { text: 'Set "Open to Work" → Recruiters Only (invisible badge, visible to LinkedIn Recruiter users only)' },
+      { text: 'Disable "Notify your network" in Settings → Privacy → Sharing profile edits (avoid flooding connections during your optimization sprint)' },
+      { text: 'Enable Creator Mode if you plan to post — unlocks Follow button, Featured link in bio, and post analytics' },
+      { text: `Set your target location (${metadata.country || 'your target market'}) even if remote — LinkedIn Recruiter filters by location by default` },
+      { text: 'Enable InMail (LinkedIn Premium only) — adds ~30% more recruiter reachability for active job seekers' },
+    ];
+
+    // --- Profile link / core offer ---
+    const githubUrl = metadata.githubUrl;
+    const candidateName = analysis.profile?.name?.toLowerCase().replace(/\s+/g, '-') || 'yourname';
+    const profileLinkTips = [
+      {
+        title: 'Customize your LinkedIn URL',
+        tip: `Change it to linkedin.com/in/${candidateName} — a clean vanity URL is more professional in your CV and email signature. Go to Edit Public Profile & URL → Edit your custom URL.`,
+      },
+      {
+        title: 'Website field (prime real estate)',
+        tip: githubUrl
+          ? `Add your GitHub (${githubUrl}) with the label "Portfolio — ${target} Projects". Recruiters who click through will see your technical depth firsthand. Your "${portfolioItem.title}" project is your strongest signal — make sure the README is polished.`
+          : `Add a portfolio, GitHub, or personal site with a descriptive label ("Portfolio — ${target} Projects") not just "Website". This field appears in search results and is often the first click a recruiter makes.`,
+      },
+      {
+        title: 'Core offer alignment',
+        tip: `Your headline, first sentence of About, and website label should all say the same thing: who you are, who you serve, and what outcome you deliver. Inconsistency across these three = confusion = fewer clicks.`,
+      },
+    ];
+
+    return { headlines, about, featuredItems, skillsToAdd, skillsToRemove, contentIdeas, connectionTargets, commentGroups, profileSettings, profileLinkTips };
   }, [analysis]);
 
   return (
@@ -352,7 +390,8 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
                 <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md flex-shrink-0 mt-1 ${
                   idea.type === 'project' ? 'bg-primary/[0.08] text-primary' :
                   idea.type === 'learning' ? 'bg-success/[0.08] text-success' :
-                  idea.type === 'insight' ? 'bg-accent-orange/[0.08] text-accent-orange' :
+                  idea.type === 'opinion' ? 'bg-accent-orange/[0.08] text-accent-orange' :
+                  idea.type === 'video' ? 'bg-pink-500/[0.08] text-pink-400' :
                   'bg-purple-500/[0.08] text-purple-400'
                 }`}>
                   {idea.type}
@@ -381,6 +420,76 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
             <div key={i} className="flex items-center gap-3 text-sm text-text-secondary bg-black/[0.03] border border-black/[0.06] rounded-xl px-4 py-3">
               <span className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
               {target}
+            </div>
+          ))}
+        </div>
+      </SectionCard>
+
+      {/* 7. Commenting Strategy */}
+      <SectionCard
+        title={t('linkedin.commenting')}
+        icon={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>}
+      >
+        <p className="text-sm text-text-secondary mb-3">
+          {t('linkedin.commentingAdvice')}
+        </p>
+        <p className="text-xs text-text-tertiary mb-4 italic border-l-2 border-primary/20 pl-3">
+          {t('linkedin.commentingPhilosophy')}
+        </p>
+        <p className="text-xs font-semibold text-text-primary uppercase tracking-wider mb-3">4 groups to comment on daily</p>
+        <div className="space-y-2">
+          {plan.commentGroups.map((group, i) => (
+            <div key={i} className="flex items-start gap-3 bg-black/[0.03] border border-black/[0.06] rounded-xl px-4 py-3">
+              <div className="w-6 h-6 rounded-full bg-primary/10 border border-primary/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span className="text-[10px] font-bold text-primary">{i + 1}</span>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-text-primary">{group.label}</p>
+                <p className="text-xs text-text-tertiary mt-0.5">{group.reason}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </SectionCard>
+
+      {/* 8. Profile Settings Checklist */}
+      <SectionCard
+        title={t('linkedin.profileSettings')}
+        icon={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/><circle cx="12" cy="12" r="1"/></svg>}
+      >
+        <p className="text-sm text-text-secondary mb-4">
+          {t('linkedin.profileSettingsAdvice')}
+        </p>
+        <div className="space-y-2">
+          {plan.profileSettings.map((item, i) => (
+            <div key={i} className="flex items-start gap-3 bg-black/[0.03] border border-black/[0.06] rounded-xl px-4 py-3">
+              <div className="w-5 h-5 rounded border-2 border-primary/30 bg-primary/[0.04] flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-primary/40"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <p className="text-sm text-text-secondary leading-relaxed">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </SectionCard>
+
+      {/* 9. Profile Link & Core Offer */}
+      <SectionCard
+        title={t('linkedin.profileLink')}
+        icon={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>}
+      >
+        <p className="text-sm text-text-secondary mb-4">
+          {t('linkedin.profileLinkAdvice')}
+        </p>
+        <div className="space-y-3">
+          {plan.profileLinkTips.map((tip, i) => (
+            <div key={i} className="flex items-start gap-3 bg-black/[0.03] border border-black/[0.06] rounded-xl px-4 py-3">
+              <div className="w-6 h-6 rounded-lg bg-success/10 border border-success/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span className="text-xs font-bold text-success">{i + 1}</span>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-text-primary">{tip.title}</p>
+                <p className="text-xs text-text-tertiary mt-1 leading-relaxed">{tip.tip}</p>
+              </div>
             </div>
           ))}
         </div>
