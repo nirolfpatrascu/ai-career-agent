@@ -10,6 +10,7 @@ interface GitHubAnalysisPanelProps {
   targetRole: string;
   jobPosting?: string;
   initialAnalysis?: GitHubAnalysis;
+  analysisId?: string;
 }
 
 type GitHubTab = 'project' | 'strengths' | 'improvements';
@@ -25,7 +26,7 @@ const ACTION_TYPE_STYLES: Record<string, string> = {
   polish_existing: 'bg-success/[0.08] border-success/15 text-success',
 };
 
-export default function GitHubAnalysisPanel({ githubUrl, targetRole, jobPosting, initialAnalysis }: GitHubAnalysisPanelProps) {
+export default function GitHubAnalysisPanel({ githubUrl, targetRole, jobPosting, initialAnalysis, analysisId }: GitHubAnalysisPanelProps) {
   const { t, locale } = useTranslation();
   const [analyzing, setAnalyzing] = useState(false);
   const [analysis, setAnalysis] = useState<GitHubAnalysis | null>(initialAnalysis ?? null);
@@ -220,7 +221,10 @@ export default function GitHubAnalysisPanel({ githubUrl, targetRole, jobPosting,
                 <div key={i} className="relative rounded-2xl border border-black/[0.08] bg-black/[0.02] p-5">
                   <div className="absolute left-0 top-4 bottom-4 w-[3px] rounded-full bg-success" />
                   <div className="pl-4">
-                    <h4 className="font-semibold text-text-primary text-[15px] mb-1">{s.area}</h4>
+                    <div className="flex items-start justify-between gap-2 mb-1">
+                      <h4 className="font-semibold text-text-primary text-[15px]">{s.area}</h4>
+                      <FeedbackButton compact analysisId={analysisId} section={`github-strength-${i}`} />
+                    </div>
                     <p className="text-sm text-text-secondary mb-2">{s.description}</p>
                     <p className="text-xs text-success/80 italic">{s.evidence}</p>
                   </div>
@@ -249,6 +253,7 @@ export default function GitHubAnalysisPanel({ githubUrl, targetRole, jobPosting,
                         <span className={`text-[11px] font-medium px-2 py-0.5 rounded-full border capitalize ${PRIORITY_STYLES[imp.priority] || PRIORITY_STYLES.medium}`}>
                           {t(`github.priority.${imp.priority}`) || imp.priority}
                         </span>
+                        <FeedbackButton compact analysisId={analysisId} section={`github-improvement-${i}`} />
                       </div>
                     </div>
                     <p className="text-sm text-text-secondary mb-2">{imp.description}</p>

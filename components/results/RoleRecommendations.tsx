@@ -105,6 +105,10 @@ export default function RoleRecommendations({ roles, analysisId, tags = [], onTa
                   </div>
                 </div>
               )}
+
+              <div className="flex justify-end mt-4 pt-3 border-t border-black/[0.06]">
+                <FeedbackButton compact analysisId={analysisId} section={`role-${i}`} />
+              </div>
             </div>
           );
         })}

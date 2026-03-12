@@ -142,6 +142,9 @@ export default function ActionPlan({ plan, fitScore, analysisId, tags = [], onTa
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
                   {item.expectedImpact}
                 </div>
+                <div className="flex justify-end mt-3 pt-2.5 border-t border-black/[0.06]">
+                  <FeedbackButton compact analysisId={analysisId} section={`actionPlan-${activeTab}-${i}`} />
+                </div>
               </div>
             </div>
           </div>

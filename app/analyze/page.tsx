@@ -411,6 +411,7 @@ export default function AnalyzePage() {
                 targetRole={result.metadata.targetRole}
                 jobPosting={result.metadata.jobPosting}
                 initialAnalysis={result.githubAnalysis}
+                analysisId={analysisId}
               />
             </div>
           ) : null;

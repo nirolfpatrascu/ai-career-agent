@@ -36,6 +36,20 @@ const SEV_STYLES = {
 
 type ViewMode = 'strengths' | 'gaps';
 
+const DOMAIN_TLDS = 'com|org|io|dev|net|edu|gov|co|app|ai|tech|info|me|cloud|tools|docs|js|ly|gg|sh|to|so|it|de|fr|ca|uk|au|is|at|be|ch|nl|se|no|dk|fi|pl|cz|hu|pt|es|ar|br|mx|sg|nz|us|eu|pro|inc|biz|name|wiki|blog|news|media|studio|design|agency|consulting|solutions|systems|services|software|data|digital|web|site|online|shop|store|market|network|social|world|global|international|business|company|group|team|lab|labs|works|code|open|free|smart|fast|easy|best|top|pro|plus|go|run|do|try|use|get|buy|now|live|direct|express|hub|zone|space|place|base|core|next|new|x|z|ai';
+
+function resolveResourceHref(resource: string): string {
+  if (/^https?:\/\//i.test(resource)) return resource;
+  if (/^www\./i.test(resource)) return `https://${resource}`;
+  const domainRegex = new RegExp(
+    `(?:^|[\\s\\-–—(]+)((?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+(?:${DOMAIN_TLDS})(?:\\/[^\\s)]*)?)[)\\s]*$`,
+    'i'
+  );
+  const m = resource.match(domainRegex);
+  if (m) return `https://${m[1]}`;
+  return `https://www.google.com/search?q=${encodeURIComponent(resource)}`;
+}
+
 export default function StrengthsGapsPanel({ strengths, gaps, analysisId, tags = [], onTagCreated, onTagDeleted }: StrengthsGapsPanelProps) {
   const { t } = useTranslation();
   const [view, setView] = useState<ViewMode>('strengths');
@@ -120,6 +134,9 @@ export default function StrengthsGapsPanel({ strengths, gaps, analysisId, tags =
                 </div>
                 <p className="text-sm text-text-secondary leading-relaxed mb-3">{s.description}</p>
                 <p className="text-sm text-primary/70 leading-relaxed">{s.relevance}</p>
+                <div className="flex justify-end mt-3">
+                  <FeedbackButton compact analysisId={analysisId} section={`strength-${i}`} />
+                </div>
               </div>
             </div>
           ))}
@@ -179,12 +196,17 @@ export default function StrengthsGapsPanel({ strengths, gaps, analysisId, tags =
                         </TaggableToken>
                         <p className={`text-sm mt-1 ${sev.text} opacity-80`}>{gap.impact}</p>
                       </div>
-                      <svg
-                        width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-                        className={`text-text-tertiary flex-shrink-0 mt-1 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
-                      >
-                        <polyline points="6 9 12 15 18 9" />
-                      </svg>
+                      <div className="flex items-center gap-2 flex-shrink-0 mt-1">
+                        <span onClick={e => e.stopPropagation()}>
+                          <FeedbackButton compact analysisId={analysisId} section={`gap-${i}`} />
+                        </span>
+                        <svg
+                          width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                          className={`text-text-tertiary transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                        >
+                          <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                      </div>
                     </div>
 
                     {isExpanded && (
@@ -208,10 +230,7 @@ export default function StrengthsGapsPanel({ strengths, gaps, analysisId, tags =
                             <p className="text-[11px] font-medium text-text-tertiary uppercase tracking-wider mb-2">{t('results.gaps.resources')}</p>
                             <div className="space-y-1.5">
                               {gap.resources.map((r, ri) => {
-                                const isUrl = /^https?:\/\//i.test(r) || /^www\./i.test(r);
-                                const href = isUrl
-                                  ? (r.startsWith('www.') ? `https://${r}` : r)
-                                  : `https://www.google.com/search?q=${encodeURIComponent(r)}`;
+                                const href = resolveResourceHref(r);
                                 return (
                                   <a
                                     key={ri}
