@@ -138,6 +138,20 @@ export async function callClaude<T>(options: {
       }
 
       const result = extractJSON<T>(textBlock.text, fallback);
+
+      // If JSON parsing failed (extractJSON returned the fallback reference), treat as retryable
+      if (result === fallback) {
+        console.error(
+          `Claude API call failed (attempt ${attempt + 1}/${MAX_RETRIES + 1}): JSON parse failed — response was not valid JSON`,
+          textBlock.text.slice(0, 200)
+        );
+        if (attempt < MAX_RETRIES) {
+          await sleep(BASE_DELAY_MS);
+          continue;
+        }
+        break;
+      }
+
       return result;
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(String(error));
