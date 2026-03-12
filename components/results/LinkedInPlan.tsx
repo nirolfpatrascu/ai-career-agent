@@ -88,30 +88,30 @@ export default function LinkedInPlan({ analysis }: LinkedInPlanProps) {
       : strongSkills.slice(0, 2).join(' & ');
 
     const headlines = [
-      `${target} | ${topSkillPhrase} | Building AI-Powered Solutions`,
+      `${target} | ${topSkillPhrase} | ${differentiators[1] || strongSkills[2] || `Driving ${target} Impact`}`,
       `${target} → ${topRole?.title || target} | ${differentiators[0] || strongSkills[0] || 'Tech Professional'} | Open to Opportunities`,
       `${topRole?.title || target} | ${metadata.country} (Remote) | ${topSkillPhrase}`,
     ];
 
     // --- About section draft ---
-    const yearsText = analysis.salaryAnalysis?.currentRoleMarket?.region || metadata.country;
+    const currentTitle = analysis.profile?.currentRole || 'professional';
     const strengthBullets = strengths.slice(0, 3).map(s => s.title).join(', ');
     const gapActions = gaps.filter(g => g.severity === 'critical').slice(0, 2).map(g => g.closingPlan);
-    const about = `I'm a technology professional transitioning into ${target}, bringing ${topSkillPhrase} from my background in enterprise environments.
+    const about = `As a ${currentTitle} transitioning into ${target}, I bring ${topSkillPhrase} with a track record of delivering results.
 
 What I bring to the table:
 ${strengths.slice(0, 4).map(s => `→ ${s.title}: ${s.description.split('.')[0]}.`).join('\n')}
 
 Currently focused on:
-${gapActions.length > 0 ? gapActions.map(a => `→ ${a.split('.')[0]}.`).join('\n') : `→ Building AI-powered applications and deepening cloud expertise.`}
+${gapActions.length > 0 ? gapActions.map(a => `→ ${a.split('.')[0]}.`).join('\n') : `→ Deepening expertise in ${target} and staying current with industry developments.`}
 
-I'm passionate about the intersection of enterprise process automation and modern AI. Let's connect if you're working in this space.
+I'm passionate about delivering impact as a ${target}. Let's connect if you're hiring or working in this space.
 
 🔍 Open to: ${target} roles${metadata.country ? ` | ${metadata.country} / Remote` : ''}`;
 
     // --- Featured projects ---
     const featuredItems = [
-      { title: `Portfolio Project: AI Career Analyzer`, tip: `Pin your best AI/ML project. Include a live demo link and a clear README with screenshots.` },
+      { title: `Your Best Portfolio Project`, tip: `Pin your strongest work demonstrating ${topSkillPhrase}. Include a live demo or case study link with clear documentation.` },
       { title: `Case Study or Article`, tip: `Write about a problem you solved using your key skills (${strengthBullets}). Long-form articles get 5x more visibility than posts.` },
       { title: `Certification Badge`, tip: `${gaps.find(g => g.severity === 'critical')?.resources?.[0] || 'Cloud certification'} — pin the credential once earned.` },
     ];
@@ -125,17 +125,18 @@ I'm passionate about the intersection of enterprise process automation and moder
         skillsToAdd.push(g.skill);
       }
     });
-    // Add target role keywords
-    skillsToAdd.push(target, 'AI', 'Machine Learning', 'Cloud Architecture');
+    // Add target role as a keyword; also add top recommended role title if it differs
+    skillsToAdd.push(target);
+    if (topRole?.title && topRole.title !== target) skillsToAdd.push(topRole.title);
 
-    // Skills to deprioritize: identify skills not aligned with target role
-    // Only suggest removing skills that don't appear in strengths
-    const legacyIndicators = ['Legacy Systems', 'VB.NET', 'COBOL', 'Delphi'];
-    legacyIndicators.forEach(s => {
-      if (strengths.every(str => !str.title.toLowerCase().includes(s.toLowerCase()))) {
-        skillsToRemove.push(s);
-      }
-    });
+    // Skills to deprioritize: supporting-tier strengths the user actually has
+    // that are not already in the "add" list for the target role
+    const addSet = new Set(skillsToAdd.map(s => s.toLowerCase()));
+    const supportingSkills = strengths
+      .filter(s => s.tier === 'supporting')
+      .map(s => s.title)
+      .filter(s => !addSet.has(s.toLowerCase()));
+    skillsToRemove.push(...supportingSkills.slice(0, 4));
 
     // --- Content plan ---
     const contentIdeas = [
@@ -149,7 +150,7 @@ I'm passionate about the intersection of enterprise process automation and moder
     const connectionTargets = [
       ...(topRole?.exampleCompanies?.slice(0, 3) || []).map(c => `Recruiters and engineers at ${c}`),
       `Other ${target}s in ${metadata.country || 'your region'}`,
-      `Content creators in AI/automation space`,
+      `Content creators in the ${target} space`,
     ];
 
     return { headlines, about, featuredItems, skillsToAdd, skillsToRemove, contentIdeas, connectionTargets };
