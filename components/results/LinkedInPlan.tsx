@@ -98,17 +98,10 @@ export default function LinkedInPlan({ analysis }: LinkedInPlanProps) {
     const strengthBullets = strengths.slice(0, 3).map(s => s.title).join(', ');
     const gapActions = gaps.filter(g => g.severity === 'critical').slice(0, 2).map(g => g.closingPlan);
 
-    // Pull top quantified highlight from CV experience (prefer bullets containing a number/metric)
-    const topHighlight = (analysis.profile?.experience ?? [])
-      .flatMap(e => e.highlights ?? [])
-      .find(h => typeof h === 'string' && /\d/.test(h));
-
     const about = `As a ${currentTitle} transitioning into ${target}, I bring ${topSkillPhrase} with a track record of delivering results.
 
 What I bring to the table:
-${topHighlight
-  ? `→ ${topHighlight}\n${strengths.slice(0, 3).map(s => `→ ${s.title}: ${s.description.split('.')[0]}.`).join('\n')}`
-  : strengths.slice(0, 4).map(s => `→ ${s.title}: ${s.description.split('.')[0]}.`).join('\n')}
+${strengths.slice(0, 4).map(s => `→ ${s.title}: ${s.description.split('.')[0]}.`).join('\n')}
 
 Currently focused on:
 ${gapActions.length > 0 ? gapActions.map(a => `→ ${a.split('.')[0]}.`).join('\n') : `→ Deepening expertise in ${target} and staying current with industry developments.`}
@@ -151,17 +144,14 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
 
     // Item 3: Certification Badge
     const certGap = gaps.find(g => g.severity === 'critical') || gaps.find(g => g.severity === 'moderate');
-    const existingCert = analysis.profile?.certifications?.[0];
     const certItem = certGap
       ? {
           title: `Certification: ${certGap.skill}`,
-          tip: `${existingCert ? `You already have "${existingCert}" — pin it now as a featured credential. ` : ''}Earning a recognised credential in ${certGap.skill} directly addresses your most critical gap for ${target} roles. ${certGap.closingPlan.split('.')[0]}. Once earned, pin the Credly/Coursera badge here — credentials with a clickable verification link get 40% more profile views from recruiters filtering for ${certGap.skill}.`,
+          tip: `Earning a recognised credential in ${certGap.skill} directly addresses your most critical gap for ${target} roles. ${certGap.closingPlan.split('.')[0]}. Once earned, pin the Credly/Coursera badge here — credentials with a clickable verification link get 40% more profile views from recruiters filtering for ${certGap.skill}.`,
         }
       : {
-          title: existingCert ? `Pin Your Certification: ${existingCert}` : `Advanced Certification in ${topSkillPhrase}`,
-          tip: existingCert
-            ? `You already have "${existingCert}" — this is your strongest credentialing signal for ${target} roles. Pin it as a featured item with the verification link. An advanced or specialisation credential in ${topSkillPhrase} would further differentiate you from other candidates.`
-            : `Your profile is already strong. An advanced or specialisation credential in ${topSkillPhrase} would signal seniority and differentiate you from other ${target} candidates. Look for vendor-specific certs (AWS, GCP, Azure, etc.) or role-specific ones aligned to your top target companies.`,
+          title: `Advanced Certification in ${topSkillPhrase}`,
+          tip: `Your profile is already strong. An advanced or specialisation credential in ${topSkillPhrase} would signal seniority and differentiate you from other ${target} candidates. Look for vendor-specific certs (AWS, GCP, Azure, etc.) or role-specific ones aligned to your top target companies.`,
         };
 
     const featuredItems = [portfolioItem, caseStudyItem, certItem];

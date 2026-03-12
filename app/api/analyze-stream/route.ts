@@ -421,7 +421,7 @@ export async function POST(request: NextRequest) {
           }),
           hasJobPosting
             ? callClaude<JobMatch>({
-                ...buildJobMatchPrompt(profile, cvText, questionnaire.jobPosting!, questionnaire.language, questionnaire.linkedInProfile),
+                ...buildJobMatchPrompt(profile, cvText, questionnaire.jobPosting!),
                 maxTokens: 4096,
                 temperature: 0.3,
                 fallback: JOB_MATCH_FALLBACK,
