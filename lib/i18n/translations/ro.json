@@ -862,6 +862,7 @@
     "techStack": "Tehnologii",
     "whyRelevant": "De Ce Ajută",
     "estimatedTime": "Timp Estimat",
+    "reanalyze": "Actualizează Analiza",
     "error": "Analiza profilului GitHub a eșuat",
     "priority": {
       "high": "Ridicat",

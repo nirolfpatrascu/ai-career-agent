@@ -198,7 +198,7 @@ export default function GitHubAnalysisPanel({ githubUrl, targetRole, jobPosting,
           <div className="text-center pt-2">
             <button
               onClick={handleAnalyze}
-              className="btn-secondary text-sm flex items-center gap-2 mx-auto"
+              className="btn-primary text-sm !py-2.5 !px-5 !rounded-xl flex items-center gap-2 mx-auto"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="1 4 1 10 7 10"/>

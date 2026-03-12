@@ -12,7 +12,7 @@ const PDFDownloadButton = dynamic(
 
 function ButtonPlaceholder() {
   return (
-    <button disabled className="btn-secondary text-sm opacity-50 cursor-wait flex items-center gap-2">
+    <button disabled className="btn-primary text-sm !py-2.5 !px-5 !rounded-xl opacity-50 cursor-wait flex items-center gap-2">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
         <polyline points="7 10 12 15 17 10" />

@@ -862,6 +862,7 @@
     "techStack": "Stack Tecnológico",
     "whyRelevant": "Por Qué Ayuda",
     "estimatedTime": "Tiempo Estimado",
+    "reanalyze": "Actualizar análisis",
     "error": "Error al analizar el perfil de GitHub",
     "priority": {
       "high": "Alta",

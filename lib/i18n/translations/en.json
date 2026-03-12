@@ -860,6 +860,7 @@
     "techStack": "Tech Stack",
     "whyRelevant": "Why This Helps",
     "estimatedTime": "Estimated Time",
+    "reanalyze": "Refresh Analysis",
     "error": "Failed to analyze GitHub profile",
     "priority": {
       "high": "High",
