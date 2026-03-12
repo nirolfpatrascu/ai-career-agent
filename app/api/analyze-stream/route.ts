@@ -423,7 +423,7 @@ export async function POST(request: NextRequest) {
             ? callClaude<JobMatch>({
                 ...buildJobMatchPrompt(profile, cvText, questionnaire.jobPosting!),
                 maxTokens: 4096,
-                temperature: 0.3,
+                temperature: 0.1,
                 fallback: JOB_MATCH_FALLBACK,
               })
             : Promise.resolve(undefined),
@@ -516,7 +516,7 @@ export async function POST(request: NextRequest) {
               system: 'You are an expert ATS keyword extraction analyst. Respond with valid JSON only.',
               userMessage: extractionPrompt,
               maxTokens: 4000,
-              temperature: 0.1,
+              temperature: 0,
               fallback: { keywords: [], roleLevel: 'mid', domain: 'General' },
             });
 
@@ -533,7 +533,7 @@ export async function POST(request: NextRequest) {
                 system: 'You are an expert ATS keyword matching engine. Respond with valid JSON only.',
                 userMessage: matchingPrompt,
                 maxTokens: 6000,
-                temperature: 0.1,
+                temperature: 0,
                 fallback: { matches: [], recommendations: [] },
               });
 
