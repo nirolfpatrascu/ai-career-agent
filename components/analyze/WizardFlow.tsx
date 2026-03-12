@@ -120,8 +120,8 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
   const canProceed: Record<Step, boolean> = {
     linkedin: true, // LinkedIn is encouraged, not required
     cv: !!hasLinkedInOrCV, // At least one file/profile needed
-    jobs: hasRequiredCareerFields, // Career fields are required to proceed
-    review: !!(hasLinkedInOrCV && hasRequiredCareerFields),
+    jobs: hasRequiredCareerFields && hasJobDescription, // Career fields + job description required
+    review: !!(hasLinkedInOrCV && hasRequiredCareerFields && hasJobDescription),
   };
 
   // --- Navigation ---
@@ -243,8 +243,8 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
             onProfileImported={handleUpworkProfileImported}
             importedProfile={upworkProfile}
           />
-          <p className="text-xs text-text-tertiary text-center mt-4">
-            {t('wizard.linkedin.optional') || 'This step is optional but recommended for the best analysis.'}
+          <p className="text-sm font-bold text-text-primary text-center mt-4">
+            {t('wizard.linkedin.optional') || 'This step is optional but highly recommended for the best analysis.'}
           </p>
         </div>
       )}
@@ -324,14 +324,14 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
         </summary>
         <div className="px-4 pb-4 text-sm text-text-secondary space-y-2">
           <p>1. Go to your LinkedIn profile page</p>
-          <p>2. Click the <strong className="text-text-primary">More</strong> button (⋯) below your profile photo</p>
+          <p>2. Click the <strong className="text-text-primary">More</strong> or <strong className="text-text-primary">Resources</strong> button (⋯) below your profile photo</p>
           <p>3. Select <strong className="text-text-primary">Save to PDF</strong></p>
           <p>4. Upload the downloaded PDF here</p>
         </div>
       </details>
 
-      <p className="text-xs text-text-tertiary text-center">
-        {t('wizard.linkedin.optional') || 'This step is optional but recommended for the best analysis.'}
+      <p className="text-sm font-bold text-text-primary text-center">
+        {t('wizard.linkedin.optional') || 'This step is optional but highly recommended for the best analysis.'}
       </p>
       </>
       )}
@@ -472,7 +472,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
       {/* Job description */}
       <div>
         <label htmlFor="w-jobDesc" className="label text-sm flex items-center justify-between">
-          <span>{t('wizard.jobs.descriptionLabel') || 'Job Description'}</span>
+          <span>{t('wizard.jobs.descriptionLabel') || 'Job Description'} <span className="text-danger text-xs">*</span></span>
           {hasJobDescription && (
             <span className="text-xs text-success font-normal flex items-center gap-1">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
@@ -487,7 +487,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
           value={jobDescription}
           onChange={(e) => setJobDescription(e.target.value)}
         />
-        <p className="text-xs text-text-tertiary mt-1.5">
+        <p className="text-sm font-bold text-text-primary mt-1.5">
           {t('wizard.jobs.hint') || 'Include the full posting: responsibilities, requirements, qualifications, etc.'}
         </p>
       </div>
@@ -514,9 +514,12 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
         </div>
       </div>
 
-      <p className="text-xs text-text-tertiary">
-        {t('wizard.jobs.skipNote') || 'You can skip this step, but providing a job description significantly improves the analysis quality.'}
-      </p>
+      <div className="flex items-start gap-2 px-4 py-3 bg-primary/[0.05] border border-primary/15 rounded-xl">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary flex-shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        <p className="text-sm text-text-secondary">
+          {t('wizard.jobs.requiredNote') || 'A job description is required. Without it, we cannot determine what role you are targeting or tailor the gap analysis and action plan to your specific opportunity.'}
+        </p>
+      </div>
     </div>
   );
 
@@ -593,7 +596,9 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
           <p className="text-sm text-danger text-center mt-3">
             {!hasLinkedInOrCV
               ? (t('wizard.review.needFile') || 'Upload at least a CV or LinkedIn PDF')
-              : (t('wizard.review.needDetails') || 'Complete all required career details')}
+              : !hasJobDescription
+                ? (t('wizard.review.needJob') || 'Paste a job description to continue')
+                : (t('wizard.review.needDetails') || 'Complete all required career details')}
           </p>
         )}
       </div>
@@ -698,9 +703,7 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
           >
             {currentStep === 'linkedin' && !linkedInFile
               ? (t('common.skip') || 'Skip')
-              : currentStep === 'jobs' && !hasJobDescription
-                ? (t('common.skip') || 'Skip')
-                : (t('common.next') || 'Next')
+              : (t('common.next') || 'Next')
             }
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           </button>
