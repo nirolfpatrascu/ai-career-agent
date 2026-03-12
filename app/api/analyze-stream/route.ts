@@ -326,7 +326,7 @@ export async function POST(request: NextRequest) {
         if (profileResult.source === 'fallback') {
           send({
             step: 'error',
-            message: 'Could not extract a meaningful profile from this CV. The document may be corrupted, empty, or in an unsupported format. Please upload a different PDF.',
+            message: 'Could not extract a profile from this CV. This is usually a temporary issue — please wait a moment and try again. If the problem persists, try re-uploading your PDF.',
           });
           controller.close();
           return;
