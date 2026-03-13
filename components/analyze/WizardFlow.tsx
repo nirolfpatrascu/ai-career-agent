@@ -210,47 +210,8 @@ export default function WizardFlow({ onSubmit, onDemo }: WizardFlowProps) {
         </p>
       </div>
 
-      {/* Source toggle tabs */}
-      <div className="flex gap-2">
-        <button
-          onClick={() => setImportSource('linkedin')}
-          className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-all border flex items-center justify-center gap-2 ${
-            importSource === 'linkedin'
-              ? 'bg-[#0A66C2]/[0.08] border-[#0A66C2]/20 text-[#0A66C2]'
-              : 'bg-black/[0.02] border-black/[0.08] text-text-tertiary hover:text-text-secondary'
-          }`}
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          {t('wizard.linkedin.tabLinkedin') || 'LinkedIn PDF'}
-        </button>
-        <button
-          onClick={() => setImportSource('upwork')}
-          className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-all border flex items-center justify-center gap-2 ${
-            importSource === 'upwork'
-              ? 'bg-[#14A800]/[0.08] border-[#14A800]/20 text-[#14A800]'
-              : 'bg-black/[0.02] border-black/[0.08] text-text-tertiary hover:text-text-secondary'
-          }`}
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-          {t('wizard.linkedin.tabUpwork') || 'Upwork Profile'}
-        </button>
-      </div>
-
-      {/* Upwork Import */}
-      {importSource === 'upwork' && (
-        <div>
-          <UpworkImport
-            onProfileImported={handleUpworkProfileImported}
-            importedProfile={upworkProfile}
-          />
-          <p className="text-sm font-bold text-text-primary text-center mt-4">
-            {t('wizard.linkedin.optional') || 'This step is optional but highly recommended for the best analysis.'}
-          </p>
-        </div>
-      )}
-
-      {/* LinkedIn Drop zone — only when linkedin tab selected */}
-      {importSource === 'linkedin' && (
+      {/* LinkedIn Drop zone */}
+      {(
       <>
       <div
         className={`relative rounded-2xl border-2 border-dashed p-8 sm:p-12 text-center transition-all duration-300 cursor-pointer
