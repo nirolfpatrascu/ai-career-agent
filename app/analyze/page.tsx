@@ -294,6 +294,7 @@ export default function AnalyzePage() {
     setIsDemo(true);
     const sample = getSampleAnalysis(locale);
     setResult(sample);
+    if (sample.metadata.githubUrl) setGithubUrl(sample.metadata.githubUrl);
     setState('results');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [locale]);
@@ -306,6 +307,7 @@ export default function AnalyzePage() {
     setIsDemo(false);
     setActiveTab(DEFAULT_TAB);
     setSaveStatus('idle');
+    setGithubUrl(null);
     streaming.reset();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [streaming]);
@@ -471,7 +473,7 @@ export default function AnalyzePage() {
             {isDemo && (
               <div className="flex items-center justify-between bg-primary/[0.06] border border-primary/15 rounded-2xl px-5 py-3 text-sm mb-6">
                 <span className="text-text-secondary">
-                  👆 {t('analyze.demoNotice')}
+                  👆 {t('analyze.demoBanner')}
                 </span>
                 <Link href="/analyze" className="text-primary font-medium hover:text-primary-light transition-colors">
                   {t('analyze.uploadOwn')} →

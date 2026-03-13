@@ -3,7 +3,9 @@
     "analyzedAt": "2026-02-18T14:30:00Z",
     "cvFileName": "Alex_Morgan_CV.pdf",
     "targetRole": "Cloud Solutions Architect",
-    "country": "Netherlands"
+    "country": "Netherlands",
+    "jobPosting": "HashiCorp — Solutions Architect, EMEA\n\nWe are seeking a Solutions Architect to help enterprise customers adopt infrastructure automation. You will design and implement cloud infrastructure solutions, lead technical workshops, and guide customers in their HashiCorp adoption journey.\n\nRequired:\n- 5+ years cloud infrastructure or DevOps experience\n- Proficiency with Terraform, Kubernetes, or comparable IaC tools\n- Strong AWS, Azure, or GCP knowledge\n- Excellent communication and stakeholder management skills\n- Experience with CI/CD pipelines\n\nPreferred:\n- AWS Solutions Architect or equivalent certification\n- Experience with HashiCorp products (Terraform, Vault, Consul)\n- Enterprise software architecture background\n- Scripting in Python or Go",
+    "githubUrl": "https://github.com/alex-morgan"
   },
   "fitScore": {
     "score": 6,
@@ -302,6 +304,152 @@
       "Lead with your enterprise architecture experience — 'I've designed distributed systems deployed across Fortune 500 companies' commands higher rates than listing individual technologies.",
       "When asked about salary expectations, anchor to competitive EU market ranges rather than local market rates. You're competing on value delivered.",
       "If offered below target, negotiate for sign-on bonus, equity, or accelerated review timeline rather than accepting a lower base. Base salary compounds over your career."
+    ]
+  },
+  "atsScore": {
+    "overallScore": 72,
+    "keywordScore": 68,
+    "formatScore": 85,
+    "keywords": {
+      "matched": [
+        { "keyword": "Kubernetes", "category": "required", "importance": "high", "cvSection": "Experience" },
+        { "keyword": "AWS", "category": "required", "importance": "high", "cvSection": "Experience" },
+        { "keyword": "Terraform", "category": "required", "importance": "high", "cvSection": "Skills" },
+        { "keyword": "CI/CD", "category": "required", "importance": "high", "cvSection": "Experience" },
+        { "keyword": "microservices", "category": "preferred", "importance": "medium", "cvSection": "Experience" }
+      ],
+      "semanticMatch": [
+        { "keyword": "IaC", "category": "required", "matchedAs": "Infrastructure-as-Code", "importance": "high", "cvSection": "Experience" },
+        { "keyword": "cloud infrastructure", "category": "required", "matchedAs": "cloud-native applications", "importance": "high" }
+      ],
+      "missing": [
+        { "keyword": "HashiCorp Vault", "category": "preferred", "importance": "medium", "cvSection": "Skills" },
+        { "keyword": "Terraform Enterprise", "category": "preferred", "importance": "medium", "cvSection": "Skills" },
+        { "keyword": "Python", "category": "nice-to-have", "importance": "low", "cvSection": "Skills" },
+        { "keyword": "Go", "category": "nice-to-have", "importance": "low", "cvSection": "Skills" }
+      ],
+      "total": { "required": 6, "matched": 5, "missing": 4 }
+    },
+    "formatIssues": [
+      {
+        "issue": "No certifications section",
+        "severity": "warning",
+        "description": "Certifications are not listed. AWS certifications are expected and should be prominently displayed.",
+        "fix": "Add a 'Certifications' section near the top of your CV listing your AWS certification status."
+      },
+      {
+        "issue": "GitHub URL missing from contact header",
+        "severity": "warning",
+        "description": "Technical SA roles expect a visible GitHub link in the contact section.",
+        "fix": "Add your GitHub URL to the contact information at the top of your CV."
+      }
+    ],
+    "recommendations": [
+      {
+        "action": "Add AWS Solutions Architect certification (in-progress counts)",
+        "section": "Certifications",
+        "priority": "critical",
+        "keywords": ["AWS", "Solutions Architect", "certification"],
+        "example": "AWS Solutions Architect – Associate (In Progress, expected Q2 2026)"
+      },
+      {
+        "action": "Add HashiCorp Terraform and Vault to skills explicitly",
+        "section": "Skills",
+        "priority": "high",
+        "keywords": ["Terraform Enterprise", "HashiCorp Vault"],
+        "example": "Infrastructure as Code: Terraform (advanced), HashiCorp Vault (intermediate)"
+      },
+      {
+        "action": "Quantify your cloud infrastructure impact with metrics",
+        "section": "Experience",
+        "priority": "high",
+        "keywords": ["cloud infrastructure", "CI/CD", "cost reduction"],
+        "example": "Migrated 12 microservices to AWS EKS, cutting infrastructure costs by 35% and deploy time from 2h → 8 min"
+      }
+    ],
+    "companyATS": {
+      "company": "HashiCorp",
+      "atsSystem": "Greenhouse",
+      "tips": [
+        "Mirror HashiCorp product names exactly — write 'Terraform' and 'Vault', not generic terms like 'IaC tool' or 'secrets manager'.",
+        "Greenhouse parses CV structure well — use standard section headings (Experience, Skills, Education).",
+        "Include quantified impact in every bullet point — Greenhouse's AI scoring weights specific achievements over task descriptions."
+      ]
+    }
+  },
+  "githubAnalysis": {
+    "strengths": [
+      {
+        "area": "Cloud Infrastructure Code",
+        "description": "Strong Terraform and Kubernetes configuration repositories with well-structured modules and proper documentation.",
+        "evidence": "3 infrastructure repos with 12+ stars, clean variable naming, and README diagrams"
+      },
+      {
+        "area": "Microservices Portfolio",
+        "description": "Multiple event-driven microservice projects demonstrating real-world architecture patterns — not just tutorials.",
+        "evidence": "kafka-stream-processor and aws-microservice-demo repos with architecture diagrams"
+      },
+      {
+        "area": "Consistent Activity",
+        "description": "Regular commit cadence over the past 6 months signals active practice, not just exam preparation.",
+        "evidence": "230+ contributions in the last year, recent commits in infra and backend repos"
+      }
+    ],
+    "improvements": [
+      {
+        "area": "README Quality",
+        "description": "Several repos lack deployment instructions and architecture diagrams — hiring managers spend < 30 seconds per repo.",
+        "actionable": "Add architecture diagrams (draw.io or mermaid), a 'Quick Start' section, and a demo GIF to each of your top 3 repos.",
+        "priority": "high",
+        "actionType": "polish_existing"
+      },
+      {
+        "area": "HashiCorp Tooling",
+        "description": "No public repos demonstrating Vault, Consul, or Nomad — the exact tools HashiCorp roles will test you on.",
+        "actionable": "Build a small reference project deploying Vault on Kubernetes for secrets management. This directly addresses a gap for HashiCorp applications.",
+        "priority": "high",
+        "actionType": "new_project"
+      },
+      {
+        "area": "Open Source Contributions",
+        "description": "No contributions to external projects. Strong original repos but the Terraform/K8s communities reward contributors.",
+        "actionable": "Submit one PR to a HashiCorp or CNCF project — even documentation improvements signal community engagement.",
+        "priority": "medium",
+        "actionType": "new_project"
+      }
+    ],
+    "projectIdea": {
+      "name": "vault-k8s-secrets-manager",
+      "techStack": ["HashiCorp Vault", "Kubernetes", "Terraform", "Go"],
+      "description": "A reference implementation deploying HashiCorp Vault on Kubernetes with auto-unseal via AWS KMS, dynamic database credentials, and a Go microservice consuming secrets via the Vault agent sidecar pattern.",
+      "whyRelevant": "Directly demonstrates the core HashiCorp product stack interviewers will ask about. Highly pinnable and shareable as a portfolio piece.",
+      "estimatedTime": "3-5 days of focused work"
+    },
+    "stats": {
+      "totalRepos": 18,
+      "topLanguages": ["HCL", "TypeScript", "Python", "Go"],
+      "avgStars": 4.2,
+      "accountAge": "4 years",
+      "recentActivity": "Active (last commit 3 days ago)"
+    }
+  },
+  "coverLetter": {
+    "greeting": "Dear HashiCorp Hiring Team,",
+    "openingParagraph": "I'm applying for the Solutions Architect, EMEA position at HashiCorp. My background spans 11 years designing distributed systems and cloud-native infrastructure — most recently at TechFlow, where I led enterprise architecture modernization projects across EMEA clients. HashiCorp's product suite sits at the centre of every infrastructure decision I've made in the last three years, which is why this role is a natural progression rather than a pivot.",
+    "bodyParagraphs": [
+      "At TechFlow, I designed and implemented microservices architectures for three Fortune 500 clients, each involving Terraform for IaC, AWS EKS for orchestration, and CI/CD pipelines that cut deployment cycles from 2 hours to under 10 minutes. I also built and delivered technical training programs for engineering teams of 20–50 people — the kind of customer-facing enablement your SA role requires.",
+      "I'll be direct about one gap: I'm currently working toward my AWS Solutions Architect certification. I have hands-on AWS experience across EC2, EKS, RDS, Lambda, and S3, but I recognise the certification signals structured knowledge. I expect to complete it within 6 weeks and I'm happy to discuss the exam content in depth during any technical interview."
+    ],
+    "closingParagraph": "I'm excited by HashiCorp's mission to make infrastructure automation accessible at enterprise scale — it's the problem I've been solving from the customer side for years. I'd welcome the opportunity to discuss how my background aligns with what your EMEA team needs.",
+    "signature": "Alex Morgan",
+    "toneUsed": "professional",
+    "weaknessAcknowledgments": [
+      "AWS certification currently in progress — expected completion in 6 weeks"
+    ],
+    "strengthHighlights": [
+      "11 years enterprise software and cloud architecture experience",
+      "Direct Terraform, Kubernetes, and AWS EKS hands-on project history",
+      "Technical workshop delivery and customer enablement background"
     ]
   }
 }
