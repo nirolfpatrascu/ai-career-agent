@@ -52,7 +52,7 @@
   },
   "features": {
     "sectionTitle": "Todo lo que necesitas para tu próximo paso profesional",
-    "sectionSubtitle": "Sube tu CV una sola vez — obtén análisis de brechas, datos salariales, plan de perfil LinkedIn, puntuación ATS, hoja de ruta y más. Todo en un solo lugar.",
+    "sectionSubtitle": "Sube tu CV y perfil de LinkedIn — obtén análisis de brechas, datos salariales, plan de perfil LinkedIn, puntuación ATS, hoja de ruta y más. Todo en un solo lugar.",
     "gapAnalysis": {
       "title": "Análisis de Brechas Profesionales",
       "desc": "La IA identifica tus fortalezas y brechas de competencias respecto a tu puesto objetivo. Cada brecha se califica por severidad — crítica, moderada o menor — con un plan concreto para cerrarla."
@@ -82,8 +82,8 @@
     "sectionTitle": "Cómo funciona",
     "sectionSubtitle": "De subir el CV a la estrategia profesional completa en aproximadamente 2 minutos.",
     "step1": {
-      "title": "Sube y Define tus Objetivos",
-      "desc": "Sube tu CV en PDF e indícanos tu puesto objetivo, nivel de experiencia y país. Opcionalmente, añade una oferta de empleo para puntuación ATS y carta de presentación personalizada, o tu URL de GitHub para un análisis de portafolio."
+      "title": "Sube LinkedIn, CV y Descripción del Puesto",
+      "desc": "Sube tu perfil de LinkedIn en PDF y tu CV, luego indícanos tu puesto objetivo, nivel de experiencia y país. Opcionalmente, añade una oferta de empleo para puntuación ATS y carta de presentación personalizada, o tu URL de GitHub para un análisis de portafolio."
     },
     "step2": {
       "title": "La IA Analiza Todo",

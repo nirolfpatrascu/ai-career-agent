@@ -52,7 +52,7 @@
   },
   "features": {
     "sectionTitle": "Tout ce dont vous avez besoin pour votre prochain pas de carrière",
-    "sectionSubtitle": "Téléchargez votre CV une seule fois — obtenez une analyse des écarts, des données salariales, un plan de profil LinkedIn, un score ATS, une feuille de route et plus. Tout en un seul endroit.",
+    "sectionSubtitle": "Téléchargez votre CV et votre profil LinkedIn — obtenez une analyse des écarts, des données salariales, un plan de profil LinkedIn, un score ATS, une feuille de route et plus. Tout en un seul endroit.",
     "gapAnalysis": {
       "title": "Analyse des Écarts de Carrière",
       "desc": "L'IA identifie vos forces et vos lacunes par rapport à votre poste cible. Chaque écart est évalué par sévérité — critique, modéré ou mineur — avec un plan concret pour le combler."
@@ -82,8 +82,8 @@
     "sectionTitle": "Comment ça marche",
     "sectionSubtitle": "Du téléchargement de CV à la stratégie de carrière complète en environ 2 minutes.",
     "step1": {
-      "title": "Téléchargez et Définissez Vos Objectifs",
-      "desc": "Téléchargez votre CV en PDF et indiquez votre poste cible, votre niveau d'expérience et votre pays. Optionnellement, ajoutez une offre d'emploi pour le scoring ATS et une lettre de motivation, ou votre URL GitHub pour une analyse de portfolio."
+      "title": "Télécharger LinkedIn, CV et Offre d'Emploi",
+      "desc": "Téléchargez votre profil LinkedIn en PDF et votre CV, puis indiquez votre poste cible, votre niveau d'expérience et votre pays. Optionnellement, ajoutez une offre d'emploi pour le scoring ATS et une lettre de motivation, ou votre URL GitHub pour une analyse de portfolio."
     },
     "step2": {
       "title": "L'IA Analyse Tout",

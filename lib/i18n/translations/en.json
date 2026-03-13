@@ -52,7 +52,7 @@
   },
   "features": {
     "sectionTitle": "Everything you need for your next career move",
-    "sectionSubtitle": "Upload your CV once — get gap analysis, salary data, ATS scoring, a LinkedIn profile plan, a career roadmap, and more. All in one place.",
+    "sectionSubtitle": "Upload your CV and LinkedIn profile — get gap analysis, salary data, ATS scoring, a LinkedIn profile plan, a career roadmap, and more. All in one place.",
     "gapAnalysis": {
       "title": "Career Gap Analysis",
       "desc": "AI identifies your strengths and skill gaps against your target role. Each gap is rated by severity — critical, moderate, or minor — with a specific closing plan, time estimate, and resources."
@@ -82,8 +82,8 @@
     "sectionTitle": "How it works",
     "sectionSubtitle": "From CV upload to full career strategy in about 2 minutes.",
     "step1": {
-      "title": "Upload & Set Your Goals",
-      "desc": "Upload your CV as a PDF and tell us your target role, experience level, and country. Optionally add a job posting for ATS scoring and a tailored cover letter, or your GitHub URL for a portfolio analysis."
+      "title": "Upload LinkedIn, CV & Job Posting",
+      "desc": "Upload your LinkedIn profile PDF and CV, then tell us your target role, experience level, and country. Optionally paste a job description for ATS scoring and a personalized cover letter, or add your GitHub URL for a portfolio analysis."
     },
     "step2": {
       "title": "AI Analyzes Everything",

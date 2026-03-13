@@ -52,7 +52,7 @@
   },
   "features": {
     "sectionTitle": "Tot ce ai nevoie pentru următoarea ta mișcare în carieră",
-    "sectionSubtitle": "Încarcă CV-ul o singură dată — primești analiză de gap-uri, date salariale, plan LinkedIn, scor ATS, plan de carieră și mai mult. Totul într-un singur loc.",
+    "sectionSubtitle": "Încarcă CV-ul și profilul LinkedIn — primești analiză de gap-uri, date salariale, plan LinkedIn, scor ATS, plan de carieră și mai mult. Totul într-un singur loc.",
     "gapAnalysis": {
       "title": "Analiză Gap-uri Carieră",
       "desc": "AI-ul identifică punctele tale forte și lipsurile de competențe față de rolul dorit. Fiecare gap este evaluat ca severitate — critic, moderat sau minor — cu un plan concret de rezolvare."
@@ -82,8 +82,8 @@
     "sectionTitle": "Cum funcționează",
     "sectionSubtitle": "De la încărcarea CV-ului la strategia completă de carieră în aproximativ 2 minute.",
     "step1": {
-      "title": "Încarcă și Stabilește-ți Obiectivele",
-      "desc": "Încarcă CV-ul ca PDF și spune-ne rolul dorit, nivelul de experiență și țara. Opțional, adaugă un anunț de job pentru scor ATS și o scrisoare de intenție personalizată, sau URL-ul GitHub pentru o analiză de portofoliu."
+      "title": "Încarcă LinkedIn, CV și Descrierea Jobului",
+      "desc": "Încarcă profilul LinkedIn PDF și CV-ul, apoi spune-ne rolul dorit, nivelul de experiență și țara. Opțional, lipește o descriere de job pentru scor ATS și o scrisoare de intenție personalizată, sau URL-ul GitHub pentru o analiză de portofoliu."
     },
     "step2": {
       "title": "AI-ul Analizează Totul",

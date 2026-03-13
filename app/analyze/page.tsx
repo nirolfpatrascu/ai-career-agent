@@ -163,7 +163,9 @@ export default function AnalyzePage() {
         .then(res => res.ok ? res.json() : Promise.reject('Not found'))
         .then(data => {
           if (data.analysis?.result) {
-            setResult(data.analysis.result);
+            const r = data.analysis.result;
+            setResult(r);
+            if (r.metadata?.githubUrl) setGithubUrl(r.metadata.githubUrl);
             setState('results');
             setSaveStatus('saved');
             setAnalysisId(savedId);

@@ -8,41 +8,46 @@ import type { LucideIcon } from 'lucide-react';
 /* ─── Step mockups (pure CSS/Tailwind) ─── */
 
 function UploadMockup() {
-  const [uploaded, setUploaded] = useState(false);
+  const [step, setStep] = useState(0);
   useEffect(() => {
-    const t = setTimeout(() => setUploaded(true), 1200);
-    return () => clearTimeout(t);
+    const t1 = setTimeout(() => setStep(1), 800);
+    const t2 = setTimeout(() => setStep(2), 1600);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
   return (
-    <div className="w-full space-y-2.5 px-2">
-      {/* PDF indicator */}
-      <div className={`border-2 border-dashed rounded-lg p-3 text-center transition-all duration-500 ${
-        uploaded ? 'border-[#22C55E]/40 bg-[#22C55E]/[0.04]' : 'border-black/[0.08]'
+    <div className="w-full space-y-2 px-2">
+      {/* LinkedIn PDF */}
+      <div className={`border border-dashed rounded-lg px-2.5 py-1.5 flex items-center gap-2 transition-all duration-500 ${
+        step >= 1 ? 'border-[#0A66C2]/30 bg-[#0A66C2]/[0.04]' : 'border-black/[0.08]'
       }`}>
-        {uploaded ? (
-          <div className="flex items-center justify-center gap-2">
-            <span className="text-[#22C55E] font-bold text-sm">&#10003;</span>
-            <span className="text-[10px] font-semibold text-[#22C55E]">Resume.pdf uploaded</span>
-          </div>
-        ) : (
-          <div className="flex items-center justify-center gap-2 text-[#9CA3AF]">
-            <Upload className="w-4 h-4" />
-            <span className="text-[10px]">Drop your CV here...</span>
-          </div>
-        )}
+        <span className={`text-[10px] font-bold transition-colors ${step >= 1 ? 'text-[#0A66C2]' : 'text-[#9CA3AF]'}`}>
+          {step >= 1 ? '✓' : '↑'}
+        </span>
+        <span className={`text-[10px] transition-colors ${step >= 1 ? 'text-[#0A66C2] font-medium' : 'text-[#9CA3AF]'}`}>
+          {step >= 1 ? 'LinkedIn_Profile.pdf' : 'LinkedIn PDF (optional)'}
+        </span>
+        {step < 1 && <span className="ml-auto text-[8px] text-[#9CA3AF]">optional</span>}
       </div>
-      {/* Form fields */}
-      {[
-        { label: 'Current Role', value: 'RPA Developer' },
-        { label: 'Target Role', value: 'AI Solutions Architect' },
-        { label: 'Country', value: 'Romania' },
-      ].map((f) => (
-        <div key={f.label}>
-          <div className="text-[9px] font-medium text-[#9CA3AF] mb-0.5">{f.label}</div>
-          <div className="bg-black/[0.03] border border-black/[0.06] rounded-md px-2 py-1 text-[10px] text-[#1A1A1A]">{f.value}</div>
-        </div>
-      ))}
+      {/* CV */}
+      <div className={`border border-dashed rounded-lg px-2.5 py-1.5 flex items-center gap-2 transition-all duration-500 ${
+        step >= 2 ? 'border-[#22C55E]/40 bg-[#22C55E]/[0.04]' : 'border-black/[0.08]'
+      }`}>
+        <Upload className={`w-3 h-3 flex-shrink-0 transition-colors ${step >= 2 ? 'text-[#22C55E]' : 'text-[#9CA3AF]'}`} />
+        <span className={`text-[10px] transition-colors ${step >= 2 ? 'text-[#22C55E] font-medium' : 'text-[#9CA3AF]'}`}>
+          {step >= 2 ? '✓ Resume.pdf' : 'CV / Resume (required)'}
+        </span>
+      </div>
+      {/* Job description */}
+      <div className="bg-black/[0.03] border border-black/[0.06] rounded-lg px-2.5 py-1.5">
+        <div className="text-[8px] font-medium text-[#9CA3AF] mb-0.5">Job Description <span className="text-[#9CA3AF]/60">(optional)</span></div>
+        <div className="text-[9px] text-[#6B7280] truncate">HashiCorp — Solutions Architect, EMEA...</div>
+      </div>
+      {/* Target role field */}
+      <div className="bg-black/[0.03] border border-black/[0.06] rounded-md px-2 py-1 flex items-center justify-between">
+        <span className="text-[9px] text-[#9CA3AF]">Target Role</span>
+        <span className="text-[9px] font-medium text-[#1A1A1A]">AI Solutions Architect</span>
+      </div>
     </div>
   );
 }

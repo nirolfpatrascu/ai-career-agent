@@ -52,7 +52,7 @@
   },
   "features": {
     "sectionTitle": "Alles, was Sie für Ihren nächsten Karriereschritt brauchen",
-    "sectionSubtitle": "Laden Sie Ihren Lebenslauf einmal hoch — erhalten Sie Gap-Analyse, Gehaltsdaten, LinkedIn-Profilplan, ATS-Scoring, eine Karriere-Roadmap und mehr. Alles an einem Ort.",
+    "sectionSubtitle": "Laden Sie Ihren Lebenslauf und Ihr LinkedIn-Profil hoch — erhalten Sie Gap-Analyse, Gehaltsdaten, LinkedIn-Profilplan, ATS-Scoring, eine Karriere-Roadmap und mehr. Alles an einem Ort.",
     "gapAnalysis": {
       "title": "Karriere-Gap-Analyse",
       "desc": "KI identifiziert Ihre Stärken und Kompetenzlücken für Ihre Zielrolle. Jede Lücke wird nach Schweregrad bewertet — kritisch, moderat oder gering — mit einem konkreten Plan zur Schließung."
@@ -82,8 +82,8 @@
     "sectionTitle": "So funktioniert es",
     "sectionSubtitle": "Vom Lebenslauf-Upload zur vollständigen Karrierestrategie in etwa 2 Minuten.",
     "step1": {
-      "title": "Hochladen & Ziele setzen",
-      "desc": "Laden Sie Ihren Lebenslauf als PDF hoch und nennen Sie uns Ihre Zielrolle, Erfahrungsstufe und Ihr Land. Optional: Fügen Sie eine Stellenanzeige für ATS-Scoring und ein maßgeschneidertes Anschreiben hinzu, oder Ihre GitHub-URL für eine Portfolio-Analyse."
+      "title": "LinkedIn, Lebenslauf & Stellenanzeige hochladen",
+      "desc": "Laden Sie Ihr LinkedIn-Profil-PDF und Ihren Lebenslauf hoch, dann nennen Sie Ihre Zielrolle, Erfahrungsstufe und Ihr Land. Optional: Fügen Sie eine Stellenanzeige für ATS-Scoring und ein Anschreiben hinzu, oder Ihre GitHub-URL für eine Portfolio-Analyse."
     },
     "step2": {
       "title": "KI analysiert alles",

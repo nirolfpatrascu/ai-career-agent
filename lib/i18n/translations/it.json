@@ -52,7 +52,7 @@
   },
   "features": {
     "sectionTitle": "Tutto ciò che serve per il tuo prossimo passo di carriera",
-    "sectionSubtitle": "Carica il tuo CV una sola volta — ottieni analisi delle lacune, dati salariali, piano profilo LinkedIn, punteggio ATS, roadmap di carriera e altro. Tutto in un unico posto.",
+    "sectionSubtitle": "Carica il tuo CV e il profilo LinkedIn — ottieni analisi delle lacune, dati salariali, piano profilo LinkedIn, punteggio ATS, roadmap di carriera e altro. Tutto in un unico posto.",
     "gapAnalysis": {
       "title": "Analisi Gap di Carriera",
       "desc": "L'IA identifica i tuoi punti di forza e le lacune di competenze rispetto al ruolo desiderato. Ogni gap è valutato per gravità — critico, moderato o minore — con un piano concreto per colmarlo."
@@ -82,8 +82,8 @@
     "sectionTitle": "Come funziona",
     "sectionSubtitle": "Dal caricamento del CV alla strategia di carriera completa in circa 2 minuti.",
     "step1": {
-      "title": "Carica e Definisci i Tuoi Obiettivi",
-      "desc": "Carica il tuo CV in PDF e indicaci il ruolo desiderato, il livello di esperienza e il paese. Opzionalmente, aggiungi un annuncio di lavoro per il punteggio ATS e una lettera di presentazione personalizzata, o il tuo URL GitHub per un'analisi del portfolio."
+      "title": "Carica LinkedIn, CV e Offerta di Lavoro",
+      "desc": "Carica il tuo profilo LinkedIn in PDF e il CV, poi indicaci il ruolo desiderato, il livello di esperienza e il paese. Opzionalmente, aggiungi un'offerta di lavoro per il punteggio ATS e una lettera di presentazione personalizzata, o il tuo URL GitHub per un'analisi del portfolio."
     },
     "step2": {
       "title": "L'IA Analizza Tutto",
