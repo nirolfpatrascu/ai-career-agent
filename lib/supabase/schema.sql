@@ -8,7 +8,7 @@ create table if not exists public.analyses (
   id uuid default gen_random_uuid() primary key,
   user_id uuid references auth.users(id) on delete cascade not null,
   target_role text not null,
-  current_role text not null,
+  "current_role" text not null,
   country text not null,
   fit_score integer not null check (fit_score between 1 and 10),
   fit_label text not null,
@@ -76,7 +76,7 @@ create policy "Users can insert own profile"
 -- 7. Career Profiles table — persistent user career settings
 create table if not exists public.career_profiles (
   user_id uuid references auth.users(id) on delete cascade primary key,
-  current_role text,
+  "current_role" text,
   target_role text,
   years_experience integer,
   country text,
