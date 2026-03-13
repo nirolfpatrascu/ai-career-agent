@@ -669,7 +669,7 @@ function CareerReport({ result, labels: l }: { result: AnalysisResult; labels?: 
                 <View key={i} style={[styles.card, styles.mb8]}>
                   <Text style={[styles.textSmall, styles.bold, { color: colors.primary, marginBottom: 4 }]}>{clean(s.section)}</Text>
                   <Text style={[styles.textSmall, styles.bold]}>{clean(labels.current)}:</Text>
-                  <Text style={[styles.cardText, { fontStyle: 'italic', marginBottom: 4 }]}>{clean(s.current)}</Text>
+                  <Text style={[styles.cardText, { marginBottom: 4 }]}>{clean(s.current)}</Text>
                   <Text style={[styles.textSmall, styles.bold]}>{clean(labels.suggested)}:</Text>
                   <Text style={[styles.cardText, { color: colors.success, marginBottom: 4 }]}>{clean(s.suggested)}</Text>
                   <Text style={[styles.textSmall, { color: colors.textSecondary }]}>{clean(s.reasoning)}</Text>
@@ -778,7 +778,7 @@ function CareerReport({ result, labels: l }: { result: AnalysisResult; labels?: 
                   </View>
                   <Text style={styles.cardText}>{clean(rec.action)}</Text>
                   {rec.example && (
-                    <Text style={[styles.cardText, { color: colors.primary, fontStyle: 'italic', marginTop: 4 }]}>{clean(rec.example)}</Text>
+                    <Text style={[styles.cardText, { color: colors.primary, marginTop: 4 }]}>{clean(rec.example)}</Text>
                   )}
                 </View>
               ))}
@@ -824,7 +824,7 @@ function CareerReport({ result, labels: l }: { result: AnalysisResult; labels?: 
                 <View key={i} style={styles.card}>
                   <Text style={styles.cardTitle}>{clean(s.area)}</Text>
                   <Text style={styles.cardText}>{clean(s.description)}</Text>
-                  <Text style={[styles.textSmall, { color: colors.success, marginTop: 4, fontStyle: 'italic' }]}>{clean(s.evidence)}</Text>
+                  <Text style={[styles.textSmall, { color: colors.success, marginTop: 4 }]}>{clean(s.evidence)}</Text>
                 </View>
               ))}
             </View>
