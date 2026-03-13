@@ -386,11 +386,128 @@ const DEFAULT_LABELS: PDFLabels = {
   strengthHighlights: 'Strength Highlights',
 };
 
+// --- LinkedIn Plan computation (mirrors LinkedInPlan.tsx useMemo logic) ---
+
+function computeLinkedInPlan(result: AnalysisResult) {
+  const { metadata, strengths, gaps, roleRecommendations, profile, githubAnalysis } = result;
+  const target = metadata.targetRole;
+  const sortedRoles = [...roleRecommendations].sort((a, b) => b.fitScore - a.fitScore);
+  const topRole = sortedRoles[0];
+
+  const differentiators = strengths.filter(s => s.tier === 'differentiator').map(s => s.title);
+  const strongSkills = strengths.filter(s => s.tier === 'strong').map(s => s.title);
+  const topSkillPhrase = differentiators.length > 0
+    ? differentiators.slice(0, 2).join(' & ')
+    : strongSkills.slice(0, 2).join(' & ');
+
+  const headlines = [
+    `${target} | ${topSkillPhrase} | ${differentiators[1] || strongSkills[2] || `Driving ${target} Impact`}`,
+    `${target} -> ${topRole?.title || target} | ${differentiators[0] || strongSkills[0] || 'Tech Professional'} | Open to Opportunities`,
+    `${topRole?.title || target} | ${metadata.country} (Remote) | ${topSkillPhrase}`,
+  ];
+
+  const currentTitle = profile?.currentRole || 'professional';
+  const gapActions = gaps.filter(g => g.severity === 'critical').slice(0, 2).map(g => g.closingPlan);
+  const about = `As a ${currentTitle} transitioning into ${target}, I bring ${topSkillPhrase} with a track record of delivering results.\n\nWhat I bring:\n${strengths.slice(0, 4).map(s => `- ${s.title}: ${s.description.split('.')[0]}.`).join('\n')}\n\nCurrently focused on:\n${gapActions.length > 0 ? gapActions.map(a => `- ${a.split('.')[0]}.`).join('\n') : `- Deepening expertise in ${target}.`}\n\nOpen to: ${target} roles${metadata.country ? ` | ${metadata.country} / Remote` : ''}`;
+
+  const skillsToAdd: string[] = [];
+  gaps.forEach(g => {
+    if (g.severity === 'critical' || g.severity === 'moderate') skillsToAdd.push(g.skill);
+  });
+  skillsToAdd.push(target);
+  if (topRole?.title && topRole.title !== target) skillsToAdd.push(topRole.title);
+
+  const addSet = new Set(skillsToAdd.map(s => s.toLowerCase()));
+  const skillsToRemove = strengths
+    .filter(s => s.tier === 'supporting')
+    .map(s => s.title)
+    .filter(s => !addSet.has(s.toLowerCase()))
+    .slice(0, 4);
+
+  const profileSettings = [
+    'Set "Open to Work" -> Recruiters Only (invisible to your current employer)',
+    'Disable "Notify your network" during optimization (Settings -> Privacy)',
+    'Enable Creator Mode if you plan to post - unlocks Follow button and post analytics',
+    `Set your target location (${metadata.country || 'your target market'}) even if remote`,
+    'Customize your LinkedIn URL to linkedin.com/in/yourname for a professional look',
+  ];
+
+  const contentIdeas = [
+    `"I just built a ${topRole?.title || target} project. Here's what I learned and 3 things that surprised me."`,
+    `"Week X of my ${gaps[0]?.skill || 'cloud certification'} journey. Key insight: [specific takeaway]."`,
+    `"Hot take: [counterintuitive belief about ${target}]. Most people think X but I've seen Y."`,
+    `"I went from [current domain] to ${target}. These 3 skills transferred perfectly - and these 2 didn't."`,
+    `"1-2 min video: Walk through how you solved a specific ${target} problem. Raw and authentic wins."`,
+  ];
+
+  const connectionTargets = [
+    ...(topRole?.exampleCompanies?.slice(0, 3) || []).map(c => `Recruiters and hiring managers at ${c}`),
+    `Other ${target}s in ${metadata.country || 'your region'}`,
+    `Content creators and thought leaders in the ${target} space`,
+  ];
+
+  const commentGroups = [
+    { label: 'Peers in your field', reason: 'Relationship-building + staying visible to your immediate network' },
+    { label: `Hiring managers & ${target} recruiters`, reason: 'Get on their radar before they post a job' },
+    { label: 'Big influencers (1M+ followers)', reason: 'Algorithmic amplification - 3-5 thoughtful comments/week' },
+    { label: 'Small creators (1K-10K followers)', reason: 'Community-building - higher response rates' },
+  ];
+
+  let portfolioItem: { title: string; tip: string };
+  const gh = githubAnalysis as GitHubAnalysis | undefined;
+  if (gh && gh.strengths.length > 0) {
+    const topStrength = gh.strengths[0];
+    portfolioItem = {
+      title: topStrength.area,
+      tip: `${topStrength.evidence} - Optimize the README with problem statement, tech decisions, demo link, and measurable results.`,
+    };
+  } else if (gh) {
+    portfolioItem = {
+      title: `Build: ${gh.projectIdea.name}`,
+      tip: `${gh.projectIdea.description} Tech: ${gh.projectIdea.techStack.join(', ')}. ${gh.projectIdea.whyRelevant}`,
+    };
+  } else {
+    portfolioItem = {
+      title: `Portfolio Project: ${target}`,
+      tip: `Build one focused project solving a real problem using ${topSkillPhrase}. Deploy it live with a clear README and measurable outcomes.`,
+    };
+  }
+
+  const primaryGap = gaps.find(g => g.severity === 'critical') || gaps.find(g => g.severity === 'moderate');
+  const articleTitle = primaryGap
+    ? `"How I applied ${primaryGap.skill} to solve a real problem"`
+    : `"${target} in ${new Date().getFullYear()}: what most people get wrong about ${topSkillPhrase}"`;
+  const caseStudyItem = {
+    title: 'Case Study or Article',
+    tip: `${articleTitle} - Targets '${primaryGap?.skill || topSkillPhrase}' for recruiter search reach. Lead with a specific result. Aim for 600-900 words.`,
+  };
+
+  const certGap = gaps.find(g => g.severity === 'critical') || gaps.find(g => g.severity === 'moderate');
+  const certItem = certGap
+    ? {
+        title: `Certification: ${certGap.skill}`,
+        tip: `${certGap.closingPlan.split('.')[0]}. Pin the verified credential badge once earned - verification links get 40% more profile views.`,
+      }
+    : {
+        title: `Advanced Certification in ${topSkillPhrase}`,
+        tip: `An advanced credential in ${topSkillPhrase} signals seniority and differentiates you from other ${target} candidates.`,
+      };
+
+  const featuredItems = [portfolioItem, caseStudyItem, certItem];
+
+  return { headlines, about, skillsToAdd, skillsToRemove, profileSettings, contentIdeas, connectionTargets, commentGroups, featuredItems };
+}
+
+// --- PDF Document ---
+
 function CareerReport({ result, labels: l }: { result: AnalysisResult; labels?: PDFLabels }) {
   const labels = l || DEFAULT_LABELS;
+  const li = computeLinkedInPlan(result);
+
   return (
     <Document>
-      {/* PAGE 1: Overview + Strengths */}
+
+      {/* PAGE 1: Fit Score + Overall Advice + Job Match metrics */}
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <View style={styles.header}>
@@ -414,201 +531,46 @@ function CareerReport({ result, labels: l }: { result: AnalysisResult; labels?: 
           <Text style={styles.fitScoreSummary}>{clean(result.fitScore.summary)}</Text>
         </View>
 
-        {/* Strengths */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{clean(labels.strengths)}</Text>
-          {result.strengths.map((str: Strength, i: number) => (
-            <View key={i} style={styles.card}>
-              <View style={styles.row}>
-                <Text style={[styles.badge, getTierBadge(str.tier)]}>{str.tier.toUpperCase()}</Text>
-                <Text style={styles.cardTitle}>{clean(str.title)}</Text>
-              </View>
-              <Text style={styles.cardText}>{clean(str.description)}</Text>
-              <Text style={[styles.cardText, { color: colors.primary, marginTop: 4 }]}>{clean(str.relevance)}</Text>
-            </View>
-          ))}
-        </View>
-
-        <View style={styles.footer}>
-          <Text>{clean(labels.brandLine)}</Text>
-          <Text>Page 1</Text>
-        </View>
-      </Page>
-
-      {/* PAGE 2: Skill Gaps */}
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{clean(labels.gaps)}</Text>
-          {result.gaps.map((g: Gap, i: number) => (
-            <View key={i} style={styles.card}>
-              <View style={styles.row}>
-                <Text style={[styles.badge, getSeverityBadge(g.severity)]}>{g.severity.toUpperCase()}</Text>
-                <Text style={styles.cardTitle}>{clean(g.skill)}</Text>
-                <Text style={[styles.textSmall, { marginLeft: 'auto' }]}>{clean(g.timeToClose)}</Text>
-              </View>
-              <Text style={[styles.cardText, { color: colors.danger }]}>{clean(g.impact)}</Text>
-              <View style={[styles.twoCol, styles.mt8]}>
-                <View style={styles.col}>
-                  <Text style={[styles.textSmall, styles.bold]}>{clean(labels.current)}</Text>
-                  <Text style={styles.cardText}>{clean(g.currentLevel)}</Text>
-                </View>
-                <View style={styles.col}>
-                  <Text style={[styles.textSmall, styles.bold]}>{clean(labels.required)}</Text>
-                  <Text style={styles.cardText}>{clean(g.requiredLevel)}</Text>
-                </View>
-              </View>
-              <Text style={[styles.cardText, { color: colors.primary, marginTop: 6 }]}>{clean(g.closingPlan)}</Text>
-              {g.resources.length > 0 && (
-                <View style={styles.mt8}>
-                  {g.resources.map((res: string, ri: number) => (
-                    <Text key={ri} style={[styles.textSmall, styles.mb4]}>- {clean(res)}</Text>
-                  ))}
-                </View>
-              )}
-            </View>
-          ))}
-        </View>
-
-        <View style={styles.footer}>
-          <Text>{clean(labels.brandLine)}</Text>
-          <Text>Page 2</Text>
-        </View>
-      </Page>
-
-      {/* PAGE 3: Role Recommendations + Salary */}
-      <Page size="A4" style={styles.page}>
-        {/* Roles */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{clean(labels.roles)}</Text>
-          {[...result.roleRecommendations].sort((a, b) => b.fitScore - a.fitScore).map((role: RoleRecommendation, i: number) => (
-            <View key={i} style={styles.card}>
-              <View style={styles.row}>
-                <Text style={[styles.badge, styles.badgeDifferentiator]}>{role.fitScore}/10</Text>
-                <Text style={styles.cardTitle}>{clean(role.title)}</Text>
-              </View>
-              <Text style={styles.cardText}>{clean(role.reasoning)}</Text>
-              <View style={[styles.row, styles.mt8]}>
-                <Text style={[styles.textSmall, styles.textSuccess]}>
-                  {formatCurrency(role.salaryRange.low, role.salaryRange.currency)} - {formatCurrency(role.salaryRange.high, role.salaryRange.currency)}
-                </Text>
-                <Text style={[styles.textSmall, { marginLeft: 12 }]}>{clean(role.timeToReady)}</Text>
-              </View>
-              <Text style={[styles.textSmall, styles.mt8]}>
-                {clean(labels.companies)}: {role.exampleCompanies.map(c => clean(c)).join(', ')}
-              </Text>
-            </View>
-          ))}
-        </View>
-
-        {/* Salary Analysis */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{clean(labels.salaryAnalysis)}</Text>
-          <Text style={[styles.textSmall, styles.mb8]}>{clean(labels.salarySubtitle)}</Text>
-          <View style={[styles.twoCol, styles.mb8]}>
-            <View style={styles.salaryCard}>
-              <Text style={styles.salaryLabel}>{clean(labels.currentRoleMarket)}</Text>
-              <Text style={[styles.salaryValue, styles.textPrimary]}>
-                {formatCurrency(result.salaryAnalysis.currentRoleMarket.mid, result.salaryAnalysis.currentRoleMarket.currency)}
-              </Text>
-              <Text style={styles.salaryRange}>
-                {formatCurrency(result.salaryAnalysis.currentRoleMarket.low, result.salaryAnalysis.currentRoleMarket.currency)} - {formatCurrency(result.salaryAnalysis.currentRoleMarket.high, result.salaryAnalysis.currentRoleMarket.currency)}
-              </Text>
-              <Text style={[styles.textSmall, styles.mt8]}>{clean(result.salaryAnalysis.currentRoleMarket.region)}</Text>
-            </View>
-            <View style={styles.salaryCard}>
-              <Text style={styles.salaryLabel}>{clean(labels.targetRoleMarket)}</Text>
-              <Text style={[styles.salaryValue, styles.textSuccess]}>
-                {formatCurrency(result.salaryAnalysis.targetRoleMarket.mid, result.salaryAnalysis.targetRoleMarket.currency)}
-              </Text>
-              <Text style={styles.salaryRange}>
-                {formatCurrency(result.salaryAnalysis.targetRoleMarket.low, result.salaryAnalysis.targetRoleMarket.currency)} - {formatCurrency(result.salaryAnalysis.targetRoleMarket.high, result.salaryAnalysis.targetRoleMarket.currency)}
-              </Text>
-              <Text style={[styles.textSmall, styles.mt8]}>{clean(result.salaryAnalysis.targetRoleMarket.region)}</Text>
-            </View>
-          </View>
-          <View style={styles.card}>
-            <Text style={[styles.cardText, styles.textSuccess, styles.bold]}>{clean(labels.growthPotential)}: {clean(result.salaryAnalysis.growthPotential)}</Text>
-            <Text style={[styles.cardText, styles.mt8]}>{clean(result.salaryAnalysis.bestMonetaryMove)}</Text>
-          </View>
-        </View>
-
-        <View style={styles.footer}>
-          <Text>{clean(labels.brandLine)}</Text>
-          <Text>Page 3</Text>
-        </View>
-      </Page>
-
-      {/* PAGE 4: Action Plan */}
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{clean(labels.actionPlan30)}</Text>
-          {result.actionPlan.thirtyDays.map((item: ActionItem, i: number) => (
-            <View key={i} style={styles.actionItem}>
-              <View style={styles.row}>
-                <Text style={[styles.badge, getSeverityBadge(item.priority === 'high' ? 'moderate' : item.priority === 'medium' ? 'minor' : 'critical')]}>
-                  {item.priority.toUpperCase()}
-                </Text>
-                <Text style={styles.textSmall}>{clean(item.timeEstimate)}</Text>
-              </View>
-              <Text style={styles.actionText}>{clean(item.action)}</Text>
-              <Text style={styles.actionMeta}>{clean(item.resource)}</Text>
-              <Text style={styles.impactText}>{clean(item.expectedImpact)}</Text>
-            </View>
-          ))}
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{clean(labels.actionPlan90)}</Text>
-          {result.actionPlan.ninetyDays.map((item: ActionItem, i: number) => (
-            <View key={i} style={styles.actionItem}>
-              <View style={styles.row}>
-                <Text style={[styles.badge, getSeverityBadge(item.priority === 'high' ? 'moderate' : item.priority === 'medium' ? 'minor' : 'critical')]}>
-                  {item.priority.toUpperCase()}
-                </Text>
-                <Text style={styles.textSmall}>{clean(item.timeEstimate)}</Text>
-              </View>
-              <Text style={styles.actionText}>{clean(item.action)}</Text>
-              <Text style={styles.actionMeta}>{clean(item.resource)}</Text>
-              <Text style={styles.impactText}>{clean(item.expectedImpact)}</Text>
-            </View>
-          ))}
-        </View>
-
-        <View style={styles.footer}>
-          <Text>{clean(labels.brandLine)}</Text>
-          <Text>Page 4</Text>
-        </View>
-      </Page>
-
-      {/* PAGE 5: 12-Month + Negotiation Tips */}
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{clean(labels.actionPlan12m)}</Text>
-          {result.actionPlan.twelveMonths.map((item: ActionItem, i: number) => (
-            <View key={i} style={styles.actionItem}>
-              <View style={styles.row}>
-                <Text style={[styles.badge, getSeverityBadge(item.priority === 'high' ? 'moderate' : item.priority === 'medium' ? 'minor' : 'critical')]}>
-                  {item.priority.toUpperCase()}
-                </Text>
-                <Text style={styles.textSmall}>{clean(item.timeEstimate)}</Text>
-              </View>
-              <Text style={styles.actionText}>{clean(item.action)}</Text>
-              <Text style={styles.actionMeta}>{clean(item.resource)}</Text>
-              <Text style={styles.impactText}>{clean(item.expectedImpact)}</Text>
-            </View>
-          ))}
-        </View>
-
-        {/* Negotiation tips */}
-        {result.salaryAnalysis.negotiationTips.length > 0 && (
+        {/* Overall Advice */}
+        {result.jobMatch?.overallAdvice && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>{clean(labels.negotiationTips)}</Text>
-            {result.salaryAnalysis.negotiationTips.map((tip: string, i: number) => (
-              <View key={i} style={[styles.card, styles.mb8]}>
-                <Text style={styles.cardText}>
-                  <Text style={[styles.bold, { color: colors.primary }]}>{i + 1}. </Text>
-                  {clean(tip)}
+            <Text style={styles.sectionTitle}>{clean(labels.overallAdvice)}</Text>
+            <View style={styles.card}>
+              <Text style={styles.cardText}>{clean(result.jobMatch.overallAdvice)}</Text>
+            </View>
+          </View>
+        )}
+
+        {/* Match Score */}
+        {result.jobMatch && (
+          <View style={[styles.fitScoreContainer, { marginBottom: 16 }]}>
+            <Text style={styles.fitScoreNumber}>{result.jobMatch.matchScore}%</Text>
+            <Text style={styles.fitScoreLabel}>{clean(labels.matchScore)}</Text>
+          </View>
+        )}
+
+        {/* Matching Skills */}
+        {result.jobMatch && result.jobMatch.matchingSkills.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>{clean(labels.matchingSkills)}</Text>
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
+              {result.jobMatch.matchingSkills.map((skill: string, i: number) => (
+                <Text key={i} style={[styles.badge, styles.badgeStrong]}>{clean(skill)}</Text>
+              ))}
+            </View>
+          </View>
+        )}
+
+        {/* Missing Keywords */}
+        {result.jobMatch && result.jobMatch.missingSkills.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>{clean(labels.missingSkills)}</Text>
+            {result.jobMatch.missingSkills.map((ms: MissingSkill, i: number) => (
+              <View key={i} style={[styles.row, styles.mb4]}>
+                <Text style={[styles.badge, ms.importance === 'important' ? styles.badgeCritical : ms.importance === 'not_a_deal_breaker' ? styles.badgeModerate : styles.badgeMinor]}>
+                  {ms.importance === 'important' ? 'REQUIRED' : ms.importance === 'not_a_deal_breaker' ? 'PREFERRED' : 'OPTIONAL'}
                 </Text>
+                <Text style={styles.cardText}>{clean(ms.skill)}</Text>
               </View>
             ))}
           </View>
@@ -616,86 +578,118 @@ function CareerReport({ result, labels: l }: { result: AnalysisResult; labels?: 
 
         <View style={styles.footer}>
           <Text>{clean(labels.brandLine)}</Text>
-          <Text>Page 5</Text>
+          <Text>Fit Score</Text>
         </View>
       </Page>
 
-      {/* PAGE 6 (conditional): Job Match */}
-      {result.jobMatch && (
-        <Page size="A4" style={styles.page}>
-          <View style={styles.header}>
-            <Text style={styles.logo}>Gap<Text style={styles.logoAccent}>Zero</Text></Text>
-            <Text style={styles.headerMeta}>{clean(labels.jobMatch)}</Text>
-          </View>
+      {/* PAGE 2: LinkedIn Plan */}
+      <Page size="A4" style={styles.page}>
+        <View style={styles.header}>
+          <Text style={styles.logo}>Gap<Text style={styles.logoAccent}>Zero</Text></Text>
+          <Text style={styles.headerMeta}>LinkedIn Profile Plan</Text>
+        </View>
 
-          {/* Match score */}
-          <View style={styles.fitScoreContainer}>
-            <Text style={styles.fitScoreNumber}>{result.jobMatch.matchScore}%</Text>
-            <Text style={styles.fitScoreLabel}>{clean(labels.matchScore)}</Text>
-          </View>
-
-          {/* Matching skills */}
-          {result.jobMatch.matchingSkills.length > 0 && (
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>{clean(labels.matchingSkills)}</Text>
-              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
-                {result.jobMatch.matchingSkills.map((skill: string, i: number) => (
-                  <Text key={i} style={[styles.badge, styles.badgeStrong]}>{clean(skill)}</Text>
-                ))}
-              </View>
+        {/* Headlines */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Headline Suggestions</Text>
+          {li.headlines.map((h, i) => (
+            <View key={i} style={styles.card}>
+              <Text style={styles.cardTitle}>{i + 1}. {clean(h)}</Text>
             </View>
-          )}
+          ))}
+        </View>
 
-          {/* Missing skills */}
-          {result.jobMatch.missingSkills.length > 0 && (
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>{clean(labels.missingSkills)}</Text>
-              {result.jobMatch.missingSkills.map((ms: MissingSkill, i: number) => (
-                <View key={i} style={[styles.row, styles.mb4]}>
-                  <Text style={[styles.badge, ms.importance === 'important' ? styles.badgeCritical : ms.importance === 'not_a_deal_breaker' ? styles.badgeModerate : styles.badgeMinor]}>
-                    {ms.importance === 'important' ? 'REQUIRED' : ms.importance === 'not_a_deal_breaker' ? 'PREFERRED' : 'OPTIONAL'}
-                  </Text>
-                  <Text style={styles.cardText}>{clean(ms.skill)}</Text>
-                </View>
+        {/* About Section */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>About Section Draft</Text>
+          <View style={[styles.card, { padding: 16 }]}>
+            <Text style={styles.cardText}>{clean(li.about)}</Text>
+          </View>
+        </View>
+
+        {/* Profile Settings */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Profile Settings</Text>
+          {li.profileSettings.map((s, i) => (
+            <View key={i} style={[styles.row, styles.mb4]}>
+              <Text style={[styles.textSmall, { color: colors.success, marginRight: 6, flexShrink: 0 }]}>{i + 1}.</Text>
+              <Text style={styles.cardText}>{clean(s)}</Text>
+            </View>
+          ))}
+        </View>
+
+        {/* Skills to Add */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Skills to Add</Text>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
+            {li.skillsToAdd.map((s, i) => (
+              <Text key={i} style={[styles.badge, styles.badgeDifferentiator]}>{clean(s)}</Text>
+            ))}
+          </View>
+        </View>
+
+        {/* Skills to Deprioritize */}
+        {li.skillsToRemove.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Skills to Deprioritize</Text>
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
+              {li.skillsToRemove.map((s, i) => (
+                <Text key={i} style={[styles.badge, styles.badgeSupporting]}>{clean(s)}</Text>
               ))}
             </View>
-          )}
+          </View>
+        )}
 
-          {/* CV Suggestions */}
-          {result.jobMatch.cvSuggestions.length > 0 && (
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>{clean(labels.cvSuggestions)}</Text>
-              {result.jobMatch.cvSuggestions.map((s, i) => (
-                <View key={i} style={[styles.card, styles.mb8]}>
-                  <Text style={[styles.textSmall, styles.bold, { color: colors.primary, marginBottom: 4 }]}>{clean(s.section)}</Text>
-                  <Text style={[styles.textSmall, styles.bold]}>{clean(labels.current)}:</Text>
-                  <Text style={[styles.cardText, { marginBottom: 4 }]}>{clean(s.current)}</Text>
-                  <Text style={[styles.textSmall, styles.bold]}>{clean(labels.suggested)}:</Text>
-                  <Text style={[styles.cardText, { color: colors.success, marginBottom: 4 }]}>{clean(s.suggested)}</Text>
-                  <Text style={[styles.textSmall, { color: colors.textSecondary }]}>{clean(s.reasoning)}</Text>
-                </View>
-              ))}
+        {/* Featured Projects */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Featured Projects</Text>
+          {li.featuredItems.map((item, i) => (
+            <View key={i} style={styles.card}>
+              <Text style={styles.cardTitle}>{clean(item.title)}</Text>
+              <Text style={styles.cardText}>{clean(item.tip)}</Text>
             </View>
-          )}
+          ))}
+        </View>
 
-          {/* Overall advice */}
-          {result.jobMatch.overallAdvice && (
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>{clean(labels.overallAdvice)}</Text>
-              <View style={styles.card}>
-                <Text style={styles.cardText}>{clean(result.jobMatch.overallAdvice)}</Text>
+        {/* Content Ideas */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Content Ideas</Text>
+          {li.contentIdeas.map((idea, i) => (
+            <View key={i} style={[styles.card, styles.mb8]}>
+              <View style={styles.row}>
+                <Text style={[styles.textSmall, { color: colors.primary, marginRight: 6, flexShrink: 0 }]}>{i + 1}.</Text>
+                <Text style={styles.cardText}>{clean(idea)}</Text>
               </View>
             </View>
-          )}
+          ))}
+        </View>
 
-          <View style={styles.footer}>
-            <Text>{clean(labels.brandLine)}</Text>
-            <Text>Job Match</Text>
-          </View>
-        </Page>
-      )}
+        {/* Connection Strategy */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Connection Strategy</Text>
+          {li.connectionTargets.map((t, i) => (
+            <Text key={i} style={[styles.cardText, styles.mb4]}>- {clean(t)}</Text>
+          ))}
+        </View>
 
-      {/* PAGE 7 (conditional): ATS Score */}
+        {/* Commenting Groups */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Commenting Groups</Text>
+          {li.commentGroups.map((g, i) => (
+            <View key={i} style={[styles.card, styles.mb8]}>
+              <Text style={styles.cardTitle}>{clean(g.label)}</Text>
+              <Text style={styles.cardText}>{clean(g.reason)}</Text>
+            </View>
+          ))}
+        </View>
+
+        <View style={styles.footer}>
+          <Text>{clean(labels.brandLine)}</Text>
+          <Text>LinkedIn Plan</Text>
+        </View>
+      </Page>
+
+      {/* PAGE 3 (conditional): ATS Analysis + CV Suggestions */}
       {result.atsScore && (
         <Page size="A4" style={styles.page}>
           <View style={styles.header}>
@@ -785,6 +779,23 @@ function CareerReport({ result, labels: l }: { result: AnalysisResult; labels?: 
             </View>
           )}
 
+          {/* CV Suggestions (from Job Match) */}
+          {result.jobMatch && result.jobMatch.cvSuggestions.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{clean(labels.cvSuggestions)}</Text>
+              {result.jobMatch.cvSuggestions.map((s, i) => (
+                <View key={i} style={[styles.card, styles.mb8]}>
+                  <Text style={[styles.textSmall, styles.bold, { color: colors.primary, marginBottom: 4 }]}>{clean(s.section)}</Text>
+                  <Text style={[styles.textSmall, styles.bold]}>{clean(labels.current)}:</Text>
+                  <Text style={[styles.cardText, { marginBottom: 4 }]}>{clean(s.current)}</Text>
+                  <Text style={[styles.textSmall, styles.bold]}>{clean(labels.suggested)}:</Text>
+                  <Text style={[styles.cardText, { color: colors.success, marginBottom: 4 }]}>{clean(s.suggested)}</Text>
+                  <Text style={[styles.textSmall, { color: colors.textSecondary }]}>{clean(s.reasoning)}</Text>
+                </View>
+              ))}
+            </View>
+          )}
+
           <View style={styles.footer}>
             <Text>{clean(labels.brandLine)}</Text>
             <Text>ATS Score</Text>
@@ -792,7 +803,64 @@ function CareerReport({ result, labels: l }: { result: AnalysisResult; labels?: 
         </Page>
       )}
 
-      {/* PAGE 8 (conditional): GitHub Analysis */}
+      {/* PAGE 4 (conditional): Cover Letter */}
+      {result.coverLetter && (
+        <Page size="A4" style={styles.page}>
+          <View style={styles.header}>
+            <Text style={styles.logo}>Gap<Text style={styles.logoAccent}>Zero</Text></Text>
+            <Text style={styles.headerMeta}>{clean(labels.coverLetter)}</Text>
+          </View>
+
+          <View style={styles.section}>
+            {/* Letter body */}
+            <View style={[styles.card, { padding: 20 }]}>
+              <Text style={[styles.cardText, styles.mb8]}>{clean((result.coverLetter as CoverLetter).greeting)}</Text>
+              <Text style={[styles.cardText, styles.mb8]}>{clean((result.coverLetter as CoverLetter).openingParagraph)}</Text>
+              {(result.coverLetter as CoverLetter).bodyParagraphs.map((para: string, i: number) => (
+                <Text key={i} style={[styles.cardText, styles.mb8]}>{clean(para)}</Text>
+              ))}
+              <Text style={[styles.cardText, styles.mb8]}>{clean((result.coverLetter as CoverLetter).closingParagraph)}</Text>
+              <Text style={[styles.cardText, styles.bold]}>{clean((result.coverLetter as CoverLetter).signature)}</Text>
+            </View>
+          </View>
+
+          {/* Tone */}
+          <View style={[styles.twoCol, styles.mb8]}>
+            <View style={styles.col}>
+              <View style={styles.card}>
+                <Text style={[styles.textSmall, styles.bold, styles.mb4]}>{clean(labels.tone)}: {clean((result.coverLetter as CoverLetter).toneUsed)}</Text>
+              </View>
+            </View>
+          </View>
+
+          {/* Strength highlights */}
+          {(result.coverLetter as CoverLetter).strengthHighlights.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{clean(labels.strengthHighlights)}</Text>
+              {(result.coverLetter as CoverLetter).strengthHighlights.map((h: string, i: number) => (
+                <Text key={i} style={[styles.cardText, styles.mb4]}>- {clean(h)}</Text>
+              ))}
+            </View>
+          )}
+
+          {/* Weakness acknowledgments */}
+          {(result.coverLetter as CoverLetter).weaknessAcknowledgments.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{clean(labels.weaknessAcknowledgments)}</Text>
+              {(result.coverLetter as CoverLetter).weaknessAcknowledgments.map((w: string, i: number) => (
+                <Text key={i} style={[styles.cardText, styles.mb4]}>- {clean(w)}</Text>
+              ))}
+            </View>
+          )}
+
+          <View style={styles.footer}>
+            <Text>{clean(labels.brandLine)}</Text>
+            <Text>Cover Letter</Text>
+          </View>
+        </Page>
+      )}
+
+      {/* PAGE 5 (conditional): GitHub Analysis — Project first, then Strengths, then Improvements */}
       {result.githubAnalysis && (
         <Page size="A4" style={styles.page}>
           <View style={styles.header}>
@@ -816,40 +884,7 @@ function CareerReport({ result, labels: l }: { result: AnalysisResult; labels?: 
             </View>
           </View>
 
-          {/* Strengths */}
-          {result.githubAnalysis.strengths.length > 0 && (
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>{clean(labels.strengths)}</Text>
-              {(result.githubAnalysis as GitHubAnalysis).strengths.map((s, i) => (
-                <View key={i} style={styles.card}>
-                  <Text style={styles.cardTitle}>{clean(s.area)}</Text>
-                  <Text style={styles.cardText}>{clean(s.description)}</Text>
-                  <Text style={[styles.textSmall, { color: colors.success, marginTop: 4 }]}>{clean(s.evidence)}</Text>
-                </View>
-              ))}
-            </View>
-          )}
-
-          {/* Improvements */}
-          {result.githubAnalysis.improvements.length > 0 && (
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>{clean(labels.improvements)}</Text>
-              {(result.githubAnalysis as GitHubAnalysis).improvements.map((imp, i) => (
-                <View key={i} style={[styles.card, styles.mb8]}>
-                  <View style={styles.row}>
-                    <Text style={[styles.badge, getSeverityBadge(imp.priority === 'high' ? 'critical' : imp.priority === 'medium' ? 'moderate' : 'minor')]}>
-                      {imp.priority.toUpperCase()}
-                    </Text>
-                    <Text style={styles.cardTitle}>{clean(imp.area)}</Text>
-                  </View>
-                  <Text style={styles.cardText}>{clean(imp.description)}</Text>
-                  <Text style={[styles.cardText, { color: colors.primary, marginTop: 4 }]}>{clean(imp.actionable)}</Text>
-                </View>
-              ))}
-            </View>
-          )}
-
-          {/* Project Idea */}
+          {/* Recommended Project (first) */}
           {result.githubAnalysis.projectIdea?.name && (
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>{clean(labels.projectIdea)}</Text>
@@ -871,6 +906,39 @@ function CareerReport({ result, labels: l }: { result: AnalysisResult; labels?: 
             </View>
           )}
 
+          {/* Strengths */}
+          {result.githubAnalysis.strengths.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{clean(labels.strengths)}</Text>
+              {(result.githubAnalysis as GitHubAnalysis).strengths.map((s, i) => (
+                <View key={i} style={styles.card}>
+                  <Text style={styles.cardTitle}>{clean(s.area)}</Text>
+                  <Text style={styles.cardText}>{clean(s.description)}</Text>
+                  <Text style={[styles.textSmall, { color: colors.success, marginTop: 4 }]}>{clean(s.evidence)}</Text>
+                </View>
+              ))}
+            </View>
+          )}
+
+          {/* Areas to Improve */}
+          {result.githubAnalysis.improvements.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{clean(labels.improvements)}</Text>
+              {(result.githubAnalysis as GitHubAnalysis).improvements.map((imp, i) => (
+                <View key={i} style={[styles.card, styles.mb8]}>
+                  <View style={styles.row}>
+                    <Text style={[styles.badge, getSeverityBadge(imp.priority === 'high' ? 'critical' : imp.priority === 'medium' ? 'moderate' : 'minor')]}>
+                      {imp.priority.toUpperCase()}
+                    </Text>
+                    <Text style={styles.cardTitle}>{clean(imp.area)}</Text>
+                  </View>
+                  <Text style={styles.cardText}>{clean(imp.description)}</Text>
+                  <Text style={[styles.cardText, { color: colors.primary, marginTop: 4 }]}>{clean(imp.actionable)}</Text>
+                </View>
+              ))}
+            </View>
+          )}
+
           <View style={styles.footer}>
             <Text>{clean(labels.brandLine)}</Text>
             <Text>GitHub</Text>
@@ -878,60 +946,199 @@ function CareerReport({ result, labels: l }: { result: AnalysisResult; labels?: 
         </Page>
       )}
 
-      {/* PAGE 9 (conditional): Cover Letter */}
-      {result.coverLetter && (
-        <Page size="A4" style={styles.page}>
-          <View style={styles.header}>
-            <Text style={styles.logo}>Gap<Text style={styles.logoAccent}>Zero</Text></Text>
-            <Text style={styles.headerMeta}>{clean(labels.coverLetter)}</Text>
-          </View>
-
-          <View style={styles.section}>
-            {/* Letter body */}
-            <View style={[styles.card, { padding: 20 }]}>
-              <Text style={[styles.cardText, styles.mb8]}>{clean((result.coverLetter as CoverLetter).greeting)}</Text>
-              <Text style={[styles.cardText, styles.mb8]}>{clean((result.coverLetter as CoverLetter).openingParagraph)}</Text>
-              {(result.coverLetter as CoverLetter).bodyParagraphs.map((para: string, i: number) => (
-                <Text key={i} style={[styles.cardText, styles.mb8]}>{clean(para)}</Text>
-              ))}
-              <Text style={[styles.cardText, styles.mb8]}>{clean((result.coverLetter as CoverLetter).closingParagraph)}</Text>
-              <Text style={[styles.cardText, styles.bold]}>{clean((result.coverLetter as CoverLetter).signature)}</Text>
-            </View>
-          </View>
-
-          {/* Tone + highlights metadata */}
-          <View style={[styles.twoCol, styles.mb8]}>
-            <View style={styles.col}>
-              <View style={styles.card}>
-                <Text style={[styles.textSmall, styles.bold, styles.mb4]}>{clean(labels.tone)}: {clean((result.coverLetter as CoverLetter).toneUsed)}</Text>
+      {/* PAGE 6: Strengths + Gaps */}
+      <Page size="A4" style={styles.page}>
+        {/* Strengths */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{clean(labels.strengths)}</Text>
+          {result.strengths.map((str: Strength, i: number) => (
+            <View key={i} style={styles.card}>
+              <View style={styles.row}>
+                <Text style={[styles.badge, getTierBadge(str.tier)]}>{str.tier.toUpperCase()}</Text>
+                <Text style={styles.cardTitle}>{clean(str.title)}</Text>
               </View>
+              <Text style={styles.cardText}>{clean(str.description)}</Text>
+              <Text style={[styles.cardText, { color: colors.primary, marginTop: 4 }]}>{clean(str.relevance)}</Text>
+            </View>
+          ))}
+        </View>
+
+        {/* Gaps */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{clean(labels.gaps)}</Text>
+          {result.gaps.map((g: Gap, i: number) => (
+            <View key={i} style={styles.card}>
+              <View style={styles.row}>
+                <Text style={[styles.badge, getSeverityBadge(g.severity)]}>{g.severity.toUpperCase()}</Text>
+                <Text style={styles.cardTitle}>{clean(g.skill)}</Text>
+                <Text style={[styles.textSmall, { marginLeft: 'auto' }]}>{clean(g.timeToClose)}</Text>
+              </View>
+              <Text style={[styles.cardText, { color: colors.danger }]}>{clean(g.impact)}</Text>
+              <View style={[styles.twoCol, styles.mt8]}>
+                <View style={styles.col}>
+                  <Text style={[styles.textSmall, styles.bold]}>{clean(labels.current)}</Text>
+                  <Text style={styles.cardText}>{clean(g.currentLevel)}</Text>
+                </View>
+                <View style={styles.col}>
+                  <Text style={[styles.textSmall, styles.bold]}>{clean(labels.required)}</Text>
+                  <Text style={styles.cardText}>{clean(g.requiredLevel)}</Text>
+                </View>
+              </View>
+              <Text style={[styles.cardText, { color: colors.primary, marginTop: 6 }]}>{clean(g.closingPlan)}</Text>
+              {g.resources.length > 0 && (
+                <View style={styles.mt8}>
+                  {g.resources.map((res: string, ri: number) => (
+                    <Text key={ri} style={[styles.textSmall, styles.mb4]}>- {clean(res)}</Text>
+                  ))}
+                </View>
+              )}
+            </View>
+          ))}
+        </View>
+
+        <View style={styles.footer}>
+          <Text>{clean(labels.brandLine)}</Text>
+          <Text>Strengths & Gaps</Text>
+        </View>
+      </Page>
+
+      {/* PAGE 7: Action Plan (30-day + 90-day + 12-month) */}
+      <Page size="A4" style={styles.page}>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{clean(labels.actionPlan30)}</Text>
+          {result.actionPlan.thirtyDays.map((item: ActionItem, i: number) => (
+            <View key={i} style={styles.actionItem}>
+              <View style={styles.row}>
+                <Text style={[styles.badge, getSeverityBadge(item.priority === 'high' ? 'moderate' : item.priority === 'medium' ? 'minor' : 'critical')]}>
+                  {item.priority.toUpperCase()}
+                </Text>
+                <Text style={styles.textSmall}>{clean(item.timeEstimate)}</Text>
+              </View>
+              <Text style={styles.actionText}>{clean(item.action)}</Text>
+              <Text style={styles.actionMeta}>{clean(item.resource)}</Text>
+              <Text style={styles.impactText}>{clean(item.expectedImpact)}</Text>
+            </View>
+          ))}
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{clean(labels.actionPlan90)}</Text>
+          {result.actionPlan.ninetyDays.map((item: ActionItem, i: number) => (
+            <View key={i} style={styles.actionItem}>
+              <View style={styles.row}>
+                <Text style={[styles.badge, getSeverityBadge(item.priority === 'high' ? 'moderate' : item.priority === 'medium' ? 'minor' : 'critical')]}>
+                  {item.priority.toUpperCase()}
+                </Text>
+                <Text style={styles.textSmall}>{clean(item.timeEstimate)}</Text>
+              </View>
+              <Text style={styles.actionText}>{clean(item.action)}</Text>
+              <Text style={styles.actionMeta}>{clean(item.resource)}</Text>
+              <Text style={styles.impactText}>{clean(item.expectedImpact)}</Text>
+            </View>
+          ))}
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{clean(labels.actionPlan12m)}</Text>
+          {result.actionPlan.twelveMonths.map((item: ActionItem, i: number) => (
+            <View key={i} style={styles.actionItem}>
+              <View style={styles.row}>
+                <Text style={[styles.badge, getSeverityBadge(item.priority === 'high' ? 'moderate' : item.priority === 'medium' ? 'minor' : 'critical')]}>
+                  {item.priority.toUpperCase()}
+                </Text>
+                <Text style={styles.textSmall}>{clean(item.timeEstimate)}</Text>
+              </View>
+              <Text style={styles.actionText}>{clean(item.action)}</Text>
+              <Text style={styles.actionMeta}>{clean(item.resource)}</Text>
+              <Text style={styles.impactText}>{clean(item.expectedImpact)}</Text>
+            </View>
+          ))}
+        </View>
+
+        <View style={styles.footer}>
+          <Text>{clean(labels.brandLine)}</Text>
+          <Text>Action Plan</Text>
+        </View>
+      </Page>
+
+      {/* PAGE 8: Recommended Roles + Salary Analysis + Negotiation Tips */}
+      <Page size="A4" style={styles.page}>
+        {/* Roles */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{clean(labels.roles)}</Text>
+          {[...result.roleRecommendations].sort((a, b) => b.fitScore - a.fitScore).map((role: RoleRecommendation, i: number) => (
+            <View key={i} style={styles.card}>
+              <View style={styles.row}>
+                <Text style={[styles.badge, styles.badgeDifferentiator]}>{role.fitScore}/10</Text>
+                <Text style={styles.cardTitle}>{clean(role.title)}</Text>
+              </View>
+              <Text style={styles.cardText}>{clean(role.reasoning)}</Text>
+              <View style={[styles.row, styles.mt8]}>
+                <Text style={[styles.textSmall, styles.textSuccess]}>
+                  {formatCurrency(role.salaryRange.low, role.salaryRange.currency)} - {formatCurrency(role.salaryRange.high, role.salaryRange.currency)}
+                </Text>
+                <Text style={[styles.textSmall, { marginLeft: 12 }]}>{clean(role.timeToReady)}</Text>
+              </View>
+              <Text style={[styles.textSmall, styles.mt8]}>
+                {clean(labels.companies)}: {role.exampleCompanies.map(c => clean(c)).join(', ')}
+              </Text>
+            </View>
+          ))}
+        </View>
+
+        {/* Salary Analysis */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{clean(labels.salaryAnalysis)}</Text>
+          <Text style={[styles.textSmall, styles.mb8]}>{clean(labels.salarySubtitle)}</Text>
+          <View style={[styles.twoCol, styles.mb8]}>
+            <View style={styles.salaryCard}>
+              <Text style={styles.salaryLabel}>{clean(labels.currentRoleMarket)}</Text>
+              <Text style={[styles.salaryValue, styles.textPrimary]}>
+                {formatCurrency(result.salaryAnalysis.currentRoleMarket.mid, result.salaryAnalysis.currentRoleMarket.currency)}
+              </Text>
+              <Text style={styles.salaryRange}>
+                {formatCurrency(result.salaryAnalysis.currentRoleMarket.low, result.salaryAnalysis.currentRoleMarket.currency)} - {formatCurrency(result.salaryAnalysis.currentRoleMarket.high, result.salaryAnalysis.currentRoleMarket.currency)}
+              </Text>
+              <Text style={[styles.textSmall, styles.mt8]}>{clean(result.salaryAnalysis.currentRoleMarket.region)}</Text>
+            </View>
+            <View style={styles.salaryCard}>
+              <Text style={styles.salaryLabel}>{clean(labels.targetRoleMarket)}</Text>
+              <Text style={[styles.salaryValue, styles.textSuccess]}>
+                {formatCurrency(result.salaryAnalysis.targetRoleMarket.mid, result.salaryAnalysis.targetRoleMarket.currency)}
+              </Text>
+              <Text style={styles.salaryRange}>
+                {formatCurrency(result.salaryAnalysis.targetRoleMarket.low, result.salaryAnalysis.targetRoleMarket.currency)} - {formatCurrency(result.salaryAnalysis.targetRoleMarket.high, result.salaryAnalysis.targetRoleMarket.currency)}
+              </Text>
+              <Text style={[styles.textSmall, styles.mt8]}>{clean(result.salaryAnalysis.targetRoleMarket.region)}</Text>
             </View>
           </View>
-
-          {(result.coverLetter as CoverLetter).strengthHighlights.length > 0 && (
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>{clean(labels.strengthHighlights)}</Text>
-              {(result.coverLetter as CoverLetter).strengthHighlights.map((h: string, i: number) => (
-                <Text key={i} style={[styles.cardText, styles.mb4]}>- {clean(h)}</Text>
-              ))}
-            </View>
-          )}
-
-          {(result.coverLetter as CoverLetter).weaknessAcknowledgments.length > 0 && (
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>{clean(labels.weaknessAcknowledgments)}</Text>
-              {(result.coverLetter as CoverLetter).weaknessAcknowledgments.map((w: string, i: number) => (
-                <Text key={i} style={[styles.cardText, styles.mb4]}>- {clean(w)}</Text>
-              ))}
-            </View>
-          )}
-
-          <View style={styles.footer}>
-            <Text>{clean(labels.brandLine)}</Text>
-            <Text>Cover Letter</Text>
+          <View style={styles.card}>
+            <Text style={[styles.cardText, styles.textSuccess, styles.bold]}>{clean(labels.growthPotential)}: {clean(result.salaryAnalysis.growthPotential)}</Text>
+            <Text style={[styles.cardText, styles.mt8]}>{clean(result.salaryAnalysis.bestMonetaryMove)}</Text>
           </View>
-        </Page>
-      )}
+        </View>
+
+        {/* Negotiation Tips */}
+        {result.salaryAnalysis.negotiationTips.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>{clean(labels.negotiationTips)}</Text>
+            {result.salaryAnalysis.negotiationTips.map((tip: string, i: number) => (
+              <View key={i} style={[styles.card, styles.mb8]}>
+                <Text style={styles.cardText}>
+                  <Text style={[styles.bold, { color: colors.primary }]}>{i + 1}. </Text>
+                  {clean(tip)}
+                </Text>
+              </View>
+            ))}
+          </View>
+        )}
+
+        <View style={styles.footer}>
+          <Text>{clean(labels.brandLine)}</Text>
+          <Text>Roles & Salary</Text>
+        </View>
+      </Page>
+
     </Document>
   );
 }
