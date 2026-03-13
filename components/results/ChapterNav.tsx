@@ -19,12 +19,6 @@ const TABS: Tab[] = [
   { id: 'salary', labelKey: 'results.salary.title', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> },
 ];
 
-const JOB_MATCH_TAB: Tab = {
-  id: 'job-match',
-  labelKey: 'results.jobMatch.title',
-  icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>,
-};
-
 const UPWORK_TAB: Tab = {
   id: 'upwork',
   labelKey: 'nav.upwork',
@@ -50,7 +44,6 @@ const COACH_TAB: Tab = {
 };
 
 interface ChapterNavProps {
-  hasJobMatch?: boolean;
   hasUpwork?: boolean;
   hasCoverLetter?: boolean;
   hasGitHub?: boolean;
@@ -59,7 +52,7 @@ interface ChapterNavProps {
   onTabChange: (tabId: string) => void;
 }
 
-export default function ChapterNav({ hasJobMatch, hasUpwork, hasCoverLetter, hasGitHub, showCoach, activeTab, onTabChange }: ChapterNavProps) {
+export default function ChapterNav({ hasUpwork, hasCoverLetter, hasGitHub, showCoach, activeTab, onTabChange }: ChapterNavProps) {
   const { t } = useTranslation();
   const activeRefMobile = useRef<HTMLButtonElement>(null);
 
@@ -76,11 +69,10 @@ export default function ChapterNav({ hasJobMatch, hasUpwork, hasCoverLetter, has
       const idx = result.findIndex(tab => tab.id === insertAfter);
       result.splice(idx + 1, 0, GITHUB_TAB);
     }
-    if (hasJobMatch) result.push(JOB_MATCH_TAB);
     if (hasUpwork) result.push(UPWORK_TAB);
     if (showCoach) result.push(COACH_TAB);
     return result;
-  }, [hasJobMatch, hasUpwork, hasCoverLetter, hasGitHub, showCoach]);
+  }, [hasUpwork, hasCoverLetter, hasGitHub, showCoach]);
 
   const activeIndex = tabs.findIndex((tab) => tab.id === activeTab);
 

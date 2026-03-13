@@ -4,11 +4,10 @@ import { useEffect, useState, useMemo } from 'react';
 import { getFitScoreColor } from '@/lib/utils';
 import { useTranslation } from '@/lib/i18n';
 import TaggableToken from '@/components/shared/TaggableToken';
-import type { FitScore, JobMatch, OutputTag } from '@/lib/types';
+import type { FitScore, OutputTag } from '@/lib/types';
 
 interface FitScoreGaugeProps {
   fitScore: FitScore;
-  jobMatch?: JobMatch;
   onNavigate?: (tabId: string) => void;
   analysisId?: string;
   tags?: OutputTag[];
@@ -53,7 +52,7 @@ function ConfettiParticles({ color }: { color: string }) {
   );
 }
 
-export default function FitScoreGauge({ fitScore, jobMatch, onNavigate, analysisId, tags = [], onTagCreated, onTagDeleted }: FitScoreGaugeProps) {
+export default function FitScoreGauge({ fitScore, onNavigate, analysisId, tags = [], onTagCreated, onTagDeleted }: FitScoreGaugeProps) {
   const { t } = useTranslation();
   const [animated, setAnimated] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -175,64 +174,6 @@ export default function FitScoreGauge({ fitScore, jobMatch, onNavigate, analysis
           <p className="text-xs text-text-secondary leading-relaxed">{t('results.fitScore.guide.low')}</p>
         </div>
       </div>
-
-      {/* Job Match summary card */}
-      {jobMatch && onNavigate && (
-        <div className="relative z-10 mt-6 mx-2 rounded-2xl border border-black/[0.08] bg-white p-5">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2.5">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-              <h3 className="font-semibold text-text-primary text-sm">{t('results.fitScore.jobMatch.title')}</h3>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className={`text-lg font-bold ${
-                jobMatch.matchScore >= 75 ? 'text-success' :
-                jobMatch.matchScore >= 50 ? 'text-warning' : 'text-danger'
-              }`}>
-                {jobMatch.matchScore}%
-              </span>
-              <button
-                onClick={() => onNavigate('job-match')}
-                className="text-xs font-medium text-primary hover:text-primary-light transition-colors px-3 py-1.5 rounded-lg border border-primary/20 hover:bg-primary/[0.06]"
-              >
-                {t('results.fitScore.jobMatch.viewFull')} →
-              </button>
-            </div>
-          </div>
-          {/* Matching skills */}
-          {jobMatch.matchingSkills.length > 0 && (
-            <div className="mb-2">
-              <p className="text-[11px] font-medium text-text-tertiary uppercase tracking-wider mb-1.5">{t('results.fitScore.jobMatch.matching')}</p>
-              <div className="flex flex-wrap gap-1.5">
-                {jobMatch.matchingSkills.slice(0, 6).map((skill, i) => (
-                  <span key={i} className="text-xs px-2.5 py-1 rounded-full bg-success/10 text-success border border-success/15 font-medium">{skill}</span>
-                ))}
-                {jobMatch.matchingSkills.length > 6 && (
-                  <span className="text-xs px-2.5 py-1 rounded-full bg-black/[0.04] text-text-tertiary font-medium">+{jobMatch.matchingSkills.length - 6}</span>
-                )}
-              </div>
-            </div>
-          )}
-          {/* Missing skills */}
-          {jobMatch.missingSkills.length > 0 && (
-            <div>
-              <p className="text-[11px] font-medium text-text-tertiary uppercase tracking-wider mb-1.5">{t('results.fitScore.jobMatch.missing')}</p>
-              <div className="flex flex-wrap gap-1.5">
-                {jobMatch.missingSkills.slice(0, 4).map((skill, i) => (
-                  <span key={i} className={`text-xs px-2.5 py-1 rounded-full border font-medium ${
-                    skill.importance === 'important' ? 'bg-danger/10 text-danger border-danger/15' :
-                    skill.importance === 'not_a_deal_breaker' ? 'bg-[#E8890A]/10 text-[#E8890A] border-[#E8890A]/15' :
-                    'bg-black/[0.04] text-text-tertiary border-black/[0.08]'
-                  }`}>{skill.skill}</span>
-                ))}
-                {jobMatch.missingSkills.length > 4 && (
-                  <span className="text-xs px-2.5 py-1 rounded-full bg-black/[0.04] text-text-tertiary font-medium">+{jobMatch.missingSkills.length - 4}</span>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
-      )}
 
     </div>
   );

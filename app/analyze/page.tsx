@@ -337,7 +337,13 @@ export default function AnalyzePage() {
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-fit-score" aria-labelledby="tab-fit-score">
               <SectionIntro messageKey="motivation.fitScore" variant={fitScore >= 7 ? 'celebratory' : 'encouraging'} />
-              <FitScoreGauge fitScore={result.fitScore} jobMatch={result.jobMatch} onNavigate={setActiveTab} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
+              <FitScoreGauge fitScore={result.fitScore} onNavigate={setActiveTab} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
+              {result.jobMatch && (
+                <div className="mt-8">
+                  <SectionIntro messageKey="motivation.jobMatch" variant="encouraging" />
+                  <JobMatchPanel match={result.jobMatch} />
+                </div>
+              )}
             </div>
           );
         case 'strengths-gaps':
@@ -370,13 +376,6 @@ export default function AnalyzePage() {
               <SalaryBenchmark salary={result.salaryAnalysis} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
             </div>
           );
-        case 'job-match':
-          return result.jobMatch ? (
-            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-job-match" aria-labelledby="tab-job-match">
-              <SectionIntro messageKey="motivation.jobMatch" variant="encouraging" />
-              <JobMatchPanel match={result.jobMatch} />
-            </div>
-          ) : null;
         case 'linkedin':
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-linkedin" aria-labelledby="tab-linkedin">
@@ -458,7 +457,6 @@ export default function AnalyzePage() {
       <ErrorBoundary>
         <Header />
         <ChapterNav
-          hasJobMatch={!!result.jobMatch}
           hasUpwork={!!upworkProfile}
           hasCoverLetter={!!result.metadata.jobPosting}
           hasGitHub={!!githubUrl}
