@@ -40,19 +40,19 @@
       "piano d'azione",
       "match di ruoli"
     ],
-    "subtitle": "La nostra IA analizza le tue competenze, identifica le lacune, confronta gli stipendi e costruisce un piano passo dopo passo. Quello che costava $500/ora con un career coach, in 90 secondi.",
+    "subtitle": "La nostra IA analizza le tue competenze, identifica le lacune, confronta gli stipendi, costruisce un piano profilo LinkedIn e crea una roadmap dettagliata. Quello che costava $500/ora con un career coach, in circa 2 minuti.",
     "analyzeFree": "Analizza la mia Carriera →",
     "stats": {
       "analysisTime": "Tempo di Analisi",
-      "dataPoints": "Punti Dati",
-      "aiSteps": "Passaggi IA",
+      "outputSections": "Sezioni di Output",
+      "simpleSteps": "Passaggi Semplici",
       "toUse": "Utilizzo"
     },
     "trust": "Usato da professionisti in transizione verso IA, cloud e ruoli tech moderni"
   },
   "features": {
     "sectionTitle": "Tutto ciò che serve per il tuo prossimo passo di carriera",
-    "sectionSubtitle": "Carica il tuo CV una sola volta — ottieni analisi delle lacune, dati salariali, punteggio ATS, roadmap di carriera e un coach IA. Tutto in un unico posto.",
+    "sectionSubtitle": "Carica il tuo CV una sola volta — ottieni analisi delle lacune, dati salariali, piano profilo LinkedIn, punteggio ATS, roadmap di carriera e altro. Tutto in un unico posto.",
     "gapAnalysis": {
       "title": "Analisi Gap di Carriera",
       "desc": "L'IA identifica i tuoi punti di forza e le lacune di competenze rispetto al ruolo desiderato. Ogni gap è valutato per gravità — critico, moderato o minore — con un piano concreto per colmarlo."
@@ -62,16 +62,16 @@
       "desc": "Dati salariali da fonti governative (US BLS, UK ONS, EU Eurostat) e sondaggi sviluppatori in oltre 20 paesi. Conosci il tuo valore di mercato con dati, non supposizioni."
     },
     "ats": {
-      "title": "Ottimizzazione ATS",
-      "desc": "Scopri come il tuo CV si posiziona rispetto alle offerte di lavoro. Corrispondenza parole chiave, controlli formato e correzioni mirate per superare i sistemi ATS usati dal 90% delle grandi aziende."
+      "title": "ATS e Job Match",
+      "desc": "Aggiungi un annuncio di lavoro per ottenere un punteggio di corrispondenza parole chiave, parole chiave mancanti, problemi di formato e suggerimenti CV mirati. Scopri esattamente come sei posizionato prima di candidarti."
     },
     "coach": {
       "title": "Coach Carriera IA",
-      "desc": "Chatta con un coach IA che conosce il tuo profilo completo — punti di forza, lacune, dati salariali e obiettivi di carriera. Chiedi qualsiasi cosa sul tuo prossimo passo e ricevi consigli personalizzati."
+      "desc": "Chatta con un coach IA che conosce il tuo profilo completo — punti di forza, lacune, dati salariali e obiettivi di carriera. Chiedi qualsiasi cosa sul tuo prossimo passo e ricevi consigli personalizzati. (funzionalità Pro)"
     },
-    "cv": {
-      "title": "Costruttore & Ottimizzatore CV",
-      "desc": "Ricevi suggerimenti di riscrittura sezione per sezione adattati al tuo ruolo target. Applica le modifiche con un clic e scarica un PDF ottimizzato per ATS."
+    "linkedin": {
+      "title": "Piano Profilo LinkedIn",
+      "desc": "Opzioni di titolo generate dall'IA, bozza sezione About, competenze da aggiungere o depriorizzare, idee di progetti, strategia di contenuto e piano di connessioni — adattati al tuo ruolo target."
     },
     "roadmap": {
       "title": "Roadmap di Carriera",
@@ -80,18 +80,18 @@
   },
   "howItWorks": {
     "sectionTitle": "Come funziona",
-    "sectionSubtitle": "Dal caricamento del CV alla strategia di carriera in meno di 60 secondi.",
+    "sectionSubtitle": "Dal caricamento del CV alla strategia di carriera completa in circa 2 minuti.",
     "step1": {
       "title": "Carica e Definisci i Tuoi Obiettivi",
-      "desc": "Carica il tuo CV in PDF e indicaci il ruolo desiderato, il livello di esperienza e il paese. Opzionalmente, incolla un annuncio di lavoro per un'analisi mirata."
+      "desc": "Carica il tuo CV in PDF e indicaci il ruolo desiderato, il livello di esperienza e il paese. Opzionalmente, aggiungi un annuncio di lavoro per il punteggio ATS e una lettera di presentazione personalizzata, o il tuo URL GitHub per un'analisi del portfolio."
     },
     "step2": {
       "title": "L'IA Analizza Tutto",
-      "desc": "La nostra IA legge il tuo CV, estrae le tue competenze, confronta gli stipendi con dati governativi, identifica le lacune e costruisce la tua strategia di carriera personalizzata — il tutto in meno di 60 secondi."
+      "desc": "La nostra IA estrae le tue competenze, mappa i tuoi punti di forza e le lacune, confronta gli stipendi, costruisce un piano profilo LinkedIn, genera la tua roadmap e, opzionalmente, valuta la tua compatibilità ATS — tipicamente in circa 2 minuti."
     },
     "step3": {
       "title": "Ricevi il Tuo Piano di Carriera",
-      "desc": "Esplora i tuoi risultati in oltre 10 sezioni: punteggio di compatibilità, analisi delle lacune, dati salariali, punteggio ATS, roadmap di carriera, raccomandazioni di ruoli e un coach IA per rispondere alle tue domande."
+      "desc": "Esplora i tuoi risultati in 11 sezioni: punteggio di compatibilità, job match, piano profilo LinkedIn, analisi ATS, lettera di presentazione, revisione portfolio GitHub, punti di forza e lacune, piano d'azione, ruoli consigliati e benchmark salariali."
     }
   },
   "cta": {
@@ -103,7 +103,7 @@
     "quoteAuthor": "— Quello che stiamo costruendo GapZero per aiutarti a dire",
     "noSignup": "Senza registrazione",
     "noCreditCard": "Senza carta di credito",
-    "resultsIn2Min": "Risultati in ~90 secondi"
+    "resultsIn2Min": "Risultati in ~2 minuti"
   },
   "analyze": {
     "title": "Analizza la Tua Carriera",

@@ -90,9 +90,9 @@ export default function Hero() {
         {/* Stats bar */}
         <div className="inline-flex items-center bg-white border border-black/[0.06] rounded-2xl overflow-hidden shadow-sm">
           {[
-            { value: '~90s', label: t('hero.stats.analysisTime') },
-            { value: '10+', label: t('hero.stats.dataPoints') },
-            { value: '3', label: t('hero.stats.aiSteps') },
+            { value: '~2 min', label: t('hero.stats.analysisTime') },
+            { value: '11+', label: t('hero.stats.outputSections') },
+            { value: '3', label: t('hero.stats.simpleSteps') },
             { value: t('common.free'), label: t('hero.stats.toUse') },
           ].map((stat, i, arr) => (
             <div key={i} className={`text-center px-6 sm:px-8 py-4 ${i < arr.length - 1 ? 'border-r border-black/[0.06]' : ''}`}>

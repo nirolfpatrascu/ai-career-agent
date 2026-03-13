@@ -40,19 +40,19 @@
       "Aktionsplan",
       "Rollenabgleich"
     ],
-    "subtitle": "Unsere KI analysiert Ihre Kompetenzen, identifiziert Lücken, vergleicht Gehälter und erstellt einen Schritt-für-Schritt-Plan. Was früher 500$/Stunde beim Karrierecoach kostete, in 90 Sekunden.",
+    "subtitle": "Unsere KI analysiert Ihre Kompetenzen, identifiziert Lücken, vergleicht Gehälter, erstellt einen LinkedIn-Profilplan und baut eine Schritt-für-Schritt-Roadmap. Was früher 500$/Stunde beim Karrierecoach kostete, in etwa 2 Minuten.",
     "analyzeFree": "Meine Karriere analysieren →",
     "stats": {
       "analysisTime": "Analysezeit",
-      "dataPoints": "Datenpunkte",
-      "aiSteps": "KI-Schritte",
+      "outputSections": "Ausgabebereiche",
+      "simpleSteps": "Einfache Schritte",
       "toUse": "Nutzung"
     },
     "trust": "Genutzt von Fachleuten im Übergang zu KI, Cloud und modernen Tech-Rollen"
   },
   "features": {
     "sectionTitle": "Alles, was Sie für Ihren nächsten Karriereschritt brauchen",
-    "sectionSubtitle": "Laden Sie Ihren Lebenslauf einmal hoch — erhalten Sie Gap-Analyse, Gehaltsdaten, ATS-Scoring, eine Karriere-Roadmap und einen KI-Coach. Alles an einem Ort.",
+    "sectionSubtitle": "Laden Sie Ihren Lebenslauf einmal hoch — erhalten Sie Gap-Analyse, Gehaltsdaten, LinkedIn-Profilplan, ATS-Scoring, eine Karriere-Roadmap und mehr. Alles an einem Ort.",
     "gapAnalysis": {
       "title": "Karriere-Gap-Analyse",
       "desc": "KI identifiziert Ihre Stärken und Kompetenzlücken für Ihre Zielrolle. Jede Lücke wird nach Schweregrad bewertet — kritisch, moderat oder gering — mit einem konkreten Plan zur Schließung."
@@ -62,16 +62,16 @@
       "desc": "Gehaltsdaten aus staatlichen Quellen (US BLS, UK ONS, EU Eurostat) und Entwicklerumfragen aus über 20 Ländern. Kennen Sie Ihren Marktwert mit Daten, nicht Vermutungen."
     },
     "ats": {
-      "title": "ATS-Optimierung",
-      "desc": "Sehen Sie, wie Ihr Lebenslauf bei Stellenanzeigen abschneidet. Keyword-Matching, Formatprüfungen und gezielte Korrekturen, um die Bewerbermanagementsysteme zu bestehen, die 90 % der großen Unternehmen nutzen."
+      "title": "ATS & Job-Match",
+      "desc": "Fügen Sie eine Stellenanzeige hinzu, um einen Keyword-Match-Score, fehlende Keywords, Formatprobleme und gezielte Lebenslauf-Vorschläge zu erhalten. Sehen Sie genau, wie Sie abschneiden, bevor Sie sich bewerben."
     },
     "coach": {
       "title": "KI-Karrierecoach",
-      "desc": "Chatten Sie mit einem KI-Coach, der Ihr gesamtes Profil kennt — Stärken, Lücken, Gehaltsdaten und Karriereziele. Fragen Sie alles zu Ihrem nächsten Schritt und erhalten Sie personalisierte Beratung."
+      "desc": "Chatten Sie mit einem KI-Coach, der Ihr gesamtes Profil kennt — Stärken, Lücken, Gehaltsdaten und Karriereziele. Fragen Sie alles zu Ihrem nächsten Schritt und erhalten Sie personalisierte Beratung. (Pro-Funktion)"
     },
-    "cv": {
-      "title": "Lebenslauf-Builder & Optimizer",
-      "desc": "Erhalten Sie abschnittsweise Umformulierungsvorschläge, die auf Ihre Zielrolle zugeschnitten sind. Übernehmen Sie Änderungen mit einem Klick und laden Sie ein ATS-optimiertes PDF herunter."
+    "linkedin": {
+      "title": "LinkedIn-Profilplan",
+      "desc": "KI-generierte Überschriften-Optionen, Entwurf des Über-Abschnitts, Fähigkeiten zum Hinzufügen oder Deprioritisieren, Projektideen, Content-Strategie und Verbindungsplan — auf Ihre Zielrolle zugeschnitten."
     },
     "roadmap": {
       "title": "Karriere-Roadmap",
@@ -80,18 +80,18 @@
   },
   "howItWorks": {
     "sectionTitle": "So funktioniert es",
-    "sectionSubtitle": "Vom Lebenslauf-Upload zur Karrierestrategie in unter 60 Sekunden.",
+    "sectionSubtitle": "Vom Lebenslauf-Upload zur vollständigen Karrierestrategie in etwa 2 Minuten.",
     "step1": {
       "title": "Hochladen & Ziele setzen",
-      "desc": "Laden Sie Ihren Lebenslauf als PDF hoch und nennen Sie uns Ihre Zielrolle, Erfahrungsstufe und Ihr Land. Optional können Sie eine Stellenanzeige einfügen für eine gezielte Analyse."
+      "desc": "Laden Sie Ihren Lebenslauf als PDF hoch und nennen Sie uns Ihre Zielrolle, Erfahrungsstufe und Ihr Land. Optional: Fügen Sie eine Stellenanzeige für ATS-Scoring und ein maßgeschneidertes Anschreiben hinzu, oder Ihre GitHub-URL für eine Portfolio-Analyse."
     },
     "step2": {
       "title": "KI analysiert alles",
-      "desc": "Unsere KI liest Ihren Lebenslauf, extrahiert Ihre Fähigkeiten, vergleicht Gehälter mit Regierungsdaten, identifiziert Lücken und erstellt Ihre personalisierte Karrierestrategie — alles in unter 60 Sekunden."
+      "desc": "Unsere KI extrahiert Ihre Fähigkeiten, ermittelt Stärken und Lücken, vergleicht Gehälter, erstellt einen LinkedIn-Profilplan, generiert Ihre Karriere-Roadmap und bewertet optional Ihre ATS-Eignung — in der Regel in etwa 2 Minuten."
     },
     "step3": {
       "title": "Ihr Karriere-Playbook erhalten",
-      "desc": "Erkunden Sie Ihre Ergebnisse in über 10 Bereichen: Fit-Score, Gap-Analyse, Gehaltsbenchmarks, ATS-Scoring, Karriere-Roadmap, Rollenempfehlungen und ein KI-Coach für Ihre Fragen."
+      "desc": "Erkunden Sie Ihre Ergebnisse in 11 Bereichen: Fit-Score, Job-Match, LinkedIn-Profilplan, ATS-Analyse, Anschreiben, GitHub-Portfolio-Review, Stärken & Lücken, Aktionsplan, empfohlene Rollen und Gehaltsbenchmarks."
     }
   },
   "cta": {
@@ -103,7 +103,7 @@
     "quoteAuthor": "— Was wir mit GapZero ermöglichen wollen",
     "noSignup": "Keine Anmeldung",
     "noCreditCard": "Keine Kreditkarte",
-    "resultsIn2Min": "Ergebnisse in ~90 Sekunden"
+    "resultsIn2Min": "Ergebnisse in ~2 Minuten"
   },
   "analyze": {
     "title": "Analysieren Sie Ihre Karriere",

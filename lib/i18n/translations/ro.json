@@ -40,19 +40,19 @@
       "plan de acțiune",
       "potrivire de roluri"
     ],
-    "subtitle": "AI-ul nostru îți analizează competențele, identifică lacunele, benchmarkează salariul și construiește un plan pas cu pas pentru a ajunge unde vrei. Ce costa $500/oră la un coach de carieră, acum în 90 de secunde.",
+    "subtitle": "AI-ul nostru îți analizează competențele, identifică lacunele, benchmarkează salariul, construiește un plan LinkedIn și creează o foaie de parcurs detaliată. Ce costa $500/oră la un coach de carieră, acum în aproximativ 2 minute.",
     "analyzeFree": "Analizează-mi Cariera →",
     "stats": {
       "analysisTime": "Durata Analizei",
-      "dataPoints": "Puncte de Date",
-      "aiSteps": "Pași cu AI",
+      "outputSections": "Secțiuni Rezultate",
+      "simpleSteps": "Pași Simpli",
       "toUse": "De Folosit"
     },
     "trust": "Folosit de profesioniști care fac tranziția spre AI, cloud și roluri tech moderne"
   },
   "features": {
     "sectionTitle": "Tot ce ai nevoie pentru următoarea ta mișcare în carieră",
-    "sectionSubtitle": "Încarcă CV-ul o singură dată — primești analiză de gap-uri, date salariale, scor ATS, plan de carieră și un coach AI. Totul într-un singur loc.",
+    "sectionSubtitle": "Încarcă CV-ul o singură dată — primești analiză de gap-uri, date salariale, plan LinkedIn, scor ATS, plan de carieră și mai mult. Totul într-un singur loc.",
     "gapAnalysis": {
       "title": "Analiză Gap-uri Carieră",
       "desc": "AI-ul identifică punctele tale forte și lipsurile de competențe față de rolul dorit. Fiecare gap este evaluat ca severitate — critic, moderat sau minor — cu un plan concret de rezolvare."
@@ -62,16 +62,16 @@
       "desc": "Date salariale din surse guvernamentale (US BLS, UK ONS, EU Eurostat) și sondaje pentru dezvoltatori din peste 20 de țări. Cunoaște-ți valoarea pe piață cu date, nu presupuneri."
     },
     "ats": {
-      "title": "Optimizare ATS",
-      "desc": "Vezi cum scorează CV-ul tău față de anunțurile de job. Potrivire de cuvinte cheie, verificări de format și corecții specifice pentru a trece de sistemele ATS folosite de 90% din companiile mari."
+      "title": "ATS & Potrivire Job",
+      "desc": "Adaugă un anunț de job pentru a primi un scor de potrivire a cuvintelor cheie, cuvinte lipsă, probleme de format și sugestii țintite de CV. Vezi exact cum stai înainte să aplici."
     },
     "coach": {
       "title": "Coach AI de Carieră",
-      "desc": "Discută cu un coach AI care îți cunoaște profilul complet — puncte forte, gap-uri, date salariale și obiective. Întreabă orice despre următorul pas și primești sfaturi personalizate."
+      "desc": "Discută cu un coach AI care îți cunoaște profilul complet — puncte forte, gap-uri, date salariale și obiective. Întreabă orice despre următorul pas și primești sfaturi personalizate. (funcție Pro)"
     },
-    "cv": {
-      "title": "Constructor & Optimizer CV",
-      "desc": "Primești sugestii de rescrie secțiune cu secțiune, adaptate rolului dorit. Aplică modificările cu un click și descarcă un PDF optimizat pentru ATS."
+    "linkedin": {
+      "title": "Plan Profil LinkedIn",
+      "desc": "Titluri de profil generate de AI, schiță secțiune Despre, competențe de adăugat sau depriorizat, idei de proiecte recomandate, strategie de conținut și plan de conexiuni — adaptate rolului tău."
     },
     "roadmap": {
       "title": "Plan de Carieră",
@@ -80,18 +80,18 @@
   },
   "howItWorks": {
     "sectionTitle": "Cum funcționează",
-    "sectionSubtitle": "De la încărcarea CV-ului la strategie de carieră în sub 60 de secunde.",
+    "sectionSubtitle": "De la încărcarea CV-ului la strategia completă de carieră în aproximativ 2 minute.",
     "step1": {
       "title": "Încarcă și Stabilește-ți Obiectivele",
-      "desc": "Încarcă CV-ul ca PDF și spune-ne rolul dorit, nivelul de experiență și țara. Opțional, lipește un anunț de job pentru o analiză țintită."
+      "desc": "Încarcă CV-ul ca PDF și spune-ne rolul dorit, nivelul de experiență și țara. Opțional, adaugă un anunț de job pentru scor ATS și o scrisoare de intenție personalizată, sau URL-ul GitHub pentru o analiză de portofoliu."
     },
     "step2": {
       "title": "AI-ul Analizează Totul",
-      "desc": "AI-ul nostru citește CV-ul, extrage competențele, compară salariile cu date guvernamentale, identifică gap-urile și construiește strategia ta de carieră personalizată — totul în sub 60 de secunde."
+      "desc": "AI-ul nostru extrage competențele, mapează punctele forte și lacunele, compară salariile, construiește un plan LinkedIn, generează foaia de parcurs și, opțional, evaluează compatibilitatea ATS — de obicei în aproximativ 2 minute."
     },
     "step3": {
       "title": "Primești Planul Tău de Carieră",
-      "desc": "Explorează rezultatele în peste 10 secțiuni: scor de potrivire, analiză gap-uri, date salariale, scor ATS, plan de carieră, recomandări de roluri și un coach AI care îți răspunde la întrebări."
+      "desc": "Explorează rezultatele în 11 secțiuni: scor de potrivire, job match, plan LinkedIn, analiză ATS, scrisoare de intenție, analiză portofoliu GitHub, puncte forte & lacune, plan de acțiune, roluri recomandate și benchmark salarial."
     }
   },
   "cta": {
@@ -103,7 +103,7 @@
     "quoteAuthor": "— Ce construim GapZero să te ajute să spui",
     "noSignup": "Fără înregistrare",
     "noCreditCard": "Fără card de credit",
-    "resultsIn2Min": "Rezultate în ~90 secunde"
+    "resultsIn2Min": "Rezultate în ~2 minute"
   },
   "analyze": {
     "title": "Analizează-ți Cariera",

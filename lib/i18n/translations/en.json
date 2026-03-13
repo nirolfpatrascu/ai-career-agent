@@ -40,38 +40,38 @@
       "action plan",
       "role match"
     ],
-    "subtitle": "Our AI analyzes your skills, identifies gaps, benchmarks your salary, and builds a step-by-step plan to get you where you want to be. What used to cost $500/hour with a career coach, done in 90 seconds.",
+    "subtitle": "Our AI analyzes your skills, identifies gaps, benchmarks your salary, builds a LinkedIn profile plan, and creates a step-by-step career roadmap. What used to cost $500/hour with a career coach, done in about 2 minutes.",
     "analyzeFree": "Analyze My Career →",
     "stats": {
       "analysisTime": "Analysis Time",
-      "dataPoints": "Data Points",
-      "aiSteps": "AI-Powered Steps",
+      "outputSections": "Output Sections",
+      "simpleSteps": "Simple Steps",
       "toUse": "To Use"
     },
     "trust": "Trusted by professionals transitioning into AI, cloud, and modern tech roles"
   },
   "features": {
     "sectionTitle": "Everything you need for your next career move",
-    "sectionSubtitle": "Upload your CV once — get gap analysis, salary data, ATS scoring, a career roadmap, and an AI coach. All in one place.",
+    "sectionSubtitle": "Upload your CV once — get gap analysis, salary data, ATS scoring, a LinkedIn profile plan, a career roadmap, and more. All in one place.",
     "gapAnalysis": {
       "title": "Career Gap Analysis",
-      "desc": "AI identifies your strengths and skill gaps against your target role. Each gap is rated by severity — critical, moderate, or minor — with a specific plan to close it."
+      "desc": "AI identifies your strengths and skill gaps against your target role. Each gap is rated by severity — critical, moderate, or minor — with a specific closing plan, time estimate, and resources."
     },
     "salary": {
       "title": "Real Salary Benchmarks",
-      "desc": "Salary data from government sources (US BLS, UK ONS, EU Eurostat) and developer surveys across 20+ countries. Know your market value with data, not guesswork."
+      "desc": "Salary data from government sources (US BLS, UK ONS, EU Eurostat) and developer surveys across 20+ countries. Includes negotiation tips and your best monetary move."
     },
     "ats": {
-      "title": "ATS Optimization",
-      "desc": "See how your CV scores against job postings. Keyword matching, format checks, and specific fixes to pass Applicant Tracking Systems used by 90% of large companies."
+      "title": "ATS & Job Match",
+      "desc": "Paste a job posting to get a keyword match score, missing keywords, format issues, and targeted CV suggestions. See exactly how your CV stacks up before you apply."
     },
     "coach": {
       "title": "AI Career Coach",
-      "desc": "Chat with an AI coach that knows your full profile — strengths, gaps, salary data, and career goals. Ask anything about your next move and get personalized advice."
+      "desc": "Chat with an AI coach that knows your full profile — strengths, gaps, salary data, and career goals. Ask anything about your next move and get personalized advice. (Pro feature)"
     },
-    "cv": {
-      "title": "CV Builder & Optimizer",
-      "desc": "Get section-by-section CV rewrite suggestions tailored to your target role. Apply changes with one click and download an ATS-optimized PDF."
+    "linkedin": {
+      "title": "LinkedIn Profile Plan",
+      "desc": "AI-generated headline options, About section draft, skills to add or deprioritize, featured project ideas, content strategy, and connection plan — all tailored to your target role."
     },
     "roadmap": {
       "title": "Career Roadmap",
@@ -80,18 +80,18 @@
   },
   "howItWorks": {
     "sectionTitle": "How it works",
-    "sectionSubtitle": "From CV upload to career strategy in under 60 seconds.",
+    "sectionSubtitle": "From CV upload to full career strategy in about 2 minutes.",
     "step1": {
       "title": "Upload & Set Your Goals",
-      "desc": "Upload your CV as a PDF and tell us your target role, experience level, and country. Optionally paste a job posting for a targeted analysis."
+      "desc": "Upload your CV as a PDF and tell us your target role, experience level, and country. Optionally add a job posting for ATS scoring and a tailored cover letter, or your GitHub URL for a portfolio analysis."
     },
     "step2": {
       "title": "AI Analyzes Everything",
-      "desc": "Our AI reads your CV, extracts your skills, benchmarks salaries from government data, identifies gaps, and builds your personalized career strategy — all in under 60 seconds."
+      "desc": "Our AI extracts your skills, maps your strengths and gaps, benchmarks salaries, builds a LinkedIn profile plan, generates your career roadmap, and optionally scores your ATS fit — typically in about 2 minutes."
     },
     "step3": {
       "title": "Get Your Career Playbook",
-      "desc": "Explore your results across 10+ sections: fit score, gap analysis, salary benchmarks, ATS scoring, career roadmap, role recommendations, and an AI coach to answer your questions."
+      "desc": "Explore your results across 11 sections: fit score, job match, LinkedIn profile plan, ATS analysis, cover letter, GitHub portfolio review, strengths & gaps, action plan, recommended roles, and salary benchmarks."
     }
   },
   "cta": {
@@ -103,7 +103,7 @@
     "quoteAuthor": "— What we're building GapZero to help you say",
     "noSignup": "No sign-up",
     "noCreditCard": "No credit card",
-    "resultsIn2Min": "Results in ~90 seconds"
+    "resultsIn2Min": "Results in ~2 minutes"
   },
   "analyze": {
     "title": "Analyze Your Career",

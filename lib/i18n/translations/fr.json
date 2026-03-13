@@ -40,19 +40,19 @@
       "plan d'action",
       "correspondance de rôles"
     ],
-    "subtitle": "Notre IA analyse vos compétences, identifie les lacunes, compare les salaires et construit un plan étape par étape. Ce qui coûtait 500$/heure avec un coach de carrière, en 90 secondes.",
+    "subtitle": "Notre IA analyse vos compétences, identifie les lacunes, compare les salaires, construit un plan de profil LinkedIn et crée une feuille de route détaillée. Ce qui coûtait 500$/heure avec un coach de carrière, en environ 2 minutes.",
     "analyzeFree": "Analyser ma Carrière →",
     "stats": {
       "analysisTime": "Temps d'Analyse",
-      "dataPoints": "Points de Données",
-      "aiSteps": "Étapes IA",
+      "outputSections": "Sections de Résultats",
+      "simpleSteps": "Étapes Simples",
       "toUse": "Utilisation"
     },
     "trust": "Utilisé par des professionnels en transition vers l'IA, le cloud et les rôles tech modernes"
   },
   "features": {
     "sectionTitle": "Tout ce dont vous avez besoin pour votre prochain pas de carrière",
-    "sectionSubtitle": "Téléchargez votre CV une seule fois — obtenez une analyse des écarts, des données salariales, un score ATS, une feuille de route et un coach IA. Tout en un seul endroit.",
+    "sectionSubtitle": "Téléchargez votre CV une seule fois — obtenez une analyse des écarts, des données salariales, un plan de profil LinkedIn, un score ATS, une feuille de route et plus. Tout en un seul endroit.",
     "gapAnalysis": {
       "title": "Analyse des Écarts de Carrière",
       "desc": "L'IA identifie vos forces et vos lacunes par rapport à votre poste cible. Chaque écart est évalué par sévérité — critique, modéré ou mineur — avec un plan concret pour le combler."
@@ -62,16 +62,16 @@
       "desc": "Données salariales provenant de sources gouvernementales (US BLS, UK ONS, EU Eurostat) et d'enquêtes développeurs dans plus de 20 pays. Connaissez votre valeur avec des données, pas des suppositions."
     },
     "ats": {
-      "title": "Optimisation ATS",
-      "desc": "Voyez comment votre CV se positionne face aux offres d'emploi. Correspondance de mots-clés, vérifications de format et corrections ciblées pour passer les systèmes ATS utilisés par 90 % des grandes entreprises."
+      "title": "ATS & Match d'Emploi",
+      "desc": "Ajoutez une offre d'emploi pour obtenir un score de correspondance de mots-clés, les mots-clés manquants, les problèmes de format et des suggestions de CV ciblées. Voyez exactement où vous en êtes avant de postuler."
     },
     "coach": {
       "title": "Coach Carrière IA",
-      "desc": "Discutez avec un coach IA qui connaît votre profil complet — forces, lacunes, données salariales et objectifs de carrière. Posez n'importe quelle question sur votre prochain pas et recevez des conseils personnalisés."
+      "desc": "Discutez avec un coach IA qui connaît votre profil complet — forces, lacunes, données salariales et objectifs de carrière. Posez n'importe quelle question sur votre prochain pas et recevez des conseils personnalisés. (fonctionnalité Pro)"
     },
-    "cv": {
-      "title": "Constructeur & Optimiseur de CV",
-      "desc": "Recevez des suggestions de réécriture section par section adaptées à votre poste cible. Appliquez les modifications en un clic et téléchargez un PDF optimisé pour les ATS."
+    "linkedin": {
+      "title": "Plan de Profil LinkedIn",
+      "desc": "Options de titre générées par IA, brouillon de section À propos, compétences à ajouter ou déprioritiser, idées de projets, stratégie de contenu et plan de connexion — adaptés à votre poste cible."
     },
     "roadmap": {
       "title": "Feuille de Route Carrière",
@@ -80,18 +80,18 @@
   },
   "howItWorks": {
     "sectionTitle": "Comment ça marche",
-    "sectionSubtitle": "Du téléchargement de CV à la stratégie de carrière en moins de 60 secondes.",
+    "sectionSubtitle": "Du téléchargement de CV à la stratégie de carrière complète en environ 2 minutes.",
     "step1": {
       "title": "Téléchargez et Définissez Vos Objectifs",
-      "desc": "Téléchargez votre CV en PDF et indiquez votre poste cible, votre niveau d'expérience et votre pays. Optionnellement, collez une offre d'emploi pour une analyse ciblée."
+      "desc": "Téléchargez votre CV en PDF et indiquez votre poste cible, votre niveau d'expérience et votre pays. Optionnellement, ajoutez une offre d'emploi pour le scoring ATS et une lettre de motivation, ou votre URL GitHub pour une analyse de portfolio."
     },
     "step2": {
       "title": "L'IA Analyse Tout",
-      "desc": "Notre IA lit votre CV, extrait vos compétences, compare les salaires avec des données gouvernementales, identifie les écarts et construit votre stratégie de carrière personnalisée — le tout en moins de 60 secondes."
+      "desc": "Notre IA extrait vos compétences, cartographie vos points forts et lacunes, compare les salaires, construit un plan de profil LinkedIn, génère votre feuille de route et évalue optionnellement votre compatibilité ATS — généralement en environ 2 minutes."
     },
     "step3": {
       "title": "Recevez Votre Plan de Carrière",
-      "desc": "Explorez vos résultats dans plus de 10 sections : score de compatibilité, analyse des écarts, données salariales, score ATS, feuille de route, recommandations de postes et un coach IA pour répondre à vos questions."
+      "desc": "Explorez vos résultats dans 11 sections : score de compatibilité, job match, plan de profil LinkedIn, analyse ATS, lettre de motivation, revue de portfolio GitHub, points forts & lacunes, plan d'action, rôles recommandés et benchmarks salariaux."
     }
   },
   "cta": {
@@ -103,7 +103,7 @@
     "quoteAuthor": "— Ce que nous construisons GapZero pour vous aider à dire",
     "noSignup": "Sans inscription",
     "noCreditCard": "Sans carte de crédit",
-    "resultsIn2Min": "Résultats en ~90 secondes"
+    "resultsIn2Min": "Résultats en ~2 minutes"
   },
   "analyze": {
     "title": "Analysez Votre Carrière",

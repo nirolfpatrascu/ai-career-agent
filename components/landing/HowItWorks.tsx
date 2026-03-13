@@ -50,16 +50,17 @@ function UploadMockup() {
 function AnalysisMockup() {
   const [done, setDone] = useState(0);
   useEffect(() => {
-    const items = [600, 1000, 1400, 1800];
+    const items = [500, 900, 1300, 1700, 2100];
     const timers = items.map((ms, i) => setTimeout(() => setDone(i + 1), ms));
     return () => timers.forEach(clearTimeout);
   }, []);
 
   const steps = [
-    'Skills extracted',
-    'Gaps identified',
+    'Skills & profile extracted',
+    'Gaps, strengths & roles mapped',
     'Salary benchmarked',
-    'Roadmap built',
+    'LinkedIn plan & roadmap built',
+    'Report ready',
   ];
 
   return (
@@ -93,10 +94,10 @@ function PlaybookMockup() {
       {/* Mini dashboard header */}
       <div className="flex items-center gap-1 mb-3 pb-2 border-b border-black/[0.06]">
         {[
-          { label: 'Score', active: true },
-          { label: 'Gaps', active: false },
+          { label: 'Fit Score', active: true },
+          { label: 'LinkedIn', active: false },
           { label: 'Salary', active: false },
-          { label: 'Coach', active: false },
+          { label: 'Plan', active: false },
         ].map((tab) => (
           <div
             key={tab.label}

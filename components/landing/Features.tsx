@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { useTranslation } from '@/lib/i18n';
-import { Target, TrendingUp, Shield, MessageSquare, FileText, Map } from 'lucide-react';
+import { Target, TrendingUp, Shield, MessageSquare, Map } from 'lucide-react';
 
 /* ─── Mini-mockups (pure CSS/Tailwind, no images/SVGs/external assets) ─── */
 
@@ -93,22 +93,22 @@ function CoachMockup() {
   );
 }
 
-function CVMockup() {
+function LinkedInMockup() {
   return (
     <div className="w-full space-y-2 px-1">
-      {(['Summary', 'Skills', 'Experience'] as const).map((label) => (
-        <div key={label} className="flex items-center justify-between bg-black/[0.03] rounded-lg px-3 py-1.5">
-          <div className="flex items-center gap-2">
-            <div className="w-1.5 h-4 rounded-full bg-[#E8890A]/30" />
-            <span className="text-[11px] font-medium text-[#6B7280]">{label}</span>
-          </div>
-          <span className="text-[10px] text-[#22C55E] font-semibold">&#10003;</span>
+      {[
+        'AI Solutions Architect | RPA & ML | Open to Roles',
+        'Transitioning to AI | Automation Expert | Romania',
+      ].map((h, i) => (
+        <div key={i} className="bg-black/[0.03] border border-black/[0.06] rounded-lg px-2.5 py-1.5">
+          <div className="text-[8px] font-medium text-[#9CA3AF] mb-0.5">Headline {i + 1}</div>
+          <div className="text-[10px] text-[#1A1A1A] leading-snug">{h}</div>
         </div>
       ))}
-      <div className="flex justify-center pt-1">
-        <span className="text-[9px] font-semibold px-3 py-1 rounded-full bg-[#E8890A]/10 text-[#E8890A]">
-          Download PDF
-        </span>
+      <div className="flex flex-wrap gap-1 pt-0.5">
+        <span className="text-[9px] font-medium px-1.5 py-0.5 rounded bg-[#0A66C2]/10 text-[#0A66C2]">+ Add Python</span>
+        <span className="text-[9px] font-medium px-1.5 py-0.5 rounded bg-[#0A66C2]/10 text-[#0A66C2]">+ Add LLMs</span>
+        <span className="text-[9px] font-medium px-1.5 py-0.5 rounded bg-black/[0.05] text-[#9CA3AF] line-through">Scripting</span>
       </div>
     </div>
   );
@@ -140,12 +140,21 @@ function RoadmapMockup() {
 
 /* ─── Feature definitions ─── */
 
+// LinkedIn icon inline as a component since lucide doesn't bundle it
+function LinkedInIcon({ color, size = 20 }: { color: string; size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={color}>
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+    </svg>
+  );
+}
+
 const FEATURES = [
   { key: 'gapAnalysis', Icon: Target, color: '#E8890A', Mockup: GapAnalysisMockup },
   { key: 'salary', Icon: TrendingUp, color: '#22C55E', Mockup: SalaryMockup },
   { key: 'ats', Icon: Shield, color: '#3B82F6', Mockup: ATSMockup },
   { key: 'coach', Icon: MessageSquare, color: '#8B5CF6', Mockup: CoachMockup },
-  { key: 'cv', Icon: FileText, color: '#E8890A', Mockup: CVMockup },
+  { key: 'linkedin', Icon: null, color: '#0A66C2', Mockup: LinkedInMockup },
   { key: 'roadmap', Icon: Map, color: '#22C55E', Mockup: RoadmapMockup },
 ] as const;
 
@@ -206,7 +215,11 @@ export default function Features() {
                   className="w-10 h-10 rounded-xl flex items-center justify-center"
                   style={{ backgroundColor: `${color}15` }}
                 >
-                  <Icon className="w-5 h-5" style={{ color }} />
+                  {Icon ? (
+                    <Icon className="w-5 h-5" style={{ color }} />
+                  ) : (
+                    <LinkedInIcon color={color} size={20} />
+                  )}
                 </div>
                 <h3 className="text-lg font-semibold text-[#1A1A1A]">
                   {t(`features.${key}.title`)}
