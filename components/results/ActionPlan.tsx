@@ -47,7 +47,6 @@ export default function ActionPlan({ plan, fitScore, analysisId, tags = [], onTa
           </div>
           <h2 className="text-xl font-bold text-text-primary font-display">{t('results.actionPlan.title')}</h2>
         </div>
-        <FeedbackButton section="actionPlan" />
       </div>
 
       {/* Contextual intro based on fit score */}
@@ -79,6 +78,9 @@ export default function ActionPlan({ plan, fitScore, analysisId, tags = [], onTa
                 <span>{item.action}</span>
               </div>
             ))}
+          </div>
+          <div className="flex justify-end mt-3 pt-2.5 border-t border-success/10">
+            <FeedbackButton compact analysisId={analysisId} section="actionPlan-quickPrep" />
           </div>
         </div>
       )}

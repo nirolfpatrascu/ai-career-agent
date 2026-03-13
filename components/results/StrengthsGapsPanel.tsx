@@ -71,7 +71,6 @@ export default function StrengthsGapsPanel({ strengths, gaps, analysisId, tags =
           </div>
           <h2 className="text-xl font-bold text-text-primary font-display">{t('results.strengthsGaps.title')}</h2>
         </div>
-        <FeedbackButton section="strengthsGaps" />
       </div>
 
       {/* Toggle pill tabs */}

@@ -104,7 +104,6 @@ export default function CoverLetterPanel({ analysis }: CoverLetterPanelProps) {
             <p className="text-sm text-text-tertiary">{t('coverLetter.subtitle') || 'AI-generated, tailored to the job posting'}</p>
           </div>
         </div>
-        <FeedbackButton section="cover-letter" />
       </div>
 
       {/* Error */}
@@ -146,6 +145,9 @@ export default function CoverLetterPanel({ analysis }: CoverLetterPanelProps) {
               onChange={(e) => setEditedContent(e.target.value)}
               className="w-full min-h-[400px] p-5 rounded-2xl border border-black/[0.08] bg-white text-sm text-text-primary leading-relaxed resize-y focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30"
             />
+            <div className="flex justify-end mt-2">
+              <FeedbackButton compact section="coverLetter-content" />
+            </div>
           </div>
 
           {/* Action bar */}
@@ -184,6 +186,9 @@ export default function CoverLetterPanel({ analysis }: CoverLetterPanelProps) {
                     </span>
                   ))}
                 </div>
+                <div className="flex justify-end mt-3 pt-2.5 border-t border-black/[0.06]">
+                  <FeedbackButton compact section="coverLetter-strengths" />
+                </div>
               </div>
             )}
             {coverLetter.weaknessAcknowledgments?.length > 0 && (
@@ -195,6 +200,9 @@ export default function CoverLetterPanel({ analysis }: CoverLetterPanelProps) {
                       {g}
                     </span>
                   ))}
+                </div>
+                <div className="flex justify-end mt-3 pt-2.5 border-t border-black/[0.06]">
+                  <FeedbackButton compact section="coverLetter-gaps" />
                 </div>
               </div>
             )}

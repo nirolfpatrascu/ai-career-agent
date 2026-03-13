@@ -103,7 +103,6 @@ export default function SalaryBenchmark({ salary, analysisId, tags = [], onTagCr
                 )}
               </div>
             </div>
-            <FeedbackButton section="salaryAnalysis" />
           </div>
           <p className="text-xs text-text-tertiary">{t('results.salary.subtitle')}</p>
         </div>
@@ -178,6 +177,9 @@ export default function SalaryBenchmark({ salary, analysisId, tags = [], onTagCr
           <TaggableToken analysisId={analysisId} section="salary" elementKey="bestMove" existingTags={tags} onTagCreated={onTagCreated} onTagDeleted={onTagDeleted}>
             <p className="text-sm text-text-secondary leading-relaxed">{salary.bestMonetaryMove}</p>
           </TaggableToken>
+          <div className="flex justify-end mt-3 pt-2.5 border-t border-black/[0.06]">
+            <FeedbackButton compact section="salary-bestMove" />
+          </div>
         </div>
 
         {/* Negotiation tips */}
@@ -189,9 +191,12 @@ export default function SalaryBenchmark({ salary, analysisId, tags = [], onTagCr
             </div>
             <div className="space-y-3">
               {salary.negotiationTips.map((tip, i) => (
-                <div key={i} className="flex gap-3">
-                  <span className="text-primary/60 font-bold text-sm flex-shrink-0 mt-0.5 font-display">{i + 1}.</span>
-                  <p className="text-sm text-text-secondary leading-relaxed">{tip}</p>
+                <div key={i} className="flex items-start justify-between gap-3 rounded-xl bg-black/[0.02] border border-black/[0.06] px-3 py-2.5">
+                  <div className="flex gap-3 min-w-0">
+                    <span className="text-primary/60 font-bold text-sm flex-shrink-0 mt-0.5 font-display">{i + 1}.</span>
+                    <p className="text-sm text-text-secondary leading-relaxed">{tip}</p>
+                  </div>
+                  <FeedbackButton compact section={`salary-tip-${i}`} />
                 </div>
               ))}
             </div>

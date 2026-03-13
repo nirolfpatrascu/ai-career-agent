@@ -68,7 +68,6 @@ export default function GitHubAnalysisPanel({ githubUrl, targetRole, jobPosting,
             <p className="text-sm text-text-tertiary">{t('github.subtitle') || 'Repos, languages, and contribution insights'}</p>
           </div>
         </div>
-        <FeedbackButton section="github-analysis" />
       </div>
 
       {/* Error */}
@@ -206,6 +205,9 @@ export default function GitHubAnalysisPanel({ githubUrl, targetRole, jobPosting,
                     {analysis.projectIdea.estimatedTime}
                   </span>
                 </div>
+              </div>
+              <div className="flex justify-end mt-4 pt-3 border-t border-black/[0.06]">
+                <FeedbackButton compact analysisId={analysisId} section="github-projectIdea" />
               </div>
             </div>
           )}

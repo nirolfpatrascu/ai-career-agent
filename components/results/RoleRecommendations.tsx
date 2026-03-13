@@ -31,7 +31,6 @@ export default function RoleRecommendations({ roles, analysisId, tags = [], onTa
           </div>
           <h2 className="text-xl font-bold text-text-primary font-display">{t('results.roles.title')}</h2>
         </div>
-        <FeedbackButton section="roleRecommendations" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">

@@ -51,7 +51,6 @@ export default function JobMatchPanel({ match }: JobMatchPanelProps) {
           </div>
           <h2 className="text-xl font-bold text-text-primary font-display">{t('results.jobMatch.title')}</h2>
         </div>
-        <FeedbackButton section="jobMatch" />
       </div>
 
       <div className="space-y-4">
@@ -62,6 +61,9 @@ export default function JobMatchPanel({ match }: JobMatchPanelProps) {
             <h3 className="font-semibold text-text-primary">Assessment</h3>
           </div>
           <p className="text-sm text-text-secondary leading-relaxed whitespace-pre-line">{match.overallAdvice}</p>
+          <div className="flex justify-end mt-3 pt-2.5 border-t border-black/[0.06]">
+            <FeedbackButton compact section="jobMatch-assessment" />
+          </div>
         </div>
 
         {/* Score */}

@@ -73,11 +73,6 @@ export function CVOptimizerPanel({ atsScore, jobMatch, analysis }: CVOptimizerPa
 
   return (
     <div className="animate-panelEnter space-y-6">
-      {/* Section header with feedback */}
-      <div className="flex items-center justify-end">
-        <FeedbackButton section="atsScore" />
-      </div>
-
       {/* Toggle pill tabs */}
       <div className="flex gap-2 mb-6 p-1 bg-black/[0.03] border border-black/[0.08] rounded-xl w-fit flex-wrap">
         <button
@@ -272,6 +267,9 @@ function RescoreSection({
           )}
         </div>
       </div>
+      <div className="flex justify-end mt-3 pt-2.5 border-t border-black/[0.06]">
+        <FeedbackButton compact section="atsScore-rescore" />
+      </div>
     </div>
   );
 }
@@ -425,6 +423,9 @@ function ATSScoreSection({ atsScore, t }: { atsScore: ATSScoreResult; t: (key: s
             </p>
           </div>
         </div>
+        <div className="flex justify-end mt-3 pt-2.5 border-t border-black/[0.06]">
+          <FeedbackButton compact section="atsScore-overall" />
+        </div>
       </div>
 
       {/* Company ATS Info */}
@@ -483,6 +484,9 @@ function ATSScoreSection({ atsScore, t }: { atsScore: ATSScoreResult; t: (key: s
                 {showAllMatched ? (<>{t('ats.showLess')} <ChevronUp className="h-4 w-4" /></>) : (<>{t('ats.showAll', { count: String(atsScore.keywords.matched.length) })} <ChevronDown className="h-4 w-4" /></>)}
               </button>
             )}
+            <div className="flex justify-end mt-3 pt-2.5 border-t border-black/[0.06]">
+              <FeedbackButton compact section="atsScore-matchedKeywords" />
+            </div>
           </div>
         )}
 
@@ -504,6 +508,9 @@ function ATSScoreSection({ atsScore, t }: { atsScore: ATSScoreResult; t: (key: s
                   <span className="text-blue-600 font-medium">{kw.matchedAs}</span>
                 </span>
               ))}
+            </div>
+            <div className="flex justify-end mt-3 pt-2.5 border-t border-black/[0.06]">
+              <FeedbackButton compact section="atsScore-semanticKeywords" />
             </div>
           </div>
         )}
@@ -541,6 +548,9 @@ function ATSScoreSection({ atsScore, t }: { atsScore: ATSScoreResult; t: (key: s
               <Info className="h-3.5 w-3.5 flex-shrink-0 mt-0.5 text-warning" />
               {t('cvOptimizer.keywordCaveat')}
             </p>
+            <div className="flex justify-end mt-3 pt-2.5 border-t border-black/[0.06]">
+              <FeedbackButton compact section="atsScore-missingKeywords" />
+            </div>
           </div>
         )}
       </div>
@@ -572,6 +582,9 @@ function ATSScoreSection({ atsScore, t }: { atsScore: ATSScoreResult; t: (key: s
                 </div>
               </div>
             ))}
+          </div>
+          <div className="flex justify-end">
+            <FeedbackButton compact section="atsScore-formatIssues" />
           </div>
         </div>
       )}
@@ -621,6 +634,9 @@ function ATSScoreSection({ atsScore, t }: { atsScore: ATSScoreResult; t: (key: s
                         ))}
                       </div>
                     )}
+                    <div className="flex justify-end mt-2 pt-2 border-t border-black/[0.06]" onClick={e => e.stopPropagation()}>
+                      <FeedbackButton compact section={`atsScore-rec-${i}`} />
+                    </div>
                   </div>
                   {rec.example && (
                     <span className="text-gray-400">{expandedRec === i ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}</span>
@@ -697,9 +713,12 @@ function CVSuggestionsSection({
                   <p className="text-sm text-text-primary leading-relaxed">{suggestion.suggested}</p>
                 </div>
               </div>
-              <div className="flex items-start gap-2 px-1">
-                <Info className="h-3.5 w-3.5 flex-shrink-0 mt-0.5 text-text-tertiary" />
-                <p className="text-xs text-text-tertiary leading-relaxed">{suggestion.reasoning}</p>
+              <div className="flex items-start justify-between gap-2 px-1">
+                <div className="flex items-start gap-2">
+                  <Info className="h-3.5 w-3.5 flex-shrink-0 mt-0.5 text-text-tertiary" />
+                  <p className="text-xs text-text-tertiary leading-relaxed">{suggestion.reasoning}</p>
+                </div>
+                <FeedbackButton compact section={`cvSuggestion-${i}`} />
               </div>
             </div>
           </div>
@@ -976,6 +995,7 @@ function CVEditorSection({
           appliedSuggestions={appliedSuggestions}
           onApply={applySuggestion}
           onDismiss={(idx) => setDismissedSuggestions(prev => new Set([...Array.from(prev), idx]))}
+          feedbackSection="cvEditor-summary"
           t={t}
         >
           <textarea
@@ -996,6 +1016,7 @@ function CVEditorSection({
           appliedSuggestions={appliedSuggestions}
           onApply={applySuggestion}
           onDismiss={(idx) => setDismissedSuggestions(prev => new Set([...Array.from(prev), idx]))}
+          feedbackSection="cvEditor-skills"
           t={t}
         >
           <textarea
@@ -1011,9 +1032,12 @@ function CVEditorSection({
         <div className="bg-white rounded-2xl border border-black/[0.08] overflow-hidden border-l-4 border-l-green-400">
           <div className="flex items-center justify-between px-5 py-3.5 border-b border-black/[0.06] bg-black/[0.02]">
             <h4 className="font-semibold text-text-primary text-sm">{t('cvOptimizer.editor.section.experience')}</h4>
-            <button onClick={addExperience} className="inline-flex items-center gap-1 text-xs text-[#E8890A] font-medium hover:underline">
-              <Plus className="h-3.5 w-3.5" /> Add
-            </button>
+            <div className="flex items-center gap-2">
+              <FeedbackButton compact section="cvEditor-experience" />
+              <button onClick={addExperience} className="inline-flex items-center gap-1 text-xs text-[#E8890A] font-medium hover:underline">
+                <Plus className="h-3.5 w-3.5" /> Add
+              </button>
+            </div>
           </div>
           <div className="p-5 space-y-4">
             {sections.experience.length === 0 && (
@@ -1041,9 +1065,12 @@ function CVEditorSection({
         <div className="bg-white rounded-2xl border border-black/[0.08] overflow-hidden border-l-4 border-l-yellow-400">
           <div className="flex items-center justify-between px-5 py-3.5 border-b border-black/[0.06] bg-black/[0.02]">
             <h4 className="font-semibold text-text-primary text-sm">{t('cvOptimizer.editor.section.education')}</h4>
-            <button onClick={addEducation} className="inline-flex items-center gap-1 text-xs text-[#E8890A] font-medium hover:underline">
-              <Plus className="h-3.5 w-3.5" /> Add
-            </button>
+            <div className="flex items-center gap-2">
+              <FeedbackButton compact section="cvEditor-education" />
+              <button onClick={addEducation} className="inline-flex items-center gap-1 text-xs text-[#E8890A] font-medium hover:underline">
+                <Plus className="h-3.5 w-3.5" /> Add
+              </button>
+            </div>
           </div>
           <div className="p-5 space-y-4">
             {sections.education.length === 0 && (
@@ -1075,6 +1102,7 @@ function CVEditorSection({
           appliedSuggestions={appliedSuggestions}
           onApply={applySuggestion}
           onDismiss={(idx) => setDismissedSuggestions(prev => new Set([...Array.from(prev), idx]))}
+          feedbackSection="cvEditor-certifications"
           t={t}
         >
           <textarea
@@ -1095,6 +1123,7 @@ function CVEditorSection({
           appliedSuggestions={appliedSuggestions}
           onApply={applySuggestion}
           onDismiss={(idx) => setDismissedSuggestions(prev => new Set([...Array.from(prev), idx]))}
+          feedbackSection="cvEditor-languages"
           t={t}
         >
           <textarea
@@ -1123,6 +1152,7 @@ function EditorCard({
   appliedSuggestions,
   onApply,
   onDismiss,
+  feedbackSection,
   t,
 }: {
   title: string;
@@ -1133,6 +1163,7 @@ function EditorCard({
   appliedSuggestions: Set<number>;
   onApply: (idx: number) => void;
   onDismiss: (idx: number) => void;
+  feedbackSection?: string;
   t: (key: string) => string;
 }) {
   const [showSuggestion, setShowSuggestion] = useState(false);
@@ -1190,7 +1221,14 @@ function EditorCard({
         </div>
       )}
 
-      <div className="p-5">{children}</div>
+      <div className="p-5">
+        {children}
+        {feedbackSection && (
+          <div className="flex justify-end mt-3 pt-2.5 border-t border-black/[0.06]">
+            <FeedbackButton compact section={feedbackSection} />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

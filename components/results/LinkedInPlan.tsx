@@ -44,14 +44,15 @@ function CopyButton({ text }: { text: string }) {
   );
 }
 
-function SectionCard({ title, icon, children }: { title: string; icon: React.ReactNode; children: React.ReactNode }) {
+function SectionCard({ title, icon, children, feedbackSection }: { title: string; icon: React.ReactNode; children: React.ReactNode; feedbackSection?: string }) {
   return (
     <div className="bg-black/[0.03] border border-black/[0.06] rounded-2xl overflow-hidden">
       <div className="flex items-center gap-3 px-6 py-4 border-b border-black/[0.06]">
         <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/15 flex items-center justify-center text-primary">
           {icon}
         </div>
-        <h3 className="text-base font-semibold text-text-primary">{title}</h3>
+        <h3 className="text-base font-semibold text-text-primary flex-1">{title}</h3>
+        {feedbackSection && <FeedbackButton compact section={feedbackSection} />}
       </div>
       <div className="px-6 py-5">{children}</div>
     </div>
@@ -254,7 +255,6 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
             </p>
           </div>
         </div>
-        <FeedbackButton section="linkedinPlan" />
       </div>
 
       {/* Profile Grade Badge */}
@@ -307,6 +307,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
           <SectionCard
             title={t('linkedin.profileSettings')}
             icon={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>}
+            feedbackSection="linkedin-profileSettings"
           >
             <p className="text-sm text-text-secondary mb-4">
               {t('linkedin.profileSettingsAdvice')}
@@ -327,6 +328,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
           <SectionCard
             title={t('linkedin.profileLink')}
             icon={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>}
+            feedbackSection="linkedin-profileLink"
           >
             <p className="text-sm text-text-secondary mb-4">
               {t('linkedin.profileLinkAdvice')}
@@ -355,6 +357,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
           <SectionCard
             title={t('linkedin.bannerTitle')}
             icon={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>}
+            feedbackSection="linkedin-banner"
           >
             <p className="text-sm text-text-secondary mb-4">
               {t('linkedin.bannerAdvice')}
@@ -383,6 +386,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
           <SectionCard
             title={t('linkedin.headline')}
             icon={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>}
+            feedbackSection="linkedin-headline"
           >
             <p className="text-sm text-text-secondary mb-4">
               {t('linkedin.headlineAdvice')}
@@ -406,6 +410,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
           <SectionCard
             title={t('linkedin.aboutSection')}
             icon={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>}
+            feedbackSection="linkedin-about"
           >
             <p className="text-sm text-text-secondary mb-4">
               {t('linkedin.aboutAdvice')}
@@ -429,6 +434,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
           <SectionCard
             title={t('linkedin.featured')}
             icon={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>}
+            feedbackSection="linkedin-featured"
           >
             <p className="text-sm text-text-secondary mb-4">
               {t('linkedin.featuredAdvice')}
@@ -452,6 +458,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
           <SectionCard
             title={t('linkedin.skills')}
             icon={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>}
+            feedbackSection="linkedin-skills"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -498,6 +505,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
           <SectionCard
             title={t('linkedin.content')}
             icon={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>}
+            feedbackSection="linkedin-content"
           >
             <p className="text-sm text-text-secondary mb-4">
               {t('linkedin.contentAdvice')}
@@ -530,6 +538,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
           <SectionCard
             title={t('linkedin.connections')}
             icon={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
+            feedbackSection="linkedin-connections"
           >
             <p className="text-sm text-text-secondary mb-4">
               {t('linkedin.connectionsAdvice')}
@@ -548,6 +557,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
           <SectionCard
             title={t('linkedin.commenting')}
             icon={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>}
+            feedbackSection="linkedin-commenting"
           >
             <p className="text-sm text-text-secondary mb-3">
               {t('linkedin.commentingAdvice')}
