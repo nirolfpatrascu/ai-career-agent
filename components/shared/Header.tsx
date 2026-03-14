@@ -81,21 +81,36 @@ export default function Header() {
               </div>
             )}
 
-            {/* Job Tracker link — only when authenticated */}
+            {/* Profile + Job Tracker links — only when authenticated */}
             {user && !isLanding && (
-              <Link
-                href="/dashboard/jobs"
-                className={`hidden sm:flex items-center gap-1.5 text-sm font-medium transition-colors px-3 py-2 rounded-xl hover:bg-black/[0.04] ${
-                  pathname === '/dashboard/jobs'
-                    ? 'text-primary'
-                    : 'text-text-secondary hover:text-text-primary'
-                }`}
-              >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-                </svg>
-                {t('nav.jobTracker')}
-              </Link>
+              <>
+                <Link
+                  href="/dashboard"
+                  className={`hidden sm:flex items-center gap-1.5 text-sm font-medium transition-colors px-3 py-2 rounded-xl hover:bg-black/[0.04] ${
+                    pathname === '/dashboard'
+                      ? 'text-primary'
+                      : 'text-text-secondary hover:text-text-primary'
+                  }`}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                  </svg>
+                  Profile
+                </Link>
+                <Link
+                  href="/dashboard/jobs"
+                  className={`hidden sm:flex items-center gap-1.5 text-sm font-medium transition-colors px-3 py-2 rounded-xl hover:bg-black/[0.04] ${
+                    pathname === '/dashboard/jobs'
+                      ? 'text-primary'
+                      : 'text-text-secondary hover:text-text-primary'
+                  }`}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                  </svg>
+                  {t('nav.jobTracker')}
+                </Link>
+              </>
             )}
 
             {/* Language switcher */}
