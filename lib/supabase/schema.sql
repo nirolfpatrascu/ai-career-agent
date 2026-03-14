@@ -56,8 +56,12 @@ create table if not exists public.profiles (
   id uuid references auth.users(id) on delete cascade primary key,
   full_name text,
   avatar_url text,
+  terms_accepted_at timestamptz,          -- when the user explicitly accepted the T&C
+  terms_version text,                     -- version string, e.g. '2026-03'
   created_at timestamptz default now() not null
 );
+
+create index if not exists profiles_terms_version_idx on public.profiles(terms_version);
 
 alter table public.profiles enable row level security;
 

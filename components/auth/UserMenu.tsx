@@ -16,10 +16,12 @@ function AuthDropdown({ onClose }: { onClose: () => void }) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const handleEmailSubmit = useCallback(async () => {
     if (!email || !password) { setError(t('auth.fillAllFields')); return; }
     if (mode === 'signup' && !fullName) { setError(t('auth.fillAllFields')); return; }
+    if (mode === 'signup' && !termsAccepted) { setError('Please accept the Terms & Conditions to create an account.'); return; }
     setLoading(true);
     setError('');
     const result = mode === 'signin'
@@ -79,6 +81,14 @@ function AuthDropdown({ onClose }: { onClose: () => void }) {
         </button>
       </div>
 
+      {/* OAuth consent notice */}
+      <p className="text-[10px] text-text-tertiary text-center px-1 mb-3">
+        By continuing with Google or GitHub, you agree to our{' '}
+        <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Terms</a>
+        {' '}&amp;{' '}
+        <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Privacy Policy</a>
+      </p>
+
       {/* Divider */}
       <div className="flex items-center gap-2 mb-3">
         <div className="flex-1 h-px bg-black/[0.05]" />
@@ -104,6 +114,36 @@ function AuthDropdown({ onClose }: { onClose: () => void }) {
           autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}
           onKeyDown={(e) => e.key === 'Enter' && handleEmailSubmit()} />
 
+        {mode === 'signup' && (
+          <label className="flex items-start gap-2 cursor-pointer group">
+            <div className="relative flex-shrink-0 mt-0.5">
+              <input
+                type="checkbox"
+                checked={termsAccepted}
+                onChange={(e) => setTermsAccepted(e.target.checked)}
+                className="sr-only"
+              />
+              <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${
+                termsAccepted
+                  ? 'bg-primary border-primary'
+                  : 'border-black/20 bg-white group-hover:border-primary/50'
+              }`}>
+                {termsAccepted && (
+                  <svg className="w-2.5 h-2.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3.5}>
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                )}
+              </div>
+            </div>
+            <span className="text-[11px] text-text-tertiary leading-snug">
+              I agree to the{' '}
+              <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Terms</a>
+              {' '}&amp;{' '}
+              <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Privacy Policy</a>
+            </span>
+          </label>
+        )}
+
         {error && (
           <p className="text-xs text-danger bg-danger/[0.06] border border-danger/10 rounded-lg px-2.5 py-1.5">{error}</p>
         )}
@@ -116,7 +156,7 @@ function AuthDropdown({ onClose }: { onClose: () => void }) {
 
       <p className="text-center text-xs text-text-tertiary mt-3">
         {mode === 'signin' ? t('auth.noAccount') : t('auth.haveAccount')}{' '}
-        <button onClick={() => { setMode(mode === 'signin' ? 'signup' : 'signin'); setError(''); }}
+        <button onClick={() => { setMode(mode === 'signin' ? 'signup' : 'signin'); setError(''); setTermsAccepted(false); }}
           className="text-primary font-medium hover:text-primary-light transition-colors">
           {mode === 'signin' ? t('auth.signUp') : t('auth.signIn')}
         </button>

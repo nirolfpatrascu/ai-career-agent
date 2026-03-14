@@ -2,7 +2,12 @@
 
 import { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { supabase } from '@/lib/supabase/client';
+import { TermsAcceptanceModal } from '@/components/auth/TermsAcceptanceModal';
 import type { User, Session } from '@supabase/supabase-js';
+
+// Bump this string whenever you publish a material update to T&C or Privacy Policy.
+// All signed-in users with a different (or null) terms_version will see the acceptance modal.
+export const CURRENT_TERMS_VERSION = '2026-03';
 
 interface AuthContextType {
   user: User | null;
@@ -13,6 +18,7 @@ interface AuthContextType {
   signInWithEmail: (email: string, password: string) => Promise<{ error: string | null }>;
   signUpWithEmail: (email: string, password: string, fullName: string) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
+  acceptTerms: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -21,20 +27,38 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const [needsTermsAcceptance, setNeedsTermsAcceptance] = useState(false);
 
   useEffect(() => {
-    // Get initial session
+    // Check whether a signed-in user has accepted the current terms version
+    const checkTerms = async (u: User) => {
+      const { data } = await supabase
+        .from('profiles')
+        .select('terms_version')
+        .eq('id', u.id)
+        .single();
+      if (!data?.terms_version || data.terms_version !== CURRENT_TERMS_VERSION) {
+        setNeedsTermsAcceptance(true);
+      }
+    };
+
+    // Restore existing session on mount
     supabase.auth.getSession().then(({ data: { session: s } }) => {
       setSession(s);
       setUser(s?.user ?? null);
       setLoading(false);
+      if (s?.user) checkTerms(s.user);
     });
 
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, s) => {
+    // Listen for auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, s) => {
       setSession(s);
       setUser(s?.user ?? null);
       setLoading(false);
+      // Check terms on fresh sign-in (not on token refresh — avoids unnecessary DB reads)
+      if (event === 'SIGNED_IN' && s?.user) checkTerms(s.user);
+      // Clear the gate when the user signs out
+      if (!s?.user) setNeedsTermsAcceptance(false);
     });
 
     return () => subscription.unsubscribe();
@@ -60,11 +84,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const signUpWithEmail = useCallback(async (email: string, password: string, fullName: string) => {
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: { data: { full_name: fullName } },
     });
+    // Record terms acceptance immediately at signup — the user checked the box to submit this form
+    if (!error && data.user) {
+      await supabase.from('profiles').upsert({
+        id: data.user.id,
+        terms_accepted_at: new Date().toISOString(),
+        terms_version: CURRENT_TERMS_VERSION,
+      });
+    }
     return { error: error?.message ?? null };
   }, []);
 
@@ -72,12 +104,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await supabase.auth.signOut();
   }, []);
 
+  // Called by TermsAcceptanceModal when the user accepts
+  const acceptTerms = useCallback(async () => {
+    if (!user) return;
+    await supabase.from('profiles').upsert({
+      id: user.id,
+      terms_accepted_at: new Date().toISOString(),
+      terms_version: CURRENT_TERMS_VERSION,
+    });
+    setNeedsTermsAcceptance(false);
+  }, [user]);
+
   return (
     <AuthContext.Provider value={{
       user, session, loading,
-      signInWithGoogle, signInWithGitHub, signInWithEmail, signUpWithEmail, signOut,
+      signInWithGoogle, signInWithGitHub, signInWithEmail, signUpWithEmail,
+      signOut, acceptTerms,
     }}>
       {children}
+      {needsTermsAcceptance && (
+        <TermsAcceptanceModal onAccept={acceptTerms} onSignOut={signOut} />
+      )}
     </AuthContext.Provider>
   );
 }
