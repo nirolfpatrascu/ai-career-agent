@@ -82,7 +82,7 @@ export default function Header() {
             )}
 
             {/* Profile + Job Tracker links — only when authenticated */}
-            {user && !isLanding && (
+            {user && (
               <>
                 <Link
                   href="/dashboard"
