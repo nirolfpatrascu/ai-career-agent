@@ -35,7 +35,7 @@ export default function Footer() {
           </div>
 
           {/* Links */}
-          <div className="flex items-center gap-6 text-sm text-text-tertiary">
+          <div className="flex items-center gap-6 text-sm text-text-tertiary flex-wrap justify-center">
             <Link href="/#features" className="hover:text-text-secondary transition-colors">
               {t('common.features')}
             </Link>
@@ -44,6 +44,12 @@ export default function Footer() {
             </Link>
             <Link href="/analyze" className="hover:text-text-secondary transition-colors">
               {t('common.analyzeMyCareer')}
+            </Link>
+            <Link href="/terms" className="hover:text-text-secondary transition-colors">
+              Terms
+            </Link>
+            <Link href="/privacy" className="hover:text-text-secondary transition-colors">
+              Privacy
             </Link>
           </div>
 
