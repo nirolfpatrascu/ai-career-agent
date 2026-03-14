@@ -46,10 +46,10 @@ export default function Footer() {
               {t('common.analyzeMyCareer')}
             </Link>
             <Link href="/terms" className="hover:text-text-secondary transition-colors">
-              Terms
+              {t('common.terms')}
             </Link>
             <Link href="/privacy" className="hover:text-text-secondary transition-colors">
-              Privacy
+              {t('common.privacy')}
             </Link>
           </div>
 

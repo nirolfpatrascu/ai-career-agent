@@ -20,7 +20,9 @@
     "added": "Hinzugefügt",
     "remove": "Entfernen",
     "close": "Schließen",
-    "language": "Sprache"
+    "language": "Sprache",
+    "terms": "Nutzungsbedingungen",
+    "privacy": "Datenschutz"
   },
   "nav": {
     "cvOptimizer": "Lebenslauf-Optimierer",

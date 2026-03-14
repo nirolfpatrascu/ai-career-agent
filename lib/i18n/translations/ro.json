@@ -20,7 +20,9 @@
     "added": "Adăugat",
     "remove": "Șterge",
     "close": "Închide",
-    "language": "Limbă"
+    "language": "Limbă",
+    "terms": "Termeni",
+    "privacy": "Confidențialitate"
   },
   "nav": {
     "cvOptimizer": "Optimizator CV",

@@ -20,7 +20,9 @@
     "added": "Ajouté",
     "remove": "Supprimer",
     "close": "Fermer",
-    "language": "Langue"
+    "language": "Langue",
+    "terms": "CGU",
+    "privacy": "Confidentialité"
   },
   "nav": {
     "cvOptimizer": "Optimiseur de CV",

@@ -20,7 +20,9 @@
     "added": "Added",
     "remove": "Remove",
     "close": "Close",
-    "language": "Language"
+    "language": "Language",
+    "terms": "Terms",
+    "privacy": "Privacy"
   },
   "nav": {
     "cvOptimizer": "CV Optimizer",
