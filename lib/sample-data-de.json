@@ -432,5 +432,116 @@
       "Direkter praktischer Projekthintergrund mit Terraform, Kubernetes und AWS EKS",
       "Hintergrund in technischer Workshop-Durchführung und Kunden-Enablement"
     ]
+  },
+  "jobMatch": {
+    "matchScore": 72,
+    "matchingSkills": [
+      "Cloud Architecture",
+      "Terraform",
+      "Kubernetes",
+      "AWS",
+      "Microservices",
+      "CI/CD",
+      "Enterprise Architecture",
+      "Technical Consulting"
+    ],
+    "missingSkills": [
+      { "skill": "AWS Solutions Architect Zertifizierung", "importance": "important" },
+      { "skill": "HashiCorp Vault", "importance": "important" },
+      { "skill": "Python oder Go Scripting", "importance": "not_a_deal_breaker" }
+    ],
+    "overallAdvice": "Starke Übereinstimmung für die HashiCorp SA-Rolle. Ihr Enterprise-Architektur-Hintergrund und die praktische Cloud-Erfahrung sind genau das, wonach sie suchen. Die fehlende AWS-Zertifizierung ist das Haupthindernis — verfolgen Sie diese sofort. Das Hinzufügen von HashiCorp Vault zu Ihren Kenntnissen und die Quantifizierung der Infrastrukturauswirkungen mit Metriken wird Ihren ATS-Score erheblich verbessern.",
+    "cvSuggestions": [
+      {
+        "section": "Zusammenfassung",
+        "current": "Solutions Architect mit 11 Jahren Erfahrung in Enterprise-Software und Cloud-Infrastruktur.",
+        "suggested": "Cloud Solutions Architect mit 11 Jahren Erfahrung in der Entwicklung verteilter Systeme und Cloud-nativer Infrastruktur. Nachgewiesene Erfolgsbilanz beim Einsatz von Terraform, Kubernetes und AWS EKS bei Fortune-500-Kunden. AWS Solutions Architect Zertifizierung in Bearbeitung (voraussichtlich Q2 2026).",
+        "reasoning": "Die HashiCorp-Rolle sucht nach Cloud-First-Sprache. Das Erwähnen von Terraform und Kubernetes in der Zusammenfassung signalisiert sofort die Eignung. Das Hinzufügen der laufenden Zertifizierung beseitigt den ersten Einwand eines Recruiters."
+      },
+      {
+        "section": "Erfahrung — TechFlow",
+        "current": "Entwarf und implementierte Microservices-Architekturen für Enterprise-Kunden.",
+        "suggested": "Entwarf und implementierte Terraform-verwaltete Microservices-Architekturen auf AWS EKS für 3 Fortune-500-Kunden, reduzierte Infrastruktur-Bereitstellungszeit um 70% und Deployment-Zyklen von 2h → 8 Min.",
+        "reasoning": "HashiCorp verkauft Infrastrukturautomatisierung — zu zeigen, dass Sie messbare Geschwindigkeitsverbesserungen mit genau den Tools erzielt haben, die sie bauen, beweist, dass Sie deren Wertversprechen bei Kunden demonstrieren können."
+      },
+      {
+        "section": "Kenntnisse",
+        "current": "AWS, Kubernetes, Terraform, CI/CD, Kafka, Java, TypeScript",
+        "suggested": "Infrastructure as Code: Terraform (fortgeschritten), HashiCorp Vault (mittel) | Cloud: AWS (EC2, EKS, Lambda, RDS, S3) | Orchestrierung: Kubernetes, Docker | Sprachen: Go, Python, Java, TypeScript | CI/CD: GitHub Actions, Jenkins",
+        "reasoning": "Strukturierte Kenntnisabschnitte mit explizitem HashiCorp-Tooling und Go/Python erzielen höhere Punktzahlen in ATS-Systemen. Die aktuelle flache Liste verliert Keyword-Dichte."
+      },
+      {
+        "section": "Zertifizierungen",
+        "current": "(Keine Zertifizierungen aufgeführt)",
+        "suggested": "AWS Solutions Architect – Associate (In Bearbeitung, voraussichtlich Q2 2026)\nKubernetes Administrator (CKA) — In Bearbeitung",
+        "reasoning": "60% der HashiCorp SA-Stellenausschreibungen verlangen oder bevorzugen die AWS-Zertifizierung. Sie als in Bearbeitung zu zeigen ist besser als sie wegzulassen — es signalisiert, dass Sie die Lücke erkannt haben und aktiv daran arbeiten."
+      }
+    ]
+  },
+  "profile": {
+    "name": "Alex Morgan",
+    "currentRole": "Senior Solutions Architect",
+    "totalYearsExperience": 11,
+    "summary": "Solutions Architect mit 11 Jahren Erfahrung in der Entwicklung verteilter Systeme und Cloud-nativer Infrastruktur in Enterprise- und Finanzdienstleistungsumgebungen. Spezialisiert auf AWS, Terraform, Kubernetes und Event-driven Architekturen.",
+    "skills": [
+      {
+        "category": "Cloud & Infrastruktur",
+        "skills": ["AWS", "Terraform", "Kubernetes", "Docker", "AWS EKS", "AWS Lambda", "S3", "RDS", "Serverless"],
+        "proficiencyLevel": "advanced"
+      },
+      {
+        "category": "Backend-Entwicklung",
+        "skills": ["Java", "TypeScript", "Node.js", "Microservices", "Event-Driven Architektur", "Kafka", "REST APIs"],
+        "proficiencyLevel": "expert"
+      },
+      {
+        "category": "DevOps & CI/CD",
+        "skills": ["GitHub Actions", "Jenkins", "CI/CD-Pipelines", "Infrastructure as Code", "Prometheus", "Grafana"],
+        "proficiencyLevel": "advanced"
+      },
+      {
+        "category": "Datentechnik",
+        "skills": ["Apache Kafka", "ETL-Pipelines", "Echtzeit-Streaming", "PostgreSQL", "Redis"],
+        "proficiencyLevel": "advanced"
+      }
+    ],
+    "certifications": [],
+    "education": [
+      {
+        "degree": "Bachelor of Science",
+        "institution": "Technische Universität Delft",
+        "year": "2014",
+        "field": "Informatik"
+      }
+    ],
+    "experience": [
+      {
+        "title": "Senior Solutions Architect",
+        "company": "TechFlow",
+        "duration": "2019 — Heute (5 Jahre)",
+        "highlights": [
+          "Entwarf und implementierte Microservices-Architekturen für 3 Fortune-500-Kunden mit AWS EKS, Terraform und Kafka",
+          "Erstellte CI/CD-Pipelines, die Deployment-Zyklen von 2 Stunden auf unter 10 Minuten reduzierten",
+          "Leitete technische Workshops und Architektur-Reviews für Engineering-Teams von 20–50 Ingenieuren",
+          "Entwickelte Observability-Plattformen mit Prometheus, Grafana und OpenTelemetry"
+        ],
+        "technologies": ["AWS", "Terraform", "Kubernetes", "Kafka", "TypeScript", "Java", "GitHub Actions"]
+      },
+      {
+        "title": "Backend-Ingenieur",
+        "company": "DataCore Systems",
+        "duration": "2013 — 2019 (6 Jahre)",
+        "highlights": [
+          "Entwickelte hochverfügbare Backend-Systeme für Finanzdienstleistungskunden",
+          "Entwarf verteilte Datenbankarchitekturen mit SOC-2-Compliance",
+          "Erstellte ETL-Pipelines, die Millionen von Ereignissen täglich mit Java und Kafka verarbeiten"
+        ],
+        "technologies": ["Java", "PostgreSQL", "Kafka", "Redis", "Linux", "Docker"]
+      }
+    ],
+    "languages": [
+      { "language": "Englisch", "level": "Fließend" },
+      { "language": "Niederländisch", "level": "Konversation" }
+    ]
   }
 }

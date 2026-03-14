@@ -451,5 +451,116 @@
       "Direct Terraform, Kubernetes, and AWS EKS hands-on project history",
       "Technical workshop delivery and customer enablement background"
     ]
+  },
+  "jobMatch": {
+    "matchScore": 72,
+    "matchingSkills": [
+      "Cloud Architecture",
+      "Terraform",
+      "Kubernetes",
+      "AWS",
+      "Microservices",
+      "CI/CD",
+      "Enterprise Architecture",
+      "Technical Consulting"
+    ],
+    "missingSkills": [
+      { "skill": "AWS Solutions Architect Certification", "importance": "important" },
+      { "skill": "HashiCorp Vault", "importance": "important" },
+      { "skill": "Python or Go scripting", "importance": "not_a_deal_breaker" }
+    ],
+    "overallAdvice": "Strong match for the HashiCorp SA role. Your enterprise architecture background and hands-on cloud experience are exactly what they look for. The AWS certification gap is the main blocker — pursue it immediately. Adding HashiCorp Vault to your skills and quantifying infrastructure impact with metrics will significantly improve your ATS score.",
+    "cvSuggestions": [
+      {
+        "section": "Summary",
+        "current": "Solutions Architect with 11 years of experience in enterprise software and cloud infrastructure.",
+        "suggested": "Cloud Solutions Architect with 11 years designing distributed systems and cloud-native infrastructure. Proven track record deploying Terraform, Kubernetes, and AWS EKS across Fortune 500 clients. AWS Solutions Architect certification in progress (expected Q2 2026).",
+        "reasoning": "The HashiCorp role looks for cloud-first language. Mentioning Terraform and Kubernetes in the summary immediately signals fit. Adding the in-progress certification removes the first objection a recruiter will have."
+      },
+      {
+        "section": "Experience — TechFlow",
+        "current": "Designed and implemented microservices architectures for enterprise clients.",
+        "suggested": "Designed and implemented Terraform-managed microservices architectures on AWS EKS for 3 Fortune 500 clients, reducing infrastructure provisioning time by 70% and deployment cycles from 2h → 8 min.",
+        "reasoning": "HashiCorp sells infrastructure automation — showing you've driven measurable speed improvements with the exact tools they build proves you can demo their value proposition to customers."
+      },
+      {
+        "section": "Skills",
+        "current": "AWS, Kubernetes, Terraform, CI/CD, Kafka, Java, TypeScript",
+        "suggested": "Infrastructure as Code: Terraform (advanced), HashiCorp Vault (intermediate) | Cloud: AWS (EC2, EKS, Lambda, RDS, S3) | Orchestration: Kubernetes, Docker | Languages: Go, Python, Java, TypeScript | CI/CD: GitHub Actions, Jenkins",
+        "reasoning": "Structured skills sections with explicit HashiCorp tooling and Go/Python score higher in ATS systems. The current flat list loses keyword density."
+      },
+      {
+        "section": "Certifications",
+        "current": "(None listed)",
+        "suggested": "AWS Solutions Architect – Associate (In Progress, expected Q2 2026)\nKubernetes Administrator (CKA) — In Progress",
+        "reasoning": "60% of HashiCorp SA job postings require or strongly prefer AWS certification. Showing it in-progress is better than omitting it — it signals you're aware of the gap and actively closing it."
+      }
+    ]
+  },
+  "profile": {
+    "name": "Alex Morgan",
+    "currentRole": "Senior Solutions Architect",
+    "totalYearsExperience": 11,
+    "summary": "Solutions Architect with 11 years of experience designing distributed systems and cloud-native infrastructure across enterprise and financial services environments. Specializes in AWS, Terraform, Kubernetes, and event-driven architectures.",
+    "skills": [
+      {
+        "category": "Cloud & Infrastructure",
+        "skills": ["AWS", "Terraform", "Kubernetes", "Docker", "AWS EKS", "AWS Lambda", "S3", "RDS", "Serverless"],
+        "proficiencyLevel": "advanced"
+      },
+      {
+        "category": "Backend Engineering",
+        "skills": ["Java", "TypeScript", "Node.js", "Microservices", "Event-Driven Architecture", "Kafka", "REST APIs"],
+        "proficiencyLevel": "expert"
+      },
+      {
+        "category": "DevOps & CI/CD",
+        "skills": ["GitHub Actions", "Jenkins", "CI/CD Pipelines", "Infrastructure as Code", "Prometheus", "Grafana"],
+        "proficiencyLevel": "advanced"
+      },
+      {
+        "category": "Data Engineering",
+        "skills": ["Apache Kafka", "ETL Pipelines", "Real-time Streaming", "PostgreSQL", "Redis"],
+        "proficiencyLevel": "advanced"
+      }
+    ],
+    "certifications": [],
+    "education": [
+      {
+        "degree": "Bachelor of Science",
+        "institution": "Delft University of Technology",
+        "year": "2014",
+        "field": "Computer Science"
+      }
+    ],
+    "experience": [
+      {
+        "title": "Senior Solutions Architect",
+        "company": "TechFlow",
+        "duration": "2019 — Present (5 years)",
+        "highlights": [
+          "Designed and implemented microservices architectures for 3 Fortune 500 clients using AWS EKS, Terraform, and Kafka",
+          "Built CI/CD pipelines reducing deployment cycles from 2 hours to under 10 minutes",
+          "Led technical workshops and architecture reviews for enterprise engineering teams of 20–50 engineers",
+          "Developed observability platforms using Prometheus, Grafana, and OpenTelemetry"
+        ],
+        "technologies": ["AWS", "Terraform", "Kubernetes", "Kafka", "TypeScript", "Java", "GitHub Actions"]
+      },
+      {
+        "title": "Backend Engineer",
+        "company": "DataCore Systems",
+        "duration": "2013 — 2019 (6 years)",
+        "highlights": [
+          "Built high-availability backend systems for financial services clients processing millions of daily transactions",
+          "Designed distributed database architectures meeting SOC 2 compliance requirements",
+          "Built ETL pipelines processing millions of events per day using Java and Kafka"
+        ],
+        "technologies": ["Java", "PostgreSQL", "Kafka", "Redis", "Linux", "Docker"]
+      }
+    ],
+    "languages": [
+      { "language": "English", "level": "Fluent" },
+      { "language": "Dutch", "level": "Conversational" }
+    ]
   }
 }

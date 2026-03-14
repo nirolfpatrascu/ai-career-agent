@@ -432,5 +432,116 @@
       "Experiență practică cu Terraform, Kubernetes și AWS EKS",
       "Experiență în livrarea de training-uri tehnice și enablement clienți"
     ]
+  },
+  "jobMatch": {
+    "matchScore": 72,
+    "matchingSkills": [
+      "Cloud Architecture",
+      "Terraform",
+      "Kubernetes",
+      "AWS",
+      "Microservices",
+      "CI/CD",
+      "Enterprise Architecture",
+      "Technical Consulting"
+    ],
+    "missingSkills": [
+      { "skill": "AWS Solutions Architect Certification", "importance": "important" },
+      { "skill": "HashiCorp Vault", "importance": "important" },
+      { "skill": "Python or Go scripting", "importance": "not_a_deal_breaker" }
+    ],
+    "overallAdvice": "Potrivire puternică pentru rolul HashiCorp SA. Experiența ta în arhitecturi enterprise și infrastructura cloud hands-on sunt exact ce caută. Lipsa certificării AWS este principalul blocaj — urmărește-o imediat. Adăugând HashiCorp Vault la competențe și cuantificând impactul infrastructurii cu cifre vei îmbunătăți semnificativ scorul ATS.",
+    "cvSuggestions": [
+      {
+        "section": "Sumar",
+        "current": "Solutions Architect cu 11 ani de experiență în software enterprise și infrastructură cloud.",
+        "suggested": "Cloud Solutions Architect cu 11 ani în proiectarea sistemelor distribuite și infrastructurii cloud-native. Experiență dovedită cu Terraform, Kubernetes și AWS EKS la clienți Fortune 500. Certificare AWS Solutions Architect în curs (estimat T2 2026).",
+        "reasoning": "Rolul HashiCorp caută limbaj orientat spre cloud. Menționând Terraform și Kubernetes în sumar semnalizezi imediat potrivirea. Adăugând certificarea în curs elimini prima obiecție a recruterului."
+      },
+      {
+        "section": "Experiență — TechFlow",
+        "current": "Am proiectat și implementat arhitecturi de microservicii pentru clienți enterprise.",
+        "suggested": "Am proiectat și implementat arhitecturi de microservicii gestionate cu Terraform pe AWS EKS pentru 3 clienți Fortune 500, reducând timpul de provizionare a infrastructurii cu 70% și ciclurile de deployment de la 2h → 8 min.",
+        "reasoning": "HashiCorp vinde automatizare a infrastructurii — arătând că ai condus îmbunătățiri măsurabile cu exact instrumentele pe care le construiesc dovedești că poți demonstra propunerea lor de valoare clienților."
+      },
+      {
+        "section": "Competențe",
+        "current": "AWS, Kubernetes, Terraform, CI/CD, Kafka, Java, TypeScript",
+        "suggested": "Infrastructure as Code: Terraform (avansat), HashiCorp Vault (intermediar) | Cloud: AWS (EC2, EKS, Lambda, RDS, S3) | Orchestrare: Kubernetes, Docker | Limbaje: Go, Python, Java, TypeScript | CI/CD: GitHub Actions, Jenkins",
+        "reasoning": "Secțiunile de competențe structurate cu HashiCorp tooling explicit și Go/Python obțin scoruri mai mari în sistemele ATS. Lista plată actuală pierde densitatea cuvintelor cheie."
+      },
+      {
+        "section": "Certificări",
+        "current": "(Nicio certificare listată)",
+        "suggested": "AWS Solutions Architect – Associate (În curs, estimat T2 2026)\nKubernetes Administrator (CKA) — În curs",
+        "reasoning": "60% din postările HashiCorp SA necesită sau preferă puternic certificarea AWS. Arătând că este în curs este mai bine decât omiterea — semnalează că ești conștient de lacună și acționezi."
+      }
+    ]
+  },
+  "profile": {
+    "name": "Alex Morgan",
+    "currentRole": "Senior Solutions Architect",
+    "totalYearsExperience": 11,
+    "summary": "Solutions Architect cu 11 ani de experiență în proiectarea sistemelor distribuite și infrastructurii cloud-native în medii enterprise și servicii financiare. Specializat în AWS, Terraform, Kubernetes și arhitecturi event-driven.",
+    "skills": [
+      {
+        "category": "Cloud & Infrastructură",
+        "skills": ["AWS", "Terraform", "Kubernetes", "Docker", "AWS EKS", "AWS Lambda", "S3", "RDS", "Serverless"],
+        "proficiencyLevel": "advanced"
+      },
+      {
+        "category": "Inginerie Backend",
+        "skills": ["Java", "TypeScript", "Node.js", "Microservicii", "Arhitectură Event-Driven", "Kafka", "REST APIs"],
+        "proficiencyLevel": "expert"
+      },
+      {
+        "category": "DevOps & CI/CD",
+        "skills": ["GitHub Actions", "Jenkins", "Pipeline CI/CD", "Infrastructure as Code", "Prometheus", "Grafana"],
+        "proficiencyLevel": "advanced"
+      },
+      {
+        "category": "Inginerie Date",
+        "skills": ["Apache Kafka", "Pipeline-uri ETL", "Streaming în timp real", "PostgreSQL", "Redis"],
+        "proficiencyLevel": "advanced"
+      }
+    ],
+    "certifications": [],
+    "education": [
+      {
+        "degree": "Licență în Informatică",
+        "institution": "Universitatea Tehnică din Delft",
+        "year": "2014",
+        "field": "Informatică"
+      }
+    ],
+    "experience": [
+      {
+        "title": "Senior Solutions Architect",
+        "company": "TechFlow",
+        "duration": "2019 — Prezent (5 ani)",
+        "highlights": [
+          "Am proiectat și implementat arhitecturi de microservicii pentru 3 clienți Fortune 500 folosind AWS EKS, Terraform și Kafka",
+          "Am construit pipeline-uri CI/CD care au redus ciclurile de deployment de la 2 ore la sub 10 minute",
+          "Am condus workshop-uri tehnice și review-uri de arhitectură pentru echipe de 20–50 de ingineri",
+          "Am dezvoltat platforme de observabilitate folosind Prometheus, Grafana și OpenTelemetry"
+        ],
+        "technologies": ["AWS", "Terraform", "Kubernetes", "Kafka", "TypeScript", "Java", "GitHub Actions"]
+      },
+      {
+        "title": "Inginer Backend",
+        "company": "DataCore Systems",
+        "duration": "2013 — 2019 (6 ani)",
+        "highlights": [
+          "Am construit sisteme backend de înaltă disponibilitate pentru clienți din servicii financiare",
+          "Am proiectat arhitecturi de baze de date distribuite conforme cu SOC 2",
+          "Am construit pipeline-uri ETL procesând milioane de evenimente pe zi folosind Java și Kafka"
+        ],
+        "technologies": ["Java", "PostgreSQL", "Kafka", "Redis", "Linux", "Docker"]
+      }
+    ],
+    "languages": [
+      { "language": "Engleză", "level": "Fluent" },
+      { "language": "Olandeză", "level": "Conversational" }
+    ]
   }
 }
