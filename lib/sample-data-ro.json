@@ -5,7 +5,8 @@
     "targetRole": "Cloud Solutions Architect",
     "country": "Olanda",
     "jobPosting": "HashiCorp — Solutions Architect, EMEA\n\nWe are seeking a Solutions Architect to help enterprise customers adopt infrastructure automation. You will design and implement cloud infrastructure solutions, lead technical workshops, and guide customers in their HashiCorp adoption journey.\n\nRequired:\n- 5+ years cloud infrastructure or DevOps experience\n- Proficiency with Terraform, Kubernetes, or comparable IaC tools\n- Strong AWS, Azure, or GCP knowledge\n- Excellent communication and stakeholder management skills\n- Experience with CI/CD pipelines\n\nPreferred:\n- AWS Solutions Architect or equivalent certification\n- Experience with HashiCorp products (Terraform, Vault, Consul)\n- Enterprise software architecture background\n- Scripting in Python or Go",
-    "githubUrl": "https://github.com/alex-morgan"
+    "githubUrl": "https://github.com/alex-morgan",
+    "hasRealCV": true
   },
   "fitScore": {
     "score": 6,
