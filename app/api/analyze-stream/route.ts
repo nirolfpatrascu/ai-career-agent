@@ -412,7 +412,19 @@ export async function POST(request: NextRequest) {
 
         const hasJobPosting = questionnaire.jobPosting && questionnaire.jobPosting.trim().length > 50;
 
-        const parallelCalls: [Promise<CareerPlanResult>, Promise<JobMatch | undefined>, Promise<GitHubAnalysis | null>] = [
+        interface ATSExtractionResult {
+          keywords: Array<{ keyword: string; category: string; importance: string; variants: string[] }>;
+          roleLevel: string;
+          domain: string;
+        }
+
+        interface ATSMatchingResult {
+          matches: Array<{ keyword: string; category: string; importance: string; status: string; matchedAs?: string; cvSection?: string }>;
+          recommendations: Array<{ action: string; section: string; priority: string; keywords: string[]; example?: string }>;
+        }
+
+        // Run career plan, job match, GitHub analysis, and ATS keyword extraction all in parallel
+        const [careerPlan, jobMatchResult, githubAnalysis, atsExtraction] = await Promise.all([
           callClaude<CareerPlanResult>({
             ...planPrompt,
             maxTokens: 6144,
@@ -435,9 +447,16 @@ export async function POST(request: NextRequest) {
                 language: questionnaire.language,
               })
             : Promise.resolve(null),
-        ];
-
-        const [careerPlan, jobMatchResult, githubAnalysis] = await Promise.all(parallelCalls);
+          hasJobPosting
+            ? callClaude<ATSExtractionResult>({
+                system: 'You are an expert ATS keyword extraction analyst. Respond with valid JSON only.',
+                userMessage: buildATSKeywordExtractionPrompt(questionnaire.jobPosting!),
+                maxTokens: 4000,
+                temperature: 0,
+                fallback: { keywords: [], roleLevel: 'mid', domain: 'General' },
+              })
+            : Promise.resolve(null as ATSExtractionResult | null),
+        ]);
         endCareerPlan();
         metrics.recordStepTokens('career_plan', estimateTokens(planPrompt.system + planPrompt.userMessage), estimateTokens(JSON.stringify(careerPlan)));
         if (jobMatchResult) {
@@ -497,136 +516,103 @@ export async function POST(request: NextRequest) {
           },
         });
 
-        // --- Step 5: ATS Scoring (if job posting provided) ---
-        let atsScoreResult: ATSScoreResult | undefined;
-        if (hasJobPosting) {
-          send({ step: 'ats', progress: 82, message: 'Scoring ATS compatibility...' });
-
-          try {
-            // Extract keywords from job posting
-            const extractionPrompt = buildATSKeywordExtractionPrompt(questionnaire.jobPosting!);
-
-            interface ExtractionResult {
-              keywords: Array<{ keyword: string; category: string; importance: string; variants: string[] }>;
-              roleLevel: string;
-              domain: string;
-            }
-
-            const extraction = await callClaude<ExtractionResult>({
-              system: 'You are an expert ATS keyword extraction analyst. Respond with valid JSON only.',
-              userMessage: extractionPrompt,
-              maxTokens: 4000,
-              temperature: 0,
-              fallback: { keywords: [], roleLevel: 'mid', domain: 'General' },
-            });
-
-            if (extraction.keywords.length > 0) {
-              // Match keywords against CV
-              const matchingPrompt = buildATSMatchingPrompt(cvText, extraction.keywords);
-
-              interface MatchingResult {
-                matches: Array<{ keyword: string; category: string; importance: string; status: string; matchedAs?: string; cvSection?: string }>;
-                recommendations: Array<{ action: string; section: string; priority: string; keywords: string[]; example?: string }>;
-              }
-
-              const matching = await callClaude<MatchingResult>({
-                system: 'You are an expert ATS keyword matching engine. Respond with valid JSON only.',
-                userMessage: matchingPrompt,
-                maxTokens: 6000,
-                temperature: 0,
-                fallback: { matches: [], recommendations: [] },
-              });
-
-              // Compute scores
-              const { keywordScore, keywords } = computeATSScore(matching.matches);
-
-              // Format analysis
-              const formatAnalysis = analyzeATSFormat(
-                cvText,
-                { numpages: parsedPDF.pageCount },
-                buffer.length
-              );
-
-              // Company ATS lookup
-              let companyATS: CompanyATSInfo | undefined;
-              const companyPatterns = [
-                /(?:about|join)\s+([A-Z][A-Za-z0-9\s&.]+?)(?:\s+is|\s+—|\s+-|\s*\n)/i,
-                /(?:at|@)\s+([A-Z][A-Za-z0-9\s&.]+?)(?:\s+we|\s*,|\s*\n)/i,
-                /^([A-Z][A-Za-z0-9\s&.]+?)\s+(?:is hiring|is looking|seeks)/im,
-                /company:\s*([A-Za-z0-9\s&.]+)/i,
-              ];
-              for (const pattern of companyPatterns) {
-                const match = questionnaire.jobPosting!.match(pattern);
-                if (match?.[1] && match[1].trim().length > 1 && match[1].trim().length < 50) {
-                  const atsEntry = lookupCompanyATS(match[1].trim());
-                  if (atsEntry) {
-                    companyATS = {
-                      company: atsEntry.company,
-                      atsSystem: atsEntry.atsSystem,
-                      tips: [...atsEntry.tips, ...getATSSystemTips(atsEntry.atsSystem)],
-                    };
-                    break;
-                  }
-                }
-              }
-
-              // Blend scores (80% keyword, 20% format)
-              const overallScore = Math.round(keywordScore * 0.8 + formatAnalysis.formatScore * 0.2);
-
-              atsScoreResult = {
-                overallScore,
-                keywordScore,
-                formatScore: formatAnalysis.formatScore,
-                keywords,
-                formatIssues: formatAnalysis.issues,
-                recommendations: (matching.recommendations || []).map((r) => ({
-                  action: r.action,
-                  section: r.section,
-                  priority: r.priority as 'critical' | 'high' | 'medium',
-                  keywords: r.keywords,
-                  example: r.example,
-                })),
-                companyATS,
-              };
-
-              logger.debug('ats.scored', { overallScore, keywordScore, formatScore: formatAnalysis.formatScore });
-            }
-          } catch (e) {
-            logger.warn('ats.scoring_failed', { error: e instanceof Error ? e.message : String(e) });
-          }
-        }
-
         // --- Post-process action plan URLs ---
         const actionPlan = ensureResourceUrls(careerPlan.actionPlan);
 
-        // --- Cover Letter (if job posting provided) ---
-        let coverLetterResult: CoverLetter | undefined;
+        // --- Step 4: ATS Matching + Cover Letter (parallel) ---
+        // ATS extraction already completed in Stage 3; now match keywords against CV
+        // while simultaneously generating the cover letter — no dependency between them.
         if (hasJobPosting) {
-          send({ step: 'cover_letter', progress: 83, message: 'Generating cover letter...' });
-          try {
-            const clPrompt = buildCoverLetterPrompt({
-              analysis: {
-                metadata: { analyzedAt: new Date().toISOString(), cvFileName: cvFile.name, targetRole: questionnaire.targetRole, country: questionnaire.country },
-                fitScore: gapAnalysis.fitScore,
-                strengths: gapAnalysis.strengths,
-                gaps: gapAnalysis.gaps,
-                roleRecommendations: gapAnalysis.roleRecommendations,
-                actionPlan,
-                salaryAnalysis,
-                profile,
-              },
-              jobPosting: questionnaire.jobPosting!,
-              tone: 'professional',
-              language: questionnaire.language,
-            });
-            coverLetterResult = await callClaude<CoverLetter>({
-              ...clPrompt,
+          send({ step: 'ats', progress: 82, message: 'Scoring ATS compatibility...' });
+          send({ step: 'cover_letter', progress: 82, message: 'Generating cover letter...' });
+        }
+
+        const atsMatchingTask = hasJobPosting && atsExtraction && atsExtraction.keywords.length > 0
+          ? callClaude<ATSMatchingResult>({
+              system: 'You are an expert ATS keyword matching engine. Respond with valid JSON only.',
+              userMessage: buildATSMatchingPrompt(cvText, atsExtraction.keywords),
+              maxTokens: 6000,
+              temperature: 0,
+              fallback: { matches: [], recommendations: [] },
+            })
+          : Promise.resolve(null as ATSMatchingResult | null);
+
+        const coverLetterTask = hasJobPosting
+          ? callClaude<CoverLetter>({
+              ...buildCoverLetterPrompt({
+                analysis: {
+                  metadata: { analyzedAt: new Date().toISOString(), cvFileName: cvFile.name, targetRole: questionnaire.targetRole, country: questionnaire.country },
+                  fitScore: gapAnalysis.fitScore,
+                  strengths: gapAnalysis.strengths,
+                  gaps: gapAnalysis.gaps,
+                  roleRecommendations: gapAnalysis.roleRecommendations,
+                  actionPlan,
+                  salaryAnalysis,
+                  profile,
+                },
+                jobPosting: questionnaire.jobPosting!,
+                tone: 'professional',
+                language: questionnaire.language,
+              }),
               maxTokens: 4096,
               temperature: 0.3,
               fallback: COVER_LETTER_FALLBACK,
-            });
+            }).catch((e: Error) => {
+              logger.warn('cover_letter.generation_failed', { error: e.message });
+              return undefined as CoverLetter | undefined;
+            })
+          : Promise.resolve(undefined as CoverLetter | undefined);
+
+        const [atsMatchingRaw, coverLetterResult] = await Promise.all([atsMatchingTask, coverLetterTask]);
+
+        // Compute ATS score from matching results
+        let atsScoreResult: ATSScoreResult | undefined;
+        if (hasJobPosting && atsExtraction && atsMatchingRaw) {
+          try {
+            const { keywordScore, keywords } = computeATSScore(atsMatchingRaw.matches);
+            const formatAnalysis = analyzeATSFormat(cvText, { numpages: parsedPDF.pageCount }, buffer.length);
+
+            let companyATS: CompanyATSInfo | undefined;
+            const companyPatterns = [
+              /(?:about|join)\s+([A-Z][A-Za-z0-9\s&.]+?)(?:\s+is|\s+—|\s+-|\s*\n)/i,
+              /(?:at|@)\s+([A-Z][A-Za-z0-9\s&.]+?)(?:\s+we|\s*,|\s*\n)/i,
+              /^([A-Z][A-Za-z0-9\s&.]+?)\s+(?:is hiring|is looking|seeks)/im,
+              /company:\s*([A-Za-z0-9\s&.]+)/i,
+            ];
+            for (const pattern of companyPatterns) {
+              const match = questionnaire.jobPosting!.match(pattern);
+              if (match?.[1] && match[1].trim().length > 1 && match[1].trim().length < 50) {
+                const atsEntry = lookupCompanyATS(match[1].trim());
+                if (atsEntry) {
+                  companyATS = {
+                    company: atsEntry.company,
+                    atsSystem: atsEntry.atsSystem,
+                    tips: [...atsEntry.tips, ...getATSSystemTips(atsEntry.atsSystem)],
+                  };
+                  break;
+                }
+              }
+            }
+
+            const overallScore = Math.round(keywordScore * 0.8 + formatAnalysis.formatScore * 0.2);
+            atsScoreResult = {
+              overallScore,
+              keywordScore,
+              formatScore: formatAnalysis.formatScore,
+              keywords,
+              formatIssues: formatAnalysis.issues,
+              recommendations: (atsMatchingRaw.recommendations || []).map((r) => ({
+                action: r.action,
+                section: r.section,
+                priority: r.priority as 'critical' | 'high' | 'medium',
+                keywords: r.keywords,
+                example: r.example,
+              })),
+              companyATS,
+            };
+            logger.debug('ats.scored', { overallScore, keywordScore, formatScore: formatAnalysis.formatScore });
           } catch (e) {
-            logger.warn('cover_letter.generation_failed', { error: e instanceof Error ? e.message : String(e) });
+            logger.warn('ats.scoring_failed', { error: e instanceof Error ? e.message : String(e) });
           }
         }
 
