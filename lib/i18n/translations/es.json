@@ -226,6 +226,11 @@
       "ats": "Evaluando compatibilidad ATS",
       "translating": "Traduciendo tu informe",
       "finalizing": "Finalizando tu informe"
+    },
+    "patience": {
+      "headline": "Un buen análisis lleva tiempo.",
+      "subtext": "Ejecutamos 4 etapas de IA en secuencia — puntuación de idoneidad, brechas de habilidades, referencias salariales y planificación de carrera. Sin atajos, sin plantillas.",
+      "almostDone": "Casi listo — finalizando tu informe…"
     }
   },
   "results": {

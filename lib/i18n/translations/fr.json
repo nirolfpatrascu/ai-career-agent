@@ -226,6 +226,11 @@
       "ats": "Évaluation de la compatibilité ATS",
       "translating": "Traduction de votre rapport",
       "finalizing": "Finalisation de votre rapport"
+    },
+    "patience": {
+      "headline": "Une bonne analyse prend du temps.",
+      "subtext": "Nous exécutons 4 étapes IA en séquence — adéquation au poste, lacunes de compétences, benchmarks salariaux et planification de carrière. Aucun raccourci, aucun modèle.",
+      "almostDone": "Presque terminé — finalisation de votre rapport…"
     }
   },
   "results": {

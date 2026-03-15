@@ -226,6 +226,11 @@
       "ats": "Valutazione compatibilità ATS",
       "translating": "Traduzione del tuo report",
       "finalizing": "Finalizzazione del tuo report"
+    },
+    "patience": {
+      "headline": "Una buona analisi richiede tempo.",
+      "subtext": "Eseguiamo 4 fasi IA in sequenza — valutazione idoneità, gap di competenze, benchmark salariali e pianificazione della carriera. Nessuna scorciatoia, nessun modello.",
+      "almostDone": "Quasi pronto — completamento del tuo report…"
     }
   },
   "results": {

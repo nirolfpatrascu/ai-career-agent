@@ -226,6 +226,11 @@
       "ats": "ATS-Kompatibilität wird bewertet",
       "translating": "Ihr Bericht wird übersetzt",
       "finalizing": "Ihr Bericht wird fertiggestellt"
+    },
+    "patience": {
+      "headline": "Gute Analysen brauchen Zeit.",
+      "subtext": "Wir führen 4 KI-Stufen nacheinander aus — Eignungsbewertung, Kompetenzlücken, Gehaltsbenchmarks und Karriereplanung. Keine Abkürzungen, keine Vorlagen.",
+      "almostDone": "Fast fertig — Ihr Bericht wird abgeschlossen…"
     }
   },
   "results": {

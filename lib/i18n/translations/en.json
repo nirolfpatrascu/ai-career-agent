@@ -226,6 +226,11 @@
       "ats": "Scoring ATS compatibility",
       "translating": "Translating your report",
       "finalizing": "Finalizing your report"
+    },
+    "patience": {
+      "headline": "Good analysis takes time.",
+      "subtext": "We run 4 AI stages in sequence — fit scoring, skill gap mapping, salary benchmarks, and career planning. No shortcuts, no templates.",
+      "almostDone": "Almost done — wrapping up your report…"
     }
   },
   "results": {

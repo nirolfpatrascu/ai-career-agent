@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useTranslation } from '@/lib/i18n';
 import type { StreamStep } from '@/lib/hooks/useStreamingAnalysis';
 
@@ -49,8 +50,23 @@ function getDisplayStatus(
   return 'pending';
 }
 
+const COUNTDOWN_SECONDS = 180; // 3 minutes
+
+function formatCountdown(seconds: number): string {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m}:${String(s).padStart(2, '0')}`;
+}
+
 export default function StreamingProgress({ currentStep }: StreamingProgressProps) {
   const { t } = useTranslation();
+  const [remaining, setRemaining] = useState(COUNTDOWN_SECONDS);
+
+  useEffect(() => {
+    if (remaining <= 0) return;
+    const id = setInterval(() => setRemaining((r) => Math.max(0, r - 1)), 1000);
+    return () => clearInterval(id);
+  }, [remaining]);
 
   const completedCount = DISPLAY_STEPS.filter(
     (step) => getDisplayStatus(step, currentStep.step) === 'done'
@@ -105,6 +121,19 @@ export default function StreamingProgress({ currentStep }: StreamingProgressProp
               {t('progress.stepLabel')} {currentStepNum}/{DISPLAY_STEPS.length}
             </p>
           </div>
+        </div>
+
+        {/* Patience callout */}
+        <div className="rounded-2xl border border-black/[0.08] bg-black/[0.02] px-6 py-5 text-center space-y-2">
+          <div className="text-5xl font-bold font-display tabular-nums text-text-primary tracking-tight">
+            {remaining > 0 ? formatCountdown(remaining) : '✓'}
+          </div>
+          <p className="text-xl font-semibold text-text-primary font-display">
+            {remaining > 0 ? t('progress.patience.headline') : t('progress.patience.almostDone')}
+          </p>
+          <p className="text-sm text-text-secondary leading-relaxed max-w-sm mx-auto">
+            {t('progress.patience.subtext')}
+          </p>
         </div>
 
         {/* Pipeline steps */}

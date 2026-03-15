@@ -226,6 +226,11 @@
       "ats": "Evaluăm compatibilitatea ATS",
       "translating": "Traducem raportul tău",
       "finalizing": "Finalizăm raportul tău"
+    },
+    "patience": {
+      "headline": "O analiză bună necesită timp.",
+      "subtext": "Rulăm 4 etape AI în serie — potrivire rol, deficite de competențe, benchmark salarial și planificare carieră. Fără scurtături, fără șabloane.",
+      "almostDone": "Aproape gata — finalizăm raportul tău…"
     }
   },
   "results": {
