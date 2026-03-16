@@ -101,13 +101,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       password,
       options: { data: { full_name: fullName } },
     });
-    // Record terms acceptance immediately at signup — the user checked the box to submit this form
-    if (!error && data.user) {
-      await supabase.from('profiles').upsert({
-        id: data.user.id,
-        terms_accepted_at: new Date().toISOString(),
-        terms_version: CURRENT_TERMS_VERSION,
-      });
+    // Record terms acceptance immediately at signup — the user checked the box to submit this form.
+    // Use the session token from the freshly created account so the server route can verify identity.
+    if (!error && data.user && data.session) {
+      try {
+        const res = await fetch('/api/accept-terms', {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${data.session.access_token}` },
+        });
+        if (!res.ok) {
+          console.error('[signUpWithEmail] accept-terms API returned', res.status);
+        }
+      } catch (fetchErr) {
+        console.error('[signUpWithEmail] accept-terms fetch failed:', fetchErr);
+      }
     }
     return { error: error?.message ?? null };
   }, []);
@@ -116,17 +123,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await supabase.auth.signOut();
   }, []);
 
-  // Called by TermsAcceptanceModal when the user accepts
+  // Called by TermsAcceptanceModal when the user accepts.
+  // Uses the server-side API route with the service role key so the write
+  // bypasses RLS and is guaranteed to succeed if the DB is reachable.
+  // The modal stays open until the write is confirmed.
   const acceptTerms = useCallback(async () => {
-    if (!user) return;
-    await supabase.from('profiles').upsert({
-      id: user.id,
-      terms_accepted_at: new Date().toISOString(),
-      terms_version: CURRENT_TERMS_VERSION,
-    });
+    if (!user || !session) return;
+    try {
+      const res = await fetch('/api/accept-terms', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${session.access_token}` },
+      });
+      if (!res.ok) {
+        console.error('[acceptTerms] API returned', res.status, '— keeping modal open');
+        return; // Do not dismiss — the write did not succeed
+      }
+    } catch (err) {
+      console.error('[acceptTerms] fetch failed:', err, '— keeping modal open');
+      return; // Do not dismiss — the write did not succeed
+    }
+    // Only close the modal after a confirmed successful write
     termsConfirmedForRef.current = user.id;
     setNeedsTermsAcceptance(false);
-  }, [user]);
+  }, [user, session]);
 
   return (
     <AuthContext.Provider value={{
