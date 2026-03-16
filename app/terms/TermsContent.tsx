@@ -84,7 +84,7 @@ export function TermsContent() {
   return (
     <div className="min-h-screen bg-bg-primary flex flex-col">
       <Header />
-      <main className="flex-1 container mx-auto px-4 py-16 max-w-3xl">
+      <main className="flex-1 container mx-auto px-4 pt-24 pb-16 max-w-3xl">
         <div className="mb-10">
           <p className="text-sm text-text-tertiary uppercase tracking-wider font-medium mb-2">Legal</p>
           <h1 className="text-4xl sm:text-5xl font-bold text-text-primary font-display mb-4">
