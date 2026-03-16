@@ -1,7 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import type { JobListing } from '@/app/api/job-listings/route';
+
+interface JobListing {
+  id: string;
+  title: string;
+  company: string;
+  location: string;
+  url: string;
+  currency: string;
+  salaryMin?: number;
+  salaryMax?: number;
+}
 
 interface Props {
   roleTitle: string;
@@ -22,6 +32,7 @@ export default function RoleJobsPanel({ roleTitle, country, fallbackCompanies }:
   const [state, setState] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle');
   const [jobs, setJobs] = useState<JobListing[]>([]);
   const [currency, setCurrency] = useState('GBP');
+  const [errorMsg, setErrorMsg] = useState('');
 
   async function load() {
     if (state === 'loading' || state === 'loaded') return;
@@ -31,11 +42,14 @@ export default function RoleJobsPanel({ roleTitle, country, fallbackCompanies }:
         `/api/job-listings?role=${encodeURIComponent(roleTitle)}&country=${encodeURIComponent(country)}`
       );
       const data = await res.json();
-      if (!res.ok || !Array.isArray(data.jobs)) throw new Error(data.error || 'Failed');
+      if (!res.ok || !Array.isArray(data.jobs)) throw new Error(data.error || `HTTP ${res.status}`);
       setJobs(data.jobs);
       setCurrency(data.currency ?? 'GBP');
       setState('loaded');
-    } catch {
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Unknown error';
+      console.error('[RoleJobsPanel] fetch failed:', msg);
+      setErrorMsg(msg);
       setState('error');
     }
   }
@@ -85,13 +99,16 @@ export default function RoleJobsPanel({ roleTitle, country, fallbackCompanies }:
     );
   }
 
-  // Error — fall back silently to static badges
+  // Error — fall back to static badges, show error for debugging
   if (state === 'error') {
     return (
       <div>
         <p className="text-[11px] font-medium text-text-tertiary uppercase tracking-wider mb-2">
           Companies Hiring
         </p>
+        {errorMsg && (
+          <p className="text-[11px] text-danger mb-2 font-mono">{errorMsg}</p>
+        )}
         <div className="flex flex-wrap gap-1.5">
           {fallbackCompanies.map((c, i) => (
             <span key={i} className="text-xs px-2.5 py-1 rounded-lg bg-black/[0.04] border border-black/[0.08] text-text-secondary">
