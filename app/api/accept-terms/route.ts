@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAuthenticatedClient, getServiceClient } from '@/lib/supabase/server';
-import { CURRENT_TERMS_VERSION } from '@/lib/auth/context';
+import { CURRENT_TERMS_VERSION } from '@/lib/auth/terms-version';
 
 /**
  * POST /api/accept-terms

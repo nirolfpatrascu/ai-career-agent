@@ -4,10 +4,9 @@ import { createContext, useContext, useEffect, useRef, useState, useCallback } f
 import { supabase } from '@/lib/supabase/client';
 import { TermsAcceptanceModal } from '@/components/auth/TermsAcceptanceModal';
 import type { User, Session } from '@supabase/supabase-js';
+import { CURRENT_TERMS_VERSION } from '@/lib/auth/terms-version';
 
-// Bump this string whenever you publish a material update to T&C or Privacy Policy.
-// All signed-in users with a different (or null) terms_version will see the acceptance modal.
-export const CURRENT_TERMS_VERSION = '2026-03';
+export { CURRENT_TERMS_VERSION };
 
 interface AuthContextType {
   user: User | null;
