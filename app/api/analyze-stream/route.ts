@@ -423,8 +423,8 @@ export async function POST(request: NextRequest) {
           recommendations: Array<{ action: string; section: string; priority: string; keywords: string[]; example?: string }>;
         }
 
-        // Run career plan, job match, GitHub analysis, and ATS keyword extraction all in parallel
-        const [careerPlan, jobMatchResult, githubAnalysis, atsExtraction] = await Promise.all([
+        // Run career plan, job match, and GitHub analysis in parallel
+        const [careerPlan, jobMatchResult, githubAnalysis] = await Promise.all([
           callClaude<CareerPlanResult>({
             ...planPrompt,
             maxTokens: 6144,
@@ -447,15 +447,6 @@ export async function POST(request: NextRequest) {
                 language: questionnaire.language,
               })
             : Promise.resolve(null),
-          hasJobPosting
-            ? callClaude<ATSExtractionResult>({
-                system: 'You are an expert ATS keyword extraction analyst. Respond with valid JSON only.',
-                userMessage: buildATSKeywordExtractionPrompt(questionnaire.jobPosting!),
-                maxTokens: 4000,
-                temperature: 0,
-                fallback: { keywords: [], roleLevel: 'mid', domain: 'General' },
-              })
-            : Promise.resolve(null as ATSExtractionResult | null),
         ]);
         endCareerPlan();
         metrics.recordStepTokens('career_plan', estimateTokens(planPrompt.system + planPrompt.userMessage), estimateTokens(JSON.stringify(careerPlan)));
@@ -519,14 +510,25 @@ export async function POST(request: NextRequest) {
         // --- Post-process action plan URLs ---
         const actionPlan = ensureResourceUrls(careerPlan.actionPlan);
 
-        // --- Step 4: ATS Matching + Cover Letter (parallel) ---
-        // ATS extraction already completed in Stage 3; now match keywords against CV
-        // while simultaneously generating the cover letter — no dependency between them.
+        // --- Step 4a: ATS Keyword Extraction (sequential — heavy Stage 3 calls have finished) ---
+        let atsExtraction: ATSExtractionResult | null = null;
         if (hasJobPosting) {
           send({ step: 'ats', progress: 82, message: 'Scoring ATS compatibility...' });
           send({ step: 'cover_letter', progress: 82, message: 'Generating cover letter...' });
+          try {
+            atsExtraction = await callClaude<ATSExtractionResult>({
+              system: 'You are an expert ATS keyword extraction analyst. Respond with valid JSON only.',
+              userMessage: buildATSKeywordExtractionPrompt(questionnaire.jobPosting!),
+              maxTokens: 4000,
+              temperature: 0,
+              fallback: { keywords: [], roleLevel: 'mid', domain: 'General' },
+            });
+          } catch (e) {
+            logger.warn('ats.extraction_failed', { error: e instanceof Error ? e.message : String(e) });
+          }
         }
 
+        // --- Step 4b: ATS Matching + Cover Letter (parallel — no dependency between them) ---
         const atsMatchingTask = hasJobPosting && atsExtraction && atsExtraction.keywords.length > 0
           ? callClaude<ATSMatchingResult>({
               system: 'You are an expert ATS keyword matching engine. Respond with valid JSON only.',
