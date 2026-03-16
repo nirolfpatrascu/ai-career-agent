@@ -226,6 +226,14 @@ export async function POST(request: NextRequest) {
     }
   }
 
+  // --- Require authentication ---
+  if (!authClient || !authUserId) {
+    return new Response(
+      JSON.stringify({ error: 'Unauthorized', message: 'Please sign in to run an analysis.' }),
+      { status: 401, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
   // --- All validation passed — open SSE stream ---
   const encoder = new TextEncoder();
   const stream = new ReadableStream({

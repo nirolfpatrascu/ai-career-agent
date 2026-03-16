@@ -26,6 +26,7 @@ import SectionIntro from '@/components/results/SectionIntro';
 import { getSampleAnalysis } from '@/lib/demo';
 import { useTranslation } from '@/lib/i18n';
 import { useAuth } from '@/lib/auth/context';
+import AuthForm from '@/components/auth/AuthForm';
 import { useTags } from '@/lib/hooks/useTags';
 import type { AnalysisResult, CareerQuestionnaire, CareerProfileInput, UpworkProfile, UpworkProfileAnalysis } from '@/lib/types';
 
@@ -33,7 +34,7 @@ type AppState = 'upload' | 'processing' | 'results' | 'error';
 
 export default function AnalyzePage() {
   const { t, locale } = useTranslation();
-  const { user, session } = useAuth();
+  const { user, session, loading } = useAuth();
   const [state, setState] = useState<AppState>('upload');
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState<string>('');
@@ -577,7 +578,45 @@ export default function AnalyzePage() {
             </div>
           )}
 
-          <WizardFlow onSubmit={handleWizardSubmit} onDemo={handleDemo} />
+          {loading ? (
+            <div className="flex justify-center py-20">
+              <div className="w-8 h-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+            </div>
+          ) : !user ? (
+            /* Auth gate — shown to signed-out visitors */
+            <div className="max-w-3xl mx-auto">
+              <div className="grid sm:grid-cols-2 gap-6 items-start">
+                {/* Sign-in card */}
+                <div className="rounded-2xl border border-black/[0.08] bg-black/[0.02] p-6">
+                  <AuthForm />
+                </div>
+
+                {/* Demo card */}
+                <div className="rounded-2xl border border-primary/20 bg-primary/[0.03] p-6 flex flex-col items-center text-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+                      <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-text-primary mb-1">{t('common.tryDemo') || 'Try the Demo'}</p>
+                    <p className="text-sm text-text-secondary leading-relaxed">
+                      {t('analyze.demoDescription') || 'See a real analysis example — no account needed.'}
+                    </p>
+                  </div>
+                  <button
+                    onClick={handleDemo}
+                    className="btn-secondary w-full flex items-center justify-center gap-2 text-sm"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    {t('common.tryDemo') || 'Try Demo'}
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <WizardFlow onSubmit={handleWizardSubmit} onDemo={handleDemo} />
+          )}
         </div>
       </main>
       <Footer />
