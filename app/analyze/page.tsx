@@ -371,7 +371,7 @@ export default function AnalyzePage() {
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-roles" aria-labelledby="tab-roles">
               <SectionIntro messageKey="motivation.roles" variant="encouraging" />
-              <RoleRecommendations roles={result.roleRecommendations} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
+              <RoleRecommendations roles={result.roleRecommendations} country={result.metadata.country} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
             </div>
           );
         case 'salary':

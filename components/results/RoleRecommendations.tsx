@@ -6,16 +6,18 @@ import { getFitScoreColor, formatCurrency } from '@/lib/utils';
 import { useTranslation } from '@/lib/i18n';
 import { FeedbackButton } from './FeedbackButton';
 import TaggableToken from '@/components/shared/TaggableToken';
+import RoleJobsPanel from './RoleJobsPanel';
 
 interface RoleRecommendationsProps {
   roles: RoleRecommendation[];
+  country?: string;
   analysisId?: string;
   tags?: OutputTag[];
   onTagCreated?: (tag: OutputTag) => void;
   onTagDeleted?: (tagId: string) => void;
 }
 
-export default function RoleRecommendations({ roles, analysisId, tags = [], onTagCreated, onTagDeleted }: RoleRecommendationsProps) {
+export default function RoleRecommendations({ roles, country = 'United Kingdom', analysisId, tags = [], onTagCreated, onTagDeleted }: RoleRecommendationsProps) {
   const { t } = useTranslation();
   const sortedRoles = useMemo(() => [...roles].sort((a, b) => b.fitScore - a.fitScore), [roles]);
   if (sortedRoles.length === 0) return null;
@@ -93,17 +95,12 @@ export default function RoleRecommendations({ roles, analysisId, tags = [], onTa
                 {role.timeToReady}
               </div>
 
-              {/* Companies */}
-              {role.exampleCompanies.length > 0 && (
-                <div>
-                  <p className="text-[11px] font-medium text-text-tertiary uppercase tracking-wider mb-2">{t('results.roles.companiesLabel')}</p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {role.exampleCompanies.map((company, ci) => (
-                      <span key={ci} className="text-xs px-2.5 py-1 rounded-lg bg-black/[0.04] border border-black/[0.08] text-text-secondary">{company}</span>
-                    ))}
-                  </div>
-                </div>
-              )}
+              {/* Companies / Live job listings */}
+              <RoleJobsPanel
+                roleTitle={role.title}
+                country={country}
+                fallbackCompanies={role.exampleCompanies}
+              />
 
               <div className="flex justify-end mt-4 pt-3 border-t border-black/[0.06]">
                 <FeedbackButton compact analysisId={analysisId} section={`role-${i}`} />
