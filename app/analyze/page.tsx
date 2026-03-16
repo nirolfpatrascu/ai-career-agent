@@ -251,7 +251,7 @@ export default function AnalyzePage() {
             questionnaire,
           };
 
-          streaming.startAnalysis(formData);
+          streaming.startAnalysis(formData, session?.access_token);
         } catch {
           setState('upload');
           setError('Could not load stored profile. Please run the wizard manually.');
@@ -289,8 +289,8 @@ export default function AnalyzePage() {
       language: locale,
     }));
 
-    streaming.startAnalysis(formData);
-  }, [locale, streaming]);
+    streaming.startAnalysis(formData, session?.access_token);
+  }, [locale, streaming, session?.access_token]);
 
   // --- Demo ---
   const handleDemo = useCallback(() => {

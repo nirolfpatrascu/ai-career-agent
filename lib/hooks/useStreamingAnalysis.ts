@@ -43,7 +43,7 @@ export function useStreamingAnalysis() {
   const [readySections, setReadySections] = useState<Set<string>>(new Set());
   const abortRef = useRef<AbortController | null>(null);
 
-  const startAnalysis = useCallback(async (formData: FormData) => {
+  const startAnalysis = useCallback(async (formData: FormData, token?: string | null) => {
     // Reset state
     setCurrentStep({ step: 'starting', progress: 2, message: 'Starting analysis...' });
     setPartialResult(null);
@@ -58,8 +58,12 @@ export function useStreamingAnalysis() {
     abortRef.current = abortController;
 
     try {
+      const headers: Record<string, string> = {};
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+
       const response = await fetch('/api/analyze-stream', {
         method: 'POST',
+        headers,
         body: formData,
         signal: abortController.signal,
       });
