@@ -23,10 +23,10 @@ const LIMIT_COLUMN: Record<QuotaType, keyof UserQuotaRow> = {
 
 /** Pro plan limits */
 const PRO_LIMITS = {
-  analyses_limit: 10,
-  cv_limit: 10,
-  cover_letter_limit: 10,
-  coach_limit: 10,
+  analyses_limit: 50,
+  cv_limit: 50,
+  cover_letter_limit: 50,
+  coach_limit: 50,
 } as const;
 
 /** Free plan limits */
