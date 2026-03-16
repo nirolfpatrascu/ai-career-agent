@@ -123,10 +123,11 @@ export async function incrementQuota(
   isInitialAnalysis = false
 ): Promise<void> {
   if (type === 'analysis' && isInitialAnalysis) {
-    await client
+    const { error } = await client
       .from('user_quotas')
       .update({ has_used_initial_analysis: true, updated_at: new Date().toISOString() })
       .eq('user_id', userId);
+    if (error) throw new Error(`Failed to mark initial analysis used: ${error.message}`);
     return;
   }
 
@@ -136,10 +137,11 @@ export async function incrementQuota(
   const row = await ensureQuotaRow(client, userId);
   const currentVal = row[col] as number;
 
-  await client
+  const { error } = await client
     .from('user_quotas')
     .update({ [col]: currentVal + 1, updated_at: new Date().toISOString() })
     .eq('user_id', userId);
+  if (error) throw new Error(`Failed to increment quota for ${type}: ${error.message}`);
 }
 
 /**
@@ -149,10 +151,11 @@ export async function markInitialAnalysisUsed(
   client: SupabaseClient,
   userId: string
 ): Promise<void> {
-  await client
+  const { error } = await client
     .from('user_quotas')
     .update({ has_used_initial_analysis: true, updated_at: new Date().toISOString() })
     .eq('user_id', userId);
+  if (error) throw new Error(`Failed to mark initial analysis used: ${error.message}`);
 }
 
 /**
@@ -192,7 +195,7 @@ export async function upgradeToPro(
   stripeSubscriptionId: string,
   periodEnd: string
 ): Promise<void> {
-  await client
+  const { error } = await client
     .from('user_quotas')
     .update({
       plan: 'pro',
@@ -204,6 +207,7 @@ export async function upgradeToPro(
       updated_at: new Date().toISOString(),
     })
     .eq('user_id', userId);
+  if (error) throw new Error(`Failed to upgrade user to Pro: ${error.message}`);
 }
 
 /**
@@ -213,7 +217,7 @@ export async function downgradeToFree(
   client: SupabaseClient,
   userId: string
 ): Promise<void> {
-  await client
+  const { error } = await client
     .from('user_quotas')
     .update({
       plan: 'free',
@@ -222,6 +226,7 @@ export async function downgradeToFree(
       updated_at: new Date().toISOString(),
     })
     .eq('user_id', userId);
+  if (error) throw new Error(`Failed to downgrade user to Free: ${error.message}`);
 }
 
 /**
@@ -239,8 +244,9 @@ export async function updateSubscriptionStatus(
   };
   if (periodEnd) update.subscription_period_end = periodEnd;
 
-  await client
+  const { error } = await client
     .from('user_quotas')
     .update(update)
     .eq('user_id', userId);
+  if (error) throw new Error(`Failed to update subscription status: ${error.message}`);
 }

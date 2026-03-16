@@ -39,7 +39,7 @@ import { analyzeGitHubProfile } from '@/lib/github-analyzer';
 import { buildCoverLetterPrompt, COVER_LETTER_FALLBACK, type CoverLetter } from '@/lib/prompts/cover-letter';
 import { logger } from '@/lib/logger';
 import { MetricsCollector } from '@/lib/metrics';
-import { getAuthenticatedClient } from '@/lib/supabase/server';
+import { getAuthenticatedClient, getServiceClient } from '@/lib/supabase/server';
 import { checkQuota, incrementQuota } from '@/lib/quota';
 
 export const maxDuration = 300;
@@ -203,34 +203,40 @@ export async function POST(request: NextRequest) {
     questionnaire.additionalContext = questionnaire.additionalContext.slice(0, 2000);
   }
 
-  // --- Quota check for authenticated users ---
-  const { client: authClient, userId: authUserId } = await getAuthenticatedClient(request);
-  let isInitialAnalysis = false;
-  if (authClient && authUserId) {
-    try {
-      const quotaCheck = await checkQuota(authClient, authUserId, 'analysis');
-      if (!quotaCheck.allowed) {
-        return new Response(
-          JSON.stringify({
-            error: 'Quota exceeded',
-            message: 'You have used all your analyses for this week. Upgrade to Pro for 10 weekly analyses.',
-            quota: { used: quotaCheck.used, limit: quotaCheck.limit, resetAt: quotaCheck.resetAt },
-          }),
-          { status: 403, headers: { 'Content-Type': 'application/json' } }
-        );
-      }
-      isInitialAnalysis = !!quotaCheck.isInitialAnalysis;
-    } catch (e) {
-      logger.warn('quota.check_failed', { error: e instanceof Error ? e.message : String(e) });
-      // Allow analysis to proceed if quota check fails (fail-open)
-    }
-  }
+  // --- Require authentication (identity check only — uses user JWT) ---
+  const { userId: authUserId } = await getAuthenticatedClient(request);
 
-  // --- Require authentication ---
-  if (!authClient || !authUserId) {
+  if (!authUserId) {
     return new Response(
       JSON.stringify({ error: 'Unauthorized', message: 'Please sign in to run an analysis.' }),
       { status: 401, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
+  // --- Quota check (uses service client to bypass RLS) ---
+  const serviceClient = getServiceClient();
+  let isInitialAnalysis = false;
+  try {
+    const quotaCheck = await checkQuota(serviceClient, authUserId, 'analysis');
+    if (!quotaCheck.allowed) {
+      return new Response(
+        JSON.stringify({
+          error: 'Quota exceeded',
+          message: 'You have used all your analyses for this week. Upgrade to Pro for 10 weekly analyses.',
+          quota: { used: quotaCheck.used, limit: quotaCheck.limit, resetAt: quotaCheck.resetAt },
+        }),
+        { status: 403, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+    isInitialAnalysis = !!quotaCheck.isInitialAnalysis;
+  } catch (e) {
+    logger.warn('quota.check_failed', { error: e instanceof Error ? e.message : String(e) });
+    return new Response(
+      JSON.stringify({
+        error: 'Service unavailable',
+        message: 'Could not verify usage quota. Please try again in a moment.',
+      }),
+      { status: 503, headers: { 'Content-Type': 'application/json' } }
     );
   }
 
@@ -717,13 +723,11 @@ export async function POST(request: NextRequest) {
           autoFixed: validationReport.autoFixed,
         });
 
-        // Increment quota on success
-        if (authClient && authUserId) {
-          try {
-            await incrementQuota(authClient, authUserId, 'analysis', isInitialAnalysis);
-          } catch (e) {
-            logger.warn('quota.increment_failed', { error: e instanceof Error ? e.message : String(e) });
-          }
+        // Increment quota on success (service client bypasses RLS)
+        try {
+          await incrementQuota(serviceClient, authUserId, 'analysis', isInitialAnalysis);
+        } catch (e) {
+          logger.warn('quota.increment_failed', { error: e instanceof Error ? e.message : String(e) });
         }
 
         // Sanitize and send final result

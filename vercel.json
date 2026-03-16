@@ -3,5 +3,11 @@
     "app/api/analyze-stream/route.ts": {
       "maxDuration": 300
     }
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/reset-quotas",
+      "schedule": "0 0 * * 1"
+    }
+  ]
 }

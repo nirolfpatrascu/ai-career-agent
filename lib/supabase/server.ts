@@ -30,3 +30,23 @@ export async function getAuthenticatedClient(req: NextRequest) {
 
   return { client, userId: user.id };
 }
+
+/**
+ * Create a Supabase client using the service role key.
+ * This client bypasses RLS entirely and is intended for trusted server-side
+ * operations such as quota management and cron jobs.
+ * Never expose this client or its key to the browser.
+ */
+export function getServiceClient() {
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!serviceRoleKey) {
+    throw new Error('SUPABASE_SERVICE_ROLE_KEY is not set');
+  }
+  return createClient(supabaseUrl, serviceRoleKey, {
+    auth: {
+      // Disable auto-refresh and session persistence — this is a server-only client
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  });
+}
