@@ -109,17 +109,19 @@ export async function callClaude<T>(options: {
   maxTokens?: number;
   temperature?: number;
   fallback: T;
+  model?: string;
+  maxRetries?: number;
 }): Promise<T> {
-  const { system, userMessage, maxTokens = 4096, temperature = 0.3, fallback } = options;
+  const { system, userMessage, maxTokens = 4096, temperature = 0.3, fallback, model = MODEL, maxRetries = MAX_RETRIES } = options;
 
   let lastError: Error | null = null;
 
-  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
     try {
       const anthropic = getClient();
 
       const response = await anthropic.messages.create({
-        model: MODEL,
+        model,
         max_tokens: maxTokens,
         temperature,
         system,
@@ -142,10 +144,10 @@ export async function callClaude<T>(options: {
       // If JSON parsing failed (extractJSON returned the fallback reference), treat as retryable
       if (result === fallback) {
         console.error(
-          `Claude API call failed (attempt ${attempt + 1}/${MAX_RETRIES + 1}): JSON parse failed — response was not valid JSON`,
+          `Claude API call failed (attempt ${attempt + 1}/${maxRetries + 1}): JSON parse failed — response was not valid JSON`,
           textBlock.text.slice(0, 200)
         );
-        if (attempt < MAX_RETRIES) {
+        if (attempt < maxRetries) {
           await sleep(BASE_DELAY_MS);
           continue;
         }
@@ -156,7 +158,7 @@ export async function callClaude<T>(options: {
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(String(error));
       console.error(
-        `Claude API call failed (attempt ${attempt + 1}/${MAX_RETRIES + 1}):`,
+        `Claude API call failed (attempt ${attempt + 1}/${maxRetries + 1}):`,
         lastError.message
       );
 
@@ -166,11 +168,11 @@ export async function callClaude<T>(options: {
       }
 
       // Wait with exponential backoff before retry
-      if (attempt < MAX_RETRIES && isRetryableError(error)) {
+      if (attempt < maxRetries && isRetryableError(error)) {
         const delay = getRetryDelay(attempt);
         console.log(`Retrying in ${Math.round(delay)}ms...`);
         await sleep(delay);
-      } else if (attempt < MAX_RETRIES) {
+      } else if (attempt < maxRetries) {
         // Unknown error — still retry but with shorter delay
         await sleep(BASE_DELAY_MS);
       }

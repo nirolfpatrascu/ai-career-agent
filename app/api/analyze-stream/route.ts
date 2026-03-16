@@ -654,10 +654,14 @@ export async function POST(request: NextRequest) {
           try {
             const fields = extractTranslatableFields(result);
             const translationPrompt = buildTranslationPrompt(fields, language);
+            // Use Haiku: 5-10x faster than Sonnet, excellent at translation,
+            // no retries — if it fails we gracefully keep the English result.
             const translatedFields = await callClaude<TranslatableFields>({
               ...translationPrompt,
-              maxTokens: 6144,
+              model: 'claude-haiku-4-5-20251001',
+              maxTokens: 8192,
               temperature: 0.1,
+              maxRetries: 0,
               fallback: fields,
             });
             result = mergeTranslatedFields(result, translatedFields);
