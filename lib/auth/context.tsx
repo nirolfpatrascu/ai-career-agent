@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import { createContext, useContext, useEffect, useRef, useState, useCallback } from 'react';
 import { supabase } from '@/lib/supabase/client';
 import { TermsAcceptanceModal } from '@/components/auth/TermsAcceptanceModal';
 import type { User, Session } from '@supabase/supabase-js';
@@ -28,10 +28,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [needsTermsAcceptance, setNeedsTermsAcceptance] = useState(false);
+  // Tracks the userId whose terms we've already confirmed this session.
+  // Prevents re-querying the DB (and re-showing the modal) on every tab focus,
+  // because Supabase fires SIGNED_IN on each session refresh, not only on login.
+  const termsConfirmedForRef = useRef<string | null>(null);
 
   useEffect(() => {
-    // Check whether a signed-in user has accepted the current terms version
+    // Check whether a signed-in user has accepted the current terms version.
+    // Skips the DB call if we already confirmed acceptance for this user.
     const checkTerms = async (u: User) => {
+      if (termsConfirmedForRef.current === u.id) return;
       const { data } = await supabase
         .from('profiles')
         .select('terms_version')
@@ -39,6 +45,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         .single();
       if (!data?.terms_version || data.terms_version !== CURRENT_TERMS_VERSION) {
         setNeedsTermsAcceptance(true);
+      } else {
+        // Mark as confirmed so tab-focus SIGNED_IN events don't re-check
+        termsConfirmedForRef.current = u.id;
       }
     };
 
@@ -58,7 +67,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // Check terms on fresh sign-in (not on token refresh — avoids unnecessary DB reads)
       if (event === 'SIGNED_IN' && s?.user) checkTerms(s.user);
       // Clear the gate when the user signs out
-      if (!s?.user) setNeedsTermsAcceptance(false);
+      if (!s?.user) {
+        setNeedsTermsAcceptance(false);
+        termsConfirmedForRef.current = null;
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -112,6 +124,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       terms_accepted_at: new Date().toISOString(),
       terms_version: CURRENT_TERMS_VERSION,
     });
+    termsConfirmedForRef.current = user.id;
     setNeedsTermsAcceptance(false);
   }, [user]);
 
