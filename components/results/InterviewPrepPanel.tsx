@@ -37,7 +37,6 @@ interface InterviewPrepPanelProps {
 const APPLY_THRESHOLD = 65;
 
 type QuestionTab = 'technical' | 'behavioral' | 'situational' | 'culture';
-type PrepTab = 'overview' | 'questions' | 'study' | 'soft-skills' | 'salary';
 
 const DIFFICULTY_CONFIG = {
   easy: { label: 'Easy', color: '#10B981', bg: 'bg-success/[0.08]', border: 'border-success/20', text: 'text-success' },
@@ -429,7 +428,6 @@ export default function InterviewPrepPanel({
   const [state, setState] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle');
   const [prep, setPrep] = useState<InterviewPrep | null>(null);
   const [error, setError] = useState('');
-  const [activePrepTab, setActivePrepTab] = useState<PrepTab>('overview');
   const [activeTab, setActiveTab] = useState<QuestionTab>('technical');
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
 
@@ -468,7 +466,6 @@ export default function InterviewPrepPanel({
   const generate = useCallback(async () => {
     setState('loading');
     setError('');
-    setActivePrepTab('overview');
     try {
       const experienceHighlights = profile?.experience?.slice(0, 3).map(e => ({
         title: e.title,
@@ -605,106 +602,40 @@ export default function InterviewPrepPanel({
             <p className="text-xs text-text-tertiary mt-2">{doneChecks} of {totalChecks} items checked</p>
           </div>
 
-          {/* ── Section tab bar ── */}
+          {/* ── Difficulty card — always visible ── */}
+          <DifficultyCard prep={prep} />
+
+          {/* ── Tab bar ── */}
           <div className="flex gap-1 p-1 bg-black/[0.03] border border-black/[0.08] rounded-xl overflow-x-auto scrollbar-none">
-            {(
-              [
-                { id: 'overview' as PrepTab, label: 'Overview' },
-                { id: 'questions' as PrepTab, label: 'Questions' },
-                { id: 'study' as PrepTab, label: 'Study Plan' },
-                { id: 'soft-skills' as PrepTab, label: 'Soft Skills' },
-                ...(salaryAnalysis ? [{ id: 'salary' as PrepTab, label: 'Salary' }] : []),
-              ]
-            ).map(tab => (
+            {Q_TABS.map(tab => (
               <button
                 key={tab.id}
-                onClick={() => setActivePrepTab(tab.id)}
-                className={`px-3.5 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200 flex-shrink-0 ${
-                  activePrepTab === tab.id
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200 flex-shrink-0 ${
+                  activeTab === tab.id
                     ? 'bg-white text-text-primary shadow-sm'
                     : 'text-text-tertiary hover:text-text-secondary'
                 }`}
               >
                 {tab.label}
+                {tab.count > 0 && (
+                  <span className={`text-[11px] px-1.5 py-0.5 rounded-md font-semibold ${activeTab === tab.id ? 'bg-primary/10 text-primary' : 'bg-black/[0.04] text-text-tertiary'}`}>
+                    {tab.count}
+                  </span>
+                )}
               </button>
             ))}
           </div>
 
-          {/* ── Tab: Overview ── */}
-          {activePrepTab === 'overview' && (
-            <DifficultyCard prep={prep} />
-          )}
-
-          {/* ── Tab: Questions ── */}
-          {activePrepTab === 'questions' && (
+          {/* ── Technical tab ── */}
+          {activeTab === 'technical' && (
             <div className="space-y-6">
-              {/* Question Bank */}
-              <div>
-                <div className="flex gap-1 p-1 bg-black/[0.03] border border-black/[0.08] rounded-xl mb-4 overflow-x-auto scrollbar-none">
-                  {Q_TABS.map(tab => (
-                    <button
-                      key={tab.id}
-                      onClick={() => setActiveTab(tab.id)}
-                      className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200 flex-shrink-0 ${
-                        activeTab === tab.id
-                          ? 'bg-white text-text-primary shadow-sm'
-                          : 'text-text-tertiary hover:text-text-secondary'
-                      }`}
-                    >
-                      {tab.label}
-                      {tab.count > 0 && (
-                        <span className={`text-[11px] px-1.5 py-0.5 rounded-md font-semibold ${activeTab === tab.id ? 'bg-primary/10 text-primary' : 'bg-black/[0.04] text-text-tertiary'}`}>
-                          {tab.count}
-                        </span>
-                      )}
-                    </button>
-                  ))}
-                </div>
-                <div className="space-y-2">
-                  {activeTab === 'technical' && prep.technicalQuestions.map((q, i) => (
-                    <TechnicalQuestionCard key={i} q={q} index={i} expanded={expanded.has(`tech-${i}`)} onToggle={toggleExpanded} />
-                  ))}
-                  {activeTab === 'behavioral' && prep.behavioralQuestions.map((q, i) => (
-                    <BehavioralQuestionCard key={i} q={q} index={i} expanded={expanded.has(`beh-${i}`)} onToggle={toggleExpanded} />
-                  ))}
-                  {activeTab === 'situational' && prep.situationalQuestions.map((q, i) => (
-                    <SituationalQuestionCard key={i} q={q} index={i} expanded={expanded.has(`sit-${i}`)} onToggle={toggleExpanded} />
-                  ))}
-                  {activeTab === 'culture' && prep.cultureQuestions.map((q, i) => (
-                    <CultureQuestionCard key={i} q={q} index={i} expanded={expanded.has(`cul-${i}`)} onToggle={toggleExpanded} />
-                  ))}
-                </div>
+              <div className="space-y-2">
+                {prep.technicalQuestions.map((q, i) => (
+                  <TechnicalQuestionCard key={i} q={q} index={i} expanded={expanded.has(`tech-${i}`)} onToggle={toggleExpanded} />
+                ))}
               </div>
 
-              {/* Questions to Ask Them */}
-              {prep.questionsToAsk.length > 0 && (
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-8 h-8 rounded-lg bg-success/10 border border-success/20 flex items-center justify-center text-success">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                      </svg>
-                    </div>
-                    <h3 className="font-semibold text-text-primary text-base">Questions to Ask Them</h3>
-                  </div>
-                  <div className="space-y-2">
-                    {prep.questionsToAsk.map((q, i) => (
-                      <div key={i} className="flex items-start gap-3 rounded-xl border border-black/[0.08] bg-black/[0.02] px-4 py-3">
-                        <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full border flex-shrink-0 mt-0.5 whitespace-nowrap ${ASK_CATEGORY_STYLES[q.category]}`}>
-                          {ASK_CATEGORY_LABELS[q.category]}
-                        </span>
-                        <p className="text-sm text-text-primary leading-relaxed">{q.question}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* ── Tab: Study Plan ── */}
-          {activePrepTab === 'study' && (
-            <div className="space-y-6">
               {/* Technical Review Checklist */}
               {prep.technicalReview.length > 0 && (
                 <div>
@@ -714,7 +645,7 @@ export default function InterviewPrepPanel({
                         <polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
                       </svg>
                     </div>
-                    <h3 className="font-semibold text-text-primary text-base">Technical Review Checklist</h3>
+                    <h3 className="font-semibold text-text-primary text-base">Review Checklist</h3>
                   </div>
                   {Array.from(new Set(prep.technicalReview.map(item => item.cluster))).map(cluster => (
                     <div key={cluster} className="mb-5">
@@ -734,14 +665,8 @@ export default function InterviewPrepPanel({
                                   isChecked ? 'border-success/20 bg-success/[0.04]' : 'border-black/[0.08] bg-black/[0.02] hover:bg-black/[0.03]'
                                 }`}
                               >
-                                <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors ${
-                                  isChecked ? 'bg-success border-success' : 'border-black/20'
-                                }`}>
-                                  {isChecked && (
-                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-                                      <polyline points="20 6 9 17 4 12"/>
-                                    </svg>
-                                  )}
+                                <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors ${isChecked ? 'bg-success border-success' : 'border-black/20'}`}>
+                                  {isChecked && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>}
                                 </div>
                                 <div className="flex-1 min-w-0">
                                   <div className="flex items-center gap-2 flex-wrap">
@@ -759,7 +684,7 @@ export default function InterviewPrepPanel({
                 </div>
               )}
 
-              {/* TestGorilla Practice Tests */}
+              {/* Practice Tests */}
               {(() => {
                 const matches = prep.testGorillaTests.map(k => TESTGORILLA_MAP[k]).filter(Boolean);
                 return matches.length > 0 ? (
@@ -793,9 +718,15 @@ export default function InterviewPrepPanel({
             </div>
           )}
 
-          {/* ── Tab: Soft Skills ── */}
-          {activePrepTab === 'soft-skills' && (
+          {/* ── Behavioral tab ── */}
+          {activeTab === 'behavioral' && (
             <div className="space-y-6">
+              <div className="space-y-2">
+                {prep.behavioralQuestions.map((q, i) => (
+                  <BehavioralQuestionCard key={i} q={q} index={i} expanded={expanded.has(`beh-${i}`)} onToggle={toggleExpanded} />
+                ))}
+              </div>
+
               {/* Soft Skills Deep Dive */}
               {prep.softSkills.length > 0 && (
                 <div>
@@ -868,14 +799,8 @@ export default function InterviewPrepPanel({
                           const isChecked = checked.has(item.id);
                           return (
                             <div key={item.id} onClick={() => toggleChecked(item.id)} className="flex items-start gap-2 cursor-pointer">
-                              <div className={`w-4 h-4 rounded border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors ${
-                                isChecked ? 'bg-success border-success' : 'border-black/20 bg-white/60'
-                              }`}>
-                                {isChecked && (
-                                  <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <polyline points="20 6 9 17 4 12"/>
-                                  </svg>
-                                )}
+                              <div className={`w-4 h-4 rounded border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors ${isChecked ? 'bg-success border-success' : 'border-black/20 bg-white/60'}`}>
+                                {isChecked && <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>}
                               </div>
                               <p className={`text-xs leading-relaxed ${isChecked ? 'line-through text-text-tertiary' : 'text-text-secondary'}`}>{item.text}</p>
                             </div>
@@ -886,40 +811,92 @@ export default function InterviewPrepPanel({
                   ))}
                 </div>
               </div>
+
+              {/* Salary Negotiation */}
+              {salaryAnalysis && (
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-8 h-8 rounded-lg bg-success/10 border border-success/20 flex items-center justify-center text-success">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                      </svg>
+                    </div>
+                    <h3 className="font-semibold text-text-primary text-base">Salary Negotiation</h3>
+                  </div>
+                  <div className="rounded-2xl border border-black/[0.08] bg-black/[0.02] p-4 mb-3">
+                    <div className="grid grid-cols-3 gap-3 mb-1">
+                      {(
+                        [
+                          { label: 'Floor', value: salaryAnalysis.targetRoleMarket.low, color: 'text-text-secondary', border: 'border-black/[0.08]', bg: 'bg-white/60' },
+                          { label: 'Target', value: salaryAnalysis.targetRoleMarket.mid, color: 'text-primary', border: 'border-primary/20', bg: 'bg-primary/[0.04]' },
+                          { label: 'Stretch', value: salaryAnalysis.targetRoleMarket.high, color: 'text-success', border: 'border-success/20', bg: 'bg-success/[0.04]' },
+                        ]
+                      ).map(({ label, value, color, border, bg }) => (
+                        <div key={label} className={`rounded-xl border ${border} ${bg} px-3 py-3 text-center`}>
+                          <p className="text-[11px] text-text-tertiary font-medium mb-1">{label}</p>
+                          <p className={`text-sm font-bold ${color}`}>{formatCurrency(value, salaryAnalysis.targetRoleMarket.currency)}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-[11px] text-text-tertiary text-center mt-2">{salaryAnalysis.targetRoleMarket.region}</p>
+                  </div>
+                  {salaryAnalysis.negotiationTips.length > 0 && (
+                    <div className="rounded-xl border border-black/[0.08] bg-black/[0.02] p-4">
+                      <p className="text-[11px] font-semibold text-text-tertiary uppercase tracking-wider mb-3">Negotiation Tips</p>
+                      <ul className="space-y-2">
+                        {salaryAnalysis.negotiationTips.map((tip, i) => (
+                          <li key={i} className="flex items-start gap-2.5">
+                            <span className="text-success font-bold flex-shrink-0 mt-0.5 text-sm">›</span>
+                            <p className="text-sm text-text-secondary">{tip}</p>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
 
-          {/* ── Tab: Salary ── */}
-          {activePrepTab === 'salary' && salaryAnalysis && (
-            <div className="space-y-4">
-              <div className="rounded-2xl border border-black/[0.08] bg-black/[0.02] p-4">
-                <div className="grid grid-cols-3 gap-3 mb-1">
-                  {(
-                    [
-                      { label: 'Floor', value: salaryAnalysis.targetRoleMarket.low, color: 'text-text-secondary', border: 'border-black/[0.08]', bg: 'bg-white/60' },
-                      { label: 'Target', value: salaryAnalysis.targetRoleMarket.mid, color: 'text-primary', border: 'border-primary/20', bg: 'bg-primary/[0.04]' },
-                      { label: 'Stretch', value: salaryAnalysis.targetRoleMarket.high, color: 'text-success', border: 'border-success/20', bg: 'bg-success/[0.04]' },
-                    ]
-                  ).map(({ label, value, color, border, bg }) => (
-                    <div key={label} className={`rounded-xl border ${border} ${bg} px-3 py-3 text-center`}>
-                      <p className="text-[11px] text-text-tertiary font-medium mb-1">{label}</p>
-                      <p className={`text-sm font-bold ${color}`}>{formatCurrency(value, salaryAnalysis.targetRoleMarket.currency)}</p>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-[11px] text-text-tertiary text-center mt-2">{salaryAnalysis.targetRoleMarket.region}</p>
+          {/* ── Situational tab ── */}
+          {activeTab === 'situational' && (
+            <div className="space-y-2">
+              {prep.situationalQuestions.map((q, i) => (
+                <SituationalQuestionCard key={i} q={q} index={i} expanded={expanded.has(`sit-${i}`)} onToggle={toggleExpanded} />
+              ))}
+            </div>
+          )}
+
+          {/* ── Culture & Motivation tab ── */}
+          {activeTab === 'culture' && (
+            <div className="space-y-6">
+              <div className="space-y-2">
+                {prep.cultureQuestions.map((q, i) => (
+                  <CultureQuestionCard key={i} q={q} index={i} expanded={expanded.has(`cul-${i}`)} onToggle={toggleExpanded} />
+                ))}
               </div>
-              {salaryAnalysis.negotiationTips.length > 0 && (
-                <div className="rounded-xl border border-black/[0.08] bg-black/[0.02] p-4">
-                  <p className="text-[11px] font-semibold text-text-tertiary uppercase tracking-wider mb-3">Negotiation Tips</p>
-                  <ul className="space-y-2">
-                    {salaryAnalysis.negotiationTips.map((tip, i) => (
-                      <li key={i} className="flex items-start gap-2.5">
-                        <span className="text-success font-bold flex-shrink-0 mt-0.5 text-sm">›</span>
-                        <p className="text-sm text-text-secondary">{tip}</p>
-                      </li>
+
+              {/* Questions to Ask Them */}
+              {prep.questionsToAsk.length > 0 && (
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-8 h-8 rounded-lg bg-success/10 border border-success/20 flex items-center justify-center text-success">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                      </svg>
+                    </div>
+                    <h3 className="font-semibold text-text-primary text-base">Questions to Ask Them</h3>
+                  </div>
+                  <div className="space-y-2">
+                    {prep.questionsToAsk.map((q, i) => (
+                      <div key={i} className="flex items-start gap-3 rounded-xl border border-black/[0.08] bg-black/[0.02] px-4 py-3">
+                        <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full border flex-shrink-0 mt-0.5 whitespace-nowrap ${ASK_CATEGORY_STYLES[q.category]}`}>
+                          {ASK_CATEGORY_LABELS[q.category]}
+                        </span>
+                        <p className="text-sm text-text-primary leading-relaxed">{q.question}</p>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               )}
             </div>
