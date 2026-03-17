@@ -70,19 +70,20 @@ export default function ChapterNav({ hasUpwork, hasCoverLetter, hasGitHub, hasJo
     if (hasJobMatch) {
       result[0] = { ...result[0], labelKey: 'results.fitScore.jobMatch.title' };
     }
-    // Insert Interview Prep tab right after the first (fit-score/job-match) tab
-    if (hasInterviewPrep) {
-      result.splice(1, 0, INTERVIEW_PREP_TAB);
-    }
     // Insert cover letter after cv-optimizer
     if (hasCoverLetter) {
       const cvIdx = result.findIndex(tab => tab.id === 'cv-optimizer');
       result.splice(cvIdx + 1, 0, COVER_LETTER_TAB);
     }
-    // Insert GitHub analysis after cover letter (or after cv-optimizer if no cover letter)
-    if (hasGitHub) {
-      const insertAfter = hasCoverLetter ? 'cover-letter' : 'cv-optimizer';
+    // Insert Interview Prep after cover letter (or after fit-score if no cover letter)
+    if (hasInterviewPrep) {
+      const insertAfter = hasCoverLetter ? 'cover-letter' : 'fit-score';
       const idx = result.findIndex(tab => tab.id === insertAfter);
+      result.splice(idx + 1, 0, INTERVIEW_PREP_TAB);
+    }
+    // Insert GitHub analysis after action-plan
+    if (hasGitHub) {
+      const idx = result.findIndex(tab => tab.id === 'action-plan');
       result.splice(idx + 1, 0, GITHUB_TAB);
     }
     if (hasUpwork) result.push(UPWORK_TAB);

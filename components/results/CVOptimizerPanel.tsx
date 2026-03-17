@@ -905,7 +905,7 @@ function CVEditorSection({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: analysis.metadata.targetRole ? `${analysis.metadata.cvFileName?.replace('.pdf', '') || 'Candidate'}` : 'Candidate',
+          name: analysis.profile?.name || analysis.metadata.cvFileName?.replace('.pdf', '') || 'Candidate',
           summary: sections.summary,
           skills: sections.skills,
           experience: sections.experience,

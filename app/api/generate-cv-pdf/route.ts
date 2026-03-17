@@ -205,10 +205,8 @@ export async function POST(req: NextRequest) {
     }
     const pdfBuffer = Buffer.concat(chunks);
 
-    const safeName = (data.name || 'CV').replace(/[^a-zA-Z0-9]/g, '_');
-    const safeRole = (data.targetRole || 'Role').replace(/[^a-zA-Z0-9]/g, '_');
-    const date = new Date().toISOString().split('T')[0];
-    const filename = `${safeName}_CV_${safeRole}_${date}.pdf`;
+    const safeName = (data.name || 'Candidate').replace(/[^a-zA-Z0-9 ]/g, '').trim();
+    const filename = `${safeName} CV.pdf`;
 
     return new NextResponse(pdfBuffer, {
       status: 200,
