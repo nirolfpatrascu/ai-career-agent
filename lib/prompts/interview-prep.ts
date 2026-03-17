@@ -77,7 +77,7 @@ GENERATION RULES:
    - Standard questions every interview includes: "Why this role?", "Where do you see yourself?", "Biggest weakness?", "Why leave current role?"
    - suggestedAngle: personalized to the candidate's background — make it concrete, not generic
 
-6. TECHNICAL REVIEW ITEMS (8-12):
+6. TECHNICAL REVIEW ITEMS (5-8):
    - Topics the candidate should refresh before the interview
    - Prioritize: topics from critical gaps first, then JD requirements they partially match, then nice-to-haves
    - cluster: group into 3-5 topic clusters (e.g., "Core Language", "System Design", "Tools & Frameworks", "Domain Knowledge")
@@ -90,7 +90,7 @@ GENERATION RULES:
    - howToSignal: 2 concrete behaviors during the interview that demonstrate this skill
    - redFlag: one common mistake that signals the opposite of this skill
 
-8. QUESTIONS TO ASK (10-12):
+8. QUESTIONS TO ASK (6-8):
    - Write actual, intelligent questions — not fill-in-the-blank templates
    - strategic questions must reference specific language or signals from the JD
    - category: role | team | company | growth | strategic

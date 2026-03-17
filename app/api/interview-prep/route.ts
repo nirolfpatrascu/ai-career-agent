@@ -8,7 +8,7 @@ import { checkRateLimit } from '@/lib/rate-limit';
 import type { MissingSkill, Strength, Gap, ExperienceItem } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
-export const maxDuration = 60;
+export const maxDuration = 120;
 
 export async function POST(request: NextRequest) {
   try {
@@ -72,9 +72,10 @@ export async function POST(request: NextRequest) {
 
     const prep = await callClaude({
       ...prompt,
-      maxTokens: 6000,
+      maxTokens: 4096,
       temperature: 0.4,
       fallback: INTERVIEW_PREP_FALLBACK,
+      maxRetries: 1,
     });
 
     return NextResponse.json({ prep }, { status: 200 });
