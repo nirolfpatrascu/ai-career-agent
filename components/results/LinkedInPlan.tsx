@@ -208,11 +208,11 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
 
     // --- Profile settings checklist ---
     const profileSettings = [
-      { text: 'Set "Open to Work" → Recruiters Only (invisible badge, visible to LinkedIn Recruiter users only)' },
-      { text: 'Disable "Notify your network" in Settings → Privacy → Sharing profile edits (avoid flooding connections during your optimization sprint)' },
-      { text: 'Enable Creator Mode if you plan to post — unlocks Follow button, Featured link in bio, and post analytics' },
-      { text: `Set your target location (${metadata.country || 'your target market'}) even if remote — LinkedIn Recruiter filters by location by default` },
-      { text: 'Enable InMail (LinkedIn Premium only) — adds ~30% more recruiter reachability for active job seekers' },
+      { text: 'Enable "Open to Work" (Recruiters only): Click "Me" icon (top-right) → View Profile → click the "Open to" button below your photo → select "Finding a new job" → fill in job titles, location & work type → under "Choose who sees you\'re open", select "Recruiters only" → click "Add to profile". Only paid LinkedIn Recruiter users will see it — your current employer won\'t.' },
+      { text: 'Silence network notifications BEFORE editing: Click "Me" icon → Settings & Privacy → Visibility tab (left sidebar) → scroll to "Visibility of your LinkedIn activity" → click "Share profile updates with your network" → toggle to OFF. Turn it back ON when you\'re done editing.' },
+      { text: 'Enable the Follow button (replaces Creator Mode, retired March 2024): Click "Me" icon → Settings & Privacy → Visibility tab → scroll to "Followers" → toggle "Make follow primary" to ON. This replaces your Connect button with Follow, unlocks post analytics, and signals you as a content creator.' },
+      { text: `Set your target location to ${metadata.country || 'your target market'}: Click "Me" icon → View Profile → click the pencil (Edit) icon in your intro card → scroll to "Country/Region" → select your target country/region → click Save. LinkedIn Recruiter filters by location — set it to where you want to work, even if you\'re open to remote.` },
+      { text: 'Check your message settings so recruiters can reach you: Click "Me" icon → Settings & Privacy → Communications tab → "Messaging experience" → "Message requests" → ensure "InMail" is set to receive from "Anyone". Free users are already reachable from LinkedIn Recruiter by default. Premium users: also enable "Open Profile" to let anyone message you for free.' },
     ];
 
     // --- Profile link / core offer ---

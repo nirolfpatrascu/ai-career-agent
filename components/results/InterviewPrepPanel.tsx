@@ -73,27 +73,27 @@ const ASK_CATEGORY_LABELS: Record<QuestionToAsk['category'], string> = {
 };
 
 const TESTGORILLA_MAP: Record<string, { name: string; url: string; minutes: number }> = {
-  'Python': { name: 'Python (Coding)', url: 'https://www.testgorilla.com/test-library/programming-skills-tests/python-coding/', minutes: 10 },
-  'JavaScript': { name: 'JavaScript (Coding)', url: 'https://www.testgorilla.com/test-library/programming-skills-tests/javascript-coding/', minutes: 10 },
-  'TypeScript': { name: 'TypeScript', url: 'https://www.testgorilla.com/test-library/programming-skills-tests/typescript/', minutes: 10 },
-  'React': { name: 'React', url: 'https://www.testgorilla.com/test-library/programming-skills-tests/react/', minutes: 10 },
-  'Node.js': { name: 'Node.js', url: 'https://www.testgorilla.com/test-library/programming-skills-tests/nodejs/', minutes: 10 },
-  'SQL': { name: 'SQL (Intermediate)', url: 'https://www.testgorilla.com/test-library/programming-skills-tests/sql-intermediate-level/', minutes: 10 },
-  'Excel': { name: 'Microsoft Excel (Intermediate)', url: 'https://www.testgorilla.com/test-library/software-skills-tests/microsoft-excel-intermediate/', minutes: 10 },
-  'Attention to Detail': { name: 'Attention to Detail', url: 'https://www.testgorilla.com/test-library/cognitive-ability-tests/attention-to-detail-visual/', minutes: 7 },
-  'Critical Thinking': { name: 'Critical Thinking', url: 'https://www.testgorilla.com/test-library/cognitive-ability-tests/critical-thinking/', minutes: 12 },
-  'Communication': { name: 'Communication', url: 'https://www.testgorilla.com/test-library/personality-culture-tests/communication/', minutes: 10 },
-  'Problem Solving': { name: 'Problem Solving', url: 'https://www.testgorilla.com/test-library/cognitive-ability-tests/problem-solving/', minutes: 10 },
-  'Leadership': { name: 'Leadership & People Management', url: 'https://www.testgorilla.com/test-library/personality-culture-tests/leadership-and-people-management/', minutes: 10 },
-  'Project Management': { name: 'Project Management', url: 'https://www.testgorilla.com/test-library/role-specific-skills-tests/project-management/', minutes: 10 },
-  'Time Management': { name: 'Time Management', url: 'https://www.testgorilla.com/test-library/personality-culture-tests/time-management/', minutes: 10 },
-  'Data Analysis': { name: 'Data Analysis', url: 'https://www.testgorilla.com/test-library/role-specific-skills-tests/data-analysis/', minutes: 10 },
-  'Machine Learning': { name: 'Machine Learning', url: 'https://www.testgorilla.com/test-library/programming-skills-tests/machine-learning/', minutes: 15 },
-  'Java': { name: 'Java (Coding)', url: 'https://www.testgorilla.com/test-library/programming-skills-tests/java-coding/', minutes: 10 },
-  'C#': { name: 'C# (Coding)', url: 'https://www.testgorilla.com/test-library/programming-skills-tests/c-sharp-coding/', minutes: 10 },
-  'PHP': { name: 'PHP (Coding)', url: 'https://www.testgorilla.com/test-library/programming-skills-tests/php-coding/', minutes: 10 },
-  'CSS': { name: 'CSS', url: 'https://www.testgorilla.com/test-library/programming-skills-tests/css/', minutes: 10 },
-  'Git': { name: 'Git', url: 'https://www.testgorilla.com/test-library/programming-skills-tests/git/', minutes: 10 },
+  'Python': { name: 'Python (Basic)', url: 'https://www.hackerrank.com/skills-verification/python_basic', minutes: 90 },
+  'JavaScript': { name: 'JavaScript (Basic)', url: 'https://www.hackerrank.com/skills-verification/javascript_basic', minutes: 90 },
+  'TypeScript': { name: 'JavaScript (Intermediate)', url: 'https://www.hackerrank.com/skills-verification/javascript_intermediate', minutes: 90 },
+  'React': { name: 'React (Basic)', url: 'https://www.hackerrank.com/skills-verification/react_basic', minutes: 90 },
+  'Node.js': { name: 'Node.js (Basic)', url: 'https://www.hackerrank.com/skills-verification/nodejs_basic', minutes: 90 },
+  'SQL': { name: 'SQL (Basic)', url: 'https://www.hackerrank.com/skills-verification/sql_basic', minutes: 30 },
+  'Excel': { name: 'All Skill Tests', url: 'https://www.hackerrank.com/skills-verification', minutes: 30 },
+  'Attention to Detail': { name: 'All Skill Tests', url: 'https://www.hackerrank.com/skills-verification', minutes: 30 },
+  'Critical Thinking': { name: 'All Skill Tests', url: 'https://www.hackerrank.com/skills-verification', minutes: 30 },
+  'Communication': { name: 'All Skill Tests', url: 'https://www.hackerrank.com/skills-verification', minutes: 20 },
+  'Problem Solving': { name: 'All Skill Tests', url: 'https://www.hackerrank.com/skills-verification', minutes: 30 },
+  'Leadership': { name: 'All Skill Tests', url: 'https://www.hackerrank.com/skills-verification', minutes: 20 },
+  'Project Management': { name: 'All Skill Tests', url: 'https://www.hackerrank.com/skills-verification', minutes: 20 },
+  'Time Management': { name: 'All Skill Tests', url: 'https://www.hackerrank.com/skills-verification', minutes: 20 },
+  'Data Analysis': { name: 'SQL (Advanced)', url: 'https://www.hackerrank.com/skills-verification/sql_advanced', minutes: 60 },
+  'Machine Learning': { name: 'All Skill Tests', url: 'https://www.hackerrank.com/skills-verification', minutes: 30 },
+  'Java': { name: 'Java (Basic)', url: 'https://www.hackerrank.com/skills-verification/java_basic', minutes: 90 },
+  'C#': { name: 'All Skill Tests', url: 'https://www.hackerrank.com/skills-verification', minutes: 30 },
+  'PHP': { name: 'All Skill Tests', url: 'https://www.hackerrank.com/skills-verification', minutes: 30 },
+  'CSS': { name: 'All Skill Tests', url: 'https://www.hackerrank.com/skills-verification', minutes: 30 },
+  'Git': { name: 'All Skill Tests', url: 'https://www.hackerrank.com/skills-verification', minutes: 30 },
 };
 
 type MentalItem = { id: string; text: string };
@@ -695,7 +695,7 @@ export default function InterviewPrepPanel({
                           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
                         </svg>
                       </div>
-                      <h3 className="font-semibold text-text-primary text-base">Practice Tests (TestGorilla)</h3>
+                      <h3 className="font-semibold text-text-primary text-base">Practice Tests (HackerRank)</h3>
                     </div>
                     <div className="grid sm:grid-cols-2 gap-2">
                       {matches.map((entry, i) => (
