@@ -84,7 +84,7 @@ function ReadinessBanner({ matchScore }: { matchScore: number }) {
           </svg>
         </div>
         <div>
-          <p className="font-semibold text-success text-sm">You're ready to apply — let's nail the interview.</p>
+          <p className="font-semibold text-success text-sm">You&apos;re ready to apply — let&apos;s nail the interview.</p>
           <p className="text-xs text-text-secondary mt-1">Your {matchScore}% job match puts you in a strong position. The prep kit below is fully tailored to this role and your profile.</p>
         </div>
       </div>
@@ -100,7 +100,7 @@ function ReadinessBanner({ matchScore }: { matchScore: number }) {
           </svg>
         </div>
         <div>
-          <p className="font-semibold text-[#E8890A] text-sm">You're close — a bit more prep and you'll be competitive.</p>
+          <p className="font-semibold text-[#E8890A] text-sm">You&apos;re close — a bit more prep and you&apos;ll be competitive.</p>
           <p className="text-xs text-text-secondary mt-1">
             Your current job match is <span className="font-medium text-[#E8890A]">{matchScore}%</span>. We recommend reaching at least <span className="font-medium">{APPLY_THRESHOLD}%</span> before applying — optimize your CV and LinkedIn profile and close key skill gaps first. That said, this prep kit is ready when you are.
           </p>
@@ -119,7 +119,7 @@ function ReadinessBanner({ matchScore }: { matchScore: number }) {
       <div>
         <p className="font-semibold text-danger text-sm">Your job match is below {APPLY_THRESHOLD}% — close gaps before applying.</p>
         <p className="text-xs text-text-secondary mt-1">
-          At <span className="font-medium text-danger">{matchScore}%</span>, we strongly advise optimizing your CV, updating your LinkedIn profile, and closing the critical skill gaps shown in the Strengths & Gaps tab before interviewing. We've generated this prep kit so you know what to expect when you're ready.
+          At <span className="font-medium text-danger">{matchScore}%</span>, we strongly advise optimizing your CV, updating your LinkedIn profile, and closing the critical skill gaps shown in the Strengths &amp; Gaps tab before interviewing. We&apos;ve generated this prep kit so you know what to expect when you&apos;re ready.
         </p>
       </div>
     </div>
@@ -223,7 +223,7 @@ function TechnicalQuestionCard({ q, index, expanded, onToggle }: {
       {expanded && (
         <div className="px-4 pb-4 space-y-3 border-t border-black/[0.06]">
           <div className="pt-3">
-            <p className="text-[11px] font-semibold text-text-tertiary uppercase tracking-wider mb-1">What they're testing</p>
+            <p className="text-[11px] font-semibold text-text-tertiary uppercase tracking-wider mb-1">What they&apos;re testing</p>
             <p className="text-sm text-text-secondary">{q.testing}</p>
           </div>
           <div>
