@@ -24,7 +24,8 @@ export function buildCareerPlanPrompt(
   questionnaire: CareerQuestionnaire,
   gaps: Gap[],
   roleRecommendations: RoleRecommendation[],
-  knowledgeContext?: string
+  knowledgeContext?: string,
+  jobPosting?: string
 ): { system: string; userMessage: string } {
 
   const system = `You are a senior career strategist who creates highly specific, actionable career development plans. You have deep knowledge of tech industry salary benchmarks across global markets.
@@ -188,6 +189,14 @@ ${JSON.stringify(roleRecommendations, null, 2)}
 ${curatedSalaryContext}
 
 ${questionnaire.additionalContext ? `CANDIDATE-PROVIDED CONTEXT:\n${questionnaire.additionalContext.slice(0, 2000)}\n\nConsider this when creating action items — it may reveal skills, activities, or circumstances that affect the plan's priorities and timeline.` : ''}
+
+${jobPosting ? (() => { const truncatedPosting = jobPosting.slice(0, 1500); return `TARGET JOB POSTING:
+---
+${truncatedPosting}
+---
+The candidate is actively applying for this specific role.
+The 30-day action plan MUST prioritise closing the gaps most critical to THIS application. Be specific — reference actual skills or domains from the posting.
+The 90-day and 12-month plans can address broader career development.`; })() : ''}
 
 ${knowledgeContext ? `REFERENCE DATA (use to calibrate salary ranges, action items, and negotiation tips — do NOT copy verbatim, synthesize into personalized recommendations):\n${knowledgeContext}` : ''}
 

@@ -14,7 +14,6 @@ import { logger } from '@/lib/logger';
 export interface AnalyzeGitHubOptions {
   githubUrl: string;
   targetRole: string;
-  jobPosting?: string;
   language?: string;
 }
 
@@ -26,7 +25,7 @@ export async function analyzeGitHubProfile(
   options: AnalyzeGitHubOptions
 ): Promise<GitHubAnalysis | null> {
   try {
-    const { githubUrl, targetRole, jobPosting, language } = options;
+    const { githubUrl, targetRole, language } = options;
 
     // Extract username from URL
     const usernameMatch = githubUrl.match(/github\.com\/([a-zA-Z0-9-]+)/);
@@ -59,7 +58,7 @@ export async function analyzeGitHubProfile(
     // Call Claude
     logger.debug('github_analyzer.analyzing', { username, repoCount: repos.length, targetRole });
 
-    const prompt = buildGitHubAnalysisPrompt({ user, repos, targetRole, jobPosting, language });
+    const prompt = buildGitHubAnalysisPrompt({ user, repos, targetRole, language });
     const analysis = await callClaude<GitHubAnalysis>({
       ...prompt,
       maxTokens: 4096,

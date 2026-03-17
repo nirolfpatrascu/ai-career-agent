@@ -59,14 +59,13 @@ interface GitHubAnalysisOptions {
   user: GitHubUserData;
   repos: GitHubRepoData[];
   targetRole: string;
-  jobPosting?: string;
   language?: string;
 }
 
 export function buildGitHubAnalysisPrompt(
   options: GitHubAnalysisOptions
 ): { system: string; userMessage: string } {
-  const { user, repos, targetRole, jobPosting, language } = options;
+  const { user, repos, targetRole, language } = options;
 
   const langInstruction = getLanguageInstruction(language);
 
@@ -141,7 +140,6 @@ REPOSITORIES (up to 30, sorted by recently updated):
 ${JSON.stringify(repos, null, 2)}
 
 TARGET ROLE: ${targetRole}
-${jobPosting ? `\nJOB POSTING:\n---\n${jobPosting}\n---` : ''}
 
 Analyze this GitHub profile and provide strengths, improvements, a project idea, and stats as JSON.`;
 

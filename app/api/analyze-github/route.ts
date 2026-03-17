@@ -30,10 +30,9 @@ export async function POST(request: NextRequest) {
 
     // --- Parse and validate body ---
     const body = await request.json();
-    const { githubUrl, targetRole, jobPosting, language } = body as {
+    const { githubUrl, targetRole, language } = body as {
       githubUrl: string;
       targetRole: string;
-      jobPosting?: string;
       language?: string;
     };
 
@@ -52,7 +51,7 @@ export async function POST(request: NextRequest) {
     }
 
     // --- Analyze using shared function ---
-    const analysis = await analyzeGitHubProfile({ githubUrl, targetRole, jobPosting, language });
+    const analysis = await analyzeGitHubProfile({ githubUrl, targetRole, language });
 
     if (!analysis) {
       return NextResponse.json(

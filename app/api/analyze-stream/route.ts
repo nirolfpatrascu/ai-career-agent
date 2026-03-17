@@ -364,7 +364,7 @@ export async function POST(request: NextRequest) {
         // Build knowledge context from curated data
         const knowledge = buildKnowledgeContext(questionnaire);
 
-        const gapPrompt = buildGapAnalysisPrompt(profile, questionnaire, knowledge.forGapAnalysis);
+        const gapPrompt = buildGapAnalysisPrompt(profile, questionnaire, knowledge.forGapAnalysis, questionnaire.jobPosting ?? undefined);
         const gapResult = await callClaudeWithSource<GapAnalysisResult>({
           ...gapPrompt,
           maxTokens: 6144,
@@ -421,7 +421,7 @@ export async function POST(request: NextRequest) {
         const endCareerPlan = metrics.startStep('career_plan');
 
         const planPrompt = buildCareerPlanPrompt(
-          profile, questionnaire, gapAnalysis.gaps, gapAnalysis.roleRecommendations, knowledge.forCareerPlan
+          profile, questionnaire, gapAnalysis.gaps, gapAnalysis.roleRecommendations, knowledge.forCareerPlan, questionnaire.jobPosting ?? undefined
         );
 
         const hasJobPosting = questionnaire.jobPosting && questionnaire.jobPosting.trim().length > 50;
@@ -457,7 +457,6 @@ export async function POST(request: NextRequest) {
             ? analyzeGitHubProfile({
                 githubUrl: questionnaire.githubUrl,
                 targetRole: questionnaire.targetRole,
-                jobPosting: questionnaire.jobPosting,
                 language: questionnaire.language,
               })
             : Promise.resolve(null),
@@ -468,20 +467,6 @@ export async function POST(request: NextRequest) {
           metrics.recordStepTokens('job_match', estimateTokens(JSON.stringify(questionnaire.jobPosting || '')), estimateTokens(JSON.stringify(jobMatchResult)));
         }
         logger.debug('career_plan.done', { thirtyDays: careerPlan.actionPlan.thirtyDays.length, ninetyDays: careerPlan.actionPlan.ninetyDays.length, twelveMonths: careerPlan.actionPlan.twelveMonths.length });
-
-        // --- Post-parallel coherence check: fitScore vs matchScore ---
-        const coherenceWarnings: string[] = [];
-        if (jobMatchResult) {
-          const fitScoreNormalized = gapAnalysis.fitScore.score * 10; // 1-10 → 10-100
-          const delta = Math.abs(fitScoreNormalized - jobMatchResult.matchScore);
-          if (delta > 30) {
-            coherenceWarnings.push(
-              `Fit score (${gapAnalysis.fitScore.score}/10 = ${fitScoreNormalized}%) and job match score (${jobMatchResult.matchScore}%) diverge by ${delta} points. ` +
-              `This may indicate the gap analysis and job matcher weighted skills differently. Review both assessments.`
-            );
-            logger.warn('coherence.divergence', { fitScoreNormalized, matchScore: jobMatchResult.matchScore, delta });
-          }
-        }
 
         // Normalize salary currencies
         const salaryAnalysis = careerPlan.salaryAnalysis;
@@ -643,7 +628,6 @@ export async function POST(request: NextRequest) {
             ...(questionnaire.githubUrl && { githubUrl: questionnaire.githubUrl }),
             ...(parsedPDF.qualityWarning && { pdfQualityWarning: parsedPDF.qualityWarning }),
             dataSources,
-            ...(coherenceWarnings.length > 0 && { warnings: coherenceWarnings }),
           },
           fitScore: gapAnalysis.fitScore,
           strengths: gapAnalysis.strengths,
