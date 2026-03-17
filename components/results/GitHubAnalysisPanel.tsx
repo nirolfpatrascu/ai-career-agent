@@ -8,7 +8,6 @@ import type { GitHubAnalysis } from '@/lib/prompts/github-analysis';
 interface GitHubAnalysisPanelProps {
   githubUrl: string;
   targetRole: string;
-  jobPosting?: string;
   initialAnalysis?: GitHubAnalysis;
   analysisId?: string;
 }
@@ -26,7 +25,7 @@ const ACTION_TYPE_STYLES: Record<string, string> = {
   polish_existing: 'bg-success/[0.08] border-success/15 text-success',
 };
 
-export default function GitHubAnalysisPanel({ githubUrl, targetRole, jobPosting, initialAnalysis, analysisId }: GitHubAnalysisPanelProps) {
+export default function GitHubAnalysisPanel({ githubUrl, targetRole, initialAnalysis, analysisId }: GitHubAnalysisPanelProps) {
   const { t, locale } = useTranslation();
   const [analyzing, setAnalyzing] = useState(false);
   const [analysis, setAnalysis] = useState<GitHubAnalysis | null>(initialAnalysis ?? null);
@@ -40,7 +39,7 @@ export default function GitHubAnalysisPanel({ githubUrl, targetRole, jobPosting,
       const res = await fetch('/api/analyze-github', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ githubUrl, targetRole, jobPosting, language: locale }),
+        body: JSON.stringify({ githubUrl, targetRole, language: locale }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -53,7 +52,7 @@ export default function GitHubAnalysisPanel({ githubUrl, targetRole, jobPosting,
     } finally {
       setAnalyzing(false);
     }
-  }, [githubUrl, targetRole, jobPosting, locale]);
+  }, [githubUrl, targetRole, locale]);
 
   return (
     <div className="space-y-6">

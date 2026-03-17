@@ -47,17 +47,22 @@ interface ChapterNavProps {
   hasUpwork?: boolean;
   hasCoverLetter?: boolean;
   hasGitHub?: boolean;
+  hasJobMatch?: boolean;
   showCoach?: boolean;
   activeTab: string;
   onTabChange: (tabId: string) => void;
 }
 
-export default function ChapterNav({ hasUpwork, hasCoverLetter, hasGitHub, showCoach, activeTab, onTabChange }: ChapterNavProps) {
+export default function ChapterNav({ hasUpwork, hasCoverLetter, hasGitHub, hasJobMatch, showCoach, activeTab, onTabChange }: ChapterNavProps) {
   const { t } = useTranslation();
   const activeRefMobile = useRef<HTMLButtonElement>(null);
 
   const tabs: Tab[] = useMemo(() => {
     const result = [...TABS];
+    // Rename first tab when a job match score is present
+    if (hasJobMatch) {
+      result[0] = { ...result[0], labelKey: 'results.fitScore.jobMatch.title' };
+    }
     // Insert cover letter after cv-optimizer
     if (hasCoverLetter) {
       const cvIdx = result.findIndex(tab => tab.id === 'cv-optimizer');
@@ -72,7 +77,7 @@ export default function ChapterNav({ hasUpwork, hasCoverLetter, hasGitHub, showC
     if (hasUpwork) result.push(UPWORK_TAB);
     if (showCoach) result.push(COACH_TAB);
     return result;
-  }, [hasUpwork, hasCoverLetter, hasGitHub, showCoach]);
+  }, [hasUpwork, hasCoverLetter, hasGitHub, hasJobMatch, showCoach]);
 
   const activeIndex = tabs.findIndex((tab) => tab.id === activeTab);
 

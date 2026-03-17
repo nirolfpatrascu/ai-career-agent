@@ -339,16 +339,15 @@ export default function AnalyzePage() {
     const renderActiveTab = () => {
       switch (activeTab) {
         case 'fit-score':
-          return (
+          return result.jobMatch ? (
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-fit-score" aria-labelledby="tab-fit-score">
+              <SectionIntro messageKey="motivation.jobMatch" variant="encouraging" />
+              <JobMatchPanel match={result.jobMatch} />
+            </div>
+          ) : (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-fit-score" aria-labelledby="tab-fit-score">
               <SectionIntro messageKey="motivation.fitScore" variant={fitScore >= 7 ? 'celebratory' : 'encouraging'} />
               <FitScoreGauge fitScore={result.fitScore} onNavigate={setActiveTab} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
-              {result.jobMatch && (
-                <div className="mt-8">
-                  <SectionIntro messageKey="motivation.jobMatch" variant="encouraging" />
-                  <JobMatchPanel match={result.jobMatch} />
-                </div>
-              )}
             </div>
           );
         case 'strengths-gaps':
@@ -413,7 +412,6 @@ export default function AnalyzePage() {
               <GitHubAnalysisPanel
                 githubUrl={githubUrl}
                 targetRole={result.metadata.targetRole}
-                jobPosting={result.metadata.jobPosting}
                 initialAnalysis={result.githubAnalysis}
                 analysisId={analysisId}
               />
@@ -465,6 +463,7 @@ export default function AnalyzePage() {
           hasUpwork={!!upworkProfile}
           hasCoverLetter={!!result.metadata.jobPosting}
           hasGitHub={!!githubUrl}
+          hasJobMatch={!!result.jobMatch}
           showCoach={isPro}
           activeTab={activeTab}
           onTabChange={setActiveTab}
