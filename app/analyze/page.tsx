@@ -365,6 +365,7 @@ export default function AnalyzePage() {
                 jobPosting={result.metadata.jobPosting ?? ''}
                 profile={result.profile}
                 analysisId={analysisId}
+                salaryAnalysis={result.salaryAnalysis}
               />
             </div>
           ) : null;
