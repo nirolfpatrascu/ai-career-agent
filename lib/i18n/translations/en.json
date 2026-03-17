@@ -29,7 +29,8 @@
     "jobTracker": "Job Tracker",
     "upwork": "Upwork",
     "coverLetter": "Cover Letter",
-    "githubAnalysis": "GitHub Analysis"
+    "githubAnalysis": "GitHub Analysis",
+    "interviewPrep": "Interview Prep"
   },
   "hero": {
     "badge": "AI-Powered Career Advisor",
@@ -622,7 +623,8 @@
     "atsScore": "Let's make sure your CV gets past the robots. Here's how ATS systems will read your application and what you can optimize.",
     "cvOptimizer": "Your CV analyzed against the job posting — ATS compatibility score, keyword gaps, and specific suggestions to improve your chances.",
     "coverLetter": "A tailored cover letter that highlights your strengths and honestly addresses gaps. Edit it to add your personal touch before sending.",
-    "githubAnalysis": "Your GitHub profile tells a story. Here's what hiring managers would see — and how to make it stronger for your target role."
+    "githubAnalysis": "Your GitHub profile tells a story. Here's what hiring managers would see — and how to make it stronger for your target role.",
+    "interviewPrep": "You've analyzed the opportunity — now prepare to win the interview. This kit is tailored to the specific job posting, your strengths, and your skill gaps."
   },
   "cv": {
     "tabTitle": "CV Builder",

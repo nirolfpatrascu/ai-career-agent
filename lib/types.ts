@@ -165,6 +165,75 @@ export interface CVSuggestion {
   reasoning: string;
 }
 
+// --- Interview Prep Types ---
+
+export interface InterviewPrep {
+  difficultyRating: 'easy' | 'moderate' | 'competitive' | 'highly_competitive';
+  difficultyRationale: string;
+  focusAreas: string[];
+  estimatedPrepHours: number;
+  technicalQuestions: TechnicalQuestion[];
+  behavioralQuestions: BehavioralQuestion[];
+  situationalQuestions: SituationalQuestion[];
+  cultureQuestions: CultureQuestion[];
+  technicalReview: TechnicalReviewItem[];
+  softSkills: SoftSkillPrep[];
+  questionsToAsk: QuestionToAsk[];
+  mentalReadinessTip: string;
+  testGorillaTests: string[];
+}
+
+export interface TechnicalQuestion {
+  question: string;
+  difficulty: 'easy' | 'medium' | 'hard';
+  likelihood: 'very_likely' | 'possible';
+  testing: string;
+  approach: string;
+  yourEdge?: string;
+}
+
+export interface BehavioralQuestion {
+  question: string;
+  competency: string;
+  starHints: {
+    situation: string;
+    task: string;
+    action: string;
+    result: string;
+  };
+}
+
+export interface SituationalQuestion {
+  question: string;
+  framework: string;
+}
+
+export interface CultureQuestion {
+  question: string;
+  suggestedAngle: string;
+}
+
+export interface TechnicalReviewItem {
+  topic: string;
+  cluster: string;
+  whyItMatters: string;
+  whatToReview: string;
+  estimatedTime: '30min' | '1-2h' | 'half-day';
+  searchTerm: string;
+}
+
+export interface SoftSkillPrep {
+  skill: string;
+  inContext: string;
+  howToSignal: string[];
+  redFlag: string;
+}
+
+export interface QuestionToAsk {
+  question: string;
+  category: 'role' | 'team' | 'company' | 'growth' | 'strategic';
+}
+
 // --- Intermediate Types (used between Claude calls) ---
 
 export interface ExtractedProfile {

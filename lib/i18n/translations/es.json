@@ -29,7 +29,8 @@
     "jobTracker": "Candidaturas",
     "upwork": "Upwork",
     "coverLetter": "Carta de Presentación",
-    "githubAnalysis": "Análisis GitHub"
+    "githubAnalysis": "Análisis GitHub",
+    "interviewPrep": "Preparación Entrevista"
   },
   "hero": {
     "badge": "Asesor de Carrera con IA",
@@ -624,7 +625,8 @@
     "atsScore": "Asegurémonos de que tu CV pase los robots. Así es como los sistemas ATS leerán tu solicitud y qué puedes optimizar.",
     "cvOptimizer": "Tu CV analizado frente a la oferta de empleo — puntuación de compatibilidad ATS, palabras clave faltantes y sugerencias concretas para mejorar tus posibilidades.",
     "coverLetter": "Una carta de presentación que destaca tus fortalezas y aborda honestamente las brechas. Edítala para añadir tu toque personal.",
-    "githubAnalysis": "Tu perfil de GitHub cuenta una historia. Esto es lo que verían los reclutadores — y cómo fortalecerlo para tu rol objetivo."
+    "githubAnalysis": "Tu perfil de GitHub cuenta una historia. Esto es lo que verían los reclutadores — y cómo fortalecerlo para tu rol objetivo.",
+    "interviewPrep": "Has analizado la oportunidad — ahora prepárate para ganar la entrevista. Este kit está personalizado según la oferta de trabajo, tus fortalezas y tus brechas de habilidades."
   },
   "cv": {
     "tabTitle": "Generador CV",

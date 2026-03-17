@@ -29,7 +29,8 @@
     "jobTracker": "Aplicări",
     "upwork": "Upwork",
     "coverLetter": "Scrisoare de Intenție",
-    "githubAnalysis": "Analiză GitHub"
+    "githubAnalysis": "Analiză GitHub",
+    "interviewPrep": "Pregătire Interviu"
   },
   "hero": {
     "badge": "Consilier de Carieră cu AI",
@@ -624,7 +625,8 @@
     "atsScore": "Hai să ne asigurăm că CV-ul tău trece de roboți. Iată cum citesc sistemele ATS aplicația ta și ce poți optimiza.",
     "cvOptimizer": "CV-ul tău analizat în raport cu anunțul de job — scor de compatibilitate ATS, cuvinte cheie lipsă și sugestii concrete pentru a-ți crește șansele.",
     "coverLetter": "O scrisoare de intenție care îți evidențiază punctele forte și abordează onest lacunele. Editează pentru a adăuga nota ta personală.",
-    "githubAnalysis": "Profilul tău GitHub spune o poveste. Iată ce ar vedea managerii de angajare — și cum să-l faci mai puternic."
+    "githubAnalysis": "Profilul tău GitHub spune o poveste. Iată ce ar vedea managerii de angajare — și cum să-l faci mai puternic.",
+    "interviewPrep": "Ai analizat oportunitatea — acum pregătește-te să câștigi interviul. Acest kit este adaptat la anunțul de job, punctele tale forte și lacunele de competențe."
   },
   "cv": {
     "tabTitle": "Generator CV",

@@ -25,6 +25,12 @@ const UPWORK_TAB: Tab = {
   icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>,
 };
 
+const INTERVIEW_PREP_TAB: Tab = {
+  id: 'interview-prep',
+  labelKey: 'nav.interviewPrep',
+  icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>,
+};
+
 const COVER_LETTER_TAB: Tab = {
   id: 'cover-letter',
   labelKey: 'nav.coverLetter',
@@ -48,12 +54,13 @@ interface ChapterNavProps {
   hasCoverLetter?: boolean;
   hasGitHub?: boolean;
   hasJobMatch?: boolean;
+  hasInterviewPrep?: boolean;
   showCoach?: boolean;
   activeTab: string;
   onTabChange: (tabId: string) => void;
 }
 
-export default function ChapterNav({ hasUpwork, hasCoverLetter, hasGitHub, hasJobMatch, showCoach, activeTab, onTabChange }: ChapterNavProps) {
+export default function ChapterNav({ hasUpwork, hasCoverLetter, hasGitHub, hasJobMatch, hasInterviewPrep, showCoach, activeTab, onTabChange }: ChapterNavProps) {
   const { t } = useTranslation();
   const activeRefMobile = useRef<HTMLButtonElement>(null);
 
@@ -62,6 +69,10 @@ export default function ChapterNav({ hasUpwork, hasCoverLetter, hasGitHub, hasJo
     // Rename first tab when a job match score is present
     if (hasJobMatch) {
       result[0] = { ...result[0], labelKey: 'results.fitScore.jobMatch.title' };
+    }
+    // Insert Interview Prep tab right after the first (fit-score/job-match) tab
+    if (hasInterviewPrep) {
+      result.splice(1, 0, INTERVIEW_PREP_TAB);
     }
     // Insert cover letter after cv-optimizer
     if (hasCoverLetter) {
@@ -77,7 +88,7 @@ export default function ChapterNav({ hasUpwork, hasCoverLetter, hasGitHub, hasJo
     if (hasUpwork) result.push(UPWORK_TAB);
     if (showCoach) result.push(COACH_TAB);
     return result;
-  }, [hasUpwork, hasCoverLetter, hasGitHub, hasJobMatch, showCoach]);
+  }, [hasUpwork, hasCoverLetter, hasGitHub, hasJobMatch, hasInterviewPrep, showCoach]);
 
   const activeIndex = tabs.findIndex((tab) => tab.id === activeTab);
 

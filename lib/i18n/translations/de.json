@@ -29,7 +29,8 @@
     "jobTracker": "Bewerbungen",
     "upwork": "Upwork",
     "coverLetter": "Anschreiben",
-    "githubAnalysis": "GitHub-Analyse"
+    "githubAnalysis": "GitHub-Analyse",
+    "interviewPrep": "Interview-Vorbereitung"
   },
   "hero": {
     "badge": "KI-Karriereberater",
@@ -624,7 +625,8 @@
     "atsScore": "Stellen wir sicher, dass Ihr Lebenslauf die Roboter passiert. So lesen ATS-Systeme Ihre Bewerbung und was Sie optimieren können.",
     "cvOptimizer": "Ihr Lebenslauf analysiert gegen die Stellenausschreibung — ATS-Kompatibilitätsscore, fehlende Keywords und konkrete Vorschläge zur Verbesserung Ihrer Chancen.",
     "coverLetter": "Ein maßgeschneidertes Anschreiben, das Ihre Stärken hervorhebt und Lücken ehrlich anspricht. Bearbeiten Sie es, um Ihre persönliche Note hinzuzufügen.",
-    "githubAnalysis": "Ihr GitHub-Profil erzählt eine Geschichte. So würden Personalverantwortliche es sehen — und wie Sie es für Ihre Zielrolle stärken können."
+    "githubAnalysis": "Ihr GitHub-Profil erzählt eine Geschichte. So würden Personalverantwortliche es sehen — und wie Sie es für Ihre Zielrolle stärken können.",
+    "interviewPrep": "Sie haben die Gelegenheit analysiert — jetzt bereiten Sie sich vor, das Interview zu gewinnen. Dieses Kit ist auf die Stellenausschreibung, Ihre Stärken und Kompetenzlücken zugeschnitten."
   },
   "cv": {
     "tabTitle": "Lebenslauf-Generator",

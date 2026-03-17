@@ -21,6 +21,7 @@ import LinkedInPlan from '@/components/results/LinkedInPlan';
 import UpworkPanel from '@/components/results/UpworkPanel';
 import CoverLetterPanel from '@/components/results/CoverLetterPanel';
 import GitHubAnalysisPanel from '@/components/results/GitHubAnalysisPanel';
+import InterviewPrepPanel from '@/components/results/InterviewPrepPanel';
 import ChapterNav, { DEFAULT_TAB } from '@/components/results/ChapterNav';
 import SectionIntro from '@/components/results/SectionIntro';
 import { getSampleAnalysis } from '@/lib/demo';
@@ -350,6 +351,23 @@ export default function AnalyzePage() {
               <FitScoreGauge fitScore={result.fitScore} onNavigate={setActiveTab} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
             </div>
           );
+        case 'interview-prep':
+          return result.jobMatch ? (
+            <div role="tabpanel" className="animate-panel-enter" id="tabpanel-interview-prep" aria-labelledby="tab-interview-prep">
+              <SectionIntro messageKey="motivation.interviewPrep" variant="encouraging" />
+              <InterviewPrepPanel
+                matchScore={result.jobMatch.matchScore}
+                matchingSkills={result.jobMatch.matchingSkills}
+                missingSkills={result.jobMatch.missingSkills}
+                strengths={result.strengths}
+                gaps={result.gaps}
+                targetRole={result.metadata.targetRole}
+                jobPosting={result.metadata.jobPosting ?? ''}
+                profile={result.profile}
+                analysisId={analysisId}
+              />
+            </div>
+          ) : null;
         case 'strengths-gaps':
         case 'strengths':
         case 'gaps':
@@ -464,6 +482,7 @@ export default function AnalyzePage() {
           hasCoverLetter={!!result.metadata.jobPosting}
           hasGitHub={!!githubUrl}
           hasJobMatch={!!result.jobMatch}
+          hasInterviewPrep={!!result.jobMatch}
           showCoach={isPro}
           activeTab={activeTab}
           onTabChange={setActiveTab}

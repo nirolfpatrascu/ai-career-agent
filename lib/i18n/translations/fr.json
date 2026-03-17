@@ -29,7 +29,8 @@
     "jobTracker": "Candidatures",
     "upwork": "Upwork",
     "coverLetter": "Lettre de Motivation",
-    "githubAnalysis": "Analyse GitHub"
+    "githubAnalysis": "Analyse GitHub",
+    "interviewPrep": "Préparation Entretien"
   },
   "hero": {
     "badge": "Conseiller de Carrière IA",
@@ -624,7 +625,8 @@
     "atsScore": "Assurons-nous que votre CV passe les robots. Voici comment les systèmes ATS liront votre candidature et ce que vous pouvez optimiser.",
     "cvOptimizer": "Votre CV analysé par rapport à l'offre d'emploi — score de compatibilité ATS, mots-clés manquants et suggestions concrètes pour améliorer vos chances.",
     "coverLetter": "Une lettre de motivation qui met en valeur vos forces et aborde honnêtement vos lacunes. Personnalisez-la avant de l'envoyer.",
-    "githubAnalysis": "Votre profil GitHub raconte une histoire. Voici ce que les recruteurs verraient — et comment le renforcer pour votre rôle cible."
+    "githubAnalysis": "Votre profil GitHub raconte une histoire. Voici ce que les recruteurs verraient — et comment le renforcer pour votre rôle cible.",
+    "interviewPrep": "Vous avez analysé l'opportunité — préparez-vous maintenant à réussir l'entretien. Ce kit est personnalisé selon l'offre d'emploi, vos forces et vos lacunes de compétences."
   },
   "cv": {
     "tabTitle": "Générateur CV",
