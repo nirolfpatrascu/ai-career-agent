@@ -37,6 +37,7 @@ interface InterviewPrepPanelProps {
 const APPLY_THRESHOLD = 65;
 
 type QuestionTab = 'technical' | 'behavioral' | 'situational' | 'culture';
+type PrepTab = 'overview' | 'questions' | 'study' | 'soft-skills' | 'salary';
 
 const DIFFICULTY_CONFIG = {
   easy: { label: 'Easy', color: '#10B981', bg: 'bg-success/[0.08]', border: 'border-success/20', text: 'text-success' },
@@ -428,6 +429,7 @@ export default function InterviewPrepPanel({
   const [state, setState] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle');
   const [prep, setPrep] = useState<InterviewPrep | null>(null);
   const [error, setError] = useState('');
+  const [activePrepTab, setActivePrepTab] = useState<PrepTab>('overview');
   const [activeTab, setActiveTab] = useState<QuestionTab>('technical');
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
 
@@ -466,6 +468,7 @@ export default function InterviewPrepPanel({
   const generate = useCallback(async () => {
     setState('loading');
     setError('');
+    setActivePrepTab('overview');
     try {
       const experienceHighlights = profile?.experience?.slice(0, 3).map(e => ({
         title: e.title,
@@ -587,7 +590,7 @@ export default function InterviewPrepPanel({
       {/* ── Loaded content ── */}
       {state === 'loaded' && prep && (
         <>
-          {/* ── Progress bar ── */}
+          {/* ── Progress bar — always visible ── */}
           <div className="rounded-2xl border border-black/[0.08] bg-black/[0.02] p-4">
             <div className="flex items-center justify-between mb-2">
               <p className="text-sm font-semibold text-text-primary">Prep Progress</p>
@@ -602,310 +605,294 @@ export default function InterviewPrepPanel({
             <p className="text-xs text-text-tertiary mt-2">{doneChecks} of {totalChecks} items checked</p>
           </div>
 
-          {/* ── Difficulty card ── */}
-          <DifficultyCard prep={prep} />
-
-          {/* ── Question Bank ── */}
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
-                </svg>
-              </div>
-              <h3 className="font-semibold text-text-primary text-base">Question Bank</h3>
-            </div>
-
-            {/* Inner tabs */}
-            <div className="flex gap-1 p-1 bg-black/[0.03] border border-black/[0.08] rounded-xl mb-4 overflow-x-auto scrollbar-none">
-              {Q_TABS.map(tab => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200 flex-shrink-0 ${
-                    activeTab === tab.id
-                      ? 'bg-white text-text-primary shadow-sm'
-                      : 'text-text-tertiary hover:text-text-secondary'
-                  }`}
-                >
-                  {tab.label}
-                  {tab.count > 0 && (
-                    <span className={`text-[11px] px-1.5 py-0.5 rounded-md font-semibold ${activeTab === tab.id ? 'bg-primary/10 text-primary' : 'bg-black/[0.04] text-text-tertiary'}`}>
-                      {tab.count}
-                    </span>
-                  )}
-                </button>
-              ))}
-            </div>
-
-            {/* Question lists */}
-            <div className="space-y-2">
-              {activeTab === 'technical' && prep.technicalQuestions.map((q, i) => (
-                <TechnicalQuestionCard
-                  key={i} q={q} index={i}
-                  expanded={expanded.has(`tech-${i}`)}
-                  onToggle={toggleExpanded}
-                />
-              ))}
-              {activeTab === 'behavioral' && prep.behavioralQuestions.map((q, i) => (
-                <BehavioralQuestionCard
-                  key={i} q={q} index={i}
-                  expanded={expanded.has(`beh-${i}`)}
-                  onToggle={toggleExpanded}
-                />
-              ))}
-              {activeTab === 'situational' && prep.situationalQuestions.map((q, i) => (
-                <SituationalQuestionCard
-                  key={i} q={q} index={i}
-                  expanded={expanded.has(`sit-${i}`)}
-                  onToggle={toggleExpanded}
-                />
-              ))}
-              {activeTab === 'culture' && prep.cultureQuestions.map((q, i) => (
-                <CultureQuestionCard
-                  key={i} q={q} index={i}
-                  expanded={expanded.has(`cul-${i}`)}
-                  onToggle={toggleExpanded}
-                />
-              ))}
-            </div>
+          {/* ── Section tab bar ── */}
+          <div className="flex gap-1 p-1 bg-black/[0.03] border border-black/[0.08] rounded-xl overflow-x-auto scrollbar-none">
+            {(
+              [
+                { id: 'overview' as PrepTab, label: 'Overview' },
+                { id: 'questions' as PrepTab, label: 'Questions' },
+                { id: 'study' as PrepTab, label: 'Study Plan' },
+                { id: 'soft-skills' as PrepTab, label: 'Soft Skills' },
+                ...(salaryAnalysis ? [{ id: 'salary' as PrepTab, label: 'Salary' }] : []),
+              ]
+            ).map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActivePrepTab(tab.id)}
+                className={`px-3.5 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200 flex-shrink-0 ${
+                  activePrepTab === tab.id
+                    ? 'bg-white text-text-primary shadow-sm'
+                    : 'text-text-tertiary hover:text-text-secondary'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
           </div>
 
-          {/* ── Questions to Ask ── */}
-          {prep.questionsToAsk.length > 0 && (
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-success/10 border border-success/20 flex items-center justify-center text-success">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                  </svg>
-                </div>
-                <h3 className="font-semibold text-text-primary text-base">Questions to Ask Them</h3>
-              </div>
-              <div className="space-y-2">
-                {prep.questionsToAsk.map((q, i) => (
-                  <div key={i} className="flex items-start gap-3 rounded-xl border border-black/[0.08] bg-black/[0.02] px-4 py-3">
-                    <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full border flex-shrink-0 mt-0.5 whitespace-nowrap ${ASK_CATEGORY_STYLES[q.category]}`}>
-                      {ASK_CATEGORY_LABELS[q.category]}
-                    </span>
-                    <p className="text-sm text-text-primary leading-relaxed">{q.question}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+          {/* ── Tab: Overview ── */}
+          {activePrepTab === 'overview' && (
+            <DifficultyCard prep={prep} />
           )}
 
-          {/* ── Technical Review Checklist ── */}
-          {prep.technicalReview.length > 0 && (
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-600">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-                  </svg>
-                </div>
-                <h3 className="font-semibold text-text-primary text-base">Technical Review Checklist</h3>
-              </div>
-              {Array.from(new Set(prep.technicalReview.map(item => item.cluster))).map(cluster => (
-                <div key={cluster} className="mb-5">
-                  <p className="text-[11px] font-semibold text-text-tertiary uppercase tracking-wider mb-2">{cluster}</p>
-                  <div className="space-y-2">
-                    {prep.technicalReview
-                      .map((item, i) => ({ item, i }))
-                      .filter(({ item }) => item.cluster === cluster)
-                      .map(({ item, i }) => {
-                        const id = `tr-${i}`;
-                        const isChecked = checked.has(id);
-                        return (
-                          <div
-                            key={i}
-                            onClick={() => toggleChecked(id)}
-                            className={`rounded-xl border px-4 py-3 flex items-start gap-3 cursor-pointer transition-colors ${
-                              isChecked
-                                ? 'border-success/20 bg-success/[0.04]'
-                                : 'border-black/[0.08] bg-black/[0.02] hover:bg-black/[0.03]'
-                            }`}
-                          >
-                            <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors ${
-                              isChecked ? 'bg-success border-success' : 'border-black/20'
-                            }`}>
-                              {isChecked && (
-                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-                                  <polyline points="20 6 9 17 4 12"/>
-                                </svg>
-                              )}
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-2 flex-wrap">
-                                <p className={`text-sm font-medium ${isChecked ? 'line-through text-text-tertiary' : 'text-text-primary'}`}>
-                                  {item.topic}
-                                </p>
-                                <span className="text-[11px] px-2 py-0.5 rounded-full bg-black/[0.04] border border-black/[0.06] text-text-tertiary">
-                                  {item.estimatedTime}
-                                </span>
-                              </div>
-                              <p className="text-xs text-text-tertiary mt-0.5">{item.whyItMatters}</p>
-                            </div>
-                          </div>
-                        );
-                      })}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* ── Soft Skills Deep Dive ── */}
-          {prep.softSkills.length > 0 && (
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-[#E8890A]/10 border border-[#E8890A]/20 flex items-center justify-center text-[#E8890A]">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                  </svg>
-                </div>
-                <h3 className="font-semibold text-text-primary text-base">Soft Skills Deep Dive</h3>
-              </div>
-              <div className="space-y-3">
-                {prep.softSkills.map((skill, i) => (
-                  <div key={i} className="rounded-xl border border-black/[0.08] bg-black/[0.02] p-4">
-                    <div className="flex items-start gap-3 mb-3">
-                      <div>
-                        <p className="text-sm font-semibold text-text-primary">{skill.skill}</p>
-                        <p className="text-xs text-text-tertiary mt-0.5">{skill.inContext}</p>
-                      </div>
-                    </div>
-                    <div className="grid sm:grid-cols-2 gap-3">
-                      <div className="rounded-lg bg-success/[0.05] border border-success/15 px-3 py-2.5">
-                        <p className="text-[11px] font-semibold text-success uppercase tracking-wider mb-1.5">How to signal it</p>
-                        <ul className="space-y-1">
-                          {skill.howToSignal.map((point, j) => (
-                            <li key={j} className="text-xs text-text-secondary flex items-start gap-1.5">
-                              <span className="text-success mt-0.5 flex-shrink-0">›</span>
-                              {point}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="rounded-lg bg-danger/[0.05] border border-danger/15 px-3 py-2.5">
-                        <p className="text-[11px] font-semibold text-danger uppercase tracking-wider mb-1.5">Red flag to avoid</p>
-                        <p className="text-xs text-text-secondary">{skill.redFlag}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* ── TestGorilla Practice Picks ── */}
-          {prep.testGorillaTests.length > 0 && (() => {
-            const matches = prep.testGorillaTests
-              .map(keyword => TESTGORILLA_MAP[keyword])
-              .filter(Boolean);
-            return matches.length > 0 ? (
+          {/* ── Tab: Questions ── */}
+          {activePrepTab === 'questions' && (
+            <div className="space-y-6">
+              {/* Question Bank */}
               <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-600">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
-                    </svg>
-                  </div>
-                  <h3 className="font-semibold text-text-primary text-base">Practice Tests (TestGorilla)</h3>
-                </div>
-                <div className="grid sm:grid-cols-2 gap-2">
-                  {matches.map((entry, i) => (
-                    <a
-                      key={i}
-                      href={entry.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-between gap-3 rounded-xl border border-black/[0.08] bg-black/[0.02] px-4 py-3 hover:border-primary/20 hover:bg-primary/[0.02] transition-colors group"
+                <div className="flex gap-1 p-1 bg-black/[0.03] border border-black/[0.08] rounded-xl mb-4 overflow-x-auto scrollbar-none">
+                  {Q_TABS.map(tab => (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActiveTab(tab.id)}
+                      className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200 flex-shrink-0 ${
+                        activeTab === tab.id
+                          ? 'bg-white text-text-primary shadow-sm'
+                          : 'text-text-tertiary hover:text-text-secondary'
+                      }`}
                     >
-                      <div className="min-w-0">
-                        <p className="text-sm font-medium text-text-primary group-hover:text-primary transition-colors truncate">{entry.name}</p>
-                        <p className="text-xs text-text-tertiary">{entry.minutes} min</p>
-                      </div>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-text-tertiary group-hover:text-primary flex-shrink-0 transition-colors">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-                      </svg>
-                    </a>
+                      {tab.label}
+                      {tab.count > 0 && (
+                        <span className={`text-[11px] px-1.5 py-0.5 rounded-md font-semibold ${activeTab === tab.id ? 'bg-primary/10 text-primary' : 'bg-black/[0.04] text-text-tertiary'}`}>
+                          {tab.count}
+                        </span>
+                      )}
+                    </button>
+                  ))}
+                </div>
+                <div className="space-y-2">
+                  {activeTab === 'technical' && prep.technicalQuestions.map((q, i) => (
+                    <TechnicalQuestionCard key={i} q={q} index={i} expanded={expanded.has(`tech-${i}`)} onToggle={toggleExpanded} />
+                  ))}
+                  {activeTab === 'behavioral' && prep.behavioralQuestions.map((q, i) => (
+                    <BehavioralQuestionCard key={i} q={q} index={i} expanded={expanded.has(`beh-${i}`)} onToggle={toggleExpanded} />
+                  ))}
+                  {activeTab === 'situational' && prep.situationalQuestions.map((q, i) => (
+                    <SituationalQuestionCard key={i} q={q} index={i} expanded={expanded.has(`sit-${i}`)} onToggle={toggleExpanded} />
+                  ))}
+                  {activeTab === 'culture' && prep.cultureQuestions.map((q, i) => (
+                    <CultureQuestionCard key={i} q={q} index={i} expanded={expanded.has(`cul-${i}`)} onToggle={toggleExpanded} />
                   ))}
                 </div>
               </div>
-            ) : null;
-          })()}
 
-          {/* ── Mental Readiness ── */}
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-              </div>
-              <h3 className="font-semibold text-text-primary text-base">Mental Readiness</h3>
-            </div>
-            {prep.mentalReadinessTip && (
-              <div className="rounded-xl border border-primary/15 bg-primary/[0.04] px-4 py-3.5 flex items-start gap-3 mb-4">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary flex-shrink-0 mt-0.5">
-                  <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-                </svg>
-                <p className="text-sm text-text-secondary italic">{prep.mentalReadinessTip}</p>
-              </div>
-            )}
-            <div className="grid sm:grid-cols-3 gap-3">
-              {(
-                [
-                  { key: 'pre' as const, label: 'Pre-Interview', color: 'text-violet-600', bg: 'bg-violet-500/[0.05]', border: 'border-violet-500/15' },
-                  { key: 'day' as const, label: 'Day Of', color: 'text-[#E8890A]', bg: 'bg-[#E8890A]/[0.05]', border: 'border-[#E8890A]/15' },
-                  { key: 'during' as const, label: 'During', color: 'text-success', bg: 'bg-success/[0.05]', border: 'border-success/15' },
-                ]
-              ).map(({ key, label, color, bg, border }) => (
-                <div key={key} className={`rounded-xl border ${border} ${bg} p-3.5`}>
-                  <p className={`text-[11px] font-semibold uppercase tracking-wider mb-2.5 ${color}`}>{label}</p>
+              {/* Questions to Ask Them */}
+              {prep.questionsToAsk.length > 0 && (
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-8 h-8 rounded-lg bg-success/10 border border-success/20 flex items-center justify-center text-success">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                      </svg>
+                    </div>
+                    <h3 className="font-semibold text-text-primary text-base">Questions to Ask Them</h3>
+                  </div>
                   <div className="space-y-2">
-                    {MENTAL_ITEMS[key].map(item => {
-                      const isChecked = checked.has(item.id);
-                      return (
-                        <div
-                          key={item.id}
-                          onClick={() => toggleChecked(item.id)}
-                          className="flex items-start gap-2 cursor-pointer"
-                        >
-                          <div className={`w-4 h-4 rounded border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors ${
-                            isChecked ? 'bg-success border-success' : 'border-black/20 bg-white/60'
-                          }`}>
-                            {isChecked && (
-                              <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-                                <polyline points="20 6 9 17 4 12"/>
-                              </svg>
-                            )}
-                          </div>
-                          <p className={`text-xs leading-relaxed ${isChecked ? 'line-through text-text-tertiary' : 'text-text-secondary'}`}>
-                            {item.text}
-                          </p>
-                        </div>
-                      );
-                    })}
+                    {prep.questionsToAsk.map((q, i) => (
+                      <div key={i} className="flex items-start gap-3 rounded-xl border border-black/[0.08] bg-black/[0.02] px-4 py-3">
+                        <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full border flex-shrink-0 mt-0.5 whitespace-nowrap ${ASK_CATEGORY_STYLES[q.category]}`}>
+                          {ASK_CATEGORY_LABELS[q.category]}
+                        </span>
+                        <p className="text-sm text-text-primary leading-relaxed">{q.question}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              ))}
+              )}
             </div>
-          </div>
+          )}
 
-          {/* ── Salary Negotiation Prep ── */}
-          {salaryAnalysis && (
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-success/10 border border-success/20 flex items-center justify-center text-success">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                  </svg>
+          {/* ── Tab: Study Plan ── */}
+          {activePrepTab === 'study' && (
+            <div className="space-y-6">
+              {/* Technical Review Checklist */}
+              {prep.technicalReview.length > 0 && (
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-600">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                      </svg>
+                    </div>
+                    <h3 className="font-semibold text-text-primary text-base">Technical Review Checklist</h3>
+                  </div>
+                  {Array.from(new Set(prep.technicalReview.map(item => item.cluster))).map(cluster => (
+                    <div key={cluster} className="mb-5">
+                      <p className="text-[11px] font-semibold text-text-tertiary uppercase tracking-wider mb-2">{cluster}</p>
+                      <div className="space-y-2">
+                        {prep.technicalReview
+                          .map((item, i) => ({ item, i }))
+                          .filter(({ item }) => item.cluster === cluster)
+                          .map(({ item, i }) => {
+                            const id = `tr-${i}`;
+                            const isChecked = checked.has(id);
+                            return (
+                              <div
+                                key={i}
+                                onClick={() => toggleChecked(id)}
+                                className={`rounded-xl border px-4 py-3 flex items-start gap-3 cursor-pointer transition-colors ${
+                                  isChecked ? 'border-success/20 bg-success/[0.04]' : 'border-black/[0.08] bg-black/[0.02] hover:bg-black/[0.03]'
+                                }`}
+                              >
+                                <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors ${
+                                  isChecked ? 'bg-success border-success' : 'border-black/20'
+                                }`}>
+                                  {isChecked && (
+                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+                                      <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                  )}
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <p className={`text-sm font-medium ${isChecked ? 'line-through text-text-tertiary' : 'text-text-primary'}`}>{item.topic}</p>
+                                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-black/[0.04] border border-black/[0.06] text-text-tertiary">{item.estimatedTime}</span>
+                                  </div>
+                                  <p className="text-xs text-text-tertiary mt-0.5">{item.whyItMatters}</p>
+                                </div>
+                              </div>
+                            );
+                          })}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <h3 className="font-semibold text-text-primary text-base">Salary Negotiation Prep</h3>
+              )}
+
+              {/* TestGorilla Practice Tests */}
+              {(() => {
+                const matches = prep.testGorillaTests.map(k => TESTGORILLA_MAP[k]).filter(Boolean);
+                return matches.length > 0 ? (
+                  <div>
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-600">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                      </div>
+                      <h3 className="font-semibold text-text-primary text-base">Practice Tests (TestGorilla)</h3>
+                    </div>
+                    <div className="grid sm:grid-cols-2 gap-2">
+                      {matches.map((entry, i) => (
+                        <a key={i} href={entry.url} target="_blank" rel="noopener noreferrer"
+                          className="flex items-center justify-between gap-3 rounded-xl border border-black/[0.08] bg-black/[0.02] px-4 py-3 hover:border-primary/20 hover:bg-primary/[0.02] transition-colors group"
+                        >
+                          <div className="min-w-0">
+                            <p className="text-sm font-medium text-text-primary group-hover:text-primary transition-colors truncate">{entry.name}</p>
+                            <p className="text-xs text-text-tertiary">{entry.minutes} min</p>
+                          </div>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-text-tertiary group-hover:text-primary flex-shrink-0 transition-colors">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                          </svg>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ) : null;
+              })()}
+            </div>
+          )}
+
+          {/* ── Tab: Soft Skills ── */}
+          {activePrepTab === 'soft-skills' && (
+            <div className="space-y-6">
+              {/* Soft Skills Deep Dive */}
+              {prep.softSkills.length > 0 && (
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-8 h-8 rounded-lg bg-[#E8890A]/10 border border-[#E8890A]/20 flex items-center justify-center text-[#E8890A]">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                      </svg>
+                    </div>
+                    <h3 className="font-semibold text-text-primary text-base">Soft Skills Deep Dive</h3>
+                  </div>
+                  <div className="space-y-3">
+                    {prep.softSkills.map((skill, i) => (
+                      <div key={i} className="rounded-xl border border-black/[0.08] bg-black/[0.02] p-4">
+                        <p className="text-sm font-semibold text-text-primary mb-0.5">{skill.skill}</p>
+                        <p className="text-xs text-text-tertiary mb-3">{skill.inContext}</p>
+                        <div className="grid sm:grid-cols-2 gap-3">
+                          <div className="rounded-lg bg-success/[0.05] border border-success/15 px-3 py-2.5">
+                            <p className="text-[11px] font-semibold text-success uppercase tracking-wider mb-1.5">How to signal it</p>
+                            <ul className="space-y-1">
+                              {skill.howToSignal.map((point, j) => (
+                                <li key={j} className="text-xs text-text-secondary flex items-start gap-1.5">
+                                  <span className="text-success mt-0.5 flex-shrink-0">›</span>
+                                  {point}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div className="rounded-lg bg-danger/[0.05] border border-danger/15 px-3 py-2.5">
+                            <p className="text-[11px] font-semibold text-danger uppercase tracking-wider mb-1.5">Red flag to avoid</p>
+                            <p className="text-xs text-text-secondary">{skill.redFlag}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Mental Readiness */}
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                  </div>
+                  <h3 className="font-semibold text-text-primary text-base">Mental Readiness</h3>
+                </div>
+                {prep.mentalReadinessTip && (
+                  <div className="rounded-xl border border-primary/15 bg-primary/[0.04] px-4 py-3.5 flex items-start gap-3 mb-4">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary flex-shrink-0 mt-0.5">
+                      <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                    <p className="text-sm text-text-secondary italic">{prep.mentalReadinessTip}</p>
+                  </div>
+                )}
+                <div className="grid sm:grid-cols-3 gap-3">
+                  {(
+                    [
+                      { key: 'pre' as const, label: 'Pre-Interview', color: 'text-violet-600', bg: 'bg-violet-500/[0.05]', border: 'border-violet-500/15' },
+                      { key: 'day' as const, label: 'Day Of', color: 'text-[#E8890A]', bg: 'bg-[#E8890A]/[0.05]', border: 'border-[#E8890A]/15' },
+                      { key: 'during' as const, label: 'During', color: 'text-success', bg: 'bg-success/[0.05]', border: 'border-success/15' },
+                    ]
+                  ).map(({ key, label, color, bg, border }) => (
+                    <div key={key} className={`rounded-xl border ${border} ${bg} p-3.5`}>
+                      <p className={`text-[11px] font-semibold uppercase tracking-wider mb-2.5 ${color}`}>{label}</p>
+                      <div className="space-y-2">
+                        {MENTAL_ITEMS[key].map(item => {
+                          const isChecked = checked.has(item.id);
+                          return (
+                            <div key={item.id} onClick={() => toggleChecked(item.id)} className="flex items-start gap-2 cursor-pointer">
+                              <div className={`w-4 h-4 rounded border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors ${
+                                isChecked ? 'bg-success border-success' : 'border-black/20 bg-white/60'
+                              }`}>
+                                {isChecked && (
+                                  <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                  </svg>
+                                )}
+                              </div>
+                              <p className={`text-xs leading-relaxed ${isChecked ? 'line-through text-text-tertiary' : 'text-text-secondary'}`}>{item.text}</p>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="rounded-2xl border border-black/[0.08] bg-black/[0.02] p-4 mb-3">
+            </div>
+          )}
+
+          {/* ── Tab: Salary ── */}
+          {activePrepTab === 'salary' && salaryAnalysis && (
+            <div className="space-y-4">
+              <div className="rounded-2xl border border-black/[0.08] bg-black/[0.02] p-4">
                 <div className="grid grid-cols-3 gap-3 mb-1">
                   {(
                     [
@@ -916,9 +903,7 @@ export default function InterviewPrepPanel({
                   ).map(({ label, value, color, border, bg }) => (
                     <div key={label} className={`rounded-xl border ${border} ${bg} px-3 py-3 text-center`}>
                       <p className="text-[11px] text-text-tertiary font-medium mb-1">{label}</p>
-                      <p className={`text-sm font-bold ${color}`}>
-                        {formatCurrency(value, salaryAnalysis.targetRoleMarket.currency)}
-                      </p>
+                      <p className={`text-sm font-bold ${color}`}>{formatCurrency(value, salaryAnalysis.targetRoleMarket.currency)}</p>
                     </div>
                   ))}
                 </div>
@@ -940,7 +925,7 @@ export default function InterviewPrepPanel({
             </div>
           )}
 
-          {/* ── Re-generate + feedback ── */}
+          {/* ── Re-generate + feedback — always visible ── */}
           <div className="flex items-center justify-between pt-2">
             <button
               onClick={generate}
