@@ -15,6 +15,7 @@ import type {
   SalaryAnalysis,
 } from '@/lib/types';
 import { formatCurrency } from '@/lib/utils';
+import { useTranslation } from '@/lib/i18n';
 import { FeedbackButton } from './FeedbackButton';
 
 // ─── Props ───────────────────────────────────────────────────────────────────
@@ -425,6 +426,7 @@ export default function InterviewPrepPanel({
   analysisId,
   salaryAnalysis,
 }: InterviewPrepPanelProps) {
+  const { t } = useTranslation();
   const [state, setState] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle');
   const [prep, setPrep] = useState<InterviewPrep | null>(null);
   const [error, setError] = useState('');
@@ -545,7 +547,7 @@ export default function InterviewPrepPanel({
               <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
             </svg>
           </div>
-          <h3 className="font-semibold text-text-primary mb-2">Generate your interview kit</h3>
+          <h3 className="font-semibold text-text-primary mb-2">{t('interviewPrep.generateTitle')}</h3>
           <p className="text-sm text-text-secondary mb-6 max-w-md mx-auto">
             AI will generate a personalized question bank, STAR prompts grounded in your experience, technical topics to review, and smart questions to ask your interviewers — all tailored to this specific job posting.
           </p>
@@ -556,7 +558,7 @@ export default function InterviewPrepPanel({
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
             </svg>
-            Generate Interview Kit
+            {t('interviewPrep.generateButton')}
           </button>
         </div>
       )}
@@ -564,7 +566,7 @@ export default function InterviewPrepPanel({
       {/* ── Loading skeleton ── */}
       {state === 'loading' && (
         <div className="space-y-3">
-          <p className="text-sm text-text-tertiary text-center animate-pulse">Generating your personalized interview kit…</p>
+          <p className="text-sm text-text-tertiary text-center animate-pulse">{t('interviewPrep.generating')}</p>
           {[80, 60, 72, 55, 68].map((w, i) => (
             <div key={i} className={`h-14 rounded-xl bg-black/[0.04] animate-pulse`} style={{ width: `${w}%` }} />
           ))}

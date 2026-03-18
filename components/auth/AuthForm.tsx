@@ -85,7 +85,7 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
 
       {/* OAuth consent notice */}
       <p className="text-[10px] text-text-tertiary text-center px-1 mb-3">
-        By continuing with Google or GitHub, you agree to our{' '}
+        {t('auth.oauthConsent')}{' '}
         <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Terms</a>
         {' '}&amp;{' '}
         <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Privacy Policy</a>

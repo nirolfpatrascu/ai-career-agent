@@ -24,7 +24,12 @@
     "terms": "Terms",
     "privacy": "Privacy",
     "translating": "Translating...",
-    "translationFailed": "Translation failed — click to retry"
+    "translationFailed": "Translation failed — click to retry",
+    "lastUpdated": "Last updated",
+    "effective": "Effective",
+    "seeAlso": "See also",
+    "privacyPolicy": "Privacy Policy",
+    "termsAndConditions": "Terms & Conditions"
   },
   "nav": {
     "cvOptimizer": "CV Optimizer",
@@ -230,6 +235,15 @@
       "ats": "Scoring ATS compatibility",
       "translating": "Translating your report",
       "finalizing": "Finalizing your report"
+    },
+    "stepMessages": {
+      "parsing": "Reading your documents...",
+      "extraction": "Extracting skills and experience...",
+      "gap_analysis": "Analyzing skill gaps and matching roles...",
+      "career_plan": "Building your career roadmap...",
+      "ats": "Scoring ATS compatibility...",
+      "cover_letter": "Generating cover letter...",
+      "translating": "Translating your report..."
     },
     "patience": {
       "headline": "Good analysis takes time.",
@@ -444,7 +458,11 @@
       "howToExport": "How to export your LinkedIn profile as PDF",
       "optional": "This step is optional but recommended for the best analysis.",
       "tabLinkedin": "LinkedIn PDF",
-      "tabUpwork": "Upwork Profile"
+      "tabUpwork": "Upwork Profile",
+      "step1": "Go to your LinkedIn profile page",
+      "step2": "Click the More or Resources button (⋯) below your profile photo",
+      "step3": "Select Save to PDF",
+      "step4": "Upload the downloaded PDF here"
     },
     "cv": {
       "title": "Upload your CV / Resume",
@@ -551,6 +569,7 @@
     "confirmationSent": "We sent you a confirmation link. Click it to activate your account.",
     "noAccount": "Don't have an account?",
     "haveAccount": "Already have an account?",
+    "oauthConsent": "By continuing with Google or GitHub, you agree to our",
     "myAnalyses": "My Analyses",
     "saveSaving": "Saving...",
     "saveSaved": "Saved",
@@ -844,6 +863,8 @@
     },
     "analysis": {
       "title": "Upwork Profile Analysis",
+      "analyzing": "Analyzing...",
+      "analyzeButton": "Analyze Profile",
       "score": "Profile Score",
       "titleOpt": "Title Optimization",
       "titleCurrent": "Current Title",
@@ -903,6 +924,11 @@
     "gapsAddressed": "Gaps Addressed",
     "editHint": "Edit the letter below to personalize it further",
     "noJobPosting": "Add a job posting in the wizard to generate a tailored cover letter."
+  },
+  "interviewPrep": {
+    "generateTitle": "Generate your interview kit",
+    "generateButton": "Generate Interview Kit",
+    "generating": "Generating your personalized interview kit…"
   },
   "github": {
     "title": "GitHub Analysis",

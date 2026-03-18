@@ -104,12 +104,12 @@ export default function UpworkPanel({
             {analyzing ? (
               <>
                 <Loader2 size={16} className="animate-spin" />
-                Analyzing...
+                {t('upwork.analysis.analyzing')}
               </>
             ) : (
               <>
                 <Zap size={16} />
-                Analyze Profile
+                {t('upwork.analysis.analyzeButton')}
               </>
             )}
           </button>

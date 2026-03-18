@@ -24,7 +24,12 @@
     "terms": "Termeni",
     "privacy": "Confidențialitate",
     "translating": "Se traduce...",
-    "translationFailed": "Traducerea a eșuat — faceți clic pentru a încerca din nou"
+    "translationFailed": "Traducerea a eșuat — faceți clic pentru a încerca din nou",
+    "lastUpdated": "Ultima actualizare",
+    "effective": "Eficient",
+    "seeAlso": "Vezi și",
+    "privacyPolicy": "Politica de confidențialitate",
+    "termsAndConditions": "Termeni și condiții"
   },
   "nav": {
     "cvOptimizer": "Optimizator de CV",
@@ -230,6 +235,15 @@
       "ats": "Evaluarea compatibilității cu ATS",
       "translating": "Traducerea raportului dumneavoastră",
       "finalizing": "Finalizarea raportului"
+    },
+    "stepMessages": {
+      "parsing": "Se citesc documentele...",
+      "extraction": "Dobândirea de competențe și experiență...",
+      "gap_analysis": "Analizarea lacunelor în materie de competențe și potrivirea posturilor...",
+      "career_plan": "Construirea planului tău de carieră...",
+      "ats": "Evaluarea compatibilității cu ATS...",
+      "cover_letter": "Se generează scrisoarea de intenție...",
+      "translating": "Se traduce raportul dumneavoastră..."
     },
     "patience": {
       "headline": "O analiză bună necesită timp.",
@@ -444,7 +458,11 @@
       "howToExport": "Cum să-ți exportezi profilul LinkedIn în format PDF",
       "optional": "Acest pas este opțional, dar recomandat pentru o analiză optimă.",
       "tabLinkedin": "PDF LinkedIn",
-      "tabUpwork": "Profilul Upwork"
+      "tabUpwork": "Profilul Upwork",
+      "step1": "Accesează pagina profilului tău de LinkedIn",
+      "step2": "Dă clic pe butonul „Mai multe” sau „Resurse” (⋯) situat sub fotografia de profil",
+      "step3": "Selectează „Salvează în PDF”",
+      "step4": "Încărcați aici fișierul PDF descărcat"
     },
     "cv": {
       "title": "Încărcați CV-ul dumneavoastră",
@@ -551,6 +569,7 @@
     "confirmationSent": "Ți-am trimis un link de confirmare. Dă clic pe el pentru a-ți activa contul.",
     "noAccount": "Nu ai un cont?",
     "haveAccount": "Ai deja un cont?",
+    "oauthConsent": "Dacă continuați cu Google sau GitHub, sunteți de acord cu",
     "myAnalyses": "Analizele mele",
     "saveSaving": "Se salvează...",
     "saveSaved": "Salvat",
@@ -844,6 +863,8 @@
     },
     "analysis": {
       "title": "Analiza profilului Upwork",
+      "analyzing": "Se analizează...",
+      "analyzeButton": "Analizează profilul",
       "score": "Scorul profilului",
       "titleOpt": "Optimizarea titlului",
       "titleCurrent": "Titlul actual",
@@ -903,6 +924,11 @@
     "gapsAddressed": "Lacunele remediate",
     "editHint": "Modificați textul de mai jos pentru a-l personaliza și mai mult",
     "noJobPosting": "Adăugați o ofertă de muncă în asistentul de configurare pentru a genera o scrisoare de intenție personalizată."
+  },
+  "interviewPrep": {
+    "generateTitle": "Creează-ți kitul pentru interviu",
+    "generateButton": "Creează un kit pentru interviu",
+    "generating": "Se creează pachetul tău personalizat pentru interviu…"
   },
   "github": {
     "title": "Analiza GitHub",

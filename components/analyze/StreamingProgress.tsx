@@ -115,7 +115,7 @@ export default function StreamingProgress({ currentStep }: StreamingProgressProp
           {/* Status message */}
           <div className="text-center space-y-1.5">
             <p className="text-lg font-semibold text-text-primary font-display">
-              {currentStep.message || t('progress.messages.0')}
+              {t(`progress.stepMessages.${currentStep.step}`) || currentStep.message || t('progress.messages.0')}
             </p>
             <p className="text-xs text-text-tertiary">
               {t('progress.stepLabel')} {currentStepNum}/{DISPLAY_STEPS.length}

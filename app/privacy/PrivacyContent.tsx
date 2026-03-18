@@ -177,7 +177,7 @@ function PrivacySectionRenderer({
 }
 
 export function PrivacyContent() {
-  const { locale } = useTranslation();
+  const { locale, t } = useTranslation();
   const content = PRIVACY_CONTENT[locale];
 
   return (
@@ -190,7 +190,7 @@ export function PrivacyContent() {
             {content.pageTitle}
           </h1>
           <p className="text-text-secondary">
-            Last updated: <strong className="text-text-primary">{LAST_UPDATED}</strong> · Effective: {EFFECTIVE_DATE}
+            {t('common.lastUpdated')}: <strong className="text-text-primary">{LAST_UPDATED}</strong> · {t('common.effective')}: {EFFECTIVE_DATE}
           </p>
           <p className="mt-3 text-text-secondary">{content.intro}</p>
         </div>
@@ -201,9 +201,9 @@ export function PrivacyContent() {
 
         <div className="mt-12 pt-8 border-t border-black/[0.06] text-center">
           <p className="text-text-tertiary text-sm">
-            See also:{' '}
+            {t('common.seeAlso')}:{' '}
             <Link href="/terms" className="text-primary hover:underline font-medium">
-              Terms &amp; Conditions
+              {t('common.termsAndConditions')}
             </Link>
           </p>
         </div>

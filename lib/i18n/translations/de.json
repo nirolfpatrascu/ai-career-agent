@@ -24,7 +24,12 @@
     "terms": "Bedingungen",
     "privacy": "Datenschutz",
     "translating": "Wird übersetzt...",
-    "translationFailed": "Die Übersetzung ist fehlgeschlagen – bitte klicken Sie hier, um es erneut zu versuchen"
+    "translationFailed": "Die Übersetzung ist fehlgeschlagen – bitte klicken Sie hier, um es erneut zu versuchen",
+    "lastUpdated": "Zuletzt aktualisiert",
+    "effective": "Gültig",
+    "seeAlso": "Siehe auch",
+    "privacyPolicy": "Datenschutzerklärung",
+    "termsAndConditions": "Allgemeine Geschäftsbedingungen"
   },
   "nav": {
     "cvOptimizer": "Lebenslauf-Optimierer",
@@ -230,6 +235,15 @@
       "ats": "Bewertung der ATS-Kompatibilität",
       "translating": "Übersetzung Ihres Berichts",
       "finalizing": "Fertigstellung Ihres Berichts"
+    },
+    "stepMessages": {
+      "parsing": "Ihre Dokumente werden geladen...",
+      "extraction": "Kompetenzen und Erfahrungen sammeln...",
+      "gap_analysis": "Kompetenzlücken analysieren und Stellen besetzen...",
+      "career_plan": "Erstellen Sie Ihren Karriereplan...",
+      "ats": "Bewertung der ATS-Kompatibilität...",
+      "cover_letter": "Anschreiben wird erstellt...",
+      "translating": "Ihr Bericht wird gerade übersetzt..."
     },
     "patience": {
       "headline": "Eine gute Analyse braucht Zeit.",
@@ -444,7 +458,11 @@
       "howToExport": "So exportieren Sie Ihr LinkedIn-Profil als PDF",
       "optional": "Dieser Schritt ist optional, wird jedoch für eine optimale Analyse empfohlen.",
       "tabLinkedin": "LinkedIn-PDF",
-      "tabUpwork": "Upwork-Profil"
+      "tabUpwork": "Upwork-Profil",
+      "step1": "Gehen Sie zu Ihrer LinkedIn-Profilseite",
+      "step2": "Klicke auf die Schaltfläche „Mehr“ oder „Ressourcen“ (⋯) unter deinem Profilfoto",
+      "step3": "Wähle „Als PDF speichern“",
+      "step4": "Laden Sie die heruntergeladene PDF-Datei hier hoch"
     },
     "cv": {
       "title": "Laden Sie Ihren Lebenslauf hoch",
@@ -551,6 +569,7 @@
     "confirmationSent": "Wir haben dir einen Bestätigungslink geschickt. Klicke darauf, um dein Konto zu aktivieren.",
     "noAccount": "Sie haben noch kein Konto?",
     "haveAccount": "Haben Sie bereits ein Konto?",
+    "oauthConsent": "Wenn Sie sich über Google oder GitHub anmelden, erklären Sie sich mit unseren",
     "myAnalyses": "Meine Analysen",
     "saveSaving": "Wird gespeichert...",
     "saveSaved": "Gespeichert",
@@ -844,6 +863,8 @@
     },
     "analysis": {
       "title": "Analyse des Upwork-Profils",
+      "analyzing": "Wird analysiert...",
+      "analyzeButton": "Profil analysieren",
       "score": "Profilbewertung",
       "titleOpt": "Titeloptimierung",
       "titleCurrent": "Aktueller Titel",
@@ -903,6 +924,11 @@
     "gapsAddressed": "Beheobene Lücken",
     "editHint": "Bearbeiten Sie den folgenden Brief, um ihn weiter anzupassen",
     "noJobPosting": "Fügen Sie im Assistenten eine Stellenanzeige hinzu, um ein individuelles Anschreiben zu erstellen."
+  },
+  "interviewPrep": {
+    "generateTitle": "Stellen Sie Ihr Vorstellungsgespräch-Paket zusammen",
+    "generateButton": "Interview-Paket erstellen",
+    "generating": "Ihr individuelles Vorstellungsgesprächspaket wird erstellt…"
   },
   "github": {
     "title": "GitHub-Analyse",

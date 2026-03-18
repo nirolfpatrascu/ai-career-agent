@@ -78,7 +78,7 @@ function HighlightSection({ section, label }: { section: LegalSection; label: st
 }
 
 export function TermsContent() {
-  const { locale } = useTranslation();
+  const { locale, t } = useTranslation();
   const content = TERMS_CONTENT[locale];
 
   return (
@@ -91,7 +91,7 @@ export function TermsContent() {
             {content.pageTitle}
           </h1>
           <p className="text-text-secondary">
-            Last updated: <strong className="text-text-primary">{LAST_UPDATED}</strong> · Effective: {EFFECTIVE_DATE}
+            {t('common.lastUpdated')}: <strong className="text-text-primary">{LAST_UPDATED}</strong> · {t('common.effective')}: {EFFECTIVE_DATE}
           </p>
           <p className="mt-3 text-text-secondary">{content.intro}</p>
         </div>
@@ -106,9 +106,9 @@ export function TermsContent() {
 
         <div className="mt-12 pt-8 border-t border-black/[0.06] text-center">
           <p className="text-text-tertiary text-sm">
-            See also:{' '}
+            {t('common.seeAlso')}:{' '}
             <Link href="/privacy" className="text-primary hover:underline font-medium">
-              Privacy Policy
+              {t('common.privacyPolicy')}
             </Link>
           </p>
         </div>
