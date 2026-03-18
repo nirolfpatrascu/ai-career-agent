@@ -111,6 +111,7 @@
   "analyze": {
     "title": "Analyze Your Career",
     "subtitle": "Upload your LinkedIn profile and CV, fill in your career goals, and get your personalized analysis.",
+    "demoDescription": "Curious what you'll get? Try a live demo with a sample profile — no sign-up, no personal data required. See exactly what the analysis looks like before you commit to running it on your own career.",
     "uploadCV": "Upload CV",
     "careerDetails": "Career Details",
     "uploadToContinue": "Upload your CV to continue",
