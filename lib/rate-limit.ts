@@ -19,7 +19,7 @@ const WINDOW_MS = 60 * 60 * 1000; // 1 hour
  * @param identifier - Usually the client IP address
  * @returns Object with allowed status and remaining requests
  */
-export function checkRateLimit(identifier: string): {
+export function checkRateLimit(identifier: string, limit = LIMIT_PER_HOUR): {
   allowed: boolean;
   remaining: number;
   resetAt: number;
@@ -41,13 +41,13 @@ export function checkRateLimit(identifier: string): {
     });
     return {
       allowed: true,
-      remaining: LIMIT_PER_HOUR - 1,
+      remaining: limit - 1,
       resetAt: now + WINDOW_MS,
     };
   }
 
   // Existing entry — check limit
-  if (entry.count >= LIMIT_PER_HOUR) {
+  if (entry.count >= limit) {
     return {
       allowed: false,
       remaining: 0,
@@ -59,7 +59,7 @@ export function checkRateLimit(identifier: string): {
   entry.count++;
   return {
     allowed: true,
-    remaining: LIMIT_PER_HOUR - entry.count,
+    remaining: limit - entry.count,
     resetAt: entry.resetAt,
   };
 }
