@@ -497,9 +497,9 @@ export default function AnalyzePage() {
                 <span className="text-text-secondary">
                   👆 {t('analyze.demoBanner')}
                 </span>
-                <Link href="/analyze" className="text-primary font-medium hover:text-primary-light transition-colors">
+                <button onClick={handleReset} className="text-primary font-medium hover:text-primary-light transition-colors">
                   {t('analyze.uploadOwn')} →
-                </Link>
+                </button>
               </div>
             )}
 
