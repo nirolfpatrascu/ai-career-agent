@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useTranslation } from '@/lib/i18n';
 import type { AnalysisResult } from '@/lib/types';
 import { FeedbackButton } from './FeedbackButton';
@@ -62,7 +62,7 @@ function SectionCard({ title, icon, children, feedbackSection }: { title: string
 type LinkedInTab = 'setup' | 'brand' | 'showcase' | 'growth';
 
 export default function LinkedInPlan({ analysis }: LinkedInPlanProps) {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const [tab, setTab] = useState<LinkedInTab>('setup');
 
   // Compute a LinkedIn Profile Grade (0-10)
@@ -238,6 +238,55 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
     return { headlines, about, featuredItems, skillsToAdd, skillsToRemove, contentIdeas, connectionTargets, commentGroups, profileSettings, profileLinkTips };
   }, [analysis]);
 
+  const [displayPlan, setDisplayPlan] = useState(plan);
+
+  useEffect(() => {
+    setDisplayPlan(plan); // show English immediately
+    if (locale === 'en') return;
+
+    const texts = [
+      ...plan.headlines,
+      plan.about,
+      ...plan.featuredItems.flatMap(f => [f.title, f.tip]),
+      ...plan.contentIdeas.map(c => c.text),
+      ...plan.connectionTargets,
+      ...plan.commentGroups.flatMap(g => [g.label, g.reason]),
+      ...plan.profileSettings.map(s => s.text),
+      ...plan.profileLinkTips.flatMap(entry => [entry.title, entry.tip]),
+    ];
+
+    const controller = new AbortController();
+    fetch('/api/translate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ texts, targetLang: locale }),
+      signal: controller.signal,
+    })
+      .then(r => r.json())
+      .then((data: { translations?: string[] }) => {
+        if (!data.translations) return;
+        const tx = data.translations;
+        let idx = 0;
+        const take = () => tx[idx++] ?? '';
+        setDisplayPlan({
+          ...plan,
+          headlines: plan.headlines.map(() => take()),
+          about: take(),
+          featuredItems: plan.featuredItems.map(f => ({ ...f, title: take(), tip: take() })),
+          contentIdeas: plan.contentIdeas.map(c => ({ ...c, text: take() })),
+          connectionTargets: plan.connectionTargets.map(() => take()),
+          commentGroups: plan.commentGroups.map(g => ({ ...g, label: take(), reason: take() })),
+          profileSettings: plan.profileSettings.map(s => ({ ...s, text: take() })),
+          profileLinkTips: plan.profileLinkTips.map(entry => ({ ...entry, title: take(), tip: take() })),
+        });
+      })
+      .catch(() => {}); // on abort or error, keep English
+
+    return () => controller.abort();
+  }, [plan, locale]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const dp = displayPlan;
+
   return (
     <section className="space-y-6">
       {/* Section header */}
@@ -313,7 +362,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
               {t('linkedin.profileSettingsAdvice')}
             </p>
             <div className="space-y-2">
-              {plan.profileSettings.map((item, i) => (
+              {dp.profileSettings.map((item, i) => (
                 <div key={i} className="flex items-start gap-3 bg-white border border-black/[0.10] rounded-xl px-4 py-3 shadow-sm">
                   <div className="w-5 h-5 rounded border-2 border-[#0A66C2]/40 bg-[#0A66C2]/[0.07] flex items-center justify-center flex-shrink-0 mt-0.5">
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0A66C2" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -334,7 +383,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
               {t('linkedin.profileLinkAdvice')}
             </p>
             <div className="space-y-3">
-              {plan.profileLinkTips.map((tip, i) => (
+              {dp.profileLinkTips.map((tip, i) => (
                 <div key={i} className="flex items-start gap-3 bg-black/[0.03] border border-black/[0.06] rounded-xl px-4 py-3">
                   <div className="w-6 h-6 rounded-lg bg-success/10 border border-success/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span className="text-xs font-bold text-success">{i + 1}</span>
@@ -392,7 +441,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
               {t('linkedin.headlineAdvice')}
             </p>
             <div className="space-y-3">
-              {plan.headlines.map((h, i) => (
+              {dp.headlines.map((h, i) => (
                 <div key={i} className="flex items-start justify-between gap-3 bg-black/[0.03] border border-black/[0.06] rounded-xl px-4 py-3">
                   <div className="flex items-start gap-2 min-w-0">
                     <span className="text-xs font-bold text-primary/60 bg-primary/[0.08] rounded-md px-1.5 py-0.5 mt-0.5 flex-shrink-0">
@@ -417,10 +466,10 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
             </p>
             <div className="relative bg-black/[0.03] border border-black/[0.06] rounded-xl p-4">
               <pre className="text-sm text-text-primary whitespace-pre-wrap font-sans leading-relaxed">
-                {plan.about}
+                {dp.about}
               </pre>
               <div className="absolute top-3 right-3">
-                <CopyButton text={plan.about} />
+                <CopyButton text={dp.about} />
               </div>
             </div>
           </SectionCard>
@@ -440,7 +489,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
               {t('linkedin.featuredAdvice')}
             </p>
             <div className="space-y-3">
-              {plan.featuredItems.map((item, i) => (
+              {dp.featuredItems.map((item, i) => (
                 <div key={i} className="flex items-start gap-3 bg-black/[0.03] border border-black/[0.06] rounded-xl px-4 py-3">
                   <div className="w-6 h-6 rounded-lg bg-accent-orange/10 border border-accent-orange/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span className="text-xs font-bold text-accent-orange">{i + 1}</span>
@@ -467,7 +516,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
                   {t('linkedin.skillsAdd')}
                 </p>
                 <div className="space-y-1.5">
-                  {Array.from(new Set(plan.skillsToAdd)).slice(0, 8).map((skill, i) => (
+                  {Array.from(new Set(dp.skillsToAdd)).slice(0, 8).map((skill, i) => (
                     <div key={i} className="flex items-center gap-2 text-sm text-text-secondary bg-success/[0.04] border border-success/10 rounded-lg px-3 py-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-success flex-shrink-0" />
                       {skill}
@@ -481,7 +530,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
                   {t('linkedin.skillsDeprioritize')}
                 </p>
                 <div className="space-y-1.5">
-                  {plan.skillsToRemove.slice(0, 6).map((skill, i) => (
+                  {dp.skillsToRemove.slice(0, 6).map((skill, i) => (
                     <div key={i} className="flex items-center gap-2 text-sm text-text-tertiary bg-black/[0.02] border border-black/[0.06] rounded-lg px-3 py-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-text-tertiary flex-shrink-0" />
                       {skill}
@@ -511,7 +560,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
               {t('linkedin.contentAdvice')}
             </p>
             <div className="space-y-3">
-              {plan.contentIdeas.map((idea, i) => (
+              {dp.contentIdeas.map((idea, i) => (
                 <div key={i} className="flex items-start justify-between gap-3 bg-black/[0.03] border border-black/[0.06] rounded-xl px-4 py-3">
                   <div className="flex items-start gap-3 min-w-0">
                     <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md flex-shrink-0 mt-1 ${
@@ -544,7 +593,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
               {t('linkedin.connectionsAdvice')}
             </p>
             <div className="space-y-2">
-              {plan.connectionTargets.map((target, i) => (
+              {dp.connectionTargets.map((target, i) => (
                 <div key={i} className="flex items-center gap-3 text-sm text-text-secondary bg-black/[0.03] border border-black/[0.06] rounded-xl px-4 py-3">
                   <span className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
                   {target}
@@ -567,7 +616,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
             </p>
             <p className="text-xs font-semibold text-text-primary uppercase tracking-wider mb-3">4 groups to comment on daily</p>
             <div className="space-y-2">
-              {plan.commentGroups.map((group, i) => (
+              {dp.commentGroups.map((group, i) => (
                 <div key={i} className="flex items-start gap-3 bg-black/[0.03] border border-black/[0.06] rounded-xl px-4 py-3">
                   <div className="w-6 h-6 rounded-full bg-primary/10 border border-primary/15 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span className="text-[10px] font-bold text-primary">{i + 1}</span>

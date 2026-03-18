@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { useTranslation } from '@/lib/i18n';
 import { FeedbackButton } from './FeedbackButton';
 import type { AnalysisResult } from '@/lib/types';
@@ -17,6 +17,7 @@ export default function CoverLetterPanel({ analysis }: CoverLetterPanelProps) {
   const [editedContent, setEditedContent] = useState('');
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState('');
+  const hasUserEdited = useRef(false);
 
   const jobPosting = analysis.metadata.jobPosting;
 
@@ -30,13 +31,13 @@ export default function CoverLetterPanel({ analysis }: CoverLetterPanelProps) {
     ].filter(Boolean).join('\n\n');
   }, []);
 
-  // Auto-populate from pipeline-generated cover letter
+  // Auto-populate from pipeline-generated cover letter (and re-populate on translation)
   useEffect(() => {
-    if (analysis.coverLetter && !coverLetter) {
+    if (analysis.coverLetter && !hasUserEdited.current) {
       setCoverLetter(analysis.coverLetter);
       setEditedContent(assembleLetter(analysis.coverLetter));
     }
-  }, [analysis.coverLetter, coverLetter, assembleLetter]);
+  }, [analysis.coverLetter, assembleLetter]);
 
   const handleGenerate = useCallback(async () => {
     if (!jobPosting) return;
@@ -55,6 +56,7 @@ export default function CoverLetterPanel({ analysis }: CoverLetterPanelProps) {
       const data = await res.json();
       setCoverLetter(data.coverLetter);
       setEditedContent(assembleLetter(data.coverLetter));
+      hasUserEdited.current = false;
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong');
     } finally {
@@ -142,7 +144,7 @@ export default function CoverLetterPanel({ analysis }: CoverLetterPanelProps) {
             <p className="text-xs text-text-tertiary mb-2">{t('coverLetter.editHint') || 'Edit the letter below to personalize it further'}</p>
             <textarea
               value={editedContent}
-              onChange={(e) => setEditedContent(e.target.value)}
+              onChange={(e) => { setEditedContent(e.target.value); hasUserEdited.current = true; }}
               className="w-full min-h-[400px] p-5 rounded-2xl border border-black/[0.08] bg-white text-sm text-text-primary leading-relaxed resize-y focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30"
             />
             <div className="flex justify-end mt-2">

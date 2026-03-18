@@ -22,7 +22,9 @@
     "close": "Close",
     "language": "Language",
     "terms": "Terms",
-    "privacy": "Privacy"
+    "privacy": "Privacy",
+    "translating": "Translating...",
+    "translationFailed": "Translation failed — click to retry"
   },
   "nav": {
     "cvOptimizer": "CV Optimizer",

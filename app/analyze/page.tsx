@@ -26,6 +26,7 @@ import ChapterNav, { DEFAULT_TAB } from '@/components/results/ChapterNav';
 import SectionIntro from '@/components/results/SectionIntro';
 import { getSampleAnalysis } from '@/lib/demo';
 import { useTranslation } from '@/lib/i18n';
+import { useTranslatedResult } from '@/lib/hooks/useTranslatedResult';
 import { useAuth } from '@/lib/auth/context';
 import AuthForm from '@/components/auth/AuthForm';
 import { useTags } from '@/lib/hooks/useTags';
@@ -41,6 +42,7 @@ export default function AnalyzePage() {
   const [error, setError] = useState<string>('');
   const [isDemo, setIsDemo] = useState(false);
   const [activeTab, setActiveTab] = useState(DEFAULT_TAB);
+  const { displayResult, translationStatus, translationError, retryTranslation } = useTranslatedResult(result, locale);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [analysisId, setAnalysisId] = useState<string | undefined>(undefined);
   const { tags, addTag, removeTag } = useTags(analysisId);
@@ -296,12 +298,12 @@ export default function AnalyzePage() {
   // --- Demo ---
   const handleDemo = useCallback(() => {
     setIsDemo(true);
-    const sample = getSampleAnalysis(locale);
+    const sample = getSampleAnalysis();
     setResult(sample);
     if (sample.metadata.githubUrl) setGithubUrl(sample.metadata.githubUrl);
     setState('results');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [locale]);
+  }, []);
 
   // --- Reset ---
   const handleReset = useCallback(() => {
@@ -336,6 +338,8 @@ export default function AnalyzePage() {
   // RESULTS STATE — Tabbed dashboard
   // ==========================================================================
   if (state === 'results' && result) {
+    // dr = display result (translated or English original while translating)
+    const dr = displayResult ?? result;
     const fitScore = result.fitScore.score;
     const renderActiveTab = () => {
       switch (activeTab) {
@@ -343,12 +347,12 @@ export default function AnalyzePage() {
           return result.jobMatch ? (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-fit-score" aria-labelledby="tab-fit-score">
               <SectionIntro messageKey="motivation.jobMatch" variant="encouraging" />
-              <JobMatchPanel match={result.jobMatch} />
+              <JobMatchPanel match={dr.jobMatch!} />
             </div>
           ) : (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-fit-score" aria-labelledby="tab-fit-score">
               <SectionIntro messageKey="motivation.fitScore" variant={fitScore >= 7 ? 'celebratory' : 'encouraging'} />
-              <FitScoreGauge fitScore={result.fitScore} onNavigate={setActiveTab} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
+              <FitScoreGauge fitScore={dr.fitScore} onNavigate={setActiveTab} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
             </div>
           );
         case 'interview-prep':
@@ -356,16 +360,16 @@ export default function AnalyzePage() {
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-interview-prep" aria-labelledby="tab-interview-prep">
               <SectionIntro messageKey="motivation.interviewPrep" variant="encouraging" />
               <InterviewPrepPanel
-                matchScore={result.jobMatch.matchScore}
-                matchingSkills={result.jobMatch.matchingSkills}
-                missingSkills={result.jobMatch.missingSkills}
-                strengths={result.strengths}
-                gaps={result.gaps}
+                matchScore={dr.jobMatch!.matchScore}
+                matchingSkills={dr.jobMatch!.matchingSkills}
+                missingSkills={dr.jobMatch!.missingSkills}
+                strengths={dr.strengths}
+                gaps={dr.gaps}
                 targetRole={result.metadata.targetRole}
                 jobPosting={result.metadata.jobPosting ?? ''}
-                profile={result.profile}
+                profile={dr.profile}
                 analysisId={analysisId}
-                salaryAnalysis={result.salaryAnalysis}
+                salaryAnalysis={dr.salaryAnalysis}
               />
             </div>
           ) : null;
@@ -375,28 +379,28 @@ export default function AnalyzePage() {
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-strengths-gaps" aria-labelledby="tab-strengths-gaps">
               <SectionIntro messageKey="motivation.strengths" variant="celebratory" />
-              <StrengthsGapsPanel strengths={result.strengths} gaps={result.gaps} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
+              <StrengthsGapsPanel strengths={dr.strengths} gaps={dr.gaps} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
             </div>
           );
         case 'action-plan':
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-action-plan" aria-labelledby="tab-action-plan">
               <SectionIntro messageKey="motivation.actionPlan" variant="encouraging" />
-              <ActionPlan plan={result.actionPlan} fitScore={result.fitScore.score} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
+              <ActionPlan plan={dr.actionPlan} fitScore={result.fitScore.score} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
             </div>
           );
         case 'roles':
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-roles" aria-labelledby="tab-roles">
               <SectionIntro messageKey="motivation.roles" variant="encouraging" />
-              <RoleRecommendations roles={result.roleRecommendations} country={result.metadata.country} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
+              <RoleRecommendations roles={dr.roleRecommendations} country={result.metadata.country} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
             </div>
           );
         case 'salary':
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-salary" aria-labelledby="tab-salary">
               <SectionIntro messageKey="motivation.salary" variant="encouraging" />
-              <SalaryBenchmark salary={result.salaryAnalysis} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
+              <SalaryBenchmark salary={dr.salaryAnalysis} analysisId={analysisId} tags={tags} onTagCreated={addTag} onTagDeleted={removeTag} />
             </div>
           );
         case 'linkedin':
@@ -411,9 +415,9 @@ export default function AnalyzePage() {
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-cv-optimizer" aria-labelledby="tab-cv-optimizer">
               <SectionIntro messageKey="motivation.cvOptimizer" variant="encouraging" />
               <CVOptimizerPanel
-                atsScore={result.atsScore}
-                jobMatch={result.jobMatch}
-                analysis={result}
+                atsScore={dr.atsScore}
+                jobMatch={dr.jobMatch}
+                analysis={dr}
               />
             </div>
           );
@@ -421,7 +425,7 @@ export default function AnalyzePage() {
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-cover-letter" aria-labelledby="tab-cover-letter">
               <SectionIntro messageKey="motivation.coverLetter" variant="encouraging" />
-              <CoverLetterPanel analysis={result} />
+              <CoverLetterPanel analysis={dr} />
             </div>
           );
         case 'github-analysis':
@@ -431,7 +435,7 @@ export default function AnalyzePage() {
               <GitHubAnalysisPanel
                 githubUrl={githubUrl}
                 targetRole={result.metadata.targetRole}
-                initialAnalysis={result.githubAnalysis}
+                initialAnalysis={dr.githubAnalysis}
                 analysisId={analysisId}
               />
             </div>
@@ -467,7 +471,7 @@ export default function AnalyzePage() {
         case 'ai-coach':
           return (
             <div role="tabpanel" className="animate-panel-enter" id="tabpanel-ai-coach" aria-labelledby="tab-ai-coach">
-              <ChatPanel analysis={result} />
+              <ChatPanel analysis={dr} />
             </div>
           );
         default:
@@ -515,6 +519,21 @@ export default function AnalyzePage() {
                 </p>
               </div>
               <div className="flex gap-3 flex-wrap items-center">
+                {/* Translation status */}
+                {translationStatus === 'translating' && (
+                  <span className="text-xs font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-text-tertiary border-black/[0.06] bg-black/[0.03]">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="animate-spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+                    {t('common.translating')}
+                  </span>
+                )}
+                {translationStatus === 'error' && (
+                  <button
+                    onClick={retryTranslation}
+                    className="text-xs font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-danger border-danger/15 bg-danger/[0.04] hover:bg-danger/[0.08] transition-colors"
+                  >
+                    ⚠ {t('common.translationFailed')}
+                  </button>
+                )}
                 {/* Save status */}
                 {user && saveStatus !== 'idle' && (
                   <span className={`text-xs font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-lg border ${
