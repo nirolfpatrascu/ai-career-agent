@@ -67,7 +67,7 @@ export default function JobMatchPanel({ match }: JobMatchPanelProps) {
         <div className="rounded-2xl border border-primary/15 bg-primary/[0.03] p-6">
           <div className="flex items-center gap-2 mb-3">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <h3 className="font-semibold text-text-primary">{t('jobMatch.assessment')}</h3>
+            <h3 className="font-semibold text-text-primary">{t('results.jobMatch.assessment')}</h3>
           </div>
           <p className="text-sm text-text-secondary leading-relaxed whitespace-pre-line">{match.overallAdvice}</p>
           <div className="flex justify-end mt-3 pt-2.5 border-t border-black/[0.06]">
