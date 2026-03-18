@@ -585,7 +585,7 @@ export async function POST(request: NextRequest) {
                 })),
                 language: questionnaire.language,
               }),
-              maxTokens: 4096,
+              maxTokens: 8192,
               temperature: 0.4,
               fallback: INTERVIEW_PREP_FALLBACK,
               maxRetries: 1,
