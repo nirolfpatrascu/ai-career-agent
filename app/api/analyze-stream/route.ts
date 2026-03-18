@@ -31,6 +31,7 @@ import type {
   JobMatch,
   ATSScoreResult,
   CompanyATSInfo,
+  MissingSkill,
 } from '@/lib/types';
 import type { GapAnalysisResult } from '@/lib/prompts/gap-analysis';
 import type { CareerPlanResult } from '@/lib/prompts/career-plan';
@@ -573,7 +574,7 @@ export async function POST(request: NextRequest) {
                 targetRole: questionnaire.targetRole,
                 jobPosting: questionnaire.jobPosting!,
                 matchingSkills: (jobMatchResult as { matchingSkills?: string[] }).matchingSkills ?? [],
-                missingSkills: (jobMatchResult as { missingSkills?: Array<{ skill: string; importance: string }> }).missingSkills ?? [],
+                missingSkills: ((jobMatchResult as { missingSkills?: MissingSkill[] }).missingSkills ?? []),
                 strengths: gapAnalysis.strengths,
                 gaps: gapAnalysis.gaps,
                 profileSummary: profile.summary,
