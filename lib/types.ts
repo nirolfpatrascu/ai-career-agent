@@ -51,6 +51,7 @@ export interface AnalysisResult {
   profile?: ExtractedProfile;
   githubAnalysis?: GitHubAnalysis;
   coverLetter?: CoverLetter;
+  interviewPrep?: InterviewPrep;
 }
 
 export interface AnalysisMetadata {

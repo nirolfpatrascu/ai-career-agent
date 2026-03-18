@@ -15,8 +15,13 @@ const SECTION_PREFIXES = [
   'cvSuggestions',
   'atsScore',
   'cvBuilder',
+  'cvEditor',
   'github',
   'overall',
+  'coverLetter',
+  'interview-prep',
+  'salary',
+  'upwork',
   // per-item prefixes (followed by -<index> or -<tab>-<index>)
   'strength',
   'gap',
@@ -37,6 +42,7 @@ interface FeedbackBody {
   section: string;
   rating: boolean;
   comment?: string;
+  selectedIssues?: string[];
 }
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;

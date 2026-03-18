@@ -31,6 +31,7 @@ interface InterviewPrepPanelProps {
   profile?: ExtractedProfile;
   analysisId?: string;
   salaryAnalysis?: SalaryAnalysis;
+  initialPrep?: InterviewPrep;
 }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -425,10 +426,11 @@ export default function InterviewPrepPanel({
   profile,
   analysisId,
   salaryAnalysis,
+  initialPrep,
 }: InterviewPrepPanelProps) {
   const { t } = useTranslation();
-  const [state, setState] = useState<'idle' | 'loading' | 'loaded' | 'error'>('idle');
-  const [prep, setPrep] = useState<InterviewPrep | null>(null);
+  const [state, setState] = useState<'idle' | 'loading' | 'loaded' | 'error'>(initialPrep ? 'loaded' : 'idle');
+  const [prep, setPrep] = useState<InterviewPrep | null>(initialPrep ?? null);
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState<QuestionTab>('technical');
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
@@ -539,8 +541,8 @@ export default function InterviewPrepPanel({
       {/* ── Readiness banner (always visible) ── */}
       <ReadinessBanner matchScore={matchScore} />
 
-      {/* ── Idle state — generate CTA ── */}
-      {state === 'idle' && (
+      {/* ── Idle state — generate CTA (only shown when no initialPrep was provided) ── */}
+      {state === 'idle' && !initialPrep && (
         <div className="rounded-2xl border border-black/[0.08] bg-black/[0.02] p-8 text-center">
           <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
@@ -906,15 +908,17 @@ export default function InterviewPrepPanel({
 
           {/* ── Re-generate + feedback — always visible ── */}
           <div className="flex items-center justify-between pt-2">
-            <button
-              onClick={generate}
-              className="btn-secondary text-sm flex items-center gap-2 !py-2 !px-4"
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
-              </svg>
-              Regenerate
-            </button>
+            {!initialPrep && (
+              <button
+                onClick={generate}
+                className="btn-secondary text-sm flex items-center gap-2 !py-2 !px-4"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+                </svg>
+                Regenerate
+              </button>
+            )}
             <FeedbackButton compact analysisId={analysisId} section="interview-prep" />
           </div>
         </>

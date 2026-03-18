@@ -37,6 +37,8 @@ import type { CareerPlanResult } from '@/lib/prompts/career-plan';
 import type { GitHubAnalysis } from '@/lib/prompts/github-analysis';
 import { analyzeGitHubProfile } from '@/lib/github-analyzer';
 import { buildCoverLetterPrompt, COVER_LETTER_FALLBACK, type CoverLetter } from '@/lib/prompts/cover-letter';
+import { buildInterviewPrepPrompt, INTERVIEW_PREP_FALLBACK } from '@/lib/prompts/interview-prep';
+import type { InterviewPrep } from '@/lib/types';
 import { logger } from '@/lib/logger';
 import { MetricsCollector } from '@/lib/metrics';
 import { getAuthenticatedClient, getServiceClient } from '@/lib/supabase/server';
@@ -564,7 +566,35 @@ export async function POST(request: NextRequest) {
             })
           : Promise.resolve(undefined as CoverLetter | undefined);
 
-        const [atsMatchingRaw, coverLetterResult] = await Promise.all([atsMatchingTask, coverLetterTask]);
+        // Run interview prep in parallel with ATS matching + cover letter
+        const interviewPrepTask: Promise<InterviewPrep | null> = hasJobPosting && jobMatchResult
+          ? callClaude<InterviewPrep>({
+              ...buildInterviewPrepPrompt({
+                targetRole: questionnaire.targetRole,
+                jobPosting: questionnaire.jobPosting!,
+                matchingSkills: (jobMatchResult as { matchingSkills?: string[] }).matchingSkills ?? [],
+                missingSkills: (jobMatchResult as { missingSkills?: Array<{ skill: string; importance: string }> }).missingSkills ?? [],
+                strengths: gapAnalysis.strengths,
+                gaps: gapAnalysis.gaps,
+                profileSummary: profile.summary,
+                experienceHighlights: profile.experience?.slice(0, 3).map(e => ({
+                  title: e.title,
+                  company: e.company,
+                  highlights: e.highlights,
+                })),
+                language: questionnaire.language,
+              }),
+              maxTokens: 4096,
+              temperature: 0.4,
+              fallback: INTERVIEW_PREP_FALLBACK,
+              maxRetries: 1,
+            }).catch((e: Error) => {
+              logger.warn('interview_prep.generation_failed', { error: e.message });
+              return null;
+            })
+          : Promise.resolve(null);
+
+        const [atsMatchingRaw, coverLetterResult, interviewPrepResult] = await Promise.all([atsMatchingTask, coverLetterTask, interviewPrepTask]);
 
         // Compute ATS score from matching results
         let atsScoreResult: ATSScoreResult | undefined;
@@ -640,6 +670,7 @@ export async function POST(request: NextRequest) {
           ...(atsScoreResult && { atsScore: atsScoreResult }),
           ...(githubAnalysis && { githubAnalysis }),
           ...(coverLetterResult && { coverLetter: coverLetterResult }),
+          ...(interviewPrepResult && { interviewPrep: interviewPrepResult }),
         };
 
         // --- Post-processing Translation ---

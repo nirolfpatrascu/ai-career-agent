@@ -54,31 +54,19 @@ export default function RoleJobsPanel({ roleTitle, country, fallbackCompanies }:
     }
   }
 
-  // Idle — static fallback badges + "View open roles" trigger
+  // Idle — "View open roles" trigger only (no static company badges)
   if (state === 'idle') {
     return (
       <div>
-        <div className="flex items-center justify-between mb-2">
-          <p className="text-[11px] font-medium text-text-tertiary uppercase tracking-wider">
-            Companies Hiring
-          </p>
-          <button
-            onClick={load}
-            className="flex items-center gap-1 text-[11px] font-medium text-primary hover:text-primary/70 transition-colors"
-          >
-            View open roles
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
-          </button>
-        </div>
-        <div className="flex flex-wrap gap-1.5">
-          {fallbackCompanies.map((c, i) => (
-            <span key={i} className="text-xs px-2.5 py-1 rounded-lg bg-black/[0.04] border border-black/[0.08] text-text-secondary">
-              {c}
-            </span>
-          ))}
-        </div>
+        <button
+          onClick={load}
+          className="flex items-center gap-1 text-[11px] font-medium text-primary hover:text-primary/70 transition-colors"
+        >
+          View open roles
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
       </div>
     );
   }
@@ -99,23 +87,13 @@ export default function RoleJobsPanel({ roleTitle, country, fallbackCompanies }:
     );
   }
 
-  // Error — fall back to static badges, show error for debugging
+  // Error — show error message only
   if (state === 'error') {
     return (
       <div>
-        <p className="text-[11px] font-medium text-text-tertiary uppercase tracking-wider mb-2">
-          Companies Hiring
-        </p>
         {errorMsg && (
-          <p className="text-[11px] text-danger mb-2 font-mono">{errorMsg}</p>
+          <p className="text-[11px] text-danger font-mono">{errorMsg}</p>
         )}
-        <div className="flex flex-wrap gap-1.5">
-          {fallbackCompanies.map((c, i) => (
-            <span key={i} className="text-xs px-2.5 py-1 rounded-lg bg-black/[0.04] border border-black/[0.08] text-text-secondary">
-              {c}
-            </span>
-          ))}
-        </div>
       </div>
     );
   }

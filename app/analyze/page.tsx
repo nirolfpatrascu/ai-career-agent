@@ -370,6 +370,7 @@ export default function AnalyzePage() {
                 profile={dr.profile}
                 analysisId={analysisId}
                 salaryAnalysis={dr.salaryAnalysis}
+                initialPrep={result.interviewPrep}
               />
             </div>
           ) : null;
