@@ -690,8 +690,24 @@ export default function InterviewPrepPanel({
 
               {/* Practice Tests */}
               {(() => {
-                const matches = prep.testGorillaTests.map(k => TESTGORILLA_MAP[k]).filter(Boolean);
-                return matches.length > 0 ? (
+                const seenUrls = new Set<string>();
+                const matched: Array<{ skill: string; entry: { name: string; url: string; minutes: number } }> = [];
+                const unmatched: string[] = [];
+
+                for (const skill of prep.testGorillaTests) {
+                  const entry = TESTGORILLA_MAP[skill];
+                  if (!entry) {
+                    unmatched.push(skill);
+                  } else if (!seenUrls.has(entry.url)) {
+                    seenUrls.add(entry.url);
+                    matched.push({ skill, entry });
+                  }
+                  // duplicate URL → silently skip
+                }
+
+                if (matched.length === 0 && unmatched.length === 0) return null;
+
+                return (
                   <div>
                     <div className="flex items-center gap-3 mb-4">
                       <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-600">
@@ -701,23 +717,41 @@ export default function InterviewPrepPanel({
                       </div>
                       <h3 className="font-semibold text-text-primary text-base">Practice Tests (HackerRank)</h3>
                     </div>
-                    <div className="grid sm:grid-cols-2 gap-2">
-                      {matches.map((entry, i) => (
-                        <a key={i} href={entry.url} target="_blank" rel="noopener noreferrer"
-                          className="flex items-center justify-between gap-3 rounded-xl border border-black/[0.08] bg-black/[0.02] px-4 py-3 hover:border-primary/20 hover:bg-primary/[0.02] transition-colors group"
-                        >
-                          <div className="min-w-0">
-                            <p className="text-sm font-medium text-text-primary group-hover:text-primary transition-colors truncate">{entry.name}</p>
-                            <p className="text-xs text-text-tertiary">{entry.minutes} min</p>
+
+                    {matched.length > 0 && (
+                      <div className="grid sm:grid-cols-2 gap-2 mb-3">
+                        {matched.map(({ skill, entry }) => (
+                          <a key={skill} href={entry.url} target="_blank" rel="noopener noreferrer"
+                            className="flex items-center justify-between gap-3 rounded-xl border border-black/[0.08] bg-black/[0.02] px-4 py-3 hover:border-primary/20 hover:bg-primary/[0.02] transition-colors group"
+                          >
+                            <div className="min-w-0">
+                              <p className="text-sm font-medium text-text-primary group-hover:text-primary transition-colors truncate">{entry.name}</p>
+                              <p className="text-xs text-text-tertiary">{skill} · {entry.minutes} min</p>
+                            </div>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-text-tertiary group-hover:text-primary flex-shrink-0 transition-colors">
+                              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                            </svg>
+                          </a>
+                        ))}
+                      </div>
+                    )}
+
+                    {unmatched.length > 0 && (
+                      <div className="space-y-1.5">
+                        {unmatched.map(skill => (
+                          <div key={skill} className="flex items-start gap-2.5 rounded-xl border border-black/[0.06] bg-black/[0.02] px-4 py-3">
+                            <svg className="w-3.5 h-3.5 text-text-tertiary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                            <p className="text-xs text-text-secondary">
+                              No dedicated test found for <span className="font-semibold text-text-primary">{skill}</span> — a refresher through documentation or a short course would be useful before the interview.
+                            </p>
                           </div>
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-text-tertiary group-hover:text-primary flex-shrink-0 transition-colors">
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-                          </svg>
-                        </a>
-                      ))}
-                    </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                ) : null;
+                );
               })()}
             </div>
           )}
