@@ -4,6 +4,7 @@ import { useMemo, useState, useEffect } from 'react';
 import { useTranslation } from '@/lib/i18n';
 import type { AnalysisResult } from '@/lib/types';
 import { FeedbackButton } from './FeedbackButton';
+import BannerGenerator from './BannerGenerator';
 
 interface LinkedInPlanProps {
   analysis: AnalysisResult;
@@ -411,24 +412,14 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
             <p className="text-sm text-text-secondary mb-4">
               {t('linkedin.bannerAdvice')}
             </p>
-            <div className="rounded-xl border-2 border-dashed border-[#0A66C2]/20 bg-[#0A66C2]/[0.02] p-5 flex items-start gap-4">
-              <div className="w-8 h-8 rounded-lg bg-[#0A66C2]/10 border border-[#0A66C2]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0A66C2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-text-primary mb-1">{t('linkedin.bannerSoonTitle')}</p>
-                <p className="text-xs text-text-tertiary leading-relaxed">{t('linkedin.bannerComingSoon')}</p>
-                <a
-                  href="https://www.canva.com/create/linkedin-banners/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 mt-3 text-xs font-semibold text-[#0A66C2] hover:underline"
-                >
-                  {t('linkedin.bannerCanvaLink')}
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                </a>
-              </div>
-            </div>
+            <BannerGenerator
+              role={analysis.profile?.currentRole || analysis.metadata.targetRole}
+              skills={
+                (analysis.profile?.skills ?? [])
+                  .flatMap(cat => cat.skills)
+                  .slice(0, 5)
+              }
+            />
           </SectionCard>
 
           {/* Headline */}
