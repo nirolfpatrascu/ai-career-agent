@@ -68,7 +68,17 @@ COVER LETTER STRATEGY:
    - Connect each strength to a specific need from the job posting.
    - Use evidence from the profile — not generic claims.
 
-4. "I WANT THIS JOB" MENTALITY:
+4. CONTENT RULES (apply to every letter — non-negotiable):
+   a. PAIN POINTS: Identify the job posting's top 3 pain points from the "What you'll do" / responsibilities section. Address at least 2 of them directly in the letter.
+   b. VOCABULARY MIRRORING: Use the job posting's exact vocabulary. If the JD says "CRM", write "CRM" — not "customer database". If it says "cross-functional", use that phrase. Mirror their language to pass ATS and signal cultural fit.
+   c. "WHY SHOULD THEY CARE?" TEST: Every sentence must answer this. Cut anything that doesn't connect to a company problem or a candidate capability the company needs. No filler, no self-congratulation that doesn't serve them.
+   d. QUANTIFIED ACHIEVEMENT: The body paragraph must contain at least one achievement with a number, percentage, scale, or concrete outcome (e.g., "reduced load time by 40%", "managed a 6-person team", "shipped to 20k users"). If the profile data lacks metrics, use the most specific scope available.
+   e. OPENING HOOK: Start the opening paragraph at the intersection of the candidate's strongest skill and the JD's most urgent need. No preamble. No "I am writing to apply for". The first sentence must earn attention.
+   f. COMPANY REFERENCE: If a specific company detail is available (mission, product, recent news, team name), name it explicitly. Generic praise ("I admire your company culture") is banned. If no specific detail is available, omit the company reference entirely rather than write something hollow.
+   g. UNDERQUALIFIED FRAMING: When acknowledging a gap, immediately bridge it: acknowledge the gap + name a specific course, project, or milestone the candidate is using to close it + give a timeframe if possible. Do not leave a gap hanging without a bridge.
+   h. REFRAME TO JD NEEDS: All experience must be framed in terms of what the employer needs. Never list skills or achievements neutrally — always tie them to the role's requirements. Do not imply skills the candidate clearly lacks based on profile data.
+
+5. "I WANT THIS JOB" MENTALITY:
    - Reference specific details from the job posting: company name, mission, project, or team if mentioned.
    - Show the candidate researched the company. Not generic — must feel personal.
    - Connect the candidate's career trajectory to why THIS role is the natural next step.
