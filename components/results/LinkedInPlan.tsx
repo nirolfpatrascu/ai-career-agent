@@ -413,6 +413,7 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
               {t('linkedin.bannerAdvice')}
             </p>
             <BannerGenerator
+              name={analysis.profile?.name ?? ''}
               role={analysis.profile?.currentRole || analysis.metadata.targetRole}
               skills={
                 (analysis.profile?.skills ?? [])

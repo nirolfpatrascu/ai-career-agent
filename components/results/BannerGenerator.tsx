@@ -9,6 +9,7 @@ interface BannerTemplate {
 }
 
 interface BannerGeneratorProps {
+  name: string;
   role: string;
   skills: string[];
 }
@@ -23,7 +24,7 @@ const TEMPLATES: BannerTemplate[] = [
 
 type GenState = 'idle' | 'loading' | 'done' | 'error';
 
-export default function BannerGenerator({ role, skills }: BannerGeneratorProps) {
+export default function BannerGenerator({ name, role, skills }: BannerGeneratorProps) {
   const [selected, setSelected] = useState<BannerTemplate>(TEMPLATES[0]);
   const [state, setState] = useState<GenState>('idle');
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -40,7 +41,7 @@ export default function BannerGenerator({ role, skills }: BannerGeneratorProps) 
       const res = await fetch('/api/generate-banner', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ templateId: selected.id, role, skills: topSkills }),
+        body: JSON.stringify({ templateId: selected.id, name, role, skills: topSkills }),
       });
 
       if (!res.ok) {
@@ -76,10 +77,11 @@ export default function BannerGenerator({ role, skills }: BannerGeneratorProps) 
 
   return (
     <div className="space-y-5">
-      {/* Role + skills preview */}
+      {/* Name + role + skills preview */}
       <div className="rounded-xl border border-black/[0.06] bg-surface-secondary/40 px-4 py-3 space-y-1.5">
         <p className="text-xs font-medium text-text-tertiary uppercase tracking-wider">Will appear on your banner</p>
-        <p className="text-sm font-semibold text-text-primary">{role}</p>
+        {name && <p className="text-sm font-bold text-text-primary">{name}</p>}
+        <p className="text-sm text-text-secondary">{role}</p>
         <div className="flex flex-wrap gap-1.5">
           {topSkills.map((s, i) => (
             <span key={i} className="text-[11px] px-2.5 py-1 rounded-full bg-primary/[0.08] text-primary border border-primary/15 font-medium">

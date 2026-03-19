@@ -146,8 +146,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 });
   }
 
-  const body = await req.json() as { templateId?: string; role?: string; skills?: string[] };
-  const { templateId, role, skills } = body;
+  const body = await req.json() as { templateId?: string; name?: string; role?: string; skills?: string[] };
+  const { templateId, name, role, skills } = body;
 
   const validIds = Object.keys(CONFIGS);
   if (!templateId || !validIds.includes(templateId)) {
@@ -158,6 +158,7 @@ export async function POST(req: NextRequest) {
   }
 
   const cfg = CONFIGS[templateId];
+  const cleanName = (name ?? '').slice(0, 60);
   const cleanRole = role.slice(0, 60);
   const cleanSkills = (skills ?? [])
     .filter((s): s is string => typeof s === 'string' && s.length > 0)
@@ -196,17 +197,35 @@ export async function POST(req: NextRequest) {
 
         {/* Text overlay */}
         <div style={containerStyle as React.CSSProperties}>
-          {/* Role title — where the name was */}
+          {/* Full name — biggest text */}
+          {cleanName && (
+            <div
+              style={{
+                fontSize: cfg.titleSize,
+                fontWeight: 700,
+                color: cfg.titleColor,
+                lineHeight: 1.1,
+                textTransform: cfg.uppercase ? 'uppercase' : 'none',
+                letterSpacing: cfg.letterSpacing ?? '0px',
+                display: 'flex',
+                flexWrap: 'wrap',
+              }}
+            >
+              {cleanName}
+            </div>
+          )}
+
+          {/* Job title — smaller, underneath name */}
           <div
             style={{
-              fontSize: cfg.titleSize,
-              fontWeight: 700,
-              color: cfg.titleColor,
-              lineHeight: 1.1,
+              fontSize: Math.round(cfg.titleSize * 0.52),
+              fontWeight: 500,
+              color: cfg.roleColor,
+              lineHeight: 1.2,
               textTransform: cfg.uppercase ? 'uppercase' : 'none',
               letterSpacing: cfg.letterSpacing ?? '0px',
-              whiteSpace: 'nowrap',
               display: 'flex',
+              flexWrap: 'wrap',
             }}
           >
             {cleanRole}
