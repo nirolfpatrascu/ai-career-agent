@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useTranslation } from '@/lib/i18n';
+import OutcomePrompt from './OutcomePrompt';
 
 interface SavedAnalysis {
   id: string;
@@ -21,6 +22,7 @@ interface AnalysesTabProps {
   onOpen: (id: string) => void;
   onDelete: (id: string) => void;
   deleting: string | null;
+  accessToken?: string;
 }
 
 function ScoreBadge({ score }: { score: number }) {
@@ -35,7 +37,7 @@ function ScoreBadge({ score }: { score: number }) {
   );
 }
 
-export default function AnalysesTab({ analyses, loading, onOpen, onDelete, deleting }: AnalysesTabProps) {
+export default function AnalysesTab({ analyses, loading, onOpen, onDelete, deleting, accessToken }: AnalysesTabProps) {
   const { t } = useTranslation();
 
   if (loading) {
@@ -127,6 +129,12 @@ export default function AnalysesTab({ analyses, loading, onOpen, onDelete, delet
               )}
             </button>
           </div>
+
+          <OutcomePrompt
+            analysisId={a.id}
+            createdAt={a.created_at}
+            accessToken={accessToken}
+          />
         </div>
       ))}
     </div>

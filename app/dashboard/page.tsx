@@ -299,6 +299,7 @@ export default function DashboardPage() {
               onOpen={handleOpen}
               onDelete={handleDelete}
               deleting={deleting}
+              accessToken={session?.access_token}
             />
           )}
 
