@@ -41,51 +41,52 @@
   },
   "hero": {
     "badge": "AI-Powered Career Advisor",
-    "headline1": "Upload your CV.",
-    "headline2": "Get a personalized",
+    "headline1": "Stop guessing.",
+    "headline2": "Start getting",
     "rotatingWords": [
-      "career roadmap",
-      "gap analysis",
-      "salary benchmark",
-      "action plan",
-      "role match"
+      "interviews",
+      "callbacks",
+      "the right offer",
+      "clarity",
+      "your next role"
     ],
-    "subtitle": "Our AI analyzes your skills, identifies gaps, benchmarks your salary, builds a LinkedIn profile plan, and creates a step-by-step career roadmap. What used to cost $500/hour with a career coach, done in about 2 minutes.",
+    "subtitle": "Upload your CV — we analyze it in 2 minutes, then delete it. No storage. No data selling. Just a clear career roadmap.",
     "analyzeFree": "Analyze My Career →",
+    "sampleReport": "See a sample report",
     "stats": {
       "analysisTime": "Analysis Time",
       "outputSections": "Output Sections",
       "simpleSteps": "Simple Steps",
       "toUse": "To Use"
     },
-    "trust": "Trusted by professionals at every career stage — from first job to career change"
+    "trust": "GDPR compliant · Data deleted after analysis · Trusted by professionals"
   },
   "features": {
     "sectionTitle": "Everything you need for your next career move",
-    "sectionSubtitle": "Upload your CV and LinkedIn profile — get gap analysis, salary data, ATS scoring, a LinkedIn profile plan, a career roadmap, and more. All in one place.",
+    "sectionSubtitle": "Upload your CV — get a complete picture of where you stand, what's holding you back, and exactly what to do next.",
     "gapAnalysis": {
-      "title": "Career Gap Analysis",
-      "desc": "AI identifies your strengths and skill gaps against your target role. Each gap is rated by severity — critical, moderate, or minor — with a specific closing plan, time estimate, and resources."
+      "title": "Know exactly what's holding you back",
+      "desc": "AI identifies your strengths and the specific skill gaps standing between you and your target role. Each gap is rated critical, moderate, or minor — with a closing plan, time estimate, and resources."
     },
     "salary": {
-      "title": "Real Salary Benchmarks",
-      "desc": "Salary data from government sources (US BLS, UK ONS, EU Eurostat) and developer surveys across 20+ countries. Includes negotiation tips and your best monetary move."
+      "title": "Find out if you're underpaid",
+      "desc": "Salary data from government sources (US BLS, UK ONS, EU Eurostat) and developer surveys across 20+ countries. Know your market rate before your next negotiation."
     },
     "ats": {
-      "title": "ATS & Job Match",
-      "desc": "Paste a job posting to get a keyword match score, missing keywords, format issues, and targeted CV suggestions. See exactly how your CV stacks up before you apply."
+      "title": "Beat the robots that reject 75% of CVs",
+      "desc": "Paste a job posting to get a keyword match score, missing keywords, and targeted CV fixes. See exactly how your CV stacks up against the ATS filter — before you apply."
     },
     "coach": {
-      "title": "AI Career Coach",
-      "desc": "Chat with an AI coach that knows your full profile — strengths, gaps, salary data, and career goals. Ask anything about your next move and get personalized advice. (Pro feature)"
+      "title": "Ask anything about your next move",
+      "desc": "Chat with an AI coach that knows your full profile — strengths, gaps, salary data, and career goals. Specific, personalized advice — not generic career tips. (Pro feature)"
     },
     "linkedin": {
-      "title": "LinkedIn Profile Plan",
-      "desc": "AI-generated headline options, About section draft, skills to add or deprioritize, featured project ideas, content strategy, and connection plan — all tailored to your target role."
+      "title": "Get found by recruiters who have your dream job",
+      "desc": "AI-generated headline options, About section draft, skills to add, and a content strategy — all tailored to make you visible to the right people."
     },
     "roadmap": {
-      "title": "Career Roadmap",
-      "desc": "A concrete action plan split into 30-day quick wins, 90-day skill building, and 12-month career trajectory. Every item includes time estimates, resources, and expected impact."
+      "title": "A concrete plan, not just advice",
+      "desc": "30-day quick wins, 90-day skill building, and a 12-month career trajectory. Every item has a time estimate, a resource, and an expected impact — so you always know your next step."
     }
   },
   "howItWorks": {
@@ -106,11 +107,9 @@
   },
   "cta": {
     "title": "Your next career move starts here",
-    "subtitle": "Join professionals who used GapZero to find their path into AI, cloud, and modern tech roles.",
+    "subtitle": "We're building GapZero to help you make your next career move with confidence. Try it free — no sign-up required.",
     "button": "Analyze My Career — Free",
     "footer": "No sign-up • No credit card • Results in under 2 minutes",
-    "quote": "I spent weeks wondering if I was ready to transition from backend development to solutions architecture. GapZero showed me exactly what I needed to close in 90 days. I got the job.",
-    "quoteAuthor": "— What we're building GapZero to help you say",
     "noSignup": "No sign-up",
     "noCreditCard": "No credit card",
     "resultsIn2Min": "Results in ~2 minutes"
@@ -1016,7 +1015,7 @@
   },
   "pricing": {
     "title": "Simple, transparent pricing",
-    "subtitle": "Start free with your first career analysis. Upgrade when you need more power for your job search.",
+    "subtitle": "Your first analysis is always free. No credit card. No tricks. Upgrade when you're ready for more.",
     "weekly": "Weekly",
     "monthly": "Monthly",
     "save25": "Save 25%",

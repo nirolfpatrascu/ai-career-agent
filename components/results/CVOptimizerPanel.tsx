@@ -59,7 +59,7 @@ interface CVSections {
   languages: string;
 }
 
-type CVOptimizerView = 'ats-analysis' | 'optimized-cv' | 'cv-rewrite';
+type CVOptimizerView = 'ats-analysis' | 'optimized-cv';
 
 // ============================================================================
 // Main Component — 3-Page Toggle
@@ -68,8 +68,6 @@ type CVOptimizerView = 'ats-analysis' | 'optimized-cv' | 'cv-rewrite';
 export function CVOptimizerPanel({ atsScore, jobMatch, analysis }: CVOptimizerPanelProps) {
   const { t } = useTranslation();
   const [view, setView] = useState<CVOptimizerView>('ats-analysis');
-
-  const suggestionsCount = jobMatch?.cvSuggestions?.length || 0;
 
   return (
     <div className="animate-panelEnter space-y-6">
@@ -96,22 +94,6 @@ export function CVOptimizerPanel({ atsScore, jobMatch, analysis }: CVOptimizerPa
         >
           <FileCheck className={`h-4 w-4 ${view === 'optimized-cv' ? 'text-[#E8890A]' : ''}`} />
           {t('cvOptimizer.tabs.optimizedCv')}
-        </button>
-        <button
-          onClick={() => setView('cv-rewrite')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-            view === 'cv-rewrite'
-              ? 'bg-white text-text-primary shadow-sm'
-              : 'text-text-tertiary hover:text-text-secondary'
-          }`}
-        >
-          <Sparkles className={`h-4 w-4 ${view === 'cv-rewrite' ? 'text-[#E8890A]' : ''}`} />
-          {t('cvOptimizer.tabs.rewriteSuggestions')}
-          {suggestionsCount > 0 && (
-            <span className={`text-[11px] px-1.5 py-0.5 rounded-md font-semibold ${view === 'cv-rewrite' ? 'bg-[#E8890A]/10 text-[#E8890A]' : 'bg-black/[0.04]'}`}>
-              {suggestionsCount}
-            </span>
-          )}
         </button>
       </div>
 
@@ -154,14 +136,6 @@ export function CVOptimizerPanel({ atsScore, jobMatch, analysis }: CVOptimizerPa
         </div>
       )}
 
-      {/* Page 3: CV Rewrite Suggestions */}
-      {view === 'cv-rewrite' && (
-        <CVSuggestionsSection
-          cvSuggestions={jobMatch?.cvSuggestions}
-          recommendations={atsScore?.recommendations}
-          t={t}
-        />
-      )}
     </div>
   );
 }

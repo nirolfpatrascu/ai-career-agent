@@ -57,17 +57,18 @@ export default function RoleJobsPanel({ roleTitle, country, fallbackCompanies }:
   // Idle — "View open roles" trigger only (no static company badges)
   if (state === 'idle') {
     return (
-      <div>
-        <button
-          onClick={load}
-          className="flex items-center gap-1 text-[11px] font-medium text-primary hover:text-primary/70 transition-colors"
-        >
-          View open roles
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
-        </button>
-      </div>
+      <button
+        onClick={load}
+        className="w-full flex items-center justify-center gap-2 border-2 border-[#E8890A]/60 rounded-xl p-3 text-sm font-semibold text-[#E8890A] hover:border-[#E8890A] hover:bg-[#E8890A]/[0.04] transition-all duration-200 group"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+        </svg>
+        View open roles
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-0.5">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
     );
   }
 

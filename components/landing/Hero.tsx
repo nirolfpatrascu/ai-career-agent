@@ -66,7 +66,7 @@ export default function Hero() {
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
           <Link
             href="/analyze"
             className="group btn-primary text-base sm:text-lg px-10 py-4 flex items-center gap-3 rounded-2xl"
@@ -76,14 +76,18 @@ export default function Hero() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </Link>
+        </div>
+
+        {/* Sample report link */}
+        <div className="flex items-center justify-center mb-10">
           <Link
             href="/analyze?demo=true"
-            className="btn-secondary text-base px-8 py-4 flex items-center gap-2.5 rounded-2xl"
+            className="text-sm text-text-secondary hover:text-text-primary transition-colors flex items-center gap-1.5 underline underline-offset-4 decoration-black/20 hover:decoration-black/40"
           >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <polygon points="5 3 19 12 5 21 5 3" />
             </svg>
-            {t('common.tryDemo')}
+            {t('hero.sampleReport')}
           </Link>
         </div>
 
