@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
       request.headers.get('x-real-ip') ||
       'unknown';
 
-    const rateLimit = checkRateLimit(ip);
+    const rateLimit = await checkRateLimit(ip);
     if (!rateLimit.allowed) {
       return NextResponse.json(
         { error: 'Rate limited' },

@@ -148,7 +148,13 @@ export interface MarketSalary {
 
 export interface MissingSkill {
   skill: string;
-  importance: 'important' | 'not_a_deal_breaker' | 'unimportant';
+  /**
+   * "important": core requirement, must-have
+   * "not_a_deal_breaker": preferred, learnable on the job
+   * "quick_win": learnable in 1 week (tool/platform/syntax gap, not structural)
+   * "unimportant": tangential mention, easily substituted
+   */
+  importance: 'important' | 'not_a_deal_breaker' | 'quick_win' | 'unimportant';
 }
 
 export interface JobMatch {
@@ -157,6 +163,8 @@ export interface JobMatch {
   missingSkills: MissingSkill[];
   cvSuggestions: CVSuggestion[];
   overallAdvice: string;
+  /** 1-2 bullets: what this candidate brings that most applicants won't */
+  competitiveAdvantage?: string[];
 }
 
 export interface CVSuggestion {

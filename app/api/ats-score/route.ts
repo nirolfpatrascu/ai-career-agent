@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
   try {
     // Rate limiting
     const ip = request.headers.get('x-forwarded-for') ?? 'unknown';
-    const rateLimitResult = checkRateLimit(ip);
+    const rateLimitResult = await checkRateLimit(ip);
     if (!rateLimitResult.allowed) {
       return NextResponse.json(
         { error: 'Rate limit exceeded. Please try again later.' },

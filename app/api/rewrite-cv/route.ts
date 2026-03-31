@@ -5,8 +5,9 @@ import { buildCVRewritePrompt, CV_REWRITE_FALLBACK } from '@/lib/prompts';
 import { buildKnowledgeContext } from '@/lib/knowledge';
 import { getAuthenticatedClient } from '@/lib/supabase/server';
 import { checkQuota, incrementQuota } from '@/lib/quota';
-import type { CVRewriteResult } from '@/lib/prompts/cv-rewriter';
+import type { CVRewriteResult, CVRewriteTone } from '@/lib/prompts/cv-rewriter';
 import type { Gap } from '@/lib/types';
+import { loadGoldenStandard } from '@/lib/golden-standards';
 
 export const maxDuration = 30;
 
@@ -18,7 +19,7 @@ export async function POST(request: NextRequest) {
       request.headers.get('x-real-ip') ||
       'unknown';
 
-    const rateLimit = checkRateLimit(ip);
+    const rateLimit = await checkRateLimit(ip);
     if (!rateLimit.allowed) {
       return NextResponse.json(
         { error: 'Rate limited', message: 'Too many requests. Please try again later.' },
@@ -43,11 +44,12 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { cvText, targetRole, gaps, jobPosting } = body as {
+    const { cvText, targetRole, gaps, jobPosting, tone } = body as {
       cvText: string;
       targetRole: string;
       gaps: Gap[];
       jobPosting?: string;
+      tone?: CVRewriteTone;
     };
 
     if (!cvText || !targetRole) {
@@ -57,15 +59,27 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Build knowledge context for CV rewriting best practices
-    const knowledge = buildKnowledgeContext({
-      currentRole: targetRole,
+    // Load golden standard and build knowledge context in parallel
+    const [goldenCV, knowledge] = await Promise.all([
+      loadGoldenStandard('cvs', targetRole),
+      Promise.resolve(buildKnowledgeContext({
+        currentRole: targetRole,
+        targetRole,
+        yearsExperience: 5,
+        country: 'US',
+        workPreference: 'remote',
+      })),
+    ]);
+
+    const prompt = buildCVRewritePrompt(
+      cvText,
       targetRole,
-      yearsExperience: 5,
-      country: 'US',
-      workPreference: 'remote',
-    });
-    const prompt = buildCVRewritePrompt(cvText, targetRole, gaps || [], jobPosting, knowledge.forCVRewrite);
+      gaps || [],
+      jobPosting,
+      knowledge.forCVRewrite,
+      tone ?? 'balanced',
+      goldenCV || undefined
+    );
     const result = await callClaude<CVRewriteResult>({
       ...prompt,
       maxTokens: 4096,

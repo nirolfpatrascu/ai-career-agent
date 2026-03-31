@@ -72,7 +72,7 @@ JSON SCHEMA:
   "missingSkills": [
     {
       "skill": "string — the skill/keyword missing from the CV",
-      "importance": "important | not_a_deal_breaker | unimportant"
+      "importance": "important | not_a_deal_breaker | quick_win | unimportant"
     }
   ],
   "cvSuggestions": [
@@ -83,8 +83,18 @@ JSON SCHEMA:
       "reasoning": "string — why this change improves the match"
     }
   ],
+  "competitiveAdvantage": ["string array — 1-2 bullets of what this candidate brings that most applicants won't. Be specific."],
   "overallAdvice": "string — 2-3 paragraph honest assessment. Should they apply? What's the strategy?"
 }
+
+MISSING SKILL IMPORTANCE TIERS:
+- "important": explicitly required in the posting, core to the role
+- "not_a_deal_breaker": preferred or nice-to-have, learnable on the job (months)
+- "quick_win": simple tool/platform/syntax gap learnable in 1 week (e.g., knowing one specific framework when you know adjacent ones, a specific SaaS tool)
+- "unimportant": tangential mention, generic filler, easily substituted
+
+COMPETITIVE ADVANTAGE RULE:
+Think about the full applicant pool for this role. What does this candidate have that most won't? Could be: niche combination of skills, industry experience, scale of impact, certifications, multilingual, specific domain knowledge, or any differentiator clearly visible in the CV. Be specific — "Strong React background" is NOT a competitive advantage. "Production experience with both React and Rust at 1M+ user scale" IS.
 
 NEGATIVE EXAMPLE — DO NOT produce output like this:
 {

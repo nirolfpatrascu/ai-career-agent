@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
       request.headers.get('x-real-ip') ||
       'unknown';
 
-    const rateLimit = checkRateLimit(`github-analysis:${ip}`);
+    const rateLimit = await checkRateLimit(`github-analysis:${ip}`);
     if (!rateLimit.allowed) {
       return NextResponse.json(
         {

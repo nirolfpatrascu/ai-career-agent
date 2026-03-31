@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
       request.headers.get('x-real-ip') ||
       'unknown';
 
-    const rateLimit = checkRateLimit(`parse-upwork:${ip}`);
+    const rateLimit = await checkRateLimit(`parse-upwork:${ip}`);
     if (!rateLimit.allowed) {
       return NextResponse.json(
         {

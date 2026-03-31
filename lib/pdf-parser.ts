@@ -76,7 +76,7 @@ export async function parsePDF(buffer: Buffer): Promise<ParsedPDF> {
  * - Encoding artifacts: garbled characters, excessive special chars
  * - Structure signals: presence of typical CV sections
  */
-function assessTextQuality(text: string): { score: number; warning?: string } {
+export function assessTextQuality(text: string): { score: number; warning?: string } {
   const warnings: string[] = [];
   let score = 100;
 
@@ -151,7 +151,7 @@ function assessTextQuality(text: string): { score: number; warning?: string } {
  * - Fix common extraction artifacts
  * - Normalize line breaks
  */
-function cleanText(text: string): string {
+export function cleanText(text: string): string {
   return text
     // Replace multiple spaces with single space
     .replace(/[ \t]+/g, ' ')

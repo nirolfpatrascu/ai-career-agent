@@ -141,7 +141,7 @@ function loadBgAsBase64(templateId: string): string {
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
-  const { allowed } = checkRateLimit(`banner:${ip}`, 10);
+  const { allowed } = await checkRateLimit(`banner:${ip}`, 10);
   if (!allowed) {
     return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 });
   }

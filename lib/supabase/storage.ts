@@ -2,6 +2,8 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 
 const BUCKET = 'user-documents';
 
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 /**
  * Upload a user document (CV or LinkedIn PDF) to Supabase Storage.
  * Files are stored under {userId}/{type}.pdf
@@ -13,6 +15,9 @@ export async function uploadUserDocument(
   file: File | Buffer,
   filename: string
 ): Promise<string> {
+  if (!UUID_REGEX.test(userId)) {
+    throw new Error('Invalid userId: must be a valid UUID');
+  }
   const path = `${userId}/${type}.pdf`;
 
   const { error } = await client.storage

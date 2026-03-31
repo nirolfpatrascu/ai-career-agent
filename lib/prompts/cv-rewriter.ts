@@ -10,14 +10,43 @@ export interface CVRewriteResult {
   rewrittenSummary: string;
 }
 
+export type CVRewriteTone = 'conservative' | 'balanced' | 'bold';
+
+const TONE_INSTRUCTIONS: Record<CVRewriteTone, string> = {
+  conservative: `REWRITING TONE — CONSERVATIVE:
+- Preserve the candidate's original voice as much as possible
+- Make only essential changes: fix obvious ATS keyword gaps and formatting
+- Do NOT restructure bullet points or change the flow significantly
+- Best for: senior professionals who are confident in their current CV
+- Changes should feel like a polish, not a rewrite`,
+
+  balanced: `REWRITING TONE — BALANCED:
+- Moderate rewriting — improve action verbs, quantify achievements where data exists
+- Optimize structure without drastically changing the candidate's voice
+- Add strategic keywords that accurately describe existing experience
+- Best for: most users — clear improvements while staying true to the original`,
+
+  bold: `REWRITING TONE — BOLD:
+- Aggressive rewrite — transform bullet points into high-impact statements
+- Lead every bullet with the outcome/result, then the action
+- Strategic framing: position all experience as directly relevant to the target role
+- Best for: career changers, career starters, people in competitive markets
+- Changes can significantly restructure the presentation, but NEVER fabricate`,
+};
+
 export function buildCVRewritePrompt(
   cvText: string,
   targetRole: string,
   gaps: Gap[],
   jobPosting?: string,
-  knowledgeContext?: string
+  knowledgeContext?: string,
+  tone: CVRewriteTone = 'balanced',
+  goldenStandard?: string
 ): { system: string; userMessage: string } {
+  const toneInstruction = TONE_INSTRUCTIONS[tone];
   const system = `You are an expert CV/resume writer specializing in tech industry career transitions. You rewrite CVs to maximize ATS pass-through rates and interview callbacks while remaining completely truthful.
+
+${toneInstruction}
 
 You must respond ONLY with a valid JSON object matching the exact schema below. No preamble, no explanation, no markdown fences — just pure JSON.
 
@@ -87,6 +116,12 @@ ${JSON.stringify(gaps.map((g) => ({ skill: g.skill, severity: g.severity, curren
 ${jobPosting ? `SPECIFIC JOB POSTING TO OPTIMIZE FOR:\n---JOB POSTING---\n${jobPosting}\n---END JOB POSTING---` : 'No specific job posting provided — optimize for general target role.'}
 
 ${knowledgeContext ? `CV & LINKEDIN BEST PRACTICES (use to guide your suggestions):\n${knowledgeContext}` : ''}
+
+${goldenStandard ? `QUALITY REFERENCE — GOLDEN STANDARD CV for a ${targetRole} professional:
+---GOLDEN STANDARD START---
+${goldenStandard}
+---GOLDEN STANDARD END---
+Your output quality should match or exceed this reference in terms of specificity, impact language, and structure. Use it as a benchmark only — do NOT copy its content.` : ''}
 
 Provide the CV rewrite suggestions as JSON.`;
 

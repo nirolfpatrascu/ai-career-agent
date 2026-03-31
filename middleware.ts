@@ -53,7 +53,12 @@ export function middleware(request: NextRequest) {
       "frame-ancestors 'none'",
       "base-uri 'self'",
       "form-action 'self'",
+      "upgrade-insecure-requests",
     ].join('; ')
+  );
+  response.headers.set(
+    'Strict-Transport-Security',
+    'max-age=63072000; includeSubDomains; preload'
   );
 
   return response;

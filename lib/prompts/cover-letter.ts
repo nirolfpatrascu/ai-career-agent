@@ -22,6 +22,8 @@ interface CoverLetterOptions {
   jobPosting: string;
   tone?: 'professional' | 'conversational' | 'bold';
   language?: string;
+  /** Golden standard cover letter for few-shot quality reference */
+  goldenStandard?: string;
 }
 
 export function buildCoverLetterPrompt(
@@ -32,6 +34,7 @@ export function buildCoverLetterPrompt(
     jobPosting,
     tone = 'professional',
     language,
+    goldenStandard,
   } = options;
 
   const langInstruction = getLanguageInstruction(language);
@@ -156,6 +159,12 @@ ${jobPosting}
 ---
 
 TONE PREFERENCE: ${tone}
+
+${goldenStandard ? `QUALITY REFERENCE — GOLDEN STANDARD COVER LETTER:
+---GOLDEN STANDARD START---
+${goldenStandard}
+---GOLDEN STANDARD END---
+Match or exceed this quality level: use the same directness, specificity, and authentic tone. Do NOT copy its content — use it only as a quality benchmark.` : ''}
 
 Generate a compelling, honest cover letter as JSON.`;
 

@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
       request.headers.get('x-real-ip') ||
       'unknown';
     const rateLimitKey = `feedback:${ip}`;
-    const { allowed } = checkRateLimit(rateLimitKey);
+    const { allowed } = await checkRateLimit(rateLimitKey);
 
     if (!allowed) {
       return NextResponse.json(

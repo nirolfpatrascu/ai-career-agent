@@ -12,6 +12,7 @@ interface JobMatchPanelProps {
 const IMPORTANCE_CONFIG = {
   important: { color: 'text-danger', bg: 'bg-danger/[0.08]', border: 'border-danger/15' },
   not_a_deal_breaker: { color: 'text-[#E8890A]', bg: 'bg-[#E8890A]/[0.08]', border: 'border-[#E8890A]/15' },
+  quick_win: { color: 'text-success', bg: 'bg-success/[0.08]', border: 'border-success/15' },
   unimportant: { color: 'text-text-tertiary', bg: 'bg-black/[0.04]', border: 'border-black/[0.08]' },
 } as const;
 
@@ -31,6 +32,7 @@ export default function JobMatchPanel({ match }: JobMatchPanelProps) {
     const groups: Record<MissingSkill['importance'], MissingSkill[]> = {
       important: [],
       not_a_deal_breaker: [],
+      quick_win: [],
       unimportant: [],
     };
     for (const skill of match.missingSkills) {
@@ -95,7 +97,7 @@ export default function JobMatchPanel({ match }: JobMatchPanelProps) {
               <h3 className="text-sm font-semibold text-danger">{t('results.jobMatch.missingSkills')} ({match.missingSkills.length})</h3>
             </div>
             <div className="space-y-3">
-              {(['important', 'not_a_deal_breaker', 'unimportant'] as const).map((level) => {
+              {(['important', 'not_a_deal_breaker', 'quick_win', 'unimportant'] as const).map((level) => {
                 const skills = groupedMissing[level];
                 if (skills.length === 0) return null;
                 const cfg = IMPORTANCE_CONFIG[level];

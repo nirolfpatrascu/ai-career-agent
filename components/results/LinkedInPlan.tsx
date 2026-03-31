@@ -403,26 +403,6 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
       {/* Tab 2: Brand & Visibility */}
       {tab === 'brand' && (
         <div className="space-y-6">
-          {/* Banner */}
-          <SectionCard
-            title={t('linkedin.bannerTitle')}
-            icon={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>}
-            feedbackSection="linkedin-banner"
-          >
-            <p className="text-sm text-text-secondary mb-4">
-              {t('linkedin.bannerAdvice')}
-            </p>
-            <BannerGenerator
-              name={analysis.profile?.name ?? ''}
-              role={analysis.profile?.currentRole || analysis.metadata.targetRole}
-              skills={
-                (analysis.profile?.skills ?? [])
-                  .flatMap(cat => cat.skills)
-                  .slice(0, 5)
-              }
-            />
-          </SectionCard>
-
           {/* Headline */}
           <SectionCard
             title={t('linkedin.headline')}
@@ -464,6 +444,26 @@ I'm passionate about delivering impact as a ${target}. Let's connect if you're h
                 <CopyButton text={dp.about} />
               </div>
             </div>
+          </SectionCard>
+
+          {/* Banner — moved to bottom (visual/optional, not the primary action) */}
+          <SectionCard
+            title={t('linkedin.bannerTitle')}
+            icon={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>}
+            feedbackSection="linkedin-banner"
+          >
+            <p className="text-sm text-text-secondary mb-4">
+              {t('linkedin.bannerAdvice')}
+            </p>
+            <BannerGenerator
+              name={analysis.profile?.name ?? ''}
+              role={analysis.profile?.currentRole || analysis.metadata.targetRole}
+              skills={
+                (analysis.profile?.skills ?? [])
+                  .flatMap(cat => cat.skills)
+                  .slice(0, 5)
+              }
+            />
           </SectionCard>
         </div>
       )}

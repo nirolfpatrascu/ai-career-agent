@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
       request.headers.get('x-real-ip') ||
       'unknown';
 
-    const rateLimit = checkRateLimit(`cover-letter:${ip}`);
+    const rateLimit = await checkRateLimit(`cover-letter:${ip}`);
     if (!rateLimit.allowed) {
       return NextResponse.json(
         {

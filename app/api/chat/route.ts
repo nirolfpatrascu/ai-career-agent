@@ -119,7 +119,7 @@ export async function POST(request: NextRequest) {
     || request.headers.get('x-real-ip')
     || request.headers.get('cf-connecting-ip')
     || 'unknown';
-  const rateLimit = checkRateLimit(`chat:${ip}`);
+  const rateLimit = await checkRateLimit(`chat:${ip}`);
   if (!rateLimit.allowed) {
     return new Response(
       JSON.stringify({ error: 'Too many requests. Please try again later.' }),

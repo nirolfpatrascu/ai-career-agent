@@ -6,8 +6,16 @@ import { safeParseJSON } from './utils';
 // ============================================================================
 
 const MODEL = process.env.CLAUDE_MODEL || 'claude-sonnet-4-20250514';
+export const HAIKU_MODEL = 'claude-haiku-4-5-20251001';
 const MAX_RETRIES = 3;
 const BASE_DELAY_MS = 1500;
+
+/**
+ * Default model cascade: Sonnet → Haiku.
+ * If Sonnet exhausts all retries, Haiku is tried next.
+ * Ensures analysis never fails due to a single model being overloaded.
+ */
+export const DEFAULT_MODEL_CASCADE = [MODEL, HAIKU_MODEL];
 
 let client: Anthropic | null = null;
 
@@ -111,75 +119,117 @@ export async function callClaude<T>(options: {
   fallback: T;
   model?: string;
   maxRetries?: number;
+  /** Per-call timeout in ms. Defaults to 55s — leaves headroom before Vercel's 300s kill. */
+  timeout?: number;
+  /**
+   * Override the model cascade. Defaults to DEFAULT_MODEL_CASCADE (Sonnet → Haiku).
+   * Pass a single-element array to disable cascading.
+   */
+  modelCascade?: string[];
+  /** Called when the cascade falls back to a different model, e.g. to show a toast. */
+  onModelFallback?: (model: string) => void;
 }): Promise<T> {
-  const { system, userMessage, maxTokens = 4096, temperature = 0.3, fallback, model = MODEL, maxRetries = MAX_RETRIES } = options;
+  const {
+    system,
+    userMessage,
+    maxTokens = 4096,
+    temperature = 0.3,
+    fallback,
+    model,
+    maxRetries = MAX_RETRIES,
+    timeout = 55_000,
+    modelCascade,
+    onModelFallback,
+  } = options;
 
-  let lastError: Error | null = null;
+  // Build cascade: explicit modelCascade > [explicit model + haiku] > default cascade
+  const cascade = modelCascade ?? (model ? [model, HAIKU_MODEL] : DEFAULT_MODEL_CASCADE);
 
-  for (let attempt = 0; attempt <= maxRetries; attempt++) {
-    try {
-      const anthropic = getClient();
+  for (let cascadeIndex = 0; cascadeIndex < cascade.length; cascadeIndex++) {
+    const currentModel = cascade[cascadeIndex];
+    const isFallbackModel = cascadeIndex > 0;
 
-      const response = await anthropic.messages.create({
-        model,
-        max_tokens: maxTokens,
-        temperature,
-        system,
-        messages: [
-          {
-            role: 'user',
-            content: userMessage,
-          },
-        ],
-      });
+    if (isFallbackModel) {
+      console.warn(`[callClaude] Primary model failed. Falling back to ${currentModel}`);
+      onModelFallback?.(currentModel);
+    }
 
-      // Extract text from response
-      const textBlock = response.content.find((block) => block.type === 'text');
-      if (!textBlock || textBlock.type !== 'text') {
-        throw new Error('No text content in Claude response');
-      }
+    let lastError: Error | null = null;
 
-      const result = extractJSON<T>(textBlock.text, fallback);
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        const anthropic = getClient();
 
-      // If JSON parsing failed (extractJSON returned the fallback reference), treat as retryable
-      if (result === fallback) {
-        console.error(
-          `Claude API call failed (attempt ${attempt + 1}/${maxRetries + 1}): JSON parse failed — response was not valid JSON`,
-          textBlock.text.slice(0, 200)
-        );
-        if (attempt < maxRetries) {
-          await sleep(BASE_DELAY_MS);
-          continue;
+        const response = await anthropic.messages.create({
+          model: currentModel,
+          max_tokens: maxTokens,
+          temperature,
+          system,
+          messages: [
+            {
+              role: 'user',
+              content: userMessage,
+            },
+          ],
+        }, {
+          // Disable the SDK's own retry loop — callClaude manages retries explicitly
+          // with logging and backoff. Double-retrying silently wastes time budget.
+          maxRetries: 0,
+          timeout,
+        });
+
+        // Extract text from response
+        const textBlock = response.content.find((block) => block.type === 'text');
+        if (!textBlock || textBlock.type !== 'text') {
+          throw new Error('No text content in Claude response');
         }
-        break;
-      }
 
-      return result;
-    } catch (error) {
-      lastError = error instanceof Error ? error : new Error(String(error));
-      console.error(
-        `Claude API call failed (attempt ${attempt + 1}/${maxRetries + 1}):`,
-        lastError.message
-      );
+        const result = extractJSON<T>(textBlock.text, fallback);
 
-      // Don't retry on auth errors or invalid requests
-      if (isNonRetryableError(error)) {
-        break;
-      }
+        // If JSON parsing failed (extractJSON returned the fallback reference), treat as retryable
+        if (result === fallback) {
+          console.error(
+            `[callClaude] ${currentModel} (attempt ${attempt + 1}/${maxRetries + 1}): JSON parse failed`,
+            textBlock.text.slice(0, 200)
+          );
+          if (attempt < maxRetries) {
+            await sleep(BASE_DELAY_MS);
+            continue;
+          }
+          break;
+        }
 
-      // Wait with exponential backoff before retry
-      if (attempt < maxRetries && isRetryableError(error)) {
-        const delay = getRetryDelay(attempt);
-        console.log(`Retrying in ${Math.round(delay)}ms...`);
-        await sleep(delay);
-      } else if (attempt < maxRetries) {
-        // Unknown error — still retry but with shorter delay
-        await sleep(BASE_DELAY_MS);
+        return result;
+      } catch (error) {
+        lastError = error instanceof Error ? error : new Error(String(error));
+        console.error(
+          `[callClaude] ${currentModel} failed (attempt ${attempt + 1}/${maxRetries + 1}):`,
+          lastError.message
+        );
+
+        // Don't retry on auth errors or invalid requests
+        if (isNonRetryableError(error)) {
+          // Non-retryable errors won't be fixed by cascade — bail immediately
+          console.error('All Claude API attempts failed. Using fallback.');
+          return fallback;
+        }
+
+        // Wait with exponential backoff before retry
+        if (attempt < maxRetries && isRetryableError(error)) {
+          const delay = getRetryDelay(attempt);
+          console.log(`[callClaude] Retrying ${currentModel} in ${Math.round(delay)}ms...`);
+          await sleep(delay);
+        } else if (attempt < maxRetries) {
+          await sleep(BASE_DELAY_MS);
+        }
       }
     }
+
+    // All retries for this model failed — try next model in cascade
+    console.warn(`[callClaude] ${currentModel} exhausted ${maxRetries + 1} attempts. Trying next model in cascade...`);
   }
 
-  console.error('All Claude API attempts failed. Using fallback.');
+  console.error('All models in cascade failed. Using fallback.');
   return fallback;
 }
 
@@ -193,6 +243,8 @@ export async function callClaudeWithSource<T>(options: {
   maxTokens?: number;
   temperature?: number;
   fallback: T;
+  model?: string;
+  modelCascade?: string[];
 }): Promise<{ data: T; source: 'claude' | 'fallback' }> {
   const { fallback } = options;
   const result = await callClaude<T>(options);
@@ -211,56 +263,68 @@ export async function callClaudeText(options: {
   userMessage: string;
   maxTokens?: number;
   temperature?: number;
+  modelCascade?: string[];
 }): Promise<string> {
-  const { system, userMessage, maxTokens = 4096, temperature = 0.4 } = options;
+  const { system, userMessage, maxTokens = 4096, temperature = 0.4, modelCascade } = options;
+  const cascade = modelCascade ?? DEFAULT_MODEL_CASCADE;
 
-  let lastError: unknown = null;
+  for (let cascadeIndex = 0; cascadeIndex < cascade.length; cascadeIndex++) {
+    const currentModel = cascade[cascadeIndex];
+    if (cascadeIndex > 0) {
+      console.warn(`[callClaudeText] Falling back to ${currentModel}`);
+    }
 
-  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
-    try {
-      const anthropic = getClient();
+    let lastError: unknown = null;
 
-      const response = await anthropic.messages.create({
-        model: MODEL,
-        max_tokens: maxTokens,
-        temperature,
-        system,
-        messages: [
-          {
-            role: 'user',
-            content: userMessage,
-          },
-        ],
-      });
+    for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+      try {
+        const anthropic = getClient();
 
-      const textBlock = response.content.find((block) => block.type === 'text');
-      if (!textBlock || textBlock.type !== 'text') {
-        throw new Error('No text content in Claude response');
-      }
+        const response = await anthropic.messages.create({
+          model: currentModel,
+          max_tokens: maxTokens,
+          temperature,
+          system,
+          messages: [
+            {
+              role: 'user',
+              content: userMessage,
+            },
+          ],
+        }, { maxRetries: 0, timeout: 55_000 });
 
-      return textBlock.text;
-    } catch (error) {
-      lastError = error;
-      console.error(
-        `callClaudeText failed (attempt ${attempt + 1}/${MAX_RETRIES + 1}):`,
-        error instanceof Error ? error.message : String(error)
-      );
+        const textBlock = response.content.find((block) => block.type === 'text');
+        if (!textBlock || textBlock.type !== 'text') {
+          throw new Error('No text content in Claude response');
+        }
 
-      if (isNonRetryableError(error)) {
-        break;
-      }
+        return textBlock.text;
+      } catch (error) {
+        lastError = error;
+        console.error(
+          `[callClaudeText] ${currentModel} failed (attempt ${attempt + 1}/${MAX_RETRIES + 1}):`,
+          error instanceof Error ? error.message : String(error)
+        );
 
-      if (attempt < MAX_RETRIES && isRetryableError(error)) {
-        const delay = getRetryDelay(attempt);
-        console.log(`Retrying in ${Math.round(delay)}ms...`);
-        await sleep(delay);
-      } else if (attempt < MAX_RETRIES) {
-        await sleep(BASE_DELAY_MS);
+        if (isNonRetryableError(error)) {
+          throw new Error(getUserFriendlyError(error));
+        }
+
+        if (attempt < MAX_RETRIES && isRetryableError(error)) {
+          const delay = getRetryDelay(attempt);
+          console.log(`[callClaudeText] Retrying in ${Math.round(delay)}ms...`);
+          await sleep(delay);
+        } else if (attempt < MAX_RETRIES) {
+          await sleep(BASE_DELAY_MS);
+        }
       }
     }
+
+    // All retries failed for this model — try next
+    console.warn(`[callClaudeText] ${currentModel} exhausted all attempts. Trying next model...`);
   }
 
-  throw new Error(getUserFriendlyError(lastError));
+  throw new Error('All models failed. Please try again in a moment.');
 }
 
 /**
@@ -372,7 +436,7 @@ export function streamClaude(options: {
             temperature,
             system,
             messages,
-          });
+          }, { maxRetries: 0, timeout: 55_000 });
 
           for await (const event of stream) {
             if (

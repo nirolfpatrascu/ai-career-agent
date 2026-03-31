@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
       request.headers.get('x-real-ip') ||
       'unknown';
 
-    const rateLimit = checkRateLimit(`interview-prep:${ip}`);
+    const rateLimit = await checkRateLimit(`interview-prep:${ip}`);
     if (!rateLimit.allowed) {
       return NextResponse.json(
         { error: 'Rate limited', message: 'Too many requests. Please try again later.' },

@@ -93,6 +93,12 @@ export async function PUT(req: NextRequest) {
   // Upload CV if provided
   const cvFile = formData.get('cv') as File | null;
   if (cvFile && cvFile.size > 0) {
+    if (cvFile.size > 5 * 1024 * 1024) {
+      return NextResponse.json({ error: 'CV file must be less than 5MB' }, { status: 413 });
+    }
+    if (cvFile.type !== 'application/pdf') {
+      return NextResponse.json({ error: 'CV must be a PDF file' }, { status: 415 });
+    }
     try {
       const path = await uploadUserDocument(client, userId, 'cv', cvFile, cvFile.name);
       dbRow.cv_storage_path = path;
@@ -105,6 +111,12 @@ export async function PUT(req: NextRequest) {
   // Upload LinkedIn PDF if provided
   const linkedinFile = formData.get('linkedin') as File | null;
   if (linkedinFile && linkedinFile.size > 0) {
+    if (linkedinFile.size > 5 * 1024 * 1024) {
+      return NextResponse.json({ error: 'LinkedIn file must be less than 5MB' }, { status: 413 });
+    }
+    if (linkedinFile.type !== 'application/pdf') {
+      return NextResponse.json({ error: 'LinkedIn file must be a PDF file' }, { status: 415 });
+    }
     try {
       const path = await uploadUserDocument(client, userId, 'linkedin', linkedinFile, linkedinFile.name);
       dbRow.linkedin_storage_path = path;

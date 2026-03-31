@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
   // 200/hour per IP — one locale switch needs ~17 batches, so this allows ~11 switches/hour
   const TRANSLATE_LIMIT = parseInt(process.env.TRANSLATE_RATE_LIMIT_PER_HOUR || '200', 10);
-  const rl = checkRateLimit(`translate:${ip}`, TRANSLATE_LIMIT);
+  const rl = await checkRateLimit(`translate:${ip}`, TRANSLATE_LIMIT);
   if (!rl.allowed) {
     return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 });
   }

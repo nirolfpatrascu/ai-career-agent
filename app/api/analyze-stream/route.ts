@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server';
 import { parsePDF, validatePDFBuffer } from '@/lib/pdf-parser';
-import { callClaude, callClaudeWithSource, truncateCVText, estimateTokens } from '@/lib/claude';
+import { parseDOCX, detectDocumentFormat } from '@/lib/docx-parser';
+import { callClaude, callClaudeWithSource, truncateCVText, estimateTokens, HAIKU_MODEL, DEFAULT_MODEL_CASCADE } from '@/lib/claude';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { sanitizeResult } from '@/lib/utils';
 import {
@@ -44,6 +45,7 @@ import { logger } from '@/lib/logger';
 import { MetricsCollector } from '@/lib/metrics';
 import { getAuthenticatedClient, getServiceClient } from '@/lib/supabase/server';
 import { checkQuota, incrementQuota } from '@/lib/quota';
+import { loadGoldenStandard } from '@/lib/golden-standards';
 
 export const maxDuration = 300;
 
@@ -112,7 +114,7 @@ export async function POST(request: NextRequest) {
 
   // --- Validate request upfront before opening stream ---
   const ip = getClientIP(request);
-  const rateLimit = checkRateLimit(ip);
+  const rateLimit = await checkRateLimit(ip);
 
   if (!rateLimit.allowed) {
     return new Response(
@@ -151,9 +153,14 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  if (cvFile.type !== 'application/pdf') {
+  const ACCEPTED_MIME_TYPES = [
+    'application/pdf',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/msword',
+  ];
+  if (!ACCEPTED_MIME_TYPES.includes(cvFile.type)) {
     return new Response(
-      JSON.stringify({ error: 'Invalid file type', message: 'Only PDF files are accepted.' }),
+      JSON.stringify({ error: 'Invalid file type', message: 'Only PDF and Word (.docx) files are accepted.' }),
       { status: 415, headers: { 'Content-Type': 'application/json' } }
     );
   }
@@ -255,6 +262,12 @@ export async function POST(request: NextRequest) {
         }
       };
 
+      // 250s deadline — 50s safety margin before Vercel's 300s hard kill.
+      // Optional steps (ATS, cover letter, interview prep, translation) are
+      // skipped when the deadline is near so core results always reach the client.
+      const DEADLINE_MS = 250_000;
+      const pastDeadline = () => Date.now() - startTime > DEADLINE_MS;
+
       const metrics = new MetricsCollector();
 
       try {
@@ -263,13 +276,19 @@ export async function POST(request: NextRequest) {
         const endParsing = metrics.startStep('parsing');
 
         const buffer = Buffer.from(await cvFile.arrayBuffer());
-        if (!validatePDFBuffer(buffer)) {
+        const docFormat = detectDocumentFormat(buffer);
+        if (docFormat === 'unknown') {
+          send({ step: 'error', message: 'The uploaded file is not a valid PDF or Word document.' });
+          controller.close();
+          return;
+        }
+        if (docFormat === 'pdf' && !validatePDFBuffer(buffer)) {
           send({ step: 'error', message: 'The uploaded file is not a valid PDF document.' });
           controller.close();
           return;
         }
 
-        const parsedPDF = await parsePDF(buffer);
+        const parsedPDF = docFormat === 'pdf' ? await parsePDF(buffer) : await parseDOCX(buffer);
         const cvText = truncateCVText(parsedPDF.text);
         logger.debug('pdf.parsed', { pageCount: parsedPDF.pageCount, charCount: cvText.length, quality: parsedPDF.qualityScore });
 
@@ -320,6 +339,14 @@ export async function POST(request: NextRequest) {
 
         endParsing();
 
+        // --- Load golden standards for AI quality reference ---
+        // These are injected into prompts as few-shot quality benchmarks.
+        // Loaded async in background — never blocks the pipeline if missing.
+        const [goldenCV, goldenCoverLetter] = await Promise.all([
+          loadGoldenStandard('cvs', questionnaire.targetRole),
+          loadGoldenStandard('coverLetters', questionnaire.targetRole),
+        ]);
+
         // --- Step 1: Extract Skills ---
         send({ step: 'extraction', progress: 12, message: 'Extracting skills and experience...' });
         const endExtraction = metrics.startStep('extraction');
@@ -332,6 +359,9 @@ export async function POST(request: NextRequest) {
           maxTokens: 4096,
           temperature: 0.0,
           fallback: EXTRACTION_FALLBACK,
+          // Extraction is a structured task — Haiku handles it at ~66% lower cost.
+          // Falls back to Sonnet if Haiku is unavailable.
+          modelCascade: [HAIKU_MODEL, ...DEFAULT_MODEL_CASCADE],
         });
         const profile = profileResult.data;
         dataSources.extraction = profileResult.source;
@@ -513,8 +543,14 @@ export async function POST(request: NextRequest) {
         const actionPlan = ensureResourceUrls(careerPlan.actionPlan);
 
         // --- Step 4a: ATS Keyword Extraction (sequential — heavy Stage 3 calls have finished) ---
+        // Skip all optional enrichment steps if we are approaching the 250s deadline.
+        const skipOptional = pastDeadline();
+        if (skipOptional) {
+          logger.warn('pipeline.deadline_reached', { elapsedMs: Date.now() - startTime, skipping: 'ats,cover_letter,interview_prep' });
+        }
+
         let atsExtraction: ATSExtractionResult | null = null;
-        if (hasJobPosting) {
+        if (hasJobPosting && !skipOptional) {
           send({ step: 'ats', progress: 82, message: 'Scoring ATS compatibility...' });
           send({ step: 'cover_letter', progress: 82, message: 'Generating cover letter...' });
           try {
@@ -524,6 +560,9 @@ export async function POST(request: NextRequest) {
               maxTokens: 4000,
               temperature: 0,
               fallback: { keywords: [], roleLevel: 'mid', domain: 'General' },
+              maxRetries: 1,
+              // ATS keyword extraction is structured — Haiku is sufficient and ~66% cheaper
+              modelCascade: [HAIKU_MODEL, ...DEFAULT_MODEL_CASCADE],
             });
           } catch (e) {
             logger.warn('ats.extraction_failed', { error: e instanceof Error ? e.message : String(e) });
@@ -531,17 +570,20 @@ export async function POST(request: NextRequest) {
         }
 
         // --- Step 4b: ATS Matching + Cover Letter (parallel — no dependency between them) ---
-        const atsMatchingTask = hasJobPosting && atsExtraction && atsExtraction.keywords.length > 0
+        const atsMatchingTask = hasJobPosting && !skipOptional && atsExtraction && atsExtraction.keywords.length > 0
           ? callClaude<ATSMatchingResult>({
               system: 'You are an expert ATS keyword matching engine. Respond with valid JSON only.',
               userMessage: buildATSMatchingPrompt(cvText, atsExtraction.keywords),
               maxTokens: 6000,
               temperature: 0,
               fallback: { matches: [], recommendations: [] },
+              maxRetries: 1,
+              // ATS matching is keyword-based — Haiku handles it well at ~66% lower cost
+              modelCascade: [HAIKU_MODEL, ...DEFAULT_MODEL_CASCADE],
             })
           : Promise.resolve(null as ATSMatchingResult | null);
 
-        const coverLetterTask = hasJobPosting
+        const coverLetterTask = hasJobPosting && !skipOptional
           ? callClaude<CoverLetter>({
               ...buildCoverLetterPrompt({
                 analysis: {
@@ -557,10 +599,12 @@ export async function POST(request: NextRequest) {
                 jobPosting: questionnaire.jobPosting!,
                 tone: 'professional',
                 language: questionnaire.language,
+                goldenStandard: goldenCoverLetter || undefined,
               }),
               maxTokens: 4096,
               temperature: 0.3,
               fallback: COVER_LETTER_FALLBACK,
+              maxRetries: 1,
             }).catch((e: Error) => {
               logger.warn('cover_letter.generation_failed', { error: e.message });
               return undefined as CoverLetter | undefined;
@@ -568,7 +612,7 @@ export async function POST(request: NextRequest) {
           : Promise.resolve(undefined as CoverLetter | undefined);
 
         // Run interview prep in parallel with ATS matching + cover letter
-        const interviewPrepTask: Promise<InterviewPrep | null> = hasJobPosting && jobMatchResult
+        const interviewPrepTask: Promise<InterviewPrep | null> = hasJobPosting && !skipOptional && jobMatchResult
           ? callClaude<InterviewPrep>({
               ...buildInterviewPrepPrompt({
                 targetRole: questionnaire.targetRole,
@@ -678,7 +722,7 @@ export async function POST(request: NextRequest) {
         // Extract only text fields (~75% smaller payload), translate, then merge back.
         // This reduces translation from 30-55s to ~10-15s, preventing Vercel timeouts for non-EN.
         const language = questionnaire.language || 'en';
-        if (language !== 'en') {
+        if (language !== 'en' && !pastDeadline()) {
           send({ step: 'translating', progress: 85, message: 'Translating your report...' });
 
           try {

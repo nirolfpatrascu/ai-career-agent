@@ -185,7 +185,7 @@ export async function POST(req: NextRequest) {
     || req.headers.get('x-real-ip')
     || req.headers.get('cf-connecting-ip')
     || 'unknown';
-  const rateLimit = checkRateLimit(`cvpdf:${ip}`);
+  const rateLimit = await checkRateLimit(`cvpdf:${ip}`);
   if (!rateLimit.allowed) {
     return NextResponse.json(
       { error: 'Too many requests. Please try again later.' },
