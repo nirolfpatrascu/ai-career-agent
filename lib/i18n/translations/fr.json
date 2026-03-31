@@ -36,16 +36,16 @@
   },
   "hero": {
     "badge": "Conseiller de carrière basé sur l'IA",
-    "headline1": "Téléchargez votre CV.",
-    "headline2": "Obtenez un",
+    "headline1": "Stop guessing.",
+    "headline2": "Start getting",
     "rotatingWords": [
-      "plan de carrière",
-      "analyse des écarts",
-      "référentiel salarial",
-      "plan d'action",
-      "correspondance de rôle"
+      "interviews",
+      "callbacks",
+      "the right offer",
+      "clarity",
+      "your next role"
     ],
-    "subtitle": "Notre IA analyse vos compétences, identifie vos lacunes, compare votre salaire à celui du marché, élabore un plan pour votre profil LinkedIn et établit une feuille de route professionnelle étape par étape. Ce qui coûtait auparavant 500 $ de l'heure avec un coach de carrière est désormais réalisé en environ 2 minutes.",
+    "subtitle": "Upload your CV — we analyze it in 2 minutes, then delete it. No storage. No data selling. Just a clear career roadmap.",
     "analyzeFree": "Analyser ma carrière →",
     "stats": {
       "analysisTime": "Durée de l'analyse",
@@ -53,34 +53,35 @@
       "simpleSteps": "Quelques étapes simples",
       "toUse": "Mode d'emploi"
     },
-    "trust": "Reconnu par les professionnels à toutes les étapes de leur carrière, du premier emploi à la reconversion professionnelle"
+    "trust": "GDPR compliant · Data deleted after analysis · Trusted by professionals",
+    "sampleReport": "See a sample report"
   },
   "features": {
     "sectionTitle": "Tout ce dont vous avez besoin pour votre prochaine évolution professionnelle",
-    "sectionSubtitle": "Téléchargez votre CV et votre profil LinkedIn : bénéficiez d'une analyse des lacunes, de données salariales, d'une évaluation ATS, d'un plan d'optimisation de votre profil LinkedIn, d'une feuille de route professionnelle et bien plus encore. Le tout en un seul endroit.",
+    "sectionSubtitle": "Upload your CV — get a complete picture of where you stand, what's holding you back, and exactly what to do next.",
     "gapAnalysis": {
-      "title": "Analyse des lacunes professionnelles",
-      "desc": "L'IA identifie vos points forts et vos lacunes par rapport au poste que vous visez. Chaque lacune est classée selon son niveau de gravité — critique, modérée ou mineure — et s'accompagne d'un plan d'action spécifique, d'une estimation du temps nécessaire et des ressources requises."
+      "title": "Know exactly what's holding you back",
+      "desc": "AI identifies your strengths and the specific skill gaps standing between you and your target role. Each gap is rated critical, moderate, or minor — with a closing plan, time estimate, and resources."
     },
     "salary": {
-      "title": "Références salariales réelles",
-      "desc": "Données salariales issues de sources gouvernementales (BLS aux États-Unis, ONS au Royaume-Uni, Eurostat dans l'UE) et d'enquêtes menées auprès de développeurs dans plus de 20 pays. Comprend des conseils de négociation et la meilleure stratégie financière à adopter."
+      "title": "Find out if you're underpaid",
+      "desc": "Salary data from government sources (US BLS, UK ONS, EU Eurostat) and developer surveys across 20+ countries. Know your market rate before your next negotiation."
     },
     "ats": {
-      "title": "ATS & Job Match",
-      "desc": "Collez une offre d'emploi pour obtenir un score de correspondance par mot-clé, connaître les mots-clés manquants, identifier les problèmes de mise en forme et recevoir des suggestions de CV adaptés. Découvrez exactement où se situe votre CV avant de postuler."
+      "title": "Beat the robots that reject 75% of CVs",
+      "desc": "Paste a job posting to get a keyword match score, missing keywords, and targeted CV fixes. See exactly how your CV stacks up against the ATS filter — before you apply."
     },
     "coach": {
-      "title": "Coach de carrière en IA",
-      "desc": "Discutez avec un coach IA qui connaît parfaitement votre profil : vos points forts, vos lacunes, vos données salariales et vos objectifs de carrière. Posez toutes vos questions sur votre prochaine étape professionnelle et bénéficiez de conseils personnalisés. (Fonctionnalité Pro)"
+      "title": "Ask anything about your next move",
+      "desc": "Chat with an AI coach that knows your full profile — strengths, gaps, salary data, and career goals. Specific, personalized advice — not generic career tips. (Pro feature)"
     },
     "linkedin": {
-      "title": "Formule de profil LinkedIn",
-      "desc": "Des suggestions de titres générées par l'IA, un brouillon pour la section « À propos », des compétences à mettre en avant ou à reléguer au second plan, des idées de projets phares, une stratégie de contenu et un plan de mise en réseau — le tout adapté au poste que vous visez."
+      "title": "Get found by recruiters who have your dream job",
+      "desc": "AI-generated headline options, About section draft, skills to add, and a content strategy — all tailored to make you visible to the right people."
     },
     "roadmap": {
-      "title": "Parcours professionnel",
-      "desc": "Un plan d'action concret divisé en trois volets : des actions à impact immédiat sur 30 jours, un renforcement des compétences sur 90 jours et un parcours professionnel sur 12 mois. Chaque point comprend une estimation du temps nécessaire, les ressources requises et l'impact attendu."
+      "title": "A concrete plan, not just advice",
+      "desc": "30-day quick wins, 90-day skill building, and a 12-month career trajectory. Every item has a time estimate, a resource, and an expected impact — so you always know your next step."
     }
   },
   "howItWorks": {
@@ -101,11 +102,9 @@
   },
   "cta": {
     "title": "Votre prochaine étape professionnelle commence ici",
-    "subtitle": "Rejoignez les professionnels qui ont utilisé GapZero pour se lancer dans des postes liés à l'IA, au cloud et aux technologies modernes.",
+    "subtitle": "We're building GapZero to help you make your next career move with confidence. Try it free — no sign-up required.",
     "button": "Analysez ma carrière — Gratuit",
     "footer": "Pas d'inscription • Pas de carte de crédit • Résultats en moins de 2 minutes",
-    "quote": "J'ai passé des semaines à me demander si j'étais prêt à passer du développement backend à l'architecture de solutions. GapZero m'a montré exactement ce qu'il me fallait pour combler mes lacunes en 90 jours. J'ai décroché le poste.",
-    "quoteAuthor": "— C'est pour cela que nous développons GapZero, afin de vous aider à dire",
     "noSignup": "Pas d'inscription",
     "noCreditCard": "Pas de carte de crédit",
     "resultsIn2Min": "Résultats en environ 2 minutes"
@@ -990,7 +989,7 @@
   },
   "pricing": {
     "title": "Une tarification simple et transparente",
-    "subtitle": "Commencez gratuitement avec votre première analyse de carrière. Passez à un abonnement supérieur lorsque vous avez besoin de plus de fonctionnalités pour votre recherche d'emploi.",
+    "subtitle": "Your first analysis is always free. No credit card. No tricks. Upgrade when you're ready for more.",
     "weekly": "Hebdomadaire",
     "monthly": "Mensuel",
     "save25": "Économisez 25 %",

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Redis } from '@upstash/redis';
 
 const ADZUNA_APP_ID = process.env.ADZUNA_APP_ID;
 const ADZUNA_APP_KEY = process.env.ADZUNA_APP_KEY;
@@ -63,9 +64,39 @@ interface AdzunaJob {
   salary_max?: number;
 }
 
-// In-memory cache — avoids burning quota on repeated renders within same server instance
-const cache = new Map<string, { jobs: JobListing[]; expires: number }>();
-const CACHE_TTL_MS = 6 * 60 * 60 * 1000; // 6 hours
+// Redis cache (shared across all serverless instances) — 6h TTL
+// Falls back to in-memory if Upstash is not configured
+const CACHE_TTL_SECONDS = 6 * 60 * 60; // 6 hours
+
+const redis = process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
+  ? new Redis({
+      url: process.env.UPSTASH_REDIS_REST_URL,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN,
+    })
+  : null;
+
+const memCache = new Map<string, { jobs: JobListing[]; expires: number }>();
+
+async function getCached(key: string): Promise<JobListing[] | null> {
+  if (redis) {
+    try {
+      const val = await redis.get<JobListing[]>(`jl:${key}`);
+      return val ?? null;
+    } catch { /* fall through to memory */ }
+  }
+  const entry = memCache.get(key);
+  return (entry && entry.expires > Date.now()) ? entry.jobs : null;
+}
+
+async function setCached(key: string, jobs: JobListing[]): Promise<void> {
+  if (redis) {
+    try {
+      await redis.set(`jl:${key}`, jobs, { ex: CACHE_TTL_SECONDS });
+      return;
+    } catch { /* fall through to memory */ }
+  }
+  memCache.set(key, { jobs, expires: Date.now() + CACHE_TTL_SECONDS * 1000 });
+}
 
 export async function GET(req: NextRequest) {
   if (!ADZUNA_APP_ID || !ADZUNA_APP_KEY) {
@@ -84,9 +115,9 @@ export async function GET(req: NextRequest) {
   const currency = COUNTRY_CURRENCY[countryCode] ?? 'GBP';
   const cacheKey = `${countryCode}:${role.toLowerCase()}`;
 
-  const cached = cache.get(cacheKey);
-  if (cached && cached.expires > Date.now()) {
-    return NextResponse.json({ jobs: cached.jobs, currency });
+  const cached = await getCached(cacheKey);
+  if (cached) {
+    return NextResponse.json({ jobs: cached, currency });
   }
 
   try {
@@ -120,7 +151,7 @@ export async function GET(req: NextRequest) {
       ...(j.salary_max != null && { salaryMax: Math.round(j.salary_max) }),
     }));
 
-    cache.set(cacheKey, { jobs, expires: Date.now() + CACHE_TTL_MS });
+    await setCached(cacheKey, jobs);
     return NextResponse.json({ jobs, currency });
   } catch (err) {
     console.error('[api/job-listings]', err);

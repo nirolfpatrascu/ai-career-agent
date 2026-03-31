@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { z } from 'zod';
 import { safeParseJSON } from './utils';
 
 // ============================================================================
@@ -128,6 +129,12 @@ export async function callClaude<T>(options: {
   modelCascade?: string[];
   /** Called when the cascade falls back to a different model, e.g. to show a toast. */
   onModelFallback?: (model: string) => void;
+  /**
+   * Optional Zod schema to validate the parsed JSON against.
+   * On validation failure, one retry is attempted with the Zod error appended to the user message.
+   * If retry also fails validation, returns fallback.
+   */
+  schema?: z.ZodType<T>;
 }): Promise<T> {
   const {
     system,
@@ -140,6 +147,7 @@ export async function callClaude<T>(options: {
     timeout = 55_000,
     modelCascade,
     onModelFallback,
+    schema,
   } = options;
 
   // Build cascade: explicit modelCascade > [explicit model + haiku] > default cascade
@@ -197,6 +205,47 @@ export async function callClaude<T>(options: {
             continue;
           }
           break;
+        }
+
+        // Zod schema validation — if provided, validate and retry once with fix prompt on failure
+        if (schema) {
+          const validation = schema.safeParse(result);
+          if (!validation.success) {
+            const zodErrors = validation.error.issues
+              .slice(0, 5) // cap to avoid huge prompts
+              .map(i => `- ${i.path.join('.')}: ${i.message}`)
+              .join('\n');
+            console.warn(
+              `[callClaude] ${currentModel} (attempt ${attempt + 1}): Zod validation failed:\n${zodErrors}`
+            );
+            if (attempt < maxRetries) {
+              // Retry with fix prompt appended
+              const fixPrompt = `${userMessage}\n\nYour previous response had these schema errors — fix them in your next response:\n${zodErrors}`;
+              try {
+                const anthropic = getClient();
+                const fixResponse = await anthropic.messages.create({
+                  model: currentModel,
+                  max_tokens: maxTokens,
+                  temperature,
+                  system,
+                  messages: [{ role: 'user', content: fixPrompt }],
+                }, { maxRetries: 0, timeout });
+                const fixText = fixResponse.content.find(b => b.type === 'text');
+                if (fixText?.type === 'text') {
+                  const fixResult = extractJSON<T>(fixText.text, fallback);
+                  if (fixResult !== fallback) {
+                    const fixValidation = schema.safeParse(fixResult);
+                    if (fixValidation.success) return fixResult;
+                    console.warn('[callClaude] Fix retry also failed Zod validation — using fallback');
+                  }
+                }
+              } catch (fixErr) {
+                console.warn('[callClaude] Fix retry threw:', fixErr instanceof Error ? fixErr.message : fixErr);
+              }
+              break; // Stop retrying this model, try next in cascade or return fallback
+            }
+            break;
+          }
         }
 
         return result;

@@ -41,16 +41,16 @@
   },
   "hero": {
     "badge": "Consilier de carieră bazat pe inteligență artificială",
-    "headline1": "Încărcați-vă CV-ul.",
-    "headline2": "Obțineți un",
+    "headline1": "Stop guessing.",
+    "headline2": "Start getting",
     "rotatingWords": [
-      "plan de carieră",
-      "analiza lacunelor",
-      "nivelul salarial de referință",
-      "plan de acțiune",
-      "potrivire de roluri"
+      "interviews",
+      "callbacks",
+      "the right offer",
+      "clarity",
+      "your next role"
     ],
-    "subtitle": "Inteligența noastră artificială îți analizează competențele, identifică lacunele, compară salariul tău cu cel al altora, elaborează un plan pentru profilul tău de LinkedIn și creează un plan de carieră detaliat, pas cu pas. Ceea ce înainte costa 500 de dolari pe oră cu un consilier de carieră, acum se realizează în aproximativ 2 minute.",
+    "subtitle": "Upload your CV — we analyze it in 2 minutes, then delete it. No storage. No data selling. Just a clear career roadmap.",
     "analyzeFree": "Analizează-mi cariera →",
     "stats": {
       "analysisTime": "Durata analizei",
@@ -58,34 +58,35 @@
       "simpleSteps": "Pași simpli",
       "toUse": "Mod de utilizare"
     },
-    "trust": "Alegerea profesioniștilor în orice etapă a carierei — de la primul loc de muncă până la schimbarea carierei"
+    "trust": "GDPR compliant · Data deleted after analysis · Trusted by professionals",
+    "sampleReport": "See a sample report"
   },
   "features": {
     "sectionTitle": "Tot ce ai nevoie pentru următorul pas în carieră",
-    "sectionSubtitle": "Încărcați-vă CV-ul și profilul LinkedIn — beneficiați de o analiză a lacunelor, date privind salariile, evaluarea ATS, un plan pentru profilul LinkedIn, o foaie de parcurs profesională și multe altele. Totul într-un singur loc.",
+    "sectionSubtitle": "Upload your CV — get a complete picture of where you stand, what's holding you back, and exactly what to do next.",
     "gapAnalysis": {
-      "title": "Analiza lacunelor în carieră",
-      "desc": "IA identifică punctele tale forte și lacunele în competențe în raport cu postul vizat. Fiecare lacună este clasificată în funcție de gravitate — critică, moderată sau minoră — și însoțită de un plan specific de remediere, o estimare a duratei și resursele necesare."
+      "title": "Know exactly what's holding you back",
+      "desc": "AI identifies your strengths and the specific skill gaps standing between you and your target role. Each gap is rated critical, moderate, or minor — with a closing plan, time estimate, and resources."
     },
     "salary": {
-      "title": "Valori de referință reale ale salariilor",
-      "desc": "Date privind salariile provenite din surse guvernamentale (BLS din SUA, ONS din Marea Britanie, Eurostat din UE) și sondaje realizate în rândul dezvoltatorilor din peste 20 de țări. Include sfaturi de negociere și cea mai bună strategie financiară pentru tine."
+      "title": "Find out if you're underpaid",
+      "desc": "Salary data from government sources (US BLS, UK ONS, EU Eurostat) and developer surveys across 20+ countries. Know your market rate before your next negotiation."
     },
     "ats": {
-      "title": "ATS & Job Match",
-      "desc": "Încarcă un anunț de angajare pentru a afla scorul de potrivire a cuvintelor-cheie, cuvintele-cheie lipsă, problemele de formatare și sugestii de CV-uri relevante. Vezi exact cum se prezintă CV-ul tău înainte de a aplica."
+      "title": "Beat the robots that reject 75% of CVs",
+      "desc": "Paste a job posting to get a keyword match score, missing keywords, and targeted CV fixes. See exactly how your CV stacks up against the ATS filter — before you apply."
     },
     "coach": {
-      "title": "Consilier de carieră în domeniul IA",
-      "desc": "Discută cu un antrenor bazat pe inteligență artificială care îți cunoaște profilul în detaliu — punctele forte, lacunele, datele salariale și obiectivele profesionale. Întreabă orice legat de următorul tău pas și primește sfaturi personalizate. (Funcție Pro)"
+      "title": "Ask anything about your next move",
+      "desc": "Chat with an AI coach that knows your full profile — strengths, gaps, salary data, and career goals. Specific, personalized advice — not generic career tips. (Pro feature)"
     },
     "linkedin": {
-      "title": "Planul de profil LinkedIn",
-      "desc": "Opțiuni de titluri generate de IA, schiță pentru secțiunea „Despre mine”, competențe de adăugat sau de pus pe plan secund, idei de proiecte de prezentat, strategie de conținut și plan de relaționare — toate adaptate rolului pe care îl vizezi."
+      "title": "Get found by recruiters who have your dream job",
+      "desc": "AI-generated headline options, About section draft, skills to add, and a content strategy — all tailored to make you visible to the right people."
     },
     "roadmap": {
-      "title": "Planul de carieră",
-      "desc": "Un plan de acțiune concret, structurat în obiective cu rezultate imediate pe 30 de zile, dezvoltarea competențelor pe 90 de zile și o traiectorie profesională pe 12 luni. Fiecare element include estimări de timp, resurse și impactul preconizat."
+      "title": "A concrete plan, not just advice",
+      "desc": "30-day quick wins, 90-day skill building, and a 12-month career trajectory. Every item has a time estimate, a resource, and an expected impact — so you always know your next step."
     }
   },
   "howItWorks": {
@@ -106,11 +107,9 @@
   },
   "cta": {
     "title": "Următorul pas în cariera ta începe aici",
-    "subtitle": "Alătură-te profesioniștilor care au folosit GapZero pentru a-și găsi drumul către posturi în domeniul IA, al cloud-ului și al tehnologiilor moderne.",
+    "subtitle": "We're building GapZero to help you make your next career move with confidence. Try it free — no sign-up required.",
     "button": "Analizează-mi cariera — Gratuit",
     "footer": "Fără înregistrare • Fără card de credit • Rezultate în mai puțin de 2 minute",
-    "quote": "M-am gândit săptămâni întregi dacă sunt pregătit să trec de la dezvoltarea backend la arhitectura de soluții. GapZero mi-a arătat exact ce trebuia să îmbunătățesc în 90 de zile. Am obținut postul.",
-    "quoteAuthor": "— Iată ce construim cu GapZero pentru a vă ajuta să spuneți",
     "noSignup": "Fără înregistrare",
     "noCreditCard": "Fără card de credit",
     "resultsIn2Min": "Rezultate în aproximativ 2 minute"
@@ -1016,7 +1015,7 @@
   },
   "pricing": {
     "title": "Tarife simple și transparente",
-    "subtitle": "Începe gratuit cu prima ta analiză de carieră. Trece la un plan superior atunci când ai nevoie de mai multe funcționalități pentru căutarea unui loc de muncă.",
+    "subtitle": "Your first analysis is always free. No credit card. No tricks. Upgrade when you're ready for more.",
     "weekly": "Săptămânal",
     "monthly": "Lunar",
     "save25": "Economisiți 25%",
