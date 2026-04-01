@@ -276,10 +276,12 @@ export async function callClaude<T>(options: {
           return fallback;
         }
 
-        // Timeout: one retry covers transient network drops; a second timeout
-        // means the model is just slow for this prompt — cascade immediately.
+        // Timeout: retry once if maxRetries > 0 (covers transient network drops),
+        // then cascade immediately. Callers that pass maxRetries: 0 skip the
+        // retry and cascade on the first timeout — use this for optional parallel
+        // tasks where a fast Haiku fallback is preferable to blocking 240s.
         if (isTimeoutError(error)) {
-          if (attempt === 0) {
+          if (attempt === 0 && maxRetries > 0) {
             await sleep(BASE_DELAY_MS);
             continue;
           }

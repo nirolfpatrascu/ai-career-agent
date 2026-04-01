@@ -604,7 +604,7 @@ export async function POST(request: NextRequest) {
               maxTokens: 4096,
               temperature: 0.3,
               fallback: COVER_LETTER_FALLBACK,
-              maxRetries: 1,
+              maxRetries: 0,
             }).catch((e: Error) => {
               logger.warn('cover_letter.generation_failed', { error: e.message });
               return undefined as CoverLetter | undefined;
@@ -632,7 +632,7 @@ export async function POST(request: NextRequest) {
               maxTokens: 8192,
               temperature: 0.4,
               fallback: INTERVIEW_PREP_FALLBACK,
-              maxRetries: 1,
+              maxRetries: 0,
             }).catch((e: Error) => {
               logger.warn('interview_prep.generation_failed', { error: e.message });
               return null;
