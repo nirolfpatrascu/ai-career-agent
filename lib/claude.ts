@@ -51,9 +51,22 @@ function isRetryableError(error: unknown): boolean {
       msg.includes('rate_limit') ||
       msg.includes('529') ||
       msg.includes('503') ||
-      msg.includes('econnreset') ||
-      msg.includes('timeout')
+      msg.includes('econnreset')
     );
+  }
+  return false;
+}
+
+/**
+ * Check if an error is a client-side generation timeout.
+ * Timeout errors are treated differently from overload/rate-limit errors:
+ * one retry is allowed (covers transient network drops), then cascade immediately.
+ * Retrying 3× on a slow model wastes ~165s for no gain.
+ */
+function isTimeoutError(error: unknown): boolean {
+  if (error instanceof Error) {
+    const msg = error.message.toLowerCase();
+    return msg.includes('timeout') || msg.includes('timed out');
   }
   return false;
 }
@@ -263,6 +276,16 @@ export async function callClaude<T>(options: {
           return fallback;
         }
 
+        // Timeout: one retry covers transient network drops; a second timeout
+        // means the model is just slow for this prompt — cascade immediately.
+        if (isTimeoutError(error)) {
+          if (attempt === 0) {
+            await sleep(BASE_DELAY_MS);
+            continue;
+          }
+          break;
+        }
+
         // Wait with exponential backoff before retry
         if (attempt < maxRetries && isRetryableError(error)) {
           const delay = getRetryDelay(attempt);
@@ -357,6 +380,14 @@ export async function callClaudeText(options: {
 
         if (isNonRetryableError(error)) {
           throw new Error(getUserFriendlyError(error));
+        }
+
+        if (isTimeoutError(error)) {
+          if (attempt === 0) {
+            await sleep(BASE_DELAY_MS);
+            continue;
+          }
+          break;
         }
 
         if (attempt < MAX_RETRIES && isRetryableError(error)) {
