@@ -6,7 +6,7 @@ import { safeParseJSON } from './utils';
 // Claude API Client — Central wrapper for all Anthropic API interactions
 // ============================================================================
 
-const MODEL = process.env.CLAUDE_MODEL || 'claude-sonnet-4-6';
+const MODEL = process.env.CLAUDE_MODEL || 'claude-3-5-sonnet-20241022';
 export const HAIKU_MODEL = 'claude-haiku-4-5-20251001';
 const MAX_RETRIES = 3;
 const BASE_DELAY_MS = 1500;
