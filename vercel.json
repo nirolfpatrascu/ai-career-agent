@@ -1,10 +1,10 @@
 {
   "functions": {
-    "app/api/analyze-stream/route.ts": { "maxDuration": 300, "memory": 1024 },
+    "app/api/analyze-stream/route.ts": { "maxDuration": 600, "memory": 1024 },
     "app/api/generate-cv-pdf/route.ts": { "maxDuration": 60, "memory": 512 },
-    "app/api/generate-cover-letter/route.ts": { "maxDuration": 60 },
-    "app/api/interview-prep/route.ts": { "maxDuration": 60 },
-    "app/api/rewrite-cv/route.ts": { "maxDuration": 60 }
+    "app/api/generate-cover-letter/route.ts": { "maxDuration": 180 },
+    "app/api/interview-prep/route.ts": { "maxDuration": 180 },
+    "app/api/rewrite-cv/route.ts": { "maxDuration": 180 }
   },
   "crons": [
     { "path": "/api/cron/reset-quotas", "schedule": "0 0 * * 1" }

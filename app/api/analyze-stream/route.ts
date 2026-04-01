@@ -47,7 +47,7 @@ import { getAuthenticatedClient, getServiceClient } from '@/lib/supabase/server'
 import { checkQuota, incrementQuota } from '@/lib/quota';
 import { loadGoldenStandard } from '@/lib/golden-standards';
 
-export const maxDuration = 300;
+export const maxDuration = 600;
 
 // ============================================================================
 // Resource URL fallback — ensures every action item has a clickable link
@@ -262,10 +262,10 @@ export async function POST(request: NextRequest) {
         }
       };
 
-      // 250s deadline — 50s safety margin before Vercel's 300s hard kill.
+      // 550s deadline — 50s safety margin before Vercel's 600s hard kill.
       // Optional steps (ATS, cover letter, interview prep, translation) are
       // skipped when the deadline is near so core results always reach the client.
-      const DEADLINE_MS = 250_000;
+      const DEADLINE_MS = 550_000;
       const pastDeadline = () => Date.now() - startTime > DEADLINE_MS;
 
       const metrics = new MetricsCollector();

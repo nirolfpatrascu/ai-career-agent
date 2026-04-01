@@ -6,7 +6,7 @@ import { safeParseJSON } from './utils';
 // Claude API Client — Central wrapper for all Anthropic API interactions
 // ============================================================================
 
-const MODEL = process.env.CLAUDE_MODEL || 'claude-3-5-sonnet-20241022';
+const MODEL = process.env.CLAUDE_MODEL || 'claude-sonnet-4-6';
 export const HAIKU_MODEL = 'claude-haiku-4-5-20251001';
 const MAX_RETRIES = 3;
 const BASE_DELAY_MS = 1500;
@@ -133,7 +133,7 @@ export async function callClaude<T>(options: {
   fallback: T;
   model?: string;
   maxRetries?: number;
-  /** Per-call timeout in ms. Defaults to 55s — leaves headroom before Vercel's 300s kill. */
+  /** Per-call timeout in ms. Defaults to 120s — covers Sonnet 4.6 worst-case 8192-token response (~108s at 77 t/s). */
   timeout?: number;
   /**
    * Override the model cascade. Defaults to DEFAULT_MODEL_CASCADE (Sonnet → Haiku).
@@ -157,7 +157,7 @@ export async function callClaude<T>(options: {
     fallback,
     model,
     maxRetries = MAX_RETRIES,
-    timeout = 55_000,
+    timeout = 120_000,
     modelCascade,
     onModelFallback,
     schema,
@@ -336,8 +336,9 @@ export async function callClaudeText(options: {
   maxTokens?: number;
   temperature?: number;
   modelCascade?: string[];
+  timeout?: number;
 }): Promise<string> {
-  const { system, userMessage, maxTokens = 4096, temperature = 0.4, modelCascade } = options;
+  const { system, userMessage, maxTokens = 4096, temperature = 0.4, modelCascade, timeout = 120_000 } = options;
   const cascade = modelCascade ?? DEFAULT_MODEL_CASCADE;
 
   for (let cascadeIndex = 0; cascadeIndex < cascade.length; cascadeIndex++) {
@@ -363,7 +364,7 @@ export async function callClaudeText(options: {
               content: userMessage,
             },
           ],
-        }, { maxRetries: 0, timeout: 55_000 });
+        }, { maxRetries: 0, timeout });
 
         const textBlock = response.content.find((block) => block.type === 'text');
         if (!textBlock || textBlock.type !== 'text') {
